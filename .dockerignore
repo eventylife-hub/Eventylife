@@ -1,0 +1,42 @@
+# Répertoires de dépendances
+node_modules
+.next
+
+# Contrôle de version
+.git
+.gitignore
+
+# Variables d'environnement
+.env
+.env.local
+.env.*.local
+
+# Documentation
+*.md
+README*
+
+# Fichiers de test
+__tests__
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+coverage
+jest.config.*
+
+# Éditeur / IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Storybook
+.storybook
+storybook-static
+
+# Turbo
+.turbo
