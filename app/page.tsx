@@ -1,78 +1,74 @@
-'use client';
-import Link from 'next/link';
-
-export default function HomePage() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-green-50">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Vivez des voyages
-              <span className="block text-blue-600">inoubliables en groupe</span>
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-green-400 text-white">
+        <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex-1 space-y-6">
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+              Vivez des voyages<br />
+              <span className="text-yellow-300">inoubliables en groupe</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              DÃ©couvrez notre plateforme de voyages organisÃ©s avec accompagnement humain porte-Ã -porte.
-              Des circuits en bus et avion conÃ§us pour vous.
+            <p className="text-lg text-blue-100 max-w-lg">
+              La plateforme de voyages de groupe avec accompagnement humain porte-a-porte.
+              Des circuits en bus et avion penses pour vous.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/voyages" className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-                DÃ©couvrir les voyages
-              </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
+            <div className="flex gap-4">
+              <a href="/voyages" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-xl transition">
+                Voir les voyages
+              </a>
+              <a href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold px-8 py-3 rounded-xl transition">
                 Nous contacter
-              </Link>
+              </a>
             </div>
           </div>
-          <div className="hidden md:flex items-center justify-center">
-            <div className="w-full h-96 bg-gradient-to-br from-blue-200 to-green-200 rounded-2xl shadow-lg flex items-center justify-center text-8xl">
-              âï¸
+          <div className="flex-1 flex justify-center">
+            <div className="w-80 h-80 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center">
+              <span className="text-8xl">&#x2708;</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Pourquoi choisir Eventy Life ?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Avantages */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Pourquoi choisir Eventy Life ?
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: 'ð', title: 'Transport confortable', desc: 'Autocars modernes et climatisÃ©s' },
-              { icon: 'ð¥', title: 'Accompagnement humain', desc: 'Guides expÃ©rimentÃ©s Ã  vos cÃ´tÃ©s' },
-              { icon: 'ð¨', title: 'HÃ©bergements de qualitÃ©', desc: 'Partenaires sÃ©lectionnÃ©s' },
-              { icon: 'ð°', title: 'Tarifs compÃ©titifs', desc: 'Meilleurs prix garantis' },
-            ].map((b, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="text-5xl mb-4">{b.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2">{b.title}</h3>
-                <p className="text-sm text-gray-600">{b.desc}</p>
+              { icon: '\ud83d\ude8c', title: 'Transport confortable', desc: 'Bus premium et vols directs pour un confort optimal.' },
+              { icon: '\ud83e\udd1d', title: 'Accompagnement humain', desc: 'Un accompagnateur du depart au retour.' },
+              { icon: '\ud83c\udfe8', title: 'Hotels de qualite', desc: 'Hebergements selectionnes avec soin, 3 a 5 etoiles.' },
+              { icon: '\ud83d\udcb0', title: 'Tarifs competitifs', desc: 'Les meilleurs prix grace a nos volumes groupe.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
+                <div className="text-5xl mb-4">{item.icon}</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-600 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">TÃ©moignages de voyageurs</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Temoignages */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Ce que disent nos voyageurs
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: 'Marie D.', text: "Un voyage magnifique ! L'accompagnement Ã©tait impeccable.", avatar: 'ð©', rating: 5 },
-              { name: 'Pierre M.', text: 'Excellente expÃ©rience. Groupe convivial et guide compÃ©tent.', avatar: 'ð¨', rating: 5 },
-              { name: 'Sophie L.', text: 'TrÃ¨s bon rapport qualitÃ©-prix. Tout Ã©tait bien organisÃ©.', avatar: 'ð©', rating: 4 },
+              { name: 'Marie L.', text: 'Un voyage magnifique ! Organisation au top, je recommande.', stars: 5 },
+              { name: 'Pierre D.', text: 'Accompagnement impeccable du debut a la fin. Merci Eventy !', stars: 5 },
+              { name: 'Sophie M.', text: 'Rapport qualite-prix imbattable. Deja mon 3e voyage avec eux.', stars: 5 },
             ].map((t, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-md p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{t.avatar}</span>
-                  <div>
-                    <h3 className="font-bold text-gray-900">{t.name}</h3>
-                    <div className="text-sm">{'â­'.repeat(t.rating)}</div>
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm italic">"{t.text}"</p>
+              <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border">
+                <div className="text-yellow-400 mb-3">{'\u2605'.repeat(t.stars)}</div>
+                <p className="text-gray-700 mb-4 italic">&ldquo;{t.text}&rdquo;</p>
+                <p className="font-semibold text-gray-900">{t.name}</p>
               </div>
             ))}
           </div>
@@ -80,40 +76,43 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-green-500">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">PrÃªt Ã  partir Ã  l'aventure ?</h2>
-          <p className="text-lg mb-8 opacity-90">DÃ©couvrez nos voyages et trouvez votre destination idÃ©ale</p>
-          <Link href="/voyages" className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-colors text-lg">
-            Explorer nos voyages
-          </Link>
+      <section className="bg-gradient-to-r from-blue-600 to-green-500 py-16">
+        <div className="max-w-4xl mx-auto px-6 text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">Pret pour l&apos;aventure ?</h2>
+          <p className="text-lg text-blue-100 mb-8">Rejoignez des milliers de voyageurs satisfaits.</p>
+          <a href="/voyages" className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold px-10 py-4 rounded-xl text-lg transition">
+            Explorer les voyages
+          </a>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <footer className="bg-gray-900 text-gray-400 py-12">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Eventy Life</h3>
-            <p className="text-sm">Votre partenaire pour des voyages en groupe inoubliables.</p>
+            <h3 className="text-white font-bold text-xl mb-4">Eventy Life</h3>
+            <p className="text-sm">Votre partenaire pour des voyages de groupe inoubliables.</p>
           </div>
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Liens utiles</h3>
+            <h4 className="text-white font-semibold mb-3">Liens utiles</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/voyages" className="hover:text-white transition-colors">Nos voyages</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              <li><Link href="/cgv" className="hover:text-white transition-colors">CGV</Link></li>
+              <li><a href="/voyages" className="hover:text-white transition">Nos voyages</a></li>
+              <li><a href="/about" className="hover:text-white transition">A propos</a></li>
+              <li><a href="/contact" className="hover:text-white transition">Contact</a></li>
             </ul>
           </div>
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Contact</h3>
-            <p className="text-sm">Email: contact@eventylife.fr</p>
+            <h4 className="text-white font-semibold mb-3">Contact</h4>
+            <ul className="space-y-2 text-sm">
+              <li>Email : contact@eventylife.fr</li>
+              <li>Tel : 01 23 45 67 89</li>
+            </ul>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-700 text-center text-sm">
-          <p>Â© 2026 Eventy Life. Tous droits rÃ©servÃ©s.</p>
+        <div className="max-w-6xl mx-auto px-6 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+          &copy; 2026 Eventy Life. Tous droits reserves.
         </div>
       </footer>
     </main>
-  );
+  )
 }
