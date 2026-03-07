@@ -10,8 +10,8 @@ const C = {
 };
 
 const tripData = {
-  title: 'Iles Eoliennes & Baroque Sicilien',
-  subtitle: '8 jours de reve entre volcans, mer turquoise et villages baroques',
+  title: '\u00celes \u00c9oliennes & Baroque Sicilien',
+  subtitle: '8 jours de r\u00eave entre volcans, mer turquoise et villages baroques',
   duration: '8 jours / 7 nuits',
   basePrice: 1890,
   rating: 4.8,
@@ -23,43 +23,43 @@ const tripData = {
     { city: 'Lyon Perrache', time: '10:30', type: 'etape' },
     { city: 'Marseille St-Charles', time: '14:00', type: 'etape' },
     { city: 'Nice', time: '17:00', type: 'etape' },
-    { city: 'Genes (ferry)', time: '20:00', type: 'arrivee' },
+    { city: 'G\u00eanes (ferry)', time: '20:00', type: 'arrivee' },
   ],
   onSiteShuttles: [
     { name: 'Navette Plage', schedule: '14h00, 15h30', retour: '17h00, 18h30' },
     { name: 'Navette Village', schedule: '14h00, 16h00', retour: '20h00, 22h00' },
   ],
   program: [
-    { day: 1, title: 'Depart & Traversee', desc: 'Ramassage en bus grand tourisme. Embarquement ferry a Genes. Nuit en cabine.' },
-    { day: 2, title: 'Arrivee en Sicile', desc: 'Arrivee a Palerme. Visite du centre historique et de la chapelle Palatine.' },
-    { day: 3, title: 'Cefalu & Madonie', desc: 'Journee a Cefalu, cathedrale normande, baignade. Route panoramique des Madonie.' },
-    { day: 4, title: 'Iles Eoliennes', desc: 'Excursion en bateau : Lipari, Vulcano. Baignade dans les eaux turquoise.' },
-    { day: 5, title: 'Stromboli', desc: 'Ascension guidee du Stromboli au coucher du soleil. Spectacle volcanique.' },
-    { day: 6, title: 'Taormine & Etna', desc: 'Visite de Taormine, theatre grec. Montee sur les flancs de l Etna.' },
-    { day: 7, title: 'Syracuse & Noto', desc: 'Baroque sicilien : Syracuse (Ortygie), Noto. Degustation de granita.' },
-    { day: 8, title: 'Retour', desc: 'Transfert ferry retour. Arrivee en France dans la soiree.' },
+    { day: 1, title: 'D\u00e9part & Travers\u00e9e', desc: 'Ramassage en bus grand tourisme. Embarquement ferry \u00e0 G\u00eanes. Nuit en cabine.' },
+    { day: 2, title: 'Arriv\u00e9e en Sicile', desc: 'Arriv\u00e9e \u00e0 Palerme. Visite du centre historique et de la chapelle Palatine.' },
+    { day: 3, title: 'Cefal\u00f9 & Madonie', desc: 'Journ\u00e9e \u00e0 Cefal\u00f9, cath\u00e9drale normande, baignade. Route panoramique des Madonie.' },
+    { day: 4, title: '\u00celes \u00c9oliennes', desc: 'Excursion en bateau : Lipari, Vulcano. Baignade dans les eaux turquoise.' },
+    { day: 5, title: 'Stromboli', desc: 'Ascension guid\u00e9e du Stromboli au coucher du soleil. Spectacle volcanique.' },
+    { day: 6, title: 'Taormine & Etna', desc: 'Visite de Taormine, th\u00e9\u00e2tre grec. Mont\u00e9e sur les flancs de l\u2019Etna.' },
+    { day: 7, title: 'Syracuse & Noto', desc: 'Baroque sicilien : Syracuse (Ortygie), Noto. D\u00e9gustation de granita.' },
+    { day: 8, title: 'Retour', desc: 'Transfert ferry retour. Arriv\u00e9e en France dans la soir\u00e9e.' },
   ],
   included: [
     'Transport bus grand tourisme A/R',
-    'Ferry Genes-Palerme A/R en cabine',
-    'Hotel 4* en demi-pension (7 nuits)',
-    'Excursion bateau Iles Eoliennes',
-    'Guide francophone tout le sejour',
+    'Ferry G\u00eanes-Palerme A/R en cabine',
+    'H\u00f4tel 4* en demi-pension (7 nuits)',
+    'Excursion bateau \u00celes \u00c9oliennes',
+    'Guide francophone tout le s\u00e9jour',
     'Navettes sur place incluses',
     'Assurance rapatriement',
-    'Accompagnateur Eventy dedie',
+    'Accompagnateur Eventy d\u00e9di\u00e9',
   ],
-  notIncluded: ['Dejeuners', 'Boissons', 'Depenses personnelles', 'Pourboires'],
+  notIncluded: ['D\u00e9jeuners', 'Boissons', 'D\u00e9penses personnelles', 'Pourboires'],
   hotel: { name: 'Grand Hotel delle Palme', stars: 4, city: 'Palerme', features: ['Piscine', 'Spa', 'Restaurant', 'WiFi', 'Vue mer'] },
   occurrences: [
     { date: '15 Juin 2026', spots: 6, price: 1890 },
     { date: '6 Juillet 2026', spots: 12, price: 1990 },
-    { date: '24 Aout 2026', spots: 18, price: 2090 },
+    { date: '24 Ao\u00fbt 2026', spots: 18, price: 2090 },
     { date: '14 Sept 2026', spots: 24, price: 1890 },
   ],
   team: [
-    { name: 'Sophie M.', role: 'Accompagnatrice', desc: '12 ans d experience, passionnee d Italie' },
-    { name: 'Marco R.', role: 'Guide local', desc: 'Sicilien natif, historien de formation' },
+    { name: 'Sophie M.', role: 'Cr\u00e9atrice de voyage', desc: 'Ind\u00e9pendante du voyage, sp\u00e9cialiste Italie & M\u00e9diterran\u00e9e' },
+    { name: 'Thomas B.', role: 'Cr\u00e9ateur de voyage', desc: 'Ind\u00e9pendant du voyage, passionn\u00e9 de culture sicilienne' },
   ],
 };
 
@@ -78,9 +78,9 @@ export default function VoyageDetailPage() {
     { id: 'navettes', label: 'Navettes', icon: '\uD83D\uDE90' },
     { id: 'programme', label: 'Programme', icon: '\uD83D\uDCC5' },
     { id: 'inclus', label: 'Inclus', icon: '\u2705' },
-    { id: 'hotel', label: 'Hotel', icon: '\uD83C\uDFE8' },
+    { id: 'hotel', label: 'H\u00f4tel', icon: '\uD83C\uDFE8' },
     { id: 'dates', label: 'Dates', icon: '\uD83D\uDCC6' },
-    { id: 'equipe', label: 'Equipe', icon: '\uD83D\uDC65' },
+    { id: 'equipe', label: '\u00c9quipe', icon: '\uD83D\uDC65' },
   ];
 
   return (
@@ -121,7 +121,7 @@ export default function VoyageDetailPage() {
           {/* Ramassage */}
           <SectionTitle id="ramassage" icon="\uD83D\uDE8C" title="Points de ramassage" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
-            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>Montez dans le bus a l arret le plus proche de chez vous</p>
+            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>Montez dans le bus \u00e0 l&apos;arr\u00eat le plus proche de chez vous</p>
             <div style={{ position: 'relative', paddingLeft: 24 }}>
               <div style={{ position: 'absolute', left: 8, top: 8, bottom: 8, width: 3, background: `linear-gradient(${C.terra}, ${C.gold})`, borderRadius: 2 }} />
               {tripData.pickupPoints.map((p, i) => (
@@ -130,8 +130,8 @@ export default function VoyageDetailPage() {
                   <div style={{ marginLeft: 10 }}>
                     <span style={{ fontWeight: 700, color: C.navy }}>{p.city}</span>
                     <span style={{ color: C.muted, fontSize: 14, marginLeft: 10 }}>{p.time}</span>
-                    {p.type === 'depart' && <Badge bg={C.terra} color={C.white}>Depart</Badge>}
-                    {p.type === 'arrivee' && <Badge bg={C.gold} color={C.navy}>Arrivee</Badge>}
+                    {p.type === 'depart' && <Badge bg={C.terra} color={C.white}>D\u00e9part</Badge>}
+                    {p.type === 'arrivee' && <Badge bg={C.gold} color={C.navy}>Arriv\u00e9e</Badge>}
                   </div>
                 </div>
               ))}
@@ -141,7 +141,7 @@ export default function VoyageDetailPage() {
           {/* Navettes */}
           <SectionTitle id="navettes" icon="\uD83D\uDE90" title="Navettes sur place" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
-            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>2 navettes gratuites pour vos deplacements sur place</p>
+            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>2 navettes gratuites pour vos d\u00e9placements sur place</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               {tripData.onSiteShuttles.map((s, i) => (
                 <div key={i} style={{ background: C.blueBg, borderRadius: 12, padding: 16 }}>
@@ -189,7 +189,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Hotel */}
-          <SectionTitle id="hotel" icon="\uD83C\uDFE8" title="Hebergement" />
+          <SectionTitle id="hotel" icon="\uD83C\uDFE8" title="H\u00e9bergement" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
               <div>
@@ -205,7 +205,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Dates */}
-          <SectionTitle id="dates" icon="\uD83D\uDCC6" title="Dates et disponibilites" />
+          <SectionTitle id="dates" icon="\uD83D\uDCC6" title="Dates et disponibilit\u00e9s" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {tripData.occurrences.map((o, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -222,7 +222,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Equipe */}
-          <SectionTitle id="equipe" icon="\uD83D\uDC65" title="Votre equipe" />
+          <SectionTitle id="equipe" icon="\uD83D\uDC65" title="Vos cr\u00e9ateurs de voyage" />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {tripData.team.map((t, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, textAlign: 'center' }}>
@@ -239,7 +239,7 @@ export default function VoyageDetailPage() {
         <div style={{ position: 'sticky', top: 70 }}>
           <div style={{ background: C.white, borderRadius: 20, padding: 28, border: `1px solid ${C.border}`, boxShadow: '0 8px 32px rgba(0,0,0,0.08)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
-              <div style={{ fontSize: 14, color: C.muted }}>A partir de</div>
+              <div style={{ fontSize: 14, color: C.muted }}>{'\u00c0'} partir de</div>
             </div>
             <div style={{ fontSize: 36, fontWeight: 800, color: C.terra, marginBottom: 4 }}>{tripData.basePrice} EUR</div>
             <div style={{ fontSize: 14, color: C.muted, marginBottom: 20 }}>par personne, tout compris</div>
@@ -248,12 +248,12 @@ export default function VoyageDetailPage() {
               <span style={{ fontSize: 20 }}>&#9203;</span>
               <div>
                 <div style={{ fontWeight: 700, color: C.green, fontSize: 14 }}>Plus que {tripData.spotsLeft} places !</div>
-                <div style={{ color: C.green, fontSize: 12 }}>Sur le depart du 15 Juin</div>
+                <div style={{ color: C.green, fontSize: 12 }}>Sur le d\u00e9part du 15 Juin</div>
               </div>
             </div>
 
             <button style={{ width: '100%', padding: '16px', background: `linear-gradient(135deg, ${C.terra}, #E06B47)`, color: C.white, border: 'none', borderRadius: 14, fontSize: 17, fontWeight: 700, cursor: 'pointer', marginBottom: 12, transition: 'transform 0.2s' }}>
-              Reserver ma place
+              R\u00e9server ma place
             </button>
             <button style={{ width: '100%', padding: '14px', background: 'transparent', color: C.navy, border: `2px solid ${C.border}`, borderRadius: 14, fontSize: 15, fontWeight: 600, cursor: 'pointer', marginBottom: 20 }}>
               Poser une question
@@ -261,10 +261,10 @@ export default function VoyageDetailPage() {
 
             <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.navy }}>
-                <span>&#9989;</span> Accompagnement porte-a-porte
+                <span>&#9989;</span> Accompagnement porte-\u00e0-porte
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.navy }}>
-                <span>&#9989;</span> Paiement securise 3x sans frais
+                <span>&#9989;</span> Paiement s\u00e9curis\u00e9 3x sans frais
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.navy }}>
                 <span>&#9989;</span> Annulation gratuite 30j avant
