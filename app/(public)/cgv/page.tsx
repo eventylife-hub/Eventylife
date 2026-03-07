@@ -7,43 +7,43 @@ const C = {
 const sections = [
   {
     title: 'Article 1 \u2013 Objet',
-    content: 'Les pr\u00e9sentes Conditions G\u00e9n\u00e9rales de Vente (CGV) r\u00e9gissent les relations contractuelles entre Eventy Life SAS, agence de voyages immatricul\u00e9e aupr\u00e8s d\u0027Atout France, et ses clients. Toute r\u00e9servation implique l\u0027acceptation pleine et enti\u00e8re des pr\u00e9sentes CGV.',
+    content: 'Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre Eventy Life SAS, agence de voyages immatriculée auprès d\u0027Atout France, et ses clients. Toute réservation implique l\u0027acceptation pleine et entière des présentes CGV.',
   },
   {
-    title: 'Article 2 \u2013 R\u00e9servation et paiement',
-    content: 'La r\u00e9servation est confirm\u00e9e apr\u00e8s paiement int\u00e9gral ou versement d\u0027un acompte de 30% du prix total. Le solde doit \u00eatre r\u00e9gl\u00e9 au plus tard 30 jours avant la date de d\u00e9part. Le paiement s\u0027effectue par carte bancaire via notre plateforme s\u00e9curis\u00e9e (Stripe). Le paiement en 3 ou 4 fois sans frais est disponible pour les r\u00e9servations sup\u00e9rieures \u00e0 300\u20ac.',
+    title: 'Article 2 \u2013 Réservation et paiement',
+    content: 'La réservation est confirmée après paiement intégral ou versement d\u0027un acompte de 30% du prix total. Le solde doit être réglé au plus tard 30 jours avant la date de départ. Le paiement s\u0027effectue par carte bancaire via notre plateforme sécurisée (Stripe). Le paiement en 3 ou 4 fois sans frais est disponible pour les réservations supérieures à 300\u20ac.',
   },
   {
     title: 'Article 3 \u2013 Prix',
-    content: 'Les prix sont indiqu\u00e9s en euros TTC (TVA sur la marge). Ils comprennent : le transport (bus ou avion selon le voyage), l\u0027h\u00e9bergement, la restauration (selon programme), les activit\u00e9s et visites pr\u00e9vues, l\u0027accompagnement porte-\u00e0-porte, les assurances de base. Sauf mention contraire, les prix ne comprennent pas : les d\u00e9penses personnelles, les assurances compl\u00e9mentaires optionnelles, les extras non pr\u00e9vus au programme.',
+    content: 'Les prix sont indiqués en euros TTC (TVA sur la marge). Ils comprennent : le transport (bus ou avion selon le voyage), l\u0027hébergement, la restauration (selon programme), les activités et visites prévues, l\u0027accompagnement porte-à-porte, les assurances de base. Sauf mention contraire, les prix ne comprennent pas : les dépenses personnelles, les assurances complémentaires optionnelles, les extras non prévus au programme.',
   },
   {
     title: 'Article 4 \u2013 Modification et annulation par le client',
-    content: 'Annulation plus de 30 jours avant le d\u00e9part : remboursement int\u00e9gral moins 50\u20ac de frais de dossier. Annulation entre 30 et 15 jours : retenue de 30% du prix. Annulation entre 14 et 7 jours : retenue de 50% du prix. Annulation moins de 7 jours ou non-pr\u00e9sentation : aucun remboursement. Toute modification de r\u00e9servation est soumise \u00e0 disponibilit\u00e9 et peut entra\u00eener un suppl\u00e9ment tarifaire.',
+    content: 'Annulation plus de 30 jours avant le départ : remboursement intégral moins 50\u20ac de frais de dossier. Annulation entre 30 et 15 jours : retenue de 30% du prix. Annulation entre 14 et 7 jours : retenue de 50% du prix. Annulation moins de 7 jours ou non-présentation : aucun remboursement. Toute modification de réservation est soumise à disponibilité et peut entraîner un supplément tarifaire.',
   },
   {
     title: 'Article 5 \u2013 Modification et annulation par Eventy Life',
-    content: 'En cas de force majeure ou de nombre insuffisant de participants (minimum 15 personnes), Eventy Life se r\u00e9serve le droit d\u0027annuler le voyage. Dans ce cas, le client se voit proposer un report ou un remboursement int\u00e9gral. Eventy Life peut modifier des \u00e9l\u00e9ments non essentiels du programme (ordre des visites, h\u00f4tel de cat\u00e9gorie \u00e9quivalente) sans que cela constitue un motif d\u0027annulation.',
+    content: 'En cas de force majeure ou de nombre insuffisant de participants (minimum 15 personnes), Eventy Life se réserve le droit d\u0027annuler le voyage. Dans ce cas, le client se voit proposer un report ou un remboursement intégral. Eventy Life peut modifier des éléments non essentiels du programme (ordre des visites, hôtel de catégorie équivalente) sans que cela constitue un motif d\u0027annulation.',
   },
   {
     title: 'Article 6 \u2013 Transport et ramassage',
-    content: 'Le ramassage est organis\u00e9 \u00e0 proximit\u00e9 du domicile du client. Les points et horaires de ramassage sont communiqu\u00e9s 7 jours avant le d\u00e9part. Le client doit se pr\u00e9senter \u00e0 l\u0027heure indiqu\u00e9e. Aucun remboursement ne sera effectu\u00e9 en cas de retard du client.',
+    content: 'Le ramassage est organisé à proximité du domicile du client. Les points et horaires de ramassage sont communiqués 7 jours avant le départ. Le client doit se présenter à l\u0027heure indiquée. Aucun remboursement ne sera effectué en cas de retard du client.',
   },
   {
     title: 'Article 7 \u2013 Assurances',
-    content: 'Eventy Life est couverte par une assurance Responsabilit\u00e9 Civile Professionnelle et b\u00e9n\u00e9ficie de la garantie financi\u00e8re APST. Une assurance annulation et rapatriement est incluse dans le prix. Des options d\u0027assurance compl\u00e9mentaire peuvent \u00eatre propos\u00e9es lors de la r\u00e9servation.',
+    content: 'Eventy Life est couverte par une assurance Responsabilité Civile Professionnelle et bénéficie de la garantie financière APST. Une assurance annulation et rapatriement est incluse dans le prix. Des options d\u0027assurance complémentaire peuvent être proposées lors de la réservation.',
   },
   {
-    title: 'Article 8 \u2013 R\u00e9clamations',
-    content: 'Toute r\u00e9clamation doit \u00eatre adress\u00e9e par \u00e9crit \u00e0 contact@eventylife.fr dans un d\u00e9lai de 30 jours apr\u00e8s le retour de voyage. Eventy Life s\u0027engage \u00e0 r\u00e9pondre dans un d\u00e9lai de 15 jours ouvr\u00e9s. En cas de litige non r\u00e9solu, le client peut recourir au M\u00e9diateur du Tourisme et du Voyage (MTV).',
+    title: 'Article 8 \u2013 Réclamations',
+    content: 'Toute réclamation doit être adressée par écrit à contact@eventylife.fr dans un délai de 30 jours après le retour de voyage. Eventy Life s\u0027engage à répondre dans un délai de 15 jours ouvrés. En cas de litige non résolu, le client peut recourir au Médiateur du Tourisme et du Voyage (MTV).',
   },
   {
-    title: 'Article 9 \u2013 Responsabilit\u00e9',
-    content: 'Eventy Life est responsable de la bonne ex\u00e9cution des prestations pr\u00e9vues au contrat, sous r\u00e9serve des cas de force majeure, du fait d\u0027un tiers \u00e9tranger au contrat, ou du fait du client lui-m\u00eame. La responsabilit\u00e9 d\u0027Eventy Life ne saurait exc\u00e9der les limites pr\u00e9vues par les conventions internationales applicables.',
+    title: 'Article 9 \u2013 Responsabilité',
+    content: 'Eventy Life est responsable de la bonne exécution des prestations prévues au contrat, sous réserve des cas de force majeure, du fait d\u0027un tiers étranger au contrat, ou du fait du client lui-même. La responsabilité d\u0027Eventy Life ne saurait excéder les limites prévues par les conventions internationales applicables.',
   },
   {
     title: 'Article 10 \u2013 Droit applicable',
-    content: 'Les pr\u00e9sentes CGV sont soumises au droit fran\u00e7ais. En cas de litige, et apr\u00e8s tentative de r\u00e9solution amiable, les tribunaux de Paris seront seuls comp\u00e9tents. Le client peut \u00e9galement recourir \u00e0 la plateforme europ\u00e9enne de r\u00e8glement en ligne des litiges : https://ec.europa.eu/odr.',
+    content: 'Les présentes CGV sont soumises au droit français. En cas de litige, et après tentative de résolution amiable, les tribunaux de Paris seront seuls compétents. Le client peut également recourir à la plateforme européenne de règlement en ligne des litiges : https://ec.europa.eu/odr.',
   },
 ];
 export default function CgvPage() {
