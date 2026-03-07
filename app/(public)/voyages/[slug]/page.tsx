@@ -121,7 +121,7 @@ export default function VoyageDetailPage() {
           {/* Ramassage */}
           <SectionTitle id="ramassage" icon="\uD83D\uDE8C" title="Points de ramassage" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
-            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>Montez dans le bus \u00e0 l&apos;arr\u00eat le plus proche de chez vous</p>
+            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>Montez dans le bus &#224; l&apos;arr&#234;t le plus proche de chez vous</p>
             <div style={{ position: 'relative', paddingLeft: 24 }}>
               <div style={{ position: 'absolute', left: 8, top: 8, bottom: 8, width: 3, background: `linear-gradient(${C.terra}, ${C.gold})`, borderRadius: 2 }} />
               {tripData.pickupPoints.map((p, i) => (
@@ -130,8 +130,8 @@ export default function VoyageDetailPage() {
                   <div style={{ marginLeft: 10 }}>
                     <span style={{ fontWeight: 700, color: C.navy }}>{p.city}</span>
                     <span style={{ color: C.muted, fontSize: 14, marginLeft: 10 }}>{p.time}</span>
-                    {p.type === 'depart' && <Badge bg={C.terra} color={C.white}>D\u00e9part</Badge>}
-                    {p.type === 'arrivee' && <Badge bg={C.gold} color={C.navy}>Arriv\u00e9e</Badge>}
+                    {p.type === 'depart' && <Badge bg={C.terra} color={C.white}>D&#233;part</Badge>}
+                    {p.type === 'arrivee' && <Badge bg={C.gold} color={C.navy}>Arriv&#233;e</Badge>}
                   </div>
                 </div>
               ))}
@@ -141,7 +141,7 @@ export default function VoyageDetailPage() {
           {/* Navettes */}
           <SectionTitle id="navettes" icon="\uD83D\uDE90" title="Navettes sur place" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
-            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>2 navettes gratuites pour vos d\u00e9placements sur place</p>
+            <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>2 navettes gratuites pour vos d&#233;placements sur place</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               {tripData.onSiteShuttles.map((s, i) => (
                 <div key={i} style={{ background: C.blueBg, borderRadius: 12, padding: 16 }}>
@@ -189,7 +189,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Hotel */}
-          <SectionTitle id="hotel" icon="\uD83C\uDFE8" title="H\u00e9bergement" />
+          <SectionTitle id="hotel" icon="\uD83C\uDFE8" title={'H\u00e9bergement'} />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
               <div>
@@ -205,7 +205,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Dates */}
-          <SectionTitle id="dates" icon="\uD83D\uDCC6" title="Dates et disponibilit\u00e9s" />
+          <SectionTitle id="dates" icon="\uD83D\uDCC6" title={'Dates et disponibilit\u00e9s'} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {tripData.occurrences.map((o, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -222,7 +222,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Equipe */}
-          <SectionTitle id="equipe" icon="\uD83D\uDC65" title="Vos cr\u00e9ateurs de voyage" />
+          <SectionTitle id="equipe" icon="\uD83D\uDC65" title={'Vos cr\u00e9ateurs de voyage'} />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {tripData.team.map((t, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, textAlign: 'center' }}>
@@ -248,12 +248,12 @@ export default function VoyageDetailPage() {
               <span style={{ fontSize: 20 }}>&#9203;</span>
               <div>
                 <div style={{ fontWeight: 700, color: C.green, fontSize: 14 }}>Plus que {tripData.spotsLeft} places !</div>
-                <div style={{ color: C.green, fontSize: 12 }}>Sur le d\u00e9part du 15 Juin</div>
+                <div style={{ color: C.green, fontSize: 12 }}>Sur le d&#233;part du 15 Juin</div>
               </div>
             </div>
 
             <button style={{ width: '100%', padding: '16px', background: `linear-gradient(135deg, ${C.terra}, #E06B47)`, color: C.white, border: 'none', borderRadius: 14, fontSize: 17, fontWeight: 700, cursor: 'pointer', marginBottom: 12, transition: 'transform 0.2s' }}>
-              R\u00e9server ma place
+              R&#233;server ma place
             </button>
             <button style={{ width: '100%', padding: '14px', background: 'transparent', color: C.navy, border: `2px solid ${C.border}`, borderRadius: 14, fontSize: 15, fontWeight: 600, cursor: 'pointer', marginBottom: 20 }}>
               Poser une question
@@ -261,10 +261,10 @@ export default function VoyageDetailPage() {
 
             <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.navy }}>
-                <span>&#9989;</span> Accompagnement porte-\u00e0-porte
+                <span>&#9989;</span> Accompagnement porte-&#224;-porte
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.navy }}>
-                <span>&#9989;</span> Paiement s\u00e9curis\u00e9 3x sans frais
+                <span>&#9989;</span> Paiement s&#233;curis&#233; 3x sans frais
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.navy }}>
                 <span>&#9989;</span> Annulation gratuite 30j avant
