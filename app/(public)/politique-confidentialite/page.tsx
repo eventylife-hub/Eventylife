@@ -1,628 +1,91 @@
-import { Metadata } from 'next';
+'use client';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Politique de Confidentialité | Eventy Life',
-  description:
-    'Politique de confidentialité RGPD d\'Eventy Life - Protection de vos données personnelles',
+const C = {
+  navy: '#1A1A2E', cream: '#FAF7F2', terra: '#C75B39', gold: '#D4A853',
+  white: '#FFFFFF', muted: '#6B7280', border: '#E8E4DE',
 };
-
-export default function PolitiqueConfidentialite() {
+const sections = [
+  {
+    title: '1. Responsable du traitement',
+    content: 'Eventy Life SAS (en cours d\u0027immatriculation), dont le si\u00e8ge social est situ\u00e9 \u00e0 Paris, France. Contact DPO : contact@eventylife.fr.',
+  },
+  {
+    title: '2. Donn\u00e9es collect\u00e9es',
+    content: 'Nous collectons les donn\u00e9es suivantes : donn\u00e9es d\u0027identification (nom, pr\u00e9nom, email, t\u00e9l\u00e9phone), donn\u00e9es de r\u00e9servation (destinations, dates, participants), donn\u00e9es de paiement (trait\u00e9es par Stripe, nous ne stockons aucune donn\u00e9e bancaire), donn\u00e9es de navigation (cookies, adresse IP, pages visit\u00e9es), donn\u00e9es des partenaires (SIRET, informations bancaires pour les virements de commissions).',
+  },
+  {
+    title: '3. Finalit\u00e9s du traitement',
+    content: 'Vos donn\u00e9es sont utilis\u00e9es pour : la gestion de votre compte et de vos r\u00e9servations, le traitement des paiements et remboursements, l\u0027envoi de confirmations et documents de voyage, la communication marketing (avec votre consentement), l\u0027am\u00e9lioration de nos services et de l\u0027exp\u00e9rience utilisateur, le respect de nos obligations l\u00e9gales.',
+  },
+  {
+    title: '4. Bases l\u00e9gales',
+    content: 'Le traitement de vos donn\u00e9es repose sur : l\u0027ex\u00e9cution du contrat de voyage, votre consentement (marketing), nos obligations l\u00e9gales (comptabilit\u00e9, fiscalit\u00e9), notre int\u00e9r\u00eat l\u00e9gitime (am\u00e9lioration des services, pr\u00e9vention de la fraude).',
+  },
+  {
+    title: '5. Dur\u00e9e de conservation',
+    content: 'Donn\u00e9es de compte : dur\u00e9e de la relation commerciale + 3 ans. Donn\u00e9es de r\u00e9servation : 10 ans (obligation comptable). Donn\u00e9es de navigation : 13 mois maximum. Donn\u00e9es marketing : 3 ans apr\u00e8s le dernier contact.',
+  },
+  {
+    title: '6. Partage des donn\u00e9es',
+    content: 'Vos donn\u00e9es peuvent \u00eatre partag\u00e9es avec : nos partenaires de voyage (h\u00f4tels, transporteurs) pour l\u0027ex\u00e9cution de votre r\u00e9servation, Stripe pour le traitement des paiements, nos prestataires techniques (h\u00e9bergement, email), les autorit\u00e9s comp\u00e9tentes si requis par la loi. Nous ne vendons jamais vos donn\u00e9es \u00e0 des tiers.',
+  },
+  {
+    title: '7. Vos droits',
+    content: 'Conform\u00e9ment au RGPD, vous disposez des droits suivants : acc\u00e8s \u00e0 vos donn\u00e9es, rectification des donn\u00e9es inexactes, suppression de vos donn\u00e9es, limitation du traitement, portabilit\u00e9 de vos donn\u00e9es, opposition au traitement, retrait du consentement \u00e0 tout moment. Pour exercer vos droits : contact@eventylife.fr. D\u00e9lai de r\u00e9ponse : 1 mois maximum.',
+  },
+  {
+    title: '8. S\u00e9curit\u00e9',
+    content: 'Nous mettons en oeuvre des mesures techniques et organisationnelles pour prot\u00e9ger vos donn\u00e9es : chiffrement SSL/TLS, hashage des mots de passe (Argon2id), acc\u00e8s restreint aux donn\u00e9es, sauvegardes r\u00e9guli\u00e8res, monitoring des acc\u00e8s.',
+  },
+  {
+    title: '9. Cookies',
+    content: 'Nous utilisons des cookies essentiels (fonctionnement du site), des cookies analytiques (mesure d\u0027audience), et des cookies marketing (avec votre consentement). Vous pouvez g\u00e9rer vos pr\u00e9f\u00e9rences via le bandeau cookies ou les param\u00e8tres de votre navigateur.',
+  },
+  {
+    title: '10. R\u00e9clamation',
+    content: 'Si vous estimez que vos droits ne sont pas respect\u00e9s, vous pouvez adresser une r\u00e9clamation \u00e0 la CNIL (Commission Nationale de l\u0027Informatique et des Libert\u00e9s) : www.cnil.fr.',
+  },
+];
+export default function PolitiqueConfidentialitePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900">
-            Politique de Confidentialité
-          </h1>
-          <p className="text-lg text-gray-600">
-            Protection de vos données personnelles - Conforme au RGPD
-          </p>
-          <p className="mt-2 text-sm text-gray-500">
-            En vigueur à compter du 2 mars 2026
+    <div style={{ minHeight: '100vh', background: C.cream }}>
+      <div style={{
+        background: 'linear-gradient(135deg, ' + C.navy + ' 0%, #2D2B55 100%)',
+        padding: '80px 20px 60px', textAlign: 'center',
+      }}>
+        <h1 style={{ fontSize: 38, fontWeight: 800, color: C.white, margin: '0 0 16px' }}>
+          Politique de confidentialit&#233;
+        </h1>
+        <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)' }}>
+          Derni&#232;re mise &#224; jour : mars 2026
+        </p>
+      </div>
+      <div style={{ maxWidth: 800, margin: '0 auto', padding: '48px 20px' }}>
+        <div style={{
+          background: '#EBF5FF', borderRadius: 14, padding: '20px 24px',
+          border: '1px solid #B3D4FC', marginBottom: 32,
+        }}>
+          <p style={{ fontSize: 15, color: C.navy, lineHeight: 1.6, margin: 0 }}>
+            Eventy Life s&#8217;engage &#224; prot&#233;ger votre vie priv&#233;e. Cette politique d&#233;crit comment nous collectons, utilisons et prot&#233;geons vos donn&#233;es personnelles conform&#233;ment au RGPD.
           </p>
         </div>
-
-        <div className="space-y-8">
-          {/* Introduction */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Introduction
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Eventy Life SAS (ci-après "l&apos;Entreprise", "nous" ou "le
-                Responsable de traitement") s&apos;engage à protéger vos
-                données personnelles et à respecter votre vie privée.
-              </p>
-              <p>
-                La présente Politique de Confidentialité explique comment nous
-                collectons, utilisons, partageons et protégeons vos données
-                personnelles, conformément au Règlement Général sur la
-                Protection des Données (RGPD) et à la loi française Informatique
-                et Libertés (Loi n° 78-17 du 6 janvier 1978 modifiée).
-              </p>
-              <p>
-                Cette politique s&apos;applique à tous nos services, notamment
-                le site www.eventy.life, l&apos;application mobile, les
-                formulaires d&apos;inscription et les communications marketing.
-              </p>
-            </div>
-          </section>
-
-          {/* 1. Responsable de traitement */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              1. Responsable de traitement
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                <strong>Responsable de traitement :</strong> Eventy Life SAS
-              </p>
-              <p>
-                <strong>Adresse :</strong> 15 rue de la Paix, 75002 Paris,
-                France
-              </p>
-              <p>
-                <strong>Email :</strong> contact@eventy.life
-              </p>
-              <p>
-                <strong>Téléphone :</strong> +33 (0)1 23 45 67 89
-              </p>
-              <p>
-                <strong>Délégué à la Protection des Données (DPO) :</strong>{' '}
-                dpo@eventy.life
-              </p>
-              <p className="mt-4 text-sm">
-                Le Responsable de traitement est la personne morale ou
-                physique qui détermine les finalités et les moyens du
-                traitement de vos données personnelles.
-              </p>
-            </div>
-          </section>
-
-          {/* 2. Données collectées */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              2. Données personnelles collectées
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <div>
-                <p className="font-semibold">2.1 Données d&apos;identité</p>
-                <p className="mt-2">
-                  Nom, prénom, date de naissance, nationalité, numéro de
-                  document d&apos;identité (passeport, carte d&apos;identité),
-                  situation matrimoniale, nombre d&apos;enfants.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">2.2 Données de contact</p>
-                <p className="mt-2">
-                  Adresse postale, adresse email, numéro de téléphone mobile et
-                  fixe.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">2.3 Données financières</p>
-                <p className="mt-2">
-                  Informations bancaires et de paiement (numéro de carte
-                  bancaire masqué, IBAN, nom du titulaire du compte), historique
-                  de paiement, factures et reçus.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">2.4 Données de voyage</p>
-                <p className="mt-2">
-                  Préférences de voyage, destinations visitées, budget,
-                  exigences particulières (régime alimentaire, accessibilité),
-                  antécédents de voyage.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">2.5 Données de santé</p>
-                <p className="mt-2">
-                  Restrictions de mobilité, conditions médicales déclarées
-                  volontairement, besoins en assistance spéciale, allergies,
-                  régimes alimentaires pour raisons de santé.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  2.6 Données de navigation et d&apos;utilisation
-                </p>
-                <p className="mt-2">
-                  Adresse IP, type de navigateur, système d&apos;exploitation,
-                  pages consultées, durée de visite, clics effectués, interactions
-                  avec nos services, informations de géolocalisation (si autorisée).
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">2.7 Données de communication</p>
-                <p className="mt-2">
-                  Contenu des messages échangés avec notre service client,
-                  commentaires et avis publiés, contenu des enquêtes de
-                  satisfaction, enregistrements d&apos;appels téléphoniques
-                  (avec notification préalable).
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">2.8 Identifiants et données techniques</p>
-                <p className="mt-2">
-                  Identifiant unique de client, numéro de contrat, identifiants
-                  de session, informations de l&apos;appareil, données de
-                  connexion.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* 3. Finalités du traitement */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              3. Finalités du traitement
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Nous traitons vos données personnelles pour les finalités suivantes :
-              </p>
-              <div>
-                <p className="font-semibold">3.1 Exécution du contrat</p>
-                <ul className="mt-2 list-inside space-y-1">
-                  <li>- Traitement et confirmation de votre réservation</li>
-                  <li>- Facturation et gestion des paiements</li>
-                  <li>- Organisation et coordination du voyage</li>
-                  <li>- Communication des informations pratiques du voyage</li>
-                  <li>- Gestion des modifications et annulation</li>
-                  <li>- Assistance client pendant le voyage</li>
-                </ul>
-              </div>
-              <div>
-                <p className="font-semibold">3.2 Obligations légales</p>
-                <ul className="mt-2 list-inside space-y-1">
-                  <li>- Respect des obligations fiscales et comptables</li>
-                  <li>
-                    - Respect des exigences de documentation d&apos;entrée aux
-                    frontières
-                  </li>
-                  <li>
-                    - Conformité avec les exigences des autorités de sécurité
-                    publique
-                  </li>
-                  <li>- Respect de la loi anti-fraude et anti-blanchiment</li>
-                </ul>
-              </div>
-              <div>
-                <p className="font-semibold">3.3 Intérêts légitimes</p>
-                <ul className="mt-2 list-inside space-y-1">
-                  <li>- Amélioration de nos services et expérience utilisateur</li>
-                  <li>- Analyse et statistiques d&apos;utilisation</li>
-                  <li>- Prévention de la fraude et sécurité du site</li>
-                  <li>
-                    - Récupération de créances et contentieux client
-                  </li>
-                  <li>- Tests A/B et optimisation du site</li>
-                </ul>
-              </div>
-              <div>
-                <p className="font-semibold">3.4 Consentement</p>
-                <ul className="mt-2 list-inside space-y-1">
-                  <li>- Communication marketing (newsletters, offres spéciales)</li>
-                  <li>- Personnalisation des contenus et recommandations</li>
-                  <li>- Enquêtes de satisfaction et feedback</li>
-                  <li>- Marketing par email ou SMS</li>
-                  <li>
-                    - Publicités ciblées sur les réseaux sociaux
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* 4. Fondement juridique */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              4. Fondement juridique du traitement
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Nous basons le traitement de vos données sur les fondements
-                juridiques suivants, énoncés à l&apos;article 6 du RGPD :
-              </p>
-              <div>
-                <p className="font-semibold">
-                  4.1 Exécution d&apos;un contrat (Article 6.1.b)
-                </p>
-                <p className="mt-2">
-                  Le traitement des données nécessaires à la réservation, la
-                  facturation et l&apos;organisation du voyage est obligatoire
-                  pour conclure et exécuter votre contrat de voyage.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  4.2 Respect d&apos;une obligation légale (Article 6.1.c)
-                </p>
-                <p className="mt-2">
-                  Nous sommes tenus par la loi de conserver certaines données à
-                  titre de preuve du contrat, des obligations fiscales et des
-                  exigences légales en matière de sécurité.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  4.3 Intérêt légitime (Article 6.1.f)
-                </p>
-                <p className="mt-2">
-                  Pour améliorer nos services, prévenir la fraude et assurer
-                  la sécurité, nous traitons certaines données sur la base de
-                  notre intérêt légitime, après évaluation qu&apos;il ne porte
-                  pas préjudice à vos droits et libertés.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  4.4 Consentement (Article 6.1.a)
-                </p>
-                <p className="mt-2">
-                  Pour les traitements ne relevant pas de la catégorie
-                  précédente, notamment le marketing, nous obtenons votre
-                  consentement préalable, explicite et informé. Vous pouvez le
-                  retirer à tout moment sans justification.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* 5. Destinataires des données */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              5. Destinataires des données
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Vos données personnelles sont communiquées aux destinataires suivants :
-              </p>
-              <ul className="list-inside space-y-2">
-                <li>
-                  <strong>Prestataires du voyage :</strong> Hôtels, compagnies
-                  aériennes, agences de location, guides touristiques (données
-                  nécessaires à l&apos;organisation du voyage)
-                </li>
-                <li>
-                  <strong>Prestataires de paiement :</strong> Processeurs de
-                  paiement, banques, sociétés de crédit
-                </li>
-                <li>
-                  <strong>Assureurs :</strong> Compagnies d&apos;assurance
-                  voyage (si applicable)
-                </li>
-                <li>
-                  <strong>Autorités publiques :</strong> Douanes,
-                  autorités d&apos;immigration (si exigé par la loi)
-                </li>
-                <li>
-                  <strong>Prestataires informatiques :</strong> Hébergeurs,
-                  fournisseurs de services cloud, sociétés de cybersécurité
-                </li>
-                <li>
-                  <strong>Prestataires marketing :</strong> Plateforme de
-                  marketing email, réseaux sociaux (avec votre consentement)
-                </li>
-                <li>
-                  <strong>Professionnels du droit :</strong> Avocats et
-                  experts-comptables (en cas de litige ou obligation légale)
-                </li>
-                <li>
-                  <strong>Service client :</strong> Équipes internes
-                  d&apos;Eventy Life
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          {/* 6. Transferts internationaux */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              6. Transferts de données en dehors de l&apos;UE
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Certaines données peuvent être transférées vers des pays situés
-                en dehors de l&apos;Espace Économique Européen (EEE), notamment
-                pour :
-              </p>
-              <ul className="list-inside space-y-2">
-                <li>
-                  - Organisation de voyages vers des destinations hors UE
-                </li>
-                <li>- Hébergement dans des serveurs situés aux États-Unis</li>
-                <li>- Services fournis par des partenaires internationaux</li>
-              </ul>
-              <p className="mt-4">
-                <strong>Garanties :</strong> Pour les transferts vers les
-                États-Unis, nous avons recours aux mécanismes suivants :
-              </p>
-              <ul className="list-inside space-y-2">
-                <li>
-                  - <strong>Clauses contractuelles types :</strong> Contrats
-                  approuvés par la Commission Européenne incluant des garanties
-                  de protection
-                </li>
-                <li>
-                  - <strong>Décisions d&apos;adéquation :</strong> Pour les
-                  pays bénéficiant d&apos;une reconnaissance de niveau de
-                  protection adéquate
-                </li>
-                <li>
-                  - <strong>Consentement explicite :</strong> Votre
-                  consentement préalable au transfert
-                </li>
-              </ul>
-              <p className="mt-4">
-                Vous avez le droit de connaître les garanties spécifiques
-                applicables. Contactez notre DPO pour plus d&apos;informations.
-              </p>
-            </div>
-          </section>
-
-          {/* 7. Durée de conservation */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              7. Durée de conservation des données
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Nous ne conservons vos données que pendant la période nécessaire
-                à chaque finalité :
-              </p>
-              <table className="mt-4 w-full border-collapse border border-gray-300 bg-gray-50">
-                <thead>
-                  <tr>
-                    <th className="border border-gray-300 p-2 text-left">
-                      Type de données
-                    </th>
-                    <th className="border border-gray-300 p-2 text-left">
-                      Durée de conservation
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-300 p-2">
-                      Données de réservation et voyage
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      3 ans après la fin du voyage
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 p-2">
-                      Données de paiement
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      7 ans (obligation comptable) ou jusqu&apos;à la
-                      prescription de l&apos;action
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 p-2">
-                      Données de contact/compte
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      Tant que le compte est actif + 2 ans de fermeture
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 p-2">
-                      Données de navigation/cookies
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      13 mois maximum
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 p-2">
-                      Données marketing
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      Jusqu&apos;à retrait du consentement
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 p-2">
-                      Logs de sécurité
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      12 mois
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="mt-4 text-sm">
-                Une fois la durée expirée, les données sont supprimées ou
-                anonymisées de manière irréversible.
-              </p>
-            </div>
-          </section>
-
-          {/* 8. Vos droits */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              8. Vos droits concernant vos données
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Vous disposez des droits suivants, prévus par le RGPD :
-              </p>
-              <div>
-                <p className="font-semibold">
-                  8.1 Droit d&apos;accès (Article 15)
-                </p>
-                <p className="mt-2">
-                  Vous pouvez demander l&apos;accès à vos données personnelles
-                  traitées par Eventy Life. Nous fournirons une copie dans un
-                  format lisible, dans les 30 jours suivant la demande.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  8.2 Droit de rectification (Article 16)
-                </p>
-                <p className="mt-2">
-                  Vous pouvez corriger, mettre à jour ou compléter des données
-                  inexactes ou incomplètes. Vous pouvez le faire directement
-                  dans votre compte ou en contactant notre DPO.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  8.3 Droit à l&apos;effacement (Article 17)
-                </p>
-                <p className="mt-2">
-                  Vous pouvez demander la suppression de vos données sous
-                  certaines conditions, notamment lorsque les données ne sont
-                  plus nécessaires ou si vous retirez votre consentement.
-                  Cependant, certaines données doivent être conservées pour des
-                  raisons légales (obligations comptables).
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  8.4 Droit à la limitation du traitement (Article 18)
-                </p>
-                <p className="mt-2">
-                  Vous pouvez demander à ce que nous restreignions le
-                  traitement de vos données, notamment si leur exactitude est
-                  contestée ou si vous vous opposez au traitement.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  8.5 Droit à la portabilité des données (Article 20)
-                </p>
-                <p className="mt-2">
-                  Vous pouvez demander à recevoir vos données dans un format
-                  structuré, couramment utilisé et lisible par machine, et le
-                  droit de les transmettre à un tiers sans obstacles.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  8.6 Droit d&apos;opposition (Article 21)
-                </p>
-                <p className="mt-2">
-                  Vous pouvez vous opposer à tout traitement basé sur notre
-                  intérêt légitime ou des fins de marketing direct, notamment
-                  en cliquant sur le lien de désinscription dans nos emails.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">
-                  8.7 Droit à la non-discrimination
-                </p>
-                <p className="mt-2">
-                  Vous avez le droit de ne pas faire l&apos;objet d&apos;une
-                  décision basée exclusivement sur un traitement automatisé. Si
-                  une prise de décision automatisée affecte vos droits, vous
-                  avez le droit d&apos;obtenir une intervention humaine.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold">8.8 Comment exercer vos droits</p>
-                <p className="mt-2">
-                  Pour exercer vos droits, veuillez contacter notre Délégué à
-                  la Protection des Données :
-                </p>
-                <p className="mt-2">
-                  <strong>Email :</strong> dpo@eventy.life
-                  <br />
-                  <strong>Adresse :</strong> 15 rue de la Paix, 75002 Paris,
-                  France
-                </p>
-                <p className="mt-2 text-sm">
-                  Toute demande sera traitée dans un délai de 30 jours. Nous
-                  pourrons vous demander des justificatifs d&apos;identité pour
-                  vérifier votre demande.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* 9. Sécurité des données */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              9. Sécurité et protection des données
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Nous mettons en œuvre les mesures techniques et organisationnelles
-                nécessaires pour protéger vos données contre l&apos;accès non
-                autorisé, la modification, la divulgation ou la destruction :
-              </p>
-              <ul className="list-inside space-y-2">
-                <li>
-                  - <strong>Chiffrement :</strong> SSL/TLS pour les données en
-                  transit, chiffrement des données sensibles au repos
-                </li>
-                <li>
-                  - <strong>Contrôle d&apos;accès :</strong> Authentification
-                  multifacteurs, droits d&apos;accès restrictifs
-                </li>
-                <li>
-                  - <strong>Audit :</strong> Tests de pénétration réguliers,
-                  audits de sécurité
-                </li>
-                <li>
-                  - <strong>Infrastructure :</strong> Serveurs sécurisés avec
-                  pare-feu et systèmes de détection d&apos;intrusion
-                </li>
-                <li>
-                  - <strong>Formation :</strong> Formation des employés sur la
-                  confidentialité et la sécurité des données
-                </li>
-              </ul>
-              <p className="mt-4">
-                <strong>Limitation de responsabilité :</strong> Malgré nos
-                efforts, aucune transmission de données sur Internet n&apos;est
-                100% sécurisée. Vous assumez le risque des transmissions
-                lorsque vous envoyez vos données à Eventy Life.
-              </p>
-            </div>
-          </section>
-
-          {/* 10. Cookies et traceurs */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              10. Cookies et technologies de suivi
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                Nous utilisons des cookies et technologies similaires pour
-                améliorer votre expérience. Pour plus d&apos;informations,
-                consultez notre{' '}
-                <Link href="/cookies" className="text-blue-600 hover:underline">
-                  Politique de Cookies
-                </Link>
-                .
-              </p>
-              <p>
-                Vous pouvez configurer votre navigateur pour refuser les
-                cookies et supprimer les cookies existants.
-              </p>
-            </div>
-          </section>
-
-          {/* Final note */}
-          <div className="rounded-lg bg-blue-50 p-6">
-            <p className="text-sm text-gray-700">
-              <strong>Dernière mise à jour :</strong> 2 mars 2026
-            </p>
-            <p className="mt-2 text-sm text-gray-600">
-              Cette Politique de Confidentialité est conforme au Règlement
-              Général sur la Protection des Données (RGPD) et à la loi française
-              Informatique et Libertés.
-            </p>
+        {sections.map((s, i) => (
+          <div key={i} style={{
+            background: C.white, borderRadius: 14, padding: '28px 24px',
+            border: '1px solid ' + C.border, marginBottom: 20,
+          }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: C.navy, margin: '0 0 12px' }}>{s.title}</h2>
+            <p style={{ fontSize: 15, color: C.muted, lineHeight: 1.7, margin: 0 }}>{s.content}</p>
           </div>
+        ))}
+        <div style={{ textAlign: 'center', marginTop: 40 }}>
+          <Link href="/mentions-legales" style={{
+            color: C.terra, fontWeight: 700, fontSize: 16, textDecoration: 'none',
+          }}>Mentions l&#233;gales &#8594;</Link>
+          <span style={{ margin: '0 20px', color: C.border }}>|</span>
+          <Link href="/cgv" style={{
+            color: C.terra, fontWeight: 700, fontSize: 16, textDecoration: 'none',
+          }}>CGV &#8594;</Link>
         </div>
       </div>
     </div>
