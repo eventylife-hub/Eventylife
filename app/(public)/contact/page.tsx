@@ -17,19 +17,19 @@ const C = {
 
 const faqs = [
   {
-    question: 'Quel est le d\u00e9lai de r\u00e9ponse ?',
+    question: 'Quel est le délai de réponse ?',
     answer:
-      'Nous r\u00e9pondons \u00e0 toutes les demandes dans les 24 heures ouvr\u00e9es. Pour les demandes urgentes, appelez-nous directement.',
+      'Nous répondons à toutes les demandes dans les 24 heures ouvrées. Pour les demandes urgentes, appelez-nous directement.',
   },
   {
-    question: 'Puis-je modifier ma r\u00e9servation apr\u00e8s confirmation ?',
+    question: 'Puis-je modifier ma réservation après confirmation ?',
     answer:
-      'Oui, les modifications sont possibles jusqu\u0027\u00e0 30 jours avant la date du voyage, selon nos conditions g\u00e9n\u00e9rales.',
+      'Oui, les modifications sont possibles jusqu\u0027à 30 jours avant la date du voyage, selon nos conditions générales.',
   },
   {
     question: 'Comment devenir partenaire Eventy Life ?',
     answer:
-      'Nous accueillons les partenaires passionn\u00e9s. S\u00e9lectionnez "Partenariat" dans le formulaire et donnez-nous plus de d\u00e9tails.',
+      'Nous accueillons les partenaires passionnés. Sélectionnez "Partenariat" dans le formulaire et donnez-nous plus de détails.',
   },
 ];
 
@@ -178,7 +178,7 @@ export default function ContactPage() {
             lineHeight: '1.6',
           }}
         >
-          Notre \u00e9quipe est \u00e0 votre \u00e9coute pour r\u00e9pondre \u00e0 vos questions et vos demandes.
+          Notre équipe est à votre écoute pour répondre à vos questions et vos demandes.
         </p>
       </section>
 
@@ -224,7 +224,7 @@ export default function ContactPage() {
                   fontWeight: '500',
                 }}
               >
-                &#10003; Merci ! Votre message a \u00e9t\u00e9 envoy\u00e9 avec succ\u00e8s. Nous vous r\u00e9pondrons sous peu.
+                &#10003; Merci ! Votre message a été envoyé avec succès. Nous vous répondrons sous peu.
               </div>
             )}
 
@@ -317,7 +317,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* T\u00e9l\u00e9phone */}
+              {/* Téléphone */}
               <div style={{ marginBottom: '1.5rem' }}>
                 <label
                   htmlFor="telephone"
@@ -329,7 +329,7 @@ export default function ContactPage() {
                     marginBottom: '0.5rem',
                   }}
                 >
-                  T\u00e9l\u00e9phone
+                  Téléphone
                 </label>
                 <input
                   id="telephone"
@@ -402,10 +402,10 @@ export default function ContactPage() {
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
-                  <option value="generale">Question g\u00e9n\u00e9rale</option>
-                  <option value="reservation">R\u00e9servation</option>
+                  <option value="generale">Question générale</option>
+                  <option value="reservation">Réservation</option>
                   <option value="partenariat">Partenariat</option>
-                  <option value="reclamation">R\u00e9clamation</option>
+                  <option value="reclamation">Réclamation</option>
                   <option value="autre">Autre</option>
                 </select>
               </div>
@@ -514,10 +514,10 @@ export default function ContactPage() {
                 marginBottom: '2rem',
               }}
             >
-              Nos coordonn\u00e9es
+              Nos coordonnées
             </h2>
 
-            {/* Contact Item - T\u00e9l\u00e9phone */}
+            {/* Contact Item - Téléphone */}
             <div
               style={{
                 marginBottom: '2rem',
@@ -544,7 +544,7 @@ export default function ContactPage() {
                   marginBottom: '0.5rem',
                 }}
               >
-                T\u00e9l\u00e9phone
+                Téléphone
               </h3>
               <p
                 style={{
@@ -704,7 +704,7 @@ export default function ContactPage() {
               textAlign: 'center',
             }}
           >
-            Questions fr\u00e9quentes
+            Questions fréquentes
           </h2>
           <p
             style={{
@@ -714,7 +714,7 @@ export default function ContactPage() {
               marginBottom: '3rem',
             }}
           >
-            Trouvez les r\u00e9ponses aux questions les plus souvent pos\u00e9es
+            Trouvez les réponses aux questions les plus souvent posées
           </p>
 
           <div
@@ -772,7 +772,7 @@ export default function ContactPage() {
         }}
       >
         <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.95rem' }}>
-          &copy; 2026 Eventy Life. Tous droits r\u00e9serv\u00e9s.
+          &copy; 2026 Eventy Life. Tous droits réservés.
         </p>
         <p style={{ margin: 0, fontSize: '0.85rem', color: C.muted }}>
           Plate-forme de voyages de groupe premium
