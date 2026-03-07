@@ -17,23 +17,23 @@ const C = {
 
 const faqData = [
   {
-    category: 'R\u00e9servation',
+    category: 'Réservation',
     items: [
       {
-        question: 'Comment r\u00e9server un voyage ?',
-        answer: 'Choisissez votre destination, s\u00e9lectionnez vos dates et le nombre de participants, puis proc\u00e9dez au paiement s\u00e9curis\u00e9.',
+        question: 'Comment réserver un voyage ?',
+        answer: 'Choisissez votre destination, sélectionnez vos dates et le nombre de participants, puis procédez au paiement sécurisé.',
       },
       {
-        question: 'Puis-je r\u00e9server pour un groupe ?',
-        answer: 'Oui ! Eventy est sp\u00e9cialis\u00e9 dans le voyage de groupe. Vous pouvez r\u00e9server pour 2 \u00e0 50 personnes.',
+        question: 'Puis-je réserver pour un groupe ?',
+        answer: 'Oui ! Eventy est spécialisé dans le voyage de groupe. Vous pouvez réserver pour 2 à 50 personnes.',
       },
       {
         question: 'Comment fonctionne le paiement ?',
-        answer: 'Paiement s\u00e9curis\u00e9 par carte bancaire via Stripe. Possibilit\u00e9 de paiement en plusieurs fois.',
+        answer: 'Paiement sécurisé par carte bancaire via Stripe. Possibilité de paiement en plusieurs fois.',
       },
       {
-        question: 'Puis-je annuler ma r\u00e9servation ?',
-        answer: 'Annulation gratuite jusqu\u00e0 30 jours avant le d\u00e9part. Conditions d\u00e9taill\u00e9es dans nos CGV.',
+        question: 'Puis-je annuler ma réservation ?',
+        answer: 'Annulation gratuite jusquà 30 jours avant le départ. Conditions détaillées dans nos CGV.',
       },
     ],
   },
@@ -42,15 +42,15 @@ const faqData = [
     items: [
       {
         question: 'Comment fonctionne le ramassage ?',
-        answer: 'Nous venons vous chercher pr\u00e8s de chez vous en bus grand tourisme. Points de ramassage communiqu\u00e9s 7 jours avant.',
+        answer: 'Nous venons vous chercher près de chez vous en bus grand tourisme. Points de ramassage communiqués 7 jours avant.',
       },
       {
         question: 'Quels types de transport ?',
-        answer: 'Bus grand tourisme et avion selon les destinations. Tous nos v\u00e9hicules sont climatis&#233;s et confortables.',
+        answer: 'Bus grand tourisme et avion selon les destinations. Tous nos véhicules sont climatis&#233;s et confortables.',
       },
       {
         question: 'Puis-je rejoindre le groupe en cours de route ?',
-        answer: 'Oui, des points de ralliement interm\u00e9diaires sont possibles. Contactez-nous pour organiser.',
+        answer: 'Oui, des points de ralliement intermédiaires sont possibles. Contactez-nous pour organiser.',
       },
     ],
   },
@@ -63,11 +63,11 @@ const faqData = [
       },
       {
         question: 'Quelles sont les commissions ?',
-        answer: 'De 8% \u00e0 15% selon le volume. Un partenaire actif peut gagner 3000-8000\u20ac/an.',
+        answer: 'De 8% à 15% selon le volume. Un partenaire actif peut gagner 3000-8000\u20ac/an.',
       },
       {
-        question: 'Faut-il un dipl\u00f4me ?',
-        answer: 'Non, aucun dipl\u00f4me requis. Eventy est une agence immatricul\u00e9e, vous \u00eates apporteur d\'affaires.',
+        question: 'Faut-il un diplôme ?',
+        answer: 'Non, aucun diplôme requis. Eventy est une agence immatriculée, vous êtes apporteur d\'affaires.',
       },
     ],
   },
@@ -75,16 +75,16 @@ const faqData = [
     category: 'Pratique',
     items: [
       {
-        question: 'Les voyages sont-ils assur\u00e9s ?',
-        answer: 'Oui, assurance RC Pro et garantie financi\u00e8re APST. Vous voyagez en toute s\u00e9r\u00e9nit\u00e9.',
+        question: 'Les voyages sont-ils assurés ?',
+        answer: 'Oui, assurance RC Pro et garantie financière APST. Vous voyagez en toute sérénité.',
       },
       {
         question: 'Y a-t-il un accompagnateur ?',
-        answer: 'Oui, chaque voyage est accompagn\u00e9 par un professionnel Eventy du d\u00e9but \u00e0 la fin.',
+        answer: 'Oui, chaque voyage est accompagné par un professionnel Eventy du début à la fin.',
       },
       {
         question: 'Comment contacter le support ?',
-        answer: 'Par email contact@eventylife.fr, par t\u00e9l\u00e9phone 01 23 45 67 89, ou via le formulaire de contact.',
+        answer: 'Par email contact@eventylife.fr, par téléphone 01 23 45 67 89, ou via le formulaire de contact.',
       },
     ],
   },
