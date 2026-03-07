@@ -119,7 +119,7 @@ export default function VoyageDetailPage() {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '30px 20px', display: 'grid', gridTemplateColumns: '1fr 340px', gap: 30, alignItems: 'start' }}>
         <div>
           {/* Ramassage */}
-          <SectionTitle id="ramassage" icon="\uD83D\uDE8C" title="Points de ramassage" />
+          <SectionTitle id="ramassage" icon={'\uD83D\uDE8C'} title="Points de ramassage" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
             <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>Montez dans le bus &#224; l&apos;arr&#234;t le plus proche de chez vous</p>
             <div style={{ position: 'relative', paddingLeft: 24 }}>
@@ -139,7 +139,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Navettes */}
-          <SectionTitle id="navettes" icon="\uD83D\uDE90" title="Navettes sur place" />
+          <SectionTitle id="navettes" icon={'\uD83D\uDE90'} title="Navettes sur place" />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
             <p style={{ color: C.muted, fontSize: 14, marginBottom: 16 }}>2 navettes gratuites pour vos d&#233;placements sur place</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -154,7 +154,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Programme */}
-          <SectionTitle id="programme" icon="\uD83D\uDCC5" title="Programme jour par jour" />
+          <SectionTitle id="programme" icon={'\uD83D\uDCC5'} title="Programme jour par jour" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {tripData.program.map(d => (
               <div key={d.day} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, display: 'flex', gap: 16 }}>
@@ -168,7 +168,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Inclus */}
-          <SectionTitle id="inclus" icon="\u2705" title="Ce qui est inclus" />
+          <SectionTitle id="inclus" icon={'\u2705'} title="Ce qui est inclus" />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}` }}>
               <div style={{ fontWeight: 700, color: C.green, marginBottom: 12 }}>Inclus dans le prix</div>
@@ -189,7 +189,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Hotel */}
-          <SectionTitle id="hotel" icon="\uD83C\uDFE8" title={'H\u00e9bergement'} />
+          <SectionTitle id="hotel" icon={'\uD83C\uDFE8'} title={'H\u00e9bergement'} />
           <div style={{ background: C.white, borderRadius: 16, padding: 24, border: `1px solid ${C.border}` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
               <div>
@@ -205,7 +205,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Dates */}
-          <SectionTitle id="dates" icon="\uD83D\uDCC6" title={'Dates et disponibilit\u00e9s'} />
+          <SectionTitle id="dates" icon={'\uD83D\uDCC6'} title={'Dates et disponibilit\u00e9s'} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {tripData.occurrences.map((o, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -222,7 +222,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Equipe */}
-          <SectionTitle id="equipe" icon="\uD83D\uDC65" title={'Vos cr\u00e9ateurs de voyage'} />
+          <SectionTitle id="equipe" icon={'\uD83D\uDC65'} title={'Vos cr\u00e9ateurs de voyage'} />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {tripData.team.map((t, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, textAlign: 'center' }}>
