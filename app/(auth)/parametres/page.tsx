@@ -58,7 +58,7 @@ export default function ParametresPage() {
           </p>
           <Toggle value={notifEmail} onChange={setNotifEmail} label="Notifications par email" />
           <Toggle value={notifSms} onChange={setNotifSms} label="Notifications par SMS" />
-          <Toggle value={rappels} onChange={setRappels} label="Rappels avant d\u00e9part" />
+          <Toggle value={rappels} onChange={setRappels} label={"Rappels avant d\u00e9part"} />
           <Toggle value={promos} onChange={setPromos} label="Offres promotionnelles" />
           <Toggle value={newsletter} onChange={setNewsletter} label="Newsletter Eventy Life" />
         </div>
