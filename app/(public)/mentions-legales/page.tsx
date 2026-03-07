@@ -1,262 +1,75 @@
-import { Metadata } from 'next';
+'use client';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Mentions Légales | Eventy Life',
-  description:
-    'Mentions légales d\'Eventy Life - Édition, hébergement et responsabilité',
+const C = {
+  navy: '#1A1A2E', cream: '#FAF7F2', terra: '#C75B39', gold: '#D4A853',
+  white: '#FFFFFF', muted: '#6B7280', border: '#E8E4DE',
 };
-
-export default function MentionsLegales() {
+const sections = [
+  {
+    title: '1. Informations l\u00e9gales',
+    content: 'Le site www.eventylife.fr est \u00e9dit\u00e9 par la soci\u00e9t\u00e9 Eventy Life SAS (en cours d\u0027immatriculation), dont le si\u00e8ge social est situ\u00e9 \u00e0 Paris, France. Capital social : 5 000 \u20ac. Directeur de la publication : David. Contact : contact@eventylife.fr.',
+  },
+  {
+    title: '2. H\u00e9bergement',
+    content: 'Le site est h\u00e9berg\u00e9 par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. T\u00e9l\u00e9phone : +1 (951) 383-6898.',
+  },
+  {
+    title: '3. Activit\u00e9 r\u00e9glement\u00e9e',
+    content: 'Eventy Life exerce une activit\u00e9 d\u0027agence de voyages et est immatricul\u00e9e au registre des op\u00e9rateurs de voyages et de s\u00e9jours aupr\u00e8s d\u0027Atout France (immatriculation en cours). Garantie financi\u00e8re : APST (Association Professionnelle de Solidarit\u00e9 du Tourisme). Assurance Responsabilit\u00e9 Civile Professionnelle : en cours de souscription.',
+  },
+  {
+    title: '4. Propri\u00e9t\u00e9 intellectuelle',
+    content: 'L\u0027ensemble du contenu du site (textes, images, graphismes, logo, ic\u00f4nes, sons, logiciels) est la propri\u00e9t\u00e9 exclusive d\u0027Eventy Life SAS ou de ses partenaires. Toute reproduction, repr\u00e9sentation, modification, publication ou adaptation de tout ou partie du site est interdite sans autorisation pr\u00e9alable.',
+  },
+  {
+    title: '5. Donn\u00e9es personnelles',
+    content: 'Conform\u00e9ment au R\u00e8glement G\u00e9n\u00e9ral sur la Protection des Donn\u00e9es (RGPD) et \u00e0 la loi Informatique et Libert\u00e9s, vous disposez d\u0027un droit d\u0027acc\u00e8s, de rectification, de suppression et de portabilit\u00e9 de vos donn\u00e9es. Pour exercer ces droits, contactez-nous \u00e0 : contact@eventylife.fr. Pour plus de d\u00e9tails, consultez notre Politique de Confidentialit\u00e9.',
+  },
+  {
+    title: '6. Cookies',
+    content: 'Le site utilise des cookies pour am\u00e9liorer votre exp\u00e9rience de navigation, mesurer l\u0027audience et personnaliser le contenu. Vous pouvez g\u00e9rer vos pr\u00e9f\u00e9rences de cookies \u00e0 tout moment via les param\u00e8tres de votre navigateur.',
+  },
+  {
+    title: '7. Limitation de responsabilit\u00e9',
+    content: 'Eventy Life s\u0027efforce de fournir des informations exactes et \u00e0 jour. Toutefois, la soci\u00e9t\u00e9 ne saurait \u00eatre tenue responsable des erreurs, omissions ou r\u00e9sultats obtenus suite \u00e0 l\u0027utilisation de ces informations.',
+  },
+  {
+    title: '8. Droit applicable',
+    content: 'Les pr\u00e9sentes mentions l\u00e9gales sont soumises au droit fran\u00e7ais. En cas de litige, les tribunaux de Paris seront seuls comp\u00e9tents.',
+  },
+];
+export default function MentionsLegalesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900">
-            Mentions Légales
-          </h1>
-          <p className="text-lg text-gray-600">
-            Informations légales relatives au site Eventy Life
-          </p>
-        </div>
-
-        <div className="space-y-12">
-          {/* Éditeur du site */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Éditeur du site
-            </h2>
-            <div className="space-y-2 text-gray-700">
-              <p>
-                <strong>Entreprise :</strong> Eventy Life SAS
-              </p>
-              <p>
-                <strong>SIRET :</strong> 123 456 789 00012
-              </p>
-              <p>
-                <strong>TVA Intracommunautaire :</strong> FR12123456789
-              </p>
-              <p>
-                <strong>Siège social :</strong> 15 rue de la Paix, 75002 Paris,
-                France
-              </p>
-              <p>
-                <strong>Téléphone :</strong> +33 (0)1 23 45 67 89
-              </p>
-              <p>
-                <strong>Email :</strong>{' '}
-                <a
-                  href="mailto:contact@eventy.life"
-                  className="text-blue-600 hover:underline"
-                >
-                  contact@eventy.life
-                </a>
-              </p>
-              <p>
-                <strong>Capital Social :</strong> 50 000 EUR
-              </p>
-            </div>
-          </section>
-
-          {/* Directeur de publication */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Directeur de la publication
-            </h2>
-            <div className="text-gray-700">
-              <p>
-                <strong>Directeur de publication :</strong> Martin Dupont
-              </p>
-              <p className="mt-2 text-sm">
-                Le directeur de la publication est responsable de la conformité
-                du contenu du site avec la législation en vigueur.
-              </p>
-            </div>
-          </section>
-
-          {/* Hébergement */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Hébergement
-            </h2>
-            <div className="space-y-2 text-gray-700">
-              <p>
-                <strong>Hébergeur :</strong> Vercel Inc.
-              </p>
-              <p>
-                <strong>Adresse :</strong> 340 S Lemon Ave, Walnut, CA 91789,
-                États-Unis
-              </p>
-              <p>
-                <strong>Site web :</strong>{' '}
-                <a
-                  href="https://vercel.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  www.vercel.com
-                </a>
-              </p>
-              <p className="mt-4 text-sm">
-                Vercel Inc. est responsable de l&apos;hébergement et de la
-                disponibilité technique du site.
-              </p>
-            </div>
-          </section>
-
-          {/* Responsabilité */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Responsabilité du contenu
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Eventy Life SAS s&apos;efforce de maintenir les informations
-                contenues sur ce site à jour et exactes. Cependant, elle ne
-                peut garantir l&apos;absence d&apos;erreurs ou
-                d&apos;omissions.
-              </p>
-              <p>
-                Eventy Life SAS ne pourra être tenue responsable des dommages
-                directs ou indirects résultant de l&apos;accès ou de
-                l&apos;utilisation du site, notamment des pertes de données,
-                interruptions de service ou erreurs dans les informations
-                fournies.
-              </p>
-              <p>
-                Les liens hypertextes présents sur le site vers d&apos;autres
-                sites ne constituent pas un cautionnement. Eventy Life SAS
-                décline toute responsabilité quant au contenu des sites tiers.
-              </p>
-            </div>
-          </section>
-
-          {/* Propriété intellectuelle */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Propriété intellectuelle
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Tous les contenus du site (textes, images, graphiques, logos,
-                vidéos, icônes) sont la propriété d&apos;Eventy Life SAS ou de
-                ses partenaires et sont protégés par les droits
-                d&apos;auteur et de propriété intellectuelle.
-              </p>
-              <p>
-                Toute reproduction, représentation, modification ou
-                exploitation non autorisée de ces contenus est strictement
-                interdite.
-              </p>
-            </div>
-          </section>
-
-          {/* Données personnelles */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Protection des données personnelles
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Le site collecte des données personnelles conformément à la
-                législation applicable, notamment le Règlement Général sur la
-                Protection des Données (RGPD).
-              </p>
-              <p>
-                Pour plus d&apos;informations sur le traitement de vos données
-                personnelles, veuillez consulter notre{' '}
-                <Link
-                  href="/politique-confidentialite"
-                  className="text-blue-600 hover:underline"
-                >
-                  Politique de Confidentialité
-                </Link>
-                .
-              </p>
-            </div>
-          </section>
-
-          {/* Cookies */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Cookies et traceurs
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                Le site utilise des cookies et des technologies similaires pour
-                améliorer l&apos;expérience utilisateur et mesurer
-                l&apos;audience.
-              </p>
-              <p>
-                Pour plus de détails et pour gérer vos préférences de cookies,
-                veuillez consulter notre{' '}
-                <Link href="/cookies" className="text-blue-600 hover:underline">
-                  Politique de Cookies
-                </Link>
-                .
-              </p>
-            </div>
-          </section>
-
-          {/* Conditions d'utilisation */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Conditions d&apos;utilisation
-            </h2>
-            <div className="space-y-3 text-gray-700">
-              <p>
-                L&apos;utilisation du site implique l&apos;acceptation de ces
-                mentions légales et des{' '}
-                <Link href="/cgv" className="text-blue-600 hover:underline">
-                  Conditions Générales de Vente
-                </Link>
-                .
-              </p>
-              <p>
-                Eventy Life SAS se réserve le droit de modifier ces mentions à
-                tout moment sans préavis.
-              </p>
-            </div>
-          </section>
-
-          {/* Contact */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
-              Nous contacter
-            </h2>
-            <div className="space-y-2 text-gray-700">
-              <p>
-                Pour toute question concernant ces mentions légales, veuillez
-                nous contacter :
-              </p>
-              <ul className="mt-4 space-y-2">
-                <li>
-                  <strong>Email :</strong>{' '}
-                  <a
-                    href="mailto:legal@eventy.life"
-                    className="text-blue-600 hover:underline"
-                  >
-                    legal@eventy.life
-                  </a>
-                </li>
-                <li>
-                  <strong>Adresse :</strong> 15 rue de la Paix, 75002 Paris,
-                  France
-                </li>
-                <li>
-                  <strong>Téléphone :</strong> +33 (0)1 23 45 67 89
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Date de mise à jour */}
-          <div className="rounded-lg bg-blue-50 p-6 text-sm text-gray-600">
-            <p>
-              <strong>Dernière mise à jour :</strong> 2 mars 2026
-            </p>
+    <div style={{ minHeight: '100vh', background: C.cream }}>
+      <div style={{
+        background: 'linear-gradient(135deg, ' + C.navy + ' 0%, #2D2B55 100%)',
+        padding: '80px 20px 60px', textAlign: 'center',
+      }}>
+        <h1 style={{ fontSize: 42, fontWeight: 800, color: C.white, margin: '0 0 16px' }}>
+          Mentions l&#233;gales
+        </h1>
+        <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)' }}>
+          Derni&#232;re mise &#224; jour : mars 2026
+        </p>
+      </div>
+      <div style={{ maxWidth: 800, margin: '0 auto', padding: '48px 20px' }}>
+        {sections.map((s, i) => (
+          <div key={i} style={{
+            background: C.white, borderRadius: 14, padding: '28px 24px',
+            border: '1px solid ' + C.border, marginBottom: 20,
+          }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: C.navy, margin: '0 0 12px' }}>{s.title}</h2>
+            <p style={{ fontSize: 15, color: C.muted, lineHeight: 1.7, margin: 0 }}>{s.content}</p>
           </div>
+        ))}
+        <div style={{ textAlign: 'center', marginTop: 40 }}>
+          <Link href="/politique-confidentialite" style={{
+            color: C.terra, fontWeight: 700, fontSize: 16, textDecoration: 'none',
+          }}>Politique de confidentialit&#233; &#8594;</Link>
+          <span style={{ margin: '0 20px', color: C.border }}>|</span>
+          <Link href="/cgv" style={{
+            color: C.terra, fontWeight: 700, fontSize: 16, textDecoration: 'none',
+          }}>Conditions g&#233;n&#233;rales de vente &#8594;</Link>
         </div>
       </div>
     </div>
