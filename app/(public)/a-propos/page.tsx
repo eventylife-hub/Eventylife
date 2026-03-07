@@ -52,7 +52,7 @@ export default function APropos() {
             margin: 0,
           }}
         >
-          Eventy Life est n&#233;e d&apos;une conviction simple: le voyage en groupe doit \u00eatre
+          Eventy Life est n&#233;e d&apos;une conviction simple: le voyage en groupe doit être
           accessible, humain et sans stress.
         </p>
       </section>
@@ -109,8 +109,8 @@ export default function APropos() {
                 margin: 0,
               }}
             >
-              Accompagnement humain porte-\u00e0-porte, du ramassage au retour. Nous croyons que
-              chaque voyageur m\u00e9rite une exp\u00e9rience fluide, personnalis\u00e9e et riche en
+              Accompagnement humain porte-à-porte, du ramassage au retour. Nous croyons que
+              chaque voyageur mérite une expérience fluide, personnalisée et riche en
               souvenirs.
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function APropos() {
                   lineHeight: '1.6',
                 }}
               >
-                Le client doit se sentir aim\u00e9
+                Le client doit se sentir aimé
               </p>
             </div>
 
@@ -215,7 +215,7 @@ export default function APropos() {
                   margin: '0 0 12px 0',
                 }}
               >
-                Accessibilit\u00e9
+                Accessibilité
               </h3>
               <p
                 style={{
@@ -265,7 +265,7 @@ export default function APropos() {
                   lineHeight: '1.6',
                 }}
               >
-                Agence immatricul\u00e9e, garantie APST
+                Agence immatriculée, garantie APST
               </p>
             </div>
 
@@ -335,7 +335,7 @@ export default function APropos() {
               letterSpacing: '1px',
             }}
           >
-            L&apos;\u00e9quipe
+            L&apos;équipe
           </h2>
           <div
             style={{
@@ -353,9 +353,9 @@ export default function APropos() {
                 margin: 0,
               }}
             >
-              Fond\u00e9e par des passionn\u00e9s de voyage et de technologie, notre \u00e9quipe
-              r\u00e9unit expertise dans le tourisme, d\u00e9veloppement logiciel et service client
-              de qualit\u00e9. Ensemble, nous construisons le futur du voyage en groupe.
+              Fondée par des passionnés de voyage et de technologie, notre équipe
+              réunit expertise dans le tourisme, développement logiciel et service client
+              de qualité. Ensemble, nous construisons le futur du voyage en groupe.
             </p>
           </div>
         </div>
@@ -384,7 +384,7 @@ export default function APropos() {
               letterSpacing: '1px',
             }}
           >
-            Chiffres cl\u00e9s
+            Chiffres clés
           </h2>
           <div
             style={{
@@ -531,7 +531,7 @@ export default function APropos() {
               letterSpacing: '1px',
             }}
           >
-            Pr\u00eats \u00e0 partir ?
+            Prêts à partir ?
           </h2>
           <p
             style={{
@@ -542,7 +542,7 @@ export default function APropos() {
               lineHeight: '1.6',
             }}
           >
-            D\u00e9couvrez nos voyages inoubliables et rejoignez des milliers de voyageurs
+            Découvrez nos voyages inoubliables et rejoignez des milliers de voyageurs
             satisfaits.
           </p>
           <Link href="/voyages">
@@ -573,7 +573,7 @@ export default function APropos() {
                 (e.target as HTMLButtonElement).style.boxShadow = 'none';
               }}
             >
-              D\u00e9couvrez nos voyages
+              Découvrez nos voyages
             </button>
           </Link>
         </div>
