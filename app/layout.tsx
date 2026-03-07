@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Outfit, Fraunces } from 'next/font/google';
 import './globals.css';
 import { ToastContainer } from '@/components/ui/toast';
 import { CookieBanner } from '@/components/cookie-banner';
 
-const inter = Inter({ subsets: ['latin'] });
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  weight: ['400', '600', '700', '800', '900'],
+});
 
 export const metadata: Metadata = {
   title: 'Eventy Life - Voyages en Groupe',
@@ -33,7 +45,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body className={`${outfit.variable} ${fraunces.variable} ${outfit.className}`}>
         {children}
         <ToastContainer />
         <CookieBanner />
