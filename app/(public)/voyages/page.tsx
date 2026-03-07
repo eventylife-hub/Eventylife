@@ -33,7 +33,7 @@ const voyages = [
   },
   {
     slug: 'maroc-imperial',
-    title: 'Maroc Imp\u00e9rial & Sahara',
+    title: 'Maroc Impérial & Sahara',
     country: 'MA',
     countryLabel: 'Maroc',
     image: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&h=400&fit=crop',
@@ -44,7 +44,7 @@ const voyages = [
     transport: 'Bus grand tourisme',
     badge: 'D\u00c9PART CONFIRM\u00c9',
     badgeColor: '#059669',
-    tags: ['Culture', 'D\u00e9sert', 'M\u00e9dina'],
+    tags: ['Culture', 'Désert', 'Médina'],
   },
   {
     slug: 'andalousie-flamenco',
@@ -78,7 +78,7 @@ const voyages = [
   },
   {
     slug: 'tunisie-hammamet',
-    title: 'Tunisie \u2014 Hammamet & Sidi Bou Sa\u00efd',
+    title: 'Tunisie \u2014 Hammamet & Sidi Bou Saïd',
     country: 'TN',
     countryLabel: 'Tunisie',
     image: 'https://images.unsplash.com/photo-1565109441139-bbc677963da9?w=600&h=400&fit=crop',
@@ -89,7 +89,7 @@ const voyages = [
     transport: 'Bus grand tourisme',
     badge: 'D\u00c9PART CONFIRM\u00c9',
     badgeColor: '#059669',
-    tags: ['Plage', 'Culture', 'D\u00e9tente'],
+    tags: ['Plage', 'Culture', 'Détente'],
   },
   {
     slug: 'croatie-dubrovnik',
@@ -119,15 +119,15 @@ const voyages = [
     transport: 'Bus grand tourisme',
     badge: 'BIENT\u00d4T',
     badgeColor: '#D97706',
-    tags: ['Culture', 'Gastronomie', 'Oc\u00e9an'],
+    tags: ['Culture', 'Gastronomie', 'Océan'],
   },
   {
     slug: 'grece-athenes-santorin',
-    title: 'Gr\u00e8ce \u2014 Ath\u00e8nes & Santorin',
+    title: 'Grèce \u2014 Athènes & Santorin',
     country: 'GR',
-    countryLabel: 'Gr\u00e8ce',
+    countryLabel: 'Grèce',
     image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=600&h=400&fit=crop',
-    dates: '24 Ao\u00fbt \u2013 1 Sept 2026',
+    dates: '24 Août \u2013 1 Sept 2026',
     duration: '9 jours',
     basePrice: 1090,
     spotsLeft: 16,
@@ -156,7 +156,7 @@ const destinations = [
   { code: 'TN', label: 'Tunisie' },
   { code: 'HR', label: 'Croatie' },
   { code: 'PT', label: 'Portugal' },
-  { code: 'GR', label: 'Gr\u00e8ce' },
+  { code: 'GR', label: 'Grèce' },
 ];
 
 function VoyageCard({ v }: { v: typeof voyages[0] }) {
@@ -229,7 +229,7 @@ function VoyageCard({ v }: { v: typeof voyages[0] }) {
           {/* Price + CTA */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <div style={{ fontSize: 12, color: C.muted }}>{'\u00e0'} partir de</div>
+              <div style={{ fontSize: 12, color: C.muted }}>{'à'} partir de</div>
               <div style={{ fontSize: 28, fontWeight: 800, color: C.terra }}>{v.basePrice}&#8364;</div>
               <div style={{ fontSize: 12, color: C.muted }}>par personne</div>
             </div>
@@ -237,7 +237,7 @@ function VoyageCard({ v }: { v: typeof voyages[0] }) {
               background: C.terra, color: C.white,
               padding: '12px 24px', borderRadius: 12,
               fontWeight: 700, fontSize: 15,
-            }}>R{'\u00e9'}server</div>
+            }}>R{'é'}server</div>
           </div>
           {/* Spots */}
           {v.spotsLeft <= 10 && (
@@ -247,7 +247,7 @@ function VoyageCard({ v }: { v: typeof voyages[0] }) {
               fontSize: 13, fontWeight: 600,
               color: v.spotsLeft <= 6 ? '#DC2626' : C.green,
               textAlign: 'center',
-            }}>&#9203; Plus que {v.spotsLeft} places sur ce d{'\u00e9'}part !</div>
+            }}>&#9203; Plus que {v.spotsLeft} places sur ce d{'é'}part !</div>
           )}
         </div>
       </div>
@@ -267,7 +267,7 @@ export default function VoyagesPage() {
           Nos voyages en groupe
         </h1>
         <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)', margin: '0 0 30px', maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}>
-          D{'\u00e9'}couvrez nos destinations avec accompagnement humain porte-{'\u00e0'}-porte. Ramassage pr{'\u00e8'}s de chez vous, z{'\u00e9'}ro logistique.
+          D{'é'}couvrez nos destinations avec accompagnement humain porte-{'à'}-porte. Ramassage pr{'è'}s de chez vous, z{'é'}ro logistique.
         </p>
         {/* Search bar */}
         <div style={{
@@ -333,10 +333,10 @@ export default function VoyagesPage() {
               padding: '6px 12px', fontSize: 14, color: C.navy,
               background: C.white, cursor: 'pointer',
             }}>
-              <option>Prochains d{'\u00e9'}parts</option>
+              <option>Prochains d{'é'}parts</option>
               <option>Prix croissant</option>
-              <option>Prix d{'\u00e9'}croissant</option>
-              <option>Popularit{'\u00e9'}</option>
+              <option>Prix d{'é'}croissant</option>
+              <option>Popularit{'é'}</option>
             </select>
           </div>
         </div>
@@ -361,9 +361,9 @@ export default function VoyagesPage() {
           textAlign: 'center',
         }}>
           {[
-            { icon: '&#128652;', title: 'Ramassage', desc: 'Pr\u00e8s de chez vous' },
-            { icon: '&#128100;', title: 'Accompagnateur', desc: 'D\u00e9di\u00e9 tout le voyage' },
-            { icon: '&#9989;', title: '3x sans frais', desc: 'Paiement s\u00e9curis\u00e9' },
+            { icon: '&#128652;', title: 'Ramassage', desc: 'Près de chez vous' },
+            { icon: '&#128100;', title: 'Accompagnateur', desc: 'Dédié tout le voyage' },
+            { icon: '&#9989;', title: '3x sans frais', desc: 'Paiement sécurisé' },
             { icon: '&#128274;', title: 'Garantie APST', desc: 'Protection totale' },
           ].map((u, i) => (
             <div key={i}>
