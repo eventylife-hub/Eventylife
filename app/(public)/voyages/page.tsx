@@ -1,313 +1,379 @@
-/**
- * Page listing des voyages avec filtres
- */
-
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { SkeletonGrid } from '@/components/ui/skeleton';
-import { ROUTES } from '@/lib/constants';
-import { formatPrice, formatDate } from '@/lib/utils';
-import { apiClient } from '@/lib/api-client';
 
-/**
- * Interface pour un voyage
- */
-interface Travel {
-  id: string;
-  slug: string;
-  title: string;
-  destination: string;
-  startDate: string;
-  endDate: string;
-  price: number;
-  image: string;
-  rating: number;
-  reviews: number;
-  daysCount: number;
-  capacity: number;
-  currentBookings: number;
-}
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  gold: '#D4A853',
+  white: '#FFFFFF',
+  muted: '#6B7280',
+  border: '#E8E4DE',
+  green: '#059669',
+  greenBg: '#ECFDF5',
+};
 
-/**
- * État du composant
- */
-type LoadState = 'loading' | 'empty' | 'error' | 'data';
+const voyages = [
+  {
+    slug: 'iles-eoliennes-baroque-sicilien',
+    title: '\u00celes \u00c9oliennes & Baroque Sicilien',
+    country: 'IT',
+    countryLabel: 'Italie',
+    image: 'https://images.unsplash.com/photo-1523365280197-f1783db9fe62?w=600&h=400&fit=crop',
+    dates: '15 Juin \u2013 22 Juin 2026',
+    duration: '8 jours',
+    basePrice: 1890,
+    spotsLeft: 6,
+    transport: 'Bus grand tourisme',
+    badge: '6 PLACES RESTANTES',
+    badgeColor: '#DC2626',
+    tags: ['Culture', 'Nature', '\u00celes'],
+  },
+  {
+    slug: 'maroc-imperial',
+    title: 'Maroc Imp\u00e9rial & Sahara',
+    country: 'MA',
+    countryLabel: 'Maroc',
+    image: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&h=400&fit=crop',
+    dates: '20 \u2013 27 Avril 2026',
+    duration: '8 jours',
+    basePrice: 599,
+    spotsLeft: 14,
+    transport: 'Bus grand tourisme',
+    badge: 'D\u00c9PART CONFIRM\u00c9',
+    badgeColor: '#059669',
+    tags: ['Culture', 'D\u00e9sert', 'M\u00e9dina'],
+  },
+  {
+    slug: 'andalousie-flamenco',
+    title: 'Andalousie, Flamenco & Tapas',
+    country: 'ES',
+    countryLabel: 'Espagne',
+    image: 'https://images.unsplash.com/photo-1509840841025-9088ba78a826?w=600&h=400&fit=crop',
+    dates: '5 \u2013 12 Mai 2026',
+    duration: '8 jours',
+    basePrice: 549,
+    spotsLeft: 20,
+    transport: 'Bus grand tourisme',
+    badge: 'D\u00c9PART CONFIRM\u00c9',
+    badgeColor: '#059669',
+    tags: ['Culture', 'Gastronomie', 'Architecture'],
+  },
+  {
+    slug: 'rome-florence-venise',
+    title: 'Rome, Florence & Venise',
+    country: 'IT',
+    countryLabel: 'Italie',
+    image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=600&h=400&fit=crop',
+    dates: '10 \u2013 18 Mai 2026',
+    duration: '9 jours',
+    basePrice: 729,
+    spotsLeft: 12,
+    transport: 'Bus grand tourisme',
+    badge: 'NOUVEAU',
+    badgeColor: '#7C3AED',
+    tags: ['Culture', 'Art', 'Gastronomie'],
+  },
+  {
+    slug: 'tunisie-hammamet',
+    title: 'Tunisie \u2014 Hammamet & Sidi Bou Sa\u00efd',
+    country: 'TN',
+    countryLabel: 'Tunisie',
+    image: 'https://images.unsplash.com/photo-1565109441139-bbc677963da9?w=600&h=400&fit=crop',
+    dates: '20 \u2013 27 Avril 2026',
+    duration: '8 jours',
+    basePrice: 599,
+    spotsLeft: 18,
+    transport: 'Bus grand tourisme',
+    badge: 'D\u00c9PART CONFIRM\u00c9',
+    badgeColor: '#059669',
+    tags: ['Plage', 'Culture', 'D\u00e9tente'],
+  },
+  {
+    slug: 'croatie-dubrovnik',
+    title: 'Croatie \u2014 Dubrovnik & Split',
+    country: 'HR',
+    countryLabel: 'Croatie',
+    image: 'https://images.unsplash.com/photo-1555990793-da11153b2473?w=600&h=400&fit=crop',
+    dates: '1 \u2013 8 Juillet 2026',
+    duration: '8 jours',
+    basePrice: 849,
+    spotsLeft: 22,
+    transport: 'Bus grand tourisme',
+    badge: 'NOUVEAU',
+    badgeColor: '#7C3AED',
+    tags: ['Plage', '\u00celes', 'Histoire'],
+  },
+  {
+    slug: 'portugal-lisbonne-porto',
+    title: 'Portugal \u2014 Lisbonne & Porto',
+    country: 'PT',
+    countryLabel: 'Portugal',
+    image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&h=400&fit=crop',
+    dates: '15 \u2013 22 Septembre 2026',
+    duration: '8 jours',
+    basePrice: 679,
+    spotsLeft: 24,
+    transport: 'Bus grand tourisme',
+    badge: 'BIENT\u00d4T',
+    badgeColor: '#D97706',
+    tags: ['Culture', 'Gastronomie', 'Oc\u00e9an'],
+  },
+  {
+    slug: 'grece-athenes-santorin',
+    title: 'Gr\u00e8ce \u2014 Ath\u00e8nes & Santorin',
+    country: 'GR',
+    countryLabel: 'Gr\u00e8ce',
+    image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=600&h=400&fit=crop',
+    dates: '24 Ao\u00fbt \u2013 1 Sept 2026',
+    duration: '9 jours',
+    basePrice: 1090,
+    spotsLeft: 16,
+    transport: 'Avion + bus',
+    badge: 'POPULAIRE',
+    badgeColor: '#DC2626',
+    tags: ['\u00celes', 'Plage', 'Histoire'],
+  },
+];
 
-/**
- * Contenu principal
- */
-function VoyagesContent() {
-  const searchParams = useSearchParams();
-  const [state, setState] = useState<LoadState>('loading');
-  const [travels, setTravels] = useState<Travel[]>([]);
-  const [filteredTravels, setFilteredTravels] = useState<Travel[]>([]);
-  const [error, setError] = useState<string | null>(null);
+const filters = [
+  { label: 'Tous', active: true },
+  { label: 'Bus', active: false },
+  { label: 'Avion', active: false },
+  { label: '- de 700\u20ac', active: false },
+  { label: 'Week-end', active: false },
+  { label: 'Culture', active: false },
+  { label: 'Plage', active: false },
+  { label: 'Nature', active: false },
+];
 
-  // Filtres
-  const [destination, setDestination] = useState(searchParams.get('destination') || '');
-  const [minPrice, setMinPrice] = useState<number | null>(null);
-  const [maxPrice, setMaxPrice] = useState<number | null>(null);
-  const [sortBy, setSortBy] = useState('popular');
+const destinations = [
+  { code: 'MA', label: 'Maroc' },
+  { code: 'ES', label: 'Espagne' },
+  { code: 'IT', label: 'Italie' },
+  { code: 'TN', label: 'Tunisie' },
+  { code: 'HR', label: 'Croatie' },
+  { code: 'PT', label: 'Portugal' },
+  { code: 'GR', label: 'Gr\u00e8ce' },
+];
 
-  // Charger les données
-  useEffect(() => {
-    const loadTravels = async () => {
-      try {
-        setState('loading');
-        setError(null);
-
-        // Récupérer les voyages depuis l'API
-        const response = await apiClient.get<any>('/travels');
-        const travelList = Array.isArray(response) ? response : (response.data || []);
-
-        // Mapper les données du backend au format du frontend
-        const mappedTravels = travelList.map((travel: any) => ({
-          id: travel.id,
-          slug: travel.slug,
-          title: travel.title,
-          destination: travel.destination,
-          startDate: travel.startDate || new Date().toISOString(),
-          endDate: travel.endDate || new Date().toISOString(),
-          price: travel.pricePerPerson || travel.price || 0,
-          image: travel.image || '✈️',
-          rating: travel.rating || 4.5,
-          reviews: travel.reviews || 0,
-          daysCount: travel.daysCount || 5,
-          capacity: travel.capacity || 50,
-          currentBookings: travel.bookings || travel.currentBookings || 0,
-        }));
-
-        setTravels(mappedTravels);
-        setState(mappedTravels.length > 0 ? 'data' : 'empty');
-      } catch (err) {
-        console.error('Erreur lors du chargement des voyages:', err);
-        setError('Erreur lors du chargement des voyages');
-        setState('error');
-      }
-    };
-
-    loadTravels();
-  }, []);
-
-  // Appliquer les filtres
-  useEffect(() => {
-    let result = travels;
-
-    // Filtre destination
-    if (destination) {
-      result = result.filter(t =>
-        t.destination.toLowerCase().includes(destination.toLowerCase()) ||
-        t.title.toLowerCase().includes(destination.toLowerCase())
-      );
-    }
-
-    // Filtre prix
-    if (minPrice !== null) {
-      result = result.filter(t => t.price >= minPrice);
-    }
-    if (maxPrice !== null) {
-      result = result.filter(t => t.price <= maxPrice);
-    }
-
-    // Tri (copie immuable pour éviter mutation de l'état)
-    const sorted = [...result];
-    if (sortBy === 'price-asc') {
-      sorted.sort((a, b) => a.price - b.price);
-    } else if (sortBy === 'price-desc') {
-      sorted.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'rating') {
-      sorted.sort((a, b) => b.rating - a.rating);
-    }
-
-    setFilteredTravels(sorted);
-  }, [travels, destination, minPrice, maxPrice, sortBy]);
-
-  // Rendu selon l'état
-  if (state === 'loading') {
-    return (
-      <div className="space-y-6">
-        <div className="flex flex-col md:flex-row gap-4 items-center">
-          <Input
-            placeholder="Rechercher une destination..."
-            disabled
-            className="flex-1"
-          />
-          <select disabled className="px-4 py-2.5 rounded-lg border-2 border-gray-300 bg-white">
-            <option>Tri</option>
-          </select>
-        </div>
-        <SkeletonGrid columns={2} count={4} />
-      </div>
-    );
-  }
-
-  if (state === 'error') {
-    return (
-      <div className="text-center py-12">
-        <p className="text-red-600 mb-4">⚠️ {error}</p>
-        <Button variant="primary" onClick={() => window.location.reload()}>
-          Réessayer
-        </Button>
-      </div>
-    );
-  }
-
-  if (state === 'data' && filteredTravels.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-gray-600 mb-4">
-          {travels.length === 0
-            ? 'Aucun voyage disponible pour le moment.'
-            : 'Aucun voyage ne correspond à vos critères de recherche.'}
-        </p>
-        {destination && (
-          <Button
-            variant="outline"
-            onClick={() => setDestination('')}
-          >
-            Réinitialiser la recherche
-          </Button>
-        )}
-      </div>
-    );
-  }
-
+function VoyageCard({ v }: { v: typeof voyages[0] }) {
   return (
-    <div className="space-y-6">
-      {/* Filtres */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200 space-y-4">
-        <h3 className="font-bold text-lg text-gray-900">Filtres</h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Input
-            label="Destination"
-            placeholder="Chercher..."
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-          />
-          
-          <Input
-            label="Prix minimum (€)"
-            type="number"
-            placeholder="0"
-            onChange={(e) => setMinPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
-          />
-          
-          <Input
-            label="Prix maximum (€)"
-            type="number"
-            placeholder="10000"
-            onChange={(e) => setMaxPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
-          />
+    <Link href={'/voyages/' + v.slug} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <div style={{
+        background: C.white,
+        borderRadius: 20,
+        overflow: 'hidden',
+        border: '1px solid ' + C.border,
+        transition: 'transform 0.2s, box-shadow 0.2s',
+        cursor: 'pointer',
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.12)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+      >
+        {/* Image */}
+        <div style={{ position: 'relative', height: 220, overflow: 'hidden' }}>
+          <img src={v.image} alt={v.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          {/* Badge */}
+          <div style={{
+            position: 'absolute', top: 12, left: 12,
+            background: v.badgeColor, color: C.white,
+            padding: '6px 12px', borderRadius: 8,
+            fontSize: 11, fontWeight: 800, letterSpacing: 0.5,
+          }}>{v.badge}</div>
+          {/* Heart */}
+          <div style={{
+            position: 'absolute', top: 12, right: 12,
+            width: 36, height: 36, borderRadius: '50%',
+            background: 'rgba(255,255,255,0.9)', display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            fontSize: 18, cursor: 'pointer',
+          }}>&#9825;</div>
+          {/* Transport badge */}
+          <div style={{
+            position: 'absolute', bottom: 12, right: 12,
+            background: 'rgba(0,0,0,0.6)', color: C.white,
+            padding: '4px 10px', borderRadius: 6,
+            fontSize: 12, fontWeight: 600,
+            display: 'flex', alignItems: 'center', gap: 4,
+          }}>&#128652; {v.transport}</div>
+          {/* Country flag */}
+          <div style={{
+            position: 'absolute', bottom: 12, left: 12,
+            background: 'rgba(255,255,255,0.95)',
+            padding: '4px 10px', borderRadius: 6,
+            fontSize: 12, fontWeight: 600, color: C.navy,
+          }}>{v.country} {v.countryLabel}</div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Trier par
-          </label>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-          >
-            <option value="popular">Plus populaires</option>
-            <option value="price-asc">Prix croissant</option>
-            <option value="price-desc">Prix décroissant</option>
-            <option value="rating">Meilleure notation</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Résultats */}
-      <div>
-        <p className="text-gray-600 mb-4">
-          {filteredTravels.length} voyage{filteredTravels.length !== 1 ? 's' : ''} trouvé{filteredTravels.length !== 1 ? 's' : ''}
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTravels.map((voyage) => {
-            const available = voyage.capacity - voyage.currentBookings;
-            
-            return (
-              <Link key={voyage.id} href={ROUTES.VOYAGE_DETAIL(voyage.slug)}>
-                <Card elevated hoverEffect className="h-full flex flex-col">
-                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-green-100 flex items-center justify-center text-6xl">
-                    {voyage.image}
-                  </div>
-                  <CardContent className="p-4 flex-1 flex flex-col">
-                    <div className="flex items-start justify-between mb-2">
-                      <Badge variant="info">{voyage.daysCount} jours</Badge>
-                      {available <= 5 && (
-                        <Badge variant="warning">Peu de places</Badge>
-                      )}
-                    </div>
-
-                    <h3 className="font-bold text-lg text-gray-900 mb-1 line-clamp-2">
-                      {voyage.title}
-                    </h3>
-                    
-                    <p className="text-sm text-gray-600 mb-2">
-                      📍 {voyage.destination}
-                    </p>
-
-                    <p className="text-xs text-gray-500 mb-3">
-                      Du {formatDate(voyage.startDate)} au{' '}
-                      {formatDate(voyage.endDate)}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-4 mt-auto">
-                      <span className="text-xl font-bold text-blue-600">
-                        À partir de {formatPrice(voyage.price)}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="flex items-center gap-1 text-sm">
-                        <span>⭐ {voyage.rating}</span>
-                        <span className="text-gray-600">({voyage.reviews})</span>
-                      </span>
-                      <span className="text-xs text-gray-600">
-                        {available} place{available !== 1 ? 's' : ''} restante{available !== 1 ? 's' : ''}
-                      </span>
-                    </div>
-
-                    <Button variant="primary" size="sm" className="w-full">
-                      Voir détails
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
+        {/* Content */}
+        <div style={{ padding: '16px 20px 20px' }}>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: C.navy, margin: '0 0 8px', lineHeight: 1.3 }}>{v.title}</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.muted, marginBottom: 8 }}>
+            <span>&#128197; {v.dates}</span>
+            <span>&#183;</span>
+            <span>{v.duration}</span>
+          </div>
+          {/* Tags */}
+          <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+            {v.tags.map((t, i) => (
+              <span key={i} style={{
+                background: C.cream, color: C.navy,
+                padding: '4px 10px', borderRadius: 20,
+                fontSize: 12, fontWeight: 500,
+              }}>{t}</span>
+            ))}
+          </div>
+          {/* Price + CTA */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{ fontSize: 12, color: C.muted }}>{'\u00e0'} partir de</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: C.terra }}>{v.basePrice}&#8364;</div>
+              <div style={{ fontSize: 12, color: C.muted }}>par personne</div>
+            </div>
+            <div style={{
+              background: C.terra, color: C.white,
+              padding: '12px 24px', borderRadius: 12,
+              fontWeight: 700, fontSize: 15,
+            }}>R{'\u00e9'}server</div>
+          </div>
+          {/* Spots */}
+          {v.spotsLeft <= 10 && (
+            <div style={{
+              marginTop: 12, background: v.spotsLeft <= 6 ? '#FEF2F2' : C.greenBg,
+              borderRadius: 8, padding: '8px 12px',
+              fontSize: 13, fontWeight: 600,
+              color: v.spotsLeft <= 6 ? '#DC2626' : C.green,
+              textAlign: 'center',
+            }}>&#9203; Plus que {v.spotsLeft} places sur ce d{'\u00e9'}part !</div>
+          )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
-/**
- * Page voyages
- */
 export default function VoyagesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Nos voyages</h1>
-        <p className="text-lg text-gray-600">
-          Découvrez notre sélection de voyages en groupe avec accompagnement humain
+    <div style={{ background: C.cream, minHeight: '100vh' }}>
+      {/* Hero */}
+      <div style={{
+        background: 'linear-gradient(135deg, ' + C.navy + ' 0%, #2D2B55 100%)',
+        padding: '60px 20px 50px', textAlign: 'center',
+      }}>
+        <h1 style={{ fontSize: 40, fontWeight: 800, color: C.white, margin: '0 0 12px' }}>
+          Nos voyages en groupe
+        </h1>
+        <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.8)', margin: '0 0 30px', maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}>
+          D{'\u00e9'}couvrez nos destinations avec accompagnement humain porte-{'\u00e0'}-porte. Ramassage pr{'\u00e8'}s de chez vous, z{'\u00e9'}ro logistique.
         </p>
+        {/* Search bar */}
+        <div style={{
+          maxWidth: 600, margin: '0 auto',
+          background: C.white, borderRadius: 16,
+          padding: '12px 16px', display: 'flex',
+          alignItems: 'center', gap: 12,
+        }}>
+          <span style={{ fontSize: 20 }}>&#128269;</span>
+          <input
+            type="text"
+            placeholder={'Rechercher une destination, un pays...'}
+            style={{
+              flex: 1, border: 'none', outline: 'none',
+              fontSize: 16, color: C.navy, background: 'transparent',
+            }}
+          />
+          <div style={{
+            background: C.terra, color: C.white,
+            padding: '10px 20px', borderRadius: 10,
+            fontWeight: 700, fontSize: 14, cursor: 'pointer',
+          }}>Rechercher</div>
+        </div>
       </div>
 
-      <Suspense fallback={<SkeletonGrid columns={2} count={4} />}>
-        <VoyagesContent />
-      </Suspense>
+      {/* Destination pills */}
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px 20px 0' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+          {destinations.map((d, i) => (
+            <button key={i} style={{
+              background: C.white, border: '1px solid ' + C.border,
+              borderRadius: 20, padding: '8px 16px',
+              fontSize: 14, fontWeight: 500, color: C.navy,
+              cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6,
+            }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: C.muted }}>{d.code}</span> {d.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Filter pills */}
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
+          {filters.map((f, i) => (
+            <button key={i} style={{
+              background: f.active ? C.terra : C.white,
+              color: f.active ? C.white : C.navy,
+              border: f.active ? 'none' : '1px solid ' + C.border,
+              borderRadius: 20, padding: '8px 18px',
+              fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            }}>{f.label}</button>
+          ))}
+        </div>
+
+        {/* Results count */}
+        <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontSize: 16, color: C.muted }}>
+            <span style={{ fontWeight: 700, color: C.navy }}>{voyages.length} voyages</span> disponibles
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: C.muted }}>
+            Trier par :
+            <select style={{
+              border: '1px solid ' + C.border, borderRadius: 8,
+              padding: '6px 12px', fontSize: 14, color: C.navy,
+              background: C.white, cursor: 'pointer',
+            }}>
+              <option>Prochains d{'\u00e9'}parts</option>
+              <option>Prix croissant</option>
+              <option>Prix d{'\u00e9'}croissant</option>
+              <option>Popularit{'\u00e9'}</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+          gap: 24,
+          paddingBottom: 60,
+        }}>
+          {voyages.map((v, i) => (
+            <VoyageCard key={i} v={v} />
+          ))}
+        </div>
+
+        {/* USP Banner */}
+        <div style={{
+          background: C.white, borderRadius: 20, padding: '40px 32px',
+          marginBottom: 60, border: '1px solid ' + C.border,
+          display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24,
+          textAlign: 'center',
+        }}>
+          {[
+            { icon: '&#128652;', title: 'Ramassage', desc: 'Pr\u00e8s de chez vous' },
+            { icon: '&#128100;', title: 'Accompagnateur', desc: 'D\u00e9di\u00e9 tout le voyage' },
+            { icon: '&#9989;', title: '3x sans frais', desc: 'Paiement s\u00e9curis\u00e9' },
+            { icon: '&#128274;', title: 'Garantie APST', desc: 'Protection totale' },
+          ].map((u, i) => (
+            <div key={i}>
+              <div style={{ fontSize: 32, marginBottom: 8 }} dangerouslySetInnerHTML={{ __html: u.icon }} />
+              <div style={{ fontWeight: 700, color: C.navy, marginBottom: 4 }}>{u.title}</div>
+              <div style={{ fontSize: 13, color: C.muted }}>{u.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
