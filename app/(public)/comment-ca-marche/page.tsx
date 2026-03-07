@@ -27,10 +27,10 @@ export default function CommentCaMarche() {
         }}
       >
         <h1 style={{ fontSize: '48px', fontWeight: 700, margin: '0 0 20px 0' }}>
-          Comment \u00e7a marche\u00a0?
+          Comment ça marche ?
         </h1>
         <p style={{ fontSize: '20px', fontWeight: 300, margin: 0, maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6 }}>
-          Voyager avec Eventy, c\u2019est simple comme bonjour
+          Voyager avec Eventy, c’est simple comme bonjour
         </p>
       </section>
 
@@ -58,31 +58,31 @@ export default function CommentCaMarche() {
                 number: 1,
                 icon: '&#128269;',
                 title: 'Choisissez votre voyage',
-                desc: 'Parcourez notre catalogue de destinations. Bus ou avion, week-end ou s\u00e9jour, il y en a pour tous les go\u00fbts.',
+                desc: 'Parcourez notre catalogue de destinations. Bus ou avion, week-end ou séjour, il y en a pour tous les goûts.',
               },
               {
                 number: 2,
                 icon: '&#128197;',
-                title: 'R\u00e9servez en ligne',
-                desc: 'S\u00e9lectionnez vos dates, le nombre de participants et payez en toute s\u00e9curit\u00e9. Paiement en plusieurs fois possible.',
+                title: 'Réservez en ligne',
+                desc: 'Sélectionnez vos dates, le nombre de participants et payez en toute sécurité. Paiement en plusieurs fois possible.',
               },
               {
                 number: 3,
                 icon: '&#128230;',
-                title: 'Pr\u00e9parez vos valises',
-                desc: 'Vous recevez tous les d\u00e9tails : point de ramassage, horaires, programme d\u00e9taill\u00e9, contacts.',
+                title: 'Préparez vos valises',
+                desc: 'Vous recevez tous les détails : point de ramassage, horaires, programme détaillé, contacts.',
               },
               {
                 number: 4,
                 icon: '&#128652;',
                 title: 'On vient vous chercher',
-                desc: 'Le jour J, un bus grand tourisme vous r\u00e9cup\u00e8re pr\u00e8s de chez vous. Accompagnateur d\u00e9di\u00e9 \u00e0 bord.',
+                desc: 'Le jour J, un bus grand tourisme vous récupère près de chez vous. Accompagnateur dédié à bord.',
               },
               {
                 number: 5,
                 icon: '&#127796;',
-                title: 'Profitez\u00a0!',
-                desc: 'H\u00e9bergement, restauration, visites, tout est inclus. Vous n\u2019avez qu\u2019\u00e0 profiter.',
+                title: 'Profitez !',
+                desc: 'Hébergement, restauration, visites, tout est inclus. Vous n’avez qu’à profiter.',
               },
             ].map((step) => (
               <div
@@ -181,7 +181,7 @@ export default function CommentCaMarche() {
               },
               {
                 number: 4,
-                title: 'Commencez \u00e0 organiser et gagner des commissions',
+                title: 'Commencez à organiser et gagner des commissions',
               },
             ].map((step) => (
               <div
@@ -255,8 +255,8 @@ export default function CommentCaMarche() {
             {[
               {
                 icon: '&#128274;',
-                title: 'Paiement s\u00e9curis\u00e9',
-                desc: 'Transactions chiffr\u00e9es via Stripe',
+                title: 'Paiement sécurisé',
+                desc: 'Transactions chiffrées via Stripe',
               },
               {
                 icon: '&#127891;',
@@ -265,12 +265,12 @@ export default function CommentCaMarche() {
               },
               {
                 icon: '&#128222;',
-                title: 'Support r\u00e9actif',
+                title: 'Support réactif',
                 desc: '\u00c9quipe disponible 6j/7',
               },
               {
                 icon: '&#128170;',
-                title: 'Satisfait ou accompagn\u00e9',
+                title: 'Satisfait ou accompagné',
                 desc: 'On ne vous l\u00e2che jamais',
               },
             ].map((guarantee, idx) => (
@@ -320,10 +320,10 @@ export default function CommentCaMarche() {
         }}
       >
         <h2 style={{ fontSize: '40px', fontWeight: 700, marginBottom: '20px' }}>
-          Pr\u00eat \u00e0 partir\u00a0?
+          Prêt à partir ?
         </h2>
         <p style={{ fontSize: '18px', fontWeight: 300, marginBottom: '40px', margin: '0 auto 40px', maxWidth: '500px' }}>
-          Rejoignez des milliers de voyageurs heureux ou devenez partenaire d\u2019Eventy
+          Rejoignez des milliers de voyageurs heureux ou devenez partenaire d’Eventy
         </p>
 
         <div
