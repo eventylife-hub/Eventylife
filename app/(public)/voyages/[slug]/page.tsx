@@ -59,7 +59,7 @@ const tripData = {
   ],
   team: [
     { name: 'Sophie M.', role: 'Cr\u00e9atrice de voyage', desc: 'Ind\u00e9pendante du voyage, sp\u00e9cialiste Italie & M\u00e9diterran\u00e9e' },
-    { name: 'Thomas B.', role: 'Cr\u00e9ateur de voyage', desc: 'Ind\u00e9pendant du voyage, passionn\u00e9 de culture sicilienne' },
+    { name: 'Thomas B.', role: 'Ind\u00e9pendant du voyage', desc: 'Passionn\u00e9 de culture sicilienne' },
   ],
 };
 
@@ -222,7 +222,7 @@ export default function VoyageDetailPage() {
           </div>
 
           {/* Equipe */}
-          <SectionTitle id="equipe" icon={'\uD83D\uDC65'} title={'Vos cr\u00e9ateurs de voyage'} />
+          <SectionTitle id="equipe" icon={'\uD83D\uDC65'} title={'Votre \u00e9quipe'} />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {tripData.team.map((t, i) => (
               <div key={i} style={{ background: C.white, borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, textAlign: 'center' }}>
