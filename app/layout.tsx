@@ -1,22 +1,43 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { ToastContainer } from '@/components/ui/toast';
+import { CookieBanner } from '@/components/cookie-banner';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Eventy Life - Voyages de groupe inoubliables',
-  description: 'Plateforme de voyages de groupe avec accompagnement humain. Circuits en bus et avion, tout compris.',
-  keywords: ['voyage groupe', 'circuit bus', 'voyage organise', 'eventy life'],
-}
+  title: 'Eventy Life - Voyages en Groupe',
+  description: 'Découvrez des voyages en groupe avec accompagnement, prix justes et qualité garantie.',
+  keywords: [
+    'voyages',
+    'groupe',
+    'agence voyage',
+    'réservation voyage',
+    'tourisme',
+    'destinations',
+  ],
+  authors: [{ name: 'Eventy Life' }],
+  openGraph: {
+    title: 'Eventy Life - Voyages en Groupe',
+    description: 'Découvrez des voyages en groupe avec accompagnement, prix justes et qualité garantie.',
+    type: 'website',
+    locale: 'fr_FR',
+  },
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr">
-      <head>
-        <meta charSet="utf-8" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-      </head>
-      <body style={{ fontFamily: "'Inter', sans-serif" }}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <ToastContainer />
+        <CookieBanner />
+      </body>
     </html>
-  )
+  );
 }
