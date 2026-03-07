@@ -1,296 +1,550 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { ZodError } from 'zod';
-import { apiClient } from '@/lib/api-client';
-import { RegisterResponse } from '@/types/api';
-import { registerSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 
-/**
- * Page d'inscription
- * Formulaire complet: prénom, nom, email, téléphone, mot de passe
- * Choix du type: Client ou Pro
- * Acceptation CGV + RGPD
- */
-export default function InscriptionPage() {
-  const router = useRouter();
-
+export default function Inscription() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    prenom: '',
+    nom: '',
     email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    userType: 'CLIENT',
-    acceptCGV: false,
-    acceptRGPD: false,
+    telephone: '',
+    motDePasse: '',
+    confirmerMotDePasse: '',
   });
 
-  const [error, setError] = useState<string | null>(null);
+  const [accepteTermes, setAccepteTermes] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
-
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: value,
     }));
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: '',
+      }));
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.prenom.trim()) {
+      newErrors.prenom = 'Le pr\u00e9nom est requis';
+    }
+    if (!formData.nom.trim()) {
+      newErrors.nom = 'Le nom est requis';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'L\'email est requis';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Email invalide';
+    }
+    if (!formData.telephone.trim()) {
+      newErrors.telephone = 'Le t\u00e9l\u00e9phone est requis';
+    }
+    if (!formData.motDePasse.trim()) {
+      newErrors.motDePasse = 'Le mot de passe est requis';
+    } else if (formData.motDePasse.length < 8) {
+      newErrors.motDePasse = 'Le mot de passe doit contenir au moins 8 caract\u00e8res';
+    }
+    if (formData.confirmerMotDePasse !== formData.motDePasse) {
+      newErrors.confirmerMotDePasse = 'Les mots de passe ne correspondent pas';
+    }
+    if (!accepteTermes) {
+      newErrors.termes = 'Vous devez accepter les CGV';
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
-    setErrors({});
+    const newErrors = validateForm();
 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      // Validate with Zod schema
-      registerSchema.parse({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-        confirmPassword: formData.confirmPassword,
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prenom: formData.prenom,
+          nom: formData.nom,
+          email: formData.email,
+          telephone: formData.telephone,
+          motDePasse: formData.motDePasse,
+        }),
       });
 
-      // Validate CGV and RGPD
-      if (!formData.acceptCGV) {
-        setError('Vous devez accepter les CGV');
-        return;
-      }
-      if (!formData.acceptRGPD) {
-        setError('Vous devez accepter la politique de confidentialité');
-        return;
-      }
-
-      setLoading(true);
-
-      await apiClient.post<RegisterResponse>('/auth/register', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone || null,
-        password: formData.password,
-        role: formData.userType,
-      });
-
-      // Rediriger vers connexion
-      router.push('/connexion');
-    } catch (err) {
-      if (err instanceof ZodError) {
-        setErrors(zodErrorsToRecord(err));
-      } else if (err instanceof Error) {
-        setError(err.message || 'Erreur lors de l\'inscription');
+      if (response.ok) {
+        window.location.href = '/connexion';
       } else {
-        setError('Erreur lors de l\'inscription');
+        const data = await response.json();
+        setErrors({ submit: data.message || 'Une erreur est survenue' });
       }
+    } catch (error) {
+      setErrors({ submit: 'Une erreur est survenue lors de l\'inscription' });
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Eventy Life</h1>
-        </div>
-
-        {/* Titre */}
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Créer un compte</h2>
-        <p className="text-gray-600 text-sm mb-6">Bienvenue chez Eventy Life!</p>
-
-        {/* Message d'erreur */}
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
-            {error}
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#FAF7F2',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '420px',
+        }}
+      >
+        <Link href="/">
+          <div
+            style={{
+              textAlign: 'center',
+              marginBottom: '40px',
+              cursor: 'pointer',
+              transition: 'opacity 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.opacity = '0.8';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.opacity = '1';
+            }}
+          >
+            <h1
+              style={{
+                fontSize: '28px',
+                fontWeight: '700',
+                color: '#1A1A2E',
+                margin: '0',
+                letterSpacing: '-0.5px',
+              }}
+            >
+              Eventy Life
+            </h1>
           </div>
-        )}
+        </Link>
 
-        {/* Formulaire */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                Prénom
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm ${
-                  errors.firstName ? 'border-red-500' : 'border-gray-300'
-                }`}
-              />
-              {errors.firstName && <p className="text-red-600 text-xs mt-1">{errors.firstName}</p>}
-            </div>
-            <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                Nom
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm ${
-                  errors.lastName ? 'border-red-500' : 'border-gray-300'
-                }`}
-              />
-              {errors.lastName && <p className="text-red-600 text-xs mt-1">{errors.lastName}</p>}
-            </div>
+        <h2
+          style={{
+            fontSize: '24px',
+            fontWeight: '600',
+            color: '#1A1A2E',
+            textAlign: 'center',
+            marginBottom: '32px',
+            margin: '0 0 32px 0',
+          }}
+        >
+          Cr\u00e9er un compte
+        </h2>
+
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '16px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#1A1A2E',
+                marginBottom: '6px',
+              }}
+            >
+              Pr\u00e9nom
+            </label>
+            <input
+              type="text"
+              name="prenom"
+              value={formData.prenom}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                fontSize: '14px',
+                border: `1px solid ${errors.prenom ? '#EF4444' : '#E8E4DE'}`,
+                borderRadius: '6px',
+                backgroundColor: '#FFFFFF',
+                color: '#1A1A2E',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.prenom) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                }
+              }}
+              onBlur={(e) => {
+                if (!errors.prenom) {
+                  e.currentTarget.style.borderColor = '#E8E4DE';
+                }
+              }}
+            />
+            {errors.prenom && (
+              <span style={{ fontSize: '12px', color: '#EF4444', marginTop: '4px', display: 'block' }}>
+                {errors.prenom}
+              </span>
+            )}
           </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <div style={{ marginBottom: '16px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#1A1A2E',
+                marginBottom: '6px',
+              }}
+            >
+              Nom
+            </label>
+            <input
+              type="text"
+              name="nom"
+              value={formData.nom}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                fontSize: '14px',
+                border: `1px solid ${errors.nom ? '#EF4444' : '#E8E4DE'}`,
+                borderRadius: '6px',
+                backgroundColor: '#FFFFFF',
+                color: '#1A1A2E',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.nom) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                }
+              }}
+              onBlur={(e) => {
+                if (!errors.nom) {
+                  e.currentTarget.style.borderColor = '#E8E4DE';
+                }
+              }}
+            />
+            {errors.nom && (
+              <span style={{ fontSize: '12px', color: '#EF4444', marginTop: '4px', display: 'block' }}>
+                {errors.nom}
+              </span>
+            )}
+          </div>
+
+          <div style={{ marginBottom: '16px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#1A1A2E',
+                marginBottom: '6px',
+              }}
+            >
               Email
             </label>
             <input
               type="email"
-              id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
-              required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                fontSize: '14px',
+                border: `1px solid ${errors.email ? '#EF4444' : '#E8E4DE'}`,
+                borderRadius: '6px',
+                backgroundColor: '#FFFFFF',
+                color: '#1A1A2E',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.email) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                }
+              }}
+              onBlur={(e) => {
+                if (!errors.email) {
+                  e.currentTarget.style.borderColor = '#E8E4DE';
+                }
+              }}
             />
-            {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
+            {errors.email && (
+              <span style={{ fontSize: '12px', color: '#EF4444', marginTop: '4px', display: 'block' }}>
+                {errors.email}
+              </span>
+            )}
           </div>
 
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-              Téléphone (optionnel)
+          <div style={{ marginBottom: '16px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#1A1A2E',
+                marginBottom: '6px',
+              }}
+            >
+              T\u00e9l\u00e9phone
             </label>
             <input
               type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm"
-              placeholder="06 12 34 56 78"
+              name="telephone"
+              value={formData.telephone}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                fontSize: '14px',
+                border: `1px solid ${errors.telephone ? '#EF4444' : '#E8E4DE'}`,
+                borderRadius: '6px',
+                backgroundColor: '#FFFFFF',
+                color: '#1A1A2E',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.telephone) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                }
+              }}
+              onBlur={(e) => {
+                if (!errors.telephone) {
+                  e.currentTarget.style.borderColor = '#E8E4DE';
+                }
+              }}
             />
+            {errors.telephone && (
+              <span style={{ fontSize: '12px', color: '#EF4444', marginTop: '4px', display: 'block' }}>
+                {errors.telephone}
+              </span>
+            )}
           </div>
 
-          <div>
-            <label htmlFor="userType" className="block text-sm font-medium text-gray-700 mb-1">
-              Type de compte
-            </label>
-            <select
-              id="userType"
-              name="userType"
-              value={formData.userType}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm"
+          <div style={{ marginBottom: '16px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#1A1A2E',
+                marginBottom: '6px',
+              }}
             >
-              <option value="CLIENT">Client</option>
-              <option value="PRO">Professionnel</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
               Mot de passe
             </label>
             <input
               type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="••••••••"
+              name="motDePasse"
+              value={formData.motDePasse}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                fontSize: '14px',
+                border: `1px solid ${errors.motDePasse ? '#EF4444' : '#E8E4DE'}`,
+                borderRadius: '6px',
+                backgroundColor: '#FFFFFF',
+                color: '#1A1A2E',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.motDePasse) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                }
+              }}
+              onBlur={(e) => {
+                if (!errors.motDePasse) {
+                  e.currentTarget.style.borderColor = '#E8E4DE';
+                }
+              }}
             />
-            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password}</p>}
+            {errors.motDePasse && (
+              <span style={{ fontSize: '12px', color: '#EF4444', marginTop: '4px', display: 'block' }}>
+                {errors.motDePasse}
+              </span>
+            )}
           </div>
 
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmez le mot de passe
+          <div style={{ marginBottom: '20px' }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#1A1A2E',
+                marginBottom: '6px',
+              }}
+            >
+              Confirmer mot de passe
             </label>
             <input
               type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm ${
-                errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="••••••••"
+              name="confirmerMotDePasse"
+              value={formData.confirmerMotDePasse}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                fontSize: '14px',
+                border: `1px solid ${errors.confirmerMotDePasse ? '#EF4444' : '#E8E4DE'}`,
+                borderRadius: '6px',
+                backgroundColor: '#FFFFFF',
+                color: '#1A1A2E',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.confirmerMotDePasse) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                }
+              }}
+              onBlur={(e) => {
+                if (!errors.confirmerMotDePasse) {
+                  e.currentTarget.style.borderColor = '#E8E4DE';
+                }
+              }}
             />
-            {errors.confirmPassword && <p className="text-red-600 text-xs mt-1">{errors.confirmPassword}</p>}
+            {errors.confirmerMotDePasse && (
+              <span style={{ fontSize: '12px', color: '#EF4444', marginTop: '4px', display: 'block' }}>
+                {errors.confirmerMotDePasse}
+              </span>
+            )}
           </div>
 
-          {/* Checkboxes */}
-          <div className="space-y-3 py-2">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                name="acceptCGV"
-                checked={formData.acceptCGV}
-                onChange={handleChange}
-                className="mt-1 w-4 h-4 rounded"
-              />
-              <span className="text-sm text-gray-700">
-                J'accepte les{' '}
-                <Link href="/cgv" className="text-blue-600 hover:text-blue-700">
-                  conditions générales de vente
-                </Link>
-              </span>
-            </label>
-
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                name="acceptRGPD"
-                checked={formData.acceptRGPD}
-                onChange={handleChange}
-                className="mt-1 w-4 h-4 rounded"
-              />
-              <span className="text-sm text-gray-700">
-                J'accepte la{' '}
-                <Link href="/politique-confidentialite" className="text-blue-600 hover:text-blue-700">
-                  politique de confidentialité
-                </Link>
-              </span>
+          <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+            <input
+              type="checkbox"
+              id="accepteTermes"
+              checked={accepteTermes}
+              onChange={(e) => {
+                setAccepteTermes(e.target.checked);
+                if (errors.termes) {
+                  setErrors((prev) => ({
+                    ...prev,
+                    termes: '',
+                  }));
+                }
+              }}
+              style={{
+                marginTop: '3px',
+                cursor: 'pointer',
+                accentColor: '#C75B39',
+                width: '18px',
+                height: '18px',
+                minWidth: '18px',
+              }}
+            />
+            <label htmlFor="accepteTermes" style={{ fontSize: '13px', color: '#6B7280', cursor: 'pointer' }}>
+              J'accepte les{' '}
+              <Link href="/cgv" style={{ color: '#C75B39', textDecoration: 'none', fontWeight: '500' }}>
+                CGV
+              </Link>
             </label>
           </div>
+          {errors.termes && (
+            <span style={{ fontSize: '12px', color: '#EF4444', marginBottom: '16px', display: 'block' }}>
+              {errors.termes}
+            </span>
+          )}
+
+          {errors.submit && (
+            <div
+              style={{
+                padding: '12px',
+                backgroundColor: '#FEE2E2',
+                borderRadius: '6px',
+                color: '#EF4444',
+                fontSize: '13px',
+                marginBottom: '16px',
+              }}
+            >
+              {errors.submit}
+            </div>
+          )}
 
           <button
             type="submit"
-            disabled={loading}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 font-medium"
+            disabled={isLoading}
+            style={{
+              width: '100%',
+              padding: '12px',
+              fontSize: '15px',
+              fontWeight: '600',
+              backgroundColor: '#C75B39',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              transition: 'background-color 0.2s, transform 0.15s',
+              opacity: isLoading ? 0.7 : 1,
+              marginBottom: '16px',
+            }}
+            onMouseEnter={(e) => {
+              if (!isLoading) {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#B84D2F';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isLoading) {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#C75B39';
+              }
+            }}
+            onMouseDown={(e) => {
+              if (!isLoading) {
+                (e.currentTarget as HTMLElement).style.transform = 'scale(0.98)';
+              }
+            }}
+            onMouseUp={(e) => {
+              if (!isLoading) {
+                (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+              }
+            }}
           >
-            {loading ? 'Inscription en cours...' : 'Créer mon compte'}
+            {isLoading ? 'Inscription en cours...' : "S'inscrire"}
           </button>
-        </form>
 
-        {/* Lien connexion */}
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Déjà inscrit?{' '}
-          <Link href="/connexion" className="text-blue-600 hover:text-blue-700 font-medium">
-            Se connecter
-          </Link>
-        </p>
+          <div style={{ textAlign: 'center', fontSize: '13px', color: '#6B7280' }}>
+            D\u00e9j\u00e0 un compte ?{' '}
+            <Link
+              href="/connexion"
+              style={{
+                color: '#C75B39',
+                textDecoration: 'none',
+                fontWeight: '500',
+              }}
+            >
+              Se connecter
+            </Link>
+          </div>
+        </form>
       </div>
     </div>
   );
