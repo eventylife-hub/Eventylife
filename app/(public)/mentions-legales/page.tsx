@@ -6,36 +6,36 @@ const C = {
 };
 const sections = [
   {
-    title: '1. Informations l\u00e9gales',
-    content: 'Le site www.eventylife.fr est \u00e9dit\u00e9 par la soci\u00e9t\u00e9 Eventy Life SAS (en cours d\u0027immatriculation), dont le si\u00e8ge social est situ\u00e9 \u00e0 Paris, France. Capital social : 5 000 \u20ac. Directeur de la publication : David. Contact : contact@eventylife.fr.',
+    title: '1. Informations légales',
+    content: 'Le site www.eventylife.fr est édité par la société Eventy Life SAS (en cours d\u0027immatriculation), dont le siège social est situé à Paris, France. Capital social : 5 000 \u20ac. Directeur de la publication : David. Contact : contact@eventylife.fr.',
   },
   {
-    title: '2. H\u00e9bergement',
-    content: 'Le site est h\u00e9berg\u00e9 par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. T\u00e9l\u00e9phone : +1 (951) 383-6898.',
+    title: '2. Hébergement',
+    content: 'Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. Téléphone : +1 (951) 383-6898.',
   },
   {
-    title: '3. Activit\u00e9 r\u00e9glement\u00e9e',
-    content: 'Eventy Life exerce une activit\u00e9 d\u0027agence de voyages et est immatricul\u00e9e au registre des op\u00e9rateurs de voyages et de s\u00e9jours aupr\u00e8s d\u0027Atout France (immatriculation en cours). Garantie financi\u00e8re : APST (Association Professionnelle de Solidarit\u00e9 du Tourisme). Assurance Responsabilit\u00e9 Civile Professionnelle : en cours de souscription.',
+    title: '3. Activité réglementée',
+    content: 'Eventy Life exerce une activité d\u0027agence de voyages et est immatriculée au registre des opérateurs de voyages et de séjours auprès d\u0027Atout France (immatriculation en cours). Garantie financière : APST (Association Professionnelle de Solidarité du Tourisme). Assurance Responsabilité Civile Professionnelle : en cours de souscription.',
   },
   {
-    title: '4. Propri\u00e9t\u00e9 intellectuelle',
-    content: 'L\u0027ensemble du contenu du site (textes, images, graphismes, logo, ic\u00f4nes, sons, logiciels) est la propri\u00e9t\u00e9 exclusive d\u0027Eventy Life SAS ou de ses partenaires. Toute reproduction, repr\u00e9sentation, modification, publication ou adaptation de tout ou partie du site est interdite sans autorisation pr\u00e9alable.',
+    title: '4. Propriété intellectuelle',
+    content: 'L\u0027ensemble du contenu du site (textes, images, graphismes, logo, icônes, sons, logiciels) est la propriété exclusive d\u0027Eventy Life SAS ou de ses partenaires. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie du site est interdite sans autorisation préalable.',
   },
   {
-    title: '5. Donn\u00e9es personnelles',
-    content: 'Conform\u00e9ment au R\u00e8glement G\u00e9n\u00e9ral sur la Protection des Donn\u00e9es (RGPD) et \u00e0 la loi Informatique et Libert\u00e9s, vous disposez d\u0027un droit d\u0027acc\u00e8s, de rectification, de suppression et de portabilit\u00e9 de vos donn\u00e9es. Pour exercer ces droits, contactez-nous \u00e0 : contact@eventylife.fr. Pour plus de d\u00e9tails, consultez notre Politique de Confidentialit\u00e9.',
+    title: '5. Données personnelles',
+    content: 'Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d\u0027un droit d\u0027accès, de rectification, de suppression et de portabilité de vos données. Pour exercer ces droits, contactez-nous à : contact@eventylife.fr. Pour plus de détails, consultez notre Politique de Confidentialité.',
   },
   {
     title: '6. Cookies',
-    content: 'Le site utilise des cookies pour am\u00e9liorer votre exp\u00e9rience de navigation, mesurer l\u0027audience et personnaliser le contenu. Vous pouvez g\u00e9rer vos pr\u00e9f\u00e9rences de cookies \u00e0 tout moment via les param\u00e8tres de votre navigateur.',
+    content: 'Le site utilise des cookies pour améliorer votre expérience de navigation, mesurer l\u0027audience et personnaliser le contenu. Vous pouvez gérer vos préférences de cookies à tout moment via les paramètres de votre navigateur.',
   },
   {
-    title: '7. Limitation de responsabilit\u00e9',
-    content: 'Eventy Life s\u0027efforce de fournir des informations exactes et \u00e0 jour. Toutefois, la soci\u00e9t\u00e9 ne saurait \u00eatre tenue responsable des erreurs, omissions ou r\u00e9sultats obtenus suite \u00e0 l\u0027utilisation de ces informations.',
+    title: '7. Limitation de responsabilité',
+    content: 'Eventy Life s\u0027efforce de fournir des informations exactes et à jour. Toutefois, la société ne saurait être tenue responsable des erreurs, omissions ou résultats obtenus suite à l\u0027utilisation de ces informations.',
   },
   {
     title: '8. Droit applicable',
-    content: 'Les pr\u00e9sentes mentions l\u00e9gales sont soumises au droit fran\u00e7ais. En cas de litige, les tribunaux de Paris seront seuls comp\u00e9tents.',
+    content: 'Les présentes mentions légales sont soumises au droit français. En cas de litige, les tribunaux de Paris seront seuls compétents.',
   },
 ];
 export default function MentionsLegalesPage() {
