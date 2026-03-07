@@ -1,190 +1,280 @@
 'use client';
 
-import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { ZodError } from 'zod';
-import { apiClient } from '@/lib/api-client';
-import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth';
+import { useState } from 'react';
 
-/**
- * Page de connexion
- * Formulaire email + mot de passe
- * Récupération de mot de passe
- * Lien vers inscription
- */
-export default function ConnexionPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/client/dashboard';
-
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-  const [error, setError] = useState<string | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+export default function Connexion() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setErrors({});
+    setError('');
     setLoading(true);
 
     try {
-      // Validate with Zod schema
-      loginSchema.parse(formData);
-
-      interface LoginResponse {
-        user: {
-          id: string;
-          email: string;
-          role: 'ADMIN' | 'PRO' | 'CLIENT';
-        };
-      }
-
-      const response = await apiClient.post<LoginResponse>('/auth/login', {
-        email: formData.email,
-        password: formData.password,
-      });
-
-      // Les tokens sont désormais gérés via httpOnly cookies par le serveur
-      // Pas besoin de les stocker côté client
-
-      // Rediriger vers le dashboard selon le rôle
-      const user = response.user;
-      if (user?.role === 'ADMIN') {
-        router.push('/admin');
-      } else if (user?.role === 'PRO') {
-        router.push('/pro');
-      } else {
-        router.push(redirect);
-      }
+      // TODO: Add authentication logic here
+      console.log('Login attempt:', { email, password });
     } catch (err) {
-      if (err instanceof ZodError) {
-        setErrors(zodErrorsToRecord(err));
-      } else if (err instanceof Error) {
-        setError(err.message || 'Erreur de connexion');
-      } else {
-        setError('Erreur de connexion');
-      }
+      setError('Erreur de connexion. Veuillez r\u00e9essayer.');
     } finally {
       setLoading(false);
     }
   };
 
+  const styles = {
+    container: {
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column' as const,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#FAF7F2',
+      padding: '20px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    },
+    header: {
+      marginBottom: '40px',
+      textAlign: 'center' as const,
+    },
+    logo: {
+      fontSize: '28px',
+      fontWeight: '700',
+      color: '#1A1A2E',
+      marginBottom: '10px',
+      letterSpacing: '-0.5px',
+    },
+    title: {
+      fontSize: '32px',
+      fontWeight: '600',
+      color: '#1A1A2E',
+      margin: '0 0 30px 0',
+    },
+    formContainer: {
+      width: '100%',
+      maxWidth: '400px',
+      backgroundColor: '#FFFFFF',
+      padding: '40px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 8px rgba(26, 26, 46, 0.08)',
+      border: '1px solid #E8E4DE',
+    },
+    formGroup: {
+      marginBottom: '20px',
+    },
+    label: {
+      display: 'block',
+      fontSize: '14px',
+      fontWeight: '500',
+      color: '#1A1A2E',
+      marginBottom: '8px',
+    },
+    input: {
+      width: '100%',
+      padding: '12px 14px',
+      fontSize: '14px',
+      border: '1px solid #E8E4DE',
+      borderRadius: '6px',
+      backgroundColor: '#FFFFFF',
+      color: '#1A1A2E',
+      boxSizing: 'border-box' as const,
+      transition: 'border-color 0.2s, box-shadow 0.2s',
+    },
+    inputFocus: {
+      borderColor: '#C75B39',
+      boxShadow: '0 0 0 3px rgba(199, 91, 57, 0.1)',
+      outline: 'none',
+    },
+    passwordWrapper: {
+      position: 'relative' as const,
+    },
+    togglePassword: {
+      position: 'absolute' as const,
+      right: '12px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      color: '#6B7280',
+      fontSize: '16px',
+      padding: '4px',
+    },
+    forgotLink: {
+      fontSize: '14px',
+      color: '#C75B39',
+      textDecoration: 'none',
+      marginTop: '12px',
+      display: 'inline-block',
+      transition: 'opacity 0.2s',
+    },
+    submitButton: {
+      width: '100%',
+      padding: '12px 16px',
+      fontSize: '15px',
+      fontWeight: '600',
+      color: '#FFFFFF',
+      backgroundColor: '#C75B39',
+      border: 'none',
+      borderRadius: '6px',
+      cursor: 'pointer',
+      transition: 'background-color 0.2s, opacity 0.2s',
+      marginTop: '28px',
+    },
+    submitButtonHover: {
+      backgroundColor: '#B3491D',
+    },
+    submitButtonDisabled: {
+      opacity: '0.6',
+      cursor: 'not-allowed',
+    },
+    divider: {
+      display: 'flex',
+      alignItems: 'center',
+      margin: '28px 0',
+    },
+    dividerLine: {
+      flex: 1,
+      height: '1px',
+      backgroundColor: '#E8E4DE',
+    },
+    dividerText: {
+      margin: '0 12px',
+      fontSize: '13px',
+      color: '#6B7280',
+    },
+    signupLink: {
+      textAlign: 'center' as const,
+      fontSize: '14px',
+      color: '#6B7280',
+      marginTop: '20px',
+    },
+    signupLinkA: {
+      color: '#C75B39',
+      textDecoration: 'none',
+      fontWeight: '600',
+      transition: 'opacity 0.2s',
+    },
+    errorMessage: {
+      padding: '12px',
+      backgroundColor: '#FEE2E2',
+      color: '#991B1B',
+      borderRadius: '6px',
+      fontSize: '13px',
+      marginBottom: '20px',
+      border: '1px solid #FECACA',
+    },
+    backLink: {
+      marginTop: '24px',
+      fontSize: '13px',
+    },
+    backLinkA: {
+      color: '#6B7280',
+      textDecoration: 'none',
+      transition: 'color 0.2s',
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Eventy Life</h1>
-        </div>
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <div style={styles.logo}>Eventy Life</div>
+        <h1 style={styles.title}>Connexion</h1>
+      </div>
 
-        {/* Titre */}
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Connexion</h2>
-        <p className="text-gray-600 text-sm mb-6">Bienvenue! Connectez-vous à votre compte</p>
+      <div style={styles.formContainer}>
+        {error && <div style={styles.errorMessage}>{error}</div>}
 
-        {/* Message d'erreur */}
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
-            {error}
-          </div>
-        )}
-
-        {/* Formulaire */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <form onSubmit={handleSubmit}>
+          <div style={styles.formGroup}>
+            <label htmlFor="email" style={styles.label}>
               Email
             </label>
             <input
-              type="email"
               id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              style={styles.input}
               placeholder="votre@email.com"
+              disabled={loading}
             />
-            {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
           </div>
 
-          <div>
-            <div className="flex justify-between items-center mb-1">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Mot de passe
-              </label>
-              <Link href="/mot-de-passe-oublie" className="text-xs text-blue-600 hover:text-blue-700">
-                Oublié?
-              </Link>
+          <div style={styles.formGroup}>
+            <label htmlFor="password" style={styles.label}>
+              Mot de passe
+            </label>
+            <div style={styles.passwordWrapper}>
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{
+                  ...styles.input,
+                  paddingRight: '40px',
+                }}
+                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                disabled={loading}
+              />
+              <button
+                type="button"
+                style={styles.togglePassword}
+                onClick={() => setShowPassword(!showPassword)}
+                disabled={loading}
+              >
+                {showPassword ? '&#128994;' : '&#128065;'}
+              </button>
             </div>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="••••••••"
-            />
-            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password}</p>}
+            <Link href="/motdepasse-oublie" style={styles.forgotLink}>
+              Mot de passe oubli&#233; ?
+            </Link>
           </div>
 
           <button
             type="submit"
+            style={{
+              ...styles.submitButton,
+              ...(loading ? styles.submitButtonDisabled : {}),
+            }}
             disabled={loading}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 font-medium"
+            onMouseEnter={(e) => {
+              if (!loading) {
+                e.currentTarget.style.backgroundColor = styles.submitButtonHover.backgroundColor;
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#C75B39';
+            }}
           >
             {loading ? 'Connexion en cours...' : 'Se connecter'}
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Nouveau client?</span>
-          </div>
+        <div style={styles.divider}>
+          <div style={styles.dividerLine}></div>
+          <span style={styles.dividerText}>ou</span>
+          <div style={styles.dividerLine}></div>
         </div>
 
-        {/* Lien inscription */}
-        <Link
-          href="/inscription"
-          className="w-full px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition font-medium text-center block"
-        >
-          Créer un compte
-        </Link>
-
-        {/* Footer */}
-        <p className="text-center text-xs text-gray-600 mt-6">
-          En vous connectant, vous acceptez nos{' '}
-          <Link href="/cgv" className="text-blue-600 hover:text-blue-700">
-            CGV
-          </Link>{' '}
-          et notre{' '}
-          <Link href="/politique-confidentialite" className="text-blue-600 hover:text-blue-700">
-            politique de confidentialité
+        <div style={styles.signupLink}>
+          Pas encore de compte ?{' '}
+          <Link href="/inscription" style={styles.signupLinkA}>
+            Cr&#233;er un compte
           </Link>
-        </p>
+        </div>
+      </div>
+
+      <div style={styles.backLink}>
+        <Link href="/" style={styles.backLinkA}>
+          Retour &#224; l&apos;accueil
+        </Link>
       </div>
     </div>
   );
