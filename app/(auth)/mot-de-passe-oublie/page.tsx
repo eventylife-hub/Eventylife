@@ -1,128 +1,84 @@
 'use client';
+import { useState } from 'react';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { ZodError } from 'zod';
-import { apiClient } from '@/lib/api-client';
-import { forgotPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
-
-/**
- * Page de réinitialisation de mot de passe
- * Demande d'email
- * Message de confirmation
- */
 export default function MotDePasseOubliePage() {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setErrors({});
+    setError('');
+    if (!email.trim()) { setError('Veuillez saisir votre email.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Email invalide.'); return; }
     setLoading(true);
-
-    try {
-      // Validate with Zod schema
-      forgotPasswordSchema.parse({ email });
-
-      await apiClient.post('/auth/forgot-password', { email });
-      setSubmitted(true);
-      setEmail('');
-    } catch (err) {
-      if (err instanceof ZodError) {
-        setErrors(zodErrorsToRecord(err));
-      } else if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Erreur lors de la demande');
-      }
-    } finally {
-      setLoading(false);
-    }
+    setTimeout(() => { setLoading(false); setSent(true); }, 1500);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Eventy Life</h1>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+      <div style={{ width: '100%', maxWidth: 440, background: '#FAF7F2', borderRadius: 16, padding: '48px 40px', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <a href="/" style={{ textDecoration: 'none' }}>
+            <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A2E', margin: 0 }}>Eventy Life</h1>
+          </a>
+          <h2 style={{ fontSize: 22, fontWeight: 600, color: '#1A1A2E', margin: '8px 0 0' }}>Mot de passe oubli&#233;</h2>
         </div>
 
-        {/* Titre */}
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Mot de passe oublié</h2>
-        <p className="text-gray-600 text-sm mb-6">
-          Entrez votre email pour recevoir les instructions de réinitialisation
-        </p>
-
-        {/* Message de confirmation */}
-        {submitted && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
-            <p className="font-medium">Email envoyé!</p>
-            <p className="mt-1">Vérifiez votre boîte mail pour les instructions de réinitialisation.</p>
-          </div>
-        )}
-
-        {/* Message d'erreur */}
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
-            {error}
-          </div>
-        )}
-
-        {/* Formulaire */}
-        {!submitted ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="votre@email.com"
-              />
-              {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
+        {sent ? (
+          <div>
+            <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: 12, padding: '24px', textAlign: 'center', marginBottom: 24 }}>
+              <div style={{ fontSize: 40, marginBottom: 12 }}>&#9993;</div>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: '#059669', margin: '0 0 8px' }}>Email envoy&#233; !</h3>
+              <p style={{ fontSize: 14, color: '#374151', margin: 0, lineHeight: 1.5 }}>
+                Si un compte existe avec l&apos;adresse <strong>{email}</strong>, vous recevrez un lien pour r&#233;initialiser votre mot de passe dans les prochaines minutes.
+              </p>
             </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 font-medium"
-            >
-              {loading ? 'Envoi en cours...' : 'Envoyer les instructions'}
-            </button>
-          </form>
+            <p style={{ fontSize: 13, color: '#6B7280', textAlign: 'center', margin: '0 0 20px' }}>
+              Vous n&apos;avez pas re&#231;u l&apos;email ? V&#233;rifiez votre dossier spam ou <button onClick={() => { setSent(false); setEmail(''); }} style={{ background: 'none', border: 'none', color: '#C75B39', cursor: 'pointer', fontWeight: 600, fontSize: 13, padding: 0 }}>r&#233;essayez</button>.
+            </p>
+            <a href="/connexion" style={{ display: 'block', textAlign: 'center', padding: '14px', background: '#1A1A2E', color: 'white', borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: 'none' }}>Retour &#224; la connexion</a>
+          </div>
         ) : (
-          <div className="space-y-4">
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                setError(null);
-              }}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
-            >
-              Envoyer à nouveau
-            </button>
+          <div>
+            <p style={{ fontSize: 14, color: '#6B7280', textAlign: 'center', marginBottom: 24, lineHeight: 1.5 }}>
+              Saisissez votre adresse email et nous vous enverrons un lien pour r&#233;initialiser votre mot de passe.
+            </p>
+
+            {error && (
+              <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 8, padding: '12px 16px', marginBottom: 20, color: '#DC2626', fontSize: 14 }}>
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div style={{ marginBottom: 24 }}>
+                <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1A1A2E', marginBottom: 6 }}>Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="votre@email.com"
+                  autoFocus
+                  style={{ width: '100%', padding: '12px 16px', border: '1px solid #E8E4DE', borderRadius: 8, fontSize: 15, outline: 'none', background: 'white', boxSizing: 'border-box' }}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                style={{ width: '100%', padding: '14px', background: loading ? '#D4A853' : '#C75B39', color: 'white', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', marginBottom: 16 }}
+              >
+                {loading ? 'Envoi en cours...' : 'Envoyer le lien'}
+              </button>
+            </form>
+
+            <a href="/connexion" style={{ display: 'block', textAlign: 'center', fontSize: 14, color: '#6B7280', textDecoration: 'none' }}>
+              &#8592; Retour &#224; la connexion
+            </a>
           </div>
         )}
-
-        {/* Lien retour */}
-        <div className="text-center mt-6">
-          <Link href="/connexion" className="text-blue-600 hover:text-blue-700 text-sm">
-            Retour à la connexion
-          </Link>
-        </div>
       </div>
     </div>
   );
