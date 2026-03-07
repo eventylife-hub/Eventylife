@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --sun: #FF6B35;
+  --sun-light: #FF8F5E;
+  --sun-glow: #FFF0E8;
+  --ocean: #0077B6;
+  --ocean-deep: #005A8C;
+  --ocean-light: #00B4D8;
+  --ocean-pale: #E8F7FC;
+  --sky: #48CAE4;
+  --sand: #FEFCF3;
+  --sand-warm: #FFF8ED;
+  --coral: #E63946;
+  --coral-soft: #FFE0E3;
+  --mint: #06D6A0;
+  --mint-soft: #E0FFF5;
+  --violet: #7B2FF7;
+  --dark: #0A1628;
+  --dark-mid: #142438;
+  --text: #1B2940;
+  --text-mid: #4A5568;
+  --text-light: #8896A6;
+  --white: #FFFFFF;
+  --radius: 20px;
+  --radius-sm: 14px;
+  --radius-xs: 8px;
+  --shadow: 0 4px 24px rgba(10,22,40,0.08);
+  --shadow-lg: 0 16px 48px rgba(10,22,40,0.14);
+  --shadow-color: 0 8px 32px rgba(255,107,53,0.2);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,11 +43,12 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: var(--sand);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Touch targets minimum 44x44px */
@@ -36,23 +67,14 @@ img {
 
 /* Loading skeletons */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 50%,
-    #f0f0f0 75%
-  );
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
 }
 
 @keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* Focus styles for accessibility */
@@ -61,15 +83,67 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--ocean);
   outline-offset: 2px;
 }
 
-/* Smooth transitions */
-button,
-a,
-input,
-select,
-textarea {
-  transition: all 0.2s ease-in-out;
+/* Font display class */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(230,57,70,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(230,57,70,0); }
+}
+
+@keyframes float {
+  from { transform: translate(0,0); }
+  to { transform: translate(30px,-30px); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+.animate-pulse-dot {
+  animation: pulse 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite alternate;
+}
+
+/* Reveal on scroll */
+.rv {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.rv.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide scrollbar for chips/trust pills */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  scrollbar-width: none;
 }
