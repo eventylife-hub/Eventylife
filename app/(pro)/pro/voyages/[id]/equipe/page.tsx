@@ -183,64 +183,65 @@ export default function EquipePage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-40 w-full" />
-        <Skeleton className="h-64 w-full" />
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Skeleton className="h-10 w-64" />
+          <Skeleton className="h-40 w-full" />
+          <Skeleton className="h-64 w-full" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header */}
-      <div className="flex justify-between items-start">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Équipe du voyage</h1>
-          <p className="text-slate-600 mt-2">Gérez les membres et les préalables</p>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Équipe du voyage</h1>
+          <p style={{ color: '#4A5568', marginTop: '0.5rem' }}>Gérez les membres et les préalables</p>
         </div>
-        <Button onClick={() => setShowInviteModal(true)} className="gap-2">
+        <button onClick={() => setShowInviteModal(true)} className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Plus className="w-4 h-4" />
           Inviter un membre
-        </Button>
+        </button>
       </div>
 
       {/* Error Alert */}
       {error && (
-        <Card className="border-red-200 bg-red-50">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600" />
-              <p className="text-red-800">{error}</p>
-            </div>
-          </CardContent>
-        </Card>
+        <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946', flexShrink: 0 }} />
+          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+        </div>
       )}
 
       {/* Invite Modal */}
       {showInviteModal && (
-        <Card className="bg-white border-indigo-200 border-2">
-          <CardHeader>
-            <CardTitle>Inviter un membre</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div className="pro-panel" style={{ border: '2px solid #0077B6' }}>
+          <div className="pro-panel-header">
+            <h3 className="pro-panel-title">Inviter un membre</h3>
+          </div>
+          <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Email</label>
               <input
                 type="email"
                 value={inviteEmail}
                 onChange={(e) => setInviteEmail(e.target.value)}
                 placeholder="pro@example.com"
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="pro-input"
+                style={{ width: '100%' }}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Rôle</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rôle</label>
               <select
                 value={inviteRole}
                 onChange={(e) => setInviteRole(e.target.value as 'CREATOR' | 'INDEPENDANT' | 'VENDEUR')}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="pro-input"
+                style={{ width: '100%' }}
               >
                 {Object.entries(ROLE_LABELS).map(([key, label]) => (
                   <option key={key} value={key}>
@@ -250,28 +251,28 @@ export default function EquipePage() {
               </select>
             </div>
 
-            <div className="flex gap-2">
-              <Button onClick={handleInvite} disabled={inviting}>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button onClick={handleInvite} disabled={inviting} className="pro-btn-sun">
                 {inviting ? 'Invitation...' : 'Inviter'}
-              </Button>
-              <Button onClick={() => setShowInviteModal(false)} variant="outline">
+              </button>
+              <button onClick={() => setShowInviteModal(false)} className="pro-btn-outline">
                 Annuler
-              </Button>
+              </button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* Team Members */}
-      <Card className="bg-white border-slate-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+      <div className="pro-panel">
+        <div className="pro-panel-header">
+          <h3 className="pro-panel-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Users className="w-5 h-5" />
             Membres de l'équipe
-          </CardTitle>
-          <CardDescription>{team.length} membre(s)</CardDescription>
-        </CardHeader>
-        <CardContent>
+          </h3>
+          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>{team.length} membre(s)</p>
+        </div>
+        <div className="pro-panel-body">
           {team.length > 0 ? (
             <div className="space-y-2">
               {team.map((member) => {
@@ -344,19 +345,19 @@ export default function EquipePage() {
               <p className="text-slate-500">Aucun membre invité pour le moment</p>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Prerequisites Checklist */}
-      <Card className="bg-white border-slate-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+      <div className="pro-panel">
+        <div className="pro-panel-header">
+          <h3 className="pro-panel-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Briefcase className="w-5 h-5" />
             Préalables avant lancement
-          </CardTitle>
-          <CardDescription>Éléments à valider avant la publication</CardDescription>
-        </CardHeader>
-        <CardContent>
+          </h3>
+          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Éléments à valider avant la publication</p>
+        </div>
+        <div className="pro-panel-body">
           <div className="space-y-3">
             {PREREQUISITES.map((prereq) => {
               const completed = prerequisites.find((p) => p.label === prereq.label)?.completed || false;
@@ -388,8 +389,9 @@ export default function EquipePage() {
               {prerequisites.filter((p) => p.completed).length} / {PREREQUISITES.length} préalables validés
             </p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+    </div>
     </div>
   );
 }

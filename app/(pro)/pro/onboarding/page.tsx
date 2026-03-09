@@ -147,27 +147,27 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-3xl mx-auto">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+      <div style={{ maxWidth: '896px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900">Complétez votre inscription</h1>
-          <p className="text-slate-600 mt-2">
+        <div style={{ marginBottom: '32px' }}>
+          <h1 className="pro-page-title">Complétez votre inscription</h1>
+          <p style={{ color: '#8896A6', marginTop: '8px' }}>
             Nous avons besoin de quelques informations pour valider votre compte Pro
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-red-700">{error}</p>
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+            <AlertCircle className="w-5 h-5" style={{ color: '#E63946', flexShrink: 0, marginTop: '4px' }} />
+            <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
           </div>
         )}
 
         {/* Step Indicator */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
             {STEPS.map((step, idx) => {
               const isCompleted = onboardingStatus && [
                 onboardingStatus.step1_profile,
@@ -181,37 +181,42 @@ export default function OnboardingPage() {
               const isCurrent = step.number === currentStep;
 
               return (
-                <div key={step.number} className="flex items-center flex-1">
+                <div key={step.number} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
-                      isCompleted
-                        ? 'bg-green-500 text-white'
-                        : isCurrent
-                        ? 'bg-indigo-600 text-white ring-4 ring-indigo-200'
-                        : 'bg-slate-200 text-slate-600'
-                    }`}
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 600,
+                      fontSize: '14px',
+                      backgroundColor: isCompleted ? '#06D6A0' : isCurrent ? '#0077B6' : '#E0E0E0',
+                      color: (isCompleted || isCurrent) ? 'white' : '#8896A6'
+                    }}
                   >
                     {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : step.number}
                   </div>
                   {idx < STEPS.length - 1 && (
-                    <div className={`flex-1 h-1 mx-2 ${isCompleted ? 'bg-green-500' : 'bg-slate-300'}`} />
+                    <div style={{ flex: 1, height: '2px', margin: '0 8px', backgroundColor: isCompleted ? '#06D6A0' : '#E0E0E0' }} />
                   )}
                 </div>
               );
             })}
           </div>
 
-          <div className="grid grid-cols-6 gap-2">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
             {STEPS.map((step) => (
-              <div key={step.number} className="text-center">
-                <p className="text-xs font-medium text-slate-700">{step.label}</p>
+              <div key={step.number} style={{ textAlign: 'center' }}>
+                <p style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>{step.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Step Content */}
-        <div className="bg-white rounded-lg shadow-sm p-8 mb-6">
+        <div className="pro-panel" style={{ padding: '32px', marginBottom: '24px' }}>
           {currentStep === 1 && (
             <StepProfile formData={formData} setFormData={setFormData} />
           )}
@@ -233,21 +238,22 @@ export default function OnboardingPage() {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between items-center">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           {currentStep > 1 && (
             <button
               onClick={() => setCurrentStep(currentStep - 1)}
-              className="px-6 py-2 text-slate-600 hover:text-slate-900 font-medium"
+              style={{ padding: '8px 24px', color: '#0077B6', fontWeight: 500, border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}
             >
               ← Précédent
             </button>
           )}
-          <div className="flex-1" />
+          <div style={{ flex: 1 }} />
           {currentStep < 6 ? (
             <button
               onClick={handleStepSubmit}
               disabled={loading}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 font-medium flex items-center gap-2"
+              className="pro-btn-sun"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
             >
               Suivant <ChevronRight className="w-4 h-4" />
             </button>
@@ -255,7 +261,20 @@ export default function OnboardingPage() {
             <button
               onClick={handleFinalSubmit}
               disabled={loading}
-              className="px-8 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 font-medium flex items-center gap-2"
+              style={{
+                padding: '8px 24px',
+                backgroundColor: '#06D6A0',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading ? 0.5 : 1,
+                fontWeight: 500,
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
             >
               Soumettre pour vérification <ChevronRight className="w-4 h-4" />
             </button>
@@ -263,9 +282,9 @@ export default function OnboardingPage() {
         </div>
 
         {/* Progress Info */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg flex items-center gap-3">
-          <Clock className="w-5 h-5 text-blue-600 flex-shrink-0" />
-          <p className="text-sm text-blue-900">
+        <div style={{ padding: '16px', backgroundColor: '#F0F7FF', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid #E8F0FA' }}>
+          <Clock className="w-5 h-5" style={{ color: '#0077B6', flexShrink: 0 }} />
+          <p style={{ fontSize: '14px', color: '#0077B6' }}>
             Votre progression est automatiquement sauvegardée. Cette procédure prend environ 10 minutes.
           </p>
         </div>
@@ -278,44 +297,44 @@ export default function OnboardingPage() {
 function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; setFormData: (data: OnboardingFormData) => void }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 1: Votre profil</h2>
-      <div className="space-y-4">
+      <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 1: Votre profil</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Nom d&apos;affichage</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom d&apos;affichage</label>
           <input
             type="text"
             value={formData.displayName || ''}
             onChange={(e) => setFormData({ ...formData, displayName: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="Ex: Voyages Entreprise"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Biographie (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Biographie (optionnel)</label>
           <textarea
             value={formData.bio || ''}
             onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="Parlez de votre expérience..."
             rows={4}
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Site web (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Site web (optionnel)</label>
           <input
             type="url"
             value={formData.website || ''}
             onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="https://exemple.com"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Type de prestataire</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type de prestataire</label>
           <select
             value={formData.proType || ''}
             onChange={(e) => setFormData({ ...formData, proType: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
           >
             <option value="">Sélectionner...</option>
             <option value="CREATOR">Créateur</option>
@@ -333,44 +352,44 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
 function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; setFormData: (data: OnboardingFormData) => void }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 2: Informations légales</h2>
-      <div className="space-y-4">
+      <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 2: Informations légales</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">SIRET (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>SIRET (optionnel)</label>
           <input
             type="text"
             value={formData.siret || ''}
             onChange={(e) => setFormData({ ...formData, siret: e.target.value.replace(/\D/g, '') })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="14 chiffres"
             maxLength={14}
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Nom de la société (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom de la société (optionnel)</label>
           <input
             type="text"
             value={formData.companyName || ''}
             onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Adresse de la société (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Adresse de la société (optionnel)</label>
           <input
             type="text"
             value={formData.companyAddress || ''}
             onChange={(e) => setFormData({ ...formData, companyAddress: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Type d&apos;entité (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type d&apos;entité (optionnel)</label>
           <input
             type="text"
             value={formData.entityType || ''}
             onChange={(e) => setFormData({ ...formData, entityType: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="Ex: SARL, SAS, Auto-entrepreneur"
           />
         </div>
@@ -382,36 +401,36 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
 function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; setFormData: (data: OnboardingFormData) => void }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 3: Configuration des paiements</h2>
-      <div className="space-y-4">
+      <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 3: Configuration des paiements</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">IBAN français</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>IBAN français</label>
           <input
             type="text"
             value={formData.iban || ''}
             onChange={(e) => setFormData({ ...formData, iban: e.target.value.toUpperCase() })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="FR76 3000 6000 0101 0009 7839"
           />
-          <p className="text-xs text-slate-500 mt-1">Format: FR + 2 chiffres + 23 caractères alphanumériques</p>
+          <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Format: FR + 2 chiffres + 23 caractères alphanumériques</p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">BIC (optionnel)</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>BIC (optionnel)</label>
           <input
             type="text"
             value={formData.bic || ''}
             onChange={(e) => setFormData({ ...formData, bic: e.target.value.toUpperCase() })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="SOFRFRPP"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Nom du titulaire</label>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom du titulaire</label>
           <input
             type="text"
             value={formData.holderName || ''}
             onChange={(e) => setFormData({ ...formData, holderName: e.target.value })}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
             placeholder="Votre nom"
           />
         </div>
@@ -437,27 +456,27 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 4: Upload des documents</h2>
+      <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 4: Upload des documents</h2>
 
       {/* Info sécurité */}
-      <div className="mb-6 p-4 bg-green-50 rounded-lg flex items-start gap-3 border border-green-200">
-        <Shield className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-        <p className="text-sm text-green-900">
+      <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#E0FFF5', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', border: '1px solid #B8F3E6' }}>
+        <Shield className="w-5 h-5" style={{ color: '#06D6A0', flexShrink: 0, marginTop: '4px' }} />
+        <p style={{ fontSize: '14px', color: '#06D6A0' }}>
           Vos documents sont chiffrés et stockés de manière sécurisée.
           Ils ne seront consultés que par notre équipe de vérification.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {/* Pièce d'identité */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <FileText className="w-5 h-5 text-indigo-600" />
-            <h3 className="text-sm font-semibold text-slate-900">
-              Pièce d&apos;identité <span className="text-red-500">*</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+            <FileText className="w-5 h-5" style={{ color: '#0077B6' }} />
+            <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>
+              Pièce d&apos;identité <span style={{ color: '#E63946' }}>*</span>
             </h3>
           </div>
-          <p className="text-xs text-slate-500 mb-3">
+          <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>
             Carte nationale d&apos;identité ou passeport en cours de validité (PDF, JPG ou PNG, max 5 Mo)
           </p>
           <FileUpload
@@ -467,7 +486,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
             label="Déposer votre pièce d&apos;identité ici"
           />
           {formData.identityDocAssetId && (
-            <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
+            <p style={{ fontSize: '12px', color: '#06D6A0', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 className="w-3 h-3" /> Document téléchargé avec succès
             </p>
           )}
@@ -475,13 +494,13 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
 
         {/* KBIS */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <FileText className="w-5 h-5 text-indigo-600" />
-            <h3 className="text-sm font-semibold text-slate-900">
-              Extrait KBIS <span className="text-slate-400 text-xs font-normal">(si société)</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+            <FileText className="w-5 h-5" style={{ color: '#0077B6' }} />
+            <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>
+              Extrait KBIS <span style={{ color: '#8896A6', fontSize: '12px', fontWeight: 400 }}>(si société)</span>
             </h3>
           </div>
-          <p className="text-xs text-slate-500 mb-3">
+          <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>
             Extrait KBIS de moins de 3 mois (PDF, JPG ou PNG, max 5 Mo)
           </p>
           <FileUpload
@@ -491,7 +510,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
             label="Déposer votre KBIS ici"
           />
           {formData.kbisDocAssetId && (
-            <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
+            <p style={{ fontSize: '12px', color: '#06D6A0', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 className="w-3 h-3" /> Document téléchargé avec succès
             </p>
           )}
@@ -504,54 +523,48 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
 function StepContracts({ formData, setFormData }: { formData: OnboardingFormData; setFormData: (data: OnboardingFormData) => void }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 5: Signatures numériques</h2>
-      <div className="space-y-4">
-        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
-          <div className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={formData.acceptTerms || false}
-              onChange={(e) => setFormData({ ...formData, acceptTerms: e.target.checked })}
-              className="mt-1"
-            />
-            <div>
-              <label className="text-sm font-medium text-slate-900">Contrat prestataire indépendant</label>
-              <p className="text-xs text-slate-600 mt-1">
-                Je confirme avoir lu et accepté les conditions d&apos;utilisation.
-              </p>
-            </div>
+      <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 5: Signatures numériques</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <input
+            type="checkbox"
+            checked={formData.acceptTerms || false}
+            onChange={(e) => setFormData({ ...formData, acceptTerms: e.target.checked })}
+            style={{ marginTop: '4px', flexShrink: 0 }}
+          />
+          <div>
+            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Contrat prestataire indépendant</label>
+            <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+              Je confirme avoir lu et accepté les conditions d&apos;utilisation.
+            </p>
           </div>
         </div>
-        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
-          <div className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={formData.acceptCharter || false}
-              onChange={(e) => setFormData({ ...formData, acceptCharter: e.target.checked })}
-              className="mt-1"
-            />
-            <div>
-              <label className="text-sm font-medium text-slate-900">Charte de prestataire</label>
-              <p className="text-xs text-slate-600 mt-1">
-                J&apos;accepte les règles d&apos;utilisation et d&apos;éthique.
-              </p>
-            </div>
+        <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <input
+            type="checkbox"
+            checked={formData.acceptCharter || false}
+            onChange={(e) => setFormData({ ...formData, acceptCharter: e.target.checked })}
+            style={{ marginTop: '4px', flexShrink: 0 }}
+          />
+          <div>
+            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Charte de prestataire</label>
+            <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+              J&apos;accepte les règles d&apos;utilisation et d&apos;éthique.
+            </p>
           </div>
         </div>
-        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
-          <div className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              checked={formData.acceptRGPD || false}
-              onChange={(e) => setFormData({ ...formData, acceptRGPD: e.target.checked })}
-              className="mt-1"
-            />
-            <div>
-              <label className="text-sm font-medium text-slate-900">Politique RGPD</label>
-              <p className="text-xs text-slate-600 mt-1">
-                J&apos;accepte le traitement de mes données selon la politique RGPD.
-              </p>
-            </div>
+        <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <input
+            type="checkbox"
+            checked={formData.acceptRGPD || false}
+            onChange={(e) => setFormData({ ...formData, acceptRGPD: e.target.checked })}
+            style={{ marginTop: '4px', flexShrink: 0 }}
+          />
+          <div>
+            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Politique RGPD</label>
+            <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+              J&apos;accepte le traitement de mes données selon la politique RGPD.
+            </p>
           </div>
         </div>
       </div>
@@ -572,11 +585,11 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 6: Modules de formation</h2>
-      <p className="text-sm text-slate-600 mb-4">Marquez les modules que vous avez complétés :</p>
-      <div className="space-y-3">
+      <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 6: Modules de formation</h2>
+      <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '16px' }}>Marquez les modules que vous avez complétés :</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {modules.map((module, idx) => (
-          <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+          <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0' }}>
             <input
               type="checkbox"
               checked={(formData.completedModules || []).includes(idx)}
@@ -594,9 +607,8 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
                   });
                 }
               }}
-              className="rounded"
             />
-            <label className="text-sm font-medium text-slate-900">{module}</label>
+            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', cursor: 'pointer' }}>{module}</label>
           </div>
         ))}
       </div>

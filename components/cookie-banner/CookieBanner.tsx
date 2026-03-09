@@ -117,7 +117,7 @@ export function CookieBanner() {
               consentement explicite pour chaque catégorie de cookies. Vous
               pouvez refuser ou modifier vos choix à tout moment.{' '}
               <a
-                href="#"
+                href="/cookies"
                 className="text-blue-600 dark:text-blue-400 hover:underline"
                 aria-label="Lire notre politique de cookies"
               >

@@ -2,11 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { HotelBlockCard } from '@/components/rooming/hotel-block-card';
 import { AlertCircle } from 'lucide-react';
@@ -108,10 +103,12 @@ export default function HotelBlocksPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-32 w-full" />
-        <Skeleton className="h-32 w-full" />
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Skeleton className="h-10 w-64" />
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-32 w-full" />
+        </div>
       </div>
     );
   }
@@ -119,45 +116,44 @@ export default function HotelBlocksPage() {
   const expiringBlocks = blocks.filter((b) => ((b.expiresIn as number) || 0) <= 3);
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div>
-        <h1 className="text-3xl font-bold">Blocs Hôtel</h1>
-        <p className="text-gray-600 mt-2">Gestion des blocs hôtel réservés</p>
+        <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Blocs Hôtel</h1>
+        <p style={{ color: '#4A5568', marginTop: '0.5rem', margin: 0 }}>Gestion des blocs hôtel réservés</p>
       </div>
 
       {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
-              Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+        <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
+          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+            Fermer
+          </button>
+        </div>
       )}
 
       {expiringBlocks.length > 0 && (
-        <Alert>
-          <AlertCircle className="w-4 h-4" />
-          <AlertDescription>
+        <div style={{ padding: '1rem', background: '#E8F7FC', border: '1px solid #0077B6', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <AlertCircle style={{ width: '1rem', height: '1rem', color: '#0077B6', flexShrink: 0 }} />
+          <p style={{ color: '#0077B6', margin: 0 }}>
             {expiringBlocks.length} bloc(s) expirent dans les 3 jours
-          </AlertDescription>
-        </Alert>
+          </p>
+        </div>
       )}
 
       {blocks.length === 0 ? (
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-gray-500 mb-4">Aucun bloc hôtel</p>
-            <Button onClick={() => (window.location.href = `/pro/voyages/${travelId}`)}>
+        <div className="pro-panel">
+          <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+            <p style={{ color: '#4A5568', marginBottom: '1rem', margin: 0 }}>Aucun bloc hôtel</p>
+            <button onClick={() => (window.location.href = `/pro/voyages/${travelId}`)} className="pro-btn-sun">
               Ajouter bloc
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       ) : (
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Cartes blocs */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem' }}>
             {blocks.map((block) => (
               <div key={block.id as string}>
                 <HotelBlockCard
@@ -170,67 +166,75 @@ export default function HotelBlocksPage() {
 
           {/* Formulaire édition */}
           {editingBlockId && (
-            <Card className="border-blue-200 bg-blue-50">
-              <CardHeader>
-                <CardTitle>Modifier bloc</CardTitle>
-                <CardDescription>Mettre à jour les détails du bloc</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
+            <div className="pro-panel" style={{ border: '2px solid #0077B6' }}>
+              <div className="pro-panel-header">
+                <h3 className="pro-panel-title">Modifier bloc</h3>
+                <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Mettre à jour les détails du bloc</p>
+              </div>
+              <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
-                  <label className="text-sm font-medium">Chambres demandées</label>
-                  <Input
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Chambres demandées</label>
+                  <input
                     type="number"
                     value={formData.roomsRequested}
                     onChange={(e) =>
                       setFormData({ ...formData, roomsRequested: e.target.value })
                     }
+                    className="pro-input"
+                    style={{ width: '100%' }}
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium">Prix par nuit (€)</label>
-                  <Input
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Prix par nuit (€)</label>
+                  <input
                     type="number"
                     step="0.01"
                     value={formData.pricePerNightTTC}
                     onChange={(e) =>
                       setFormData({ ...formData, pricePerNightTTC: e.target.value })
                     }
+                    className="pro-input"
+                    style={{ width: '100%' }}
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium">Notes</label>
-                  <Textarea
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Notes</label>
+                  <textarea
                     value={formData.notes}
                     onChange={(e) =>
                       setFormData({ ...formData, notes: e.target.value })
                     }
                     placeholder="Notes de négociation..."
+                    className="pro-input"
+                    style={{ width: '100%', minHeight: '6rem', resize: 'vertical' }}
                   />
                 </div>
 
-                <div className="flex gap-2">
-                  <Button
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <button
                     onClick={handleSaveBlock}
                     disabled={isSaving}
-                    className="flex-1"
+                    className="pro-btn-sun"
+                    style={{ flex: 1, opacity: isSaving ? 0.5 : 1 }}
                   >
                     {isSaving ? 'Sauvegarde...' : 'Sauvegarder'}
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     onClick={() => setEditingBlockId(null)}
-                    variant="outline"
-                    className="flex-1"
+                    className="pro-btn-outline"
+                    style={{ flex: 1 }}
                   >
                     Annuler
-                  </Button>
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
         </div>
       )}
+    </div>
     </div>
   );
 }

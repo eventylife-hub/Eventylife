@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { StatsCard } from '@/components/admin/stats-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useParams } from 'next/navigation';
@@ -20,6 +18,7 @@ import {
   CheckCircle as CheckIcon
 } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import Link from 'next/link';
 
 interface TravelDetail {
   id: string;
@@ -137,7 +136,12 @@ export default function AdminVoyageDetailPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Détails voyage
+          </h1>
+        </div>
         <div className="h-12 bg-gray-200 rounded animate-pulse" />
         <div className="grid grid-cols-4 gap-4">
           {[...Array(4)].map((_, i) => (
@@ -150,22 +154,22 @@ export default function AdminVoyageDetailPage() {
 
   if (error || !travel) {
     return (
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Détail du voyage</h1>
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Détails voyage
+          </h1>
         </div>
         <div className="p-6 bg-red-50 border border-red-200 rounded-lg text-red-800">
           <p className="font-medium">{error || 'Voyage non trouvé'}</p>
           <p className="text-sm text-red-700 mt-2">Vérifiez que l&apos;ID du voyage est correct.</p>
-          <Button
-            size="sm"
-            variant="outline"
+          <button
             onClick={fetchTravel}
-            className="gap-2 mt-4"
+            className="admin-btn-secondary gap-2 flex items-center text-sm mt-4"
           >
             <ArrowRight className="w-4 h-4" />
             Réessayer
-          </Button>
+          </button>
         </div>
       </div>
     );
@@ -175,18 +179,23 @@ export default function AdminVoyageDetailPage() {
   const currentPhaseIndex = phases.indexOf(travel.status);
 
   return (
-    <div className="space-y-6">
+    <div className="admin-fade-in space-y-6">
       {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">{travel.title}</h1>
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Détails voyage
+        </h1>
+      </div>
+
+      <div className="admin-fade-in delay-1">
         <p className="text-gray-600 mt-2">
           Voyage créé par <span className="font-medium">{travel.creatorProName}</span>
         </p>
       </div>
 
       {/* Carte d'information principale */}
-      <Card>
-        <CardContent className="p-6 space-y-4">
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-body p-6 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium text-gray-600">Destination</label>
@@ -209,15 +218,15 @@ export default function AdminVoyageDetailPage() {
               </span>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Timeline des phases */}
-      <Card>
-        <CardHeader className="pb-4">
-          <h3 className="font-semibold text-gray-900">Cycle de vie du voyage</h3>
-        </CardHeader>
-        <CardContent className="p-6">
+      <div className="admin-panel admin-fade-in delay-3">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Cycle de vie du voyage</h3>
+        </div>
+        <div className="admin-panel-body p-6">
           <div className="flex items-center justify-between">
             {phases.map((phase, index) => {
               const isActive = currentPhaseIndex === index;
@@ -257,27 +266,29 @@ export default function AdminVoyageDetailPage() {
 
           <div className="mt-6 flex gap-2 flex-wrap">
             {currentPhaseIndex < phases.length - 1 && (
-              <Button
+              <button
                 onClick={() => {
                   const nextPhase = phases[currentPhaseIndex + 1];
                   if (nextPhase) handleStatusTransition(nextPhase);
                 }}
-                variant="default"
+                className="admin-btn-primary gap-2 flex items-center text-sm"
               >
-                <ArrowRight className="w-4 h-4 mr-2" />
+                <ArrowRight className="w-4 h-4" />
                 Passer à {statusConfig[phases[currentPhaseIndex + 1] || 'DRAFT'].label}
-              </Button>
+              </button>
             )}
-            <Button variant="outline">
-              <LinkIcon className="w-4 h-4 mr-2" />
-              Voir page lifecycle
-            </Button>
+            <Link href={`/admin/voyages/${travelId}/lifecycle`}>
+              <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+                <LinkIcon className="w-4 h-4" />
+                Voir page lifecycle
+              </button>
+            </Link>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="admin-kpi-grid admin-fade-in delay-4">
         <StatsCard
           title="Réservations"
           value={travel.bookings.toString()}
@@ -309,19 +320,19 @@ export default function AdminVoyageDetailPage() {
       </div>
 
       {/* Onglets */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="overview">Vue d&apos;ensemble</TabsTrigger>
-          <TabsTrigger value="transport">Transport</TabsTrigger>
-          <TabsTrigger value="rooming">Logements</TabsTrigger>
-          <TabsTrigger value="finance">Finance</TabsTrigger>
-          <TabsTrigger value="team">Équipe</TabsTrigger>
-          <TabsTrigger value="audit">Audit Log</TabsTrigger>
-        </TabsList>
+      <div className="admin-panel admin-fade-in delay-5">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="overview">Vue d&apos;ensemble</TabsTrigger>
+            <TabsTrigger value="transport">Transport</TabsTrigger>
+            <TabsTrigger value="rooming">Logements</TabsTrigger>
+            <TabsTrigger value="finance">Finance</TabsTrigger>
+            <TabsTrigger value="team">Équipe</TabsTrigger>
+            <TabsTrigger value="audit">Audit Log</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="overview">
-          <Card>
-            <CardContent className="p-6">
+          <div className="admin-panel-body p-6">
+            <TabsContent value="overview" className="mt-0">
               <div className="space-y-4">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex gap-3">
@@ -346,13 +357,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </TabsContent>
 
-        <TabsContent value="transport">
-          <Card>
-            <CardContent className="p-6">
+            <TabsContent value="transport" className="mt-0">
               <div className="space-y-4">
                 {travel?.transport ? (
                   <>
@@ -388,13 +395,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </TabsContent>
 
-        <TabsContent value="rooming">
-          <Card>
-            <CardContent className="p-6">
+            <TabsContent value="rooming" className="mt-0">
               <div className="space-y-4">
                 {travel?.rooming?.hotels && travel.rooming.hotels.length > 0 ? (
                   <>
@@ -428,13 +431,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </TabsContent>
 
-        <TabsContent value="finance">
-          <Card>
-            <CardContent className="p-6">
+            <TabsContent value="finance" className="mt-0">
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 bg-green-50 rounded-lg border border-green-200">
@@ -461,13 +460,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </TabsContent>
 
-        <TabsContent value="team">
-          <Card>
-            <CardContent className="p-6">
+            <TabsContent value="team" className="mt-0">
               <div className="space-y-4">
                 {travel?.team && travel.team.length > 0 ? (
                   <div className="space-y-3">
@@ -492,13 +487,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </TabsContent>
 
-        <TabsContent value="audit">
-          <Card>
-            <CardContent className="p-6">
+            <TabsContent value="audit" className="mt-0">
               <div className="space-y-4">
                 {travel?.auditLog && travel.auditLog.length > 0 ? (
                   <div className="space-y-2">
@@ -529,10 +520,10 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+            </TabsContent>
+          </div>
+        </Tabs>
+      </div>
 
       {/* Toast notification */}
       {toastMessage && (

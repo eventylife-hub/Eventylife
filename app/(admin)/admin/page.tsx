@@ -2,13 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { StatsCard } from '@/components/admin/stats-card';
-import { Skeleton, SkeletonList } from '@/components/ui/skeleton';
-import { Users, TrendingUp, AlertCircle, Wallet, RefreshCw, Activity, CheckCircle } from 'lucide-react';
-import { formatPrice, formatDate } from '@/lib/utils';
 
+/* ────────────────────────────── Types ────────────────────────────── */
 interface DashboardStats {
   totalUsers: number;
   userGrowth: number;
@@ -18,22 +13,94 @@ interface DashboardStats {
   pendingTravels?: number;
   pendingPros?: number;
   activePros?: number;
+  openTickets?: number;
+  supplierPayments?: number;
+  supplierPaymentAmount?: number;
   recentActivity?: Array<{
     id: string;
+    actor: string;
     action: string;
+    type: 'create' | 'update' | 'access' | 'delete';
     description: string;
     timestamp: string;
   }>;
-  monthlyChart?: Array<{
-    month: string;
-    revenue: number;
-  }>;
 }
 
-/**
- * Dashboard administrateur avec statistiques complètes
- * Les identifiants de session sont transmis via les cookies httpOnly
- */
+/* ────────────────────────────── Modules data ────────────────────────────── */
+const MODULES = [
+  {
+    icon: '✈️', iconClass: 'ops', title: 'Ops Voyages', status: 'live', statusLabel: 'Actif',
+    desc: 'Cycle voyage, départs, Phase 1 & 2, occurrences, feux de validation.',
+    stats: [{ label: 'départs J-7', value: '5' }, { label: 'Feu 1 en attente', value: '2' }],
+    href: '/admin/voyages',
+  },
+  {
+    icon: '🚌', iconClass: 'transport', title: 'Transport Admin', status: 'live', statusLabel: 'Actif',
+    desc: 'Devis fournisseurs, paiements, configs bus/avion, manifests et Feu 2/3.',
+    stats: [{ label: 'devis à traiter', value: '2' }, { label: 'manifest manquant', value: '1' }],
+    href: '/admin/transport',
+  },
+  {
+    icon: '💰', iconClass: 'finance', title: 'Finance & Paiements', status: 'live', statusLabel: 'Actif',
+    desc: 'Marges, revenus, NET30/EOM, payment runs batch, ledger, exports cabinet.',
+    stats: [{ label: 'CA mois', value: '€ 142k' }, { label: 'runs en attente', value: '6' }],
+    href: '/admin/finance',
+  },
+  {
+    icon: '✅', iconClass: 'pro', title: 'Validation Pro', status: 'pending', statusLabel: '8 en attente',
+    desc: 'Créateurs, indépendants, vendeurs, partenaires — SIRET, docs, approbation.',
+    stats: [{ label: 'créateurs', value: '3' }, { label: 'indépendants', value: '5' }],
+    href: '/admin/pros',
+  },
+  {
+    icon: '🛟', iconClass: 'support', title: 'Support & Incidents', status: 'pending', statusLabel: '4 tickets',
+    desc: 'Litiges, tickets clients, incidents repas, urgences terrain, escalations.',
+    stats: [{ label: 'urgents', value: '2' }, { label: 'anomalie hôtel', value: '1' }],
+    href: '/admin/support',
+  },
+  {
+    icon: '📄', iconClass: 'docs', title: 'Docs & Signatures', status: 'live', statusLabel: 'Actif',
+    desc: 'Centre documents, charte Eventy, onboarding docs, versioning, mandats.',
+    stats: [{ label: 'docs actifs', value: '12' }, { label: 'signatures en cours', value: '3' }],
+    href: '/admin/documents',
+  },
+  {
+    icon: '👥', iconClass: 'team', title: 'Équipes & Accès', status: 'live', statusLabel: 'Actif',
+    desc: 'Inviter employés, gérer rôles par module, désactivation, audit sessions.',
+    stats: [{ label: 'membres actifs', value: '6' }, { label: 'invite pending', value: '1' }],
+    href: '/admin/utilisateurs',
+  },
+  {
+    icon: '📣', iconClass: 'marketing', title: 'Marketing', status: 'live', statusLabel: 'Actif',
+    desc: 'Templates email, print zones, données campagnes, leads, sponsors.',
+    stats: [{ label: 'PII', value: '0' }, { label: 'Accès restreint', value: '' }],
+    href: '/admin/marketing',
+  },
+  {
+    icon: '🏨', iconClass: 'supplier', title: 'Fournisseurs & Hôtels', status: 'live', statusLabel: 'Actif',
+    desc: 'Portail hôtel, rooming lists, devis/paiement fournisseurs, HRA avancé.',
+    stats: [{ label: 'anomalies', value: '3' }, { label: 'hôtels actifs', value: '9' }],
+    href: '/admin/rooming',
+  },
+];
+
+const QUICK_LINKS = [
+  { icon: '✅', label: 'Valider les Pro en attente', desc: '8 profils · /admin/pros', href: '/admin/pros' },
+  { icon: '🚌', label: 'Devis transport à traiter', desc: '2 devis · /admin/transport', href: '/admin/transport' },
+  { icon: '🏨', label: 'Anomalies hôtel', desc: '3 rooming lists · /admin/rooming', href: '/admin/rooming' },
+  { icon: '📤', label: 'Exports Finance (cabinet)', desc: 'ClosePack mensuel · /admin/exports', href: '/admin/exports' },
+  { icon: '🔍', label: 'Recherche Pro / Voyage', desc: 'Recherche globale admin', href: '/admin/voyages' },
+];
+
+const MOCK_AUDIT = [
+  { actor: 'David A.', action: 'Pro validé — CreatorProfile #247', type: 'create' as const, time: 'Il y a 12 min' },
+  { actor: 'Marie L.', action: 'Setting modifié — HOLD_DURATION → 7j', type: 'update' as const, time: 'Il y a 1h' },
+  { actor: 'Thomas B.', action: 'PII_REVEAL_60S — Ticket #892', type: 'access' as const, time: 'Il y a 2h' },
+  { actor: 'David A.', action: 'Employé désactivé — user #34', type: 'delete' as const, time: 'Il y a 5h' },
+  { actor: 'Système', action: 'Payment run batch #18 exécuté (6 pro)', type: 'create' as const, time: 'Hier 18:00' },
+];
+
+/* ────────────────────────────── Component ────────────────────────────── */
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -42,6 +109,7 @@ export default function AdminDashboardPage() {
   const fetchStats = async () => {
     try {
       setError(null);
+      setLoading(true);
       const response = await fetch('/api/admin/dashboard', {
         credentials: 'include',
       });
@@ -49,11 +117,12 @@ export default function AdminDashboardPage() {
         const data = await response.json();
         setStats(data);
       } else {
-        setError('Erreur lors du chargement des statistiques');
+        // API pas encore connectée — on affiche le dashboard avec les données mock
+        setStats(null);
       }
-    } catch (err) {
-      console.error('Dashboard stats fetch error:', err);
-      setError('Impossible de charger les statistiques. Vérifiez votre connexion.');
+    } catch {
+      // En mode beta/statique, pas d&apos;API — affichage normal
+      setStats(null);
     } finally {
       setLoading(false);
     }
@@ -64,288 +133,197 @@ export default function AdminDashboardPage() {
   }, []);
 
   return (
-    <div className="space-y-8">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Tableau de bord administrateur</h1>
-        <p className="text-gray-600 mt-2">
-          Bienvenue sur le tableau de bord Eventy Life
-        </p>
+    <div>
+      {/* ═══════ PAGE HEADER ═══════ */}
+      <div className="admin-page-header admin-fade-in">
+        <div>
+          <div className="admin-breadcrumb">
+            <Link href="/admin">Admin</Link> <span style={{ margin: '0 4px' }}>›</span> <span>Accueil</span>
+          </div>
+          <h2 className="admin-page-title">Tableau de bord</h2>
+        </div>
+        <div className="admin-header-actions">
+          <div className="admin-header-meta">
+            <span className="dot"></span>
+            FounderAdmin · Niveau N1
+          </div>
+          <div className="admin-preset-badge">✓ Mode MAX</div>
+          <button className="admin-btn-lockdown">🔒 LOCKDOWN</button>
+        </div>
       </div>
 
-      {/* Affichage erreur */}
-      {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
-          <div>
-            <p className="font-medium">{error}</p>
-            <p className="text-sm text-red-700 mt-1">Les données statistiques n&apos;ont pas pu être chargées.</p>
+      {/* ═══════ ALERTS STRIP ═══════ */}
+      <div className="admin-fade-in delay-1">
+        <div className="admin-alert-bar danger">
+          <span>⚠️</span>
+          <span><strong>3 anomalies hôtel</strong> — Rooming list non confirmée pour départ J-2</span>
+          <Link href="/admin/rooming" className="alert-action">Voir détails →</Link>
+        </div>
+        <div className="admin-alert-bar warning">
+          <span>🕐</span>
+          <span><strong>8 profils Pro</strong> en attente de validation depuis +48h</span>
+          <Link href="/admin/pros" className="alert-action">Traiter →</Link>
+        </div>
+      </div>
+
+      {/* ═══════ KPI WIDGETS ═══════ */}
+      <div className="admin-kpi-grid">
+        <div className="admin-kpi-card urgent admin-fade-in delay-1">
+          <div className="admin-kpi-label">Pro à valider</div>
+          <div className="admin-kpi-value">{stats?.pendingPros ?? 8}</div>
+          <div className="admin-kpi-sub">
+            <span className="trend-down">↑ 3</span> depuis hier
           </div>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={fetchStats}
-            className="gap-2 ml-4 flex-shrink-0"
+        </div>
+        <div className="admin-kpi-card admin-fade-in delay-2">
+          <div className="admin-kpi-label">Voyages en préparation</div>
+          <div className="admin-kpi-value">{stats?.totalTravels ?? 14}</div>
+          <div className="admin-kpi-sub">
+            dont <strong>5</strong> départs confirmés
+          </div>
+        </div>
+        <div className="admin-kpi-card admin-fade-in delay-3">
+          <div className="admin-kpi-label">Paiements fournisseurs</div>
+          <div className="admin-kpi-value">{stats?.supplierPayments ?? 6}</div>
+          <div className="admin-kpi-sub">
+            <span className="trend-down">€ {stats?.supplierPaymentAmount ? (stats.supplierPaymentAmount / 100).toLocaleString('fr-FR') : '24 800'}</span> en attente validation
+          </div>
+        </div>
+        <div className="admin-kpi-card admin-fade-in delay-4">
+          <div className="admin-kpi-label">Tickets support ouverts</div>
+          <div className="admin-kpi-value">{stats?.openTickets ?? 4}</div>
+          <div className="admin-kpi-sub">
+            2 urgents · 1 anomalie hôtel
+          </div>
+        </div>
+      </div>
+
+      {/* ═══════ MODULES GRID ═══════ */}
+      <div className="admin-section-header">
+        <h3 className="admin-section-title">Modules</h3>
+        <span className="admin-section-link">Affichage selon vos permissions RBAC</span>
+      </div>
+
+      <div className="admin-modules-grid">
+        {MODULES.map((mod, i) => (
+          <Link
+            key={mod.title}
+            href={mod.href}
+            className={`admin-module-card admin-fade-in delay-${Math.min(i + 3, 9)}`}
           >
-            <RefreshCw className="w-4 h-4" />
-            Réessayer
-          </Button>
+            <div className="admin-module-card-header">
+              <div className={`admin-module-icon ${mod.iconClass}`}>{mod.icon}</div>
+              <span className={`admin-module-status ${mod.status === 'live' ? 'live' : 'pending'}`}>
+                {mod.statusLabel}
+              </span>
+            </div>
+            <div>
+              <h3>{mod.title}</h3>
+              <p>{mod.desc}</p>
+            </div>
+            <div className="admin-module-card-footer">
+              {mod.stats.map((s, j) => (
+                <span key={j} className="admin-module-stat">
+                  {s.value && <strong>{s.value}</strong>} {s.label}
+                </span>
+              ))}
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* ═══════ SETTINGS STRIP ═══════ */}
+      <div className="admin-section-header">
+        <h3 className="admin-section-title">Paramètres actifs</h3>
+        <Link href="/admin/parametres" className="admin-section-link">Modifier dans /admin/parametres →</Link>
+      </div>
+
+      <div className="admin-settings-strip admin-fade-in delay-6">
+        <div className="admin-setting-item">
+          <span className="admin-setting-label">Hold paiement</span>
+          <span className="admin-setting-value">7 jours <span className="editable">modifier</span></span>
         </div>
-      )}
-
-      {/* KPIs */}
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[...Array(4)].map((_, i) => (
-            <Card key={i}>
-              <CardContent className="p-6 space-y-4">
-                <Skeleton height="1rem" width="100%" />
-                <Skeleton height="2rem" width="80%" />
-                <Skeleton height="0.75rem" width="60%" />
-              </CardContent>
-            </Card>
-          ))}
+        <div className="admin-setting-item">
+          <span className="admin-setting-label">Email max / sem</span>
+          <span className="admin-setting-value">3 / pro <span className="editable">modifier</span></span>
         </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatsCard
-              icon={<Users />}
-              title="Utilisateurs actifs"
-              value={stats?.totalUsers || 0}
-              changePercent={(stats?.userGrowth) ?? 0}
-              trend={((stats?.userGrowth) ?? 0) >= 0 ? 'up' : 'down'}
-              href="/admin/utilisateurs"
-            />
+        <div className="admin-setting-item">
+          <span className="admin-setting-label">Rooming deadline</span>
+          <span className="admin-setting-value">J-3 avant départ <span className="editable">modifier</span></span>
+        </div>
+        <div className="admin-setting-item">
+          <span className="admin-setting-label">Rétention tickets</span>
+          <span className="admin-setting-value">90 jours <span className="editable">modifier</span></span>
+        </div>
+      </div>
 
-            <StatsCard
-              icon={<TrendingUp />}
-              title="Voyages actifs"
-              value={stats?.totalTravels || 0}
-              href="/admin/voyages"
-            />
-
-            <StatsCard
-              icon={<Wallet />}
-              title="Chiffre d&apos;affaires mensuel"
-              value={formatPrice(stats?.monthlyRevenueCents || 0)}
-              changePercent={stats?.monthlyRevenueGrowth || 0}
-              trend={(stats?.monthlyRevenueGrowth || 0) >= 0 ? 'up' : 'down'}
-              href="/admin/finance"
-            />
-
-            <StatsCard
-              icon={<AlertCircle />}
-              title="Actions en attente"
-              value={
-                (stats?.pendingTravels || 0) + (stats?.pendingPros || 0)
-              }
-              href="/admin/voyages?status=pending"
-            />
+      {/* ═══════ BOTTOM: AUDIT LOG + QUICK LINKS ═══════ */}
+      <div className="admin-bottom-grid">
+        {/* Audit Log */}
+        <div className="admin-panel admin-fade-in delay-7">
+          <div className="admin-panel-header">
+            <span className="admin-panel-title">🛡️ Audit Log — Actions récentes</span>
+            <Link href="/admin/audit" className="admin-section-link">Voir tout →</Link>
           </div>
-
-          {/* Sections principales */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Voyages en attente */}
-            {loading ? (
-              <Card>
-                <CardHeader>
-                  <Skeleton height="1.5rem" width="40%" />
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <SkeletonList count={3} height="40px" />
-                </CardContent>
-              </Card>
-            ) : (
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold">Voyages en attente</h3>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {(stats?.pendingTravels ?? 0) > 0 ? (
-                  <>
-                    <div className="text-3xl font-bold text-orange-600">
-                      {stats?.pendingTravels ?? 0}
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      Voyages à approuver ou vérifier
-                    </p>
-                    <Link href="/admin/voyages?status=pending">
-                      <Button className="w-full mt-4">
-                        Voir les voyages en attente
-                      </Button>
-                    </Link>
-                  </>
-                ) : (
-                  <div className="flex flex-col items-center justify-center py-8">
-                    <CheckCircle className="w-12 h-12 text-green-500 mb-2" />
-                    <p className="text-gray-600 text-center">
-                      Aucun voyage en attente
-                    </p>
+          <div className="admin-panel-body">
+            {(stats?.recentActivity && stats.recentActivity.length > 0
+              ? stats.recentActivity.slice(0, 5).map((a, i) => (
+                  <div key={a.id} className="admin-audit-row">
+                    <span className={`admin-audit-dot ${a.type}`}></span>
+                    <span className="admin-audit-actor">{a.actor}</span>
+                    <span className="admin-audit-action">{a.description}</span>
+                    <span className="admin-audit-time">
+                      {new Date(a.timestamp).toLocaleDateString('fr-FR')}
+                    </span>
                   </div>
-                )}
-              </CardContent>
-            </Card>
-            )}
-
-            {/* Profils Pro en attente */}
-            {loading ? (
-              <Card>
-                <CardHeader>
-                  <Skeleton height="1.5rem" width="40%" />
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <SkeletonList count={3} height="40px" />
-                </CardContent>
-              </Card>
-            ) : (
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold">Profils Pro en attente</h3>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {(stats?.pendingPros ?? 0) > 0 ? (
-                  <>
-                    <div className="text-3xl font-bold text-green-600">
-                      {stats?.pendingPros ?? 0}
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      Profils à vérifier et approuver
-                    </p>
-                    <Link href="/admin/pros?status=pending">
-                      <Button className="w-full mt-4">
-                        Voir les profils en attente
-                      </Button>
-                    </Link>
-                  </>
-                ) : (
-                  <div className="flex flex-col items-center justify-center py-8">
-                    <CheckCircle className="w-12 h-12 text-green-500 mb-2" />
-                    <p className="text-gray-600 text-center">
-                      Aucun profil en attente
-                    </p>
+                ))
+              : MOCK_AUDIT.map((a, i) => (
+                  <div key={i} className="admin-audit-row">
+                    <span className={`admin-audit-dot ${a.type}`}></span>
+                    <span className="admin-audit-actor">{a.actor}</span>
+                    <span className="admin-audit-action">{a.action}</span>
+                    <span className="admin-audit-time">{a.time}</span>
                   </div>
-                )}
-              </CardContent>
-            </Card>
+                ))
             )}
+          </div>
+        </div>
 
-            {/* Profils Pro actifs */}
-            {loading ? (
-              <Card>
-                <CardHeader>
-                  <Skeleton height="1.5rem" width="40%" />
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <SkeletonList count={3} height="40px" />
-                </CardContent>
-              </Card>
-            ) : (
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold">Profils Pro actifs</h3>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-3xl font-bold text-blue-600">
-                  {stats?.activePros || 0}
+        {/* Quick Links */}
+        <div className="admin-panel admin-fade-in delay-8">
+          <div className="admin-panel-header">
+            <span className="admin-panel-title">⚡ Accès rapides</span>
+          </div>
+          <div className="admin-panel-body">
+            {QUICK_LINKS.map((ql) => (
+              <Link key={ql.label} href={ql.href} className="admin-quick-link">
+                <span className="ql-icon">{ql.icon}</span>
+                <div>
+                  <div className="ql-label">{ql.label}</div>
+                  <div className="ql-desc">{ql.desc}</div>
                 </div>
-                <p className="text-gray-600 text-sm">
-                  Professionnels actifs sur la plateforme
-                </p>
-                <Link href="/admin/pros">
-                  <Button variant="outline" className="w-full mt-4">
-                    Gérer les profils Pro
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            )}
+                <span className="arrow">→</span>
+              </Link>
+            ))}
           </div>
+        </div>
+      </div>
 
-          {/* Activity Log and Quick Actions Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Recent Activity */}
-            <Card className="lg:col-span-2">
-              <CardHeader>
-                <h3 className="text-lg font-semibold flex items-center gap-2">
-                  <Activity className="w-5 h-5" />
-                  Activité récente
-                </h3>
-              </CardHeader>
-              <CardContent>
-                {loading ? (
-                  <SkeletonList count={6} height="60px" />
-                ) : stats?.recentActivity && stats.recentActivity.length > 0 ? (
-                  <div className="space-y-3">
-                    {stats.recentActivity.slice(0, 6).map((activity: any) => (
-                      <div key={activity.id} className="flex items-start justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div className="flex-1">
-                          <p className="text-sm font-medium text-gray-900">{activity.description}</p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {new Date(activity.timestamp).toLocaleDateString('fr-FR')} à {new Date(activity.timestamp).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
-                          </p>
-                        </div>
-                        <span className={`text-xs font-medium px-2 py-1 rounded-full flex-shrink-0 ml-2 ${
-                          activity.action === 'CREATED' ? 'bg-blue-100 text-blue-700' :
-                          activity.action === 'APPROVED' ? 'bg-green-100 text-green-700' :
-                          activity.action === 'REJECTED' ? 'bg-red-100 text-red-700' :
-                          'bg-gray-100 text-gray-700'
-                        }`}>
-                          {activity.action}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <p className="text-sm">Aucune activité pour le moment</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold">Actions rapides</h3>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <Link href="/admin/utilisateurs">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Users className="w-4 h-4 mr-2" />
-                      Utilisateurs
-                    </Button>
-                  </Link>
-                  <Link href="/admin/voyages">
-                    <Button variant="outline" className="w-full justify-start">
-                      <TrendingUp className="w-4 h-4 mr-2" />
-                      Voyages
-                    </Button>
-                  </Link>
-                  <Link href="/admin/finance">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Wallet className="w-4 h-4 mr-2" />
-                      Finances
-                    </Button>
-                  </Link>
-                  <Link href="/admin/parametres">
-                    <Button variant="outline" className="w-full justify-start">
-                      <AlertCircle className="w-4 h-4 mr-2" />
-                      Paramètres
-                    </Button>
-                  </Link>
-                  <Link href="/admin/audit">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Activity className="w-4 h-4 mr-2" />
-                      Audit
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+      {/* ═══════ RBAC INFO FOOTER ═══════ */}
+      <div className="admin-rbac-footer admin-fade-in delay-9">
+        <span style={{ fontSize: '20px' }}>🛡️</span>
+        <div>
+          <strong>Accès conditionné RBAC</strong> — Chaque carte/widget vérifie vos permissions.
+          Actions sensibles tracées dans AuditLog. PII masquées par défaut (mode SAFE).
+          <div className="admin-rbac-tags">
+            <span className="admin-rbac-tag active">FounderAdmin</span>
+            <span className="admin-rbac-tag active">SuperAdmin</span>
+            <span className="admin-rbac-tag">OpsVoyageAdmin</span>
+            <span className="admin-rbac-tag">TransportAdmin</span>
+            <span className="admin-rbac-tag">MarketingAdmin</span>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 }

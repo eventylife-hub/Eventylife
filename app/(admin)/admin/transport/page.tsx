@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { StatsCard } from '@/components/admin/stats-card';
@@ -251,13 +249,11 @@ export default function TransportPage() {
   ];
 
   return (
-    <div className="space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Gestion des transports</h1>
-        <p className="text-gray-600 mt-2">
-          Gérez les manifestes, les transporteurs et les configurations de transport
-        </p>
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Transport Admin
+        </h1>
       </div>
 
       {/* Affichage erreur */}
@@ -279,7 +275,7 @@ export default function TransportPage() {
 
       {/* KPIs */}
       {stats ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="admin-kpi-grid admin-fade-in delay-1">
           <StatsCard
             icon={<Package />}
             title="Voyages avec transport"
@@ -302,28 +298,26 @@ export default function TransportPage() {
           />
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="admin-kpi-grid">
           {[...Array(4)].map((_, i) => (
-            <Card key={i}>
-              <CardContent className="p-6 h-32 bg-gray-100 animate-pulse rounded" />
-            </Card>
+            <div key={i} className="admin-kpi-card p-6 h-32 bg-gray-100 animate-pulse rounded" />
           ))}
         </div>
       )}
 
       {/* Lien vers gestion des arrêts bus */}
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
+      <div className="flex gap-2 admin-fade-in delay-2">
+        <button
           onClick={() => (window.location.href = '/admin/transport/stops')}
+          className="admin-btn-secondary"
         >
           Gérer les arrêts bus
-        </Button>
+        </button>
       </div>
 
       {/* Filtres et Table */}
-      <Card>
-        <CardContent className="p-6 space-y-4">
+      <div className="admin-panel admin-fade-in delay-3">
+        <div className="admin-panel-body p-6 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -375,8 +369,8 @@ export default function TransportPage() {
             emptyMessage="Aucun trajet trouvé"
             rowActions={rowActions}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

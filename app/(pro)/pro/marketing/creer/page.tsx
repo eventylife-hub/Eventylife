@@ -3,11 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+// shadcn component imports removed - using pro-panel and pro-btn-* classes
 import { AlertCircle, Loader2, ChevronRight } from 'lucide-react';
 import { CampaignWizard } from '@/components/marketing/campaign-wizard';
 
@@ -75,20 +71,20 @@ export default function CreerCampaignePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="mx-auto max-w-4xl">
-        <Link href="/pro/marketing" className="text-sm text-blue-600 hover:underline mb-4 inline-block">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+      <div style={{ maxWidth: '896px', margin: '0 auto' }}>
+        <Link href="/pro/marketing" style={{ fontSize: '14px', color: '#0077B6', textDecoration: 'none', marginBottom: '16px', display: 'inline-block' }}>
           ← Retour au marketing
         </Link>
 
-        <h1 className="text-3xl font-bold mb-6">Créer une campagne</h1>
+        <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Créer une campagne</h1>
 
         {error && (
-          <div className="rounded-lg border border-red-200 bg-red-50 p-4 mb-6 flex items-start gap-3">
-            <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+          <div style={{ borderRadius: '8px', border: '1px solid #FFE0E3', backgroundColor: '#FFE0E3', padding: '16px', marginBottom: '24px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+            <AlertCircle className="h-5 w-5" style={{ color: '#E63946', flexShrink: 0, marginTop: '2px' }} />
             <div>
-              <h2 className="font-semibold text-red-900">Erreur</h2>
-              <p className="text-sm text-red-700">{error}</p>
+              <h2 style={{ fontWeight: 600, color: '#E63946' }}>Erreur</h2>
+              <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
             </div>
           </div>
         )}

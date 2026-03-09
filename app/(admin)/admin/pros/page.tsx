@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ApprovalModal } from '@/components/admin/approval-modal';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -166,13 +164,11 @@ export default function ProsPage() {
   ];
 
   return (
-    <div className="space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Profils Pro</h1>
-        <p className="text-gray-600 mt-2">
-          Approuvez et gérez les profils Pro
-        </p>
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Validation Pro
+        </h1>
       </div>
 
       {/* Affichage erreur */}
@@ -189,8 +185,8 @@ export default function ProsPage() {
       )}
 
       {/* Onglets */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel admin-fade-in delay-1">
+        <div className="admin-panel-body p-6">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
               {statuses.map((status) => (
@@ -212,8 +208,8 @@ export default function ProsPage() {
               </TabsContent>
             ))}
           </Tabs>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Modal d'approbation */}
       <ApprovalModal

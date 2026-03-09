@@ -77,43 +77,43 @@ export default function NouvelArretPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-3xl mx-auto">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+      <div style={{ maxWidth: '768px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="mb-8">
+        <div style={{ marginBottom: '32px' }}>
           <Link
             href="/pro/arrets"
-            className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-900 mb-4"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#8896A6', marginBottom: '16px', textDecoration: 'none' }}
           >
             <ArrowLeft className="w-4 h-4" />
             Retour aux arrets
           </Link>
-          <h1 className="text-3xl font-bold text-slate-900">Nouvel arret de bus</h1>
-          <p className="text-slate-600 mt-1">
+          <h1 className="pro-page-title">Nouvel arret de bus</h1>
+          <p style={{ color: '#8896A6', marginTop: '4px' }}>
             Creez un nouveau point de depart ou d&apos;arrivee pour vos voyages
           </p>
         </div>
 
         {/* Error */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-red-700">{error}</p>
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', border: '1px solid #FFE0E3' }}>
+            <AlertCircle className="w-5 h-5" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
+            <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
           </div>
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Informations generales */}
-          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-            <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-indigo-600" />
+          <div className="pro-panel">
+            <h2 className="pro-panel-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <MapPin className="w-5 h-5" style={{ color: '#FF6B35' }} />
               Informations generales
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+              <div style={{ gridColumn: '1 / -1' }}>
+                <label className="pro-input" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Nom public *
                 </label>
                 <input
@@ -121,16 +121,16 @@ export default function NouvelArretPage() {
                   value={form.publicName}
                   onChange={(e) => updateField('publicName', e.target.value)}
                   placeholder="Ex: Gare routiere de Lyon - Perrache"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                   required
                 />
-                <p className="text-xs text-slate-500 mt-1">
+                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
                   Ce nom sera visible par les voyageurs
                 </p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Nom interne
                 </label>
                 <input
@@ -138,18 +138,18 @@ export default function NouvelArretPage() {
                   value={form.internalName}
                   onChange={(e) => updateField('internalName', e.target.value)}
                   placeholder="Ex: Lyon-P"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Type *
                 </label>
                 <select
                   value={form.type}
                   onChange={(e) => updateField('type', e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+                  className="pro-input"
                 >
                   <option value="PICKUP_DEPARTURE">Point de depart (ramassage)</option>
                   <option value="DROPOFF_ARRIVAL">Point d&apos;arrivee (depose)</option>
@@ -159,12 +159,12 @@ export default function NouvelArretPage() {
           </div>
 
           {/* Adresse */}
-          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-            <h2 className="text-lg font-bold text-slate-900 mb-4">Adresse</h2>
+          <div className="pro-panel">
+            <h2 className="pro-panel-header" style={{ marginBottom: '16px' }}>Adresse</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+              <div style={{ gridColumn: '1 / -1' }}>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Adresse *
                 </label>
                 <input
@@ -172,13 +172,13 @@ export default function NouvelArretPage() {
                   value={form.addressLine}
                   onChange={(e) => updateField('addressLine', e.target.value)}
                   placeholder="Numero et rue"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Ville *
                 </label>
                 <input
@@ -186,13 +186,13 @@ export default function NouvelArretPage() {
                   value={form.city}
                   onChange={(e) => updateField('city', e.target.value)}
                   placeholder="Lyon"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Code postal *
                 </label>
                 <input
@@ -200,25 +200,25 @@ export default function NouvelArretPage() {
                   value={form.postalCode}
                   onChange={(e) => updateField('postalCode', e.target.value)}
                   placeholder="69002"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Pays
                 </label>
                 <input
                   type="text"
                   value={form.country}
                   onChange={(e) => updateField('country', e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Latitude
                 </label>
                 <input
@@ -226,12 +226,12 @@ export default function NouvelArretPage() {
                   value={form.latitude}
                   onChange={(e) => updateField('latitude', e.target.value)}
                   placeholder="45.7484"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Longitude
                 </label>
                 <input
@@ -239,19 +239,19 @@ export default function NouvelArretPage() {
                   value={form.longitude}
                   onChange={(e) => updateField('longitude', e.target.value)}
                   placeholder="4.8422"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
                 />
               </div>
             </div>
           </div>
 
           {/* Informations pratiques */}
-          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-            <h2 className="text-lg font-bold text-slate-900 mb-4">Informations pratiques</h2>
+          <div className="pro-panel">
+            <h2 className="pro-panel-header" style={{ marginBottom: '16px' }}>Informations pratiques</h2>
 
-            <div className="space-y-4">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Instructions pour les voyageurs
                 </label>
                 <textarea
@@ -259,12 +259,13 @@ export default function NouvelArretPage() {
                   onChange={(e) => updateField('instructions', e.target.value)}
                   rows={3}
                   placeholder="Ex: Rendez-vous sur le parking face a la gare, le bus sera identifie par le logo Eventy Life."
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                  className="pro-input"
+                  style={{ resize: 'none' }}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Parking
                 </label>
                 <textarea
@@ -272,12 +273,13 @@ export default function NouvelArretPage() {
                   onChange={(e) => updateField('parkingInfo', e.target.value)}
                   rows={2}
                   placeholder="Ex: Parking gratuit de 200 places a 50m."
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                  className="pro-input"
+                  style={{ resize: 'none' }}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Accessibilite PMR
                 </label>
                 <textarea
@@ -285,39 +287,41 @@ export default function NouvelArretPage() {
                   onChange={(e) => updateField('accessibilityInfo', e.target.value)}
                   rows={2}
                   placeholder="Ex: Acces PMR avec rampe pour fauteuil roulant."
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                  className="pro-input"
+                  style={{ resize: 'none' }}
                 />
               </div>
             </div>
           </div>
 
           {/* Photos */}
-          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-            <h2 className="text-lg font-bold text-slate-900 mb-4">Photos</h2>
-            <div className="border-2 border-dashed border-slate-200 rounded-lg p-8 text-center">
-              <Upload className="w-8 h-8 text-slate-400 mx-auto mb-3" />
-              <p className="text-sm text-slate-600 font-medium">
+          <div className="pro-panel">
+            <h2 className="pro-panel-header" style={{ marginBottom: '16px' }}>Photos</h2>
+            <div style={{ border: '2px dashed #B3E5FC', borderRadius: '8px', padding: '32px 16px', textAlign: 'center' }}>
+              <Upload className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+              <p style={{ fontSize: '14px', color: '#0A1628', fontWeight: 500 }}>
                 Glissez vos photos ici ou cliquez pour parcourir
               </p>
-              <p className="text-xs text-slate-500 mt-1">
+              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
                 JPG, PNG - Max 5 Mo par photo - 5 photos maximum
               </p>
             </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-between">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Link
               href="/pro/arrets"
-              className="text-slate-600 hover:text-slate-900 text-sm font-medium"
+              style={{ color: '#8896A6', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
             >
               Annuler
             </Link>
-            <div className="flex gap-3">
-              <Button
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
                 type="submit"
                 disabled={loading}
-                className="gap-2 bg-indigo-600 hover:bg-indigo-700"
+                className="pro-btn-sun"
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
                 {loading ? (
                   <Loader className="w-4 h-4 animate-spin" />
@@ -325,7 +329,7 @@ export default function NouvelArretPage() {
                   <Save className="w-4 h-4" />
                 )}
                 {loading ? 'Creation...' : 'Creer l\'arret'}
-              </Button>
+              </button>
             </div>
           </div>
         </form>

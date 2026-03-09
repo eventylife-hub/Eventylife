@@ -2,11 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Download } from 'lucide-react';
+import { Download, AlertCircle } from 'lucide-react';
 
 /**
  * Page Manifest Passagers - Tableau des passagers par arrêt
@@ -73,88 +70,91 @@ export default function ManifestPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-96 w-full" />
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Skeleton className="h-10 w-64" />
+          <Skeleton className="h-96 w-full" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex justify-between items-start">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <h1 className="text-3xl font-bold">Manifest Passagers</h1>
-          <p className="text-gray-600 mt-2">Liste détaillée des passagers par arrêt</p>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Manifest Passagers</h1>
+          <p style={{ color: '#4A5568', marginTop: '0.5rem', margin: 0 }}>Liste détaillée des passagers par arrêt</p>
         </div>
-        <Button onClick={handleExportPDF} disabled={exporting} className="gap-2">
-          <Download className="w-4 h-4" />
+        <button onClick={handleExportPDF} disabled={exporting} className="pro-btn-ocean" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: exporting ? 0.5 : 1 }}>
+          <Download style={{ width: '1rem', height: '1rem' }} />
           {exporting ? 'Export...' : 'Exporter PDF'}
-        </Button>
+        </button>
       </div>
 
       {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
-              Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+        <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
+          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+            Fermer
+          </button>
+        </div>
       )}
 
       {manifest.length === 0 ? (
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-gray-500">Aucun passager enregistré</p>
-          </CardContent>
-        </Card>
+        <div className="pro-panel">
+          <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+            <p style={{ color: '#4A5568', margin: 0 }}>Aucun passager enregistré</p>
+          </div>
+        </div>
       ) : (
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {manifest.map((stopData) => (
-            <Card key={(stopData.stop as any)?.id as string}>
-              <CardHeader>
-                <CardTitle className="text-lg">
+            <div key={(stopData.stop as any)?.id as string} className="pro-panel">
+              <div className="pro-panel-header">
+                <h3 className="pro-panel-title" style={{ fontSize: '1.125rem' }}>
                   {((stopData.stop as any)?.publicName as string) || 'Arrêt'} ({((stopData.stop as any)?.city as string) || ''})
-                </CardTitle>
-                <CardDescription>
+                </h3>
+                <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>
                   {((stopData.passengers as any) || []).length as number} passager(s)
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="border-b">
-                      <tr className="text-left">
-                        <th className="pb-2 font-semibold">Passager</th>
-                        <th className="pb-2 font-semibold">Chambre</th>
-                        <th className="pb-2 font-semibold">Mode</th>
-                        <th className="pb-2 font-semibold">Statut paiement</th>
+                </p>
+              </div>
+              <div className="pro-panel-body">
+                <div style={{ overflowX: 'auto' }}>
+                  <table className="pro-table" style={{ width: '100%', fontSize: '0.875rem' }}>
+                    <thead style={{ borderBottom: '1px solid #E2E8F0' }}>
+                      <tr style={{ textAlign: 'left' }}>
+                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Passager</th>
+                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Chambre</th>
+                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Mode</th>
+                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Statut paiement</th>
                       </tr>
                     </thead>
-                    <tbody className="space-y-1">
+                    <tbody>
                       {((stopData.passengers as any) || []).map((p: Record<string, unknown>, idx: number) => (
-                        <tr key={idx} className="border-b hover:bg-gray-50">
-                          <td className="py-2">
+                        <tr key={idx} style={{ borderBottom: '1px solid #E2E8F0' }} onMouseEnter={(e) => (e.currentTarget.style.background = '#F7FAFC')} onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
+                          <td style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', color: '#0A1628' }}>
                             {((p.firstName as string) && (p.lastName as string))
                               ? `${p.firstName} ${p.lastName}`
                               : (p.participantId as string) || '—'}
                           </td>
-                          <td className="py-2">
+                          <td style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', color: '#0A1628' }}>
                             {(p.roomLabel as string) || (p.roomType as string) || '—'}
                           </td>
-                          <td className="py-2 text-xs">
-                            <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                          <td style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', fontSize: '0.75rem' }}>
+                            <span style={{ background: '#DBEAFE', color: '#1E40AF', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', display: 'inline-block' }}>
                               {(p.departureMode as string) || '—'}
                             </span>
                           </td>
-                          <td className="py-2 text-xs">
-                            <span className={`px-2 py-1 rounded ${
-                              (p.paymentStatus as string) === 'SUCCEEDED'
-                                ? 'bg-green-100 text-green-700'
-                                : 'bg-gray-100 text-gray-700'
-                            }`}>
+                          <td style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', fontSize: '0.75rem' }}>
+                            <span style={{
+                              padding: '0.25rem 0.5rem',
+                              borderRadius: '0.25rem',
+                              display: 'inline-block',
+                              background: (p.paymentStatus as string) === 'SUCCEEDED' ? '#DCFCE7' : '#F3F4F6',
+                              color: (p.paymentStatus as string) === 'SUCCEEDED' ? '#166534' : '#374151'
+                            }}>
                               {(p.paymentStatus as string) === 'SUCCEEDED' ? 'Payé' : 'En attente'}
                             </span>
                           </td>
@@ -163,11 +163,12 @@ export default function ManifestPage() {
                     </tbody>
                   </table>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 }

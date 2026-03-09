@@ -86,10 +86,10 @@ export default function TravelBilanPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-          <p className="text-gray-600">Chargement du bilan...</p>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ width: '3rem', height: '3rem', border: '4px solid #E8F7FC', borderTop: '4px solid #0077B6', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          <p style={{ color: '#4A5568' }}>Chargement du bilan...</p>
         </div>
       </div>
     );
@@ -97,27 +97,28 @@ export default function TravelBilanPage() {
 
   if (!dashboard) {
     return (
-      <div className="p-8">
-        <p className="text-gray-600">Voyage non trouvé</p>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <p style={{ color: '#4A5568' }}>Voyage non trouvé</p>
       </div>
     );
   }
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">{(dashboard?.travel as any)?.title || 'Voyage'}</h1>
-      <p className="text-gray-600 mb-8">Bilan de voyage</p>
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '60rem', margin: '0 auto' }}>
+      <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.5rem' }}>{(dashboard?.travel as any)?.title || 'Voyage'}</h1>
+      <p style={{ color: '#4A5568', marginBottom: '2rem' }}>Bilan de voyage</p>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+        <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: '#E63946' }}>
           {error}
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
         {/* Financier */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">Résumé Financier</h2>
+        <div className="pro-panel">
+          <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Résumé Financier</h2>
           <div className="space-y-3">
             <div>
               <p className="text-sm text-gray-600">Chiffre d&apos;affaires</p>
@@ -129,8 +130,8 @@ export default function TravelBilanPage() {
         </div>
 
         {/* Participants */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">Statistiques Participants</h2>
+        <div className="pro-panel">
+          <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Statistiques Participants</h2>
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-gray-600">Total</span>
@@ -152,8 +153,8 @@ export default function TravelBilanPage() {
         </div>
 
         {/* Avis */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">Avis Clients</h2>
+        <div className="pro-panel">
+          <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Avis Clients</h2>
           <div className="space-y-3">
             <div>
               <p className="text-sm text-gray-600">Nombre d&apos;avis</p>
@@ -175,8 +176,8 @@ export default function TravelBilanPage() {
 
         {/* Distribution */}
         {Object.keys(((dashboard?.feedbacks as any)?.ratingDistribution as Record<string, unknown>) || {}).length > 0 && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Distribution des Notes</h2>
+          <div className="pro-panel">
+            <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Distribution des Notes</h2>
             <div className="space-y-2">
               {Object.entries(((dashboard?.feedbacks as any)?.ratingDistribution as Record<string, unknown>) || {}).map(
                 ([rating, count]: [string, unknown]) => (
@@ -200,13 +201,13 @@ export default function TravelBilanPage() {
       </div>
 
       {/* Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Actions</h2>
-        <div className="flex flex-wrap gap-4">
+      <div className="pro-panel">
+        <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Actions</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
           {((dashboard?.actions as any)?.canGenerateReport as boolean) && (
             <button
               onClick={handleGenerateReport}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700"
+              className="pro-btn-sun"
             >
               📄 Générer le rapport PDF
             </button>
@@ -216,7 +217,8 @@ export default function TravelBilanPage() {
             <button
               onClick={handleSendBilan}
               disabled={sending}
-              className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50"
+              className="pro-btn-ocean"
+              style={{ opacity: sending ? 0.5 : 1 }}
             >
               {sending ? 'Envoi en cours...' : '📧 Envoyer bilan aux participants'}
             </button>
@@ -229,7 +231,7 @@ export default function TravelBilanPage() {
                   // Appel pour archiver
                 }
               }}
-              className="px-6 py-3 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700"
+              className="pro-btn-outline"
             >
               📦 Archiver le voyage
             </button>

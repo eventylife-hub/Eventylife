@@ -100,53 +100,48 @@ export default function FormationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-6xl mx-auto">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900">Formation Pro</h1>
-          <p className="text-slate-600 mt-2">
+        <div style={{ marginBottom: '32px' }}>
+          <h1 className="pro-page-title">Formation Pro</h1>
+          <p style={{ color: '#8896A6', marginTop: '8px' }}>
             Apprenez à maîtriser la plateforme Eventy Life avec nos modules interactifs
           </p>
         </div>
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-6">
-            <Alert className="border-red-200 bg-red-50">
-              <AlertCircle className="h-4 w-4 text-red-600" />
-              <AlertDescription className="ml-3 text-red-800">
-                {error}
-              </AlertDescription>
-            </Alert>
-            <div className="mt-4">
-              <Button
-                onClick={() => {
-                  setError(null);
-                  setLoading(true);
-                  Promise.all([fetchFormationModules(), fetchFormationProgress()])
-                    .catch(() => {
-                      setError('Une erreur est survenue lors du chargement de la formation');
-                    })
-                    .finally(() => {
-                      setLoading(false);
-                    });
-                }}
-                variant="outline"
-                className="border-red-200 text-red-600 hover:bg-red-50"
-              >
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Réessayer
-              </Button>
+          <div style={{ marginBottom: '24px' }}>
+            <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px' }}>
+              <AlertCircle className="h-4 w-4" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
             </div>
+            <button
+              onClick={() => {
+                setError(null);
+                setLoading(true);
+                Promise.all([fetchFormationModules(), fetchFormationProgress()])
+                  .catch(() => {
+                    setError('Une erreur est survenue lors du chargement de la formation');
+                  })
+                  .finally(() => {
+                    setLoading(false);
+                  });
+              }}
+              className="pro-btn-outline"
+            >
+              <RotateCcw className="w-4 h-4 mr-2" style={{ display: 'inline', marginRight: '8px' }} />
+              Réessayer
+            </button>
           </div>
         )}
 
         {/* Loading State */}
         {loading && !error && (
           <>
-            <div className="bg-white rounded-lg shadow-sm p-8 mb-8 border-l-4 border-indigo-600">
-              <div className="flex items-center justify-between mb-6">
+            <div className="pro-panel" style={{ marginBottom: '32px', borderLeft: '4px solid #0077B6' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
                 <div>
                   <Skeleton className="h-6 w-40 mb-2" />
                   <Skeleton className="h-4 w-32" />
@@ -156,11 +151,11 @@ export default function FormationPage() {
               <Skeleton className="h-4 w-24" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
               {[...Array(6)].map((_, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                <div key={idx} className="pro-panel" style={{ overflow: 'hidden' }}>
                   <Skeleton className="h-24" />
-                  <div className="p-6 space-y-4">
+                  <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <Skeleton className="h-6 w-3/4" />
                     <Skeleton className="h-4 w-full" />
                     <Skeleton className="h-4 w-1/2" />
@@ -174,77 +169,77 @@ export default function FormationPage() {
 
         {/* Progress Card */}
         {!loading && !error && (
-        <div className="bg-white rounded-lg shadow-sm p-8 mb-8 border-l-4 border-indigo-600">
-          <div className="flex items-center justify-between mb-6">
+        <div className="pro-panel" style={{ marginBottom: '32px', borderLeft: '4px solid #0077B6' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
             <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-2">Votre progression</h2>
-              <p className="text-slate-600 text-sm">
+              <h2 className="pro-panel-title" style={{ marginBottom: '4px' }}>Votre progression</h2>
+              <p style={{ color: '#8896A6', fontSize: '14px' }}>
                 {completedCount} sur {moduleCount} modules complétés
               </p>
             </div>
             {completionPercentage === 100 && (
-              <div className="bg-green-100 px-4 py-2 rounded-lg flex items-center gap-2">
-                <Award className="w-5 h-5 text-green-600" />
-                <span className="font-medium text-green-700">Complété!</span>
+              <div style={{ backgroundColor: '#E0FFF5', padding: '8px 16px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Award className="w-5 h-5" style={{ color: '#06D6A0' }} />
+                <span style={{ fontWeight: 600, color: '#06D6A0' }}>Complété!</span>
               </div>
             )}
           </div>
 
           {/* Progress Bar */}
-          <div className="relative h-3 bg-slate-200 rounded-full overflow-hidden">
+          <div style={{ position: 'relative', height: '12px', backgroundColor: '#E0E0E0', borderRadius: '999px', overflow: 'hidden', marginBottom: '16px' }}>
             <div
-              className="absolute h-full bg-gradient-to-r from-indigo-600 to-indigo-400 rounded-full transition-all duration-500"
-              style={{ width: `${completionPercentage}%` }}
+              style={{ height: '100%', backgroundColor: '#0077B6', borderRadius: '999px', transition: 'width 0.5s ease', width: `${completionPercentage}%` }}
             ></div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between text-sm">
-            <span className="text-slate-600">Progression globale</span>
-            <span className="font-bold text-indigo-600">{Math.round(completionPercentage)}%</span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '14px' }}>
+            <span style={{ color: '#8896A6' }}>Progression globale</span>
+            <span style={{ fontWeight: 600, color: '#0077B6' }}>{Math.round(completionPercentage)}%</span>
           </div>
         </div>
         )}
 
         {/* Modules Grid */}
         {!loading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
           {modules.map((module) => {
             const isCompleted = completedModules.includes(module.id);
 
             return (
               <div
                 key={module.id}
-                className="bg-white rounded-lg shadow-sm border border-slate-200 hover:shadow-lg transition-shadow overflow-hidden"
+                className="pro-panel"
+                style={{ overflow: 'hidden' }}
               >
                 {/* Module Header with Icon */}
-                <div className="h-24 bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center relative">
-                  <span className="text-5xl">{getIcon(module.icon)}</span>
+                <div style={{ height: '96px', background: 'linear-gradient(135deg, #E8F7FC, #B3E5FC)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                  <span style={{ fontSize: '48px' }}>{getIcon(module.icon)}</span>
                   {isCompleted && (
-                    <div className="absolute top-2 right-2 bg-green-500 rounded-full p-1">
-                      <CheckCircle2 className="w-5 h-5 text-white" />
+                    <div style={{ position: 'absolute', top: '8px', right: '8px', backgroundColor: '#06D6A0', borderRadius: '999px', padding: '6px' }}>
+                      <CheckCircle2 className="w-5 h-5" style={{ color: 'white' }} />
                     </div>
                   )}
                 </div>
 
                 {/* Module Content */}
-                <div className="p-6">
-                  <h3 className="font-bold text-slate-900 text-lg mb-2">{module.title}</h3>
-                  <p className="text-sm text-slate-600 mb-4">{module.description}</p>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontWeight: 600, color: '#0A1628', fontSize: '16px', marginBottom: '8px' }}>{module.title}</h3>
+                  <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '16px' }}>{module.description}</p>
 
                   {/* Duration Badge */}
-                  <div className="flex items-center gap-2 text-xs text-slate-600 mb-4">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#8896A6', marginBottom: '16px' }}>
                     <Clock className="w-4 h-4" />
                     {module.duration} minutes
                   </div>
 
                   {/* Status Badge */}
-                  <div className="mb-4">
+                  <div style={{ marginBottom: '16px' }}>
                     {isCompleted ? (
-                      <span className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+                      <span style={{ display: 'inline-block', padding: '6px 12px', backgroundColor: '#E0FFF5', color: '#06D6A0', fontSize: '12px', fontWeight: 600, borderRadius: '999px' }}>
                         ✓ Terminé
                       </span>
                     ) : (
-                      <span className="inline-block px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-full">
+                      <span style={{ display: 'inline-block', padding: '6px 12px', backgroundColor: '#F0F0F0', color: '#4A5568', fontSize: '12px', fontWeight: 600, borderRadius: '999px' }}>
                         À faire
                       </span>
                     )}
@@ -253,7 +248,7 @@ export default function FormationPage() {
                   {/* View Button */}
                   <Link
                     href={`/pro/formation/${module.id}`}
-                    className="w-full py-2 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100 font-medium text-sm transition-colors"
+                    style={{ display: 'block', width: '100%', padding: '12px 16px', backgroundColor: '#FFF0E8', color: '#FF6B35', borderRadius: '8px', textDecoration: 'none', fontWeight: 500, fontSize: '14px', textAlign: 'center', transition: 'background-color 0.2s' }}
                   >
                     {isCompleted ? 'Revoir le module' : 'Voir le module'} →
                   </Link>
@@ -266,16 +261,16 @@ export default function FormationPage() {
 
         {/* Certification Card */}
         {!loading && !error && completionPercentage === 100 && (
-          <div className="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-8 text-center">
-            <Award className="w-12 h-12 text-green-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">Félicitations!</h2>
-            <p className="text-slate-600 mb-6">
+          <div style={{ marginTop: '32px', background: 'linear-gradient(to right, #E0FFF5, #E0FFF5)', border: '2px solid #06D6A0', borderRadius: '8px', padding: '32px', textAlign: 'center' }}>
+            <Award className="w-12 h-12" style={{ color: '#06D6A0', margin: '0 auto 16px' }} />
+            <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Félicitations!</h2>
+            <p style={{ color: '#8896A6', marginBottom: '24px' }}>
               Vous avez complété tous les modules de formation. Vous êtes maintenant prêt(e) à créer vos
               voyages!
             </p>
             <Link
               href="/pro/voyages/nouveau"
-              className="inline-block px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium"
+              style={{ display: 'inline-block', padding: '12px 32px', backgroundColor: '#06D6A0', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: 500 }}
             >
               Créer mon premier voyage →
             </Link>

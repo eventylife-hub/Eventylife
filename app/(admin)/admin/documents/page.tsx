@@ -8,11 +8,9 @@ import {
   CheckCircle2,
   XCircle,
   Clock,
-  Loader,
   Download,
   Eye,
 } from 'lucide-react';
-import { Skeleton, SkeletonList } from '@/components/ui/skeleton';
 import { formatDate } from '@/lib/utils';
 
 interface AdminDocument {
@@ -158,166 +156,174 @@ export default function AdminDocumentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* En-tête */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Gestion des documents
-          </h1>
-          <p className="text-gray-600">
-            Examinez et validez les documents des utilisateurs et des professionnels
-          </p>
+    <div className="space-y-6">
+      <div className="admin-page-header">
+        <div>
+          <div className="admin-breadcrumb">Accueil › Documents</div>
+          <h1 className="admin-page-title">Docs & Signatures</h1>
         </div>
+      </div>
 
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-            {error}
-          </div>
-        )}
-
-        {/* Statistiques */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          {[
-            { label: 'Total', value: stats.total, color: 'bg-blue-100 text-blue-700' },
-            {
-              label: 'En attente',
-              value: stats.pending,
-              color: 'bg-yellow-100 text-yellow-700',
-            },
-            {
-              label: 'Approuvés',
-              value: stats.approved,
-              color: 'bg-green-100 text-green-700',
-            },
-            {
-              label: 'Rejetés',
-              value: stats.rejected,
-              color: 'bg-red-100 text-red-700',
-            },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className={`${stat.color} rounded-lg p-4 text-center`}
-            >
-              <p className="text-2xl font-bold">{stat.value}</p>
-              <p className="text-sm font-medium">{stat.label}</p>
-            </div>
-          ))}
+      {error && (
+        <div className="admin-alert-bar danger">
+          <span>{error}</span>
         </div>
+      )}
 
-        {/* Filtres */}
-        <div className="mb-6 flex gap-4 bg-white p-4 rounded-lg border border-gray-200">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Rechercher par nom, email ou professionnel..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-400" />
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="">Tous les statuts</option>
-              <option value="PENDING">En attente</option>
-              <option value="CONFIRMED">Approuvés</option>
-              <option value="REJECTED">Rejetés</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Tableau */}
-        {loading ? (
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <SkeletonList count={5} height="60px" />
-          </div>
-        ) : filteredDocuments.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-            <FileText className="mx-auto h-12 w-12 text-gray-300 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              Aucun document
-            </h3>
-            <p className="text-gray-600">
-              Aucun document ne correspond à vos critères de recherche
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: 'Total', value: stats.total, bgColor: 'var(--admin-ocean-light)' },
+          { label: 'En attente', value: stats.pending, bgColor: '#FEF3C7' },
+          { label: 'Approuvés', value: stats.approved, bgColor: 'var(--admin-mint-soft)' },
+          { label: 'Rejetés', value: stats.rejected, bgColor: 'var(--admin-coral-soft)' },
+        ].map((stat) => (
+          <div
+            key={stat.label}
+            className="admin-kpi-card"
+            style={{
+              background: stat.bgColor,
+              textAlign: 'center',
+              padding: '16px',
+              borderRadius: '10px',
+            }}
+          >
+            <p style={{ fontSize: '24px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>
+              {stat.value}
+            </p>
+            <p style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', marginTop: '4px' }}>
+              {stat.label}
             </p>
           </div>
-        ) : (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        ))}
+      </div>
+
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Filtres</h3>
+        </div>
+        <div className="admin-panel-body">
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+            <div style={{ flex: 1, minWidth: '200px' }}>
+              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                Rechercher
+              </label>
+              <div style={{ position: 'relative' }}>
+                <Search style={{ position: 'absolute', left: '12px', top: '10px', width: '16px', height: '16px', color: 'var(--admin-text-secondary)' }} />
+                <input
+                  type="text"
+                  placeholder="Par nom, email ou professionnel..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="admin-input"
+                  style={{ paddingLeft: '36px' }}
+                />
+              </div>
+            </div>
+            <div style={{ minWidth: '150px' }}>
+              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                Statut
+              </label>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="admin-input"
+              >
+                <option value="">Tous les statuts</option>
+                <option value="PENDING">En attente</option>
+                <option value="CONFIRMED">Approuvés</option>
+                <option value="REJECTED">Rejetés</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Documents</h3>
+        </div>
+        <div className="admin-panel-body">
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '24px', color: 'var(--admin-text-secondary)' }}>
+              Chargement...
+            </div>
+          ) : filteredDocuments.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--admin-text-secondary)' }}>
+              <FileText className="mx-auto h-12 w-12 mb-4" style={{ color: 'var(--admin-text-muted)' }} />
+              <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--admin-text-primary)', marginBottom: '8px' }}>
+                Aucun document
+              </h3>
+              <p style={{ fontSize: '14px', color: 'var(--admin-text-secondary)' }}>
+                Aucun document ne correspond à vos critères
+              </p>
+            </div>
+          ) : (
             <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
+              <table className="admin-table">
+                <thead>
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                      Document
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                      Utilisateur / Professionnel
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                      Type
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                      Statut
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                      Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th>Document</th>
+                    <th>Utilisateur / Professionnel</th>
+                    <th>Type</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                    <th style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody>
                   {filteredDocuments.map((doc) => (
-                    <tr key={doc.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center gap-3">
-                          <FileText className="h-5 w-5 text-gray-400" />
-                          <span className="text-sm font-medium text-gray-900 truncate max-w-xs">
+                    <tr key={doc.id}>
+                      <td>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                          <FileText style={{ width: '20px', height: '20px', color: 'var(--admin-text-muted)' }} />
+                          <span style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {doc.name}
                           </span>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
+                      <td>
+                        <div style={{ fontSize: '14px', color: 'var(--admin-text-primary)' }}>
                           {doc.user
                             ? `${doc.user.firstName} ${doc.user.lastName}`
                             : doc.proProfile?.displayName}
                         </div>
-                        <div className="text-xs text-gray-500">
+                        <div style={{ fontSize: '12px', color: 'var(--admin-text-secondary)' }}>
                           {doc.user?.email}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      <td style={{ fontSize: '14px', color: 'var(--admin-text-secondary)' }}>
                         {doc.type}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center gap-2">
+                      <td>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           {getStatusIcon(doc.status)}
-                          <span className="text-sm font-medium text-gray-600">
+                          <span style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>
                             {getStatusLabel(doc.status)}
                           </span>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      <td style={{ fontSize: '14px', color: 'var(--admin-text-secondary)' }}>
                         {formatDate(doc.createdAt)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td style={{ textAlign: 'right' }}>
                         <button
                           onClick={() => {
                             setSelectedDocument(doc);
                             setShowApprovalModal(true);
                           }}
-                          className="text-blue-600 hover:text-blue-900 flex items-center gap-2 text-sm font-medium"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            color: 'var(--admin-accent)',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                          }}
                         >
-                          <Eye className="h-4 w-4" />
+                          <Eye style={{ width: '16px', height: '16px' }} />
                           Examiner
                         </button>
                       </td>
@@ -326,36 +332,35 @@ export default function AdminDocumentsPage() {
                 </tbody>
               </table>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {/* Modal d'examen */}
       {showApprovalModal && selectedDocument && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
+          <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
               Examiner le document
             </h3>
 
-            <div className="space-y-4 mb-6">
-              <div>
-                <label className="text-sm font-medium text-gray-700">
+            <div style={{ marginBottom: '24px', space: '16px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>
                   Nom du document
                 </label>
-                <p className="text-gray-600">{selectedDocument.name}</p>
+                <p style={{ color: 'var(--admin-text-primary)', marginTop: '4px' }}>{selectedDocument.name}</p>
               </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>
                   Type
                 </label>
-                <p className="text-gray-600">{selectedDocument.type}</p>
+                <p style={{ color: 'var(--admin-text-primary)', marginTop: '4px' }}>{selectedDocument.type}</p>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>
                   Statut actuel
                 </label>
-                <p className="text-gray-600">
+                <p style={{ color: 'var(--admin-text-primary)', marginTop: '4px' }}>
                   {getStatusLabel(selectedDocument.status)}
                 </p>
               </div>
@@ -363,29 +368,56 @@ export default function AdminDocumentsPage() {
 
             {selectedDocument.status === 'PENDING' && (
               <>
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                <div style={{ marginBottom: '24px' }}>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', marginBottom: '8px' }}>
                     Motif du rejet (optionnel)
                   </label>
                   <textarea
                     value={approvalReason}
                     onChange={(e) => setApprovalReason(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    style={{
+                      width: '100%',
+                      padding: '12px',
+                      border: '1px solid var(--admin-border)',
+                      borderRadius: '10px',
+                      fontFamily: 'inherit',
+                      color: 'var(--admin-text-primary)',
+                    }}
                     placeholder="Entrez un motif si vous rejetez ce document..."
                     rows={4}
                   />
                 </div>
 
-                <div className="flex gap-3">
+                <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
                   <button
                     onClick={() => handleApprove(selectedDocument.id)}
-                    className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                    style={{
+                      flex: 1,
+                      padding: '10px 16px',
+                      background: 'var(--admin-success)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '10px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                    }}
                   >
                     Approuver
                   </button>
                   <button
                     onClick={() => handleReject(selectedDocument.id)}
-                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+                    style={{
+                      flex: 1,
+                      padding: '10px 16px',
+                      background: 'var(--admin-coral)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '10px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                    }}
                   >
                     Rejeter
                   </button>
@@ -399,7 +431,8 @@ export default function AdminDocumentsPage() {
                 setSelectedDocument(null);
                 setApprovalReason('');
               }}
-              className="mt-4 w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              className="admin-btn-secondary"
+              style={{ width: '100%' }}
             >
               Fermer
             </button>

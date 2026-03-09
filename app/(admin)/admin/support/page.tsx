@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ExportCta } from '@/components/admin/export-cta';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -150,29 +148,24 @@ export default function SupportPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Support & Tickets
+        </h1>
+      </div>
+
       {/* En-tête */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Support</h1>
-          <p className="text-gray-600 mt-2">
-            {allTickets.length > 0
-              ? `${allTickets.length} tickets — ${statuses.map(s => `${s.label}: ${ticketCounts[s.value] || 0}`).join(' • ')}`
-              : 'Gérez les tickets support et assistez les utilisateurs'
-            }
-          </p>
-        </div>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 admin-fade-in delay-1">
         <div className="flex gap-2">
           {error && (
-            <Button
-              size="sm"
-              variant="outline"
+            <button
               onClick={fetchAllTickets}
-              className="gap-2"
+              className="admin-btn-secondary gap-2 flex items-center text-sm"
             >
               <RefreshCw className="w-4 h-4" />
               Réessayer
-            </Button>
+            </button>
           )}
           <ExportCta exportType="support_tickets_csv" label="Exporter" />
         </div>
@@ -190,8 +183,8 @@ export default function SupportPage() {
       )}
 
       {/* Onglets */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-body p-6">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
               {statuses.map((status) => (
@@ -225,8 +218,8 @@ export default function SupportPage() {
               </TabsContent>
             ))}
           </Tabs>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

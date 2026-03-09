@@ -2,14 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { StopCard } from '@/components/transport/stop-card';
 import { StopMap } from '@/components/transport/stop-map';
+import { AlertCircle } from 'lucide-react';
 
 interface TransportConfig {
   mode: 'BUS' | 'FLIGHT' | 'MIXED';
@@ -135,134 +131,139 @@ export default function TransportPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-32 w-full" />
-        <Skeleton className="h-96 w-full" />
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Skeleton className="h-10 w-64" />
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-96 w-full" />
+        </div>
       </div>
     );
   }
 
   if (!config) {
     return (
-      <div className="p-6 space-y-4">
-        <h1 className="text-3xl font-bold">Configuration Transport</h1>
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-gray-500 mb-4">Aucune configuration transport</p>
-            <Button onClick={handleSave}>Créer configuration</Button>
-          </CardContent>
-        </Card>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Configuration Transport</h1>
+          <div className="pro-panel">
+            <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+              <p style={{ color: '#4A5568', marginBottom: '1rem', margin: 0 }}>Aucune configuration transport</p>
+              <button onClick={handleSave} className="pro-btn-sun">Créer configuration</button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div>
-        <h1 className="text-3xl font-bold">Configuration Transport</h1>
-        <p className="text-gray-600 mt-2">Gérez le mode de transport et les arrêts</p>
+        <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Configuration Transport</h1>
+        <p style={{ color: '#4A5568', marginTop: '0.5rem', margin: 0 }}>Gérez le mode de transport et les arrêts</p>
       </div>
 
       {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
-              Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+        <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
+          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+            Fermer
+          </button>
+        </div>
       )}
 
       {/* Mode de transport */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Mode Transport</CardTitle>
-          <CardDescription>Sélectionnez le mode principal</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Select value={departureMode} onValueChange={setDepartureMode}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="BUS">Bus</SelectItem>
-              <SelectItem value="FLIGHT">Avion</SelectItem>
-              <SelectItem value="MIXED">Mixte (Bus + Avion)</SelectItem>
-            </SelectContent>
-          </Select>
+      <div className="pro-panel">
+        <div className="pro-panel-header">
+          <h3 className="pro-panel-title">Mode Transport</h3>
+          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Sélectionnez le mode principal</p>
+        </div>
+        <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <select value={departureMode} onChange={(e) => setDepartureMode(e.target.value)} className="pro-input">
+            <option value="BUS">Bus</option>
+            <option value="FLIGHT">Avion</option>
+            <option value="MIXED">Mixte (Bus + Avion)</option>
+          </select>
 
           {departureMode.includes('BUS') && (
-            <div className="space-y-3">
-              <Input
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <input
                 placeholder="Compagnie bus"
                 value={busCompany}
                 onChange={(e) => setBusCompany(e.target.value)}
+                className="pro-input"
               />
-              <Input
+              <input
                 type="number"
                 placeholder="Capacité bus"
                 value={busCapacity}
                 onChange={(e) => setBusCapacity(e.target.value)}
+                className="pro-input"
               />
-              <Input
+              <input
                 type="number"
                 placeholder="Prix par personne (€)"
                 value={busPriceCents ? (parseInt(busPriceCents) / 100).toFixed(2) : ''}
                 onChange={(e) => setBusPriceCents((parseFloat(e.target.value) * 100).toString())}
+                className="pro-input"
               />
             </div>
           )}
 
           {departureMode.includes('FLIGHT') && (
-            <div className="space-y-3">
-              <Input
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <input
                 placeholder="Compagnie aérienne"
                 value={flightCompany}
                 onChange={(e) => setFlightCompany(e.target.value)}
+                className="pro-input"
               />
-              <Input
+              <input
                 type="number"
                 placeholder="Prix vol (€)"
                 value={flightPriceCents ? (parseInt(flightPriceCents) / 100).toFixed(2) : ''}
                 onChange={(e) => setFlightPriceCents((parseFloat(e.target.value) * 100).toString())}
+                className="pro-input"
               />
             </div>
           )}
 
-          <div className="space-y-3">
-            <Input
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <input
               placeholder="Point de rendez-vous"
               value={meetingPoint}
               onChange={(e) => setMeetingPoint(e.target.value)}
+              className="pro-input"
             />
-            <Input
+            <input
               type="time"
               value={meetingTime}
               onChange={(e) => setMeetingTime(e.target.value)}
+              className="pro-input"
             />
           </div>
 
-          <Button onClick={handleSave} disabled={isSaving} className="w-full">
+          <button onClick={handleSave} disabled={isSaving} className="pro-btn-sun" style={{ width: '100%', opacity: isSaving ? 0.5 : 1 }}>
             {isSaving ? 'Sauvegarde...' : 'Sauvegarder configuration'}
-          </Button>
-        </CardContent>
-      </Card>
+          </button>
+        </div>
+      </div>
 
       {/* Arrêts */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Arrêts de route</CardTitle>
-          <CardDescription>{stops.length} arrêt(s) configuré(s)</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="pro-panel">
+        <div className="pro-panel-header">
+          <h3 className="pro-panel-title">Arrêts de route</h3>
+          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>{stops.length} arrêt(s) configuré(s)</p>
+        </div>
+        <div className="pro-panel-body">
           {stops.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">Aucun arrêt configuré</p>
+            <p style={{ color: '#4A5568', textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem', margin: 0 }}>Aucun arrêt configuré</p>
           ) : (
-            <div className="space-y-4">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <StopMap stops={stops as unknown as TransportStop[]} />
-              <div className="space-y-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 {stops.map((stop) => {
                   const stopType = (stop.type as string) === 'DROPOFF_ARRIVAL' ? 'ARRIVAL' : 'PICKUP_DEPARTURE';
                   return (
@@ -278,8 +279,9 @@ export default function TransportPage() {
               </div>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+    </div>
     </div>
   );
 }

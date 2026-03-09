@@ -150,25 +150,28 @@ export default function ReservationsPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <div className="grid grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className="h-20" />
-          ))}
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Skeleton className="h-10 w-64" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+            {[...Array(4)].map((_, i) => (
+              <Skeleton key={i} className="h-20" />
+            ))}
+          </div>
+          <Skeleton className="h-96 w-full" />
         </div>
-        <Skeleton className="h-96 w-full" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header */}
-      <div className="flex justify-between items-start">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Réservations</h1>
-          <p className="text-slate-600 mt-2">Gestion de toutes les réservations pour ce voyage</p>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Réservations</h1>
+          <p style={{ color: '#4A5568', marginTop: '0.5rem' }}>Gestion de toutes les réservations pour ce voyage</p>
         </div>
         <Button
           onClick={handleExportCSV}
@@ -183,69 +186,58 @@ export default function ReservationsPage() {
 
       {/* Error Alert */}
       {error && (
-        <Card className="border-red-200 bg-red-50">
-          <CardContent className="pt-6">
-            <div className="flex items-center gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600" />
-              <p className="text-red-800">{error}</p>
-            </div>
-          </CardContent>
-        </Card>
+        <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946', flexShrink: 0 }} />
+          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+        </div>
       )}
 
       {/* Stats Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-white border-slate-200">
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-slate-900">{stats.total}</div>
-            <p className="text-sm text-slate-600 mt-1">Réservations totales</p>
-          </CardContent>
-        </Card>
+      <div className="pro-kpi-grid">
+        <div className="pro-kpi-card">
+          <div className="pro-kpi-value">{stats.total}</div>
+          <div className="pro-kpi-label">Réservations totales</div>
+        </div>
 
-        <Card className="bg-white border-slate-200">
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-green-600">{stats.confirmed}</div>
-            <p className="text-sm text-slate-600 mt-1">Confirmées</p>
-          </CardContent>
-        </Card>
+        <div className="pro-kpi-card">
+          <div className="pro-kpi-value" style={{ color: '#06D6A0' }}>{stats.confirmed}</div>
+          <div className="pro-kpi-label">Confirmées</div>
+        </div>
 
-        <Card className="bg-white border-slate-200">
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-blue-600">{stats.pending}</div>
-            <p className="text-sm text-slate-600 mt-1">En attente</p>
-          </CardContent>
-        </Card>
+        <div className="pro-kpi-card">
+          <div className="pro-kpi-value" style={{ color: '#0077B6' }}>{stats.pending}</div>
+          <div className="pro-kpi-label">En attente</div>
+        </div>
 
-        <Card className="bg-white border-slate-200">
-          <CardContent className="pt-6">
-            <div className="text-2xl font-bold text-red-600">{stats.canceled}</div>
-            <p className="text-sm text-slate-600 mt-1">Annulées</p>
-          </CardContent>
-        </Card>
+        <div className="pro-kpi-card">
+          <div className="pro-kpi-value" style={{ color: '#E63946' }}>{stats.canceled}</div>
+          <div className="pro-kpi-label">Annulées</div>
+        </div>
       </div>
 
       {/* Search & Filters */}
-      <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-slate-700 mb-2">Rechercher</label>
-          <div className="relative">
-            <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', '@media (min-width: 768px)': { flexDirection: 'row', alignItems: 'flex-end' } }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rechercher</label>
+          <div style={{ position: 'relative' }}>
+            <Search style={{ position: 'absolute', left: '0.75rem', top: '0.75rem', width: '1rem', height: '1rem', color: '#8896A6' }} />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Nom, email ou référence..."
-              className="w-full pl-10 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+              className="pro-input"
+              style={{ width: '100%', paddingLeft: '2.5rem' }}
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Statut paiement</label>
+          <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Statut paiement</label>
           <select
             value={filterStatus || ''}
             onChange={(e) => setFilterStatus(e.target.value || null)}
-            className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
           >
             <option value="">Tous</option>
             <option value="HOLD">En attente</option>
@@ -256,11 +248,11 @@ export default function ReservationsPage() {
 
         {roomTypes.length > 0 && (
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Type chambre</label>
+            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Type chambre</label>
             <select
               value={filterRoomType || ''}
               onChange={(e) => setFilterRoomType(e.target.value || null)}
-              className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+              className="pro-input"
             >
               <option value="">Tous</option>
               {roomTypes.map((type) => (
@@ -274,24 +266,24 @@ export default function ReservationsPage() {
       </div>
 
       {/* Reservations Table */}
-      <Card className="bg-white border-slate-200">
-        <CardHeader>
-          <CardTitle>Détail des réservations</CardTitle>
-          <CardDescription>{filteredReservations.length} résultat(s)</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="pro-panel">
+        <div className="pro-panel-header">
+          <h3 className="pro-panel-title">Détail des réservations</h3>
+          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>{filteredReservations.length} résultat(s)</p>
+        </div>
+        <div className="pro-panel-body">
           {filteredReservations.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <div style={{ overflowX: 'auto' }}>
+              <table className="pro-table" style={{ width: '100%', fontSize: '0.875rem' }}>
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50">
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Référence</th>
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Client</th>
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Type chambre</th>
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Occupancy</th>
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Montant TTC</th>
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Statut</th>
-                    <th className="px-4 py-3 text-left font-semibold text-slate-900">Date</th>
+                  <tr style={{ borderBottom: '1px solid #E2E8F0', background: '#F7FAFC' }}>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Référence</th>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Client</th>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Type chambre</th>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Occupancy</th>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Montant TTC</th>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Statut</th>
+                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -300,27 +292,35 @@ export default function ReservationsPage() {
                     return (
                       <tr
                         key={res.id}
-                        className="border-b border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
+                        style={{ borderBottom: '1px solid #E2E8F0', cursor: 'pointer', transition: 'background-color 0.2s' }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = '#F7FAFC')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                       >
-                        <td className="px-4 py-3 font-medium text-slate-900">{res.bookingReference}</td>
-                        <td className="px-4 py-3">
+                        <td style={{ padding: '1rem', fontWeight: '500', color: '#0A1628' }}>{res.bookingReference}</td>
+                        <td style={{ padding: '1rem' }}>
                           <div>
-                            <p className="font-medium text-slate-900">{res.clientName}</p>
-                            <p className="text-xs text-slate-500">{res.clientEmail}</p>
+                            <p style={{ fontWeight: '500', color: '#0A1628', margin: 0 }}>{res.clientName}</p>
+                            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>{res.clientEmail}</p>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-slate-600">{res.roomType}</td>
-                        <td className="px-4 py-3 text-slate-600">{res.occupancy} pers.</td>
-                        <td className="px-4 py-3 font-semibold text-slate-900">{formatPrice(res.amountTTC)}</td>
-                        <td className="px-4 py-3">
-                          <div className="flex items-center gap-2">
-                            {StatusIcon && <StatusIcon className="w-4 h-4" />}
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${PAYMENT_STATUS_COLORS[res.paymentStatus]}`}>
+                        <td style={{ padding: '1rem', color: '#4A5568' }}>{res.roomType}</td>
+                        <td style={{ padding: '1rem', color: '#4A5568' }}>{res.occupancy} pers.</td>
+                        <td style={{ padding: '1rem', fontWeight: '600', color: '#0A1628' }}>{formatPrice(res.amountTTC)}</td>
+                        <td style={{ padding: '1rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            {StatusIcon && <StatusIcon style={{ width: '1rem', height: '1rem' }} />}
+                            <span style={{ padding: '0.25rem 0.5rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: '500', ...(() => {
+                              const colors = PAYMENT_STATUS_COLORS[res.paymentStatus];
+                              if (colors === 'bg-yellow-100 text-yellow-800') return { background: '#FEF3C7', color: '#92400E' };
+                              if (colors === 'bg-blue-100 text-blue-800') return { background: '#DBEAFE', color: '#1E40AF' };
+                              if (colors === 'bg-green-100 text-green-800') return { background: '#DCFCE7', color: '#166534' };
+                              return {};
+                            })() }}>
                               {PAYMENT_STATUS_LABELS[res.paymentStatus]}
                             </span>
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-slate-600">
+                        <td style={{ padding: '1rem', color: '#4A5568' }}>
                           {formatDate(res.createdAt)}
                         </td>
                       </tr>
@@ -330,13 +330,13 @@ export default function ReservationsPage() {
               </table>
             </div>
           ) : (
-            <div className="text-center py-12">
-              <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-500">Aucune réservation trouvée</p>
+            <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
+              <AlertCircle style={{ width: '3rem', height: '3rem', color: '#CBD5E0', margin: '0 auto 1rem' }} />
+              <p style={{ color: '#8896A6', margin: 0 }}>Aucune réservation trouvée</p>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

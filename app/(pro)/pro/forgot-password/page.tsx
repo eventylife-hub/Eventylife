@@ -36,48 +36,48 @@ export default function ProForgotPasswordPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-lg p-8">
+    <main style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+      <div style={{ width: '100%', maxWidth: '448px' }}>
+        <div className="pro-panel" style={{ padding: '32px' }}>
           <Link
             href="/pro/login"
-            className="inline-flex items-center gap-1 text-sm text-slate-600 hover:text-slate-900 mb-6"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#8896A6', marginBottom: '24px', textDecoration: 'none' }}
           >
             <ArrowLeft className="w-4 h-4" />
             Retour connexion
           </Link>
 
-          <h1 className="text-2xl font-bold mb-2">Mot de passe oublie</h1>
-          <p className="text-gray-600 mb-6 text-sm">
+          <h1 className="pro-page-title" style={{ marginBottom: '8px', fontSize: '24px' }}>Mot de passe oublie</h1>
+          <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>
             Entrez votre email professionnel pour recevoir un lien de reinitialisation.
           </p>
 
           {sent ? (
-            <div className="p-6 bg-green-50 border border-green-200 rounded-lg text-center">
-              <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
-              <h2 className="font-bold text-green-900 mb-2">Email envoye</h2>
-              <p className="text-sm text-green-700 mb-4">
+            <div style={{ padding: '24px', backgroundColor: '#E0FFF5', border: '1px solid #E0FFF5', borderRadius: '8px', textAlign: 'center' }}>
+              <CheckCircle2 className="w-12 h-12" style={{ color: '#06D6A0', margin: '0 auto 12px' }} />
+              <h2 style={{ fontWeight: 600, color: '#06D6A0', marginBottom: '8px' }}>Email envoye</h2>
+              <p style={{ fontSize: '14px', color: '#06D6A0', marginBottom: '12px' }}>
                 Si un compte existe avec l&apos;adresse <strong>{email}</strong>,
                 vous recevrez un lien de reinitialisation dans quelques minutes.
               </p>
-              <p className="text-xs text-green-600">
+              <p style={{ fontSize: '12px', color: '#06D6A0' }}>
                 Pensez a verifier vos spams.
               </p>
             </div>
           ) : (
             <>
               {error && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-700">{error}</p>
+                <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <AlertCircle className="w-5 h-5" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
+                  <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}
                   >
                     Email professionnel
                   </label>
@@ -87,7 +87,7 @@ export default function ProForgotPasswordPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="pro@eventy.life"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="pro-input"
                     required
                     disabled={loading}
                   />
@@ -96,7 +96,8 @@ export default function ProForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="pro-btn-sun"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                 >
                   {loading && <Loader className="w-4 h-4 animate-spin" />}
                   {loading ? 'Envoi...' : 'Envoyer le lien'}

@@ -4,9 +4,14 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { BarChart, Users, TrendingUp, AlertCircle, RefreshCw, Calendar, DollarSign, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { formatPrice } from '@/lib/utils';
+
+const SUN = '#FF6B35';
+const OCEAN = '#0077B6';
+const DARK = '#0A1628';
+const SAND = '#FEFCF3';
+const CORAL = '#E63946';
+const MINT = '#06D6A0';
 
 interface ProDashboardStats {
   activeVoyages: number;
@@ -87,68 +92,66 @@ export default function ProDashboard() {
     ].filter(Boolean).length || 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
+      <div style={{ maxWidth: '1280px', marginX: 'auto' }}>
         {/* Header with Welcome */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">
+            <h1 className="pro-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
               Bienvenue, {proProfile?.displayName || 'Pro'}!
             </h1>
-            <p className="text-slate-600 mt-2">
+            <p style={{ color: DARK, marginTop: '8px', opacity: 0.7 }}>
               Tableau de bord de votre espace professionnel
             </p>
           </div>
-          <Button
+          <button
             onClick={fetchStats}
-            variant="outline"
-            size="sm"
-            className="gap-2 w-fit"
+            className="pro-btn-ocean"
+            style={{ width: 'fit-content', display: 'flex', alignItems: 'center', gap: '8px' }}
           >
-            <RefreshCw className="w-4 h-4" />
+            <RefreshCw style={{ width: '16px', height: '16px' }} />
             Actualiser
-          </Button>
+          </button>
         </div>
 
         {/* Error State */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#fee2e2', border: `1px solid ${CORAL}`, borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <p className="font-medium">{error}</p>
-              <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>
+              <p style={{ fontWeight: 500, color: CORAL }}>{error}</p>
+              <p style={{ fontSize: '14px', color: CORAL, marginTop: '4px', opacity: 0.8 }}>Vérifiez votre connexion et réessayez.</p>
             </div>
-            <Button
-              size="sm"
-              variant="outline"
+            <button
               onClick={fetchStats}
-              className="gap-2 ml-4 flex-shrink-0"
+              className="pro-btn-outline"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '16px', flexShrink: 0 }}
             >
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw style={{ width: '16px', height: '16px' }} />
               Réessayer
-            </Button>
+            </button>
           </div>
         )}
 
         {/* Onboarding Alert Banner */}
         {!isOnboardingComplete && (
-          <div className="mb-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#dbeafe', borderLeft: `4px solid ${OCEAN}`, borderRadius: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                <AlertCircle style={{ width: '20px', height: '20px', color: OCEAN, marginTop: '2px', flexShrink: 0 }} />
                 <div>
-                  <h3 className="font-semibold text-blue-900">Complétez votre inscription</h3>
-                  <p className="text-sm text-blue-700 mt-1">
+                  <h3 style={{ fontWeight: 600, color: DARK }}>Complétez votre inscription</h3>
+                  <p style={{ fontSize: '14px', color: DARK, marginTop: '4px', opacity: 0.8 }}>
                     Vous avez complété {completedSteps}/6 étapes de l&apos;onboarding.
                   </p>
                   <Link
                     href="/pro/onboarding"
-                    className="mt-2 inline-block text-sm font-medium text-blue-600 hover:text-blue-700 underline"
+                    style={{ marginTop: '8px', display: 'inline-block', fontSize: '14px', fontWeight: 500, color: OCEAN, textDecoration: 'underline', cursor: 'pointer' }}
                   >
                     Continuer l&apos;inscription →
                   </Link>
                 </div>
               </div>
-              <div className="text-right text-sm font-medium text-blue-600">
+              <div style={{ textAlign: 'right', fontSize: '14px', fontWeight: 500, color: OCEAN }}>
                 {Math.round((completedSteps / 6) * 100)}%
               </div>
             </div>
@@ -157,26 +160,28 @@ export default function ProDashboard() {
 
         {/* Stats Cards Grid - with Loading State */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="pro-kpi-grid" style={{ marginBottom: '32px' }}>
             {[...Array(4)].map((_, i) => (
-              <Card key={i}>
-                <CardContent className="p-6 h-32 bg-slate-100 animate-pulse rounded" />
-              </Card>
+              <div
+                key={i}
+                className="pro-kpi-card"
+                style={{ height: '128px', backgroundColor: '#f3f4f6', animation: 'pulse 2s infinite' }}
+              />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="pro-kpi-grid" style={{ marginBottom: '32px' }}>
             {/* Voyages Actifs */}
             <Link href="/pro/voyages">
-              <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-indigo-500 hover:shadow-md transition-shadow cursor-pointer h-full">
-                <div className="flex items-center justify-between">
+              <div className="pro-kpi-card" style={{ borderLeft: `4px solid ${SUN}`, cursor: 'pointer' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
-                    <p className="text-sm text-slate-600 font-medium">Voyages actifs</p>
-                    <p className="text-3xl font-bold text-slate-900 mt-2">{stats.activeVoyages}</p>
-                    <p className="text-xs text-slate-500 mt-2">Cliquer pour voir plus</p>
+                    <p className="pro-kpi-label">Voyages actifs</p>
+                    <p className="pro-kpi-value">{stats.activeVoyages}</p>
+                    <p className="pro-kpi-sub">Cliquer pour voir plus</p>
                   </div>
-                  <div className="bg-indigo-100 p-3 rounded-lg">
-                    <BarChart className="w-6 h-6 text-indigo-600" />
+                  <div style={{ backgroundColor: SUN + '1A', padding: '12px', borderRadius: '8px' }}>
+                    <BarChart style={{ width: '24px', height: '24px', color: SUN }} />
                   </div>
                 </div>
               </div>
@@ -184,46 +189,46 @@ export default function ProDashboard() {
 
             {/* Réservations Totales */}
             <Link href="/pro/reservations">
-              <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-green-500 hover:shadow-md transition-shadow cursor-pointer h-full">
-                <div className="flex items-center justify-between">
+              <div className="pro-kpi-card" style={{ borderLeft: `4px solid ${MINT}`, cursor: 'pointer' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
-                    <p className="text-sm text-slate-600 font-medium">Réservations</p>
-                    <p className="text-3xl font-bold text-slate-900 mt-2">{stats.totalBookings}</p>
-                    <p className="text-xs text-slate-500 mt-2">En cours</p>
+                    <p className="pro-kpi-label">Réservations</p>
+                    <p className="pro-kpi-value">{stats.totalBookings}</p>
+                    <p className="pro-kpi-sub">En cours</p>
                   </div>
-                  <div className="bg-green-100 p-3 rounded-lg">
-                    <Users className="w-6 h-6 text-green-600" />
+                  <div style={{ backgroundColor: MINT + '1A', padding: '12px', borderRadius: '8px' }}>
+                    <Users style={{ width: '24px', height: '24px', color: MINT }} />
                   </div>
                 </div>
               </div>
             </Link>
 
             {/* CA Ce Mois */}
-            <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-purple-500">
-              <div className="flex items-center justify-between">
+            <div className="pro-kpi-card" style={{ borderLeft: `4px solid #7B2FF7` }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
-                  <p className="text-sm text-slate-600 font-medium">CA ce mois</p>
-                  <p className="text-3xl font-bold text-slate-900 mt-2">
+                  <p className="pro-kpi-label">CA ce mois</p>
+                  <p className="pro-kpi-value">
                     {formatPrice(stats.monthlyRevenue)}
                   </p>
-                  <p className="text-xs text-slate-500 mt-2">Total: {formatPrice(stats.totalRevenue)}</p>
+                  <p className="pro-kpi-sub">Total: {formatPrice(stats.totalRevenue)}</p>
                 </div>
-                <div className="bg-purple-100 p-3 rounded-lg">
-                  <DollarSign className="w-6 h-6 text-purple-600" />
+                <div style={{ backgroundColor: '#7B2FF71A', padding: '12px', borderRadius: '8px' }}>
+                  <DollarSign style={{ width: '24px', height: '24px', color: '#7B2FF7' }} />
                 </div>
               </div>
             </div>
 
             {/* Taux d'Occupation */}
-            <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-yellow-500">
-              <div className="flex items-center justify-between">
+            <div className="pro-kpi-card" style={{ borderLeft: `4px solid ${OCEAN}` }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
-                  <p className="text-sm text-slate-600 font-medium">Taux d&apos;occupation</p>
-                  <p className="text-3xl font-bold text-slate-900 mt-2">{stats.occupancyRate.toFixed(1)}%</p>
-                  <p className="text-xs text-slate-500 mt-2">Note: {stats.averageRating.toFixed(1)}/5</p>
+                  <p className="pro-kpi-label">Taux d&apos;occupation</p>
+                  <p className="pro-kpi-value">{stats.occupancyRate.toFixed(1)}%</p>
+                  <p className="pro-kpi-sub">Note: {stats.averageRating.toFixed(1)}/5</p>
                 </div>
-                <div className="bg-yellow-100 p-3 rounded-lg">
-                  <Star className="w-6 h-6 text-yellow-600" />
+                <div style={{ backgroundColor: OCEAN + '1A', padding: '12px', borderRadius: '8px' }}>
+                  <Star style={{ width: '24px', height: '24px', color: OCEAN }} />
                 </div>
               </div>
             </div>
@@ -231,128 +236,189 @@ export default function ProDashboard() {
         )}
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '32px' }}>
           <Link
             href="/pro/voyages/nouveau"
-            className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg p-6 hover:shadow-lg transition-shadow flex items-center justify-between group"
+            style={{
+              background: `linear-gradient(135deg, ${SUN} 0%, ${SUN}dd 100%)`,
+              color: 'white',
+              borderRadius: '12px',
+              padding: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              boxShadow: `0 1px 4px rgba(10,22,40,.05)`,
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = `0 4px 12px rgba(${parseInt(SUN.slice(1, 3), 16)},${parseInt(SUN.slice(3, 5), 16)},${parseInt(SUN.slice(5, 7), 16)},.2)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = `0 1px 4px rgba(10,22,40,.05)`;
+            }}
           >
             <div>
-              <p className="font-semibold text-lg">Créer un voyage</p>
-              <p className="text-sm text-indigo-100 mt-1">Lancez votre première offre</p>
+              <p style={{ fontWeight: 600, fontSize: '18px' }}>Créer un voyage</p>
+              <p style={{ fontSize: '14px', opacity: 0.9, marginTop: '4px' }}>Lancez votre première offre</p>
             </div>
-            <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+            <span style={{ fontSize: '24px' }}>→</span>
           </Link>
 
           <Link
             href="/pro/arrets"
-            className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-lg p-6 hover:shadow-lg transition-shadow flex items-center justify-between group"
+            style={{
+              background: `linear-gradient(135deg, ${MINT} 0%, ${MINT}dd 100%)`,
+              color: 'white',
+              borderRadius: '12px',
+              padding: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              boxShadow: `0 1px 4px rgba(10,22,40,.05)`,
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = `0 4px 12px rgba(${parseInt(MINT.slice(1, 3), 16)},${parseInt(MINT.slice(3, 5), 16)},${parseInt(MINT.slice(5, 7), 16)},.2)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = `0 1px 4px rgba(10,22,40,.05)`;
+            }}
           >
             <div>
-              <p className="font-semibold text-lg">Gérer mes arrêts</p>
-              <p className="text-sm text-emerald-100 mt-1">Configurer les points de départ/arrivée</p>
+              <p style={{ fontWeight: 600, fontSize: '18px' }}>Gérer mes arrêts</p>
+              <p style={{ fontSize: '14px', opacity: 0.9, marginTop: '4px' }}>Configurer les points de départ/arrivée</p>
             </div>
-            <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+            <span style={{ fontSize: '24px' }}>→</span>
           </Link>
         </div>
 
         {/* Two Column Layout for Activity and Upcoming */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', gridTemplateColumns: '2fr 1fr' }}>
           {/* Recent Activity */}
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <h2 className="text-lg font-bold text-slate-900">Activité récente</h2>
-            </CardHeader>
-            <CardContent>
+          <div className="pro-panel">
+            <div className="pro-panel-header">
+              <h2 className="pro-panel-title">Activité récente</h2>
+            </div>
+            <div className="pro-panel-body">
               {loading ? (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {[...Array(4)].map((_, i) => (
-                    <div key={i} className="h-12 bg-slate-100 rounded animate-pulse" />
+                    <div key={i} style={{ height: '48px', backgroundColor: '#f3f4f6', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
                   ))}
                 </div>
               ) : stats.recentActivity && stats.recentActivity.length > 0 ? (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {stats.recentActivity.slice(0, 5).map((activity: any) => (
-                    <div key={activity.id} className="flex items-start justify-between p-3 bg-slate-50 rounded-lg">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-slate-900">{activity.description}</p>
-                        <p className="text-xs text-slate-500 mt-1">
+                    <div key={activity.id} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: '12px', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
+                      <div style={{ flex: 1 }}>
+                        <p style={{ fontSize: '14px', fontWeight: 500, color: DARK }}>{activity.description}</p>
+                        <p style={{ fontSize: '12px', color: DARK, opacity: 0.5, marginTop: '4px' }}>
                           {new Date(activity.timestamp).toLocaleDateString('fr-FR')}
                         </p>
                       </div>
-                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${
-                        activity.type === 'booking' ? 'bg-green-100 text-green-700' :
-                        activity.type === 'cancelled' ? 'bg-red-100 text-red-700' :
-                        'bg-blue-100 text-blue-700'
-                      }`}>
+                      <span
+                        style={{
+                          fontSize: '12px',
+                          fontWeight: 500,
+                          paddingX: '8px',
+                          paddingY: '4px',
+                          borderRadius: '9999px',
+                          backgroundColor:
+                            activity.type === 'booking' ? '#dcfce7' :
+                            activity.type === 'cancelled' ? '#fee2e2' :
+                            '#dbeafe',
+                          color:
+                            activity.type === 'booking' ? '#166534' :
+                            activity.type === 'cancelled' ? '#991b1b' :
+                            '#0c4a6e'
+                        }}
+                      >
                         {activity.type}
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-8 text-slate-500">
-                  <p className="text-sm">Aucune activité pour le moment</p>
+                <div style={{ textAlign: 'center', paddingY: '32px', color: DARK, opacity: 0.5 }}>
+                  <p style={{ fontSize: '14px' }}>Aucune activité pour le moment</p>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Upcoming Departures */}
-          <Card>
-            <CardHeader>
-              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
+          <div className="pro-panel">
+            <div className="pro-panel-header">
+              <h2 className="pro-panel-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Calendar style={{ width: '20px', height: '20px' }} />
                 Prochains départs
               </h2>
-            </CardHeader>
-            <CardContent>
+            </div>
+            <div className="pro-panel-body">
               {loading ? (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {[...Array(3)].map((_, i) => (
-                    <div key={i} className="h-16 bg-slate-100 rounded animate-pulse" />
+                    <div key={i} style={{ height: '64px', backgroundColor: '#f3f4f6', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
                   ))}
                 </div>
               ) : proProfile?.recentTravels && proProfile.recentTravels.length > 0 ? (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {proProfile.recentTravels.slice(0, 3).map((travel: any, idx: number) => (
                     <Link
                       key={idx}
                       href={`/pro/voyages/${travel.id}`}
-                      className="flex items-start justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-between',
+                        padding: '12px',
+                        backgroundColor: '#f9fafb',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#f3f4f6';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#f9fafb';
+                      }}
                     >
-                      <div className="flex-1">
-                        <p className="font-medium text-slate-900 group-hover:text-indigo-600 transition-colors text-sm">
+                      <div style={{ flex: 1 }}>
+                        <p style={{ fontWeight: 500, color: DARK, fontSize: '14px' }}>
                           {travel.name || travel.title}
                         </p>
-                        <p className="text-xs text-slate-600 mt-1">
+                        <p style={{ fontSize: '12px', color: DARK, opacity: 0.6, marginTop: '4px' }}>
                           {new Date(travel.departureDate).toLocaleDateString('fr-FR')}
                         </p>
                       </div>
-                      <span className="text-xs font-semibold text-indigo-600 whitespace-nowrap ml-2">
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: OCEAN, whiteSpace: 'nowrap', marginLeft: '8px' }}>
                         {travel.bookingCount || 0}
                       </span>
                     </Link>
                   ))}
                   <Link
                     href="/pro/voyages"
-                    className="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                    style={{ marginTop: '12px', display: 'inline-block', fontSize: '14px', color: OCEAN, textDecoration: 'underline', fontWeight: 500, cursor: 'pointer' }}
                   >
                     Voir tous les voyages →
                   </Link>
                 </div>
               ) : (
-                <div className="text-center py-8 bg-slate-50 rounded-lg">
-                  <p className="text-sm text-slate-600">Aucun voyage pour le moment</p>
+                <div style={{ textAlign: 'center', paddingY: '32px', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
+                  <p style={{ fontSize: '14px', color: DARK, opacity: 0.6 }}>Aucun voyage pour le moment</p>
                   <Link
                     href="/pro/voyages/nouveau"
-                    className="mt-2 inline-block text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                    style={{ marginTop: '8px', display: 'inline-block', fontSize: '14px', color: OCEAN, textDecoration: 'underline', fontWeight: 500, cursor: 'pointer' }}
                   >
                     Créer votre première offre →
                   </Link>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

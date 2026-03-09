@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 interface Travel {
   id: string;
@@ -186,10 +188,17 @@ export default function TravelLifecyclePage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-          <p className="text-gray-600">Chargement...</p>
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Cycle de vie du voyage
+          </h1>
+        </div>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+            <p className="text-gray-600">Chargement...</p>
+          </div>
         </div>
       </div>
     );
@@ -197,8 +206,23 @@ export default function TravelLifecyclePage() {
 
   if (!travel) {
     return (
-      <div className="p-8">
-        <p className="text-gray-600">Voyage non trouvé</p>
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Cycle de vie du voyage
+          </h1>
+        </div>
+        <Link href="/admin/voyages">
+          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+            <ArrowLeft className="w-4 h-4" />
+            Retour
+          </button>
+        </Link>
+        <div className="admin-panel">
+          <div className="admin-panel-body p-8 text-center">
+            <p className="text-gray-600">Voyage non trouvé</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -206,129 +230,156 @@ export default function TravelLifecyclePage() {
   const availableActions = getAvailableActions(travel.status);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Cycle de Vie du Voyage</h1>
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Cycle de vie du voyage
+        </h1>
+      </div>
+
+      <div className="admin-fade-in delay-1">
+        <Link href="/admin/voyages">
+          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+            <ArrowLeft className="w-4 h-4" />
+            Retour
+          </button>
+        </Link>
+      </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+        <div className="admin-fade-in delay-2 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
           {error}
         </div>
       )}
 
       {/* État actuel */}
-      <div className="mb-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">État Actuel</h2>
-        <div className="flex items-center gap-6">
-          <div>
-            <p className="text-sm text-gray-600 mb-2">Status</p>
-            <span className={`px-4 py-2 rounded-full font-medium ${getStatusBadgeColor(travel.status)}`}>
-              {getStatusLabel(travel.status)}
-            </span>
-          </div>
-          <div>
-            <p className="text-sm text-gray-600 mb-2">Titre</p>
-            <p className="font-medium text-gray-900">{travel.title}</p>
+      <div className="admin-panel admin-fade-in delay-3">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">État Actuel</h3>
+        </div>
+        <div className="admin-panel-body p-6">
+          <div className="flex items-center gap-6">
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Status</p>
+              <span className={`px-4 py-2 rounded-full font-medium ${getStatusBadgeColor(travel.status)}`}>
+                {getStatusLabel(travel.status)}
+              </span>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Titre</p>
+              <p className="font-medium text-gray-900">{travel.title}</p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Timeline */}
-      <div className="mb-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">Historique des Transitions</h2>
-
-        {history.length === 0 ? (
-          <p className="text-gray-600">Aucune transition enregistrée</p>
-        ) : (
-          <div className="space-y-4">
-            {history.map((entry: HistoryEntry, index: number) => (
-              <div key={entry.id} className="flex gap-4 pb-4 border-l-2 border-blue-300 pl-4">
-                <div className="w-3 h-3 rounded-full bg-blue-600 mt-1.5 -ml-[1.5rem]"></div>
-                <div className="flex-1">
-                  <p className="font-medium text-gray-900">{entry.action}</p>
-                  <p className="text-sm text-gray-600">{entry.reason || ''}</p>
-                  <p className="text-xs text-gray-500 mt-1">{formatDate(entry.createdAt || '')}</p>
-                  {entry.actorUser && (
-                    <p className="text-xs text-gray-500">
-                      Par: {entry.actorUser.firstName} {entry.actorUser.lastName}
-                    </p>
-                  )}
+      <div className="admin-panel admin-fade-in delay-4">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Historique des Transitions</h3>
+        </div>
+        <div className="admin-panel-body p-6">
+          {history.length === 0 ? (
+            <p className="text-gray-600">Aucune transition enregistrée</p>
+          ) : (
+            <div className="space-y-4">
+              {history.map((entry: HistoryEntry, index: number) => (
+                <div key={entry.id} className="flex gap-4 pb-4 border-l-2 border-blue-300 pl-4">
+                  <div className="w-3 h-3 rounded-full bg-blue-600 mt-1.5 -ml-[1.5rem]"></div>
+                  <div className="flex-1">
+                    <p className="font-medium text-gray-900">{entry.action}</p>
+                    <p className="text-sm text-gray-600">{entry.reason || ''}</p>
+                    <p className="text-xs text-gray-500 mt-1">{formatDate(entry.createdAt || '')}</p>
+                    {entry.actorUser && (
+                      <p className="text-xs text-gray-500">
+                        Par: {entry.actorUser.firstName} {entry.actorUser.lastName}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Actions disponibles */}
       {availableActions.length > 0 && (
-        <div className="mb-8 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Actions Disponibles</h2>
-
-          {selectedAction && (selectedAction === 'reject_p1' || selectedAction === 'cancel') && (
-            <div className="mb-6 bg-gray-50 rounded-lg p-4">
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Motif
-              </label>
-              <textarea
-                value={cancelReason}
-                onChange={(e) => setCancelReason(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                rows={4}
-                placeholder="Entrez le motif..."
-              />
-            </div>
-          )}
-
-          <div className="grid grid-cols-2 gap-4">
-            {availableActions.map((action) => (
-              <button
-                key={action.action}
-                onClick={() => {
-                  if (selectedAction === action.action) {
-                    handleAction(action.action);
-                  } else {
-                    setSelectedAction(action.action);
-                  }
-                }}
-                disabled={processing}
-                className={`px-6 py-3 rounded-lg font-medium transition ${
-                  selectedAction === action.action
-                    ? 'bg-green-600 text-white hover:bg-green-700'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                } disabled:opacity-50`}
-              >
-                {selectedAction === action.action && processing && 'Traitement...'}
-                {selectedAction === action.action && !processing && 'Confirmer'}
-                {selectedAction !== action.action && action.label}
-              </button>
-            ))}
+        <div className="admin-panel admin-fade-in delay-5">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title">Actions Disponibles</h3>
           </div>
+          <div className="admin-panel-body p-6">
+            {selectedAction && (selectedAction === 'reject_p1' || selectedAction === 'cancel') && (
+              <div className="mb-6 bg-gray-50 rounded-lg p-4">
+                <label className="admin-input-label">
+                  Motif
+                </label>
+                <textarea
+                  value={cancelReason}
+                  onChange={(e) => setCancelReason(e.target.value)}
+                  className="admin-input"
+                  rows={4}
+                  placeholder="Entrez le motif..."
+                />
+              </div>
+            )}
 
-          {selectedAction && (
-            <button
-              onClick={() => {
-                setSelectedAction(null);
-                setCancelReason('');
-              }}
-              className="mt-4 px-6 py-2 bg-gray-300 text-gray-900 rounded-lg font-medium hover:bg-gray-400"
-            >
-              Annuler
-            </button>
-          )}
+            <div className="grid grid-cols-2 gap-4">
+              {availableActions.map((action) => (
+                <button
+                  key={action.action}
+                  onClick={() => {
+                    if (selectedAction === action.action) {
+                      handleAction(action.action);
+                    } else {
+                      setSelectedAction(action.action);
+                    }
+                  }}
+                  disabled={processing}
+                  className={`px-6 py-3 rounded-lg font-medium transition ${
+                    selectedAction === action.action
+                      ? 'admin-btn-primary'
+                      : 'admin-btn-secondary'
+                  }`}
+                >
+                  {selectedAction === action.action && processing && 'Traitement...'}
+                  {selectedAction === action.action && !processing && 'Confirmer'}
+                  {selectedAction !== action.action && action.label}
+                </button>
+              ))}
+            </div>
+
+            {selectedAction && (
+              <button
+                onClick={() => {
+                  setSelectedAction(null);
+                  setCancelReason('');
+                }}
+                className="mt-4 admin-btn-secondary px-6 py-2"
+              >
+                Annuler
+              </button>
+            )}
+          </div>
         </div>
       )}
 
       {/* Actions admin supplémentaires */}
       {travel.status !== 'CANCELED' && travel.status !== 'NO_GO' && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h2 className="text-lg font-bold text-red-900 mb-4">Actions Admin</h2>
-          <button
-            onClick={() => setSelectedAction('cancel')}
-            disabled={processing}
-            className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50"
-          >
-            Annuler le voyage
-          </button>
+        <div className="admin-panel admin-fade-in delay-6 border border-red-200 bg-red-50">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title text-red-900">Actions Admin</h3>
+          </div>
+          <div className="admin-panel-body p-6">
+            <button
+              onClick={() => setSelectedAction('cancel')}
+              disabled={processing}
+              className="admin-btn-destructive gap-2 flex items-center"
+            >
+              Annuler le voyage
+            </button>
+          </div>
         </div>
       )}
     </div>

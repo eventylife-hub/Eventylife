@@ -1,9 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Search, RefreshCw, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
@@ -144,25 +141,23 @@ export default function UtilisateursPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Utilisateurs
+        </h1>
+      </div>
+
       {/* En-tête */}
-      <div className="flex justify-between items-start gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Gestion des utilisateurs</h1>
-          <p className="text-gray-600 mt-2">
-            {total > 0 ? `${total} utilisateurs` : 'Recherchez, filtrez et gérez les utilisateurs de la plateforme'}
-          </p>
-        </div>
+      <div className="flex justify-between items-start gap-4 admin-fade-in delay-1">
         {error && (
-          <Button
-            size="sm"
-            variant="outline"
+          <button
             onClick={() => fetchUsers()}
-            className="gap-2 flex-shrink-0"
+            className="admin-btn-secondary gap-2 flex items-center text-sm"
           >
             <RefreshCw className="w-4 h-4" />
             Réessayer
-          </Button>
+          </button>
         )}
       </div>
 
@@ -178,21 +173,19 @@ export default function UtilisateursPage() {
       )}
 
       {/* Filtres */}
-      <Card>
-        <CardContent className="p-6 space-y-4">
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-body p-6 space-y-4">
           <div className="flex gap-4 flex-col md:flex-row items-end">
             {/* Recherche */}
             <div className="flex-1 relative">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Rechercher
-              </label>
+              <label className="admin-input-label">Rechercher</label>
               <div className="relative">
                 <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-                <Input
+                <input
                   placeholder="Nom, email..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="pl-10"
+                  className="admin-input pl-10"
                   disabled={loading}
                 />
               </div>
@@ -200,13 +193,11 @@ export default function UtilisateursPage() {
 
             {/* Filtre rôle */}
             <div className="w-full md:w-48">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Rôle
-              </label>
+              <label className="admin-input-label">Rôle</label>
               <select
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                className="admin-input"
                 disabled={loading}
               >
                 <option value="">Tous les rôles</option>
@@ -218,13 +209,11 @@ export default function UtilisateursPage() {
 
             {/* Filtre statut */}
             <div className="w-full md:w-48">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Statut
-              </label>
+              <label className="admin-input-label">Statut</label>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                className="admin-input"
                 disabled={loading}
               >
                 <option value="">Tous les statuts</option>
@@ -233,12 +222,12 @@ export default function UtilisateursPage() {
               </select>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Tableau */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel admin-fade-in delay-3">
+        <div className="admin-panel-body p-6">
           <DataTable
             columns={columns}
             data={users}
@@ -246,36 +235,32 @@ export default function UtilisateursPage() {
             emptyMessage={search || roleFilter || statusFilter ? 'Aucun utilisateur ne correspond aux critères' : 'Aucun utilisateur trouvé'}
             rowActions={rowActions}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between admin-fade-in delay-4">
           <p className="text-sm text-gray-600">
             Page {page} sur {totalPages}
           </p>
           <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => setPage(Math.max(1, page - 1))}
               disabled={page === 1 || loading}
-              className="gap-2"
+              className="admin-btn-secondary gap-2 flex items-center text-sm disabled:opacity-50"
             >
               <ChevronLeft className="w-4 h-4" />
               Précédent
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
+            </button>
+            <button
               onClick={() => setPage(Math.min(totalPages, page + 1))}
               disabled={page === totalPages || loading}
-              className="gap-2"
+              className="admin-btn-secondary gap-2 flex items-center text-sm disabled:opacity-50"
             >
               Suivant
               <ChevronRight className="w-4 h-4" />
-            </Button>
+            </button>
           </div>
         </div>
       )}

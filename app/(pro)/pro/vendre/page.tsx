@@ -1,10 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Copy, QrCode, TrendingUp } from 'lucide-react';
 
@@ -156,52 +152,80 @@ export default function QuickSellPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Skeleton className="h-40" />
-          <Skeleton className="h-40" />
+      <div className="pro-fade-in p-6 space-y-6">
+        <div style={{ height: '2.5rem', background: '#FEFCF3', borderRadius: '0.5rem', width: '16rem', animation: 'pulse 2s infinite' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+          <div style={{ height: '10rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
+          <div style={{ height: '10rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
         </div>
-        <Skeleton className="h-96" />
+        <div style={{ height: '24rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="pro-fade-in p-6 space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold">Vendre rapidement</h1>
-        <p className="text-gray-600 mt-2">Créez un lien parrain pour vendre une place à un voyage</p>
+        <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Vendre rapidement
+        </h1>
+        <p style={{ color: '#666', marginTop: '0.5rem', fontSize: '0.875rem' }}>
+          Créez un lien parrain pour vendre une place à un voyage
+        </p>
       </div>
 
       {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
-              Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+        <div
+          style={{
+            padding: '1rem',
+            background: '#fee2e2',
+            border: '1px solid #fecaca',
+            borderRadius: '0.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
+            <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
+          </div>
+          <button
+            onClick={() => setError(null)}
+            style={{
+              padding: '0.25rem 0.75rem',
+              background: 'white',
+              border: '1px solid #991b1b',
+              borderRadius: '0.25rem',
+              cursor: 'pointer',
+              fontSize: '0.75rem',
+              fontWeight: '500',
+              color: '#991b1b',
+            }}
+          >
+            Fermer
+          </button>
+        </div>
       )}
 
       {trips.length === 0 ? (
-        <Card>
-          <CardContent className="pt-12 pb-12">
-            <div className="text-center">
-              <TrendingUp className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <h3 className="font-semibold text-lg mb-2">Aucun voyage actif</h3>
-              <p className="text-gray-600 mb-4">
-                Vous devez créer un voyage avant de pouvoir générer un lien de vente
-              </p>
-              <Button onClick={() => (window.location.href = '/pro/voyages/nouveau')}>
-                Créer un voyage
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="pro-panel" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
+          <TrendingUp className="h-12 w-12 mx-auto" style={{ color: '#999', marginBottom: '1rem' }} />
+          <h3 style={{ fontWeight: '600', fontSize: '1.125rem', marginBottom: '0.5rem', color: '#0A1628' }}>
+            Aucun voyage actif
+          </h3>
+          <p style={{ color: '#666', marginBottom: '1rem', fontSize: '0.875rem' }}>
+            Vous devez créer un voyage avant de pouvoir générer un lien de vente
+          </p>
+          <button
+            onClick={() => (window.location.href = '/pro/voyages/nouveau')}
+            className="pro-btn-sun"
+          >
+            Créer un voyage
+          </button>
+        </div>
       ) : (
         <>
           {/* Trip Selection and Code Input */}

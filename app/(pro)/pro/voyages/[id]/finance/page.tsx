@@ -77,35 +77,38 @@ export default function VoyageFinancePage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-32 w-full" />
-        <Skeleton className="h-96 w-full" />
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Skeleton className="h-10 w-64" />
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-96 w-full" />
+        </div>
       </div>
     );
   }
 
   if (!finance) {
     return (
-      <div className="p-6 space-y-4">
-        <h1 className="text-3xl font-bold">Finance Voyage</h1>
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-gray-500">Données financières non disponibles</p>
-          </CardContent>
-        </Card>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Finance Voyage</h1>
+          <div className="pro-panel" style={{ textAlign: 'center', padding: '1.5rem' }}>
+            <p style={{ color: '#4A5568', margin: 0 }}>Données financières non disponibles</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex justify-between items-start">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <h1 className="text-3xl font-bold">Finance Voyage</h1>
-          <p className="text-gray-600 mt-2">Analyse détaillée CA, coûts et marges</p>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Finance Voyage</h1>
+          <p style={{ color: '#4A5568', marginTop: '0.5rem' }}>Analyse détaillée CA, coûts et marges</p>
         </div>
-        <div className="space-x-2">
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Button
             onClick={() => handleExport('csv')}
             disabled={exporting}
@@ -127,14 +130,12 @@ export default function VoyageFinancePage() {
       </div>
 
       {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
-              Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+        <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ color: '#E63946' }}>{error}</span>
+          <button onClick={() => setError(null)} style={{ padding: '0.5rem 1rem', background: '#FFFFFF', color: '#E63946', border: '1px solid #E63946', borderRadius: '0.25rem', cursor: 'pointer' }}>
+            Fermer
+          </button>
+        </div>
       )}
 
       {/* Résumé */}
@@ -151,12 +152,12 @@ export default function VoyageFinancePage() {
       />
 
       {/* Tableau coûts */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Détail des coûts</CardTitle>
-          <CardDescription>Modifier et ajouter des coûts</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="pro-panel" style={{ marginBottom: '0' }}>
+        <div className="pro-panel-header">
+          <h3 className="pro-panel-title">Détail des coûts</h3>
+          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Modifier et ajouter des coûts</p>
+        </div>
+        <div className="pro-panel-body" style={{ padding: '0' }}>
           <CostTable
             travelId={travelId}
             costs={((finance?.activityCosts as unknown as any[]) || []) as any[]}
@@ -169,8 +170,9 @@ export default function VoyageFinancePage() {
                 .finally(() => setLoading(false));
             }}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+    </div>
     </div>
   );
 }

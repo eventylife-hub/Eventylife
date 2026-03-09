@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 interface UserDetail {
@@ -103,7 +101,12 @@ export default function UserDetailPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Profil utilisateur
+          </h1>
+        </div>
         <div className="h-12 bg-gray-200 rounded animate-pulse" />
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
@@ -116,33 +119,43 @@ export default function UserDetailPage() {
 
   if (error && !user) {
     return (
-      <div className="space-y-6">
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Profil utilisateur
+          </h1>
+        </div>
         <Link href="/admin/utilisateurs">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+            <ArrowLeft className="w-4 h-4" />
             Retour
-          </Button>
+          </button>
         </Link>
-        <Card>
-          <CardContent className="p-8 text-center">
+        <div className="admin-panel">
+          <div className="admin-panel-body p-8 text-center">
             <p className="text-gray-600 font-medium mb-4">{error}</p>
-            <Button onClick={fetchUser} variant="outline">
+            <button onClick={fetchUser} className="admin-btn-secondary">
               Réessayer
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="space-y-6">
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Profil utilisateur
+          </h1>
+        </div>
         <Link href="/admin/utilisateurs">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+            <ArrowLeft className="w-4 h-4" />
             Retour
-          </Button>
+          </button>
         </Link>
         <div className="text-center py-12">
           <p className="text-gray-600">Utilisateur non trouvé</p>
@@ -152,37 +165,37 @@ export default function UserDetailPage() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* En-tête */}
-      <div className="flex items-center gap-4">
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Profil utilisateur
+        </h1>
+      </div>
+
+      {/* Bouton retour */}
+      <div className="admin-fade-in delay-1">
         <Link href="/admin/utilisateurs">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+            <ArrowLeft className="w-4 h-4" />
             Retour
-          </Button>
+          </button>
         </Link>
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            {user.firstName} {user.lastName}
-          </h1>
-          <p className="text-gray-600">{user.email}</p>
-        </div>
       </div>
 
       {/* Affichage erreur */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 admin-fade-in delay-2">
           <p className="font-medium">{error}</p>
         </div>
       )}
 
       {/* Infos principales */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <h3 className="text-lg font-semibold">Informations personnelles</h3>
-          </CardHeader>
-          <CardContent className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 admin-fade-in delay-2">
+        <div className="admin-panel">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title">Informations personnelles</h3>
+          </div>
+          <div className="admin-panel-body space-y-4">
             <div>
               <p className="text-sm text-gray-600">Email</p>
               <p className="font-medium">{user.email}</p>
@@ -201,14 +214,14 @@ export default function UserDetailPage() {
                 {user.isActive ? 'Actif' : 'Inactif'}
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <h3 className="text-lg font-semibold">Dates importantes</h3>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div className="admin-panel">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title">Dates importantes</h3>
+          </div>
+          <div className="admin-panel-body space-y-4">
             <div>
               <p className="text-sm text-gray-600">Inscrit le</p>
               <p className="font-medium">
@@ -229,21 +242,20 @@ export default function UserDetailPage() {
                 {user.emailVerifiedAt ? 'Oui' : 'Non'}
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Actions */}
-      <Card>
-        <CardHeader>
-          <h3 className="text-lg font-semibold">Actions</h3>
-        </CardHeader>
-        <CardContent className="flex gap-4">
-          <Button
+      <div className="admin-panel admin-fade-in delay-3">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Actions</h3>
+        </div>
+        <div className="admin-panel-body flex gap-4">
+          <button
             onClick={handleToggleStatus}
             disabled={toggling}
-            variant={user.isActive ? 'destructive' : 'default'}
-            className="gap-2"
+            className={`${user.isActive ? 'admin-btn-destructive' : 'admin-btn-primary'} gap-2 flex items-center`}
           >
             {toggling ? (
               <>
@@ -253,23 +265,23 @@ export default function UserDetailPage() {
             ) : (
               user.isActive ? 'Désactiver l\'utilisateur' : 'Réactiver l\'utilisateur'
             )}
-          </Button>
+          </button>
           <p className="text-sm text-gray-600 flex items-center">
             {user.isActive
               ? 'Cet utilisateur peut accéder à la plateforme'
               : 'Cet utilisateur ne peut pas accéder à la plateforme'
             }
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Profil Pro */}
       {user.proProfile && (
-        <Card>
-          <CardHeader>
-            <h3 className="text-lg font-semibold">Profil Pro</h3>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div className="admin-panel admin-fade-in delay-4">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title">Profil Pro</h3>
+          </div>
+          <div className="admin-panel-body space-y-4">
             <div>
               <p className="text-sm text-gray-600">Statut</p>
               <span className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -286,8 +298,8 @@ export default function UserDetailPage() {
                 {formatDate(user.proProfile.createdAt)}
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
     </div>
   );

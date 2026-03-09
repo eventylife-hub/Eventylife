@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+// Card, Button, Alert components removed - using pro-panel and pro-btn-* classes instead
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Download, TrendingUp, FileText } from 'lucide-react';
@@ -143,159 +141,155 @@ export default function RevenuesDashboardPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} className="h-32" />
-          ))}
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <Skeleton className="h-10 w-64" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Skeleton key={i} className="h-32" />
+            ))}
+          </div>
+          <Skeleton className="h-96" />
+          <Skeleton className="h-96" />
         </div>
-        <Skeleton className="h-96" />
-        <Skeleton className="h-96" />
       </div>
     );
   }
 
   if (error && !summary) {
     return (
-      <div className="p-6 space-y-4">
-        <h1 className="text-3xl font-bold">Revenus</h1>
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <h1 className="pro-page-title">Revenus</h1>
+          <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <AlertCircle className="h-4 w-4" style={{ color: '#E63946' }} />
+            <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">Revenus</h1>
-          <p className="text-gray-600 mt-2">Vue d&apos;ensemble de vos revenus et versements</p>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', justifyContent: 'space-between' }}>
+          <div>
+            <h1 className="pro-page-title">Revenus</h1>
+            <p style={{ color: '#8896A6', marginTop: '8px' }}>Vue d&apos;ensemble de vos revenus et versements</p>
+          </div>
+          <Link href="/pro/revenus/releve" style={{ width: 'fit-content' }}>
+            <button className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FileText className="h-4 w-4" />
+              Voir relevé mensuel
+            </button>
+          </Link>
         </div>
-        <Link href="/pro/revenus/releve">
-          <Button className="w-full sm:w-auto">
-            <FileText className="h-4 w-4 mr-2" />
-            Voir relevé mensuel
-          </Button>
-        </Link>
-      </div>
 
-      {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
+        {error && (
+          <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <AlertCircle className="h-4 w-4" style={{ color: '#E63946' }} />
+              <span style={{ color: '#E63946', fontSize: '14px' }}>{error}</span>
+            </div>
+            <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
               Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
-      )}
+            </button>
+          </div>
+        )}
 
-      {/* Summary Cards */}
-      {summary && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-sm text-gray-600">Total gagné</div>
-              <div className="text-3xl font-bold mt-2">
+        {/* Summary Cards */}
+        {summary && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+            <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
+              <div style={{ fontSize: '14px', color: '#8896A6' }}>Total gagné</div>
+              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>
                 {formatPrice(summary.totalEarned)}
               </div>
-              <p className="text-xs text-gray-500 mt-1">Tous les temps</p>
-            </CardContent>
-          </Card>
+              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Tous les temps</p>
+            </div>
 
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-sm text-gray-600">En attente de versement</div>
-              <div className="text-3xl font-bold mt-2 text-yellow-600">
+            <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
+              <div style={{ fontSize: '14px', color: '#8896A6' }}>En attente de versement</div>
+              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#FF6B35' }}>
                 {formatPrice(summary.pendingAmount)}
               </div>
-              <p className="text-xs text-gray-500 mt-1">À traiter</p>
-            </CardContent>
-          </Card>
+              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>À traiter</p>
+            </div>
 
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-sm text-gray-600">Versements réalisés</div>
-              <div className="text-3xl font-bold mt-2 text-green-600">
+            <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
+              <div style={{ fontSize: '14px', color: '#8896A6' }}>Versements réalisés</div>
+              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#06D6A0' }}>
                 {formatPrice(summary.paidOutAmount)}
               </div>
-              <p className="text-xs text-gray-500 mt-1">Cumulé</p>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Period Filter */}
-      <div className="flex flex-wrap gap-2">
-        {[
-          { value: 'thisMonth', label: 'Ce mois' },
-          { value: 'lastQuarter', label: '3 derniers mois' },
-          { value: 'thisYear', label: 'Cette année' },
-        ].map((opt) => (
-          <Button
-            key={opt.value}
-            variant={period === opt.value ? 'default' : 'outline'}
-            onClick={() => setPeriod(opt.value as PeriodFilter)}
-            size="sm"
-          >
-            {opt.label}
-          </Button>
-        ))}
-      </div>
-
-      {/* Revenues by Trip Table */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Revenus par voyage</CardTitle>
-              <CardDescription>
-                {trips.length > 0 ? `${trips.length} voyage${trips.length > 1 ? 's' : ''}` : 'Aucun voyage'}
-              </CardDescription>
+              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Cumulé</p>
             </div>
-            <Button onClick={handleExportCSV} disabled={trips.length === 0} size="sm">
-              <Download className="h-4 w-4 mr-2" />
-              Export CSV
-            </Button>
           </div>
-        </CardHeader>
-        <CardContent>
+        )}
+
+        {/* Period Filter */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          {[
+            { value: 'thisMonth', label: 'Ce mois' },
+            { value: 'lastQuarter', label: '3 derniers mois' },
+            { value: 'thisYear', label: 'Cette année' },
+          ].map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => setPeriod(opt.value as PeriodFilter)}
+              className={period === opt.value ? 'pro-btn-sun' : 'pro-btn-outline'}
+              style={{ fontSize: '14px' }}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Revenues by Trip Table */}
+        <div className="pro-panel">
+          <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div>
+              <h2 className="pro-panel-title">Revenus par voyage</h2>
+              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>
+                {trips.length > 0 ? `${trips.length} voyage${trips.length > 1 ? 's' : ''}` : 'Aucun voyage'}
+              </p>
+            </div>
+            <button onClick={handleExportCSV} disabled={trips.length === 0} className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: trips.length === 0 ? 0.5 : 1, cursor: trips.length === 0 ? 'not-allowed' : 'pointer' }}>
+              <Download className="h-4 w-4" />
+              Export CSV
+            </button>
+          </div>
           {trips.length === 0 ? (
-            <div className="text-center py-8">
-              <TrendingUp className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-500">Aucun voyage pour cette période</p>
+            <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
+              <TrendingUp className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+              <p style={{ color: '#8896A6' }}>Aucun voyage pour cette période</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="border-b bg-gray-50">
-                  <tr className="text-left">
-                    <th className="pb-3 px-2 font-semibold">Voyage</th>
-                    <th className="pb-3 px-2 font-semibold">Dates</th>
-                    <th className="pb-3 px-2 font-semibold text-center">Réservations</th>
-                    <th className="pb-3 px-2 font-semibold text-right">CA TTC</th>
-                    <th className="pb-3 px-2 font-semibold text-right">Commission</th>
-                    <th className="pb-3 px-2 font-semibold text-right">Montant Net</th>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', fontSize: '14px', borderCollapse: 'collapse' }}>
+                <thead style={{ borderBottom: '1px solid #E0E0E0', backgroundColor: '#F9FAFB' }}>
+                  <tr style={{ textAlign: 'left' }}>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Voyage</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Dates</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'center' }}>Réservations</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>CA TTC</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Commission</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Montant Net</th>
                   </tr>
                 </thead>
                 <tbody>
                   {trips.map((trip) => (
-                    <tr key={trip.tripId} className="border-b hover:bg-gray-50 transition-colors">
-                      <td className="py-3 px-2 font-medium">{trip.tripName}</td>
-                      <td className="py-3 px-2 text-gray-600 text-xs">
+                    <tr key={trip.tripId} style={{ borderBottom: '1px solid #E0E0E0' }}>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', fontWeight: 500, color: '#0A1628' }}>{trip.tripName}</td>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6', fontSize: '12px' }}>
                         {formatDate(trip.startDate)} -{' '}
                         {formatDate(trip.endDate)}
                       </td>
-                      <td className="py-3 px-2 text-center text-gray-600">{trip.reservationCount}</td>
-                      <td className="py-3 px-2 text-right">{formatPrice(trip.totalRevenueInclTax)}</td>
-                      <td className="py-3 px-2 text-right text-gray-600">{trip.commissionPercent}%</td>
-                      <td className="py-3 px-2 text-right font-semibold">
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6', textAlign: 'center' }}>{trip.reservationCount}</td>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#0A1628' }}>{formatPrice(trip.totalRevenueInclTax)}</td>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#8896A6' }}>{trip.commissionPercent}%</td>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', fontWeight: 600, color: '#0A1628' }}>
                         {formatPrice(trip.netAmount)}
                       </td>
                     </tr>
@@ -304,44 +298,49 @@ export default function RevenuesDashboardPage() {
               </table>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Payout History */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Historique des versements</CardTitle>
-          <CardDescription>Historique complet de vos versements</CardDescription>
-        </CardHeader>
-        <CardContent>
+        {/* Payout History */}
+        <div className="pro-panel">
+          <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px' }}>
+            <h2 className="pro-panel-title">Historique des versements</h2>
+            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Historique complet de vos versements</p>
+          </div>
           {payouts.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500">Aucun versement pour le moment</p>
+            <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
+              <p style={{ color: '#8896A6' }}>Aucun versement pour le moment</p>
             </div>
           ) : (
-            <div className="space-y-2">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {payouts.map((payout) => (
-                <div key={payout.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                <div key={payout.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', border: '1px solid #E0E0E0', borderRadius: '8px' }}>
                   <div>
-                    <p className="font-medium">{formatPrice(payout.amount)}</p>
-                    <p className="text-sm text-gray-600">
+                    <p style={{ fontWeight: 500, color: '#0A1628' }}>{formatPrice(payout.amount)}</p>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>
                       {formatDate(payout.date)}
                     </p>
                     {payout.bankReference && (
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>
                         Référence: {payout.bankReference}
                       </p>
                     )}
                   </div>
-                  <div className={`px-3 py-1 rounded-full text-sm font-medium ${getPayoutStatusColor(payout.status)}`}>
+                  <div style={{
+                    padding: '6px 12px',
+                    borderRadius: '999px',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    backgroundColor: payout.status === 'PAID' ? '#E0FFF5' : payout.status === 'PENDING' ? '#FFF0E8' : '#FFE0E3',
+                    color: payout.status === 'PAID' ? '#06D6A0' : payout.status === 'PENDING' ? '#FF6B35' : '#E63946'
+                  }}>
                     {getPayoutStatusLabel(payout.status)}
                   </div>
                 </div>
               ))}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

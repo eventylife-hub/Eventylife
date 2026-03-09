@@ -1,22 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils';
-import { DataTable, DataTableColumn } from '@/components/admin/data-table';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  AlertCircle, 
-  AlertTriangle, 
-  Info,
-  CheckCircle,
-  XCircle,
-  Clock,
-  Filter,
-  X
-} from 'lucide-react';
+import { AlertCircle, AlertTriangle, Info, CheckCircle, XCircle, Clock, Filter, X } from 'lucide-react';
 
 interface Alert {
   id: string;
@@ -203,95 +189,114 @@ export default function AdminAlertesPage() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête avec badge de compteur */}
-      <div className="flex items-start justify-between">
+      <div className="admin-page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Centre d&apos;Alertes</h1>
-          <p className="text-gray-600 mt-2">
-            Gérez les alertes système et les actions requises
-          </p>
+          <div className="admin-breadcrumb">Accueil › Alertes</div>
+          <h1 className="admin-page-title">Centre des Alertes</h1>
         </div>
-        <div className="bg-red-100 border-2 border-red-200 rounded-full px-6 py-3 text-center">
-          <div className="text-2xl font-bold text-red-600">{unreadCount}</div>
-          <div className="text-xs font-medium text-red-700">Non résolues</div>
+      </div>
+
+      {/* KPI Unresolved alerts */}
+      <div className="admin-fade-in">
+        <div
+          className="admin-kpi-card"
+          style={{
+            borderTop: '3px solid #E63946',
+            background: 'rgba(230, 57, 70, 0.04)',
+          }}
+        >
+          <div className="admin-kpi-label">Alertes non résolues</div>
+          <div className="admin-kpi-value" style={{ color: '#E63946' }}>
+            {unreadCount}
+          </div>
+          <div className="admin-kpi-sub">Demandent votre attention</div>
         </div>
       </div>
 
       {/* Filtres */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Filtres</h3>
+        </div>
+        <div className="admin-panel-body">
           <div className="flex gap-4 flex-wrap items-end">
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Niveau</label>
-              <Select value={levelFilter} onValueChange={setLevelFilter}>
-                <SelectTrigger className="w-40">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tous les niveaux</SelectItem>
-                  <SelectItem value="CRITIQUE">Critique</SelectItem>
-                  <SelectItem value="WARNING">Avertissement</SelectItem>
-                  <SelectItem value="INFO">Information</SelectItem>
-                </SelectContent>
-              </Select>
+              <label className="admin-kpi-label block mb-2">Niveau</label>
+              <select
+                value={levelFilter}
+                onChange={(e) => setLevelFilter(e.target.value)}
+                className="admin-input"
+                style={{ width: '160px' }}
+              >
+                <option value="all">Tous les niveaux</option>
+                <option value="CRITIQUE">Critique</option>
+                <option value="WARNING">Avertissement</option>
+                <option value="INFO">Information</option>
+              </select>
             </div>
 
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-1 block">Statut</label>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-40">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Toutes les alertes</SelectItem>
-                  <SelectItem value="unresolved">Non résolues</SelectItem>
-                  <SelectItem value="resolved">Résolues</SelectItem>
-                </SelectContent>
-              </Select>
+              <label className="admin-kpi-label block mb-2">Statut</label>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="admin-input"
+                style={{ width: '160px' }}
+              >
+                <option value="all">Toutes les alertes</option>
+                <option value="unresolved">Non résolues</option>
+                <option value="resolved">Résolues</option>
+              </select>
             </div>
 
-            <Button variant="outline">
-              <Filter className="w-4 h-4 mr-2" />
+            <button
+              className="admin-btn-secondary"
+              style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+            >
+              <Filter className="w-4 h-4" />
               Plus de filtres
-            </Button>
+            </button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Actions en masse */}
       {selectedAlerts.length > 0 && (
-        <Card className="border-blue-200 bg-blue-50">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <span className="font-medium text-gray-900">
-                {selectedAlerts.length} alerte(s) sélectionnée(s)
-              </span>
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => handleBulkAction('acknowledge')}
-                >
-                  <CheckCircle className="w-4 h-4 mr-2" />
-                  Reconnaître
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => handleBulkAction('dismiss')}
-                >
-                  <X className="w-4 h-4 mr-2" />
-                  Ignorer
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <div
+          className="admin-alert-bar warning admin-fade-in"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255, 193, 7, 0.08), rgba(255, 193, 7, 0.04))',
+            borderColor: 'rgba(255, 193, 7, 0.2)',
+          }}
+        >
+          <span className="font-medium" style={{ color: '#0A1628' }}>
+            {selectedAlerts.length} alerte(s) sélectionnée(s)
+          </span>
+          <div className="alert-action flex gap-2 ml-auto">
+            <button
+              className="admin-btn-secondary"
+              onClick={() => handleBulkAction('acknowledge')}
+            >
+              <CheckCircle className="w-4 h-4 mr-2" />
+              Reconnaître
+            </button>
+            <button
+              className="admin-btn-secondary"
+              onClick={() => handleBulkAction('dismiss')}
+            >
+              <X className="w-4 h-4 mr-2" />
+              Ignorer
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Tableau des alertes */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Alertes</h3>
+        </div>
+        <div className="admin-panel-body">
           <div className="flex items-center gap-3 mb-4 pb-4 border-b">
             <input
               type="checkbox"
@@ -305,17 +310,26 @@ export default function AdminAlertesPage() {
           </div>
 
           {loading ? (
-            <div className="text-center py-8 text-gray-500">Chargement...</div>
+            <div className="text-center py-8" style={{ color: 'var(--admin-text-muted)' }}>
+              Chargement...
+            </div>
           ) : alerts.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">Aucune alerte trouvée</div>
+            <div className="text-center py-8" style={{ color: 'var(--admin-text-muted)' }}>
+              Aucune alerte trouvée
+            </div>
           ) : (
             <div className="space-y-3">
-              {alerts.map((alert) => {
+              {alerts.map((alert, idx) => {
                 const config = alertConfig[alert.level];
                 return (
                   <div
                     key={alert.id}
-                    className={`p-4 border rounded-lg flex gap-4 cursor-pointer hover:shadow-md transition ${config?.bgColor} border-gray-200`}
+                    className={`admin-fade-in p-4 rounded-lg flex gap-4 cursor-pointer transition`}
+                    style={{
+                      animationDelay: `${idx * 0.05}s`,
+                      background: 'var(--admin-surface)',
+                      border: '1px solid var(--admin-border)',
+                    }}
                   >
                     <input
                       type="checkbox"
@@ -327,19 +341,39 @@ export default function AdminAlertesPage() {
                     <div className="flex-1">
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <div>
-                          <h4 className="font-semibold text-gray-900">{alert.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{alert.description}</p>
+                          <h4 className="font-semibold" style={{ color: 'var(--admin-text-primary)' }}>
+                            {alert.title}
+                          </h4>
+                          <p className="text-sm mt-1" style={{ color: 'var(--admin-text-secondary)' }}>
+                            {alert.description}
+                          </p>
                         </div>
-                        <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${config?.color}`}>
+                        <span
+                          className="admin-badge-coral text-xs font-medium whitespace-nowrap"
+                          style={{
+                            background:
+                              alert.level === 'CRITIQUE'
+                                ? 'var(--admin-coral-soft)'
+                                : alert.level === 'WARNING'
+                                ? '#FEF3C7'
+                                : 'var(--admin-ocean-light)',
+                            color:
+                              alert.level === 'CRITIQUE'
+                                ? 'var(--admin-coral)'
+                                : alert.level === 'WARNING'
+                                ? '#92400E'
+                                : 'var(--admin-ocean)',
+                          }}
+                        >
                           {config?.label}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-4 mt-3 text-xs text-gray-600">
+                      <div className="flex items-center gap-4 mt-3 text-xs" style={{ color: 'var(--admin-text-muted)' }}>
                         <span>{typeConfig[alert.type] || alert.type}</span>
                         <span>{formatDate(alert.createdAt)}</span>
                         {alert.resolved && (
-                          <span className="text-green-600 font-medium">
+                          <span style={{ color: 'var(--admin-success)', fontWeight: '600' }}>
                             Résolu le {formatDate(alert.resolvedAt || '')}
                           </span>
                         )}
@@ -348,13 +382,13 @@ export default function AdminAlertesPage() {
 
                     {!alert.resolved && (
                       <div className="flex gap-2 flex-shrink-0">
-                        <Button
-                          size="sm"
-                          variant="outline"
+                        <button
+                          className="admin-btn-secondary"
+                          style={{ fontSize: '0.875rem', padding: '6px 12px' }}
                           onClick={() => handleBulkAction('acknowledge')}
                         >
                           Répondre
-                        </Button>
+                        </button>
                       </div>
                     )}
                   </div>
@@ -362,17 +396,29 @@ export default function AdminAlertesPage() {
               })}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Toast de notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border ${
-            toastMessage.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-800'
-              : 'bg-red-50 border-red-200 text-red-800'
-          }`}>
+          <div
+            className="admin-alert-bar"
+            style={{
+              background:
+                toastMessage.type === 'success'
+                  ? 'var(--admin-mint-soft)'
+                  : 'var(--admin-coral-soft)',
+              borderColor:
+                toastMessage.type === 'success'
+                  ? 'var(--admin-mint)'
+                  : 'var(--admin-coral)',
+              color:
+                toastMessage.type === 'success'
+                  ? 'var(--admin-success)'
+                  : 'var(--admin-coral)',
+            }}
+          >
             {toastMessage.type === 'success' ? (
               <CheckCircle className="w-5 h-5 flex-shrink-0" />
             ) : (

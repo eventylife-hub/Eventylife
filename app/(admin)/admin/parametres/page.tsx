@@ -1,9 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Save, CheckCircle, XCircle, X } from 'lucide-react';
 
 interface Setting {
@@ -119,37 +116,40 @@ export default function ParametresPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Paramètres
+          </h1>
+        </div>
         <div className="h-12 bg-gray-200 rounded animate-pulse" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Paramètres</h1>
-        <p className="text-gray-600 mt-2">
-          Gérez les paramètres de l'application et les feature flags
-        </p>
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Paramètres
+        </h1>
       </div>
 
       {/* Paramètres généraux */}
-      <Card>
-        <CardHeader>
-          <h3 className="text-lg font-semibold">Paramètres généraux</h3>
-        </CardHeader>
-        <CardContent className="space-y-4">
+      <div className="admin-panel admin-fade-in delay-1">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Paramètres généraux
+          </h3>
+        </div>
+        <div className="admin-panel-body space-y-4">
           {settings.map((setting) => (
             <div key={setting.key} className="flex items-end gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {setting.key}
-                </label>
+                <label className="admin-input-label">{setting.key}</label>
                 {setting.key.toLowerCase().includes('email') ||
                 setting.key.toLowerCase().includes('url') ? (
-                  <Input
+                  <input
                     type={
                       setting.key.toLowerCase().includes('email')
                         ? 'email'
@@ -159,10 +159,11 @@ export default function ParametresPage() {
                     onChange={(e) =>
                       handleSettingChange(setting.key, e.target.value)
                     }
+                    className="admin-input"
                   />
                 ) : (
                   <textarea
-                    className="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="admin-input resize-none"
                     rows={2}
                     value={editedSettings[setting.key] || setting.value}
                     onChange={(e) =>
@@ -171,34 +172,35 @@ export default function ParametresPage() {
                   />
                 )}
               </div>
-              <Button
-                size="sm"
+              <button
                 onClick={() => handleSaveSetting(setting.key)}
-                className="gap-2"
+                className="admin-btn-primary gap-2 flex items-center"
               >
                 <Save className="w-4 h-4" />
                 Sauvegarder
-              </Button>
+              </button>
             </div>
           ))}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Feature Flags */}
-      <Card>
-        <CardHeader>
-          <h3 className="text-lg font-semibold">Feature Flags</h3>
-        </CardHeader>
-        <CardContent className="space-y-4">
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Feature Flags
+          </h3>
+        </div>
+        <div className="admin-panel-body space-y-4">
           {featureFlags.map((flag) => {
             const key = flag.key as string;
             const enabled = flag.enabled as boolean;
             const description = flag.description as string | undefined;
             return (
-              <div key={key} className="flex items-center justify-between p-4 border rounded-lg">
+              <div key={key} className="flex items-center justify-between p-4 border rounded-lg" style={{ backgroundColor: 'white', borderColor: 'rgba(10,22,40,.04)' }}>
                 <div>
-                  <p className="font-medium">{key}</p>
-                  <p className="text-sm text-gray-600">{description}</p>
+                  <p className="font-medium" style={{ color: '#0A1628' }}>{key}</p>
+                  <p className="text-sm" style={{ color: '#666' }}>{description}</p>
                 </div>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -220,20 +222,19 @@ export default function ParametresPage() {
                   </span>
                 </label>
                 {editedFlags[key] !== undefined && (
-                  <Button
-                    size="sm"
+                  <button
                     onClick={() => handleSaveFlag(key)}
-                    className="gap-2"
+                    className="admin-btn-primary gap-2 flex items-center text-sm"
                   >
                     <Save className="w-4 h-4" />
                     Sauvegarder
-                  </Button>
+                  </button>
                 )}
               </div>
             );
           })}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Toast de notification */}
       {toastMessage && (

@@ -42,22 +42,22 @@ export default function ProLoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-center mb-2">Espace Pro</h1>
-          <p className="text-center text-gray-600 mb-8">Connexion organisateurs</p>
+    <main style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+      <div style={{ width: '100%', maxWidth: '448px' }}>
+        <div className="pro-panel" style={{ padding: '32px' }}>
+          <h1 className="pro-page-title" style={{ textAlign: 'center', marginBottom: '8px', fontSize: '28px' }}>Espace Pro</h1>
+          <p style={{ textAlign: 'center', color: '#8896A6', marginBottom: '32px' }}>Connexion organisateurs</p>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-700">{error}</p>
+            <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+              <AlertCircle className="w-5 h-5" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                 Email professionnel
               </label>
               <input
@@ -66,14 +66,14 @@ export default function ProLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="pro@eventy.life"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="pro-input"
                 required
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                 Mot de passe
               </label>
               <input
@@ -82,7 +82,7 @@ export default function ProLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="pro-input"
                 required
                 disabled={loading}
               />
@@ -91,23 +91,24 @@ export default function ProLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="pro-btn-sun"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
             >
               {loading && <Loader className="w-4 h-4 animate-spin" />}
               {loading ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
 
-          <div className="mt-4 text-center">
-            <Link href="/pro/forgot-password" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          <div style={{ marginTop: '16px', textAlign: 'center' }}>
+            <Link href="/pro/forgot-password" style={{ fontSize: '14px', color: '#0077B6', textDecoration: 'none', fontWeight: 500 }}>
               Mot de passe oublié?
             </Link>
           </div>
 
-          <div className="mt-6 text-center border-t pt-6">
-            <p className="text-gray-600">
+          <div style={{ marginTop: '24px', textAlign: 'center', borderTop: '1px solid #E0E0E0', paddingTop: '24px' }}>
+            <p style={{ color: '#8896A6' }}>
               Devenir partenaire?{' '}
-              <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link href="/" style={{ color: '#0077B6', textDecoration: 'none', fontWeight: 500 }}>
                 Nous contacter
               </Link>
             </p>

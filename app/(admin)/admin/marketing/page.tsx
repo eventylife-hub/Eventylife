@@ -10,6 +10,7 @@ import { StatsCard } from '@/components/admin/stats-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TrendingUp, Users, Target, DollarSign, CheckCircle, XCircle, Pause, AlertCircle, RefreshCw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { AdminPageHeader } from '@/components/admin/admin-page-header';
 
 interface Campaign {
   id: string;
@@ -182,6 +183,8 @@ export default function AdminMarketingPage() {
   if (loading) {
     return (
       <div className="space-y-6">
+      <AdminPageHeader title="Marketing" breadcrumb="Marketing" />
+
         <div>
           <Skeleton className="h-10 w-48" />
           <Skeleton className="h-5 w-96 mt-2" />
@@ -202,9 +205,6 @@ export default function AdminMarketingPage() {
   if (error && !stats) {
     return (
       <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Marketing</h1>
-        </div>
         <div className="bg-red-50 border border-red-200 rounded-lg p-8 text-center">
           <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
           <p className="text-red-700 font-medium mb-2">{error}</p>
@@ -241,8 +241,7 @@ export default function AdminMarketingPage() {
 
       {/* En-tête */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Marketing</h1>
-        <p className="text-gray-600 mt-2">
+<p className="text-gray-600 mt-2">
           Hub de gestion des campagnes et analyses marketing
         </p>
       </div>

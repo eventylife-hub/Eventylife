@@ -1,25 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download, FileText, Users, Phone, Truck, Plane, FileStack } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { formatDateTime } from '@/lib/utils';
 
 interface ExportLog {
@@ -274,59 +257,51 @@ export default function ExportsPage() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Hub des exports</h1>
-        <p className="text-gray-600 mt-2">
-          Générez et gérez les exports de données de tous vos voyages
-        </p>
+      <div className="admin-page-header">
+        <div>
+          <div className="admin-breadcrumb">Accueil › Exports</div>
+          <h1 className="admin-page-title">Exports</h1>
+        </div>
       </div>
 
-      {/* Toast erreur */}
       {toastMessage && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
+        <div className="admin-alert-bar danger">
           <span>{toastMessage}</span>
-          <button
-            onClick={() => setToastMessage(null)}
-            className="ml-4 text-sm font-medium hover:underline"
-          >
+          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
             Fermer
           </button>
         </div>
       )}
 
-      {/* Actions rapides */}
-      <Card>
-        <CardHeader>
-          <h3 className="text-lg font-semibold">Actions rapides</h3>
-        </CardHeader>
-        <CardContent>
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Actions rapides</h3>
+        </div>
+        <div className="admin-panel-body">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {exportTypes.map((type) => (
-              <div key={type.value} className="space-y-2">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start gap-2 h-auto py-3"
-                  onClick={() => handleQuickExport(type.value as ExportType, 'CSV')}
-                >
-                  {type.icon}
-                  <span className="text-sm">{type.label}</span>
-                </Button>
-              </div>
+              <button
+                key={type.value}
+                onClick={() => handleQuickExport(type.value as ExportType, 'CSV')}
+                className="admin-btn-secondary"
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'flex-start' }}
+              >
+                {type.icon}
+                <span style={{ fontSize: '14px' }}>{type.label}</span>
+              </button>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Historique des exports */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <h3 className="text-lg font-semibold">Historique des exports</h3>
-          <Button onClick={() => setIsDialogOpen(true)}>
+      <div className="admin-panel">
+        <div className="admin-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3 className="admin-panel-title">Historique des exports</h3>
+          <button onClick={() => setIsDialogOpen(true)} className="admin-btn-primary" style={{ fontSize: '14px' }}>
             Générer un export
-          </Button>
-        </CardHeader>
-        <CardContent>
+          </button>
+        </div>
+        <div className="admin-panel-body">
           <DataTable
             columns={columns}
             data={exports}
@@ -334,96 +309,106 @@ export default function ExportsPage() {
             emptyMessage="Aucun export trouvé"
             rowActions={rowActions}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Modal de génération */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Générer un export</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="export-type">Type d&apos;export</Label>
-              <Select
-                value={selectedType}
-                onValueChange={(value) => setSelectedType(value as ExportType)}
-              >
-                <SelectTrigger id="export-type">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
+      {isDialogOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
+            <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
+              Générer un export
+            </h2>
+
+            <div style={{ space: '16px', marginBottom: '24px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                  Type d'export
+                </label>
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value as ExportType)}
+                  className="admin-input"
+                >
                   {exportTypes.map((type) => (
-                    <SelectItem key={type.value} value={type.value}>
+                    <option key={type.value} value={type.value}>
                       {type.label}
-                    </SelectItem>
+                    </option>
                   ))}
-                </SelectContent>
-              </Select>
-            </div>
+                </select>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="export-trip">Voyage (optionnel)</Label>
-              <Select value={selectedTrip} onValueChange={setSelectedTrip}>
-                <SelectTrigger id="export-trip">
-                  <SelectValue placeholder="Sélectionner un voyage" />
-                </SelectTrigger>
-                <SelectContent>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                  Voyage (optionnel)
+                </label>
+                <select
+                  value={selectedTrip}
+                  onChange={(e) => setSelectedTrip(e.target.value)}
+                  className="admin-input"
+                >
+                  <option value="">Sélectionner un voyage</option>
                   {trips.map((trip) => (
-                    <SelectItem key={trip.id} value={trip.id}>
+                    <option key={trip.id} value={trip.id}>
                       {trip.title}
-                    </SelectItem>
+                    </option>
                   ))}
-                </SelectContent>
-              </Select>
-            </div>
+                </select>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="export-format">Format</Label>
-              <Select
-                value={selectedFormat}
-                onValueChange={(value) => setSelectedFormat(value as 'CSV' | 'PDF')}
-              >
-                <SelectTrigger id="export-format">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                  Format
+                </label>
+                <select
+                  value={selectedFormat}
+                  onChange={(e) => setSelectedFormat(e.target.value as 'CSV' | 'PDF')}
+                  className="admin-input"
+                >
                   {allowedFormats.map((fmt) => (
-                    <SelectItem key={fmt} value={fmt}>
+                    <option key={fmt} value={fmt}>
                       {fmt}
-                    </SelectItem>
+                    </option>
                   ))}
-                </SelectContent>
-              </Select>
+                </select>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                  Motif <span style={{ color: 'var(--admin-coral)' }}>*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Raison de cet export (requis)"
+                  value={motif}
+                  onChange={(e) => setMotif(e.target.value)}
+                  className="admin-input"
+                />
+                <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)', marginTop: '6px' }}>
+                  Cet export sera enregistré à des fins d'audit
+                </p>
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="export-motif">
-                Motif <span className="text-red-500">*</span>
-              </Label>
-              <Input
-                id="export-motif"
-                placeholder="Raison de cet export (requis)"
-                value={motif}
-                onChange={(e) => setMotif(e.target.value)}
-                className="min-h-10"
-              />
-              <p className="text-xs text-gray-500">
-                Cet export sera enregistré à des fins d'audit
-              </p>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                onClick={() => setIsDialogOpen(false)}
+                className="admin-btn-secondary"
+                style={{ flex: 1 }}
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleGenerateExport}
+                disabled={isGenerating || !motif.trim()}
+                className="admin-btn-primary"
+                style={{ flex: 1, opacity: isGenerating || !motif.trim() ? 0.5 : 1 }}
+              >
+                {isGenerating ? 'Génération...' : 'Générer'}
+              </button>
             </div>
-
-            <Button
-              onClick={handleGenerateExport}
-              disabled={isGenerating || !motif.trim()}
-              className="w-full"
-            >
-              {isGenerating ? 'Génération...' : 'Générer'}
-            </Button>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      )}
     </div>
   );
 }

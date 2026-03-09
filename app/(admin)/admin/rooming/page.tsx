@@ -1,11 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
-import { Skeleton, SkeletonGrid } from '@/components/ui/skeleton';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download, Home, Users, Sofa, AlertCircle, X } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
@@ -168,27 +165,28 @@ export default function AdminRoomingPage() {
 
   if (loading || !rooming) {
     return (
-      <div className="space-y-6">
-        <div>
-          <Skeleton height="2rem" width="50%" className="mb-4" />
-          <Skeleton height="1rem" width="70%" />
+      <div className="admin-fade-in space-y-6">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Fournisseurs & Hôtels
+          </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {[...Array(4)].map((_, i) => (
-            <Card key={i}>
-              <CardContent className="p-6 space-y-4">
-                <Skeleton height="1rem" width="100%" />
-                <Skeleton height="2rem" width="80%" />
-                <Skeleton height="0.75rem" width="60%" />
-              </CardContent>
-            </Card>
+            <div key={i} className="admin-panel p-6 space-y-4">
+              <div className="h-4 bg-gray-200 rounded animate-pulse" />
+              <div className="h-8 bg-gray-200 rounded animate-pulse" />
+              <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4" />
+            </div>
           ))}
         </div>
-        <Card>
-          <CardContent className="p-6">
-            <SkeletonGrid columns={1} count={5} />
-          </CardContent>
-        </Card>
+        <div className="admin-panel p-6">
+          <div className="space-y-3">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-12 bg-gray-200 rounded animate-pulse" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -198,13 +196,11 @@ export default function AdminRoomingPage() {
     : 0;
 
   return (
-    <div className="space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Gestion des logements</h1>
-        <p className="text-gray-600 mt-2">
-          Gérez globalement les chambres et les assignations
-        </p>
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Fournisseurs & Hôtels
+        </h1>
       </div>
 
       {/* Toast erreur export */}
@@ -221,7 +217,7 @@ export default function AdminRoomingPage() {
       )}
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="admin-kpi-grid admin-fade-in delay-1">
         <StatsCard
           title="Total de chambres"
           value={rooming.totalRooms.toString()}
@@ -250,8 +246,8 @@ export default function AdminRoomingPage() {
       </div>
 
       {/* Sélecteur de voyage */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-body p-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end">
             <div className="flex-1">
               <label className="text-sm font-medium text-gray-700 mb-2 block">
@@ -272,32 +268,34 @@ export default function AdminRoomingPage() {
             </div>
 
             <div className="flex gap-2">
-              <Button
-                variant="outline"
+              <button
                 onClick={() => handleExport('pdf')}
+                className="admin-btn-secondary gap-2 flex items-center"
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="w-4 h-4" />
                 PDF
-              </Button>
-              <Button
-                variant="outline"
+              </button>
+              <button
                 onClick={() => handleExport('csv')}
+                className="admin-btn-secondary gap-2 flex items-center"
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="w-4 h-4" />
                 CSV
-              </Button>
+              </button>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Informations du voyage sélectionné */}
       {rooming.selectedTrip && (
-        <Card>
-          <CardHeader className="pb-3">
-            <h3 className="font-semibold text-gray-900">{rooming.selectedTrip.name}</h3>
-          </CardHeader>
-          <CardContent className="p-6">
+        <div className="admin-panel admin-fade-in delay-3">
+          <div className="admin-panel-header pb-3">
+            <h3 className="admin-panel-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+              {rooming.selectedTrip.name}
+            </h3>
+          </div>
+          <div className="admin-panel-body p-6">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label className="text-xs font-medium text-gray-600">Bloc hôtel</label>
@@ -316,19 +314,19 @@ export default function AdminRoomingPage() {
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* Tableau des chambres */}
       {rooming.selectedTrip && (
-        <Card>
-          <CardHeader className="pb-3">
-            <h3 className="font-semibold text-gray-900">
+        <div className="admin-panel admin-fade-in delay-4">
+          <div className="admin-panel-header pb-3">
+            <h3 className="admin-panel-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
               Liste des chambres ({rooming.selectedTrip.rooms.length})
             </h3>
-          </CardHeader>
-          <CardContent className="p-6">
+          </div>
+          <div className="admin-panel-body p-6">
             <DataTable
               columns={roomColumns}
               data={rooming.selectedTrip.rooms}
@@ -338,29 +336,29 @@ export default function AdminRoomingPage() {
                 {
                   label: 'Détails',
                   onClick: (row) => {
-                    // Afficher les détails complets de la chambre dans un panel latéral
                     setSelectedRoom(row as Room);
                   },
                 },
                 {
                   label: 'Modifier assignation',
                   onClick: (row) => {
-                    // Ouvrir le formulaire de modification d'assignation
                     setEditingRoom(row as Room);
                   },
                 },
               ]}
             />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
       {/* Résumé des blocs hôtel */}
-      <Card>
-        <CardHeader className="pb-3">
-          <h3 className="font-semibold text-gray-900">Résumé des blocs hôtel</h3>
-        </CardHeader>
-        <CardContent className="p-6">
+      <div className="admin-panel admin-fade-in delay-5">
+        <div className="admin-panel-header pb-3">
+          <h3 className="admin-panel-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Résumé des blocs hôtel
+          </h3>
+        </div>
+        <div className="admin-panel-body p-6">
           <div className="space-y-3">
             {rooming.trips.map((trip) => (
               <div key={trip.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -371,15 +369,15 @@ export default function AdminRoomingPage() {
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Modal détail chambre */}
       {selectedRoom && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="w-full max-w-md">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <h2 className="text-xl font-bold">
+          <div className="admin-panel w-full max-w-md">
+            <div className="admin-panel-header flex flex-row items-center justify-between">
+              <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
                 Détails de la chambre {selectedRoom.number}
               </h2>
               <button
@@ -388,8 +386,8 @@ export default function AdminRoomingPage() {
               >
                 <X className="w-5 h-5" />
               </button>
-            </CardHeader>
-            <CardContent className="space-y-4">
+            </div>
+            <div className="admin-panel-body space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-medium text-gray-600">Type</label>
@@ -428,25 +426,25 @@ export default function AdminRoomingPage() {
               )}
 
               <div className="flex justify-end gap-2 pt-4">
-                <Button
+                <button
                   type="button"
-                  variant="outline"
                   onClick={() => setSelectedRoom(null)}
+                  className="admin-btn-secondary"
                 >
                   Fermer
-                </Button>
+                </button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       )}
 
       {/* Modal édition assignation chambre */}
       {editingRoom && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="w-full max-w-md">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <h2 className="text-xl font-bold">
+          <div className="admin-panel w-full max-w-md">
+            <div className="admin-panel-header flex flex-row items-center justify-between">
+              <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
                 Modifier l'assignation - Chambre {editingRoom.number}
               </h2>
               <button
@@ -455,8 +453,8 @@ export default function AdminRoomingPage() {
               >
                 <X className="w-5 h-5" />
               </button>
-            </CardHeader>
-            <CardContent className="space-y-4">
+            </div>
+            <div className="admin-panel-body space-y-4">
               <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
                 <p className="text-sm text-blue-800">
                   <span className="font-medium">Type de chambre:</span> {editingRoom.type}
@@ -491,25 +489,25 @@ export default function AdminRoomingPage() {
               </div>
 
               <div className="flex justify-end gap-2 pt-4">
-                <Button
+                <button
                   type="button"
-                  variant="outline"
                   onClick={() => setEditingRoom(null)}
+                  className="admin-btn-secondary"
                 >
                   Annuler
-                </Button>
-                <Button
+                </button>
+                <button
                   type="button"
-                  variant="default"
                   onClick={() => {
                     setEditingRoom(null);
                   }}
+                  className="admin-btn-primary"
                 >
                   Enregistrer
-                </Button>
+                </button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -164,7 +164,7 @@ export default function CancellationDetailPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-          <p className="text-gray-600">Chargement...</p>
+          <p style={{ color: 'var(--admin-text-secondary)' }}>Chargement...</p>
         </div>
       </div>
     );
@@ -172,8 +172,8 @@ export default function CancellationDetailPage() {
 
   if (!cancellation) {
     return (
-      <div className="p-8">
-        <p className="text-gray-600">Annulation non trouvée</p>
+      <div className="space-y-6">
+        <p style={{ color: 'var(--admin-text-secondary)' }}>Annulation non trouvée</p>
       </div>
     );
   }
@@ -185,124 +185,152 @@ export default function CancellationDetailPage() {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <div className="mb-8">
+    <div className="space-y-6">
+      <div className="admin-page-header">
+        <div>
+          <div className="admin-breadcrumb">Annulations › Détail</div>
+          <h1 className="admin-page-title">Détail de l'annulation</h1>
+        </div>
         <button
           onClick={() => router.back()}
-          className="text-blue-600 hover:text-blue-800 mb-4"
+          className="admin-btn-secondary"
+          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
         >
           ← Retour
         </button>
-        <h1 className="text-3xl font-bold text-gray-900">Détail de l&apos;Annulation</h1>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-          {error}
+        <div className="admin-alert-bar danger">
+          <span>{error}</span>
         </div>
       )}
 
       {/* Toast notification */}
       {toast && (
         <div
-          className={`mb-6 p-4 rounded-lg border flex justify-between items-center ${
-            toast.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-800'
-              : 'bg-red-50 border-red-200 text-red-800'
-          }`}
+          className="admin-alert-bar"
+          style={{
+            background: toast.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
+            borderColor: toast.type === 'success' ? 'var(--admin-mint)' : 'var(--admin-coral)',
+            color: toast.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)',
+          }}
         >
           <span>{toast.message}</span>
-          <button
-            onClick={() => setToast(null)}
-            className="ml-4 text-sm font-medium hover:underline"
-          >
+          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setToast(null)}>
             Fermer
           </button>
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Infos client */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Client</h2>
-          <div className="space-y-2">
-            <p>
-              <span className="font-medium">Nom:</span>{' '}
-              {cancellation.bookingGroup.createdByUser.firstName}{' '}
-              {cancellation.bookingGroup.createdByUser.lastName}
-            </p>
-            <p>
-              <span className="font-medium">Email:</span>{' '}
-              {cancellation.bookingGroup.createdByUser.email}
-            </p>
+        <div className="admin-panel">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title">Client</h3>
+          </div>
+          <div className="admin-panel-body space-y-3">
+            <div>
+              <p className="admin-kpi-label">Nom</p>
+              <p style={{ color: 'var(--admin-text-primary)' }}>
+                {cancellation.bookingGroup.createdByUser.firstName} {cancellation.bookingGroup.createdByUser.lastName}
+              </p>
+            </div>
+            <div>
+              <p className="admin-kpi-label">Email</p>
+              <p style={{ color: 'var(--admin-text-primary)' }}>
+                {cancellation.bookingGroup.createdByUser.email}
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Infos voyage */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Voyage</h2>
-          <div className="space-y-2">
-            <p>
-              <span className="font-medium">Titre:</span> {cancellation.bookingGroup.travel.title}
-            </p>
-            <p>
-              <span className="font-medium">Départ:</span>{' '}
-              {formatDate(cancellation.bookingGroup.travel.departureDate)}
-            </p>
-            <p>
-              <span className="font-medium">Retour:</span>{' '}
-              {formatDate(cancellation.bookingGroup.travel.returnDate)}
-            </p>
+        <div className="admin-panel">
+          <div className="admin-panel-header">
+            <h3 className="admin-panel-title">Voyage</h3>
+          </div>
+          <div className="admin-panel-body space-y-3">
+            <div>
+              <p className="admin-kpi-label">Titre</p>
+              <p style={{ color: 'var(--admin-text-primary)' }}>{cancellation.bookingGroup.travel.title}</p>
+            </div>
+            <div>
+              <p className="admin-kpi-label">Départ</p>
+              <p style={{ color: 'var(--admin-text-primary)' }}>
+                {formatDate(cancellation.bookingGroup.travel.departureDate)}
+              </p>
+            </div>
+            <div>
+              <p className="admin-kpi-label">Retour</p>
+              <p style={{ color: 'var(--admin-text-primary)' }}>
+                {formatDate(cancellation.bookingGroup.travel.returnDate)}
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Calcul remboursement */}
-      <div className="mt-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Calcul du Remboursement</h2>
-        <div className="space-y-4">
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Calcul du Remboursement</h3>
+        </div>
+        <div className="admin-panel-body space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-50 p-4 rounded">
-              <p className="text-sm text-gray-600">Montant payé</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div style={{ background: 'var(--admin-surface-alt)', padding: '16px', borderRadius: '10px' }}>
+              <p className="admin-kpi-label">Montant payé</p>
+              <p className="admin-kpi-value" style={{ color: 'var(--admin-text-primary)' }}>
                 {formatPrice(cancellation.paidAmountCents)}
               </p>
             </div>
-            <div className="bg-gray-50 p-4 rounded">
-              <p className="text-sm text-gray-600">Remboursement net</p>
-              <p className="text-2xl font-bold text-green-600">
+            <div style={{ background: 'var(--admin-mint-soft)', padding: '16px', borderRadius: '10px' }}>
+              <p className="admin-kpi-label" style={{ color: 'var(--admin-success)' }}>
+                Remboursement net
+              </p>
+              <p className="admin-kpi-value" style={{ color: 'var(--admin-success)' }}>
                 {formatPrice(calc.refundAmountCents)}
               </p>
             </div>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded p-4">
-            <p className="text-sm text-gray-600">Politique appliquée</p>
-            <p className="text-lg font-medium text-gray-900">{calc.policyApplied}</p>
-            <p className="text-sm text-gray-600 mt-2">
-              Frais d&apos;annulation: {formatPrice(calc.cancellationFeeCents)}
+          <div style={{ background: 'var(--admin-ocean-light)', padding: '16px', borderRadius: '10px', border: '1px solid var(--admin-ocean)' }}>
+            <p className="admin-kpi-label" style={{ color: 'var(--admin-ocean)' }}>
+              Politique appliquée
+            </p>
+            <p style={{ fontSize: '16px', fontWeight: '500', color: 'var(--admin-text-primary)', marginTop: '6px' }}>
+              {calc.policyApplied}
+            </p>
+            <p style={{ fontSize: '14px', color: 'var(--admin-text-secondary)', marginTop: '8px' }}>
+              Frais d'annulation: {formatPrice(calc.cancellationFeeCents)}
             </p>
           </div>
         </div>
       </div>
 
       {/* Infos annulation */}
-      <div className="mt-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Informations</h2>
-        <div className="space-y-2">
-          <p>
-            <span className="font-medium">Statut:</span> {cancellation.status}
-          </p>
-          <p>
-            <span className="font-medium">Demandée:</span> {formatDate(cancellation.requestedAt)}
-          </p>
-          <p>
-            <span className="font-medium">Raison:</span> {cancellation.reason}
-          </p>
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Informations</h3>
+        </div>
+        <div className="admin-panel-body space-y-3">
+          <div>
+            <p className="admin-kpi-label">Statut</p>
+            <p style={{ color: 'var(--admin-text-primary)' }}>{cancellation.status}</p>
+          </div>
+          <div>
+            <p className="admin-kpi-label">Demandée</p>
+            <p style={{ color: 'var(--admin-text-primary)' }}>{formatDate(cancellation.requestedAt)}</p>
+          </div>
+          <div>
+            <p className="admin-kpi-label">Raison</p>
+            <p style={{ color: 'var(--admin-text-primary)' }}>{cancellation.reason}</p>
+          </div>
           {cancellation.rejectionReason && (
-            <p>
-              <span className="font-medium">Motif refus:</span> {cancellation.rejectionReason}
-            </p>
+            <div>
+              <p className="admin-kpi-label">Motif refus</p>
+              <p style={{ color: 'var(--admin-text-primary)' }}>{cancellation.rejectionReason}</p>
+            </div>
           )}
         </div>
       </div>

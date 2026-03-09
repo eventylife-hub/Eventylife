@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Download, ChevronLeft, FileText } from 'lucide-react';
 
@@ -182,19 +179,31 @@ export default function ReleveMensuelPage() {
   // Loading state
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={() => router.push('/pro/revenus')}>
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Retour aux revenus
-          </Button>
-        </div>
+      <div className="pro-fade-in p-6 space-y-6">
+        <button
+          onClick={() => router.push('/pro/revenus')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.5rem 1rem',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#FF6B35',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+          }}
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Retour aux revenus
+        </button>
         <div className="space-y-2">
-          <div className="h-10 bg-gray-200 rounded animate-pulse w-64" />
-          <div className="h-5 bg-gray-200 rounded animate-pulse w-96" />
+          <div style={{ height: '2.5rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
+          <div style={{ height: '1.25rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite', width: '24rem' }} />
         </div>
-        <div className="h-10 bg-gray-200 rounded animate-pulse w-48" />
-        <div className="h-96 bg-gray-200 rounded animate-pulse" />
+        <div style={{ height: '2.5rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite', width: '12rem' }} />
+        <div style={{ height: '24rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
       </div>
     );
   }
@@ -202,27 +211,60 @@ export default function ReleveMensuelPage() {
   // Error state
   if (error && !statement) {
     return (
-      <div className="space-y-6 p-6">
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={() => router.push('/pro/revenus')}>
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Retour aux revenus
-          </Button>
+      <div className="pro-fade-in p-6 space-y-6">
+        <button
+          onClick={() => router.push('/pro/revenus')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.5rem 1rem',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#FF6B35',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+          }}
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Retour aux revenus
+        </button>
+        <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Relevé mensuel
+        </h1>
+        <div
+          style={{
+            padding: '1rem',
+            background: '#fee2e2',
+            border: '1px solid #fecaca',
+            borderRadius: '0.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
+            <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
+          </div>
+          <button
+            onClick={() => window.location.reload()}
+            style={{
+              padding: '0.5rem 1rem',
+              background: 'white',
+              border: '1px solid #991b1b',
+              borderRadius: '0.375rem',
+              cursor: 'pointer',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+              color: '#991b1b',
+            }}
+          >
+            Réessayer
+          </button>
         </div>
-        <h1 className="text-3xl font-bold">Relevé mensuel</h1>
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => window.location.reload()}
-            >
-              Réessayer
-            </Button>
-          </AlertDescription>
-        </Alert>
       </div>
     );
   }
@@ -230,65 +272,108 @@ export default function ReleveMensuelPage() {
   // Empty state
   if (!statement || !statement.trips.length) {
     return (
-      <div className="space-y-6 p-6">
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={() => router.push('/pro/revenus')}>
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Retour aux revenus
-          </Button>
-        </div>
+      <div className="pro-fade-in p-6 space-y-6">
+        <button
+          onClick={() => router.push('/pro/revenus')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.5rem 1rem',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#FF6B35',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+          }}
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Retour aux revenus
+        </button>
+
         <div>
-          <h1 className="text-3xl font-bold">Relevé mensuel</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Relevé mensuel
+          </h1>
+          <p style={{ color: '#666', marginTop: '0.5rem', fontSize: '0.875rem' }}>
             Consultez vos revenus détaillés par mois
           </p>
         </div>
 
         {/* Month selector */}
-        <div className="flex flex-wrap gap-2">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           {availableMonths.map((month) => (
-            <Button
+            <button
               key={month}
-              variant={currentMonth === month ? 'default' : 'outline'}
               onClick={() => handleMonthChange(month)}
-              size="sm"
+              style={{
+                padding: '0.5rem 1rem',
+                background: currentMonth === month ? '#FF6B35' : 'white',
+                color: currentMonth === month ? 'white' : '#0A1628',
+                border: currentMonth === month ? 'none' : '1px solid #ccc',
+                borderRadius: '0.375rem',
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+              }}
             >
               {formatMonthDisplay(month)}
-            </Button>
+            </button>
           ))}
         </div>
 
-        <Alert>
-          <FileText className="h-4 w-4" />
-          <AlertDescription>
+        <div
+          style={{
+            padding: '1rem',
+            background: '#e0f2fe',
+            border: '1px solid #0ea5e9',
+            borderRadius: '0.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+          }}
+        >
+          <FileText className="h-4 w-4" style={{ color: '#0ea5e9' }} />
+          <span style={{ color: '#0369a1', fontSize: '0.875rem' }}>
             Aucun voyage pour le mois de{' '}
             <strong>{formatMonthDisplay(currentMonth)}</strong>. Sélectionnez
             un autre mois.
-          </AlertDescription>
-        </Alert>
+          </span>
+        </div>
       </div>
     );
   }
 
   // Data state
   return (
-    <div className="space-y-6 p-6">
+    <div className="pro-fade-in p-6 space-y-6">
       {/* Back button */}
-      <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => router.push('/pro/revenus')}
-        >
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          Retour aux revenus
-        </Button>
-      </div>
+      <button
+        onClick={() => router.push('/pro/revenus')}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: '0.5rem 1rem',
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          color: '#FF6B35',
+          fontSize: '0.875rem',
+          fontWeight: '500',
+        }}
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Retour aux revenus
+      </button>
 
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold">Relevé mensuel</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Relevé mensuel
+        </h1>
+        <p style={{ color: '#666', marginTop: '0.5rem', fontSize: '0.875rem' }}>
           Détail complet des revenus pour{' '}
           <strong>{formatMonthDisplay(currentMonth)}</strong>
         </p>
@@ -296,84 +381,122 @@ export default function ReleveMensuelPage() {
 
       {/* Error alert if any */}
       {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setError(null)}
-            >
-              Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+        <div
+          style={{
+            padding: '1rem',
+            background: '#fee2e2',
+            border: '1px solid #fecaca',
+            borderRadius: '0.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '1rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
+            <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
+          </div>
+          <button
+            onClick={() => setError(null)}
+            style={{
+              padding: '0.25rem 0.75rem',
+              background: 'white',
+              border: '1px solid #991b1b',
+              borderRadius: '0.25rem',
+              cursor: 'pointer',
+              fontSize: '0.75rem',
+              fontWeight: '500',
+              color: '#991b1b',
+            }}
+          >
+            Fermer
+          </button>
+        </div>
       )}
 
       {/* Month selector */}
-      <div className="flex flex-wrap gap-2">
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
         {availableMonths.map((month) => (
-          <Button
+          <button
             key={month}
-            variant={currentMonth === month ? 'default' : 'outline'}
             onClick={() => handleMonthChange(month)}
-            size="sm"
+            style={{
+              padding: '0.5rem 1rem',
+              background: currentMonth === month ? '#FF6B35' : 'white',
+              color: currentMonth === month ? 'white' : '#0A1628',
+              border: currentMonth === month ? 'none' : '1px solid #ccc',
+              borderRadius: '0.375rem',
+              cursor: 'pointer',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+            }}
           >
             {formatMonthDisplay(month)}
-          </Button>
+          </button>
         ))}
       </div>
 
       {/* Statement Table */}
-      <Card>
-        <CardHeader>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <CardTitle>Détail des voyages</CardTitle>
-              <CardDescription>
-                {statement.trips.length} voyage{statement.trips.length > 1 ? 's' : ''}
-              </CardDescription>
-            </div>
-            <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-              <Button
-                onClick={handleExportCSV}
-                disabled={!statement.trips.length}
-                size="sm"
-                variant="outline"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                CSV
-              </Button>
-              <Button
-                onClick={handleExportPDF}
-                disabled={!statement.trips.length}
-                size="sm"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                PDF
-              </Button>
-            </div>
+      <div className="pro-panel">
+        <div className="pro-panel-header">
+          <div>
+            <div className="pro-panel-title">Détail des voyages</div>
+            <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.25rem' }}>
+              {statement.trips.length} voyage{statement.trips.length > 1 ? 's' : ''}
+            </p>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="border-b bg-gray-50">
-                <tr className="text-left">
-                  <th className="pb-3 px-2 font-semibold">Voyage</th>
-                  <th className="pb-3 px-2 font-semibold">Dates</th>
-                  <th className="pb-3 px-2 font-semibold text-center">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+            <button
+              onClick={handleExportCSV}
+              disabled={!statement.trips.length}
+              className="pro-btn-outline"
+              style={{
+                opacity: !statement.trips.length ? 0.5 : 1,
+                cursor: !statement.trips.length ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <Download className="h-4 w-4" />
+              CSV
+            </button>
+            <button
+              onClick={handleExportPDF}
+              disabled={!statement.trips.length}
+              className="pro-btn-sun"
+              style={{
+                opacity: !statement.trips.length ? 0.5 : 1,
+                cursor: !statement.trips.length ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <Download className="h-4 w-4" />
+              PDF
+            </button>
+          </div>
+        </div>
+        <div className="pro-panel-body">
+          <div style={{ overflowX: 'auto' }}>
+            <table className="pro-table">
+              <thead style={{ borderBottom: '1px solid #e5e7eb', background: '#fefcf3' }}>
+                <tr style={{ textAlign: 'left' }}>
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Voyage</th>
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Dates</th>
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'center' }}>
                     Réservations
                   </th>
-                  <th className="pb-3 px-2 font-semibold text-right">CA TTC</th>
-                  <th className="pb-3 px-2 font-semibold text-right">
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>CA TTC</th>
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
                     Commission
                   </th>
-                  <th className="pb-3 px-2 font-semibold text-right">
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
                     Montant Commission
                   </th>
-                  <th className="pb-3 px-2 font-semibold text-right">
+                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
                     Montant Net
                   </th>
                 </tr>
@@ -382,26 +505,31 @@ export default function ReleveMensuelPage() {
                 {statement.trips.map((trip, idx) => (
                   <tr
                     key={idx}
-                    className="border-b hover:bg-gray-50 transition-colors"
+                    style={{
+                      borderBottom: '1px solid #e5e7eb',
+                      transition: 'background-color 0.2s',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#fefcf3')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
                   >
-                    <td className="py-3 px-2 font-medium">{trip.tripName}</td>
-                    <td className="py-3 px-2 text-gray-600 text-xs">
+                    <td style={{ padding: '0.75rem 0.5rem', fontWeight: '500' }}>{trip.tripName}</td>
+                    <td style={{ padding: '0.75rem 0.5rem', color: '#666', fontSize: '0.75rem' }}>
                       {formatDate(trip.startDate)} -{' '}
                       {formatDate(trip.endDate)}
                     </td>
-                    <td className="py-3 px-2 text-center text-gray-600">
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'center', color: '#666' }}>
                       {trip.reservationCount}
                     </td>
-                    <td className="py-3 px-2 text-right">
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right' }}>
                       {formatPrice(trip.grossAmountCents)}
                     </td>
-                    <td className="py-3 px-2 text-right text-gray-600">
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#666' }}>
                       {trip.commissionPercent}%
                     </td>
-                    <td className="py-3 px-2 text-right text-red-600">
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#E63946' }}>
                       -{formatPrice(trip.commissionCents)}
                     </td>
-                    <td className="py-3 px-2 text-right font-semibold text-green-600">
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', fontWeight: '600', color: '#06D6A0' }}>
                       {formatPrice(trip.netAmountCents)}
                     </td>
                   </tr>
@@ -411,28 +539,28 @@ export default function ReleveMensuelPage() {
           </div>
 
           {/* Totals */}
-          <div className="border-t pt-4 mt-6 space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="font-semibold">Total CA TTC:</span>
-              <span className="font-bold text-lg">
+          <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1rem', marginTop: '1.5rem', space: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontWeight: '600' }}>Total CA TTC:</span>
+              <span style={{ fontWeight: 'bold', fontSize: '1.125rem' }}>
                 {formatPrice(statement.totalGrossCents)}
               </span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold">Total commissions:</span>
-              <span className="font-bold text-lg text-red-600">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontWeight: '600' }}>Total commissions:</span>
+              <span style={{ fontWeight: 'bold', fontSize: '1.125rem', color: '#E63946' }}>
                 -{formatPrice(statement.totalCommissionCents)}
               </span>
             </div>
-            <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-              <span className="font-semibold">Montant net reçu:</span>
-              <span className="font-bold text-xl text-green-600">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem', background: '#e0f7f4', borderRadius: '0.5rem' }}>
+              <span style={{ fontWeight: '600' }}>Montant net reçu:</span>
+              <span style={{ fontWeight: 'bold', fontSize: '1.25rem', color: '#06D6A0' }}>
                 {formatPrice(statement.totalNetCents)}
               </span>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

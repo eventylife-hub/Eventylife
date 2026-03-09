@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ApprovalModal } from '@/components/admin/approval-modal';
 import { ExportCta } from '@/components/admin/export-cta';
@@ -199,51 +197,47 @@ export default function VoyagesPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="admin-fade-in space-y-6">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Ops Voyages
+        </h1>
+      </div>
+
       {/* En-tête */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Gestion des voyages</h1>
-          <p className="text-gray-600 mt-2">
-            Approuvez, vérifiez et gérez les voyages publiés
-          </p>
-        </div>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 admin-fade-in delay-1">
         <div className="flex items-center gap-2">
-          <Button
+          <button
             onClick={fetchTravels}
-            variant="outline"
-            size="sm"
-            className="gap-2"
+            className="admin-btn-secondary gap-2 flex items-center text-sm"
           >
             <RefreshCw className="w-4 h-4" />
             Actualiser
-          </Button>
+          </button>
           <ExportCta exportType="travels_csv" label="Exporter" />
         </div>
       </div>
 
       {/* Error State */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center admin-fade-in delay-2">
           <div>
             <p className="font-medium">{error}</p>
             <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>
           </div>
-          <Button
-            size="sm"
-            variant="outline"
+          <button
             onClick={fetchTravels}
-            className="gap-2 ml-4 flex-shrink-0"
+            className="admin-btn-secondary gap-2 flex items-center text-sm ml-4 flex-shrink-0"
           >
             <RefreshCw className="w-4 h-4" />
             Réessayer
-          </Button>
+          </button>
         </div>
       )}
 
       {/* Search and Tabs */}
-      <Card>
-        <CardHeader>
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-header">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
@@ -252,12 +246,12 @@ export default function VoyagesPage() {
                 placeholder="Rechercher un voyage..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="admin-input pl-10 w-full"
               />
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="p-6 pt-0">
+        </div>
+        <div className="admin-panel-body p-6 pt-0">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
               {statuses.map((status) => (
@@ -279,13 +273,12 @@ export default function VoyagesPage() {
                   <div className="text-center py-12">
                     <p className="text-gray-500 mb-4">Aucun voyage trouvé</p>
                     {searchQuery && (
-                      <Button
-                        variant="outline"
-                        size="sm"
+                      <button
                         onClick={() => setSearchQuery('')}
+                        className="admin-btn-secondary text-sm"
                       >
                         Effacer la recherche
-                      </Button>
+                      </button>
                     )}
                   </div>
                 ) : (
@@ -300,8 +293,8 @@ export default function VoyagesPage() {
               </TabsContent>
             ))}
           </Tabs>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Modal d'approbation */}
       <ApprovalModal

@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { MetricsChart } from '@/components/marketing/metrics-chart';
 import { AlertCircle, Loader2, Copy, Trash2 } from 'lucide-react';
@@ -150,8 +148,8 @@ export default function CampagneDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="mx-auto max-w-4xl">
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <Skeleton className="h-10 w-32 mb-4" />
           <Skeleton className="h-32 mb-6" />
         </div>
@@ -161,163 +159,159 @@ export default function CampagneDetailPage() {
 
   if (!campaign) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="mx-auto max-w-4xl">
-          <p className="text-red-600">{error || 'Campagne non trouvée'}</p>
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <p style={{ color: '#E63946' }}>{error || 'Campagne non trouvée'}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="mx-auto max-w-4xl">
-        <Link href="/pro/marketing" className="text-sm text-blue-600 hover:underline mb-4 inline-block">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <Link href="/pro/marketing" style={{ fontSize: '14px', color: '#0077B6', textDecoration: 'none', marginBottom: '24px', display: 'inline-block' }}>
           ← Retour au marketing
         </Link>
 
         {error && (
-          <div className="rounded-lg border border-red-200 bg-red-50 p-4 mb-6">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-700">{error}</p>
-            </div>
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+            <AlertCircle className="h-5 w-5" style={{ color: '#E63946', flexShrink: 0, marginTop: '4px' }} />
+            <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
           </div>
         )}
 
-        <div className="flex items-center justify-between mb-6">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
           <div>
-            <h1 className="text-3xl font-bold">{campaign.title}</h1>
-            <p className="text-gray-600 mt-1">
-              Statut: <span className="font-semibold capitalize">{campaign.status}</span>
+            <h1 style={{ fontSize: '28px', fontWeight: 600, color: '#0A1628' }}>{campaign.title}</h1>
+            <p style={{ color: '#8896A6', marginTop: '8px' }}>
+              Statut: <span style={{ fontWeight: 600, textTransform: 'capitalize', color: '#0A1628' }}>{campaign.status}</span>
             </p>
           </div>
 
-          <div className="flex gap-2">
+          <div style={{ display: 'flex', gap: '12px' }}>
             {campaign.status === 'DRAFT' && (
               <>
-                <Button
+                <button
                   onClick={handleLaunch}
                   disabled={actionLoading}
-                  variant="default"
+                  className="pro-btn-sun"
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: actionLoading ? 0.5 : 1, cursor: actionLoading ? 'not-allowed' : 'pointer' }}
                 >
                   {actionLoading ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     'Lancer'
                   )}
-                </Button>
-                <Button
+                </button>
+                <button
                   onClick={handleDuplicate}
                   disabled={actionLoading}
-                  variant="outline"
+                  className="pro-btn-outline"
+                  style={{ opacity: actionLoading ? 0.5 : 1, cursor: actionLoading ? 'not-allowed' : 'pointer' }}
                 >
                   <Copy className="h-4 w-4" />
-                </Button>
+                </button>
               </>
             )}
 
             {campaign.status === 'LIVE' && (
-              <Button
+              <button
                 onClick={handleEnd}
                 disabled={actionLoading}
-                variant="destructive"
+                style={{
+                  backgroundColor: '#E63946',
+                  color: 'white',
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: actionLoading ? 'not-allowed' : 'pointer',
+                  opacity: actionLoading ? 0.5 : 1,
+                  fontWeight: 500,
+                  fontSize: '14px'
+                }}
               >
                 Terminer
-              </Button>
+              </button>
             )}
           </div>
         </div>
 
-        <div className="grid gap-6">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Description */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Description</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700">
-                {campaign.description || 'Aucune description'}
-              </p>
-            </CardContent>
-          </Card>
+          <div className="pro-panel" style={{ padding: '24px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Description</h2>
+            <p style={{ color: '#0A1628' }}>
+              {campaign.description || 'Aucune description'}
+            </p>
+          </div>
 
           {/* Métriques */}
           {metrics && (
             <>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Performance</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <MetricsChart metrics={metrics} />
-                </CardContent>
-              </Card>
+              <div className="pro-panel" style={{ padding: '24px' }}>
+                <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Performance</h2>
+                <MetricsChart metrics={metrics} />
+              </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Statistiques</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-gray-600">Impressions</p>
-                      <p className="text-2xl font-bold">{metrics.impressions}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Clics</p>
-                      <p className="text-2xl font-bold">{metrics.clicks}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">CTR</p>
-                      <p className="text-2xl font-bold">{metrics.ctr}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Conversions</p>
-                      <p className="text-2xl font-bold">{metrics.conversions}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Budget</p>
-                      <p className="text-2xl font-bold">
-                        {formatPrice(metrics.budget)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Dépensé</p>
-                      <p className="text-2xl font-bold">
-                        {formatPrice(metrics.spent)}
-                      </p>
-                    </div>
+              <div className="pro-panel" style={{ padding: '24px' }}>
+                <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Statistiques</h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Impressions</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.impressions}</p>
                   </div>
-                </CardContent>
-              </Card>
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Clics</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.clicks}</p>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>CTR</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.ctr}</p>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Conversions</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.conversions}</p>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Budget</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>
+                      {formatPrice(metrics.budget)}
+                    </p>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Dépensé</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>
+                      {formatPrice(metrics.spent)}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </>
           )}
 
           {/* Infos */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Informations</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
+          <div className="pro-panel" style={{ padding: '24px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Informations</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
-                <p className="text-sm text-gray-600">Date de création</p>
-                <p>{formatDate(campaign.createdAt)}</p>
+                <p style={{ fontSize: '14px', color: '#8896A6' }}>Date de création</p>
+                <p style={{ color: '#0A1628' }}>{formatDate(campaign.createdAt)}</p>
               </div>
               {campaign.startDate && (
                 <div>
-                  <p className="text-sm text-gray-600">Début prévue</p>
-                  <p>{formatDate(campaign.startDate)}</p>
+                  <p style={{ fontSize: '14px', color: '#8896A6' }}>Début prévue</p>
+                  <p style={{ color: '#0A1628' }}>{formatDate(campaign.startDate)}</p>
                 </div>
               )}
               {campaign.endDate && (
                 <div>
-                  <p className="text-sm text-gray-600">Fin prévue</p>
-                  <p>{formatDate(campaign.endDate)}</p>
+                  <p style={{ fontSize: '14px', color: '#8896A6' }}>Fin prévue</p>
+                  <p style={{ color: '#0A1628' }}>{formatDate(campaign.endDate)}</p>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

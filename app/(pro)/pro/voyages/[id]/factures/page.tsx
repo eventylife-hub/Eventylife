@@ -105,10 +105,10 @@ export default function InvoicesPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-          <p className="text-gray-600">Chargement...</p>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ width: '3rem', height: '3rem', border: '4px solid #E8F7FC', borderTop: '4px solid #0077B6', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          <p style={{ color: '#4A5568' }}>Chargement...</p>
         </div>
       </div>
     );
@@ -116,8 +116,8 @@ export default function InvoicesPage() {
 
   if (!travel) {
     return (
-      <div className="p-8">
-        <p className="text-gray-600">Voyage non trouvé</p>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <p style={{ color: '#4A5568' }}>Voyage non trouvé</p>
       </div>
     );
   }
@@ -128,88 +128,93 @@ export default function InvoicesPage() {
   const commissionAmount = Math.floor((totalRevenue * commissionRate) / 100);
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">{travel.title}</h1>
-      <p className="text-gray-600 mb-8">Gestion des factures</p>
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div style={{ maxWidth: '60rem', margin: '0 auto' }}>
+      <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.5rem' }}>{travel.title}</h1>
+      <p style={{ color: '#4A5568', marginBottom: '2rem' }}>Gestion des factures</p>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+        <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: '#E63946' }}>
           {error}
         </div>
       )}
 
       {/* Facture Commission */}
-      <div className="mb-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">Facture Commission Eventy</h2>
+      <div className="pro-panel" style={{ marginBottom: '2rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1.5rem', margin: 0 }}>Facture Commission Eventy</h2>
 
-        <div className="grid grid-cols-2 gap-6 mb-6">
-          <div className="bg-gray-50 p-4 rounded">
-            <p className="text-sm text-gray-600">Chiffre d&apos;affaires</p>
-            <p className="text-2xl font-bold text-gray-900">{formatPrice(totalRevenue)}</p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ background: '#F0E6D8', padding: '1rem', borderRadius: '0.5rem' }}>
+            <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Chiffre d&apos;affaires</p>
+            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>{formatPrice(totalRevenue)}</p>
           </div>
-          <div className="bg-gray-50 p-4 rounded">
-            <p className="text-sm text-gray-600">Commission ({commissionRate}%)</p>
-            <p className="text-2xl font-bold text-red-600">{formatPrice(commissionAmount)}</p>
+          <div style={{ background: '#F0E6D8', padding: '1rem', borderRadius: '0.5rem' }}>
+            <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Commission ({commissionRate}%)</p>
+            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#E63946', margin: 0 }}>{formatPrice(commissionAmount)}</p>
           </div>
         </div>
 
         <button
           onClick={handleDownloadProInvoice}
           disabled={downloading}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
+          className="pro-btn-ocean"
+          style={{ opacity: downloading ? 0.5 : 1 }}
         >
           {downloading ? 'Téléchargement...' : '📥 Télécharger facture commission'}
         </button>
       </div>
 
       {/* Factures Clients */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">Factures Clients</h2>
+      <div className="pro-panel">
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1.5rem', margin: 0 }}>Factures Clients</h2>
 
         {bookings.length === 0 ? (
-          <p className="text-gray-600">Aucune réservation pour ce voyage</p>
+          <p style={{ color: '#4A5568' }}>Aucune réservation pour ce voyage</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+          <div style={{ overflowX: 'auto' }}>
+            <table className="pro-table" style={{ width: '100%' }}>
+              <thead style={{ background: '#F0E6D8', borderBottom: '1px solid #E8F7FC' }}>
+                <tr>
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Client
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Date de réservation
                   </th>
-                  <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'right', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Montant
                   </th>
-                  <th className="px-4 py-3 text-center text-sm font-semibold text-gray-900">
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'center', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Statut
                   </th>
-                  <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900">
+                  <th style={{ padding: '0.75rem 1rem', textAlign: 'right', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {bookings.map((booking: Record<string, unknown>) => (
-                  <tr key={booking.id as string} className="border-b hover:bg-gray-50">
-                    <td className="px-4 py-4">
+                  <tr key={booking.id as string} style={{ borderBottom: '1px solid #E8F7FC', transition: 'background-color 0.2s' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F5F5')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
+                  >
+                    <td style={{ padding: '1rem' }}>
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p style={{ fontWeight: '500', color: '#0A1628', margin: 0 }}>
                           {((booking.createdByUser as any)?.firstName as string) || ''} {((booking.createdByUser as any)?.lastName as string) || ''}
                         </p>
-                        <p className="text-sm text-gray-600">
+                        <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>
                           {((booking.createdByUser as any)?.email as string) || ''}
                         </p>
                       </div>
                     </td>
-                    <td className="px-4 py-4 text-gray-600">
+                    <td style={{ padding: '1rem', color: '#4A5568' }}>
                       {formatDate((booking.createdAt as string | Date) || '')}
                     </td>
-                    <td className="px-4 py-4 text-right font-medium">
+                    <td style={{ padding: '1rem', textAlign: 'right', fontWeight: '500' }}>
                       {formatPrice((booking.paidAmountCents as number) || 0)}
                     </td>
-                    <td className="px-4 py-4 text-center">
+                    <td style={{ padding: '1rem', textAlign: 'center' }}>
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${
                           (booking.status as string) === 'FULLY_PAID'
@@ -220,10 +225,10 @@ export default function InvoicesPage() {
                         {(booking.status as string) === 'FULLY_PAID' ? 'Payée' : 'Pending'}
                       </span>
                     </td>
-                    <td className="px-4 py-4 text-right">
+                    <td style={{ padding: '1rem', textAlign: 'right' }}>
                       <button
                         onClick={() => handleDownloadClientInvoice(booking.id as string)}
-                        className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                        style={{ color: '#0077B6', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem', background: 'none', border: 'none', cursor: 'pointer' }}
                       >
                         Télécharger
                       </button>
@@ -235,6 +240,8 @@ export default function InvoicesPage() {
           </div>
         )}
       </div>
+    </div>
+    </div>
 
       {/* Toast de notification */}
       {toastMessage && (

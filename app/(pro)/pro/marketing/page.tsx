@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+// shadcn components removed - using pro-panel and pro-btn-* classes
 import { Skeleton } from '@/components/ui/skeleton';
 import { CampaignCard } from '@/components/marketing/campaign-card';
 import { AlertCircle, Plus, TrendingUp } from 'lucide-react';
@@ -63,15 +62,15 @@ export default function MarketingPage() {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="text-3xl font-bold mb-6">Marketing</h1>
-          <div className="grid gap-4 md:grid-cols-3 mb-6">
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Marketing</h1>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '24px' }}>
             {[...Array(3)].map((_, i) => (
               <Skeleton key={i} className="h-24 rounded-lg" />
             ))}
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
             {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-48 rounded-lg" />
             ))}
@@ -84,15 +83,15 @@ export default function MarketingPage() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="text-3xl font-bold mb-6">Marketing</h1>
-          <div className="rounded-lg border border-red-200 bg-red-50 p-6">
-            <div className="flex items-start gap-4">
-              <AlertCircle className="h-6 w-6 text-red-600 flex-shrink-0" />
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Marketing</h1>
+          <div style={{ borderRadius: '8px', border: '1px solid #FFE0E3', backgroundColor: '#FFE0E3', padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <AlertCircle className="h-6 w-6" style={{ color: '#E63946', flexShrink: 0 }} />
               <div>
-                <h2 className="font-semibold text-red-900">Erreur</h2>
-                <p className="text-sm text-red-700">{error}</p>
+                <h2 style={{ fontWeight: 600, color: '#E63946' }}>Erreur</h2>
+                <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
               </div>
             </div>
           </div>
@@ -104,68 +103,58 @@ export default function MarketingPage() {
   const { stats = {}, campaigns = [] } = dashboard || {};
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="mx-auto max-w-6xl">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold">Marketing</h1>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+          <h1 className="pro-page-title">Marketing</h1>
           <Link href="/pro/marketing/creer">
-            <Button variant="default">
-              <Plus className="h-4 w-4 mr-2" />
+            <button className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Plus className="h-4 w-4" />
               Nouvelle campagne
-            </Button>
+            </button>
           </Link>
         </div>
 
         {/* Stats globales */}
-        <div className="grid gap-4 md:grid-cols-3 mb-6">
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-sm text-gray-600">Campagnes actives</div>
-              <div className="text-3xl font-bold mt-2">{stats.activeCampaigns || 0}</div>
-            </CardContent>
-          </Card>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+          <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
+            <div style={{ fontSize: '14px', color: '#8896A6' }}>Campagnes actives</div>
+            <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>{stats.activeCampaigns || 0}</div>
+          </div>
 
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-sm text-gray-600">Budget total</div>
-              <div className="text-3xl font-bold mt-2">
-                {formatPrice(stats.totalBudget || 0)}
-              </div>
-            </CardContent>
-          </Card>
+          <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
+            <div style={{ fontSize: '14px', color: '#8896A6' }}>Budget total</div>
+            <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>
+              {formatPrice(stats.totalBudget || 0)}
+            </div>
+          </div>
 
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-sm text-gray-600">Budget dépensé</div>
-              <div className="text-3xl font-bold mt-2">
-                {formatPrice(stats.totalBudgetSpent || 0)}
-              </div>
-            </CardContent>
-          </Card>
+          <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
+            <div style={{ fontSize: '14px', color: '#8896A6' }}>Budget dépensé</div>
+            <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>
+              {formatPrice(stats.totalBudgetSpent || 0)}
+            </div>
+          </div>
         </div>
 
         {/* Liste des campagnes */}
         {campaigns.length === 0 ? (
-          <Card>
-            <CardContent className="pt-12 pb-12">
-              <div className="text-center">
-                <TrendingUp className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                <h3 className="font-semibold text-lg mb-2">Pas de campagne</h3>
-                <p className="text-gray-600 mb-4">
-                  Créez votre première campagne marketing pour promouvoir vos voyages
-                </p>
-                <Link href="/pro/marketing/creer">
-                  <Button variant="default">
-                    <Plus className="h-4 w-4 mr-2" />
-                    Créer une campagne
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
+            <TrendingUp className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+            <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628', marginBottom: '8px' }}>Pas de campagne</h3>
+            <p style={{ color: '#8896A6', marginBottom: '16px' }}>
+              Créez votre première campagne marketing pour promouvoir vos voyages
+            </p>
+            <Link href="/pro/marketing/creer">
+              <button className="pro-btn-sun" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <Plus className="h-4 w-4" />
+                Créer une campagne
+              </button>
+            </Link>
+          </div>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
             {campaigns.map((campaign) => (
               <CampaignCard key={campaign.id} campaign={campaign} />
             ))}
@@ -173,7 +162,7 @@ export default function MarketingPage() {
         )}
 
         {campaigns.length > 0 && (
-          <div className="mt-8 text-sm text-gray-600 text-center">
+          <div style={{ marginTop: '32px', fontSize: '14px', color: '#8896A6', textAlign: 'center' }}>
             {campaigns.length} campagne{campaigns.length > 1 ? 's' : ''}
           </div>
         )}

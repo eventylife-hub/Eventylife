@@ -50,18 +50,25 @@ export default function BusStopsPage() {
     ? busStops.filter((s) => s.type === activeFilter)
     : busStops;
 
+  const OCEAN = '#0077B6';
+  const SUN = '#FF6B35';
+  const DARK = '#0A1628';
+  const SAND = '#FEFCF3';
+  const MINT = '#06D6A0';
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Mes arrêts de bus</h1>
-            <p className="text-slate-600 mt-2">Gérez vos points de départ et d&apos;arrivée</p>
+            <h1 className="pro-page-title">Mes arrêts de bus</h1>
+            <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez vos points de départ et d&apos;arrivée</p>
           </div>
           <Link
             href="/pro/arrets/nouveau"
-            className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium"
+            className="pro-btn-sun"
+            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
           >
             <Plus className="w-5 h-5" />
             Ajouter un arrêt
@@ -70,15 +77,15 @@ export default function BusStopsPage() {
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-6">
-            <Alert className="border-red-200 bg-red-50">
-              <AlertCircle className="h-4 w-4 text-red-600" />
-              <AlertDescription className="ml-3 text-red-800">
+          <div style={{ marginBottom: '24px' }}>
+            <div style={{ border: '1px solid #FFE0E3', backgroundColor: '#FFE0E3', borderRadius: '8px', padding: '16px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+              <AlertCircle className="h-4 w-4" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ fontSize: '14px', color: '#E63946' }}>
                 {error}
-              </AlertDescription>
-            </Alert>
-            <div className="mt-4">
-              <Button
+              </p>
+            </div>
+            <div style={{ marginTop: '16px' }}>
+              <button
                 onClick={() => {
                   setError(null);
                   setLoading(true);
@@ -90,12 +97,11 @@ export default function BusStopsPage() {
                       setLoading(false);
                     });
                 }}
-                variant="outline"
-                className="border-red-200 text-red-600 hover:bg-red-50"
+                className="pro-btn-outline"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Réessayer
-              </Button>
+              </button>
             </div>
           </div>
         )}
@@ -133,58 +139,38 @@ export default function BusStopsPage() {
 
         {/* Filter and View Toggle */}
         {!loading && (
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex gap-2">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px' }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
               <button
                 onClick={() => setActiveFilter(null)}
-                className={`px-4 py-2 font-medium rounded-lg transition-colors ${
-                  activeFilter === null
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                }`}
+                className={activeFilter === null ? 'pro-btn-ocean' : 'pro-btn-outline'}
               >
                 Tous
               </button>
               <button
                 onClick={() => setActiveFilter('PICKUP_DEPARTURE')}
-                className={`px-4 py-2 font-medium rounded-lg transition-colors ${
-                  activeFilter === 'PICKUP_DEPARTURE'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                }`}
+                className={activeFilter === 'PICKUP_DEPARTURE' ? 'pro-btn-ocean' : 'pro-btn-outline'}
               >
                 Départs
               </button>
               <button
                 onClick={() => setActiveFilter('DROPOFF_ARRIVAL')}
-                className={`px-4 py-2 font-medium rounded-lg transition-colors ${
-                  activeFilter === 'DROPOFF_ARRIVAL'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                }`}
+                className={activeFilter === 'DROPOFF_ARRIVAL' ? 'pro-btn-ocean' : 'pro-btn-outline'}
               >
                 Arrivées
               </button>
             </div>
 
-            <div className="flex gap-2">
+            <div style={{ display: 'flex', gap: '8px' }}>
               <button
                 onClick={() => setViewMode('cards')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  viewMode === 'cards'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-slate-600 border border-slate-200'
-                }`}
+                className={viewMode === 'cards' ? 'pro-btn-sun' : 'pro-btn-outline'}
               >
                 Cartes
               </button>
               <button
                 onClick={() => setViewMode('map')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  viewMode === 'map'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-slate-600 border border-slate-200'
-                }`}
+                className={viewMode === 'map' ? 'pro-btn-sun' : 'pro-btn-outline'}
               >
                 Carte
               </button>
@@ -194,25 +180,25 @@ export default function BusStopsPage() {
 
         {/* Map View (Placeholder) */}
         {!loading && viewMode === 'map' && (
-          <div className="mb-6 bg-white rounded-lg shadow-sm border border-slate-200 h-96 flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-              <p className="text-slate-600 font-medium">Intégration Google Maps à venir</p>
-              <p className="text-sm text-slate-500 mt-1">Cette fonction sera disponible bientôt</p>
+          <div className="pro-panel" style={{ marginBottom: '24px', height: '384px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <MapPin className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+              <p style={{ color: '#0A1628', fontWeight: 500 }}>Intégration Google Maps à venir</p>
+              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Cette fonction sera disponible bientôt</p>
             </div>
           </div>
         )}
 
         {/* Cards View */}
         {!loading && viewMode === 'cards' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
             {filteredStops.length === 0 ? (
-              <div className="col-span-full text-center py-12 bg-white rounded-lg border border-slate-200">
-                <MapPin className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                <p className="text-slate-600 font-medium">Aucun arrêt créé</p>
+              <div className="pro-panel" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '48px 24px' }}>
+                <MapPin className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+                <p style={{ color: '#0A1628', fontWeight: 500 }}>Aucun arrêt créé</p>
                 <Link
                   href="/pro/arrets/nouveau"
-                  className="text-indigo-600 hover:text-indigo-700 font-medium text-sm mt-2 inline-block"
+                  style={{ color: '#0077B6', fontWeight: 500, fontSize: '14px', marginTop: '8px', display: 'inline-block' }}
                 >
                   Créer votre premier arrêt →
                 </Link>
@@ -222,74 +208,74 @@ export default function BusStopsPage() {
                 <Link
                   key={stop.id}
                   href={`/pro/arrets/${stop.id}`}
-                  className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow border border-slate-200 overflow-hidden group"
+                  className="pro-panel pro-fade-in"
+                  style={{ overflow: 'hidden' }}
                 >
                   {/* Image Placeholder */}
-                  <div className="h-40 bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center group-hover:from-slate-400 group-hover:to-slate-500 transition-colors relative">
+                  <div style={{ height: '160px', background: 'linear-gradient(135deg, #E8F7FC, #B3E5FC)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                     {/* Media Count */}
-                    <div className="absolute top-2 right-2 bg-white/90 px-2 py-1 rounded text-xs font-medium text-slate-700 flex items-center gap-1">
+                    <div style={{ position: 'absolute', top: '8px', right: '8px', backgroundColor: 'rgba(255,255,255,0.9)', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 500, color: '#0A1628', display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <ImageIcon className="w-4 h-4" />
                       {stop.media?.length || 0}
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="font-bold text-slate-900 line-clamp-2">
+                  <div className="pro-panel-body">
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '12px' }}>
+                      <h3 className="pro-panel-title" style={{ margin: 0, flex: 1 }}>
                         {stop.publicName}
                       </h3>
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${
-                          STATUS_COLORS[stop.status]
-                        }`}
+                        className="pro-badge-ocean"
+                        style={{ marginLeft: '8px', whiteSpace: 'nowrap' }}
                       >
                         {STATUS_LABELS[stop.status]}
                       </span>
                     </div>
 
-                    <div className="space-y-2 text-sm text-slate-600 mb-4">
-                      <div>
-                        <p className="text-xs text-slate-500 uppercase font-semibold mb-1">Adresse</p>
-                        <p className="line-clamp-1">{stop.addressLine}</p>
+                    <div style={{ marginBottom: '16px' }}>
+                      <div style={{ marginBottom: '8px' }}>
+                        <p style={{ fontSize: '12px', color: '#8896A6', textTransform: 'uppercase', fontWeight: 600, marginBottom: '4px' }}>Adresse</p>
+                        <p style={{ fontSize: '14px', color: '#0A1628', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{stop.addressLine}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-slate-500 uppercase font-semibold">
+                        <p style={{ fontSize: '12px', color: '#8896A6', textTransform: 'uppercase', fontWeight: 600 }}>
                           {stop.city}, {stop.postalCode}
                         </p>
                       </div>
                     </div>
 
                     {/* Type Badge */}
-                    <div className="mb-4">
-                      <span className="text-xs font-medium px-2 py-1 bg-slate-100 text-slate-700 rounded">
+                    <div style={{ marginBottom: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 500, padding: '4px 8px', backgroundColor: '#E8F7FC', color: '#0077B6', borderRadius: '4px' }}>
                         {stop.type === 'PICKUP_DEPARTURE' ? '🚌 Départ' : '📍 Arrivée'}
                       </span>
                     </div>
 
                     {/* Status Info */}
                     {stop.status === 'DRAFT' && (
-                      <div className="p-2 bg-blue-50 rounded text-xs text-blue-700 mb-3 flex items-center gap-2">
+                      <div style={{ padding: '8px', backgroundColor: '#E0FFF5', borderRadius: '4px', fontSize: '12px', color: '#06D6A0', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <Clock className="w-3 h-3" />
                         À soumettre pour validation
                       </div>
                     )}
 
                     {stop.status === 'VALIDATED' && (
-                      <div className="p-2 bg-green-50 rounded text-xs text-green-700 mb-3 flex items-center gap-2">
+                      <div style={{ padding: '8px', backgroundColor: '#E0FFF5', borderRadius: '4px', fontSize: '12px', color: '#06D6A0', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <CheckCircle2 className="w-3 h-3" />
                         Prêt à être utilisé
                       </div>
                     )}
 
                     {stop.status === 'CHANGES_REQUESTED' && (
-                      <div className="p-2 bg-yellow-50 rounded text-xs text-yellow-700 mb-3 flex items-center gap-2">
+                      <div style={{ padding: '8px', backgroundColor: '#FFE0E3', borderRadius: '4px', fontSize: '12px', color: '#E63946', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <AlertCircle className="w-3 h-3" />
                         Modifications demandées
                       </div>
                     )}
 
-                    <button className="w-full py-2 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100 font-medium text-sm">
+                    <button style={{ width: '100%', padding: '8px 12px', backgroundColor: '#FFF0E8', color: '#FF6B35', borderRadius: '4px', border: 'none', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }}>
                       Voir les détails →
                     </button>
                   </div>
@@ -301,30 +287,30 @@ export default function BusStopsPage() {
 
         {/* Stats Card */}
         {!loading && filteredStops.length > 0 && (
-          <div className="mt-8 bg-white rounded-lg shadow-sm p-6 border border-slate-200">
-            <h3 className="font-bold text-slate-900 mb-4">Résumé</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div>
-                <p className="text-2xl font-bold text-indigo-600">{filteredStops.length}</p>
-                <p className="text-sm text-slate-600">Arrêts total</p>
+          <div className="pro-panel" style={{ marginTop: '32px' }}>
+            <h3 className="pro-panel-title" style={{ marginBottom: '16px' }}>Résumé</h3>
+            <div className="pro-kpi-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+              <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
+                <p className="pro-kpi-value" style={{ color: '#0077B6' }}>{filteredStops.length}</p>
+                <p className="pro-kpi-label">Arrêts total</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-green-600">
+              <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
+                <p className="pro-kpi-value" style={{ color: '#06D6A0' }}>
                   {filteredStops.filter((s) => s.status === 'VALIDATED').length}
                 </p>
-                <p className="text-sm text-slate-600">Validés</p>
+                <p className="pro-kpi-label">Validés</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-blue-600">
+              <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
+                <p className="pro-kpi-value" style={{ color: '#0077B6' }}>
                   {filteredStops.filter((s) => s.status === 'DRAFT').length}
                 </p>
-                <p className="text-sm text-slate-600">Brouillons</p>
+                <p className="pro-kpi-label">Brouillons</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-yellow-600">
+              <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
+                <p className="pro-kpi-value" style={{ color: '#FF6B35' }}>
                   {filteredStops.filter((s) => s.status === 'CHANGES_REQUESTED').length}
                 </p>
-                <p className="text-sm text-slate-600">À modifier</p>
+                <p className="pro-kpi-label">À modifier</p>
               </div>
             </div>
           </div>

@@ -156,73 +156,74 @@ export default function ProDocumentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', paddingTop: '48px', paddingBottom: '48px' }}>
+      <div style={{ maxWidth: '1024px', margin: '0 auto', paddingLeft: '16px', paddingRight: '16px' }}>
         {/* En-tête */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <div style={{ marginBottom: '32px' }}>
+          <h1 className="pro-page-title" style={{ marginBottom: '8px' }}>
             Mes documents
           </h1>
-          <p className="text-gray-600">
+          <p style={{ color: '#8896A6' }}>
             Gérez vos contrats, documents administratifs et pièces justificatives
           </p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', color: '#E63946', border: '1px solid #FFE0E3' }}>
             {error}
           </div>
         )}
 
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader className="h-8 w-8 text-gray-400 animate-spin" />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '48px', paddingBottom: '48px' }}>
+            <Loader className="h-8 w-8" style={{ color: '#8896A6', animation: 'spin 1s linear infinite' }} />
           </div>
         ) : (
-          <div className="space-y-12">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
             {/* Contrats signés */}
             <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+                <h2 className="pro-section-title">
                   Contrats signés
                 </h2>
               </div>
 
               {groupedDocs.signed.length === 0 ? (
-                <div className="text-center py-8 bg-white rounded-lg border border-gray-200">
-                  <FileText className="mx-auto h-8 w-8 text-gray-300 mb-3" />
-                  <p className="text-gray-600">
+                <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
+                  <FileText className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+                  <p style={{ color: '#0A1628' }}>
                     Vous n\'avez pas encore de contrats signés
                   </p>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {groupedDocs.signed.map((doc) => (
                     <div
                       key={doc.id}
-                      className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between hover:shadow-sm transition-shadow"
+                      className="pro-panel"
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                     >
-                      <div className="flex items-center gap-3 flex-1">
-                        <FileText className="h-6 w-6 text-gray-400" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-gray-900 truncate">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+                        <FileText className="w-6 h-6" style={{ color: '#8896A6' }} />
+                        <div style={{ minWidth: 0, flex: 1 }}>
+                          <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {doc.name}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p style={{ fontSize: '12px', color: '#8896A6' }}>
                             {formatDate(doc.createdAt)}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 ml-4 flex-shrink-0">
-                        <div className="flex items-center gap-2">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: '16px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           {getStatusIcon(doc.status)}
-                          <span className="text-xs font-medium text-gray-600">
+                          <span style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>
                             {getStatusLabel(doc.status)}
                           </span>
                         </div>
                         <button
                           onClick={() => handleDownload(doc)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          style={{ padding: '8px', color: '#0077B6', backgroundColor: 'transparent', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
                           title="Télécharger le document"
                         >
                           <Download className="h-5 w-5" />
@@ -236,13 +237,14 @@ export default function ProDocumentsPage() {
 
             {/* Documents administratifs */}
             <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+                <h2 className="pro-section-title">
                   Documents administratifs
                 </h2>
                 <button
                   onClick={() => setShowUploadModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  className="pro-btn-sun"
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
                   <Upload className="h-5 w-5" />
                   Ajouter un document
@@ -250,34 +252,35 @@ export default function ProDocumentsPage() {
               </div>
 
               {groupedDocs.admin.length === 0 ? (
-                <div className="text-center py-8 bg-white rounded-lg border border-gray-200">
-                  <Upload className="mx-auto h-8 w-8 text-gray-300 mb-3" />
-                  <p className="text-gray-600 mb-4">
+                <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
+                  <Upload className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+                  <p style={{ color: '#0A1628', marginBottom: '16px' }}>
                     Vous n\'avez pas encore téléchargé de documents administratifs
                   </p>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {groupedDocs.admin.map((doc) => (
                     <div
                       key={doc.id}
-                      className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between hover:shadow-sm transition-shadow"
+                      className="pro-panel"
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                     >
-                      <div className="flex items-center gap-3 flex-1">
-                        <FileText className="h-6 w-6 text-gray-400" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-gray-900 truncate">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+                        <FileText className="w-6 h-6" style={{ color: '#8896A6' }} />
+                        <div style={{ minWidth: 0, flex: 1 }}>
+                          <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {doc.name}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p style={{ fontSize: '12px', color: '#8896A6' }}>
                             {formatDate(doc.createdAt)}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3 ml-4 flex-shrink-0">
-                        <div className="flex items-center gap-2">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: '16px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           {getStatusIcon(doc.status)}
-                          <span className="text-xs font-medium text-gray-600">
+                          <span style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>
                             {getStatusLabel(doc.status)}
                           </span>
                         </div>
@@ -293,20 +296,20 @@ export default function ProDocumentsPage() {
 
       {/* Modal de téléchargement */}
       {showUploadModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
+          <div className="pro-panel" style={{ maxWidth: '448px', width: '100%' }}>
+            <h3 className="pro-panel-title" style={{ marginBottom: '16px' }}>
               Ajouter un document administratif
             </h3>
 
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+            <div style={{ marginBottom: '24px' }}>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>
                 Type de document
               </label>
               <select
                 value={selectedDocType}
                 onChange={(e) => setSelectedDocType(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="pro-input"
               >
                 <option value="">Sélectionnez un type</option>
                 {documentTypes.map((type) => (
@@ -326,14 +329,15 @@ export default function ProDocumentsPage() {
               />
             )}
 
-            <div className="mt-6 flex gap-3">
+            <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
               <button
                 onClick={() => {
                   setShowUploadModal(false);
                   setSelectedDocType('');
                 }}
                 disabled={uploading}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors disabled:bg-gray-100"
+                className="pro-btn-outline"
+                style={{ flex: 1 }}
               >
                 Annuler
               </button>

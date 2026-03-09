@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+// Remove Card, Button, Alert imports
 import { Skeleton } from '@/components/ui/skeleton';
 import { FinanceSummary } from '@/components/finance/finance-summary';
 import { MarginChart } from '@/components/finance/margin-chart';
@@ -75,50 +73,51 @@ export default function FinanceDashboardPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <div className="grid grid-cols-2 gap-4">
-          <Skeleton className="h-32" />
-          <Skeleton className="h-32" />
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <Skeleton className="h-10 w-64" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+            <Skeleton className="h-32" />
+            <Skeleton className="h-32" />
+          </div>
+          <Skeleton className="h-96" />
         </div>
-        <Skeleton className="h-96" />
       </div>
     );
   }
 
   if (!dashboard) {
     return (
-      <div className="p-6 space-y-4">
-        <h1 className="text-3xl font-bold">Finance</h1>
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-gray-500 mb-4">Aucun voyage créé</p>
-            <Button onClick={() => (window.location.href = '/pro/voyages/new')}>
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <h1 className="pro-page-title">Finance</h1>
+          <div className="pro-panel" style={{ textAlign: 'center', padding: '32px 24px' }}>
+            <p style={{ color: '#8896A6', marginBottom: '16px' }}>Aucun voyage créé</p>
+            <button onClick={() => (window.location.href = '/pro/voyages/new')} className="pro-btn-sun">
               Créer un voyage
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
-      <div>
-        <h1 className="text-3xl font-bold">Dashboard Finance</h1>
-        <p className="text-gray-600 mt-2">Vue d&apos;ensemble financière de votre activité</p>
-      </div>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div>
+          <h1 className="pro-page-title">Dashboard Finance</h1>
+          <p style={{ color: '#8896A6', marginTop: '8px' }}>Vue d&apos;ensemble financière de votre activité</p>
+        </div>
 
-      {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
+        {error && (
+          <div style={{ padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', border: '1px solid #FFE0E3', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+            <span style={{ fontSize: '14px', color: '#E63946' }}>{error}</span>
+            <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
               Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
-      )}
+            </button>
+          </div>
+        )}
 
       {/* Résumé */}
       <FinanceSummary
@@ -139,38 +138,38 @@ export default function FinanceDashboardPage() {
       )}
 
       {/* Voyages */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Voyages ({dashboard.travelCount || dashboard.travels.length || 0})</CardTitle>
-          <CardDescription>Rentabilité par voyage</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="pro-panel">
+        <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px' }}>
+          <h2 className="pro-panel-title">Voyages ({dashboard.travelCount || dashboard.travels.length || 0})</h2>
+          <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Rentabilité par voyage</p>
+        </div>
+        <div>
           {dashboard.travels && dashboard.travels.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="border-b">
-                  <tr className="text-left">
-                    <th className="pb-2 font-semibold">Voyage</th>
-                    <th className="pb-2 font-semibold text-right">CA TTC</th>
-                    <th className="pb-2 font-semibold text-right">Coûts TTC</th>
-                    <th className="pb-2 font-semibold text-right">Marge</th>
-                    <th className="pb-2 font-semibold text-right">TVA Marge</th>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', fontSize: '14px', borderCollapse: 'collapse' }}>
+                <thead style={{ borderBottom: '1px solid #E0E0E0', backgroundColor: '#F9FAFB' }}>
+                  <tr style={{ textAlign: 'left' }}>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Voyage</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>CA TTC</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Coûts TTC</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Marge</th>
+                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>TVA Marge</th>
                   </tr>
                 </thead>
-                <tbody className="space-y-1">
+                <tbody>
                   {dashboard.travels.map((tf: Record<string, unknown>) => {
                     const marge = (tf.marge as number) || 0;
                     return (
-                      <tr key={tf.travelId as string} className="border-b hover:bg-gray-50">
-                        <td className="py-2 font-medium">{(tf.travelId as string)?.slice(0, 8) || 'N/A'}...</td>
-                        <td className="py-2 text-right">{formatPrice(tf.caTTC as number)}</td>
-                        <td className="py-2 text-right">{formatPrice(tf.coutsTTC as number)}</td>
-                        <td className="py-2 text-right font-semibold">
-                          <span className={marge >= 0 ? 'text-green-600' : 'text-red-600'}>
+                      <tr key={tf.travelId as string} style={{ borderBottom: '1px solid #E0E0E0' }}>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', fontWeight: 500, color: '#0A1628' }}>{(tf.travelId as string)?.slice(0, 8) || 'N/A'}...</td>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#0A1628' }}>{formatPrice(tf.caTTC as number)}</td>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#0A1628' }}>{formatPrice(tf.coutsTTC as number)}</td>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', fontWeight: 600 }}>
+                          <span style={{ color: marge >= 0 ? '#06D6A0' : '#E63946' }}>
                             {formatPrice(marge)}
                           </span>
                         </td>
-                        <td className="py-2 text-right text-gray-600">
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#8896A6' }}>
                           {formatPrice(tf.tvaMarge as number)}
                         </td>
                       </tr>
@@ -180,12 +179,13 @@ export default function FinanceDashboardPage() {
               </table>
             </div>
           ) : (
-            <div className="text-center py-8">
-              <p className="text-gray-500">Aucun voyage enregistré</p>
+            <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
+              <p style={{ color: '#8896A6' }}>Aucun voyage enregistré</p>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+    </div>
     </div>
   );
 }

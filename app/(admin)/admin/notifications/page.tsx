@@ -2,12 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
-import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import {
   Mail,
   MessageSquare,
@@ -206,7 +201,14 @@ export default function AdminNotificationsPage() {
         return (
           <div className="flex items-center gap-2">
             <Icon className="w-4 h-4" />
-            <span className={`px-2 py-1 rounded text-xs font-medium ${config?.color}`}>
+            <span style={{
+              padding: '4px 8px',
+              borderRadius: '4px',
+              fontSize: '12px',
+              fontWeight: '500',
+              background: channel === 'EMAIL' ? 'var(--admin-ocean-light)' : channel === 'SMS' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
+              color: channel === 'EMAIL' ? 'var(--admin-ocean)' : channel === 'SMS' ? 'var(--admin-success)' : 'var(--admin-coral)',
+            }}>
               {config?.label}
             </span>
           </div>
@@ -223,9 +225,14 @@ export default function AdminNotificationsPage() {
       render: (value: unknown) => {
         const isActive = value as boolean;
         return (
-          <span className={`px-2 py-1 rounded text-xs font-medium ${
-            isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-          }`}>
+          <span style={{
+            padding: '4px 8px',
+            borderRadius: '4px',
+            fontSize: '12px',
+            fontWeight: '500',
+            background: isActive ? 'var(--admin-mint-soft)' : 'var(--admin-surface-alt)',
+            color: isActive ? 'var(--admin-success)' : 'var(--admin-text-secondary)',
+          }}>
             {isActive ? 'Oui' : 'Non'}
           </span>
         );
@@ -266,10 +273,17 @@ export default function AdminNotificationsPage() {
       label: 'Statut',
       render: (value: unknown) => {
         const status = value as NotificationHistory['status'];
-        const config = statusConfig[status];
+        const statusColor = status === 'PENDING' ? { bg: 'var(--admin-coral-soft)', color: 'var(--admin-coral)' } : status === 'SENT' ? { bg: 'var(--admin-ocean-light)', color: 'var(--admin-ocean)' } : status === 'DELIVERED' ? { bg: 'var(--admin-mint-soft)', color: 'var(--admin-success)' } : { bg: 'var(--admin-coral-soft)', color: 'var(--admin-coral)' };
         return (
-          <span className={`px-2 py-1 rounded text-xs font-medium ${config?.color}`}>
-            {config?.label}
+          <span style={{
+            padding: '4px 8px',
+            borderRadius: '4px',
+            fontSize: '12px',
+            fontWeight: '500',
+            background: statusColor.bg,
+            color: statusColor.color,
+          }}>
+            {statusConfig[status]?.label}
           </span>
         );
       },
@@ -288,202 +302,246 @@ export default function AdminNotificationsPage() {
   return (
     <div className="space-y-6">
       {/* En-tête */}
-      <div className="flex items-start justify-between">
+      <div className="admin-page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Notifications</h1>
-          <p className="text-gray-600 mt-2">
-            Gérez les templates de notifications et l'historique d'envois
-          </p>
+          <div className="admin-breadcrumb">Accueil › Notifications</div>
+          <h1 className="admin-page-title">Monitoring</h1>
         </div>
-        <Button variant="default" onClick={() => setShowManualSend(true)}>
-          <Send className="w-4 h-4 mr-2" />
+        <button onClick={() => setShowManualSend(true)} className="admin-btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Send className="w-4 h-4" />
           Envoyer manuellement
-        </Button>
+        </button>
       </div>
 
       {/* Statuts de la queue */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-gray-600">En attente</label>
-                <p className="text-3xl font-bold text-orange-600 mt-1">{data.queueCount}</p>
-              </div>
-              <Clock className="w-10 h-10 text-orange-200" />
+        <div className="admin-kpi-card" style={{ background: 'var(--admin-coral-soft)', padding: '16px', borderRadius: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div>
+              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>En attente</label>
+              <p style={{ fontSize: '24px', fontWeight: '700', color: 'var(--admin-coral)', marginTop: '8px' }}>{data.queueCount}</p>
             </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-gray-600">Échoués</label>
-                <p className="text-3xl font-bold text-red-600 mt-1">{data.failedCount}</p>
-              </div>
-              <AlertCircle className="w-10 h-10 text-red-200" />
+            <Clock className="w-10 h-10" style={{ color: 'var(--admin-coral-soft)' }} />
+          </div>
+        </div>
+        <div className="admin-kpi-card" style={{ background: 'var(--admin-coral-soft)', padding: '16px', borderRadius: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div>
+              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>Échoués</label>
+              <p style={{ fontSize: '24px', fontWeight: '700', color: 'var(--admin-coral)', marginTop: '8px' }}>{data.failedCount}</p>
             </div>
-          </CardContent>
-        </Card>
+            <AlertCircle className="w-10 h-10" style={{ color: 'var(--admin-coral-soft)' }} />
+          </div>
+        </div>
       </div>
 
       {/* Onglets */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="templates">Templates ({data.templates.length})</TabsTrigger>
-          <TabsTrigger value="history">Historique</TabsTrigger>
-        </TabsList>
-
+      <div className="space-y-6">
         {/* Onglet Templates */}
-        <TabsContent value="templates">
-          <Card>
-            <CardContent className="p-6">
-              <DataTable
-                columns={templateColumns}
-                data={data.templates}
-                loading={false}
-                emptyMessage="Aucun template trouvé"
-                rowActions={[
-                  {
-                    label: 'Éditer',
-                    onClick: (row) => {
-                      // Naviguer vers la page d'édition du template
-                      router.push(`/admin/notifications/templates/${row.id}/edit`);
+        <div>
+          {activeTab === 'templates' && (
+            <div className="admin-panel">
+              <div className="admin-panel-header">
+                <h3 className="admin-panel-title">Templates ({data.templates.length})</h3>
+              </div>
+              <div className="admin-panel-body">
+                <DataTable
+                  columns={templateColumns}
+                  data={data.templates}
+                  loading={false}
+                  emptyMessage="Aucun template trouvé"
+                  rowActions={[
+                    {
+                      label: 'Éditer',
+                      onClick: (row) => {
+                        router.push(`/admin/notifications/templates/${row.id}/edit`);
+                      },
                     },
-                  },
-                  {
-                    label: 'Dupliquer',
-                    onClick: (row) => {
-                      // Dupliquer le template
-                      duplicateTemplate(row.id);
+                    {
+                      label: 'Dupliquer',
+                      onClick: (row) => {
+                        duplicateTemplate(row.id);
+                      },
                     },
-                  },
-                ]}
-              />
-            </CardContent>
-          </Card>
-        </TabsContent>
+                  ]}
+                />
+              </div>
+            </div>
+          )}
 
-        {/* Onglet Historique */}
-        <TabsContent value="history">
-          <Card>
-            <CardContent className="p-6">
-              <DataTable
-                columns={historyColumns}
-                data={data.recentHistory}
-                loading={false}
-                emptyMessage="Aucun historique"
-                rowActions={[
-                  {
-                    label: 'Détails',
-                    onClick: (row) => {
-                      // Ouvrir le panel détails de la notification
-                      setSelectedNotification(row as NotificationDetails);
+          {/* Onglet Historique */}
+          {activeTab === 'history' && (
+            <div className="admin-panel">
+              <div className="admin-panel-header">
+                <h3 className="admin-panel-title">Historique</h3>
+              </div>
+              <div className="admin-panel-body">
+                <DataTable
+                  columns={historyColumns}
+                  data={data.recentHistory}
+                  loading={false}
+                  emptyMessage="Aucun historique"
+                  rowActions={[
+                    {
+                      label: 'Détails',
+                      onClick: (row) => {
+                        setSelectedNotification(row as NotificationDetails);
+                      },
                     },
-                  },
-                ]}
-              />
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                  ]}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Tab switcher */}
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--admin-border)', marginBottom: '16px' }}>
+          <button
+            onClick={() => setActiveTab('templates')}
+            style={{
+              padding: '12px 16px',
+              fontSize: '14px',
+              fontWeight: '500',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: activeTab === 'templates' ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+              borderBottom: activeTab === 'templates' ? '2px solid var(--admin-accent)' : 'none',
+              marginBottom: '-1px',
+            }}
+          >
+            Templates ({data.templates.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('history')}
+            style={{
+              padding: '12px 16px',
+              fontSize: '14px',
+              fontWeight: '500',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: activeTab === 'history' ? 'var(--admin-accent)' : 'var(--admin-text-secondary)',
+              borderBottom: activeTab === 'history' ? '2px solid var(--admin-accent)' : 'none',
+              marginBottom: '-1px',
+            }}
+          >
+            Historique
+          </button>
+        </div>
 
       {/* Modal Envoi manuel */}
       {showManualSend && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="w-full max-w-md">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <h2 className="text-xl font-bold">Envoyer une notification</h2>
+          <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>Envoyer une notification</h2>
               <button
                 onClick={() => setShowManualSend(false)}
-                className="text-gray-400 hover:text-gray-600"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
               >
                 ✕
               </button>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">
+            </div>
+
+            <div style={{ space: '16px', marginBottom: '24px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Destinataire
                 </label>
-                <Input
+                <input
                   type="email"
                   placeholder="email@example.com ou +33..."
                   value={manualRecipient}
                   onChange={(e) => setManualRecipient(e.target.value)}
+                  className="admin-input"
                 />
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Template
                 </label>
-                <Select value={manualTemplate} onValueChange={setManualTemplate}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionner un template" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {data.templates.map((t) => (
-                      <SelectItem key={t.id} value={t.id}>
-                        {t.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <select
+                  value={manualTemplate}
+                  onChange={(e) => setManualTemplate(e.target.value)}
+                  className="admin-input"
+                >
+                  <option value="">Sélectionner un template</option>
+                  {data.templates.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Canal
                 </label>
-                <Select value={manualChannel} onValueChange={(val: string) => setManualChannel(val as 'EMAIL' | 'SMS' | 'PUSH')}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="EMAIL">Email</SelectItem>
-                    <SelectItem value="SMS">SMS</SelectItem>
-                    <SelectItem value="PUSH">Push</SelectItem>
-                  </SelectContent>
-                </Select>
+                <select
+                  value={manualChannel}
+                  onChange={(e) => setManualChannel(e.target.value as 'EMAIL' | 'SMS' | 'PUSH')}
+                  className="admin-input"
+                >
+                  <option value="EMAIL">Email</option>
+                  <option value="SMS">SMS</option>
+                  <option value="PUSH">Push</option>
+                </select>
               </div>
+            </div>
 
-              <div className="flex gap-2 justify-end pt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowManualSend(false)}
-                >
-                  Annuler
-                </Button>
-                <Button
-                  variant="default"
-                  onClick={handleSendManual}
-                >
-                  Envoyer
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setShowManualSend(false)}
+                className="admin-btn-secondary"
+                style={{ padding: '10px 16px' }}
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleSendManual}
+                className="admin-btn-primary"
+                style={{ padding: '10px 16px' }}
+              >
+                Envoyer
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
       {/* Toast de notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border ${
-            toastMessage.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-800'
-              : 'bg-red-50 border-red-200 text-red-800'
-          }`}>
+        <div style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          zIndex: 50,
+          animation: 'fadeInSlide 0.3s ease-out',
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            padding: '12px 16px',
+            borderRadius: '8px',
+            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+            border: `1px solid ${toastMessage.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)'}`,
+            background: toastMessage.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
+            color: toastMessage.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)',
+          }}>
             {toastMessage.type === 'success' ? (
-              <CheckCircle className="w-5 h-5 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5" style={{ flexShrink: 0 }} />
             ) : (
-              <XCircleIcon className="w-5 h-5 flex-shrink-0" />
+              <XCircleIcon className="w-5 h-5" style={{ flexShrink: 0 }} />
             )}
-            <span className="text-sm font-medium">{toastMessage.message}</span>
+            <span style={{ fontSize: '14px', fontWeight: '500' }}>{toastMessage.message}</span>
             <button
               onClick={() => setToastMessage(null)}
-              className="ml-2 p-1 rounded hover:bg-black/5"
+              style={{ marginLeft: '8px', padding: '4px 8px', borderRadius: '4px', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7, fontSize: '16px' }}
             >
               ✕
             </button>
@@ -494,99 +552,99 @@ export default function AdminNotificationsPage() {
       {/* Panel latéral - Détails de la notification */}
       {selectedNotification && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto shadow-lg">
-            <div className="sticky top-0 bg-white border-b p-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold">Détails de la notification</h2>
+          <div style={{ background: 'white', width: '100%', maxWidth: '448px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.15)' }}>
+            <div style={{ position: 'sticky', top: 0, background: 'white', borderBottom: '1px solid var(--admin-border)', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 10 }}>
+              <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>Détails de la notification</h2>
               <button
                 onClick={() => setSelectedNotification(null)}
-                className="text-gray-400 hover:text-gray-600"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
               >
                 ✕
               </button>
             </div>
-            <div className="p-6 space-y-6">
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
+            <div style={{ padding: '24px', space: '24px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                   Template
                 </label>
-                <p className="text-sm text-gray-900">{selectedNotification.template}</p>
+                <p style={{ fontSize: '14px', color: 'var(--admin-text-primary)' }}>{selectedNotification.template}</p>
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                   Destinataire
                 </label>
-                <p className="text-sm text-gray-900 break-all">{selectedNotification.recipient}</p>
+                <p style={{ fontSize: '14px', color: 'var(--admin-text-primary)', wordBreak: 'break-all' }}>{selectedNotification.recipient}</p>
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                   Canal
                 </label>
-                <div className="flex items-center gap-2">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   {selectedNotification.channel === 'EMAIL' && <Mail className="w-4 h-4" />}
                   {selectedNotification.channel === 'SMS' && <MessageSquare className="w-4 h-4" />}
                   {selectedNotification.channel === 'PUSH' && <Bell className="w-4 h-4" />}
-                  <span className="text-sm text-gray-900">
+                  <span style={{ fontSize: '14px', color: 'var(--admin-text-primary)' }}>
                     {channelConfig[selectedNotification.channel]?.label}
                   </span>
                 </div>
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                   Statut
                 </label>
-                <div className="flex items-center gap-2">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   {selectedNotification.status === 'PENDING' && <Clock className="w-4 h-4" />}
                   {selectedNotification.status === 'SENT' && <Send className="w-4 h-4" />}
                   {selectedNotification.status === 'DELIVERED' && <CheckCircle className="w-4 h-4" />}
                   {selectedNotification.status === 'FAILED' && <AlertCircle className="w-4 h-4" />}
-                  <span className="text-sm text-gray-900">
+                  <span style={{ fontSize: '14px', color: 'var(--admin-text-primary)' }}>
                     {statusConfig[selectedNotification.status]?.label}
                   </span>
                 </div>
               </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                   Envoyé le
                 </label>
-                <p className="text-sm text-gray-900">
+                <p style={{ fontSize: '14px', color: 'var(--admin-text-primary)' }}>
                   {formatDateTime(selectedNotification.sentAt)}
                 </p>
               </div>
 
               {selectedNotification.deliveredAt && (
-                <div>
-                  <label className="text-sm font-medium text-gray-600 block mb-1">
+                <div style={{ marginBottom: '16px' }}>
+                  <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                     Délivré le
                   </label>
-                  <p className="text-sm text-gray-900">
+                  <p style={{ fontSize: '14px', color: 'var(--admin-text-primary)' }}>
                     {formatDateTime(selectedNotification.deliveredAt)}
                   </p>
                 </div>
               )}
 
               {selectedNotification.errorMessage && (
-                <div>
-                  <label className="text-sm font-medium text-gray-600 block mb-1">
+                <div style={{ marginBottom: '16px' }}>
+                  <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                     Message d'erreur
                   </label>
-                  <p className="text-sm text-red-600 bg-red-50 p-2 rounded">
+                  <p style={{ fontSize: '14px', color: 'var(--admin-coral)', background: 'var(--admin-coral-soft)', padding: '8px', borderRadius: '4px' }}>
                     {selectedNotification.errorMessage}
                   </p>
                 </div>
               )}
 
-              <div className="pt-4 border-t">
-                <Button
-                  variant="outline"
-                  className="w-full"
+              <div style={{ paddingTop: '16px', borderTop: '1px solid var(--admin-border)' }}>
+                <button
+                  className="admin-btn-secondary"
                   onClick={() => setSelectedNotification(null)}
+                  style={{ width: '100%', padding: '10px 16px' }}
                 >
                   Fermer
-                </Button>
+                </button>
               </div>
             </div>
           </div>

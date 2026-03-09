@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Filter, Users, Calendar, MapPin, ChevronRight, AlertCircle, RotateCcw } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+// Button import removed - using native buttons with pro-btn-* classes
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface Reservation {
@@ -78,58 +78,64 @@ export default function ProReservationsPage() {
   const filtered = reservations;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px', justifyContent: 'space-between' }}>
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Reservations</h1>
-            <p className="text-slate-600 mt-1">Gerez les reservations de vos voyages</p>
+            <h1 className="pro-page-title">Reservations</h1>
+            <p style={{ color: '#8896A6', marginTop: '4px' }}>Gerez les reservations de vos voyages</p>
           </div>
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
               onClick={fetchReservations}
-              className="gap-2"
+              className="pro-btn-outline"
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
             >
               <RotateCcw className="w-4 h-4" />
               Actualiser
-            </Button>
+            </button>
           </div>
         </div>
 
         {/* Search & Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <form onSubmit={handleSearch} className="flex-1 flex gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <div className="pro-panel" style={{ marginBottom: '24px', padding: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', flex: 1 }}>
+              <div style={{ position: 'relative', flex: 1 }}>
+                <Search className="w-4 h-4" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#8896A6' }} />
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Rechercher par client, voyage..."
-                  className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="pro-input"
+                  style={{ paddingLeft: '36px' }}
                 />
               </div>
-              <Button type="submit" size="sm">
+              <button type="submit" className="pro-btn-sun">
                 Rechercher
-              </Button>
+              </button>
             </form>
 
-            <div className="flex gap-2 flex-wrap">
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {['CONFIRMED', 'PENDING', 'CANCELLED', 'COMPLETED'].map((status) => (
                 <button
                   key={status}
                   onClick={() =>
                     setStatusFilter(statusFilter === status ? null : status)
                   }
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                    statusFilter === status
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    transition: 'all 0.2s',
+                    backgroundColor: statusFilter === status ? '#0077B6' : '#F0F0F0',
+                    color: statusFilter === status ? 'white' : '#4A5568',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
                 >
                   {STATUS_LABELS[status]}
                 </button>
@@ -140,20 +146,20 @@ export default function ProReservationsPage() {
 
         {/* Error */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <AlertCircle className="w-5 h-5 text-red-500" />
-              <p className="text-red-800 text-sm">{error}</p>
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <AlertCircle className="w-5 h-5" style={{ color: '#E63946' }} />
+              <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
             </div>
-            <Button variant="outline" size="sm" onClick={fetchReservations}>
+            <button onClick={fetchReservations} className="pro-btn-outline">
               Reessayer
-            </Button>
+            </button>
           </div>
         )}
 
         {/* Loading */}
         {loading && (
-          <div className="space-y-3">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[...Array(5)].map((_, i) => (
               <Skeleton key={i} className="h-20 w-full rounded-lg" />
             ))}
@@ -164,54 +170,60 @@ export default function ProReservationsPage() {
         {!loading && !error && (
           <>
             {filtered.length === 0 ? (
-              <div className="bg-white rounded-lg border border-slate-200 p-12 text-center">
-                <Users className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                <p className="text-slate-600 font-medium">Aucune reservation trouvee</p>
-                <p className="text-sm text-slate-500 mt-1">
+              <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
+                <Users className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+                <p style={{ color: '#8896A6', fontWeight: 500 }}>Aucune reservation trouvee</p>
+                <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>
                   Les reservations apparaitront ici quand des clients reserveront vos voyages.
                 </p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {filtered.map((resa) => (
                   <Link
                     key={resa.id}
                     href={`/pro/voyages/${resa.voyageId}/reservations`}
-                    className="block bg-white rounded-lg border border-slate-200 p-5 hover:shadow-md transition-shadow group"
+                    className="pro-panel"
+                    style={{ padding: '20px', textDecoration: 'none', display: 'block', cursor: 'pointer' }}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                          <h3 style={{ fontWeight: 600, color: '#0A1628' }}>
                             {resa.clientName}
                           </h3>
                           <span
-                            className={`px-2 py-0.5 rounded text-xs font-medium ${
-                              STATUS_COLORS[resa.status] || 'bg-slate-100 text-slate-600'
-                            }`}
+                            style={{
+                              padding: '4px 8px',
+                              borderRadius: '4px',
+                              fontSize: '12px',
+                              fontWeight: 500,
+                              backgroundColor: resa.status === 'CONFIRMED' ? '#E0FFF5' : resa.status === 'PENDING' ? '#FFF0E8' : resa.status === 'CANCELLED' ? '#FFE0E3' : '#E8F7FC',
+                              color: resa.status === 'CONFIRMED' ? '#06D6A0' : resa.status === 'PENDING' ? '#FF6B35' : resa.status === 'CANCELLED' ? '#E63946' : '#0077B6'
+                            }}
                           >
                             {STATUS_LABELS[resa.status] || resa.status}
                           </span>
                         </div>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
-                          <span className="flex items-center gap-1">
+                        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px', fontSize: '14px', color: '#8896A6' }}>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <MapPin className="w-3.5 h-3.5" />
                             {resa.voyageTitle}
                           </span>
-                          <span className="flex items-center gap-1">
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <Calendar className="w-3.5 h-3.5" />
                             {new Date(resa.departureDate).toLocaleDateString('fr-FR')}
                           </span>
-                          <span className="flex items-center gap-1">
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <Users className="w-3.5 h-3.5" />
                             {resa.passengers} passager{resa.passengers > 1 ? 's' : ''}
                           </span>
-                          <span className="font-semibold text-slate-900">
+                          <span style={{ fontWeight: 600, color: '#0A1628' }}>
                             {(resa.totalAmount / 100).toFixed(2)} EUR
                           </span>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors" />
+                      <ChevronRight className="w-5 h-5" style={{ color: '#8896A6' }} />
                     </div>
                   </Link>
                 ))}
@@ -220,29 +232,29 @@ export default function ProReservationsPage() {
 
             {/* Stats Summary */}
             {filtered.length > 0 && (
-              <div className="mt-6 bg-white rounded-lg shadow-sm p-6 border border-slate-200">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div className="pro-panel" style={{ marginTop: '24px', padding: '24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px', textAlign: 'center' }}>
                   <div>
-                    <p className="text-2xl font-bold text-slate-900">{filtered.length}</p>
-                    <p className="text-sm text-slate-600">Total</p>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{filtered.length}</p>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Total</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-green-600">
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#06D6A0' }}>
                       {filtered.filter((r) => r.status === 'CONFIRMED').length}
                     </p>
-                    <p className="text-sm text-slate-600">Confirmees</p>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Confirmees</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-yellow-600">
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#FF6B35' }}>
                       {filtered.filter((r) => r.status === 'PENDING').length}
                     </p>
-                    <p className="text-sm text-slate-600">En attente</p>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>En attente</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-indigo-600">
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0077B6' }}>
                       {filtered.reduce((sum, r) => sum + r.passengers, 0)}
                     </p>
-                    <p className="text-sm text-slate-600">Passagers</p>
+                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Passagers</p>
                   </div>
                 </div>
               </div>

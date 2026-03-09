@@ -137,15 +137,15 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
   };
 
   return (
-    <Card className="bg-white border-slate-200 mb-6">
-      <CardHeader>
-        <CardTitle>Actions du voyage</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="pro-panel" style={{ marginBottom: '1.5rem' }}>
+      <div className="pro-panel-header">
+        <h3 className="pro-panel-title">Actions du voyage</h3>
+      </div>
+      <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {actionError && (
-          <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <AlertCircle className="w-4 h-4 text-red-600" />
-            <p className="text-sm text-red-700">{actionError}</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem' }}>
+            <AlertCircle style={{ width: '1rem', height: '1rem', color: '#E63946' }} />
+            <p style={{ fontSize: '0.875rem', color: '#E63946', margin: 0 }}>{actionError}</p>
           </div>
         )}
 
@@ -244,8 +244,8 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
             </div>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -282,11 +282,11 @@ export default function VoyageDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-        <div className="max-w-7xl mx-auto space-y-6">
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <Skeleton className="h-12 w-96" />
           <Skeleton className="h-32 w-full" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
             {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-24 w-full" />
             ))}
@@ -298,24 +298,22 @@ export default function VoyageDashboardPage() {
 
   if (!dashboard) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-        <div className="max-w-7xl mx-auto">
-          <Card className="border-red-200 bg-red-50">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-3">
-                <AlertCircle className="w-5 h-5 text-red-600" />
-                <p className="text-red-800">{error || 'Données non disponibles'}</p>
-              </div>
-            </CardContent>
-          </Card>
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+          <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946' }} />
+              <p style={{ color: '#E63946', margin: 0 }}>{error || 'Données non disponibles'}</p>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {/* Header */}
         <div className="flex items-start justify-between mb-8">
           <div>
@@ -347,58 +345,42 @@ export default function VoyageDashboardPage() {
         <ActionButtons travel={dashboard} onRefresh={fetchDashboard} />
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="bg-white border-slate-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-slate-600 flex items-center gap-2">
-                <Users className="w-4 h-4 text-indigo-600" />
-                Réservations
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-slate-900">{dashboard.totalReservations}</div>
-              <p className="text-xs text-slate-500 mt-1">Total des réservations</p>
-            </CardContent>
-          </Card>
+        <div className="pro-kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+          <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
+            <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
+              <Users style={{ width: '1rem', height: '1rem', color: '#FF6B35' }} />
+              Réservations
+            </div>
+            <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.totalReservations}</div>
+            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Total des réservations</p>
+          </div>
 
-          <Card className="bg-white border-slate-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-slate-600 flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-green-600" />
-                Chambres confirmées
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-slate-900">{dashboard.confirmedRooms}</div>
-              <p className="text-xs text-slate-500 mt-1">Confirmées et payées</p>
-            </CardContent>
-          </Card>
+          <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
+            <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
+              <BarChart3 style={{ width: '1rem', height: '1rem', color: '#06D6A0' }} />
+              Chambres confirmées
+            </div>
+            <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.confirmedRooms}</div>
+            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Confirmées et payées</p>
+          </div>
 
-          <Card className="bg-white border-slate-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-slate-600 flex items-center gap-2">
-                <DollarSign className="w-4 h-4 text-emerald-600" />
-                Revenu TTC
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-slate-900">{formatPrice(dashboard.revenueTTC)}</div>
-              <p className="text-xs text-slate-500 mt-1">Chiffre d&apos;affaires</p>
-            </CardContent>
-          </Card>
+          <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
+            <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
+              <DollarSign style={{ width: '1rem', height: '1rem', color: '#0077B6' }} />
+              Revenu TTC
+            </div>
+            <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{formatPrice(dashboard.revenueTTC)}</div>
+            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Chiffre d&apos;affaires</p>
+          </div>
 
-          <Card className="bg-white border-slate-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-slate-600 flex items-center gap-2">
-                <Percent className="w-4 h-4 text-purple-600" />
-                Taux d&apos;occupation
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-slate-900">{dashboard.occupancyRate}%</div>
-              <p className="text-xs text-slate-500 mt-1">Capacité utilisée</p>
-            </CardContent>
-          </Card>
+          <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
+            <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
+              <Percent style={{ width: '1rem', height: '1rem', color: '#FF6B35' }} />
+              Taux d&apos;occupation
+            </div>
+            <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.occupancyRate}%</div>
+            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Capacité utilisée</p>
+          </div>
         </div>
 
         {/* Timeline */}

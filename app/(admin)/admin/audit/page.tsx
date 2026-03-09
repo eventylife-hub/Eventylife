@@ -1,9 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download } from 'lucide-react';
 import { formatDateTime } from '@/lib/utils';
@@ -144,128 +141,112 @@ export default function AuditPage() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête */}
-      <div className="flex justify-between items-start gap-4">
+      <div className="admin-page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Audit</h1>
-          <p className="text-gray-600 mt-2">
-            {logs.length > 0 ? `${logs.length} actions enregistrées` : 'Consultez l\'historique complet des actions administrateur'}
-          </p>
+          <div className="admin-breadcrumb">Accueil › Audit</div>
+          <h1 className="admin-page-title">Logs d'Audit</h1>
         </div>
-        <Button onClick={handleExport} disabled={loading} className="gap-2 flex-shrink-0">
+        <button
+          onClick={handleExport}
+          disabled={loading}
+          className="admin-btn-secondary"
+          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+        >
           <Download className="w-4 h-4" />
           Exporter CSV
-        </Button>
+        </button>
       </div>
 
-      {/* Affichage erreur */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
-          <div>
-            <p className="font-medium">{error}</p>
-            <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>
-          </div>
-          <button
-            onClick={() => setError(null)}
-            className="text-sm font-medium hover:underline flex-shrink-0"
-          >
+        <div className="admin-alert-bar danger">
+          <span>{error}</span>
+          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setError(null)}>
             Fermer
           </button>
         </div>
       )}
 
-      {/* Filtres */}
-      <Card>
-        <CardContent className="p-6 space-y-4">
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Filtres</h3>
+        </div>
+        <div className="admin-panel-body space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Filtre action */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Action
-              </label>
-              <Input
+              <label className="admin-kpi-label block mb-2">Action</label>
+              <input
+                type="text"
                 placeholder="Ex: USER_CREATED"
                 value={filters.action}
-                onChange={(e) =>
-                  setFilters({ ...filters, action: e.target.value })
-                }
+                onChange={(e) => setFilters({ ...filters, action: e.target.value })}
                 disabled={loading}
+                className="admin-input"
               />
             </div>
 
-            {/* Filtre type entité */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Type d'entité
-              </label>
-              <Input
+              <label className="admin-kpi-label block mb-2">Type d'entité</label>
+              <input
+                type="text"
                 placeholder="Ex: User"
                 value={filters.entityType}
-                onChange={(e) =>
-                  setFilters({ ...filters, entityType: e.target.value })
-                }
+                onChange={(e) => setFilters({ ...filters, entityType: e.target.value })}
                 disabled={loading}
+                className="admin-input"
               />
             </div>
 
-            {/* Date de début */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Date de début
-              </label>
-              <Input
+              <label className="admin-kpi-label block mb-2">Date de début</label>
+              <input
                 type="date"
                 value={filters.startDate}
-                onChange={(e) =>
-                  setFilters({ ...filters, startDate: e.target.value })
-                }
+                onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
                 disabled={loading}
+                className="admin-input"
               />
             </div>
 
-            {/* Date de fin */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Date de fin
-              </label>
-              <Input
+              <label className="admin-kpi-label block mb-2">Date de fin</label>
+              <input
                 type="date"
                 value={filters.endDate}
-                onChange={(e) =>
-                  setFilters({ ...filters, endDate: e.target.value })
-                }
+                onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
                 disabled={loading}
+                className="admin-input"
               />
             </div>
           </div>
 
-          {/* Bouton réinitialiser filtres */}
           {(filters.action || filters.entityType || filters.startDate || filters.endDate) && (
-            <div className="pt-2 border-t">
-              <Button
-                size="sm"
-                variant="outline"
+            <div className="pt-2 border-t border-gray-200">
+              <button
                 onClick={handleClearFilters}
                 disabled={loading}
+                className="admin-btn-secondary"
+                style={{ fontSize: '0.875rem' }}
               >
                 Réinitialiser les filtres
-              </Button>
+              </button>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Tableau */}
-      <Card>
-        <CardContent className="p-6">
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Logs</h3>
+        </div>
+        <div className="admin-panel-body">
           <DataTable
             columns={columns}
             data={logs}
             loading={loading}
             emptyMessage="Aucun log d'audit trouvé"
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

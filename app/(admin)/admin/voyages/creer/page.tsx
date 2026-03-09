@@ -1,21 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { ChevronLeft, ChevronRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
-import { Skeleton, SkeletonGrid } from '@/components/ui/skeleton';
 
 type TransportMode = 'BUS' | 'FLIGHT' | 'MIXED';
 type Step = 1 | 2 | 3 | 4 | 5;
@@ -296,28 +283,39 @@ export default function CreateTripPage() {
   // Skeleton loader for initial loading
   if (isInitializing) {
     return (
-      <div className="space-y-6 max-w-4xl mx-auto">
-        <div>
-          <Skeleton height="2rem" width="50%" className="mb-4" />
-          <Skeleton height="1rem" width="70%" />
+      <div className="admin-fade-in space-y-6 max-w-4xl mx-auto">
+        <div className="admin-page-header">
+          <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+            Créer un voyage
+          </h1>
         </div>
-        <Card>
-          <CardHeader>
-            <Skeleton height="1.5rem" width="30%" />
-          </CardHeader>
-          <CardContent>
-            <SkeletonGrid columns={1} count={5} />
-          </CardContent>
-        </Card>
+        <div>
+          <div className="h-8 bg-gray-200 rounded w-1/2 mb-4 animate-pulse" />
+          <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse" />
+        </div>
+        <div className="admin-panel">
+          <div className="h-6 bg-gray-200 rounded w-1/3 mb-4 animate-pulse" />
+          <div className="space-y-3">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-10 bg-gray-100 rounded animate-pulse" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="admin-fade-in space-y-6 max-w-4xl mx-auto">
+      <div className="admin-page-header">
+        <h1 className="admin-page-title" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+          Créer un voyage
+        </h1>
+      </div>
+
       {/* Error banner */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 admin-fade-in delay-1">
           <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">{error}</p>
@@ -333,7 +331,7 @@ export default function CreateTripPage() {
 
       {/* Submit error banner */}
       {submitError && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 admin-fade-in delay-1">
           <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">{submitError}</p>
@@ -345,15 +343,7 @@ export default function CreateTripPage() {
             </button>
           </div>
         </div>
-      )}
-
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Créer un voyage</h1>
-        <p className="text-gray-600 mt-2">
-          Complétez les 5 étapes pour créer un nouveau voyage
-        </p>
-      </div>
+      }
 
       {/* Indicateur de progression */}
       <div className="flex items-center justify-between">
@@ -385,8 +375,8 @@ export default function CreateTripPage() {
       </div>
 
       {/* Contenu par étape */}
-      <Card>
-        <CardContent className="p-8">
+      <div className="admin-panel admin-fade-in delay-2">
+        <div className="admin-panel-body p-8">
           {/* Étape 1: Informations de base */}
           {currentStep === 1 && (
             <div className="space-y-6">
@@ -394,31 +384,31 @@ export default function CreateTripPage() {
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="title">Titre du voyage</Label>
-                  <Input
+                  <label htmlFor="title" className="admin-input-label">Titre du voyage</label>
+                  <input
                     id="title"
                     value={basicInfo.title}
                     onChange={(e) =>
                       setBasicInfo((prev) => ({ ...prev, title: e.target.value }))
                     }
                     placeholder="Ex: Voyage à Barcelone 2024"
-                    className="mt-1"
+                    className="admin-input mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="slug">Slug (auto-généré)</Label>
-                  <Input
+                  <label htmlFor="slug" className="admin-input-label">Slug (auto-généré)</label>
+                  <input
                     id="slug"
                     value={basicInfo.slug}
                     disabled
-                    className="mt-1 bg-gray-100"
+                    className="admin-input mt-1 bg-gray-100"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea
+                  <label htmlFor="description" className="admin-input-label">Description</label>
+                  <textarea
                     id="description"
                     value={basicInfo.description}
                     onChange={(e) =>
@@ -428,15 +418,15 @@ export default function CreateTripPage() {
                       }))
                     }
                     placeholder="Description détaillée du voyage"
-                    className="mt-1"
+                    className="admin-input mt-1"
                     rows={4}
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="startDate">Date de départ</Label>
-                    <Input
+                    <label htmlFor="startDate" className="admin-input-label">Date de départ</label>
+                    <input
                       id="startDate"
                       type="date"
                       value={basicInfo.startDate}
@@ -446,12 +436,12 @@ export default function CreateTripPage() {
                           startDate: e.target.value,
                         }))
                       }
-                      className="mt-1"
+                      className="admin-input mt-1"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="endDate">Date de retour</Label>
-                    <Input
+                    <label htmlFor="endDate" className="admin-input-label">Date de retour</label>
+                    <input
                       id="endDate"
                       type="date"
                       value={basicInfo.endDate}
@@ -461,14 +451,14 @@ export default function CreateTripPage() {
                           endDate: e.target.value,
                         }))
                       }
-                      className="mt-1"
+                      className="admin-input mt-1"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="destination">Destination</Label>
-                  <Input
+                  <label htmlFor="destination" className="admin-input-label">Destination</label>
+                  <input
                     id="destination"
                     value={basicInfo.destination}
                     onChange={(e) =>
@@ -478,13 +468,13 @@ export default function CreateTripPage() {
                       }))
                     }
                     placeholder="Ex: Barcelone, Espagne"
-                    className="mt-1"
+                    className="admin-input mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="imageUrl">URL de l&apos;image</Label>
-                  <Input
+                  <label htmlFor="imageUrl" className="admin-input-label">URL de l&apos;image</label>
+                  <input
                     id="imageUrl"
                     type="url"
                     value={basicInfo.imageUrl}
@@ -492,7 +482,7 @@ export default function CreateTripPage() {
                       setBasicInfo((prev) => ({ ...prev, imageUrl: e.target.value }))
                     }
                     placeholder="https://..."
-                    className="mt-1"
+                    className="admin-input mt-1"
                   />
                 </div>
               </div>
@@ -506,23 +496,18 @@ export default function CreateTripPage() {
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="transport-mode">Mode de transport</Label>
-                  <Select value={transport.mode} onValueChange={(value) => setTransport((prev) => ({ ...prev, mode: value as TransportMode }))}>
-                    <SelectTrigger id="transport-mode" className="mt-1">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="BUS">Bus</SelectItem>
-                      <SelectItem value="FLIGHT">Avion</SelectItem>
-                      <SelectItem value="MIXED">Mixte (Bus + Avion)</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <label htmlFor="transport-mode" className="admin-input-label">Mode de transport</label>
+                  <select id="transport-mode" value={transport.mode} onChange={(e) => setTransport((prev) => ({ ...prev, mode: e.target.value as TransportMode }))} className="admin-input mt-1">
+                    <option value="BUS">Bus</option>
+                    <option value="FLIGHT">Avion</option>
+                    <option value="MIXED">Mixte (Bus + Avion)</option>
+                  </select>
                 </div>
 
                 {(transport.mode === 'BUS' || transport.mode === 'MIXED') && (
                   <div>
-                    <Label htmlFor="busCompany">Transporteur bus</Label>
-                    <Input
+                    <label htmlFor="busCompany" className="admin-input-label">Transporteur bus</label>
+                    <input
                       id="busCompany"
                       value={transport.busCompany || ''}
                       onChange={(e) =>
@@ -539,8 +524,8 @@ export default function CreateTripPage() {
 
                 {(transport.mode === 'FLIGHT' || transport.mode === 'MIXED') && (
                   <div>
-                    <Label htmlFor="flightCompany">Transporteur avion</Label>
-                    <Input
+                    <label htmlFor="flightCompany" className="admin-input-label">Transporteur avion</label>
+                    <input
                       id="flightCompany"
                       value={transport.flightCompany || ''}
                       onChange={(e) =>
@@ -558,7 +543,7 @@ export default function CreateTripPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="capacity">Capacité (places)</Label>
-                    <Input
+                    <input
                       id="capacity"
                       type="number"
                       value={transport.capacity}
@@ -569,12 +554,12 @@ export default function CreateTripPage() {
                         }))
                       }
                       min="1"
-                      className="mt-1"
+                      className="admin-input mt-1"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="pricePerSeat">Prix/place (EUR)</Label>
-                    <Input
+                    <label htmlFor="pricePerSeat" className="admin-input-label">Prix/place (EUR)</label>
+                    <input
                       id="pricePerSeat"
                       type="number"
                       value={transport.pricePerSeatCentimes / 100}
@@ -588,25 +573,26 @@ export default function CreateTripPage() {
                       }
                       step="0.01"
                       min="0"
-                      className="mt-1"
+                      className="admin-input mt-1"
                     />
                   </div>
                 </div>
 
                 {transport.mode === 'BUS' && (
                   <div>
-                    <Label htmlFor="busStop">Arrêts bus</Label>
+                    <label htmlFor="busStop" className="admin-input-label">Arrêts bus</label>
                     <div className="mt-1 space-y-2">
                       <div className="flex gap-2">
-                        <Input
+                        <input
                           id="busStop"
                           value={newBusStop}
                           onChange={(e) => setNewBusStop(e.target.value)}
                           placeholder="Ajouter un arrêt"
+                          className="admin-input"
                         />
-                        <Button onClick={handleAddBusStop} size="sm">
+                        <button onClick={handleAddBusStop} className="admin-btn-secondary">
                           Ajouter
-                        </Button>
+                        </button>
                       </div>
                       <div className="space-y-2">
                         {(transport.busStops || []).map((stop, index) => (
@@ -615,13 +601,12 @@ export default function CreateTripPage() {
                             className="flex items-center justify-between bg-gray-50 p-3 rounded"
                           >
                             <span>{stop}</span>
-                            <Button
+                            <button
                               onClick={() => handleRemoveBusStop(index)}
-                              size="sm"
-                              variant="destructive"
+                              className="admin-btn-destructive text-sm"
                             >
                               Supprimer
-                            </Button>
+                            </button>
                           </div>
                         ))}
                       </div>
@@ -639,8 +624,8 @@ export default function CreateTripPage() {
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="hotelName">Nom de l&apos;hôtel</Label>
-                  <Input
+                  <label htmlFor="hotelName" className="admin-input-label">Nom de l&apos;hôtel</label>
+                  <input
                     id="hotelName"
                     value={accommodation.hotelName}
                     onChange={(e) =>
@@ -1032,27 +1017,26 @@ export default function CreateTripPage() {
               </div>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Boutons de navigation */}
-      <div className="flex items-center justify-between">
-        <Button
+      <div className="flex items-center justify-between admin-fade-in delay-3">
+        <button
           onClick={() => setCurrentStep((prev) => (Math.max(1, prev - 1) as Step))}
           disabled={currentStep === 1}
-          variant="outline"
-          className="gap-2"
+          className="admin-btn-secondary gap-2 flex items-center"
         >
           <ChevronLeft className="w-4 h-4" />
           Précédent
-        </Button>
+        </button>
 
         <div className="text-sm text-gray-600">
           Étape {currentStep} sur 5
         </div>
 
         {currentStep < 5 ? (
-          <Button
+          <button
             onClick={() => {
               if (currentStep === 1 && !isStep1Valid()) {
                 alert('Veuillez remplir tous les champs de cette étape');
@@ -1072,20 +1056,20 @@ export default function CreateTripPage() {
               }
               setCurrentStep((prev) => (Math.min(5, prev + 1) as Step));
             }}
-            className="gap-2"
+            className="admin-btn-primary gap-2 flex items-center"
           >
             Suivant
             <ChevronRight className="w-4 h-4" />
-          </Button>
+          </button>
         ) : (
-          <Button
+          <button
             onClick={handleCreateTrip}
             disabled={isSubmitting}
-            className="gap-2 bg-green-600 hover:bg-green-700"
+            className="admin-btn-primary gap-2 flex items-center bg-green-600 hover:bg-green-700"
           >
             <CheckCircle className="w-4 h-4" />
             {isSubmitting ? 'Création...' : 'Créer le voyage'}
-          </Button>
+          </button>
         )}
       </div>
     </div>

@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Briefcase,
   User,
@@ -156,48 +154,56 @@ export default function InscriptionPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md border-green-200 bg-white">
-          <CardContent className="pt-6 text-center space-y-4">
-            <CheckCircle2 className="w-16 h-16 text-green-600 mx-auto" />
-            <h2 className="text-2xl font-bold text-slate-900">Inscription réussie!</h2>
-            <p className="text-slate-600">
-              Merci de vous être inscrit. Redirection vers l'onboarding...
-            </p>
-          </CardContent>
-        </Card>
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+        <div className="pro-panel" style={{ width: '100%', maxWidth: '448px', padding: '32px', textAlign: 'center' }}>
+          <CheckCircle2 className="w-16 h-16" style={{ color: '#06D6A0', margin: '0 auto 16px' }} />
+          <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Inscription réussie!</h2>
+          <p style={{ color: '#8896A6' }}>
+            Merci de vous être inscrit. Redirection vers l'onboarding...
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 p-4">
-      <div className="max-w-2xl mx-auto">
+    <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
+      <div style={{ maxWidth: '896px', margin: '0 auto' }}>
         {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
             {[1, 2, 3, 4].map((s) => (
-              <div key={s} className="flex items-center flex-1">
+              <div key={s} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
-                    s <= step
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-200 text-slate-600'
-                  }`}
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 600,
+                    fontSize: '14px',
+                    backgroundColor: s <= step ? '#0077B6' : '#E0E0E0',
+                    color: s <= step ? 'white' : '#8896A6'
+                  }}
                 >
                   {s <= step && s < step ? <CheckCircle2 className="w-5 h-5" /> : s}
                 </div>
                 {s < 4 && (
                   <div
-                    className={`flex-1 h-1 mx-2 transition-all ${
-                      s < step ? 'bg-indigo-600' : 'bg-slate-200'
-                    }`}
+                    style={{
+                      flex: 1,
+                      height: '2px',
+                      margin: '0 8px',
+                      backgroundColor: s < step ? '#0077B6' : '#E0E0E0'
+                    }}
                   />
                 )}
               </div>
             ))}
           </div>
-          <div className="flex justify-between text-xs text-slate-600 mt-2">
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#8896A6' }}>
             <span>Type Pro</span>
             <span>Infos perso</span>
             <span>Détails pro</span>
@@ -206,124 +212,120 @@ export default function InscriptionPage() {
         </div>
 
         {error && (
-          <Card className="mb-6 border-red-200 bg-red-50">
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-3">
-                <AlertCircle className="w-5 h-5 text-red-600" />
-                <p className="text-red-800">{error}</p>
-              </div>
-            </CardContent>
-          </Card>
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <AlertCircle className="w-5 h-5" style={{ color: '#E63946', flexShrink: 0 }} />
+            <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
+          </div>
         )}
 
         {/* Step 1: Pro Type */}
         {step === 1 && (
-          <Card className="bg-white">
-            <CardHeader>
-              <CardTitle>Quel type de professionnel êtes-vous?</CardTitle>
-              <CardDescription>Sélectionnez le profil qui vous correspond</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
+          <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Quel type de professionnel êtes-vous?</h2>
+            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Sélectionnez le profil qui vous correspond</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {PRO_TYPES.map((type) => {
                 const Icon = type.icon;
                 return (
                   <button
                     key={type.id}
                     onClick={() => handleProTypeSelect(type.id)}
-                    className={`w-full p-4 border-2 rounded-lg text-left transition-all ${
-                      form.proType === type.id
-                        ? 'border-indigo-600 bg-indigo-50'
-                        : 'border-slate-200 hover:border-indigo-300'
-                    }`}
+                    style={{
+                      width: '100%',
+                      padding: '16px',
+                      border: '2px solid ' + (form.proType === type.id ? '#0077B6' : '#E0E0E0'),
+                      borderRadius: '8px',
+                      textAlign: 'left',
+                      backgroundColor: form.proType === type.id ? '#F0F7FF' : 'transparent',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px'
+                    }}
                   >
-                    <div className="flex items-start gap-3">
-                      <Icon className={`w-5 h-5 mt-1 flex-shrink-0 ${form.proType === type.id ? 'text-indigo-600' : 'text-slate-400'}`} />
-                      <div>
-                        <p className="font-semibold text-slate-900">{type.label}</p>
-                        <p className="text-sm text-slate-600">{type.description}</p>
-                      </div>
-                      {form.proType === type.id && (
-                        <CheckCircle2 className="w-5 h-5 text-indigo-600 ml-auto flex-shrink-0" />
-                      )}
+                    <Icon style={{ width: '20px', height: '20px', marginTop: '4px', flexShrink: 0, color: form.proType === type.id ? '#0077B6' : '#8896A6' }} />
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, color: '#0A1628' }}>{type.label}</p>
+                      <p style={{ fontSize: '14px', color: '#8896A6' }}>{type.description}</p>
                     </div>
+                    {form.proType === type.id && (
+                      <CheckCircle2 style={{ width: '20px', height: '20px', color: '#0077B6', flexShrink: 0 }} />
+                    )}
                   </button>
                 );
               })}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Step 2: Personal Info */}
         {step === 2 && (
-          <Card className="bg-white">
-            <CardHeader>
-              <CardTitle>Informations personnelles</CardTitle>
-              <CardDescription>Vos coordonnées de contact</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Informations personnelles</h2>
+            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Vos coordonnées de contact</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Nom complet *</label>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom complet *</label>
                 <input
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Jean Dupont"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="pro-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Email professionnel *</label>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Email professionnel *</label>
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="pro@example.com"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="pro-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Téléphone *</label>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Téléphone *</label>
                 <input
                   type="tel"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+33 6 12 34 56 78"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="pro-input"
                 />
               </div>
 
               {form.proType === 'MAGASIN' && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">SIRET *</label>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>SIRET *</label>
                   <input
                     type="text"
                     value={form.siret || ''}
                     onChange={(e) => setForm({ ...form, siret: e.target.value })}
                     placeholder="12345678901234"
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                    className="pro-input"
                   />
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Step 3: Professional Details */}
         {step === 3 && (
-          <Card className="bg-white">
-            <CardHeader>
-              <CardTitle>Détails professionnels</CardTitle>
-              <CardDescription>Vos compétences et zone d&apos;expertise</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Détails professionnels</h2>
+            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Vos compétences et zone d&apos;expertise</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Zone géographique *</label>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
                 <select
                   value={form.zone}
                   onChange={(e) => setForm({ ...form, zone: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="pro-input"
                 >
                   <option value="">Sélectionnez une zone</option>
                   {ZONES.map((zone) => (
@@ -335,147 +337,171 @@ export default function InscriptionPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-3">Compétences *</label>
-                <div className="space-y-2">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>Compétences *</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {SKILLS.map((skill) => (
                     <button
                       key={skill}
                       onClick={() => toggleSkill(skill)}
-                      className={`w-full p-3 border-2 rounded-lg text-left transition-all ${
-                        form.skills.includes(skill)
-                          ? 'border-indigo-600 bg-indigo-50'
-                          : 'border-slate-200 hover:border-indigo-300'
-                      }`}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: '2px solid ' + (form.skills.includes(skill) ? '#0077B6' : '#E0E0E0'),
+                        borderRadius: '8px',
+                        textAlign: 'left',
+                        backgroundColor: form.skills.includes(skill) ? '#F0F7FF' : 'transparent',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px'
+                      }}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                          form.skills.includes(skill)
-                            ? 'border-indigo-600 bg-indigo-600'
-                            : 'border-slate-300'
-                        }`}>
-                          {form.skills.includes(skill) && (
-                            <CheckCircle2 className="w-4 h-4 text-white" />
-                          )}
-                        </div>
-                        <span className="text-slate-700">{skill}</span>
+                      <div style={{
+                        width: '20px',
+                        height: '20px',
+                        borderRadius: '4px',
+                        border: '2px solid ' + (form.skills.includes(skill) ? '#0077B6' : '#8896A6'),
+                        backgroundColor: form.skills.includes(skill) ? '#0077B6' : 'transparent',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0
+                      }}>
+                        {form.skills.includes(skill) && (
+                          <CheckCircle2 style={{ width: '16px', height: '16px', color: 'white' }} />
+                        )}
                       </div>
+                      <span style={{ color: '#0A1628' }}>{skill}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Description professionnelle *</label>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   placeholder="Décrivez votre expérience et vos spécialités..."
                   rows={4}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="pro-input"
                 />
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Step 4: Legal Agreement */}
         {step === 4 && (
-          <Card className="bg-white">
-            <CardHeader>
-              <CardTitle>Conditions d&apos;utilisation</CardTitle>
-              <CardDescription>Acceptez nos conditions pour continuer</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-slate-50 p-4 rounded-lg max-h-64 overflow-y-auto border border-slate-200">
-                <h4 className="font-semibold text-slate-900 mb-2">Charte Eventy Life</h4>
-                <p className="text-xs text-slate-600 mb-4">
+          <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Conditions d&apos;utilisation</h2>
+            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Acceptez nos conditions pour continuer</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ backgroundColor: '#F5F5F5', padding: '16px', borderRadius: '8px', maxHeight: '256px', overflowY: 'auto', border: '1px solid #E0E0E0' }}>
+                <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Charte Eventy Life</h4>
+                <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '16px' }}>
                   En tant que professionnel partenaire, vous vous engagez à respecter nos valeurs
                   d'excellence, de transparence et de responsabilité envers nos clients...
                 </p>
 
-                <h4 className="font-semibold text-slate-900 mb-2">Conditions Générales de Vente Pro</h4>
-                <p className="text-xs text-slate-600 mb-4">
+                <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Conditions Générales de Vente Pro</h4>
+                <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '16px' }}>
                   Vous acceptez les conditions de commission, les délais de paiement et les
                   responsabilités contractuelles définies dans nos CGV...
                 </p>
 
-                <h4 className="font-semibold text-slate-900 mb-2">RGPD & Confidentialité</h4>
-                <p className="text-xs text-slate-600">
+                <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>RGPD & Confidentialité</h4>
+                <p style={{ fontSize: '12px', color: '#8896A6' }}>
                   Vos données seront traitées conformément à la réglementation RGPD. Nous nous
                   engageons à protéger vos informations personnelles...
                 </p>
               </div>
 
-              <div className="space-y-3">
-                <label className="flex items-start gap-3 cursor-pointer">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={form.acceptCharte}
                     onChange={(e) => setForm({ ...form, acceptCharte: e.target.checked })}
-                    className="w-5 h-5 rounded border-slate-300 mt-1 flex-shrink-0"
+                    style={{ marginTop: '4px', flexShrink: 0 }}
                   />
-                  <span className="text-sm text-slate-700">
+                  <span style={{ fontSize: '14px', color: '#0A1628' }}>
                     J'accepte la <strong>Charte Eventy Life</strong> *
                   </span>
                 </label>
 
-                <label className="flex items-start gap-3 cursor-pointer">
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={form.acceptCGV}
                     onChange={(e) => setForm({ ...form, acceptCGV: e.target.checked })}
-                    className="w-5 h-5 rounded border-slate-300 mt-1 flex-shrink-0"
+                    style={{ marginTop: '4px', flexShrink: 0 }}
                   />
-                  <span className="text-sm text-slate-700">
+                  <span style={{ fontSize: '14px', color: '#0A1628' }}>
                     J'accepte les <strong>Conditions Générales de Vente Pro</strong> *
                   </span>
                 </label>
 
-                <label className="flex items-start gap-3 cursor-pointer">
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={form.acceptRGPD}
                     onChange={(e) => setForm({ ...form, acceptRGPD: e.target.checked })}
-                    className="w-5 h-5 rounded border-slate-300 mt-1 flex-shrink-0"
+                    style={{ marginTop: '4px', flexShrink: 0 }}
                   />
-                  <span className="text-sm text-slate-700">
+                  <span style={{ fontSize: '14px', color: '#0A1628' }}>
                     J'accepte la <strong>Politique de confidentialité RGPD</strong> *
                   </span>
                 </label>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between gap-4 mt-8">
-          <Button
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', marginTop: '32px' }}>
+          <button
             onClick={() => setStep(step - 1)}
             disabled={step === 1}
-            variant="outline"
+            className="pro-btn-outline"
+            style={{ opacity: step === 1 ? 0.5 : 1, cursor: step === 1 ? 'not-allowed' : 'pointer' }}
           >
             Précédent
-          </Button>
+          </button>
 
           {step < 4 ? (
-            <Button
+            <button
               onClick={() => setStep(step + 1)}
               disabled={
                 (step === 1 && !canProceedStep1) ||
                 (step === 2 && !canProceedStep2) ||
                 (step === 3 && !canProceedStep3)
               }
+              className="pro-btn-sun"
+              style={{
+                opacity: ((step === 1 && !canProceedStep1) ||
+                          (step === 2 && !canProceedStep2) ||
+                          (step === 3 && !canProceedStep3)) ? 0.5 : 1,
+                cursor: ((step === 1 && !canProceedStep1) ||
+                         (step === 2 && !canProceedStep2) ||
+                         (step === 3 && !canProceedStep3)) ? 'not-allowed' : 'pointer'
+              }}
             >
               Suivant
-            </Button>
+            </button>
           ) : (
-            <Button
+            <button
               onClick={handleSubmit}
               disabled={!canSubmit || loading}
-              className="bg-green-600 hover:bg-green-700"
+              className="pro-btn-sun"
+              style={{
+                opacity: (!canSubmit || loading) ? 0.5 : 1,
+                cursor: (!canSubmit || loading) ? 'not-allowed' : 'pointer'
+              }}
             >
               {loading ? 'Inscription...' : 'S\'inscrire'}
-            </Button>
+            </button>
           )}
         </div>
       </div>

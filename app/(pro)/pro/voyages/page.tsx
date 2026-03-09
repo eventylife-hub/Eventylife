@@ -75,17 +75,36 @@ export default function TravelsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Mes voyages</h1>
-            <p className="text-slate-600 mt-2">Gérez tous vos voyages au même endroit</p>
+            <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+              Mes voyages
+            </h1>
+            <p style={{ color: '#666', marginTop: '0.5rem', fontSize: '0.875rem' }}>
+              Gérez tous vos voyages au même endroit
+            </p>
           </div>
           <Link
             href="/pro/voyages/nouveau"
-            className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.75rem 1.5rem',
+              background: '#FF6B35',
+              color: 'white',
+              borderRadius: '0.5rem',
+              textDecoration: 'none',
+              fontWeight: '500',
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#E55A24')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#FF6B35')}
           >
             <Plus className="w-5 h-5" />
             Créer un voyage
@@ -93,48 +112,79 @@ export default function TravelsPage() {
         </div>
 
         {/* Search */}
-        <div className="mb-6">
+        <div style={{ marginBottom: '1.5rem' }}>
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Rechercher un voyage..."
-            className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="pro-input"
+            style={{ width: '100%' }}
           />
         </div>
 
         {/* Tabs and View Toggle */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex gap-2 overflow-x-auto pb-2">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
             {TABS.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 font-medium whitespace-nowrap rounded-lg transition-colors ${
-                  activeTab === tab
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-slate-700 hover:bg-slate-100'
-                }`}
+                style={{
+                  padding: '0.5rem 1rem',
+                  fontWeight: '500',
+                  whiteSpace: 'nowrap',
+                  borderRadius: '0.5rem',
+                  background: activeTab === tab ? '#FF6B35' : '#FFFFFF',
+                  color: activeTab === tab ? '#FFFFFF' : '#4A5568',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeTab !== tab) (e.currentTarget as HTMLButtonElement).style.background = '#F5F5F5';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== tab) (e.currentTarget as HTMLButtonElement).style.background = '#FFFFFF';
+                }}
               >
                 {tab}
               </button>
             ))}
           </div>
 
-          <div className="flex gap-2">
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-colors ${
-                viewMode === 'grid' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600'
-              }`}
+              style={{
+                padding: '0.5rem',
+                borderRadius: '0.5rem',
+                background: viewMode === 'grid' ? '#FF6B35' : '#FFFFFF',
+                color: viewMode === 'grid' ? '#FFFFFF' : '#4A5568',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
               <Grid className="w-5 h-5" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-lg transition-colors ${
-                viewMode === 'list' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600'
-              }`}
+              style={{
+                padding: '0.5rem',
+                borderRadius: '0.5rem',
+                background: viewMode === 'list' ? '#FF6B35' : '#FFFFFF',
+                color: viewMode === 'list' ? '#FFFFFF' : '#4A5568',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
               <List className="w-5 h-5" />
             </button>
@@ -143,15 +193,13 @@ export default function TravelsPage() {
 
         {/* Erreur */}
         {error && (
-          <div className="mb-6">
-            <Alert className="border-red-200 bg-red-50">
-              <AlertCircle className="h-4 w-4 text-red-600" />
-              <AlertDescription className="ml-3 text-red-800">
-                {error}
-              </AlertDescription>
-            </Alert>
-            <div className="mt-4">
-              <Button
+          <div style={{ marginBottom: '1.5rem' }}>
+            <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+              <AlertCircle className="h-4 w-4" style={{ color: '#E63946', marginTop: '0.25rem', flexShrink: 0 }} />
+              <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+            </div>
+            <div style={{ marginTop: '1rem' }}>
+              <button
                 onClick={() => {
                   setError(null);
                   setLoading(true);
@@ -164,11 +212,19 @@ export default function TravelsPage() {
                     setLoading(false);
                   });
                 }}
-                variant="outline"
-                className="border-red-200 text-red-600 hover:bg-red-50"
+                style={{
+                  padding: '0.5rem 1rem',
+                  background: '#FFFFFF',
+                  color: '#E63946',
+                  border: '1px solid #E63946',
+                  borderRadius: '0.5rem',
+                  cursor: 'pointer',
+                  fontWeight: '500',
+                  fontSize: '0.875rem',
+                }}
               >
                 Réessayer
-              </Button>
+              </button>
             </div>
           </div>
         )}
@@ -210,17 +266,30 @@ export default function TravelsPage() {
         {!loading && !error && (
           <>
             {viewMode === 'grid' ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
                 {filteredTravels.map((travel) => (
                   <Link
                     key={travel.id}
                     href={`/pro/voyages/${travel.id}`}
-                    className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden border border-slate-200"
+                    style={{
+                      background: '#FFFFFF',
+                      borderRadius: '0.5rem',
+                      border: '1px solid #E8F7FC',
+                      overflow: 'hidden',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      transition: 'box-shadow 0.2s',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)')}
                   >
-                    <div className="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600"></div>
-                    <div className="p-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="font-bold text-slate-900 line-clamp-2">{travel.title}</h3>
+                    <div style={{ height: '12rem', background: 'linear-gradient(135deg, #FF6B35 0%, #FF8F5E 100%)' }}></div>
+                    <div style={{ padding: '1.5rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.75rem', gap: '0.75rem' }}>
+                        <h3 style={{ fontWeight: 'bold', color: '#0A1628', fontSize: '1rem', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{travel.title}</h3>
                         <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${
                           STATUS_COLORS[travel.status] || 'bg-slate-100 text-slate-800'
                         }`}>
@@ -228,22 +297,32 @@ export default function TravelsPage() {
                         </span>
                       </div>
 
-                      <div className="space-y-2 text-sm text-slate-600 mb-4">
-                        <div className="flex items-center gap-2">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem', color: '#4A5568', marginBottom: '1rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <MapPin className="w-4 h-4" />
                           {travel.destinationCity}
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <Clock className="w-4 h-4" />
                           {formatDate(travel.departureDate)} - {formatDate(travel.returnDate)}
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <Users className="w-4 h-4" />
                           Capacité: {travel.capacity} places
                         </div>
                       </div>
 
-                      <button className="w-full py-2 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-100 font-medium text-sm">
+                      <button style={{
+                        width: '100%',
+                        padding: '0.5rem',
+                        background: '#FFF0E8',
+                        color: '#FF6B35',
+                        border: 'none',
+                        borderRadius: '0.25rem',
+                        cursor: 'pointer',
+                        fontWeight: '500',
+                        fontSize: '0.875rem',
+                      }}>
                         Voir les détails →
                       </button>
                     </div>
@@ -251,36 +330,39 @@ export default function TravelsPage() {
                 ))}
               </div>
             ) : (
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-                <table className="w-full">
-                  <thead className="bg-slate-50 border-b border-slate-200">
+              <div style={{ background: '#FFFFFF', borderRadius: '0.5rem', border: '1px solid #E8F7FC', overflow: 'hidden' }}>
+                <table className="pro-table" style={{ width: '100%' }}>
+                  <thead style={{ background: '#F0E6D8', borderBottom: '1px solid #E8F7FC' }}>
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Voyage</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Destination</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Dates</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Statut</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Action</th>
+                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Voyage</th>
+                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Destination</th>
+                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Dates</th>
+                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Statut</th>
+                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200">
+                  <tbody style={{ borderTop: '1px solid #E8F7FC' }}>
                     {filteredTravels.map((travel) => (
-                      <tr key={travel.id} className="hover:bg-slate-50 transition-colors">
-                        <td className="px-6 py-4 font-medium text-slate-900">{travel.title}</td>
-                        <td className="px-6 py-4 text-slate-600">{travel.destinationCity}</td>
-                        <td className="px-6 py-4 text-sm text-slate-600">
+                      <tr key={travel.id} style={{ borderBottom: '1px solid #E8F7FC', transition: 'background-color 0.2s' }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F5F5')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
+                      >
+                        <td style={{ padding: '1rem 1.5rem', fontWeight: '500', color: '#0A1628' }}>{travel.title}</td>
+                        <td style={{ padding: '1rem 1.5rem', color: '#4A5568' }}>{travel.destinationCity}</td>
+                        <td style={{ padding: '1rem 1.5rem', fontSize: '0.875rem', color: '#4A5568' }}>
                           {formatDate(travel.departureDate)}
                         </td>
-                        <td className="px-6 py-4">
+                        <td style={{ padding: '1rem 1.5rem' }}>
                           <span className={`px-2 py-1 rounded text-xs font-medium ${
                             STATUS_COLORS[travel.status] || 'bg-slate-100 text-slate-800'
                           }`}>
                             {STATUS_LABELS[travel.status] || travel.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td style={{ padding: '1rem 1.5rem' }}>
                           <Link
                             href={`/pro/voyages/${travel.id}`}
-                            className="text-indigo-600 hover:text-indigo-700 font-medium text-sm"
+                            style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem' }}
                           >
                             Voir →
                           </Link>
@@ -293,12 +375,12 @@ export default function TravelsPage() {
             )}
 
             {filteredTravels.length === 0 && (
-              <div className="text-center py-12">
-                <AlertCircle className="mx-auto h-12 w-12 text-slate-300 mb-4" />
-                <p className="text-slate-600 font-medium mb-4">Aucun voyage trouvé</p>
+              <div style={{ textAlign: 'center', paddingY: '3rem', paddingTop: '3rem', paddingBottom: '3rem' }}>
+                <AlertCircle style={{ margin: '0 auto', height: '3rem', width: '3rem', color: '#D1D5DB', marginBottom: '1rem' }} />
+                <p style={{ color: '#4A5568', fontWeight: '500', marginBottom: '1rem' }}>Aucun voyage trouvé</p>
                 <Link
                   href="/pro/voyages/nouveau"
-                  className="text-indigo-600 hover:text-indigo-700 font-medium"
+                  style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500' }}
                 >
                   Créer votre premier voyage →
                 </Link>

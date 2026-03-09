@@ -1,14 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, Search, X, Clock, XCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
 
@@ -177,48 +170,44 @@ export default function AdminBookingsPage() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Réservations</h1>
-        <p className="text-gray-600 mt-2">
-          Recherchez et gérez les réservations clients
-        </p>
+      <div className="admin-page-header">
+        <div>
+          <div className="admin-breadcrumb">Accueil › Réservations</div>
+          <h1 className="admin-page-title">Réservations</h1>
+        </div>
       </div>
 
-      {/* Toast notification */}
       {toastMessage && (
         <div
-          className={`p-4 rounded-lg border flex justify-between items-center ${
-            toastMessage.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-800'
-              : 'bg-red-50 border-red-200 text-red-800'
-          }`}
+          className="admin-alert-bar"
+          style={{
+            background: toastMessage.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
+            borderColor: toastMessage.type === 'success' ? 'var(--admin-mint)' : 'var(--admin-coral)',
+            color: toastMessage.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)',
+          }}
         >
           <span>{toastMessage.message}</span>
-          <button
-            onClick={() => setToastMessage(null)}
-            className="ml-4 text-sm font-medium hover:underline"
-          >
+          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
             Fermer
           </button>
         </div>
       )}
 
-      {/* Barre de recherche */}
-      <Card>
-        <CardContent className="p-6">
-          <form onSubmit={handleSearch} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Filtres</h3>
+        </div>
+        <div className="admin-panel-body space-y-4">
+          <form onSubmit={handleSearch}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">
-                  Chercher (ref, email, voyage)
-                </label>
+                <label className="admin-kpi-label block mb-2">Chercher (ref, email, voyage)</label>
                 <div className="relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
+                  <Search className="absolute left-3 top-3 h-4 w-4" style={{ color: 'var(--admin-text-secondary)' }} />
+                  <input
                     type="text"
                     placeholder="Ex: BK-001234"
-                    className="pl-10"
+                    className="admin-input pl-10"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -226,129 +215,99 @@ export default function AdminBookingsPage() {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">
-                  Statut
-                </label>
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tous les statuts</SelectItem>
-                    <SelectItem value="HOLD">En attente</SelectItem>
-                    <SelectItem value="PARTIALLY_PAID">Partiellement payé</SelectItem>
-                    <SelectItem value="CONFIRMED">Confirmé</SelectItem>
-                    <SelectItem value="CANCELLED">Annulé</SelectItem>
-                    <SelectItem value="EXPIRED">Expiré</SelectItem>
-                  </SelectContent>
-                </Select>
+                <label className="admin-kpi-label block mb-2">Statut</label>
+                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="admin-input">
+                  <option value="all">Tous les statuts</option>
+                  <option value="HOLD">En attente</option>
+                  <option value="PARTIALLY_PAID">Partiellement payé</option>
+                  <option value="CONFIRMED">Confirmé</option>
+                  <option value="CANCELLED">Annulé</option>
+                  <option value="EXPIRED">Expiré</option>
+                </select>
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">
-                  Du
-                </label>
-                <Input
+                <label className="admin-kpi-label block mb-2">Du</label>
+                <input
                   type="date"
                   value={dateRangeStart}
                   onChange={(e) => setDateRangeStart(e.target.value)}
+                  className="admin-input"
                 />
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-1 block">
-                  Au
-                </label>
-                <Input
+                <label className="admin-kpi-label block mb-2">Au</label>
+                <input
                   type="date"
                   value={dateRangeEnd}
                   onChange={(e) => setDateRangeEnd(e.target.value)}
+                  className="admin-input"
                 />
               </div>
             </div>
 
             <div className="flex gap-2">
-              <Button type="submit" variant="default">
-                <Search className="w-4 h-4 mr-2" />
+              <button type="submit" className="admin-btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Search className="w-4 h-4" />
                 Rechercher
-              </Button>
-              <Button
+              </button>
+              <button
                 type="button"
-                variant="outline"
+                className="admin-btn-secondary"
                 onClick={() => {
                   setSearchQuery('');
                   setStatusFilter('all');
                   setDateRangeStart('');
                   setDateRangeEnd('');
                 }}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
               >
-                <X className="w-4 h-4 mr-2" />
+                <X className="w-4 h-4" />
                 Réinitialiser
-              </Button>
+              </button>
             </div>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Tableau des réservations */}
-      <Card>
-        <CardContent className="p-6">
-          {/* Erreur */}
+      <div className="admin-panel">
+        <div className="admin-panel-header">
+          <h3 className="admin-panel-title">Réservations</h3>
+        </div>
+        <div className="admin-panel-body">
           {error && (
-            <div className="mb-6">
-              <Alert className="border-red-200 bg-red-50">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <AlertDescription className="ml-3 text-red-800">
-                  {error}
-                </AlertDescription>
-              </Alert>
-              <div className="mt-4">
-                <Button
-                  onClick={() => fetchBookings()}
-                  variant="outline"
-                  className="border-red-200 text-red-600 hover:bg-red-50"
-                >
-                  Réessayer
-                </Button>
-              </div>
+            <div className="admin-alert-bar danger mb-6">
+              <span>{error}</span>
+              <button className="ml-4 text-sm font-medium hover:underline" onClick={() => fetchBookings()}>
+                Réessayer
+              </button>
             </div>
           )}
 
-          {/* Chargement */}
           {loading && !error && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-4 gap-4 mb-6">
-                <Skeleton className="h-20 rounded-lg" />
-                <Skeleton className="h-20 rounded-lg" />
-                <Skeleton className="h-20 rounded-lg" />
-                <Skeleton className="h-20 rounded-lg" />
-              </div>
-              <Skeleton className="h-10 rounded-lg mb-4" />
-              <Skeleton className="h-12 rounded-lg mb-2" />
-              <Skeleton className="h-12 rounded-lg mb-2" />
-              <Skeleton className="h-12 rounded-lg mb-2" />
-              <Skeleton className="h-12 rounded-lg" />
+            <div style={{ textAlign: 'center', padding: '24px', color: 'var(--admin-text-secondary)' }}>
+              Chargement des réservations...
             </div>
           )}
 
-          {/* Contenu */}
           {!loading && !error && (
             <>
               {bookings.length === 0 ? (
-                <div className="text-center py-12">
-                  <AlertCircle className="mx-auto h-12 w-12 text-gray-300 mb-4" />
-                  <p className="text-gray-600 font-medium mb-4">Aucune réservation trouvée</p>
-                  <Button
+                <div style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--admin-text-secondary)' }}>
+                  <AlertCircle className="mx-auto h-12 w-12 mb-4" style={{ color: 'var(--admin-text-muted)' }} />
+                  <p style={{ marginBottom: '16px', fontWeight: '500' }}>Aucune réservation trouvée</p>
+                  <button
+                    className="admin-btn-secondary"
                     onClick={() => {
                       setSearchQuery('');
                       setStatusFilter('all');
                       setDateRangeStart('');
                       setDateRangeEnd('');
                     }}
-                    variant="outline"
                   >
                     Réinitialiser les filtres
-                  </Button>
+                  </button>
                 </div>
               ) : (
                 <DataTable
@@ -386,15 +345,14 @@ export default function AdminBookingsPage() {
               )}
             </>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Modal d'action */}
       {showActionModal && selectedBooking && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="w-full max-w-md">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <h2 className="text-xl font-bold">
+          <div style={{ background: 'white', borderRadius: '16px', width: '100%', maxWidth: '448px', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>
                 {actionType === 'cancel'
                   ? 'Annuler et Rembourser'
                   : actionType === 'extend'
@@ -403,53 +361,68 @@ export default function AdminBookingsPage() {
               </h2>
               <button
                 onClick={() => setShowActionModal(false)}
-                className="text-gray-400 hover:text-gray-600"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
               >
-                <X className="w-5 h-5" />
+                ×
               </button>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-blue-50 p-3 rounded-lg">
-                <p className="text-sm">
-                  <span className="font-medium">Réservation:</span> {selectedBooking.reference}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {selectedBooking.clientName} - {selectedBooking.tripName}
-                </p>
-              </div>
+            </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">
-                  Raison (obligatoire pour l'audit)
-                </label>
-                <textarea
-                  className="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Expliquez la raison de cette action..."
-                  rows={4}
-                  value={actionReason}
-                  onChange={(e) => setActionReason(e.target.value)}
-                />
-              </div>
+            <div style={{ background: 'var(--admin-ocean-light)', padding: '12px', borderRadius: '10px', marginBottom: '16px', border: '1px solid var(--admin-ocean)' }}>
+              <p style={{ fontSize: '14px', color: 'var(--admin-ocean)' }}>
+                <span style={{ fontWeight: '600' }}>Réservation:</span> {selectedBooking.reference}
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--admin-text-secondary)', marginTop: '4px' }}>
+                {selectedBooking.clientName} - {selectedBooking.tripName}
+              </p>
+            </div>
 
-              <div className="flex gap-2 justify-end">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setShowActionModal(false)}
-                >
-                  Annuler
-                </Button>
-                <Button
-                  type="button"
-                  variant="default"
-                  onClick={handleAction}
-                  className="bg-red-600 hover:bg-red-700"
-                >
-                  Confirmer l'action
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                Raison (obligatoire pour l'audit)
+              </label>
+              <textarea
+                style={{
+                  width: '100%',
+                  border: '1px solid var(--admin-border)',
+                  borderRadius: '10px',
+                  padding: '12px',
+                  fontSize: '14px',
+                  fontFamily: 'inherit',
+                  color: 'var(--admin-text-primary)',
+                }}
+                placeholder="Expliquez la raison de cette action..."
+                rows={4}
+                value={actionReason}
+                onChange={(e) => setActionReason(e.target.value)}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+              <button
+                type="button"
+                className="admin-btn-secondary"
+                onClick={() => setShowActionModal(false)}
+              >
+                Annuler
+              </button>
+              <button
+                type="button"
+                onClick={handleAction}
+                style={{
+                  padding: '10px 16px',
+                  background: 'var(--admin-coral)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                }}
+              >
+                Confirmer l'action
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { MealPlanEditor } from '@/components/restauration/meal-plan-editor';
 import { RestaurantCard } from '@/components/restauration/restaurant-card';
@@ -133,10 +131,10 @@ export default function RestauratPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="text-3xl font-bold mb-6">Gestion de la restauration</h1>
-          <div className="grid gap-6 md:grid-cols-2">
+      <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+        <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#0A1628' }}>Gestion de la restauration</h1>
+          <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
             {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-48 rounded-lg" />
             ))}
@@ -147,147 +145,146 @@ export default function RestauratPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="mx-auto max-w-6xl">
-        <Link href={`/pro/voyages/${travelId}`} className="text-sm text-blue-600 hover:underline mb-4 inline-block">
+    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+        <Link href={`/pro/voyages/${travelId}`} style={{ fontSize: '0.875rem', color: '#0077B6', textDecoration: 'none', marginBottom: '1rem', display: 'inline-block' }}>
           ← Retour au voyage
         </Link>
 
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold">Gestion de la restauration</h1>
-          <Button
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Gestion de la restauration</h1>
+          <button
             onClick={handleGeneratePDF}
-            variant="outline"
+            className="pro-btn-outline"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
           >
-            <FileText className="h-4 w-4 mr-2" />
+            <FileText style={{ width: '1rem', height: '1rem' }} />
             Générer résumé PDF
-          </Button>
+          </button>
         </div>
 
         {error && (
-          <div className="rounded-lg border border-red-200 bg-red-50 p-4 mb-6">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-700">{error}</p>
-            </div>
+          <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+            <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946', flexShrink: 0, marginTop: '0.125rem' }} />
+            <p style={{ fontSize: '0.875rem', color: '#E63946', margin: 0 }}>{error}</p>
           </div>
         )}
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
           {/* Plan de repas */}
           {mealPlan && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Plan de repas</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="pro-panel">
+              <div className="pro-panel-header">
+                <h3 className="pro-panel-title">Plan de repas</h3>
+              </div>
+              <div className="pro-panel-body">
                 <MealPlanEditor
                   travelId={travelId}
                   initialPlan={mealPlan as unknown as any}
                 />
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
 
           {/* Coûts */}
           {costs && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Coûts estimés</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
+            <div className="pro-panel">
+              <div className="pro-panel-header">
+                <h3 className="pro-panel-title">Coûts estimés</h3>
+              </div>
+              <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div>
-                  <p className="text-sm text-gray-600">Nombre de participants</p>
-                  <p className="text-2xl font-bold">{(costs?.totalParticipants as number) || 0}</p>
+                  <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Nombre de participants</p>
+                  <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>{(costs?.totalParticipants as number) || 0}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Petit-déjeuner/personne</p>
-                  <p className="text-lg">
+                  <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Petit-déjeuner/personne</p>
+                  <p style={{ fontSize: '1.125rem', color: '#0A1628', margin: 0 }}>
                     {formatPrice((costs?.breakfastPerPersonCents as number) || 0)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Déjeuner/personne</p>
-                  <p className="text-lg">
+                  <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Déjeuner/personne</p>
+                  <p style={{ fontSize: '1.125rem', color: '#0A1628', margin: 0 }}>
                     {formatPrice(((costs.costs?.lunchPerPersonCents as number) || 0))}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Dîner/personne</p>
-                  <p className="text-lg">
+                  <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Dîner/personne</p>
+                  <p style={{ fontSize: '1.125rem', color: '#0A1628', margin: 0 }}>
                     {formatPrice(((costs.costs?.dinnerPerPersonCents as number) || 0))}
                   </p>
                 </div>
-                <div className="pt-4 border-t">
-                  <p className="text-sm text-gray-600">Total estimé</p>
-                  <p className="text-3xl font-bold">
+                <div style={{ paddingTop: '1rem', borderTop: '1px solid #E2E8F0', marginTop: '1rem' }}>
+                  <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Total estimé</p>
+                  <p style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>
                     {formatPrice((costs.totalCents as number) || 0)}
                   </p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
 
           {/* Préférences alimentaires */}
           {dietary && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Préférences alimentaires</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
+            <div className="pro-panel">
+              <div className="pro-panel-header">
+                <h3 className="pro-panel-title">Préférences alimentaires</h3>
+              </div>
+              <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div>
-                  <p className="text-sm text-gray-600">Total des participants</p>
-                  <p className="text-2xl font-bold">{(dietary?.stats?.total as number) || 0}</p>
+                  <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Total des participants</p>
+                  <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>{(dietary?.stats?.total as number) || 0}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-2 text-sm">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.875rem' }}>
                   <div>
-                    <p className="text-gray-600">Omnivore</p>
-                    <p className="font-semibold">{(dietary?.stats?.omnivore as number) || 0}</p>
+                    <p style={{ color: '#4A5568', margin: 0 }}>Omnivore</p>
+                    <p style={{ fontWeight: '600', color: '#0A1628', margin: 0 }}>{(dietary?.stats?.omnivore as number) || 0}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Végétarien</p>
-                    <p className="font-semibold">{(dietary?.stats?.vegetarian as number) || 0}</p>
+                    <p style={{ color: '#4A5568', margin: 0 }}>Végétarien</p>
+                    <p style={{ fontWeight: '600', color: '#0A1628', margin: 0 }}>{(dietary?.stats?.vegetarian as number) || 0}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Végan</p>
-                    <p className="font-semibold">{(dietary?.stats?.vegan as number) || 0}</p>
+                    <p style={{ color: '#4A5568', margin: 0 }}>Végan</p>
+                    <p style={{ fontWeight: '600', color: '#0A1628', margin: 0 }}>{(dietary?.stats?.vegan as number) || 0}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Halal/Casher</p>
-                    <p className="font-semibold">{((dietary?.stats?.halal as number) || 0) + ((dietary?.stats?.kosher as number) || 0)}</p>
-                  </div>
-                </div>
-                <div className="pt-2 border-t">
-                  <p className="text-xs text-gray-600">Allergies déclarées</p>
-                  <div className="text-sm mt-1 space-y-1">
-                    <p>Cacahuètes: {(dietary?.stats?.allergies?.peanut as number) || 0}</p>
-                    <p>Fruits de mer: {(dietary?.stats?.allergies?.shellfish as number) || 0}</p>
-                    <p>Produits laitiers: {(dietary?.stats?.allergies?.dairy as number) || 0}</p>
+                    <p style={{ color: '#4A5568', margin: 0 }}>Halal/Casher</p>
+                    <p style={{ fontWeight: '600', color: '#0A1628', margin: 0 }}>{((dietary?.stats?.halal as number) || 0) + ((dietary?.stats?.kosher as number) || 0)}</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+                <div style={{ paddingTop: '0.5rem', borderTop: '1px solid #E2E8F0', marginTop: '0.5rem' }}>
+                  <p style={{ fontSize: '0.75rem', color: '#4A5568', margin: '0 0 0.25rem 0' }}>Allergies déclarées</p>
+                  <div style={{ fontSize: '0.875rem', marginTop: '0.25rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <p style={{ color: '#0A1628', margin: 0 }}>Cacahuètes: {(dietary?.stats?.allergies?.peanut as number) || 0}</p>
+                    <p style={{ color: '#0A1628', margin: 0 }}>Fruits de mer: {(dietary?.stats?.allergies?.shellfish as number) || 0}</p>
+                    <p style={{ color: '#0A1628', margin: 0 }}>Produits laitiers: {(dietary?.stats?.allergies?.dairy as number) || 0}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* Restaurants partenaires */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Restaurants partenaires</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="pro-panel">
+            <div className="pro-panel-header">
+              <h3 className="pro-panel-title">Restaurants partenaires</h3>
+            </div>
+            <div className="pro-panel-body">
               {restaurants.length === 0 ? (
-                <p className="text-gray-600 text-center py-4">
+                <p style={{ color: '#4A5568', textAlign: 'center', paddingTop: '1rem', paddingBottom: '1rem', margin: 0 }}>
                   Aucun restaurant partenaire ajouté
                 </p>
               ) : (
-                <div className="space-y-3">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {restaurants.map((rest) => (
                     <RestaurantCard key={rest.id} restaurant={rest} />
                   ))}
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>
