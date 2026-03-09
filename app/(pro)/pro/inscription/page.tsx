@@ -315,7 +315,7 @@ export default function InscriptionPage() {
           <Card className="bg-white">
             <CardHeader>
               <CardTitle>Détails professionnels</CardTitle>
-              <CardDescription>Vos compétences et zone d'expertise</CardDescription>
+              <CardDescription>Vos compétences et zone d&apos;expertise</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -382,7 +382,7 @@ export default function InscriptionPage() {
         {step === 4 && (
           <Card className="bg-white">
             <CardHeader>
-              <CardTitle>Conditions d'utilisation</CardTitle>
+              <CardTitle>Conditions d&apos;utilisation</CardTitle>
               <CardDescription>Acceptez nos conditions pour continuer</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

@@ -78,7 +78,7 @@ export default function AdminDashboardPage() {
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
           <div>
             <p className="font-medium">{error}</p>
-            <p className="text-sm text-red-700 mt-1">Les données statistiques n'ont pas pu être chargées.</p>
+            <p className="text-sm text-red-700 mt-1">Les données statistiques n&apos;ont pas pu être chargées.</p>
           </div>
           <Button
             size="sm"
@@ -126,7 +126,7 @@ export default function AdminDashboardPage() {
 
             <StatsCard
               icon={<Wallet />}
-              title="Chiffre d'affaires mensuel"
+              title="Chiffre d&apos;affaires mensuel"
               value={formatPrice(stats?.monthlyRevenueCents || 0)}
               changePercent={stats?.monthlyRevenueGrowth || 0}
               trend={(stats?.monthlyRevenueGrowth || 0) >= 0 ? 'up' : 'down'}

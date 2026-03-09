@@ -164,6 +164,34 @@ frontend/
 
 ---
 
+## Portails — 3 interfaces distinctes (mis à jour 2026-03-09)
+
+L'application comporte **3 portails séparés** avec des interfaces, layouts et composants différents :
+
+### 1. Portail Client (public + espace client)
+- **Routes publiques** : `app/(public)/` — homepage, voyages, CGV, mentions légales, FAQ, etc.
+- **Espace client authentifié** : `app/(client)/client/` — 21 pages (profil, réservations, groupes, historique)
+- **Design** : gradient sunset premium (#0A1628 → #A85A30), orange accent #FF6B35
+- **Rôle requis** : CLIENT ou ADMIN
+
+### 2. Portail Professionnel
+- **Routes** : `app/(pro)/pro/` — 27 pages (gestion voyages, revenus, calendrier, équipe)
+- **Design** : interface différente du portail client, orientée dashboard/gestion
+- **Rôle requis** : PRO ou ADMIN
+
+### 3. Portail Admin (back-office)
+- **Routes** : `app/(admin)/admin/` — 23 pages (gestion utilisateurs, voyages, réservations, modération)
+- **Design** : interface différente des 2 autres portails, orientée supervision/pilotage
+- **Rôle requis** : ADMIN uniquement
+
+### Middleware d'authentification (`middleware.ts`)
+- JWT httpOnly cookie (`access_token`) décodé côté Edge
+- Matcher : `/admin/*`, `/pro/*`, `/client/*`, `/checkout/*`
+- Vérification d'expiration + redirection vers `/connexion` si invalide
+- Routes publiques exemptées : `/`, `/voyages`, `/connexion`, `/inscription`, etc.
+
+---
+
 ## Data Flow Architecture
 
 ```

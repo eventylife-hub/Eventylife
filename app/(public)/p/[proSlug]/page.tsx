@@ -1,5 +1,5 @@
 /**
- * Page Pro Publique — page publique d'un pro
+ * Page Pro Publique — page publique d&apos;un pro
  * Accessible via QR code ou lien partagé
  */
 
@@ -136,7 +136,7 @@ export default function ProPublicPage() {
   if (state === 'error' || state === 'empty') {
     return (
       <div className="max-w-6xl mx-auto px-4 py-12 text-center">
-        <p className="text-gray-600 mb-4">Ce pro n'existe pas ou n'a pas de voyages disponibles.</p>
+        <p className="text-gray-600 mb-4">Ce pro n&apos;existe pas ou n&apos;a pas de voyages disponibles.</p>
         <Link href="/voyages">
           <Button variant="primary">Voir tous les voyages</Button>
         </Link>
@@ -294,7 +294,7 @@ export default function ProPublicPage() {
                 className="w-4 h-4 rounded border-gray-300"
               />
               <label htmlFor="rgpd" className="text-sm text-gray-600">
-                J'accepte que mes données soient utilisées pour me recontacter
+                J&apos;accepte que mes données soient utilisées pour me recontacter
               </label>
             </div>
 
@@ -340,7 +340,7 @@ export default function ProPublicPage() {
                   required
                 />
                 <Button variant="primary" size="sm" type="submit" className="w-full">
-                  S'abonner
+                  S&apos;abonner
                 </Button>
               </form>
             </div>

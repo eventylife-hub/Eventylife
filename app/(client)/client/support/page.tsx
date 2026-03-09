@@ -182,7 +182,7 @@ export default function SupportPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Support</h1>
           <p className="text-gray-600">
-            Besoin d'aide ? Créez un ticket et notre équipe vous répondra rapidement.
+            Besoin d&apos;aide ? Créez un ticket et notre équipe vous répondra rapidement.
           </p>
         </div>
         {!showForm && (
@@ -396,7 +396,7 @@ export default function SupportPage() {
 
       {/* Info d'aide */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 mb-2">Besoin d'aide urgente ?</h3>
+        <h3 className="font-semibold text-blue-900 mb-2">Besoin d&apos;aide urgente ?</h3>
         <p className="text-sm text-blue-800">
           Pour les urgences liées à un voyage en cours, contactez-nous directement au{' '}
           <strong>01 23 45 67 89</strong> (disponible 7j/7 pendant les voyages).

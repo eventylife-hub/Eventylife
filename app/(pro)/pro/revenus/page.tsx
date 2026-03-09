@@ -38,7 +38,7 @@ interface Payout {
 type PeriodFilter = 'thisMonth' | 'lastQuarter' | 'thisYear' | 'custom';
 
 /**
- * Page Dashboard Revenus Pro - Vue d'ensemble des revenus
+ * Page Dashboard Revenus Pro - Vue d&apos;ensemble des revenus
  *
  * Affiche:
  * - Résumé: montant total gagné, montant en attente, montant payé
@@ -174,7 +174,7 @@ export default function RevenuesDashboardPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">Revenus</h1>
-          <p className="text-gray-600 mt-2">Vue d'ensemble de vos revenus et versements</p>
+          <p className="text-gray-600 mt-2">Vue d&apos;ensemble de vos revenus et versements</p>
         </div>
         <Link href="/pro/revenus/releve">
           <Button className="w-full sm:w-auto">

@@ -41,7 +41,7 @@ export function RefundCalculator({
         {/* Frais d'annulation */}
         {cancellationFeeCents > 0 && (
           <div className="flex justify-between items-center text-red-700">
-            <span>Frais d'annulation:</span>
+            <span>Frais d&apos;annulation:</span>
             <span className="font-bold">
               -{formatCurrency(cancellationFeeCents)}
             </span>
@@ -88,7 +88,7 @@ export function RefundCalculator({
       {refundAmountCents === 0 && (
         <div className="mt-4 p-3 bg-orange-100 border border-orange-300 rounded">
           <p className="text-sm text-orange-800">
-            Malheureusement, votre demande d'annulation trop proche de la date
+            Malheureusement, votre demande d&apos;annulation trop proche de la date
             de départ ne vous donne droit à aucun remboursement selon notre
             politique.
           </p>

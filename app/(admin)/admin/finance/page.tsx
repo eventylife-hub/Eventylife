@@ -161,7 +161,7 @@ export default function FinancePage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Voir les exports</h3>
-                <p className="text-sm text-gray-600">Accédez à l'historique des exports</p>
+                <p className="text-sm text-gray-600">Accédez à l&apos;historique des exports</p>
               </div>
             </CardContent>
           </Card>
@@ -213,7 +213,7 @@ export default function FinancePage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <StatsCard
             icon={<Wallet />}
-            title="Chiffre d'affaires total"
+            title="Chiffre d&apos;affaires total"
             value={formatPrice(stats.totalRevenueCents)}
           />
           <StatsCard

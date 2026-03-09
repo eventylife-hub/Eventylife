@@ -206,7 +206,7 @@ export default function AdminAlertesPage() {
       {/* En-tête avec badge de compteur */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Centre d'Alertes</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Centre d&apos;Alertes</h1>
           <p className="text-gray-600 mt-2">
             Gérez les alertes système et les actions requises
           </p>

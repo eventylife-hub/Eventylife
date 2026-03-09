@@ -281,7 +281,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4">
         <div className="max-w-2xl mx-auto py-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Voyage non trouvé</h2>
-          <p className="text-gray-600 mb-6">Le voyage demandé n'existe pas ou a été supprimé.</p>
+          <p className="text-gray-600 mb-6">Le voyage demandé n&apos;existe pas ou a été supprimé.</p>
           <Button onClick={() => router.push(ROUTES.VOYAGES)}>Retour aux voyages</Button>
         </div>
       </div>
@@ -307,7 +307,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                 Étape 1/5: Sélection des chambres
               </h2>
               <p className="text-sm text-gray-600 mb-6">
-                Choisissez le type de chambre et le nombre d'occupants.
+                Choisissez le type de chambre et le nombre d&apos;occupants.
               </p>
             </div>
             <div className="space-y-4">
@@ -347,7 +347,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                             {roomType.label}
                           </h3>
                           <p className="text-sm text-gray-600 mb-2">
-                            Capacité: jusqu'à {roomType.capacity} personnes
+                            Capacité: jusqu&apos;à {roomType.capacity} personnes
                           </p>
                           <Badge variant="outline" className="text-xs">
                             {roomType.stock} disponible{roomType.stock > 1 ? 's' : ''}
@@ -365,7 +365,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                         <div className="border-t border-gray-200 pt-4 mt-4 space-y-4">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-3">
-                              Nombre d'occupants
+                              Nombre d&apos;occupants
                             </label>
                             <div className="flex items-center gap-3">
                               <Button
@@ -439,7 +439,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                       Ajouter une assurance annulation
                     </p>
                     <p className="text-sm text-gray-600">
-                      Protection complète en cas d'imprévu (5% du montant total)
+                      Protection complète en cas d&apos;imprévu (5% du montant total)
                     </p>
                   </div>
                 </label>
@@ -667,12 +667,12 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   />
                   <div>
                     <p className="text-sm text-gray-900 mb-1">
-                      J'accepte les conditions générales de vente
+                      J&apos;accepte les conditions générales de vente
                     </p>
                     <p className="text-xs text-gray-600 leading-relaxed">
                       En confirmant, vous acceptez les CGV Eventy Life
                       (Arrêté 1er mars 2018). Aucun droit de rétractation
-                      n'est applicable car il s'agit d'une prestation à date
+                      n&apos;est applicable car il s&apos;agit d&apos;une prestation à date
                       déterminée.
                     </p>
                   </div>

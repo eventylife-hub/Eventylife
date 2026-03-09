@@ -31,7 +31,7 @@ import {
  * - KPI cards: réservations totales, chambres confirmées, CA TTC, taux occupancy
  * - Grille de liens rapides vers sous-pages
  * - Mini timeline des phases
- * - Feed d'activité récente
+ * - Feed d&apos;activité récente
  * 
  * API: GET /api/pro/travels/${id}
  */
@@ -219,7 +219,7 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white rounded-lg shadow-xl p-6 max-w-md">
                 <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                  Confirmer l'annulation
+                  Confirmer l&apos;annulation
                 </h3>
                 <p className="text-slate-600 mb-6">
                   Êtes-vous sûr de vouloir annuler ce voyage ? Cette action ne peut pas être annulée.
@@ -383,7 +383,7 @@ export default function VoyageDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-slate-900">{formatPrice(dashboard.revenueTTC)}</div>
-              <p className="text-xs text-slate-500 mt-1">Chiffre d'affaires</p>
+              <p className="text-xs text-slate-500 mt-1">Chiffre d&apos;affaires</p>
             </CardContent>
           </Card>
 
@@ -391,7 +391,7 @@ export default function VoyageDashboardPage() {
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-slate-600 flex items-center gap-2">
                 <Percent className="w-4 h-4 text-purple-600" />
-                Taux d'occupation
+                Taux d&apos;occupation
               </CardTitle>
             </CardHeader>
             <CardContent>

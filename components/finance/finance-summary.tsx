@@ -35,7 +35,7 @@ export function FinanceSummary({
           <div className="text-2xl font-bold">
             {(caTTC / 100).toLocaleString('fr-FR')}€
           </div>
-          <p className="text-xs text-gray-500">chiffre d'affaires</p>
+          <p className="text-xs text-gray-500">chiffre d&apos;affaires</p>
         </CardContent>
       </Card>
 

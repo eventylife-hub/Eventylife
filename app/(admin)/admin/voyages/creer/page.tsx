@@ -483,7 +483,7 @@ export default function CreateTripPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="imageUrl">URL de l'image</Label>
+                  <Label htmlFor="imageUrl">URL de l&apos;image</Label>
                   <Input
                     id="imageUrl"
                     type="url"
@@ -635,11 +635,11 @@ export default function CreateTripPage() {
           {/* Étape 3: Hébergement */}
           {currentStep === 3 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-semibold">Configuration d'hébergement</h2>
+              <h2 className="text-xl font-semibold">Configuration d&apos;hébergement</h2>
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="hotelName">Nom de l'hôtel</Label>
+                  <Label htmlFor="hotelName">Nom de l&apos;hôtel</Label>
                   <Input
                     id="hotelName"
                     value={accommodation.hotelName}
@@ -823,7 +823,7 @@ export default function CreateTripPage() {
                 </div>
 
                 <div>
-                  <Label>Options d'assurance</Label>
+                  <Label>Options d&apos;assurance</Label>
                   <div className="mt-1 space-y-3">
                     <div className="border rounded-lg p-4 space-y-3">
                       <div className="grid grid-cols-2 gap-3">

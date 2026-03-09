@@ -57,7 +57,7 @@ interface TravelDetail {
 }
 
 /**
- * Page Admin Voyage Detail - Vue détaillée d'un voyage
+ * Page Admin Voyage Detail - Vue détaillée d&apos;un voyage
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
 export default function AdminVoyageDetailPage() {
@@ -156,7 +156,7 @@ export default function AdminVoyageDetailPage() {
         </div>
         <div className="p-6 bg-red-50 border border-red-200 rounded-lg text-red-800">
           <p className="font-medium">{error || 'Voyage non trouvé'}</p>
-          <p className="text-sm text-red-700 mt-2">Vérifiez que l'ID du voyage est correct.</p>
+          <p className="text-sm text-red-700 mt-2">Vérifiez que l&apos;ID du voyage est correct.</p>
           <Button
             size="sm"
             variant="outline"
@@ -286,14 +286,14 @@ export default function AdminVoyageDetailPage() {
           trend="up"
         />
         <StatsCard
-          title="Chiffre d'affaires"
+          title="Chiffre d&apos;affaires"
           value={formatPrice(travel.revenue)}
           icon={<DollarSign className="w-5 h-5 text-blue-600" />}
           changePercent={12}
           trend="up"
         />
         <StatsCard
-          title="Taux d'occupation"
+          title="Taux d&apos;occupation"
           value={`${travel.occupancyPercent}%`}
           icon={<Percent className="w-5 h-5 text-blue-600" />}
           changePercent={8}
@@ -311,7 +311,7 @@ export default function AdminVoyageDetailPage() {
       {/* Onglets */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="overview">Vue d'ensemble</TabsTrigger>
+          <TabsTrigger value="overview">Vue d&apos;ensemble</TabsTrigger>
           <TabsTrigger value="transport">Transport</TabsTrigger>
           <TabsTrigger value="rooming">Logements</TabsTrigger>
           <TabsTrigger value="finance">Finance</TabsTrigger>
@@ -362,13 +362,13 @@ export default function AdminVoyageDetailPage() {
                         <p className="text-sm font-semibold text-gray-900 mt-2">{travel.transport.type || 'Non spécifié'}</p>
                       </div>
                       <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <label className="text-xs font-medium text-gray-600">Nombre d'arrêts</label>
+                        <label className="text-xs font-medium text-gray-600">Nombre d&apos;arrêts</label>
                         <p className="text-sm font-semibold text-gray-900 mt-2">{travel.transport.stops?.length || 0}</p>
                       </div>
                     </div>
                     {travel.transport.stops && travel.transport.stops.length > 0 && (
                       <div>
-                        <label className="text-sm font-semibold text-gray-900 mb-3 block">Points d'arrêt</label>
+                        <label className="text-sm font-semibold text-gray-900 mb-3 block">Points d&apos;arrêt</label>
                         <div className="space-y-2">
                           {travel.transport.stops.map((stop: any, idx: number) => (
                             <div key={stop.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
@@ -418,7 +418,7 @@ export default function AdminVoyageDetailPage() {
                     </div>
                     <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                       <p className="text-sm text-blue-900">
-                        <strong>Taux d'occupation:</strong> {travel.occupancyPercent}%
+                        <strong>Taux d&apos;occupation:</strong> {travel.occupancyPercent}%
                       </p>
                     </div>
                   </>
@@ -438,7 +438,7 @@ export default function AdminVoyageDetailPage() {
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                    <label className="text-xs font-medium text-green-600">Chiffre d'affaires total</label>
+                    <label className="text-xs font-medium text-green-600">Chiffre d&apos;affaires total</label>
                     <p className="text-2xl font-bold text-green-900 mt-2">{formatPrice(travel.revenue)}</p>
                     <p className="text-xs text-green-700 mt-2">{travel.bookings} réservations</p>
                   </div>
@@ -450,7 +450,7 @@ export default function AdminVoyageDetailPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <label className="text-xs font-medium text-blue-600">Taux d'occupation</label>
+                    <label className="text-xs font-medium text-blue-600">Taux d&apos;occupation</label>
                     <p className="text-2xl font-bold text-blue-900 mt-2">{travel.occupancyPercent}%</p>
                   </div>
                   <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
@@ -488,7 +488,7 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8 text-gray-500">
-                    <p className="text-sm">Aucun membre d'équipe assigné</p>
+                    <p className="text-sm">Aucun membre d&apos;équipe assigné</p>
                   </div>
                 )}
               </div>

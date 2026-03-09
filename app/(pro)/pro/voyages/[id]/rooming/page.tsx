@@ -34,13 +34,13 @@ interface PageRoom {
 }
 
 /**
- * Page Rooming List - Gestion des chambres d'hôtel
+ * Page Rooming List - Gestion des chambres d&apos;hôtel
  *
  * Affiche:
  * - Tableau: chambre, type, occupants, statut paiement
  * - Assign numéro de chambre (drag & drop ou input)
  * - Stats: taux occupation, chambres dispo
- * - Export PDF pour l'hôtel
+ * - Export PDF pour l&apos;hôtel
  *
  * États UI:
  * - Loading: Skeleton
@@ -123,7 +123,7 @@ export default function RoomingPage() {
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold">Rooming List</h1>
-          <p className="text-gray-600 mt-2">Gestion des chambres d'hôtel</p>
+          <p className="text-gray-600 mt-2">Gestion des chambres d&apos;hôtel</p>
         </div>
         <Button onClick={handleExportPDF} disabled={exporting} className="gap-2">
           <Download className="w-4 h-4" />

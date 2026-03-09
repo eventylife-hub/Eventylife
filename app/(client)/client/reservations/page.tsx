@@ -138,7 +138,7 @@ export default function ReservationsPage() {
         <div className="text-center py-16">
           <div className="text-6xl mb-4">📭</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Aucune réservation</h2>
-          <p className="text-slate-600 mb-6">Vous n'avez pas encore réservé de voyage</p>
+          <p className="text-slate-600 mb-6">Vous n&apos;avez pas encore réservé de voyage</p>
           <Link
             href="/voyages"
             className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"

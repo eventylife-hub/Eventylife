@@ -49,9 +49,9 @@ export default function CheckoutStartPage() {
         </div>
         <div className="bg-red-50 border border-red-200 rounded-lg p-6">
           <p className="text-red-700 font-semibold mb-4">Voyage non trouvé</p>
-          <p className="text-red-600 mb-4">Le voyage demandé n'existe pas ou n'est plus disponible</p>
+          <p className="text-red-600 mb-4">Le voyage demandé n&apos;existe pas ou n&apos;est plus disponible</p>
           <Button onClick={() => router.push(ROUTES.HOME)} variant="outline">
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Button>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function CheckoutStartPage() {
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
         <h2 className="font-semibold text-lg text-slate-900 mb-2">Voyage sélectionné</h2>
         <p className="text-slate-600 text-sm">ID: {travelId}</p>
-        <p className="text-slate-500 text-xs mt-2">Vous allez configurer votre réservation à l'étape suivante</p>
+        <p className="text-slate-500 text-xs mt-2">Vous allez configurer votre réservation à l&apos;étape suivante</p>
       </div>
 
       <div className="flex gap-4">

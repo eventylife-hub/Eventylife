@@ -92,7 +92,7 @@ export default function RejoindrePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Code d'invitation</CardTitle>
+            <CardTitle>Code d&apos;invitation</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <form onSubmit={handleVerifyCode} className="space-y-4">
@@ -104,7 +104,7 @@ export default function RejoindrePage() {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="code">Code d'invitation</Label>
+                <Label htmlFor="code">Code d&apos;invitation</Label>
                 <Input
                   id="code"
                   placeholder="Ex: ABC12DEF"

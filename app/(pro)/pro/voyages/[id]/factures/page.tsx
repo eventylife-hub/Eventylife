@@ -144,7 +144,7 @@ export default function InvoicesPage() {
 
         <div className="grid grid-cols-2 gap-6 mb-6">
           <div className="bg-gray-50 p-4 rounded">
-            <p className="text-sm text-gray-600">Chiffre d'affaires</p>
+            <p className="text-sm text-gray-600">Chiffre d&apos;affaires</p>
             <p className="text-2xl font-bold text-gray-900">{formatPrice(totalRevenue)}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded">

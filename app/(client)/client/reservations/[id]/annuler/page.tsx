@@ -26,8 +26,8 @@ interface RefundCalculation {
 }
 
 /**
- * Page Client - Demander l'annulation d'une réservation
- * Affiche la politique d'annulation, calcule le remboursement, formulaire
+ * Page Client - Demander l&apos;annulation d&apos;une réservation
+ * Affiche la politique d&apos;annulation, calcule le remboursement, formulaire
  */
 export default function CancelReservationPage() {
   const router = useRouter();
@@ -162,7 +162,7 @@ export default function CancelReservationPage() {
 
       {/* Politique d'annulation */}
       <div className="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h2 className="text-xl font-bold text-blue-900 mb-4">Politique d'Annulation</h2>
+        <h2 className="text-xl font-bold text-blue-900 mb-4">Politique d&apos;Annulation</h2>
         <div className="space-y-3 text-sm text-blue-900">
           <p>
             <span className="font-medium">• Plus de 60 jours avant le départ:</span> 100% remboursé
@@ -193,7 +193,7 @@ export default function CancelReservationPage() {
               <span className="font-bold">{formatCurrency(booking.totalAmountCents || 0)}</span>
             </div>
             <div className="flex justify-between items-center text-red-700">
-              <span>Frais d'annulation:</span>
+              <span>Frais d&apos;annulation:</span>
               <span className="font-bold">
                 -{formatCurrency(refundCalc.cancellationFeeCents || 0)}
               </span>
@@ -213,11 +213,11 @@ export default function CancelReservationPage() {
 
       {/* Formulaire */}
       <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Demander l'Annulation</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Demander l&apos;Annulation</h2>
 
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-900 mb-2">
-            Motif d'annulation
+            Motif d&apos;annulation
           </label>
           <select
             value={reason.split('|')[0] || ''}

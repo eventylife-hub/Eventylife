@@ -23,7 +23,7 @@ interface FinanceDashboard {
 }
 
 /**
- * Page Dashboard Finance - Vue d'ensemble financière Pro
+ * Page Dashboard Finance - Vue d&apos;ensemble financière Pro
  *
  * Affiche:
  * - Résumé: CA total, coûts, marge, TVA (INVARIANT 6)
@@ -106,7 +106,7 @@ export default function FinanceDashboardPage() {
     <div className="space-y-6 p-6">
       <div>
         <h1 className="text-3xl font-bold">Dashboard Finance</h1>
-        <p className="text-gray-600 mt-2">Vue d'ensemble financière de votre activité</p>
+        <p className="text-gray-600 mt-2">Vue d&apos;ensemble financière de votre activité</p>
       </div>
 
       {error && (

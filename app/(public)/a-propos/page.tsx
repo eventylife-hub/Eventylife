@@ -12,7 +12,7 @@ import Link from 'next/link';
 export default function AboutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">À propos d'Eventy Life</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">À propos d&apos;Eventy Life</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
         <div>
@@ -20,7 +20,7 @@ export default function AboutPage() {
             Qui sommes-nous?
           </h2>
           <p className="text-gray-700 mb-4 leading-relaxed">
-            Eventy Life est une plateforme française spécialisée dans l'organisation de voyages de groupe 
+            Eventy Life est une plateforme française spécialisée dans l&apos;organisation de voyages de groupe 
             avec accompagnement humain. Depuis plusieurs années, nous offrons à nos clients des expériences 
             de voyage inoubliables, organisées de A à Z.
           </p>

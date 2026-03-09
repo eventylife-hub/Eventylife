@@ -51,7 +51,7 @@ export default function TravelBilanPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Erreur lors de l'envoi");
+        throw new Error("Erreur lors de l&apos;envoi");
       }
 
       setToastMessage({ type: 'success', message: 'Emails de bilan envoyés à tous les participants' });
@@ -120,7 +120,7 @@ export default function TravelBilanPage() {
           <h2 className="text-lg font-bold text-gray-900 mb-4">Résumé Financier</h2>
           <div className="space-y-3">
             <div>
-              <p className="text-sm text-gray-600">Chiffre d'affaires</p>
+              <p className="text-sm text-gray-600">Chiffre d&apos;affaires</p>
               <p className="text-2xl font-bold text-gray-900">
                 {formatPrice(((dashboard?.statistics as any)?.totalRevenueCents as number) || 0)}
               </p>
@@ -156,7 +156,7 @@ export default function TravelBilanPage() {
           <h2 className="text-lg font-bold text-gray-900 mb-4">Avis Clients</h2>
           <div className="space-y-3">
             <div>
-              <p className="text-sm text-gray-600">Nombre d'avis</p>
+              <p className="text-sm text-gray-600">Nombre d&apos;avis</p>
               <p className="text-2xl font-bold text-gray-900">
                 {((dashboard?.feedbacks as any)?.totalFeedbacks as number) || 0}
               </p>

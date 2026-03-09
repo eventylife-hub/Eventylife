@@ -345,7 +345,7 @@ export default function ExportsPage() {
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="export-type">Type d'export</Label>
+              <Label htmlFor="export-type">Type d&apos;export</Label>
               <Select
                 value={selectedType}
                 onValueChange={(value) => setSelectedType(value as ExportType)}

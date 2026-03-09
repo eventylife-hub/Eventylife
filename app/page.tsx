@@ -94,20 +94,43 @@ function HeroSection() {
             Un arrêt de ramassage au plus près de chez vous, avec parking gratuit. Votre voiture reste tranquille, vos vacances commencent tout de suite.
           </p>
 
-          {/* Barre de recherche */}
-          <div className="flex flex-col sm:flex-row bg-white rounded-2xl sm:rounded-full p-[5px] max-w-[500px] shadow-[0_12px_40px_rgba(0,0,0,0.25)]" style={{ animation: 'fadeUp 0.5s 0.3s ease both' }}>
-            <input
-              type="text"
-              placeholder="Votre ville ou code postal…"
-              className="flex-1 border-none outline-none px-5 py-3 text-[15px] bg-transparent rounded-full text-[#1B2940] placeholder:text-gray-400"
-            />
-            <button className="hidden sm:flex items-center gap-1 px-3 bg-transparent border-none text-gray-400 cursor-pointer text-xs font-semibold whitespace-nowrap hover:text-[#0077B6]">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
-              Localiser
-            </button>
-            <button className="bg-[#FF6B35] text-white border-none rounded-full px-6 py-3 text-sm font-bold cursor-pointer whitespace-nowrap hover:bg-[#FF8F5E] hover:scale-[1.03] transition-all shadow-[0_4px_16px_rgba(255,107,53,0.25)] m-[5px] sm:m-0">
-              Trouver →
-            </button>
+          {/* Barre de recherche avancée */}
+          <div className="bg-white rounded-2xl sm:rounded-[20px] p-3 sm:p-4 max-w-[560px] shadow-[0_12px_40px_rgba(0,0,0,0.25)]" style={{ animation: 'fadeUp 0.5s 0.3s ease both' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr] gap-2 mb-2">
+              {/* Destination */}
+              <div className="relative">
+                <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FF6B35]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <input
+                  type="text"
+                  placeholder="Destination ou ville..."
+                  className="w-full border border-gray-200 outline-none pl-9 pr-3 py-2.5 text-[14px] bg-gray-50/50 rounded-xl text-[#1B2940] placeholder:text-gray-400 focus:border-[#FF6B35]/40 focus:bg-white transition-all"
+                />
+              </div>
+              {/* Date */}
+              <div className="relative">
+                <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FF6B35]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <input
+                  type="date"
+                  className="w-full border border-gray-200 outline-none pl-9 pr-3 py-2.5 text-[14px] bg-gray-50/50 rounded-xl text-[#1B2940] focus:border-[#FF6B35]/40 focus:bg-white transition-all"
+                />
+              </div>
+            </div>
+            {/* Départ aéroport + bouton */}
+            <div className="flex items-center justify-between gap-3">
+              <label className="flex items-center gap-2 cursor-pointer select-none group">
+                <span className="relative flex items-center justify-center w-5 h-5 border-2 border-gray-300 rounded-md group-hover:border-[#FF6B35]/60 transition-colors">
+                  <input type="checkbox" className="absolute opacity-0 w-full h-full cursor-pointer peer" />
+                  <svg className="hidden peer-checked:block text-[#FF6B35]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span className="flex items-center gap-1.5 text-[12.5px] text-gray-500 font-medium">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                  Départ aéroport possible
+                </span>
+              </label>
+              <Link href="/voyages" className="bg-[#FF6B35] text-white border-none rounded-xl px-6 py-2.5 text-sm font-bold no-underline cursor-pointer whitespace-nowrap hover:bg-[#FF8F5E] hover:scale-[1.02] transition-all shadow-[0_4px_16px_rgba(255,107,53,0.25)]">
+                Trouver →
+              </Link>
+            </div>
           </div>
 
           {/* Tags destinations */}

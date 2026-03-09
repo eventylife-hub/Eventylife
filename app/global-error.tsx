@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/nextjs';
 import React from 'react';
 
 /**
- * Props pour le gestionnaire d'erreur global
+ * Props pour le gestionnaire d&apos;erreur global
  */
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -12,9 +12,9 @@ interface GlobalErrorProps {
 }
 
 /**
- * Gestionnaire d'erreur global pour Next.js 14
+ * Gestionnaire d&apos;erreur global pour Next.js 14
  * Capture les erreurs non gérées et les envoie à Sentry
- * Affiche une page d'erreur conviviale en français
+ * Affiche une page d&apos;erreur conviviale en français
  */
 export default function GlobalError({ error, reset }: GlobalErrorProps): JSX.Element {
   // Capturer l'erreur dans Sentry
@@ -54,16 +54,16 @@ export default function GlobalError({ error, reset }: GlobalErrorProps): JSX.Ele
 
             {/* Titre principal */}
             <div className="space-y-2 text-center">
-              <h1 className="text-3xl font-bold text-gray-900">Erreur d'application</h1>
+              <h1 className="text-3xl font-bold text-gray-900">Erreur d&apos;application</h1>
               <p className="text-gray-600">
-                Une erreur critique s'est produite lors du traitement de votre requête.
+                Une erreur critique s&apos;est produite lors du traitement de votre requête.
               </p>
             </div>
 
             {/* Contenu d'erreur en développement */}
             {process.env.NODE_ENV === 'development' && (
               <div className="rounded-md bg-red-50 p-4">
-                <p className="text-xs font-semibold text-red-600">Détails de l'erreur:</p>
+                <p className="text-xs font-semibold text-red-600">Détails de l&apos;erreur:</p>
                 <p className="mt-2 break-words font-mono text-sm text-red-700">
                   {error.message || 'Erreur inconnue'}
                 </p>
@@ -96,7 +96,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps): JSX.Ele
                 href="/"
                 className="block rounded-lg border-2 border-gray-300 px-4 py-3 text-center font-medium text-gray-700 transition-colors duration-200 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
               >
-                Aller à la page d'accueil
+                Aller à la page d&apos;accueil
               </a>
             </div>
 

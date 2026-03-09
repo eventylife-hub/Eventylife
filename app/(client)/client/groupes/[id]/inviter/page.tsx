@@ -205,10 +205,10 @@ export default function InviterPage() {
             </CardContent>
           </Card>
 
-          {/* Code d'invitation */}
+          {/* Code d&apos;invitation */}
           <Card>
             <CardHeader>
-              <CardTitle>Code d'invitation</CardTitle>
+              <CardTitle>Code d&apos;invitation</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-gray-600">

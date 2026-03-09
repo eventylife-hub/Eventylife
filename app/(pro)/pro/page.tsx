@@ -138,13 +138,13 @@ export default function ProDashboard() {
                 <div>
                   <h3 className="font-semibold text-blue-900">Complétez votre inscription</h3>
                   <p className="text-sm text-blue-700 mt-1">
-                    Vous avez complété {completedSteps}/6 étapes de l'onboarding.
+                    Vous avez complété {completedSteps}/6 étapes de l&apos;onboarding.
                   </p>
                   <Link
                     href="/pro/onboarding"
                     className="mt-2 inline-block text-sm font-medium text-blue-600 hover:text-blue-700 underline"
                   >
-                    Continuer l'inscription →
+                    Continuer l&apos;inscription →
                   </Link>
                 </div>
               </div>
@@ -218,7 +218,7 @@ export default function ProDashboard() {
             <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-yellow-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-slate-600 font-medium">Taux d'occupation</p>
+                  <p className="text-sm text-slate-600 font-medium">Taux d&apos;occupation</p>
                   <p className="text-3xl font-bold text-slate-900 mt-2">{stats.occupancyRate.toFixed(1)}%</p>
                   <p className="text-xs text-slate-500 mt-2">Note: {stats.averageRating.toFixed(1)}/5</p>
                 </div>

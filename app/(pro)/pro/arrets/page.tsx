@@ -57,7 +57,7 @@ export default function BusStopsPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">Mes arrêts de bus</h1>
-            <p className="text-slate-600 mt-2">Gérez vos points de départ et d'arrivée</p>
+            <p className="text-slate-600 mt-2">Gérez vos points de départ et d&apos;arrivée</p>
           </div>
           <Link
             href="/pro/arrets/nouveau"

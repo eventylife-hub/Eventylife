@@ -10,7 +10,7 @@ import { formatPrice } from '@/lib/utils';
 // TYPES & INTERFACES
 // ============================================================================
 
-/** Structure d'une activité dans le programme */
+/** Structure d&apos;une activité dans le programme */
 interface Activity {
   id: string;
   time: string;
@@ -18,7 +18,7 @@ interface Activity {
   description: string;
 }
 
-/** Structure d'une journée du programme */
+/** Structure d&apos;une journée du programme */
 interface DayProgram {
   id: string;
   dayNumber: number;
@@ -27,7 +27,7 @@ interface DayProgram {
   activities: Activity[];
 }
 
-/** Structure d'un type de chambre */
+/** Structure d&apos;un type de chambre */
 interface Room {
   id: string;
   type: string;
@@ -37,19 +37,19 @@ interface Room {
   quantity: number;
 }
 
-/** Structure d'une photo téléchargée */
+/** Structure d&apos;une photo téléchargée */
 interface Photo {
   assetId: string;
   uploadedAt: string;
 }
 
-/** Structure d'un arrêt de bus */
+/** Structure d&apos;un arrêt de bus */
 interface BusStop {
   stopId: string;
   type: string;
 }
 
-/** Structure d'un arrêt de bus depuis l'API */
+/** Structure d&apos;un arrêt de bus depuis l&apos;API */
 interface BusStopFromAPI {
   id: string;
   publicName: string;
@@ -333,7 +333,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Date d'arrivée</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Date d&apos;arrivée</label>
             <input
               type="date"
               value={formData.endDate}
@@ -909,7 +909,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
     <div>
       <h2 className="text-2xl font-bold text-slate-900 mb-6">Arrêts de bus</h2>
       <p className="text-slate-600 mb-4">
-        Sélectionnez les arrêts de départ et d'arrivée parmi vos arrêts validés.
+        Sélectionnez les arrêts de départ et d&apos;arrivée parmi vos arrêts validés.
       </p>
 
       {error && (
@@ -926,7 +926,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
 
         <div>
           <h3 className="text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-500 rounded-full" /> Arrêts d'arrivée ({selectedDropoffIds.size} sélectionné{selectedDropoffIds.size > 1 ? 's' : ''})
+            <span className="w-2 h-2 bg-blue-500 rounded-full" /> Arrêts d&apos;arrivée ({selectedDropoffIds.size} sélectionné{selectedDropoffIds.size > 1 ? 's' : ''})
           </h3>
           <StopList stops={dropoffStops} type="DROPOFF_ARRIVAL" selectedIds={selectedDropoffIds} />
         </div>
@@ -935,7 +935,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
       {myStops.length === 0 && (
         <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
           <p className="text-sm text-amber-900">
-            Vous n'avez pas encore d'arrêts de bus. Créez-les dans la section{' '}
+            Vous n&apos;avez pas encore d&apos;arrêts de bus. Créez-les dans la section{' '}
             <a href="/pro/arrets" target="_blank" className="font-medium underline">
               Mes arrêts
             </a>{' '}

@@ -63,7 +63,7 @@ export function TravelReportPreview({
         </h2>
         <div className="grid grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
-            <p className="text-sm text-gray-600">Chiffre d'affaires total</p>
+            <p className="text-sm text-gray-600">Chiffre d&apos;affaires total</p>
             <p className="text-3xl font-bold text-blue-900 mt-2">
               {formatCurrency(statistics.totalRevenueCents)}
             </p>
@@ -113,7 +113,7 @@ export function TravelReportPreview({
         <h2 className="text-xl font-bold text-gray-900 mb-4">Avis Clients</h2>
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <p className="text-sm text-gray-600">Nombre d'avis reçus</p>
+            <p className="text-sm text-gray-600">Nombre d&apos;avis reçus</p>
             <p className="text-3xl font-bold text-gray-900 mt-2">
               {feedbacks.totalFeedbacks}
             </p>

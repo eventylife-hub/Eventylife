@@ -36,7 +36,7 @@ interface CancellationDetail {
 }
 
 /**
- * Page Admin - Détail d'une annulation
+ * Page Admin - Détail d&apos;une annulation
  * Info client, calcul remboursement, timeline, actions
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
@@ -193,7 +193,7 @@ export default function CancellationDetailPage() {
         >
           ← Retour
         </button>
-        <h1 className="text-3xl font-bold text-gray-900">Détail de l'Annulation</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Détail de l&apos;Annulation</h1>
       </div>
 
       {error && (
@@ -280,7 +280,7 @@ export default function CancellationDetailPage() {
             <p className="text-sm text-gray-600">Politique appliquée</p>
             <p className="text-lg font-medium text-gray-900">{calc.policyApplied}</p>
             <p className="text-sm text-gray-600 mt-2">
-              Frais d'annulation: {formatPrice(calc.cancellationFeeCents)}
+              Frais d&apos;annulation: {formatPrice(calc.cancellationFeeCents)}
             </p>
           </div>
         </div>

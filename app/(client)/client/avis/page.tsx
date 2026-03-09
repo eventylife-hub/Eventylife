@@ -220,7 +220,7 @@ export default function AvisPage() {
                 type="submit"
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"
               >
-                Publier l'avis
+                Publier l&apos;avis
               </button>
               <button
                 type="button"
@@ -246,7 +246,7 @@ export default function AvisPage() {
         <div className="text-center py-16 bg-white border border-slate-200 rounded-lg">
           <div className="text-6xl mb-4">⭐</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Aucun avis</h2>
-          <p className="text-slate-600 mb-6">Vous n'avez pas encore laissé d'avis</p>
+          <p className="text-slate-600 mb-6">Vous n&apos;avez pas encore laissé d&apos;avis</p>
           <button
             onClick={() => setShowForm(true)}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"

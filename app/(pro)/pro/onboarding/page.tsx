@@ -281,7 +281,7 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
       <h2 className="text-2xl font-bold text-slate-900 mb-6">Étape 1: Votre profil</h2>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Nom d'affichage</label>
+          <label className="block text-sm font-medium text-slate-700 mb-2">Nom d&apos;affichage</label>
           <input
             type="text"
             value={formData.displayName || ''}
@@ -365,7 +365,7 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Type d'entité (optionnel)</label>
+          <label className="block text-sm font-medium text-slate-700 mb-2">Type d&apos;entité (optionnel)</label>
           <input
             type="text"
             value={formData.entityType || ''}
@@ -464,7 +464,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
             accept={['application/pdf', 'image/jpeg', 'image/png']}
             maxSize={5 * 1024 * 1024}
             onUpload={handleIdentityUpload}
-            label="Déposer votre pièce d'identité ici"
+            label="Déposer votre pièce d&apos;identité ici"
           />
           {formData.identityDocAssetId && (
             <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
@@ -517,7 +517,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
             <div>
               <label className="text-sm font-medium text-slate-900">Contrat prestataire indépendant</label>
               <p className="text-xs text-slate-600 mt-1">
-                Je confirme avoir lu et accepté les conditions d'utilisation.
+                Je confirme avoir lu et accepté les conditions d&apos;utilisation.
               </p>
             </div>
           </div>
@@ -533,7 +533,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
             <div>
               <label className="text-sm font-medium text-slate-900">Charte de prestataire</label>
               <p className="text-xs text-slate-600 mt-1">
-                J'accepte les règles d'utilisation et d'éthique.
+                J&apos;accepte les règles d&apos;utilisation et d&apos;éthique.
               </p>
             </div>
           </div>
@@ -549,7 +549,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
             <div>
               <label className="text-sm font-medium text-slate-900">Politique RGPD</label>
               <p className="text-xs text-slate-600 mt-1">
-                J'accepte le traitement de mes données selon la politique RGPD.
+                J&apos;accepte le traitement de mes données selon la politique RGPD.
               </p>
             </div>
           </div>

@@ -10,7 +10,7 @@ interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-/** Liens sidebar espace Admin — chemins FR correspondant à l'arborescence réelle */
+/** Liens sidebar espace Admin — chemins FR correspondant à l&apos;arborescence réelle */
 const SIDEBAR_ITEMS = [
   { label: 'Tableau de bord', href: '/admin', icon: '📊' },
   { label: 'Utilisateurs', href: '/admin/utilisateurs', icon: '👥' },
@@ -32,7 +32,7 @@ const SIDEBAR_ITEMS = [
 ];
 
 /**
- * Layout pour l'espace Admin
+ * Layout pour l&apos;espace Admin
  * Sidebar + contenu principal avec ErrorBoundary
  */
 export default function AdminLayout({ children }: AdminLayoutProps) {
@@ -57,7 +57,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           {/* Header sidebar */}
           <div className="p-6 border-b border-gray-200">
             <h1 className="text-xl font-bold text-red-600">Eventy Admin</h1>
-            <p className="text-sm text-gray-600 mt-2">Panneau d'administration</p>
+            <p className="text-sm text-gray-600 mt-2">Panneau d&apos;administration</p>
           </div>
 
           {/* Menu items */}
