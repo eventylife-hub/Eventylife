@@ -4,6 +4,20 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface Booking {
   id: string;
   reference: string;
@@ -108,10 +122,10 @@ export default function CancelReservationPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: C.cream }}>
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-          <p className="text-gray-600">Chargement...</p>
+          <div className="w-12 h-12 border-4 rounded-full animate-spin" style={{ borderColor: C.border, borderTopColor: C.terra }}></div>
+          <p style={{ color: C.muted }}>Chargement...</p>
         </div>
       </div>
     );
@@ -119,41 +133,42 @@ export default function CancelReservationPage() {
 
   if (!booking) {
     return (
-      <div className="p-8">
-        <p className="text-gray-600">Réservation non trouvée</p>
+      <div className="p-8" style={{ backgroundColor: C.cream }}>
+        <p style={{ color: C.muted }}>Réservation non trouvée</p>
       </div>
     );
   }
 
   return (
-    <div className="p-8 max-w-3xl mx-auto">
+    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mb-8">
         <button
           onClick={() => router.back()}
-          className="text-blue-600 hover:text-blue-800 mb-4"
+          className="hover:opacity-80 mb-4"
+          style={{ color: C.terra }}
         >
           ← Retour
         </button>
-        <h1 className="text-3xl font-bold text-gray-900">Annuler ma réservation</h1>
+        <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Annuler ma réservation</h1>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-          {error}
+        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
+          <p style={{ color: '#DC2626' }}>{error}</p>
         </div>
       )}
 
       {/* Infos réservation */}
-      <div className="mb-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Votre Réservation</h2>
+      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: C.navy }}>Votre Réservation</h2>
         <div className="space-y-3">
-          <p>
+          <p style={{ color: C.navy }}>
             <span className="font-medium">Voyage:</span> {booking.travel?.title}
           </p>
-          <p>
+          <p style={{ color: C.navy }}>
             <span className="font-medium">Départ:</span> {formatDate(booking.travel?.departureDate || '')}
           </p>
-          <p>
+          <p style={{ color: C.navy }}>
             <span className="font-medium">Montant payé:</span>{' '}
             <span className="font-bold text-lg">{formatCurrency(booking.totalAmountCents || 0)}</span>
           </p>
@@ -161,9 +176,9 @@ export default function CancelReservationPage() {
       </div>
 
       {/* Politique d'annulation */}
-      <div className="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h2 className="text-xl font-bold text-blue-900 mb-4">Politique d&apos;Annulation</h2>
-        <div className="space-y-3 text-sm text-blue-900">
+      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: C.goldSoft, border: `1.5px solid ${C.gold}` }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: '#92400e' }}>Politique d&apos;Annulation</h2>
+        <div className="space-y-3 text-sm" style={{ color: '#92400e' }}>
           <p>
             <span className="font-medium">• Plus de 60 jours avant le départ:</span> 100% remboursé
             - 50€ de frais
@@ -185,26 +200,26 @@ export default function CancelReservationPage() {
 
       {/* Calcul remboursement */}
       {refundCalc && (
-        <div className="mb-8 bg-green-50 border border-green-200 rounded-lg p-6">
-          <h2 className="text-xl font-bold text-green-900 mb-4">Calcul de votre Remboursement</h2>
+        <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: C.forestBg, border: `1.5px solid ${C.forest}` }}>
+          <h2 className="text-xl font-bold mb-4" style={{ color: C.forest }}>Calcul de votre Remboursement</h2>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-gray-900">Montant payé:</span>
-              <span className="font-bold">{formatCurrency(booking.totalAmountCents || 0)}</span>
+              <span style={{ color: C.navy }}>Montant payé:</span>
+              <span className="font-bold" style={{ color: C.navy }}>{formatCurrency(booking.totalAmountCents || 0)}</span>
             </div>
-            <div className="flex justify-between items-center text-red-700">
+            <div className="flex justify-between items-center" style={{ color: '#DC2626' }}>
               <span>Frais d&apos;annulation:</span>
               <span className="font-bold">
                 -{formatCurrency(refundCalc.cancellationFeeCents || 0)}
               </span>
             </div>
-            <div className="border-t-2 border-green-200 pt-3 flex justify-between items-center">
-              <span className="text-lg font-bold text-green-900">Montant remboursé:</span>
-              <span className="text-2xl font-bold text-green-700">
+            <div className="pt-3 flex justify-between items-center" style={{ borderTop: `2px solid ${C.forest}` }}>
+              <span className="text-lg font-bold" style={{ color: C.forest }}>Montant remboursé:</span>
+              <span className="text-2xl font-bold" style={{ color: C.forest }}>
                 {formatCurrency(refundCalc.refundAmountCents || 0)}
               </span>
             </div>
-            <p className="text-sm text-green-800 mt-4">
+            <p className="text-sm mt-4" style={{ color: C.forest }}>
               Politique appliquée: <span className="font-medium">{refundCalc.policyApplied || 'N/A'}</span>
             </p>
           </div>
@@ -212,11 +227,11 @@ export default function CancelReservationPage() {
       )}
 
       {/* Formulaire */}
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Demander l&apos;Annulation</h2>
+      <form onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: C.navy }}>Demander l&apos;Annulation</h2>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-900 mb-2">
+          <label className="block text-sm font-medium mb-2" style={{ color: C.navy }}>
             Motif d&apos;annulation
           </label>
           <select
@@ -225,7 +240,12 @@ export default function CancelReservationPage() {
               const newReason = e.target.value;
               setReason(newReason);
             }}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-3"
+            className="w-full px-4 py-2 rounded-lg mb-3"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              color: C.navy,
+            }}
           >
             <option value="">Sélectionner un motif...</option>
             <option value="raison-personnelle">Raison personnelle</option>
@@ -234,24 +254,29 @@ export default function CancelReservationPage() {
             <option value="autre">Autre</option>
           </select>
 
-          <label className="block text-sm font-medium text-gray-900 mb-2 mt-4">
+          <label className="block text-sm font-medium mb-2 mt-4" style={{ color: C.navy }}>
             Commentaire (optionnel)
           </label>
           <textarea
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             placeholder="Décrivez les raisons de votre annulation..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-4 py-2 rounded-lg"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              color: C.navy,
+            }}
             rows={4}
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs mt-1" style={{ color: C.muted }}>
             {reason.length}/500 caractères
           </p>
         </div>
 
         {/* Confirmation */}
-        <div className="mb-6 bg-gray-50 rounded-lg p-4">
-          <p className="text-sm text-gray-700 mb-3">
+        <div className="mb-6 rounded-lg p-4" style={{ backgroundColor: C.goldSoft }}>
+          <p className="text-sm mb-3" style={{ color: C.navy }}>
             En confirmant, vous acceptez que votre réservation soit annulée et que vous receviez
             un remboursement de <span className="font-bold">{formatCurrency(refundCalc?.refundAmountCents || 0)}</span>.
           </p>
@@ -260,9 +285,10 @@ export default function CancelReservationPage() {
               type="checkbox"
               id="accept"
               required
-              className="w-4 h-4 border border-gray-300 rounded"
+              className="w-4 h-4 rounded"
+              style={{ borderColor: C.border, accentColor: C.terra }}
             />
-            <span className="text-sm text-gray-900">
+            <span className="text-sm" style={{ color: C.navy }}>
               Je confirme que je veux annuler ma réservation
             </span>
           </label>
@@ -272,14 +298,31 @@ export default function CancelReservationPage() {
           <button
             type="submit"
             disabled={submitting || !reason.trim()}
-            className="flex-1 px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-6 py-3 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg"
+            style={{
+              backgroundColor: '#DC2626',
+            }}
+            onMouseEnter={(e) => {
+              if (!submitting && reason.trim()) {
+                e.currentTarget.style.backgroundColor = '#B91C1C';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(220, 38, 38, 0.3)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#DC2626';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             {submitting ? 'Demande en cours...' : 'Confirmer l\'annulation'}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 bg-gray-300 text-gray-900 rounded-lg font-medium hover:bg-gray-400"
+            className="px-6 py-3 rounded-lg font-medium transition-all hover:opacity-80"
+            style={{
+              backgroundColor: C.border,
+              color: C.navy,
+            }}
           >
             Retour
           </button>

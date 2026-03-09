@@ -10,6 +10,7 @@ import { ZodError } from 'zod';
 /**
  * Page de réinitialisation du mot de passe
  * Le token est passé via les paramètres d'URL
+ * Eventy v2 Design System
  */
 export default function ReinitialiserMotDePassePage() {
   const searchParams = useSearchParams();
@@ -25,18 +26,67 @@ export default function ReinitialiserMotDePassePage() {
 
   if (!token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 text-center">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Eventy Life</h1>
-          <div className="text-5xl mb-4">⚠️</div>
-          <h2 className="text-xl font-semibold text-red-600 mb-2">Lien invalide</h2>
-          <p className="text-gray-600 text-sm mb-6">
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: '#FAF7F2',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <div
+          className="animate-fade-up"
+          style={{
+            width: '100%',
+            maxWidth: '28rem',
+            backgroundColor: '#FFFFFF',
+            borderRadius: '20px',
+            border: '1.5px solid #E5E0D8',
+            boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+            padding: '2rem',
+            textAlign: 'center',
+          }}
+        >
+          <h1
+            style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: '#1A1A2E',
+              margin: '0 0 1.5rem 0',
+              letterSpacing: '-0.5px',
+            }}
+          >
+            Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+          </h1>
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#DC2626', marginBottom: '0.5rem' }}>
+            Lien invalide
+          </h2>
+          <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
             Le lien de réinitialisation est invalide ou a expiré.
           </p>
           <Link
             href="/mot-de-passe-oublie"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+            style={{
+              display: 'inline-block',
+              padding: '0.75rem 1.5rem',
+              backgroundColor: '#C75B39',
+              color: '#FFFFFF',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              fontWeight: '500',
+              fontSize: '0.875rem',
+              transition: 'all 200ms',
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#B84A2F';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#C75B39';
+            }}
           >
             Demander un nouveau lien
           </Link>
@@ -80,19 +130,65 @@ export default function ReinitialiserMotDePassePage() {
 
   if (status === 'success') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 text-center">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-6">Eventy Life</h1>
-          <div className="text-5xl mb-4">✓</div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Mot de passe modifié!</h2>
-          <p className="text-gray-600 text-sm mb-4">
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: '#FAF7F2',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <div
+          className="animate-fade-up"
+          style={{
+            width: '100%',
+            maxWidth: '28rem',
+            backgroundColor: '#FFFFFF',
+            borderRadius: '20px',
+            border: '1.5px solid #E5E0D8',
+            boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+            padding: '2rem',
+            textAlign: 'center',
+          }}
+        >
+          <h1
+            style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: '#1A1A2E',
+              margin: '0 0 1.5rem 0',
+              letterSpacing: '-0.5px',
+            }}
+          >
+            Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+          </h1>
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✓</div>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#1A1A2E', marginBottom: '0.5rem' }}>
+            Mot de passe modifié!
+          </h2>
+          <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1rem' }}>
             Votre mot de passe a été réinitialisé avec succès.
           </p>
-          <p className="text-gray-500 text-sm mb-4">Redirection vers la connexion...</p>
+          <p style={{ color: '#9CA3AF', fontSize: '0.875rem', marginBottom: '1rem' }}>
+            Redirection vers la connexion...
+          </p>
           <Link
             href="/connexion"
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            style={{
+              color: '#C75B39',
+              fontSize: '0.875rem',
+              textDecoration: 'none',
+              fontWeight: '500',
+              transition: 'color 200ms',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#B84A2F';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#C75B39';
+            }}
           >
             Cliquez ici si vous n'êtes pas redirigé
           </Link>
@@ -102,59 +198,135 @@ export default function ReinitialiserMotDePassePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        {/* Logo */}
-        <div className="text-center mb-6">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Nouveau mot de passe</h1>
-          <p className="text-gray-600 text-sm mt-2">
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#FAF7F2',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <div
+        className="animate-fade-up"
+        style={{
+          width: '100%',
+          maxWidth: '28rem',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '20px',
+          border: '1.5px solid #E5E0D8',
+          boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+          padding: '2rem',
+        }}
+      >
+        {/* Logo & Title */}
+        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+          <h1
+            style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: '#1A1A2E',
+              margin: '0 0 0.5rem 0',
+              letterSpacing: '-0.5px',
+            }}
+          >
+            Nouveau mot de passe
+          </h1>
+          <p style={{ color: '#6B7280', fontSize: '0.875rem', margin: 0 }}>
             Choisissez un nouveau mot de passe sécurisé
           </p>
         </div>
 
         {/* Erreur serveur */}
         {serverError && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-600">{serverError}</p>
+          <div
+            style={{
+              marginBottom: '1rem',
+              padding: '0.75rem',
+              backgroundColor: '#FEF2F2',
+              border: '1.5px solid #FECACA',
+              borderRadius: '10px',
+            }}
+          >
+            <p style={{ fontSize: '0.875rem', color: '#DC2626', margin: 0 }}>
+              {serverError}
+            </p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Nouveau mot de passe */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#1A1A2E', marginBottom: '0.25rem' }}>
               Nouveau mot de passe
             </label>
-            <div className="relative">
+            <div style={{ position: 'relative' }}>
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition ${
-                  errors.password
-                    ? 'border-red-300 focus:ring-red-500'
-                    : 'border-gray-300 focus:ring-blue-500'
-                }`}
                 placeholder="Min. 8 caractères"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  paddingRight: '2.5rem',
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${errors.password ? '#DC2626' : '#E5E0D8'}`,
+                  borderRadius: '10px',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  transition: 'all 200ms',
+                  boxSizing: 'border-box',
+                  color: '#1A1A2E',
+                }}
+                onFocus={(e) => {
+                  if (!errors.password) {
+                    e.currentTarget.style.borderColor = '#C75B39';
+                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199, 91, 57, 0.1)';
+                  }
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-sm"
+                style={{
+                  position: 'absolute',
+                  right: '0.75rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: '#9CA3AF',
+                  fontSize: '0.875rem',
+                  cursor: 'pointer',
+                  background: 'none',
+                  border: 'none',
+                  padding: '0.25rem',
+                  transition: 'color 200ms',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#6B7280';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#9CA3AF';
+                }}
               >
                 {showPassword ? 'Masquer' : 'Afficher'}
               </button>
             </div>
             {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+              <p style={{ color: '#DC2626', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
+                {errors.password}
+              </p>
             )}
           </div>
 
           {/* Confirmation */}
           <div>
-            <label htmlFor="passwordConfirm" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="passwordConfirm" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#1A1A2E', marginBottom: '0.25rem' }}>
               Confirmer le mot de passe
             </label>
             <input
@@ -162,15 +334,33 @@ export default function ReinitialiserMotDePassePage() {
               type={showPassword ? 'text' : 'password'}
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition ${
-                errors.passwordConfirm
-                    ? 'border-red-300 focus:ring-red-500'
-                    : 'border-gray-300 focus:ring-blue-500'
-              }`}
               placeholder="Retapez votre mot de passe"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: '#FFFFFF',
+                border: `1.5px solid ${errors.passwordConfirm ? '#DC2626' : '#E5E0D8'}`,
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                outline: 'none',
+                transition: 'all 200ms',
+                boxSizing: 'border-box',
+                color: '#1A1A2E',
+              }}
+              onFocus={(e) => {
+                if (!errors.passwordConfirm) {
+                  e.currentTarget.style.borderColor = '#C75B39';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199, 91, 57, 0.1)';
+                }
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             />
             {errors.passwordConfirm && (
-              <p className="mt-1 text-sm text-red-500">{errors.passwordConfirm}</p>
+              <p style={{ color: '#DC2626', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
+                {errors.passwordConfirm}
+              </p>
             )}
           </div>
 
@@ -178,14 +368,50 @@ export default function ReinitialiserMotDePassePage() {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition font-semibold"
+            style={{
+              width: '100%',
+              padding: '0.75rem 1rem',
+              backgroundColor: status === 'loading' ? '#D97B5E' : '#C75B39',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '10px',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+              transition: 'all 200ms',
+              opacity: status === 'loading' ? 0.7 : 1,
+            }}
+            onMouseEnter={(e) => {
+              if (status !== 'loading') {
+                e.currentTarget.style.backgroundColor = '#B84A2F';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (status !== 'loading') {
+                e.currentTarget.style.backgroundColor = '#C75B39';
+              }
+            }}
           >
             {status === 'loading' ? 'Réinitialisation...' : 'Réinitialiser le mot de passe'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
-          <Link href="/connexion" className="text-blue-600 hover:text-blue-700 font-medium">
+        <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6B7280', marginTop: '1.5rem', margin: '1.5rem 0 0 0' }}>
+          <Link
+            href="/connexion"
+            style={{
+              color: '#C75B39',
+              textDecoration: 'none',
+              fontWeight: '500',
+              transition: 'color 200ms',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#B84A2F';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#C75B39';
+            }}
+          >
             Retour à la connexion
           </Link>
         </p>

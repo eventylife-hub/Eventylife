@@ -27,6 +27,16 @@ interface Group {
  * Affiche les groupes ouverts et permet de les rejoindre
  */
 export default function GroupesPage() {
+  const C = {
+    navy: '#1A1A2E',
+    cream: '#FAF7F2',
+    terra: '#C75B39',
+    terraLight: '#D97B5E',
+    gold: '#D4A853',
+    border: '#E5E0D8',
+    muted: '#6B7280',
+  };
+
   const params = useParams();
   const slug = params.slug as string;
 
@@ -66,12 +76,18 @@ export default function GroupesPage() {
   // État Loading
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
+      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-2xl font-bold mb-6">Groupes de voyage</h1>
+          <h1 className="text-2xl font-bold mb-6" style={{ color: C.navy }}>
+            Groupes de voyage
+          </h1>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <Skeleton key={i} className="h-48 rounded-lg" />
+              <Skeleton
+                key={i}
+                className="h-48 rounded-lg"
+                style={{ borderRadius: '20px', backgroundColor: C.border }}
+              />
             ))}
           </div>
         </div>
@@ -82,18 +98,32 @@ export default function GroupesPage() {
   // État Error
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
+      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-2xl font-bold mb-6">Groupes de voyage</h1>
-          <div className="rounded-lg border border-red-200 bg-red-50 p-6">
+          <h1 className="text-2xl font-bold mb-6" style={{ color: C.navy }}>
+            Groupes de voyage
+          </h1>
+          <div
+            className="rounded-lg p-6"
+            style={{
+              backgroundColor: '#fee2e2',
+              border: `1.5px solid #fca5a5`,
+              borderRadius: '20px',
+            }}
+          >
             <div className="flex items-start gap-4">
-              <AlertCircle className="h-6 w-6 text-red-600 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="h-6 w-6 flex-shrink-0 mt-0.5" style={{ color: '#991b1b' }} />
               <div>
-                <h2 className="font-semibold text-red-900">Erreur</h2>
-                <p className="text-sm text-red-700 mt-1">{error}</p>
+                <h2 className="font-semibold" style={{ color: '#991b1b' }}>
+                  Erreur
+                </h2>
+                <p className="text-sm mt-1" style={{ color: '#7f1d1d' }}>
+                  {error}
+                </p>
                 <button
                   onClick={() => window.location.reload()}
-                  className="mt-3 text-sm font-medium text-red-600 hover:text-red-700 underline"
+                  className="mt-3 text-sm font-medium underline hover:opacity-80"
+                  style={{ color: '#991b1b' }}
                 >
                   Réessayer
                 </button>
@@ -108,15 +138,30 @@ export default function GroupesPage() {
   // État Empty
   if (groupes.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
+      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-2xl font-bold mb-6">Groupes de voyage</h1>
-          <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-100 p-12 text-center">
-            <p className="text-gray-600 mb-4">
+          <h1 className="text-2xl font-bold mb-6" style={{ color: C.navy }}>
+            Groupes de voyage
+          </h1>
+          <div
+            className="rounded-lg p-12 text-center"
+            style={{
+              backgroundColor: 'white',
+              border: `2px dashed ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <p className="mb-4" style={{ color: C.muted }}>
               Aucun groupe ouvert pour ce voyage
             </p>
             <Link href="/client/groupes/creer">
-              <Button variant="default">
+              <Button
+                variant="default"
+                style={{
+                  backgroundColor: C.terra,
+                  color: 'white',
+                }}
+              >
                 <Plus className="h-4 w-4 mr-2" />
                 Créer un groupe
               </Button>
@@ -129,12 +174,20 @@ export default function GroupesPage() {
 
   // État Data
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
       <div className="mx-auto max-w-6xl">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold">Groupes de voyage</h1>
+          <h1 className="text-2xl font-bold" style={{ color: C.navy }}>
+            Groupes de voyage
+          </h1>
           <Link href="/client/groupes/creer">
-            <Button variant="default">
+            <Button
+              variant="default"
+              style={{
+                backgroundColor: C.terra,
+                color: 'white',
+              }}
+            >
               <Plus className="h-4 w-4 mr-2" />
               Créer un groupe
             </Button>
@@ -148,7 +201,7 @@ export default function GroupesPage() {
         </div>
 
         {groupes.length > 0 && (
-          <div className="mt-8 text-sm text-gray-600 text-center">
+          <div className="mt-8 text-sm text-center" style={{ color: C.muted }}>
             Vous voyez {groupes.length} groupe{groupes.length > 1 ? 's' : ''} ouvert{groupes.length > 1 ? 's' : ''}
           </div>
         )}

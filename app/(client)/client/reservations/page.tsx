@@ -4,6 +4,20 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface Booking {
   id: string;
   status: string;
@@ -18,13 +32,13 @@ interface Booking {
   createdAt: string;
 }
 
-const statusBadgeColor = {
-  CONFIRMED: 'bg-green-100 text-green-800',
-  HELD: 'bg-blue-100 text-blue-800',
-  PARTIALLY_PAID: 'bg-yellow-100 text-yellow-800',
-  DRAFT: 'bg-gray-100 text-gray-800',
-  EXPIRED: 'bg-red-100 text-red-800',
-  CANCELED: 'bg-red-100 text-red-800',
+const statusBadgeStyle = {
+  CONFIRMED: { background: C.forestBg, color: C.forest },
+  HELD: { background: C.goldSoft, color: '#92400e' },
+  PARTIALLY_PAID: { background: C.goldSoft, color: '#92400e' },
+  DRAFT: { background: '#F3F4F6', color: '#4B5563' },
+  EXPIRED: { background: '#FEF2F2', color: '#DC2626' },
+  CANCELED: { background: '#FEF2F2', color: '#DC2626' },
 };
 
 const statusLabels = {
@@ -85,16 +99,25 @@ export default function ReservationsPage() {
 
   if (error) {
     return (
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto animate-fade-up">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Mes réservations</h1>
-          <p className="text-slate-600">Gérez vos réservations de voyages</p>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes réservations</h1>
+          <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos réservations de voyages</p>
         </div>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700">
-          Erreur : {error}
+        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium mb-4" style={{ color: '#DC2626' }}>⚠️ {error}</p>
           <button
             onClick={() => fetchBookings()}
-            className="ml-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
+            style={{ background: C.terra, color: '#fff' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = C.terraLight;
+              e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             Réessayer
           </button>
@@ -104,15 +127,15 @@ export default function ReservationsPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto space-y-6 animate-fade-up">
       {/* En-tête */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Mes réservations</h1>
-        <p className="text-slate-600">Gérez vos réservations de voyages</p>
+      <div>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes réservations</h1>
+        <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos réservations de voyages</p>
       </div>
 
       {/* Filtres */}
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {[
           { value: 'all', label: 'Toutes' },
           { value: 'confirmed', label: 'Confirmées' },
@@ -122,11 +145,22 @@ export default function ReservationsPage() {
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
-            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-              filter === f.value
-                ? 'bg-blue-600 text-white'
-                : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-50'
-            }`}
+            className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
+            style={{
+              background: filter === f.value ? C.terra : '#fff',
+              color: filter === f.value ? '#fff' : C.navy,
+              border: `1.5px solid ${filter === f.value ? C.terra : C.border}`,
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== f.value) {
+                e.currentTarget.style.background = C.terraSoft;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== f.value) {
+                e.currentTarget.style.background = '#fff';
+              }
+            }}
           >
             {f.label}
           </button>
@@ -135,40 +169,60 @@ export default function ReservationsPage() {
 
       {/* État vide */}
       {filteredBookings.length === 0 && !loading ? (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">📭</div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Aucune réservation</h2>
-          <p className="text-slate-600 mb-6">Vous n&apos;avez pas encore réservé de voyage</p>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+          <div className="text-5xl mb-4">📭</div>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>Aucune réservation</h2>
+          <p className="text-sm mb-6" style={{ color: C.muted }}>Vous n&apos;avez pas encore réservé de voyage</p>
           <Link
             href="/voyages"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"
+            className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+            style={{ background: C.terra, color: '#fff' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = C.terraLight;
+              e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
-            Découvrir les voyages
+            Découvrir les voyages →
           </Link>
         </div>
       ) : (
         <>
           {/* Liste des réservations */}
-          <div className="space-y-4 mb-8">
+          <div className="space-y-4">
             {loading && bookings.length === 0 ? (
               [...Array(3)].map((_, i) => (
-                <div
-                  key={i}
-                  className="h-32 bg-slate-200 rounded-lg animate-pulse"
-                />
+                <div key={i} className="h-32 rounded-2xl skeleton" />
               ))
             ) : (
               filteredBookings.map((booking) => (
                 <Link
                   key={booking.id}
                   href={`/client/reservations/${booking.id}`}
-                  className="group"
+                  className="group block"
                 >
-                  <div className="bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
+                  <div
+                    className="rounded-2xl overflow-hidden transition-all duration-300"
+                    style={{
+                      background: '#fff',
+                      border: `1.5px solid ${C.border}`,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                  >
                     <div className="flex flex-col md:flex-row">
                       {/* Image */}
                       {booking.travelCoverImageUrl && (
-                        <div className="md:w-1/4 h-32 md:h-auto bg-slate-100 flex-shrink-0">
+                        <div className="md:w-1/4 h-32 md:h-auto flex-shrink-0" style={{ background: C.cream }}>
                           <img
                             src={booking.travelCoverImageUrl}
                             alt={booking.travelTitle}
@@ -180,33 +234,32 @@ export default function ReservationsPage() {
                       {/* Contenu */}
                       <div className="flex-1 p-6 flex flex-col justify-between">
                         <div>
-                          <h3 className="text-lg font-bold text-slate-900 mb-2">
+                          <h3 className="font-bold text-base mb-2" style={{ color: C.navy }}>
                             {booking.travelTitle}
                           </h3>
-                          <p className="text-sm text-slate-600 mb-1">
+                          <p className="text-xs mb-1" style={{ color: C.muted }}>
                             📍 {booking.destinationCity}
                           </p>
-                          <p className="text-sm text-slate-600 mb-2">
+                          <p className="text-xs mb-2" style={{ color: C.muted }}>
                             📅 {formatDate(booking.departureDate)} - {formatDate(booking.returnDate)}
                           </p>
-                          <p className="text-sm text-slate-600">
+                          <p className="text-xs" style={{ color: C.muted }}>
                             👥 {booking.participantCount} participant{booking.participantCount > 1 ? 's' : ''}
                           </p>
                         </div>
                       </div>
 
                       {/* Infos de droite */}
-                      <div className="p-6 md:border-l border-t md:border-t-0 border-slate-200 flex flex-col justify-between items-start md:items-end">
+                      <div className="p-6 md:border-l border-t md:border-t-0 flex flex-col justify-between items-start md:items-end" style={{ borderColor: C.border }}>
                         <div className="text-right w-full md:w-auto mb-4 md:mb-0">
-                          <p className="text-2xl font-bold text-slate-900">
+                          <p className="text-lg font-bold" style={{ color: C.navy }}>
                             {formatPrice(booking.totalAmountTTC)}
                           </p>
-                          <p className="text-xs text-slate-500">Total</p>
+                          <p className="text-xs" style={{ color: C.muted }}>Total</p>
                         </div>
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            statusBadgeColor[booking.status as keyof typeof statusBadgeColor]
-                          }`}
+                          className="px-3 py-1 rounded-xl text-xs font-semibold"
+                          style={statusBadgeStyle[booking.status as keyof typeof statusBadgeStyle] || { background: '#F3F4F6', color: '#4B5563' }}
                         >
                           {statusLabels[booking.status as keyof typeof statusLabels]}
                         </span>
@@ -222,7 +275,18 @@ export default function ReservationsPage() {
           {hasMore && !loading && (
             <button
               onClick={() => fetchBookings(cursor || undefined)}
-              className="w-full px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-colors"
+              className="w-full px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+              style={{
+                background: '#fff',
+                color: C.navy,
+                border: `1.5px solid ${C.border}`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = C.terraSoft;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#fff';
+              }}
             >
               Charger plus de réservations
             </button>

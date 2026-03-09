@@ -22,6 +22,16 @@ interface Travel {
 }
 
 export default function TravelReviewsPage() {
+  const C = {
+    navy: '#1A1A2E',
+    cream: '#FAF7F2',
+    terra: '#C75B39',
+    terraLight: '#D97B5E',
+    gold: '#D4A853',
+    border: '#E5E0D8',
+    muted: '#6B7280',
+  };
+
   const params = useParams();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [travel, setTravel] = useState<Travel | null>(null);
@@ -94,13 +104,27 @@ export default function TravelReviewsPage() {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href={`/voyages/${params.slug}`} className="text-blue-600 hover:text-blue-700 mb-4 inline-block">
+      <div
+        className="max-w-4xl mx-auto px-4 py-12 animate-fade-up"
+        style={{ backgroundColor: C.cream }}
+      >
+        <Link
+          href={`/voyages/${params.slug}`}
+          style={{ color: C.terra }}
+          className="hover:underline mb-4 inline-block"
+        >
           ← Retour au voyage
         </Link>
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-24 bg-slate-200 rounded-lg animate-pulse" />
+            <div
+              key={i}
+              className="h-24 rounded-lg animate-pulse"
+              style={{
+                backgroundColor: C.border,
+                borderRadius: '20px',
+              }}
+            />
           ))}
         </div>
       </div>
@@ -108,50 +132,93 @@ export default function TravelReviewsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link href={`/voyages/${params.slug}`} className="text-blue-600 hover:text-blue-700 mb-4 inline-block">
+    <div
+      className="max-w-4xl mx-auto px-4 py-12 animate-fade-up"
+      style={{ backgroundColor: C.cream }}
+    >
+      <Link
+        href={`/voyages/${params.slug}`}
+        style={{ color: C.terra }}
+        className="hover:underline mb-4 inline-block"
+      >
         ← Retour au voyage
       </Link>
 
       {/* En-tête */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
+        <h1
+          className="text-3xl font-bold mb-2"
+          style={{ color: C.navy, fontFamily: 'Playfair Display' }}
+        >
           Avis sur {travel?.title || 'ce voyage'}
         </h1>
-        <p className="text-slate-600">
+        <p style={{ color: C.muted }}>
           {reviews.length} avis vérifiés
         </p>
       </div>
 
       {error ? (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700">
+        <div
+          className="p-6 rounded-lg"
+          style={{
+            backgroundColor: '#fee2e2',
+            border: `1.5px solid #fca5a5`,
+            borderRadius: '20px',
+            color: '#991b1b',
+          }}
+        >
           {error}
         </div>
       ) : reviews.length === 0 ? (
-        <div className="text-center py-16 bg-white border border-slate-200 rounded-lg">
+        <div
+          className="text-center py-16 rounded-lg"
+          style={{
+            backgroundColor: 'white',
+            border: `1.5px solid ${C.border}`,
+            borderRadius: '20px',
+          }}
+        >
           <div className="text-6xl mb-4">⭐</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Aucun avis</h2>
-          <p className="text-slate-600">Soyez le premier à laisser un avis sur ce voyage</p>
+          <p style={{ color: C.muted }}>Soyez le premier à laisser un avis sur ce voyage</p>
         </div>
       ) : (
         <>
           {/* Résumé des notes */}
-          <div className="bg-white border border-slate-200 rounded-lg p-8 mb-8">
+          <div
+            className="rounded-lg p-8 mb-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="text-center md:text-left">
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-bold text-slate-900">{averageRating}</span>
-                  <span className="text-2xl text-slate-600">/5</span>
+                  <span className="text-5xl font-bold" style={{ color: C.navy }}>
+                    {averageRating}
+                  </span>
+                  <span className="text-2xl" style={{ color: C.muted }}>
+                    /5
+                  </span>
                 </div>
                 <div className="mb-3">{renderStars(Math.round(Number(averageRating)))}</div>
-                <p className="text-sm text-slate-600">Basé sur {reviews.length} avis</p>
+                <p className="text-sm" style={{ color: C.muted }}>
+                  Basé sur {reviews.length} avis
+                </p>
               </div>
 
               <div className="flex-1 space-y-2 w-full">
                 {[5, 4, 3, 2, 1].map((rating) => (
                   <div key={rating} className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-slate-600 w-12">{rating} ★</span>
-                    <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <span className="text-sm font-medium w-12" style={{ color: C.muted }}>
+                      {rating} ★
+                    </span>
+                    <div
+                      className="flex-1 h-2 rounded-full overflow-hidden"
+                      style={{ backgroundColor: C.border }}
+                    >
                       <div
                         className="h-full bg-yellow-400"
                         style={{
@@ -159,7 +226,7 @@ export default function TravelReviewsPage() {
                         }}
                       />
                     </div>
-                    <span className="text-sm text-slate-600 w-8 text-right">
+                    <span className="text-sm w-8 text-right" style={{ color: C.muted }}>
                       {ratingDistribution[rating as keyof typeof ratingDistribution]}
                     </span>
                   </div>
@@ -170,11 +237,19 @@ export default function TravelReviewsPage() {
 
           {/* Tri */}
           <div className="mb-6 flex justify-between items-center">
-            <h2 className="text-lg font-bold text-slate-900">Tous les avis</h2>
+            <h2 className="text-lg font-bold" style={{ color: C.navy }}>
+              Tous les avis
+            </h2>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'recent' | 'rating-high' | 'rating-low')}
-              className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-2 rounded-lg focus:ring-2"
+              style={{
+                borderRadius: '12px',
+                border: `1.5px solid ${C.border}`,
+                color: C.navy,
+                backgroundColor: 'white',
+              }}
             >
               <option value="recent">Plus récents</option>
               <option value="rating-high">Meilleure note</option>
@@ -185,22 +260,41 @@ export default function TravelReviewsPage() {
           {/* Liste des avis */}
           <div className="space-y-4">
             {sortedReviews.map((review) => (
-              <div key={review.id} className="bg-white border border-slate-200 rounded-lg p-6">
+              <div
+                key={review.id}
+                className="rounded-lg p-6"
+                style={{
+                  backgroundColor: 'white',
+                  border: `1.5px solid ${C.border}`,
+                  borderRadius: '20px',
+                }}
+              >
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h3 className="font-bold text-slate-900">{review.userName}</h3>
+                    <h3 className="font-bold" style={{ color: C.navy }}>
+                      {review.userName}
+                    </h3>
                     <div className="mt-1">{renderStars(review.rating)}</div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-slate-500">{formatDate(review.createdAt)}</p>
+                    <p className="text-xs" style={{ color: C.muted }}>
+                      {formatDate(review.createdAt)}
+                    </p>
                     {review.status !== 'APPROVED' && (
-                      <span className="inline-block mt-2 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">
+                      <span
+                        className="inline-block mt-2 px-2 py-1 text-xs rounded"
+                        style={{
+                          backgroundColor: '#fef3c7',
+                          color: '#92400e',
+                          borderRadius: '8px',
+                        }}
+                      >
                         En modération
                       </span>
                     )}
                   </div>
                 </div>
-                <p className="text-slate-700">{review.comment}</p>
+                <p style={{ color: C.navy }}>{review.comment}</p>
               </div>
             ))}
           </div>

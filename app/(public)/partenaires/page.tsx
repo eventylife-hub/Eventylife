@@ -16,7 +16,7 @@ const avantages = [
   {
     icon: '\u{1F4B0}',
     title: 'Revenus supplementaires',
-    desc: 'Remplissez vos capacites avec des groupes reguliers toute l&apos;annee.',
+    desc: 'Remplissez vos capacites avec des groupes reguliers toute l\'annee.',
   },
   {
     icon: '\u{1F91D}',
@@ -63,29 +63,43 @@ const typePartenaires = [
   },
 ];
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+};
+
 export default function PartenairesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div style={{ backgroundColor: C.cream, minHeight: '100vh' }}>
       {/* Hero */}
-      <div className="bg-gradient-to-r from-[#0A1628] to-[#1B3A5C] text-white py-20 px-4">
+      <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, color: 'white', paddingTop: '5rem', paddingBottom: '5rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
         <div className="mx-auto max-w-5xl text-center">
-          <span className="inline-block bg-[#FF6B35]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <span style={{ backgroundColor: 'rgba(199, 91, 57, 0.2)', color: C.terra, padding: '0.375rem 1rem', borderRadius: '9999px', fontSize: '0.875rem', fontWeight: '700', display: 'inline-block', marginBottom: '1.5rem' }}>
             Partenariat
           </span>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+          <h1 style={{ fontSize: '3rem', fontWeight: '700', marginBottom: '1.5rem', fontFamily: 'Playfair, serif' }} className="sm:text-5xl mb-6">
             Developpez votre activite avec{' '}
-            <span className="text-[#FF6B35]">Eventy Life</span>
+            <span style={{ color: C.terra }}>Eventy Life</span>
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.8)', maxWidth: '42rem' }} className="mx-auto mb-8">
             Rejoignez notre reseau de partenaires et accedez a des milliers de
             voyageurs. Inscription gratuite, commission uniquement sur les
             reservations.
           </p>
           <Link
             href="/pro"
-            className="inline-block bg-[#FF6B35] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#FF8F5E] transition-all hover:scale-105 shadow-lg"
+            style={{ display: 'inline-block', backgroundColor: C.terra, color: 'white', padding: '1rem 2rem', borderRadius: '12px', fontWeight: '700', fontSize: '1.125rem', textDecoration: 'none', transition: 'all 0.3s ease', boxShadow: `0 10px 25px rgba(199, 91, 57, 0.2)` }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; e.currentTarget.style.transform = 'scale(1.05)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; e.currentTarget.style.transform = 'scale(1)'; }}
           >
-            Devenir partenaire &rarr;
+            Devenir partenaire →
           </Link>
         </div>
       </div>
@@ -93,10 +107,10 @@ export default function PartenairesPage() {
       <div className="mx-auto max-w-6xl px-4 py-16">
         {/* Avantages */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
             Pourquoi devenir partenaire ?
           </h2>
-          <p className="text-gray-600 max-w-xl mx-auto">
+          <p style={{ color: C.muted, maxWidth: '26rem' }} className="mx-auto">
             Des avantages concrets pour faire grandir votre business.
           </p>
         </div>
@@ -105,18 +119,20 @@ export default function PartenairesPage() {
           {avantages.map((a, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all"
+              style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '1.5rem', transition: 'all 0.3s ease' }}
+              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
             >
-              <span className="text-3xl mb-4 block">{a.icon}</span>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{a.title}</h3>
-              <p className="text-sm text-gray-600">{a.desc}</p>
+              <span style={{ fontSize: '1.875rem', display: 'block', marginBottom: '1rem' }}>{a.icon}</span>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>{a.title}</h3>
+              <p style={{ fontSize: '0.875rem', color: C.muted }}>{a.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Types de partenaires */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
             Qui peut devenir partenaire ?
           </h2>
         </div>
@@ -125,45 +141,45 @@ export default function PartenairesPage() {
           {typePartenaires.map((t, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex gap-5 items-start"
+              style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '2rem', display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}
             >
-              <span className="text-4xl flex-shrink-0">{t.icon}</span>
+              <span style={{ fontSize: '2.25rem', flexShrink: 0 }}>{t.icon}</span>
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{t.type}</h3>
-                <p className="text-sm text-gray-600">{t.desc}</p>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>{t.type}</h3>
+                <p style={{ fontSize: '0.875rem', color: C.muted }}>{t.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Comment ca marche */}
-        <div className="bg-gradient-to-r from-[#0A1628] to-[#1B3A5C] rounded-3xl p-8 sm:p-12 text-white mb-20">
-          <h2 className="text-3xl font-bold text-center mb-10">Comment ca marche ?</h2>
+        <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, borderRadius: '20px', padding: '2rem', color: 'white', paddingTop: '3rem', paddingBottom: '3rem' }} className="sm:p-12 mb-20">
+          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', textAlign: 'center', marginBottom: '2.5rem', fontFamily: 'Playfair, serif' }}>Comment ca marche ?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-14 h-14 bg-[#FF6B35] rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: C.terra, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: '700', marginLeft: 'auto', marginRight: 'auto', marginBottom: '1rem' }}>
                 1
               </div>
-              <h3 className="font-bold mb-2">Inscription gratuite</h3>
-              <p className="text-sm text-gray-300">
+              <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Inscription gratuite</h3>
+              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
                 Creez votre profil pro en 5 minutes. Sans engagement ni frais.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-14 h-14 bg-[#FF6B35] rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: C.terra, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: '700', marginLeft: 'auto', marginRight: 'auto', marginBottom: '1rem' }}>
                 2
               </div>
-              <h3 className="font-bold mb-2">Publiez vos offres</h3>
-              <p className="text-sm text-gray-300">
+              <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Publiez vos offres</h3>
+              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
                 Ajoutez vos prestations, tarifs et disponibilites sur votre dashboard.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-14 h-14 bg-[#FF6B35] rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: C.terra, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: '700', marginLeft: 'auto', marginRight: 'auto', marginBottom: '1rem' }}>
                 3
               </div>
-              <h3 className="font-bold mb-2">Recevez des groupes</h3>
-              <p className="text-sm text-gray-300">
+              <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Recevez des groupes</h3>
+              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
                 Accueillez des voyageurs et developpez votre chiffre d&apos;affaires.
               </p>
             </div>
@@ -172,23 +188,27 @@ export default function PartenairesPage() {
 
         {/* CTA */}
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
             Pret a nous rejoindre ?
           </h2>
-          <p className="text-gray-600 mb-8 max-w-lg mx-auto">
+          <p style={{ color: C.muted, marginBottom: '2rem', maxWidth: '32rem' }} className="mx-auto">
             Rejoignez les partenaires qui font confiance a Eventy Life pour
             developper leur activite touristique.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/pro"
-              className="inline-block bg-[#FF6B35] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#FF8F5E] transition-all shadow-lg"
+              style={{ display: 'inline-block', backgroundColor: C.terra, color: 'white', padding: '1rem 2rem', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', transition: 'all 0.3s ease', boxShadow: `0 10px 25px rgba(199, 91, 57, 0.2)` }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}
             >
               Creer mon compte pro
             </Link>
             <a
               href="mailto:partenaires@eventylife.fr"
-              className="inline-block bg-white text-[#0A1628] px-8 py-4 rounded-xl font-bold border-2 border-gray-200 hover:border-[#FF6B35] transition-all"
+              style={{ display: 'inline-block', backgroundColor: 'white', color: C.navy, padding: '1rem 2rem', borderRadius: '12px', fontWeight: '700', border: `2px solid ${C.border}`, textDecoration: 'none', transition: 'all 0.3s ease' }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.color = C.terra; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.navy; }}
             >
               Nous contacter
             </a>

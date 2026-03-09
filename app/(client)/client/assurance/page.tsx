@@ -1,13 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Skeleton } from '@/components/ui/skeleton';
-import { InsuranceCard } from '@/components/insurance/insurance-card';
-import { Download } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
 
 /**
  * Page Mes Assurances - Vue client
@@ -74,84 +82,168 @@ export default function AssurancePage() {
 
   if (loading) {
     return (
-      <div className="space-y-6 p-6">
-        <Skeleton className="h-10 w-64" />
-        <Skeleton className="h-32 w-full" />
-        <Skeleton className="h-32 w-full" />
+      <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
+        <div>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+            Mes assurances
+          </h1>
+          <p className="text-sm mt-2" style={{ color: C.muted }}>
+            Gestion de vos assurances voyages
+          </p>
+        </div>
+        <div className="space-y-4">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="h-32 rounded-2xl skeleton" />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
+      {/* En-tête */}
       <div>
-        <h1 className="text-3xl font-bold">Mes Assurances</h1>
-        <p className="text-gray-600 mt-2">Gestion de vos assurances voyages</p>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+          Mes assurances
+        </h1>
+        <p className="text-sm mt-2" style={{ color: C.muted }}>
+          Gestion de vos assurances voyages
+        </p>
       </div>
 
+      {/* Erreur */}
       {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>
+        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: '1.5px solid #FCA5A5' }}>
+          <div className="flex justify-between items-center">
+            <p className="text-sm font-medium" style={{ color: '#DC2626' }}>
+              ⚠️ {error}
+            </p>
+            <button
+              onClick={() => setError(null)}
+              className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
+              style={{
+                background: '#fff',
+                color: '#DC2626',
+                border: '1.5px solid #FCA5A5',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#FCA5A5';
+                e.currentTarget.style.color = '#fff';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#fff';
+                e.currentTarget.style.color = '#DC2626';
+              }}
+            >
               Fermer
-            </Button>
-          </AlertDescription>
-        </Alert>
+            </button>
+          </div>
+        </div>
       )}
 
+      {/* État vide */}
       {insurances.length === 0 ? (
-        <Card>
-          <CardContent className="pt-6 text-center">
-            <p className="text-gray-500 mb-4">Aucune assurance souscrite</p>
-            <Button onClick={() => (window.location.href = '/client/reservations')}>
-              Souscrire une assurance
-            </Button>
-          </CardContent>
-        </Card>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+          <div className="text-5xl mb-4">🛡️</div>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>
+            Aucune assurance souscrite
+          </h2>
+          <p className="text-sm mb-6" style={{ color: C.muted }}>
+            Protégez vos voyages avec une assurance annulation
+          </p>
+          <button
+            onClick={() => (window.location.href = '/client/reservations')}
+            className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+            style={{ background: C.terra, color: '#fff' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = C.terraLight;
+              e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            Souscrire une assurance →
+          </button>
+        </div>
       ) : (
         <div className="space-y-4">
-          {insurances.map((insurance: any) => (
-            <Card key={insurance?.subscriptionId as string}>
-              <CardHeader className="pb-3">
-                <div className="flex justify-between items-start">
+          {insurances.map((insurance: any) => {
+            const statusBadgeStyle = {
+              background: insurance?.status === 'CONFIRMED' ? C.forestBg : C.goldSoft,
+              color: insurance?.status === 'CONFIRMED' ? C.forest : '#92400e',
+            };
+
+            return (
+              <div
+                key={insurance?.subscriptionId as string}
+                className="rounded-2xl p-6 transition-all duration-300"
+                style={{
+                  background: '#fff',
+                  border: `1.5px solid ${C.border}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <div className="flex justify-between items-start mb-4">
                   <div>
-                    <CardTitle className="text-lg">Assurance #{(insurance?.subscriptionId as string)?.slice(-8)}</CardTitle>
-                    <CardDescription>Souscrite le {formatDate(insurance?.subscribedAt as string | Date)}</CardDescription>
+                    <h3 className="font-bold text-base" style={{ color: C.navy }}>
+                      Assurance #{(insurance?.subscriptionId as string)?.slice(-8)}
+                    </h3>
+                    <p className="text-sm mt-1" style={{ color: C.muted }}>
+                      Souscrite le {formatDate(insurance?.subscribedAt as string | Date)}
+                    </p>
                   </div>
-                  <span className={`text-sm px-3 py-1 rounded ${
-                    insurance?.status === 'CONFIRMED'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-yellow-100 text-yellow-700'
-                  }`}>
+                  <span
+                    className="px-3 py-1 rounded-xl text-xs font-semibold"
+                    style={statusBadgeStyle}
+                  >
                     {insurance?.status === 'CONFIRMED' ? 'Confirmée' : 'En attente'}
                   </span>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
+
+                <div className="space-y-4 border-t" style={{ borderColor: C.border, paddingTop: '16px' }}>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Montant</span>
-                    <span className="font-semibold">
+                    <span style={{ color: C.muted }}>Montant</span>
+                    <span className="font-semibold" style={{ color: C.navy }}>
                       {formatPrice(insurance?.insuranceAmountTTC as number)}
                     </span>
                   </div>
 
-                  <Button
+                  <button
                     onClick={() => handleDownloadCertificate(insurance?.subscriptionId as string)}
                     disabled={downloadingId === (insurance?.subscriptionId as string)}
-                    className="w-full gap-2"
-                    variant="outline"
+                    className="w-full px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+                    style={{
+                      background: '#fff',
+                      color: C.terra,
+                      border: `1.5px solid ${C.border}`,
+                      opacity: downloadingId === (insurance?.subscriptionId as string) ? 0.6 : 1,
+                      cursor: downloadingId === (insurance?.subscriptionId as string) ? 'not-allowed' : 'pointer',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (downloadingId !== (insurance?.subscriptionId as string)) {
+                        e.currentTarget.style.background = C.terraSoft;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = '#fff';
+                    }}
                   >
-                    <Download className="w-4 h-4" />
-                    {downloadingId === insurance.subscriptionId
-                      ? 'Téléchargement...'
-                      : 'Télécharger certificat'}
-                  </Button>
+                    ⬇️ {downloadingId === insurance.subscriptionId ? 'Téléchargement...' : 'Télécharger certificat'}
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

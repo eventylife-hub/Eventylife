@@ -15,6 +15,20 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatDate } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface CoOccupant {
   id: string;
   firstName: string;
@@ -46,9 +60,9 @@ interface RoomingData {
 type LoadState = 'loading' | 'error' | 'data';
 
 const paymentStatusBadge = {
-  PENDING: 'bg-yellow-100 text-yellow-800',
-  PARTIAL: 'bg-orange-100 text-orange-800',
-  PAID: 'bg-green-100 text-green-800'
+  PENDING: { bg: C.goldSoft, color: '#92400e' },
+  PARTIAL: { bg: '#FEF3C7', color: '#D97706' },
+  PAID: { bg: C.forestBg, color: C.forest }
 };
 
 const paymentStatusLabel = {
@@ -176,7 +190,7 @@ export default function RoomingPage() {
 
   if (state === 'loading') {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12 space-y-8">
+      <div className="max-w-4xl mx-auto px-4 py-12 space-y-8" style={{ backgroundColor: C.cream }}>
         <Skeleton className="h-10 w-48" />
         <Skeleton className="h-48 w-full rounded-lg" />
         <Skeleton className="h-80 w-full rounded-lg" />
@@ -186,11 +200,11 @@ export default function RoomingPage() {
 
   if (state === 'error') {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700">
-          Erreur : {error}
+      <div className="max-w-4xl mx-auto px-4 py-12" style={{ backgroundColor: C.cream }}>
+        <div className="rounded-lg p-6" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
+          <p style={{ color: '#DC2626' }}>Erreur : {error}</p>
           <Link href={`/client/reservations/${reservationId}`}>
-            <Button variant="outline" className="ml-4">
+            <Button variant="outline" className="ml-4 mt-4">
               Retour à la réservation
             </Button>
           </Link>
@@ -204,46 +218,46 @@ export default function RoomingPage() {
   const isCutoffPassed = new Date(rooming.checkInDate) < new Date();
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 py-12 space-y-8" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
       {/* Header */}
       <div>
         <Link href={`/client/reservations/${reservationId}`}>
-          <Button variant="outline" size="sm" className="mb-4">
+          <Button variant="outline" size="sm" className="mb-4" style={{ color: C.terra, borderColor: C.terra }}>
             ← Retour
           </Button>
         </Link>
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Détails de la chambre</h1>
-        <p className="text-gray-600">{rooming.hotelName}</p>
+        <h1 className="text-4xl font-bold mb-2" style={{ color: C.navy }}>Détails de la chambre</h1>
+        <p style={{ color: C.muted }}>{rooming.hotelName}</p>
       </div>
 
       {/* Room Info Card */}
-      <Card elevated>
+      <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
         <CardContent className="p-6 space-y-4">
-          <h2 className="text-2xl font-bold text-gray-900">Informations de la chambre</h2>
+          <h2 className="text-2xl font-bold" style={{ color: C.navy }}>Informations de la chambre</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p className="text-sm text-gray-600 mb-1">Type de chambre</p>
-              <p className="text-lg font-semibold text-gray-900">{rooming.roomType}</p>
+              <p className="text-sm mb-1" style={{ color: C.muted }}>Type de chambre</p>
+              <p className="text-lg font-semibold" style={{ color: C.navy }}>{rooming.roomType}</p>
             </div>
 
             <div>
-              <p className="text-sm text-gray-600 mb-1">Capacité</p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-sm mb-1" style={{ color: C.muted }}>Capacité</p>
+              <p className="text-lg font-semibold" style={{ color: C.navy }}>
                 {rooming.occupants.length} / {rooming.capacity} personnes
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-gray-600 mb-1">Check-in</p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-sm mb-1" style={{ color: C.muted }}>Check-in</p>
+              <p className="text-lg font-semibold" style={{ color: C.navy }}>
                 {formatDate(rooming.checkInDate)}
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-gray-600 mb-1">Check-out</p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-sm mb-1" style={{ color: C.muted }}>Check-out</p>
+              <p className="text-lg font-semibold" style={{ color: C.navy }}>
                 {formatDate(rooming.checkOutDate)}
               </p>
             </div>
@@ -252,28 +266,33 @@ export default function RoomingPage() {
       </Card>
 
       {/* Co-occupants */}
-      <Card elevated>
+      <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
         <CardContent className="p-6 space-y-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Co-occupants</h2>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: C.navy }}>Co-occupants</h2>
 
           {rooming.occupants.length > 0 ? (
             <div className="space-y-3">
               {rooming.occupants.map((occupant) => (
                 <div
                   key={occupant.id}
-                  className="flex flex-col md:flex-row md:items-center md:justify-between p-4 bg-gray-50 rounded-lg border border-gray-200"
+                  className="flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg border"
+                  style={{ backgroundColor: C.cream, borderColor: C.border }}
                 >
                   <div>
-                    <p className="font-semibold text-gray-900">
+                    <p className="font-semibold" style={{ color: C.navy }}>
                       {occupant.firstName} {occupant.lastName}
                     </p>
-                    <p className="text-sm text-gray-600">{occupant.email}</p>
-                    <p className="text-sm text-gray-600">{occupant.phone}</p>
+                    <p className="text-sm" style={{ color: C.muted }}>{occupant.email}</p>
+                    <p className="text-sm" style={{ color: C.muted }}>{occupant.phone}</p>
                   </div>
 
                   <Badge
                     variant="outline"
-                    className={paymentStatusBadge[occupant.paymentStatus]}
+                    style={{
+                      backgroundColor: paymentStatusBadge[occupant.paymentStatus].bg,
+                      color: paymentStatusBadge[occupant.paymentStatus].color,
+                      borderColor: paymentStatusBadge[occupant.paymentStatus].color,
+                    }}
                   >
                     {paymentStatusLabel[occupant.paymentStatus]}
                   </Badge>
@@ -281,18 +300,18 @@ export default function RoomingPage() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-600">Aucun co-occupant pour le moment.</p>
+            <p style={{ color: C.muted }}>Aucun co-occupant pour le moment.</p>
           )}
         </CardContent>
       </Card>
 
       {/* Room Preferences */}
-      <Card elevated>
+      <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
         <CardContent className="p-6 space-y-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Préférences de chambre</h2>
+            <h2 className="text-2xl font-bold mb-2" style={{ color: C.navy }}>Préférences de chambre</h2>
             {isCutoffPassed && (
-              <p className="text-sm text-orange-600 bg-orange-50 border border-orange-200 rounded p-2 mt-2">
+              <p className="text-sm rounded p-2 mt-2" style={{ color: '#D97706', backgroundColor: '#FEF3C7', border: `1px solid #F59E0B` }}>
                 Vous ne pouvez plus modifier les préférences car la date du voyage approche.
               </p>
             )}
@@ -300,7 +319,7 @@ export default function RoomingPage() {
 
           <form onSubmit={handlePreferencesSave} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium mb-1" style={{ color: C.navy }}>
                 Étage (optionnel)
               </label>
               <Input
@@ -308,18 +327,31 @@ export default function RoomingPage() {
                 value={preferences.floor}
                 onChange={(e) => setPreferences({ ...preferences, floor: e.target.value })}
                 disabled={isCutoffPassed}
+                style={{
+                  backgroundColor: 'white',
+                  border: `1.5px solid ${C.border}`,
+                  borderRadius: '10px',
+                  color: C.navy,
+                }}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium mb-1" style={{ color: C.navy }}>
                 Type de lit (optionnel)
               </label>
               <select
                 value={preferences.bedType}
                 onChange={(e) => setPreferences({ ...preferences, bedType: e.target.value })}
                 disabled={isCutoffPassed}
-                className="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:bg-gray-100"
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  border: `1.5px solid ${C.border}`,
+                  color: C.navy,
+                  backgroundColor: 'white',
+                }}
               >
                 <option value="">Pas de préférence</option>
                 <option value="single">Lit simple</option>
@@ -329,7 +361,7 @@ export default function RoomingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium mb-1" style={{ color: C.navy }}>
                 Demandes spéciales (optionnel)
               </label>
               <textarea
@@ -338,7 +370,14 @@ export default function RoomingPage() {
                 onChange={(e) => setPreferences({ ...preferences, specialRequests: e.target.value })}
                 disabled={isCutoffPassed}
                 rows={3}
-                className="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 disabled:bg-gray-100"
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  border: `1.5px solid ${C.border}`,
+                  color: C.navy,
+                  backgroundColor: 'white',
+                }}
               />
             </div>
 

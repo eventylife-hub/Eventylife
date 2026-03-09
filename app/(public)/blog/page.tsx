@@ -79,15 +79,27 @@ const articles = [
 const categories = ['Tous', 'Conseils', 'Destinations', 'Temoignages', 'Services'];
 
 export default function BlogPage() {
+  const C = {
+    navy: '#1A1A2E',
+    cream: '#FAF7F2',
+    terra: '#C75B39',
+    terraLight: '#D97B5E',
+    terraSoft: '#FEF0EB',
+    gold: '#D4A853',
+    goldSoft: '#FDF6E8',
+    border: '#E5E0D8',
+    muted: '#6B7280',
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div style={{ backgroundColor: C.cream, minHeight: '100vh' }}>
       {/* Hero */}
-      <div className="bg-gradient-to-r from-[#0A1628] to-[#1B3A5C] text-white py-16 px-4">
+      <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, color: 'white', paddingTop: '4rem', paddingBottom: '4rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
         <div className="mx-auto max-w-6xl text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            Le Blog <span className="text-[#FF6B35]">Eventy Life</span>
+          <h1 style={{ fontSize: '3rem', fontWeight: '700', marginBottom: '1rem', fontFamily: 'Playfair, serif' }} className="sm:text-5xl mb-4">
+            Le Blog <span style={{ color: C.terra }}>Eventy Life</span>
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.8)', maxWidth: '42rem' }} className="mx-auto">
             Conseils voyage, inspirations et decouvertes. Tout pour preparer
             votre prochain voyage en groupe.
           </p>
@@ -100,11 +112,29 @@ export default function BlogPage() {
           {categories.map((cat) => (
             <button
               key={cat}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                cat === 'Tous'
-                  ? 'bg-[#FF6B35] text-white'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:border-[#FF6B35] hover:text-[#FF6B35]'
-              }`}
+              style={{
+                backgroundColor: cat === 'Tous' ? C.terra : 'white',
+                color: cat === 'Tous' ? 'white' : C.navy,
+                border: `1.5px solid ${cat === 'Tous' ? C.terra : C.border}`,
+                padding: '8px 16px',
+                borderRadius: '9999px',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (cat !== 'Tous') {
+                  e.currentTarget.style.borderColor = C.terra;
+                  e.currentTarget.style.color = C.terra;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (cat !== 'Tous') {
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.color = C.navy;
+                }
+              }}
             >
               {cat}
             </button>
@@ -116,30 +146,31 @@ export default function BlogPage() {
           {articles.map((article) => (
             <article
               key={article.id}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group"
+              style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease' }}
+              className="shadow-sm hover:shadow-lg hover:-translate-y-1 group"
             >
-              <div className="h-48 bg-gradient-to-br from-[#0A1628] to-[#1B3A5C] flex items-center justify-center">
-                <span className="text-5xl opacity-30">
+              <div style={{ height: '12rem', background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '3rem', opacity: 0.3 }}>
                   {article.category === 'Destinations' ? '\u{1F30D}' : article.category === 'Conseils' ? '\u{1F4A1}' : article.category === 'Temoignages' ? '\u{1F4AC}' : '\u{1F68C}'}
                 </span>
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs font-semibold text-[#FF6B35] bg-orange-50 px-3 py-1 rounded-full">
+                  <span style={{ fontSize: '0.75rem', fontWeight: '700', color: C.terra, backgroundColor: C.terraSoft, padding: '4px 12px', borderRadius: '9999px' }}>
                     {article.category}
                   </span>
-                  <span className="text-xs text-gray-400">{article.readTime} de lecture</span>
+                  <span style={{ fontSize: '0.75rem', color: C.muted }}>{article.readTime} de lecture</span>
                 </div>
-                <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#FF6B35] transition-colors line-clamp-2">
+                <h2 style={{ fontSize: '1.125rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem', transition: 'color 0.3s ease' }} className="group-hover:line-clamp-2 line-clamp-2" onMouseEnter={(e) => { e.currentTarget.style.color = C.terra; }} onMouseLeave={(e) => { e.currentTarget.style.color = C.navy; }}>
                   {article.title}
                 </h2>
-                <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+                <p style={{ fontSize: '0.875rem', color: C.muted }} className="line-clamp-3 mb-4">
                   {article.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-400">{article.date}</span>
-                  <span className="text-[#FF6B35] text-sm font-semibold group-hover:translate-x-1 transition-transform">
-                    Lire &rarr;
+                  <span style={{ fontSize: '0.75rem', color: C.muted }}>{article.date}</span>
+                  <span style={{ color: C.terra, fontSize: '0.875rem', fontWeight: '700', transition: 'transform 0.3s ease' }} className="group-hover:translate-x-1">
+                    Lire →
                   </span>
                 </div>
               </div>
@@ -148,11 +179,11 @@ export default function BlogPage() {
         </div>
 
         {/* Newsletter CTA */}
-        <div className="mt-16 bg-gradient-to-r from-[#FF6B35] to-[#FF8F5E] rounded-2xl p-8 sm:p-12 text-white text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+        <div style={{ marginTop: '4rem', background: `linear-gradient(135deg, ${C.terra}, ${C.terraLight})`, borderRadius: '20px', padding: '2rem', color: 'white', textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }} className="sm:p-12">
+          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', marginBottom: '0.75rem', fontFamily: 'Playfair, serif' }} className="sm:text-3xl mb-3">
             Ne manquez aucune inspiration
           </h2>
-          <p className="text-white/80 mb-6 max-w-xl mx-auto">
+          <p style={{ color: 'rgba(255,255,255,0.9)', marginBottom: '1.5rem', maxWidth: '42rem' }} className="mx-auto">
             Inscrivez-vous a notre newsletter et recevez nos meilleurs conseils
             voyage et offres exclusives.
           </p>
@@ -160,9 +191,9 @@ export default function BlogPage() {
             <input
               type="email"
               placeholder="Votre email..."
-              className="flex-1 px-4 py-3 rounded-xl text-gray-900 placeholder:text-gray-400 outline-none"
+              style={{ flex: 1, padding: '0.75rem 1rem', borderRadius: '12px', color: C.navy, border: 'none', outline: 'none' }}
             />
-            <button className="bg-[#0A1628] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1B3A5C] transition-colors">
+            <button style={{ backgroundColor: C.navy, color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.9'; }} onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}>
               S&apos;inscrire
             </button>
           </div>

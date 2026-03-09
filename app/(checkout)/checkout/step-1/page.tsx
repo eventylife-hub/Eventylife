@@ -14,6 +14,20 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface RoomSelection {
   roomTypeId: string;
   label: string;
@@ -131,79 +145,243 @@ export default function CheckoutStep1Page() {
   );
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-gray-900">Sélection des chambres</h1>
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
-          {error}
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: C.cream,
+        padding: '2rem 1rem',
+      }}
+    >
+      <div style={{ maxWidth: '42rem', margin: '0 auto' }} className="animate-fade-up">
+        <div style={{ marginBottom: '2rem' }}>
+          <h1
+            style={{
+              fontSize: '1.875rem',
+              fontWeight: 'bold',
+              color: C.navy,
+              marginBottom: '0.5rem',
+            }}
+          >
+            Sélection des chambres
+          </h1>
         </div>
-      )}
 
-      <div className="space-y-4">
-        {loading ? (
-          // État Loading : skeleton
-          <div className="border rounded-lg p-4 bg-gray-100 animate-pulse">
-            <div className="h-6 bg-gray-300 rounded mb-4 w-1/3"></div>
-            <div className="h-4 bg-gray-300 rounded mb-4 w-1/4"></div>
-            <div className="h-10 bg-gray-300 rounded mb-4"></div>
+        {error && (
+          <div
+            style={{
+              marginBottom: '1.5rem',
+              backgroundColor: '#FEF2F2',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+              padding: '1rem',
+              color: C.terra,
+            }}
+          >
+            {error}
           </div>
-        ) : selections.length === 0 ? (
-          // État Empty
-          <div className="text-center py-8 border rounded-lg bg-gray-50">
-            <p className="text-gray-600 mb-4">Aucune chambre disponible</p>
-            <Button
-              variant="outline"
-              onClick={() => router.back()}
-            >
-              Retour
-            </Button>
-          </div>
-        ) : (
-          // État Data
-          selections.map((room) => (
-            <div key={room.roomTypeId} className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">{room.label}</h3>
-              <p className="text-gray-600 text-sm mb-4">Capacité: {room.capacity} personne{room.capacity > 1 ? 's' : ''}</p>
-
-              <div className="flex items-center gap-4 mb-4">
-                <label className="text-sm font-medium">Nombre de personnes:</label>
-                <select
-                  className="border rounded px-2 py-1"
-                  value={room.occupancyCount}
-                  onChange={(e) =>
-                    handleOccupancyChange(room.roomTypeId, parseInt(e.target.value) || 0)
-                  }
-                >
-                  <option value="0">Pas cette chambre</option>
-                  {Array.from({ length: room.capacity }, (_, i) => i + 1).map((n) => (
-                    <option key={n} value={n}>
-                      {n} personne{n > 1 ? 's' : ''}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {room.occupancyCount > 0 && (
-                <div className="text-sm text-gray-600">
-                  <p>Prix par personne: {(room.perPersonTTC / 100).toFixed(2)} €</p>
-                  <p>Total (pour cette chambre): {(room.priceTotalTTC / 100).toFixed(2)} €</p>
-                </div>
-              )}
-            </div>
-          ))
         )}
-      </div>
 
-      <PriceSummary rooms={selections} />
+        <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {loading ? (
+            <div
+              style={{
+                backgroundColor: 'white',
+                border: `1.5px solid ${C.border}`,
+                borderRadius: '20px',
+                padding: '1.5rem',
+                opacity: 0.5,
+              }}
+            >
+              <div
+                style={{
+                  height: '1.5rem',
+                  backgroundColor: C.border,
+                  borderRadius: '8px',
+                  marginBottom: '1rem',
+                  width: '33%',
+                }}
+              ></div>
+              <div
+                style={{
+                  height: '1rem',
+                  backgroundColor: C.border,
+                  borderRadius: '8px',
+                  marginBottom: '1rem',
+                  width: '25%',
+                }}
+              ></div>
+              <div
+                style={{
+                  height: '2.5rem',
+                  backgroundColor: C.border,
+                  borderRadius: '8px',
+                }}
+              ></div>
+            </div>
+          ) : selections.length === 0 ? (
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '2rem',
+                backgroundColor: 'white',
+                border: `1.5px solid ${C.border}`,
+                borderRadius: '20px',
+              }}
+            >
+              <p style={{ color: C.muted, marginBottom: '1rem' }}>
+                Aucune chambre disponible
+              </p>
+              <button
+                onClick={() => router.back()}
+                style={{
+                  backgroundColor: 'transparent',
+                  color: C.terra,
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '10px',
+                  fontWeight: '600',
+                  border: `1.5px solid ${C.border}`,
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
+                }}
+              >
+                Retour
+              </button>
+            </div>
+          ) : (
+            selections.map((room) => (
+              <div
+                key={room.roomTypeId}
+                style={{
+                  backgroundColor: 'white',
+                  border: `1.5px solid ${C.border}`,
+                  borderRadius: '20px',
+                  padding: '1.5rem',
+                }}
+              >
+                <h3 style={{ fontWeight: '600', marginBottom: '0.5rem', color: C.navy }}>
+                  {room.label}
+                </h3>
+                <p style={{ color: C.muted, fontSize: '0.875rem', marginBottom: '1rem' }}>
+                  Capacité: {room.capacity} personne{room.capacity > 1 ? 's' : ''}
+                </p>
 
-      <div className="flex gap-4">
-        <Button variant="outline" onClick={() => router.back()}>
-          Retour
-        </Button>
-        <Button onClick={handleContinue} disabled={loading} className="flex-1">
-          {loading ? 'Chargement...' : 'Continuer'}
-        </Button>
+                <div style={{ marginBottom: '1rem' }}>
+                  <label style={{ fontSize: '0.875rem', fontWeight: '500', display: 'block', marginBottom: '0.5rem', color: C.navy }}>
+                    Nombre de personnes:
+                  </label>
+                  <select
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      border: `1.5px solid ${C.border}`,
+                      borderRadius: '10px',
+                      padding: '0.5rem 0.75rem',
+                      fontSize: '0.875rem',
+                      color: C.navy,
+                      cursor: 'pointer',
+                    }}
+                    value={room.occupancyCount}
+                    onChange={(e) =>
+                      handleOccupancyChange(room.roomTypeId, parseInt(e.target.value) || 0)
+                    }
+                    onFocus={(e) => {
+                      (e.target as HTMLSelectElement).style.borderColor = C.terra;
+                    }}
+                    onBlur={(e) => {
+                      (e.target as HTMLSelectElement).style.borderColor = C.border;
+                    }}
+                  >
+                    <option value="0">Pas cette chambre</option>
+                    {Array.from({ length: room.capacity }, (_, i) => i + 1).map((n) => (
+                      <option key={n} value={n}>
+                        {n} personne{n > 1 ? 's' : ''}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {room.occupancyCount > 0 && (
+                  <div
+                    style={{
+                      fontSize: '0.875rem',
+                      color: C.muted,
+                      padding: '1rem',
+                      backgroundColor: C.goldSoft,
+                      borderRadius: '10px',
+                      border: `1.5px solid ${C.border}`,
+                    }}
+                  >
+                    <p style={{ marginBottom: '0.5rem' }}>
+                      Prix par personne: {(room.perPersonTTC / 100).toFixed(2)} €
+                    </p>
+                    <p>
+                      Total (pour cette chambre): {(room.priceTotalTTC / 100).toFixed(2)} €
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
+
+        <PriceSummary rooms={selections} />
+
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+          <button
+            onClick={() => router.back()}
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+              color: C.terra,
+              padding: '0.75rem 1.5rem',
+              borderRadius: '10px',
+              fontWeight: '600',
+              border: `1.5px solid ${C.border}`,
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
+            }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={handleContinue}
+            disabled={loading}
+            style={{
+              flex: 1,
+              backgroundColor: loading ? C.muted : C.terra,
+              color: 'white',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '10px',
+              fontWeight: '600',
+              border: 'none',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.6 : 1,
+              boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) {
+                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) {
+                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+              }
+            }}
+          >
+            {loading ? 'Chargement...' : 'Continuer'}
+          </button>
+        </div>
       </div>
     </div>
   );

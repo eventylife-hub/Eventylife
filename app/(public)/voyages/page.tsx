@@ -1,5 +1,5 @@
 /**
- * Page listing des voyages avec filtres
+ * Page listing des voyages avec filtres — Design Eventy v2
  */
 
 'use client';
@@ -8,17 +8,25 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { SkeletonGrid } from '@/components/ui/skeleton';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { apiClient } from '@/lib/api-client';
 
-/**
- * Interface pour un voyage
- */
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface Travel {
   id: string;
   slug: string;
@@ -35,14 +43,8 @@ interface Travel {
   currentBookings: number;
 }
 
-/**
- * État du composant
- */
 type LoadState = 'loading' | 'empty' | 'error' | 'data';
 
-/**
- * Contenu principal
- */
 function VoyagesContent() {
   const searchParams = useSearchParams();
   const [state, setState] = useState<LoadState>('loading');
@@ -50,24 +52,18 @@ function VoyagesContent() {
   const [filteredTravels, setFilteredTravels] = useState<Travel[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  // Filtres
   const [destination, setDestination] = useState(searchParams.get('destination') || '');
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState('popular');
 
-  // Charger les données
   useEffect(() => {
     const loadTravels = async () => {
       try {
         setState('loading');
         setError(null);
-
-        // Récupérer les voyages depuis l'API
         const response = await apiClient.get<any>('/travels');
         const travelList = Array.isArray(response) ? response : (response.data || []);
-
-        // Mapper les données du backend au format du frontend
         const mappedTravels = travelList.map((travel: any) => ({
           id: travel.id,
           slug: travel.slug,
@@ -83,7 +79,6 @@ function VoyagesContent() {
           capacity: travel.capacity || 50,
           currentBookings: travel.bookings || travel.currentBookings || 0,
         }));
-
         setTravels(mappedTravels);
         setState(mappedTravels.length > 0 ? 'data' : 'empty');
       } catch (err) {
@@ -92,56 +87,57 @@ function VoyagesContent() {
         setState('error');
       }
     };
-
     loadTravels();
   }, []);
 
-  // Appliquer les filtres
   useEffect(() => {
     let result = travels;
-
-    // Filtre destination
     if (destination) {
       result = result.filter(t =>
         t.destination.toLowerCase().includes(destination.toLowerCase()) ||
         t.title.toLowerCase().includes(destination.toLowerCase())
       );
     }
+    if (minPrice !== null) result = result.filter(t => t.price >= minPrice);
+    if (maxPrice !== null) result = result.filter(t => t.price <= maxPrice);
 
-    // Filtre prix
-    if (minPrice !== null) {
-      result = result.filter(t => t.price >= minPrice);
-    }
-    if (maxPrice !== null) {
-      result = result.filter(t => t.price <= maxPrice);
-    }
-
-    // Tri (copie immuable pour éviter mutation de l'état)
     const sorted = [...result];
-    if (sortBy === 'price-asc') {
-      sorted.sort((a, b) => a.price - b.price);
-    } else if (sortBy === 'price-desc') {
-      sorted.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'rating') {
-      sorted.sort((a, b) => b.rating - a.rating);
-    }
+    if (sortBy === 'price-asc') sorted.sort((a, b) => a.price - b.price);
+    else if (sortBy === 'price-desc') sorted.sort((a, b) => b.price - a.price);
+    else if (sortBy === 'rating') sorted.sort((a, b) => b.rating - a.rating);
 
     setFilteredTravels(sorted);
   }, [travels, destination, minPrice, maxPrice, sortBy]);
 
-  // Rendu selon l'état
+  const inputStyle = {
+    width: '100%',
+    padding: '10px 14px',
+    borderRadius: '10px',
+    border: `1.5px solid ${C.border}`,
+    background: '#fff',
+    color: C.navy,
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  };
+
+  const selectStyle = {
+    ...inputStyle,
+    cursor: 'pointer' as const,
+  };
+
   if (state === 'loading') {
     return (
       <div className="space-y-6">
-        <div className="flex flex-col md:flex-row gap-4 items-center">
-          <Input
-            placeholder="Rechercher une destination..."
-            disabled
-            className="flex-1"
-          />
-          <select disabled className="px-4 py-2.5 rounded-lg border-2 border-gray-300 bg-white">
-            <option>Tri</option>
-          </select>
+        <div
+          className="p-6 rounded-2xl"
+          style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[1,2,3,4].map(i => (
+              <div key={i} className="h-10 rounded-lg skeleton" />
+            ))}
+          </div>
         </div>
         <SkeletonGrid columns={2} count={4} />
       </div>
@@ -150,139 +146,202 @@ function VoyagesContent() {
 
   if (state === 'error') {
     return (
-      <div className="text-center py-12">
-        <p className="text-red-600 mb-4">⚠️ {error}</p>
-        <Button variant="primary" onClick={() => window.location.reload()}>
-          Réessayer
-        </Button>
+      <div className="text-center py-16">
+        <div
+          className="inline-block p-8 rounded-2xl"
+          style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+        >
+          <p className="text-base mb-4" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
+            style={{ background: C.terra, color: '#fff' }}
+          >
+            Réessayer
+          </button>
+        </div>
       </div>
     );
   }
 
   if (state === 'data' && filteredTravels.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-600 mb-4">
-          {travels.length === 0
-            ? 'Aucun voyage disponible pour le moment.'
-            : 'Aucun voyage ne correspond à vos critères de recherche.'}
-        </p>
-        {destination && (
-          <Button
-            variant="outline"
-            onClick={() => setDestination('')}
-          >
-            Réinitialiser la recherche
-          </Button>
-        )}
+      <div className="text-center py-16">
+        <div
+          className="inline-block p-8 rounded-2xl"
+          style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+        >
+          <p className="text-4xl mb-4">🔍</p>
+          <p style={{ color: C.muted }}>
+            {travels.length === 0
+              ? 'Aucun voyage disponible pour le moment.'
+              : 'Aucun voyage ne correspond à vos critères.'}
+          </p>
+          {destination && (
+            <button
+              onClick={() => setDestination('')}
+              className="mt-4 px-5 py-2 rounded-xl text-sm font-semibold transition-all"
+              style={{ border: `1.5px solid ${C.border}`, color: C.navy, background: 'transparent' }}
+            >
+              Réinitialiser
+            </button>
+          )}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Filtres */}
-      <div className="bg-white p-6 rounded-lg border border-gray-200 space-y-4">
-        <h3 className="font-bold text-lg text-gray-900">Filtres</h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Input
-            label="Destination"
-            placeholder="Chercher..."
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-          />
-          
-          <Input
-            label="Prix minimum (€)"
-            type="number"
-            placeholder="0"
-            onChange={(e) => setMinPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
-          />
-          
-          <Input
-            label="Prix maximum (€)"
-            type="number"
-            placeholder="10000"
-            onChange={(e) => setMaxPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Trier par
-          </label>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-          >
-            <option value="popular">Plus populaires</option>
-            <option value="price-asc">Prix croissant</option>
-            <option value="price-desc">Prix décroissant</option>
-            <option value="rating">Meilleure notation</option>
-          </select>
+      <div
+        className="p-6 rounded-2xl"
+        style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Destination</label>
+            <input
+              placeholder="Chercher..."
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              style={inputStyle}
+              onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
+              onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix min (€)</label>
+            <input
+              type="number"
+              placeholder="0"
+              onChange={(e) => setMinPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
+              style={inputStyle}
+              onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
+              onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix max (€)</label>
+            <input
+              type="number"
+              placeholder="10 000"
+              onChange={(e) => setMaxPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
+              style={inputStyle}
+              onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
+              onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Trier par</label>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              style={selectStyle}
+            >
+              <option value="popular">Plus populaires</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+              <option value="rating">Meilleure notation</option>
+            </select>
+          </div>
         </div>
       </div>
 
       {/* Résultats */}
       <div>
-        <p className="text-gray-600 mb-4">
+        <p className="text-sm mb-4" style={{ color: C.muted }}>
           {filteredTravels.length} voyage{filteredTravels.length !== 1 ? 's' : ''} trouvé{filteredTravels.length !== 1 ? 's' : ''}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTravels.map((voyage) => {
             const available = voyage.capacity - voyage.currentBookings;
-            
+
             return (
               <Link key={voyage.id} href={ROUTES.VOYAGE_DETAIL(voyage.slug)}>
-                <Card elevated hoverEffect className="h-full flex flex-col">
-                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-green-100 flex items-center justify-center text-6xl">
+                <div
+                  className="h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-300"
+                  style={{
+                    background: '#fff',
+                    border: `1.5px solid ${C.border}`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(26,26,46,0.10)';
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div
+                    className="aspect-video flex items-center justify-center text-6xl"
+                    style={{ background: `linear-gradient(135deg, ${C.terra}15, ${C.gold}15)` }}
+                  >
                     {voyage.image}
                   </div>
-                  <CardContent className="p-4 flex-1 flex flex-col">
+                  <div className="p-5 flex-1 flex flex-col">
                     <div className="flex items-start justify-between mb-2">
-                      <Badge variant="info">{voyage.daysCount} jours</Badge>
+                      <span
+                        className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                        style={{ background: C.goldSoft, color: '#92400e' }}
+                      >
+                        {voyage.daysCount} jours
+                      </span>
                       {available <= 5 && (
-                        <Badge variant="warning">Peu de places</Badge>
+                        <span
+                          className="text-xs font-semibold px-2.5 py-1 rounded-full animate-pulse-dot"
+                          style={{ background: '#FEF2F2', color: '#DC2626' }}
+                        >
+                          Peu de places
+                        </span>
                       )}
                     </div>
 
-                    <h3 className="font-bold text-lg text-gray-900 mb-1 line-clamp-2">
+                    <h3 className="font-bold text-base mb-1 line-clamp-2" style={{ color: C.navy }}>
                       {voyage.title}
                     </h3>
-                    
-                    <p className="text-sm text-gray-600 mb-2">
+
+                    <p className="text-sm mb-1" style={{ color: C.muted }}>
                       📍 {voyage.destination}
                     </p>
 
-                    <p className="text-xs text-gray-500 mb-3">
-                      Du {formatDate(voyage.startDate)} au{' '}
-                      {formatDate(voyage.endDate)}
+                    <p className="text-xs mb-3" style={{ color: '#9CA3AF' }}>
+                      Du {formatDate(voyage.startDate)} au {formatDate(voyage.endDate)}
                     </p>
 
-                    <div className="flex items-center justify-between mb-4 mt-auto">
-                      <span className="text-xl font-bold text-blue-600">
+                    <div className="flex items-center justify-between mb-3 mt-auto">
+                      <span className="text-lg font-bold" style={{ color: C.terra }}>
                         À partir de {formatPrice(voyage.price)}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between mb-4">
                       <span className="flex items-center gap-1 text-sm">
-                        <span>⭐ {voyage.rating}</span>
-                        <span className="text-gray-600">({voyage.reviews})</span>
+                        <span style={{ color: C.gold }}>★</span>
+                        <span style={{ color: C.navy }}>{voyage.rating}</span>
+                        <span style={{ color: C.muted }}>({voyage.reviews})</span>
                       </span>
-                      <span className="text-xs text-gray-600">
+                      <span className="text-xs" style={{ color: C.muted }}>
                         {available} place{available !== 1 ? 's' : ''} restante{available !== 1 ? 's' : ''}
                       </span>
                     </div>
 
-                    <Button variant="primary" size="sm" className="w-full">
+                    <button
+                      className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                      style={{ background: C.terra, color: '#fff' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = C.terraLight;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = C.terra;
+                      }}
+                    >
                       Voir détails
-                    </Button>
-                  </CardContent>
-                </Card>
+                    </button>
+                  </div>
+                </div>
               </Link>
             );
           })}
@@ -292,15 +351,17 @@ function VoyagesContent() {
   );
 }
 
-/**
- * Page voyages
- */
 export default function VoyagesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Nos voyages</h1>
-        <p className="text-lg text-gray-600">
+        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
+          Explorer
+        </span>
+        <h1 className="font-display text-3xl sm:text-4xl font-bold mt-2" style={{ color: C.navy }}>
+          Nos voyages
+        </h1>
+        <p className="text-base mt-2" style={{ color: C.muted }}>
           Découvrez notre sélection de voyages en groupe avec accompagnement humain
         </p>
       </div>

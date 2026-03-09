@@ -32,6 +32,18 @@ interface Travel {
 
 type LoadState = 'loading' | 'empty' | 'error' | 'data';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+};
+
 export default function DepartPage() {
   const params = useParams();
   const ville = params.ville as string;
@@ -144,7 +156,7 @@ export default function DepartPage() {
   if (state === 'error') {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-        <p className="text-red-600 mb-4">⚠️ {error}</p>
+        <p style={{ color: C.terra }}>⚠️ {error}</p>
         <Button variant="primary" onClick={() => window.location.reload()}>
           Réessayer
         </Button>
@@ -155,14 +167,14 @@ export default function DepartPage() {
   if (state === 'empty' || (state === 'data' && filteredTravels.length === 0)) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>
           Voyages au départ de {ville.charAt(0).toUpperCase() + ville.slice(1)}
         </h1>
-        <div className="text-center py-12">
-          <p className="text-gray-600 mb-4 text-lg">
+        <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
+          <p style={{ color: C.muted, marginBottom: '1rem', fontSize: '1.125rem' }}>
             Aucun voyage au départ de {ville} pour le moment.
           </p>
-          <p className="text-gray-600 mb-6">
+          <p style={{ color: C.muted, marginBottom: '1.5rem' }}>
             Découvrez nos autres destinations
           </p>
           <Link href="/voyages">
@@ -177,10 +189,10 @@ export default function DepartPage() {
     <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Titre */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>
           Voyages au départ de {ville.charAt(0).toUpperCase() + ville.slice(1)}
         </h1>
-        <p className="text-gray-600">
+        <p style={{ color: C.muted }}>
           Découvrez {filteredTravels.length} voyage{filteredTravels.length !== 1 ? 's' : ''} disponible{filteredTravels.length !== 1 ? 's' : ''}
         </p>
       </div>
@@ -188,14 +200,14 @@ export default function DepartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Filtres Sidebar */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6 sticky top-4">
+          <div style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '12px', padding: '1.5rem', position: 'sticky', top: '1rem' }} className="space-y-6">
             <div>
-              <h3 className="font-bold text-gray-900 mb-3">Filtres</h3>
+              <h3 style={{ fontWeight: '700', color: C.navy, marginBottom: '0.75rem' }}>Filtres</h3>
             </div>
 
             {/* Date Range */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.5rem' }}>
                 Date de départ
               </label>
               <div className="space-y-2">
@@ -216,7 +228,7 @@ export default function DepartPage() {
 
             {/* Price Range */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.5rem' }}>
                 Budget (€)
               </label>
               <div className="space-y-2">
@@ -235,7 +247,7 @@ export default function DepartPage() {
 
             {/* Duration */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.5rem' }}>
                 Durée (jours)
               </label>
               <div className="space-y-2">
@@ -254,19 +266,19 @@ export default function DepartPage() {
 
             {/* Themes */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.75rem' }}>
                 Thème
               </label>
               <div className="space-y-2">
                 {themes.map(theme => (
-                  <label key={theme} className="flex items-center gap-2 cursor-pointer">
+                  <label key={theme} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                     <input
                       type="checkbox"
                       checked={selectedThemes.includes(theme)}
                       onChange={() => toggleTheme(theme)}
-                      className="w-4 h-4 rounded border-gray-300"
+                      style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: `1.5px solid ${C.border}`, cursor: 'pointer' }}
                     />
-                    <span className="text-sm text-gray-700">{theme}</span>
+                    <span style={{ fontSize: '0.875rem', color: C.navy }}>{theme}</span>
                   </label>
                 ))}
               </div>
@@ -274,10 +286,10 @@ export default function DepartPage() {
 
             {/* Reset Filters */}
             {(minDate || maxDate || minPrice || maxPrice || minDuration || maxDuration || selectedThemes.length > 0) && (
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full"
+              <button
+                style={{ width: '100%', backgroundColor: 'white', color: C.terra, padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', border: `1.5px solid ${C.border}`, fontWeight: '700', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.backgroundColor = C.terraSoft; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.backgroundColor = 'white'; }}
                 onClick={() => {
                   setMinDate('');
                   setMaxDate('');
@@ -289,7 +301,7 @@ export default function DepartPage() {
                 }}
               >
                 Réinitialiser
-              </Button>
+              </button>
             )}
           </div>
         </div>
@@ -302,52 +314,52 @@ export default function DepartPage() {
 
               return (
                 <Link key={voyage.id} href={`/voyages/${voyage.id}`}>
-                  <Card elevated hoverEffect className="h-full flex flex-col">
-                    <div className="aspect-video bg-gradient-to-br from-blue-100 to-green-100 flex items-center justify-center text-6xl">
+                  <div style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+                    <div style={{ aspectRatio: '16/9', background: `linear-gradient(135deg, ${C.cream}, ${C.goldSoft})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
                       {voyage.image}
                     </div>
-                    <CardContent className="p-4 flex-1 flex flex-col">
-                      <div className="flex items-start justify-between mb-2">
-                        <Badge variant="info">{voyage.daysCount} jours</Badge>
+                    <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.goldSoft, color: C.navy, padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>{voyage.daysCount} jours</span>
                         {available <= 5 && (
-                          <Badge variant="warning">Peu de places</Badge>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.terraSoft, color: C.terra, padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>Peu de places</span>
                         )}
                       </div>
 
-                      <h3 className="font-bold text-lg text-gray-900 mb-1 line-clamp-2">
+                      <h3 style={{ fontWeight: '700', fontSize: '1.125rem', color: C.navy, marginBottom: '0.25rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                         {voyage.title}
                       </h3>
 
-                      <p className="text-sm text-gray-600 mb-2">
+                      <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '0.5rem' }}>
                         📍 {voyage.destination}
                       </p>
 
-                      <p className="text-xs text-gray-500 mb-3">
+                      <p style={{ fontSize: '0.75rem', color: C.muted, marginBottom: '0.75rem' }}>
                         Du {formatDate(voyage.startDate)} au{' '}
                         {formatDate(voyage.endDate)}
                       </p>
 
-                      <div className="flex items-center justify-between mb-4 mt-auto">
-                        <span className="text-xl font-bold text-blue-600">
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', marginTop: 'auto', paddingTop: '1rem', borderTop: `1.5px solid ${C.border}` }}>
+                        <span style={{ fontSize: '1.25rem', fontWeight: '700', color: C.terra }}>
                           À partir de {formatPrice(voyage.price)}
                         </span>
                       </div>
 
-                      <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-1 text-sm">
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.875rem' }}>
                           <span>⭐ {voyage.rating}</span>
-                          <span className="text-gray-600">({voyage.reviews})</span>
+                          <span style={{ color: C.muted }}>({voyage.reviews})</span>
                         </span>
-                        <span className="text-xs text-gray-600">
+                        <span style={{ fontSize: '0.75rem', color: C.muted }}>
                           {available} place{available !== 1 ? 's' : ''} restante{available !== 1 ? 's' : ''}
                         </span>
                       </div>
 
-                      <Button variant="primary" size="sm" className="w-full mt-4">
+                      <button style={{ width: '100%', marginTop: '1rem', backgroundColor: C.terra, color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}>
                         Voir détails
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      </button>
+                    </div>
+                  </div>
                 </Link>
               );
             })}

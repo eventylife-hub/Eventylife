@@ -726,7 +726,7 @@ function AsideCard({ paxCount }: { paxCount: number }) {
         </div>
 
         <div style={{ fontSize: 11, color: C.muted, marginTop: 12, lineHeight: 1.5 }}>
-          Prix = forfait tout compris (transport + vol + hôtel + repas inclus) · Pas de droit de rétractation · <a href="#" style={{ color: C.terra }}>CGV</a> · <a href="#" style={{ color: C.terra }}>Info légale</a>
+          Prix = forfait tout compris (transport + vol + hôtel + repas inclus) · Pas de droit de rétractation · <a href="/cgv" style={{ color: C.terra }}>CGV</a> · <a href="/mentions-legales" style={{ color: C.terra }}>Mentions légales</a>
         </div>
       </div>
 

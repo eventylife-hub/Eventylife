@@ -9,6 +9,20 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 /**
  * Page pour rejoindre un groupe via code d'invitation
  * Affiche les détails du groupe avant confirmation
@@ -82,29 +96,29 @@ export default function RejoindrePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen p-4" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mx-auto max-w-2xl">
-        <Link href="/client/groupes" className="text-sm text-blue-600 hover:underline mb-4 inline-block">
+        <Link href="/client/groupes" className="text-sm hover:opacity-80 mb-4 inline-block" style={{ color: C.terra }}>
           ← Retour aux groupes
         </Link>
 
-        <h1 className="text-3xl font-bold mb-6">Rejoindre un groupe</h1>
+        <h1 className="text-3xl font-bold mb-6" style={{ color: C.navy }}>Rejoindre un groupe</h1>
 
-        <Card>
+        <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
           <CardHeader>
-            <CardTitle>Code d&apos;invitation</CardTitle>
+            <CardTitle style={{ color: C.navy }}>Code d&apos;invitation</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <form onSubmit={handleVerifyCode} className="space-y-4">
               {error && (
-                <div className="rounded-lg border border-red-200 bg-red-50 p-3 flex items-start gap-3">
-                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-700">{error}</p>
+                <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
+                  <p className="text-sm" style={{ color: '#DC2626' }}>{error}</p>
                 </div>
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="code">Code d&apos;invitation</Label>
+                <Label htmlFor="code" style={{ color: C.navy }}>Code d&apos;invitation</Label>
                 <Input
                   id="code"
                   placeholder="Ex: ABC12DEF"
@@ -112,10 +126,27 @@ export default function RejoindrePage() {
                   onChange={handleCodeChange}
                   disabled={loading || joining}
                   maxLength={12}
-                  className="uppercase text-center text-lg tracking-widest"
+                  style={{
+                    backgroundColor: 'white',
+                    border: `1.5px solid ${C.border}`,
+                    borderRadius: '10px',
+                    color: C.navy,
+                    textTransform: 'uppercase',
+                    textAlign: 'center',
+                    fontSize: '1.125rem',
+                    letterSpacing: '0.1em',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terraSoft}`;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                   required
                 />
-                <p className="text-xs text-gray-500">
+                <p className="text-xs" style={{ color: C.muted }}>
                   Demandez le code au leader du groupe
                 </p>
               </div>
@@ -123,7 +154,21 @@ export default function RejoindrePage() {
               <Button
                 type="submit"
                 disabled={loading || joining || !code.trim()}
-                className="w-full"
+                className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                style={{
+                  backgroundColor: C.terra,
+                  borderRadius: '10px',
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading && !joining && code.trim()) {
+                    e.currentTarget.style.backgroundColor = C.terraLight;
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = C.terra;
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
                 {loading ? (
                   <>
@@ -138,29 +183,29 @@ export default function RejoindrePage() {
 
             {/* Aperçu du groupe */}
             {groupePreview && (
-              <div className="pt-4 border-t space-y-4">
-                <div className="rounded-lg border border-green-200 bg-green-50 p-3 flex items-start gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-green-700">Groupe trouvé!</p>
+              <div className="pt-4 space-y-4" style={{ borderTop: `1px solid ${C.border}` }}>
+                <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: C.forestBg, border: `1.5px solid ${C.forest}` }}>
+                  <CheckCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: C.forest }} />
+                  <p className="text-sm" style={{ color: C.forest }}>Groupe trouvé!</p>
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-gray-600 uppercase">Groupe</label>
-                  <p className="text-lg font-semibold">{(groupePreview?.name as string) || 'Groupe'}</p>
+                  <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Groupe</label>
+                  <p className="text-lg font-semibold" style={{ color: C.navy }}>{(groupePreview?.name as string) || 'Groupe'}</p>
                 </div>
 
                 {(groupePreview?.leaderUser as any) && (
                   <div>
-                    <label className="text-xs font-semibold text-gray-600 uppercase">Leader</label>
-                    <p className="text-sm">
+                    <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Leader</label>
+                    <p className="text-sm" style={{ color: C.navy }}>
                       {(groupePreview?.leaderUser as any)?.firstName} {(groupePreview?.leaderUser as any)?.lastName}
                     </p>
                   </div>
                 )}
 
                 <div>
-                  <label className="text-xs font-semibold text-gray-600 uppercase">Membres</label>
-                  <p className="text-sm">
+                  <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Membres</label>
+                  <p className="text-sm" style={{ color: C.navy }}>
                     {(groupePreview?.memberCount as number) || 0} membre{((groupePreview?.memberCount as number) || 0) > 1 ? 's' : ''}
                     {(groupePreview?.maxRooms as number) && ` / ${((groupePreview?.maxRooms as number) * 2)}`}
                   </p>
@@ -169,8 +214,21 @@ export default function RejoindrePage() {
                 <Button
                   onClick={handleJoin}
                   disabled={joining}
-                  className="w-full"
-                  variant="default"
+                  className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                  style={{
+                    backgroundColor: C.terra,
+                    borderRadius: '10px',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!joining) {
+                      e.currentTarget.style.backgroundColor = C.terraLight;
+                      e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = C.terra;
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                 >
                   {joining ? (
                     <>

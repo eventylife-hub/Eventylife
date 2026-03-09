@@ -3,6 +3,20 @@
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDateTime, formatDate } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface Payment {
   id: string;
   amount: number;
@@ -25,12 +39,12 @@ const statusLabels = {
   CANCELED: 'Annulé',
 };
 
-const statusColors = {
-  PENDING: 'text-yellow-700 bg-yellow-50',
-  SUCCEEDED: 'text-green-700 bg-green-50',
-  FAILED: 'text-red-700 bg-red-50',
-  REFUNDED: 'text-blue-700 bg-blue-50',
-  CANCELED: 'text-gray-700 bg-gray-50',
+const statusBadgeStyle = {
+  PENDING: { background: C.goldSoft, color: '#92400e' },
+  SUCCEEDED: { background: C.forestBg, color: C.forest },
+  FAILED: { background: '#FEF2F2', color: '#DC2626' },
+  REFUNDED: { background: '#EFF6FF', color: '#0369A1' },
+  CANCELED: { background: '#F3F4F6', color: '#4B5563' },
 };
 
 export default function PaiementsPage() {
@@ -73,13 +87,14 @@ export default function PaiementsPage() {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto animate-fade-up">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Historique des paiements</h1>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Historique des paiements</h1>
+          <p className="text-sm mt-2" style={{ color: C.muted }}>Consultez tous vos paiements</p>
         </div>
         <div className="space-y-4">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-16 bg-slate-200 rounded-lg animate-pulse" />
+            <div key={i} className="h-16 rounded-2xl skeleton" />
           ))}
         </div>
       </div>
@@ -87,22 +102,22 @@ export default function PaiementsPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto space-y-6 animate-fade-up">
       {/* En-tête */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Historique des paiements</h1>
-        <p className="text-slate-600">Consultez tous vos paiements</p>
+      <div>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Historique des paiements</h1>
+        <p className="text-sm mt-2" style={{ color: C.muted }}>Consultez tous vos paiements</p>
       </div>
 
       {/* Messages d'erreur */}
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-          {error}
+        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium" style={{ color: '#DC2626' }}>⚠️ {error}</p>
         </div>
       )}
 
       {/* Filtres */}
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {[
           { value: 'all', label: 'Tous' },
           { value: 'succeeded', label: 'Réussis' },
@@ -112,11 +127,22 @@ export default function PaiementsPage() {
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
-            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-              filter === f.value
-                ? 'bg-blue-600 text-white'
-                : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-50'
-            }`}
+            className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
+            style={{
+              background: filter === f.value ? C.terra : '#fff',
+              color: filter === f.value ? '#fff' : C.navy,
+              border: `1.5px solid ${filter === f.value ? C.terra : C.border}`,
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== f.value) {
+                e.currentTarget.style.background = C.terraSoft;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== f.value) {
+                e.currentTarget.style.background = '#fff';
+              }
+            }}
           >
             {f.label}
           </button>
@@ -125,51 +151,63 @@ export default function PaiementsPage() {
 
       {/* État vide */}
       {filteredPayments.length === 0 ? (
-        <div className="text-center py-16 bg-white border border-slate-200 rounded-lg">
-          <div className="text-6xl mb-4">💰</div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Aucun paiement</h2>
-          <p className="text-slate-600">Vos paiements apparaîtront ici</p>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+          <div className="text-5xl mb-4">💰</div>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>Aucun paiement</h2>
+          <p className="text-sm" style={{ color: C.muted }}>Vos paiements apparaîtront ici</p>
         </div>
       ) : (
-        <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
+        <div className="rounded-2xl overflow-hidden" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50 border-b border-slate-200">
+              <thead style={{ background: C.cream, borderBottom: `1.5px solid ${C.border}` }}>
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Date</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Voyage</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-slate-900">Montant</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Statut</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Méthode</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Date</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Voyage</th>
+                  <th className="px-6 py-4 text-right text-sm font-semibold" style={{ color: C.navy }}>Montant</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Statut</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Méthode</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
-                {filteredPayments.map((payment) => (
-                  <tr key={payment.id} className="hover:bg-slate-50">
-                    <td className="px-6 py-4 text-sm text-slate-700">
+              <tbody style={{ borderTop: `1.5px solid ${C.border}` }}>
+                {filteredPayments.map((payment, index) => (
+                  <tr
+                    key={payment.id}
+                    style={{
+                      borderBottom: index < filteredPayments.length - 1 ? `1px solid ${C.border}` : 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = C.cream;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = '#fff';
+                    }}
+                  >
+                    <td className="px-6 py-4 text-sm" style={{ color: C.navy }}>
                       {formatDateTime(payment.createdAt)}
                     </td>
                     <td className="px-6 py-4 text-sm">
                       <div>
-                        <p className="font-semibold text-slate-900">{payment.travelTitle}</p>
-                        <p className="text-xs text-slate-500">
+                        <p className="font-semibold" style={{ color: C.navy }}>{payment.travelTitle}</p>
+                        <p className="text-xs mt-1" style={{ color: C.muted }}>
                           Départ: {formatDate(payment.travelDepartureDate)}
                         </p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right font-bold text-slate-900">
+                    <td className="px-6 py-4 text-right font-bold" style={{ color: C.navy }}>
                       {formatPrice(payment.amount)}
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${
-                          statusColors[payment.status as keyof typeof statusColors]
-                        }`}
+                        className="px-3 py-1 rounded-xl text-xs font-semibold inline-block"
+                        style={statusBadgeStyle[payment.status as keyof typeof statusBadgeStyle] || { background: '#F3F4F6', color: '#4B5563' }}
                       >
                         {statusLabels[payment.status as keyof typeof statusLabels]}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-700 capitalize">{payment.provider}</td>
+                    <td className="px-6 py-4 text-sm capitalize" style={{ color: C.muted }}>
+                      {payment.provider}
+                    </td>
                   </tr>
                 ))}
               </tbody>

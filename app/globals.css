@@ -3,33 +3,41 @@
 @tailwind utilities;
 
 :root {
-  --sun: #FF6B35;
-  --sun-light: #FF8F5E;
-  --sun-glow: #FFF0E8;
-  --ocean: #0077B6;
-  --ocean-deep: #005A8C;
-  --ocean-light: #00B4D8;
-  --ocean-pale: #E8F7FC;
-  --sky: #48CAE4;
-  --sand: #FEFCF3;
-  --sand-warm: #FFF8ED;
-  --coral: #E63946;
-  --coral-soft: #FFE0E3;
-  --mint: #06D6A0;
-  --mint-soft: #E0FFF5;
-  --violet: #7B2FF7;
-  --dark: #0A1628;
-  --dark-mid: #142438;
-  --text: #1B2940;
+  /* Palette Eventy — Design System v2 */
+  --navy: #1A1A2E;
+  --navy-light: #2D2D44;
+  --cream: #FAF7F2;
+  --cream-warm: #FFF8ED;
+  --terra: #C75B39;
+  --terra-light: #D97B5E;
+  --terra-soft: #FEF0EB;
+  --gold: #D4A853;
+  --gold-light: #E0BE7A;
+  --gold-soft: #FDF6E8;
+  --forest: #166534;
+  --forest-bg: #DCFCE7;
+  --border: #E5E0D8;
+  --muted: #6B7280;
+  --blue: #1e40af;
+  --blue-bg: #EFF6FF;
+  --orange: #92400e;
+  --orange-bg: #FEF3C7;
+
+  /* Texte */
+  --text: #1A1A2E;
   --text-mid: #4A5568;
-  --text-light: #8896A6;
+  --text-light: #6B7280;
   --white: #FFFFFF;
-  --radius: 20px;
-  --radius-sm: 14px;
-  --radius-xs: 8px;
-  --shadow: 0 4px 24px rgba(10,22,40,0.08);
-  --shadow-lg: 0 16px 48px rgba(10,22,40,0.14);
-  --shadow-color: 0 8px 32px rgba(255,107,53,0.2);
+
+  /* Rayons */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+
+  /* Ombres */
+  --shadow: 0 2px 12px rgba(26,26,46,0.06);
+  --shadow-lg: 0 8px 32px rgba(26,26,46,0.10);
+  --shadow-terra: 0 6px 24px rgba(199,91,57,0.18);
 }
 
 * {
@@ -43,9 +51,9 @@ html {
 }
 
 body {
-  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text);
-  background: var(--sand);
+  background: var(--cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -67,7 +75,7 @@ img {
 
 /* Loading skeletons */
 .skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background: linear-gradient(90deg, #f0ebe4 25%, #e8e3dc 50%, #f0ebe4 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
 }
@@ -83,13 +91,13 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--ocean);
+  outline: 2px solid var(--terra);
   outline-offset: 2px;
 }
 
 /* Font display class */
 .font-display {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-playfair), Georgia, serif;
 }
 
 /* Animations */
@@ -98,14 +106,19 @@ textarea:focus-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(230,57,70,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(230,57,70,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(199,91,57,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(199,91,57,0); }
 }
 
 @keyframes float {
@@ -113,8 +126,17 @@ textarea:focus-visible {
   to { transform: translate(30px,-30px); }
 }
 
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 .animate-fade-up {
   animation: fadeUp 0.5s ease both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease both;
 }
 
 .animate-pulse-dot {
@@ -127,6 +149,10 @@ textarea:focus-visible {
 
 .animate-float {
   animation: float 8s ease-in-out infinite alternate;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease both;
 }
 
 /* Reveal on scroll */
@@ -146,4 +172,59 @@ textarea:focus-visible {
 }
 .scrollbar-hide {
   scrollbar-width: none;
+}
+
+/* Eventy card style */
+.eventy-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.eventy-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Eventy button styles */
+.btn-terra {
+  background: var(--terra);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-terra:hover {
+  background: var(--terra-light);
+  box-shadow: var(--shadow-terra);
+}
+
+.btn-navy {
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-navy:hover {
+  background: var(--navy-light);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.btn-outline:hover {
+  border-color: var(--terra);
+  background: var(--terra-soft);
 }

@@ -7,11 +7,18 @@ import { ZodError } from 'zod';
 import { apiClient } from '@/lib/api-client';
 import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  gold: '#D4A853',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+};
+
 /**
- * Page de connexion
- * Formulaire email + mot de passe
- * Récupération de mot de passe
- * Lien vers inscription
+ * Page de connexion — Design Eventy v2
  */
 export default function ConnexionPage() {
   const router = useRouter();
@@ -41,7 +48,6 @@ export default function ConnexionPage() {
     setLoading(true);
 
     try {
-      // Validate with Zod schema
       loginSchema.parse(formData);
 
       interface LoginResponse {
@@ -57,10 +63,6 @@ export default function ConnexionPage() {
         password: formData.password,
       });
 
-      // Les tokens sont désormais gérés via httpOnly cookies par le serveur
-      // Pas besoin de les stocker côté client
-
-      // Rediriger vers le dashboard selon le rôle
       const user = response.user;
       if (user?.role === 'ADMIN') {
         router.push('/admin');
@@ -82,22 +84,53 @@ export default function ConnexionPage() {
     }
   };
 
+  const inputStyle = (hasError: boolean) => ({
+    width: '100%',
+    padding: '12px 16px',
+    borderRadius: '10px',
+    border: `1.5px solid ${hasError ? '#E63946' : C.border}`,
+    background: '#fff',
+    color: C.navy,
+    fontSize: '14px',
+    outline: 'none',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  });
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <div
+      className="min-h-screen flex items-center justify-center px-4 py-12"
+      style={{ background: C.cream }}
+    >
+      <div
+        className="w-full max-w-md p-8 sm:p-10 animate-fade-up"
+        style={{
+          background: '#fff',
+          borderRadius: '20px',
+          border: `1.5px solid ${C.border}`,
+          boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+        }}
+      >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Eventy Life</h1>
+          <Link href="/" className="inline-flex items-center gap-0">
+            <span className="font-display text-2xl font-bold" style={{ color: C.navy }}>Eventy</span>
+            <span className="font-display text-2xl font-bold" style={{ color: C.gold }}>.</span>
+            <span className="font-display text-2xl font-bold" style={{ color: C.navy }}>Life</span>
+          </Link>
         </div>
 
         {/* Titre */}
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Connexion</h2>
-        <p className="text-gray-600 text-sm mb-6">Bienvenue! Connectez-vous à votre compte</p>
+        <h2 className="font-display text-xl font-bold mb-1" style={{ color: C.navy }}>Connexion</h2>
+        <p className="text-sm mb-6" style={{ color: C.muted }}>
+          Bienvenue! Connectez-vous à votre compte
+        </p>
 
         {/* Message d'erreur */}
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+          <div
+            className="mb-4 p-3 rounded-lg text-sm"
+            style={{ background: '#FEF2F2', border: '1px solid #FECACA', color: '#DC2626' }}
+          >
             {error}
           </div>
         )}
@@ -105,7 +138,7 @@ export default function ConnexionPage() {
         {/* Formulaire */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium mb-1.5" style={{ color: C.navy }}>
               Email
             </label>
             <input
@@ -115,20 +148,26 @@ export default function ConnexionPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              style={inputStyle(!!errors.email)}
               placeholder="votre@email.com"
+              onFocus={(e) => {
+                if (!errors.email) e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terra}15`;
+              }}
+              onBlur={(e) => {
+                if (!errors.email) e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             />
-            {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
+            {errors.email && <p className="text-xs mt-1" style={{ color: '#DC2626' }}>{errors.email}</p>}
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <div className="flex justify-between items-center mb-1.5">
+              <label htmlFor="password" className="block text-sm font-medium" style={{ color: C.navy }}>
                 Mot de passe
               </label>
-              <Link href="/mot-de-passe-oublie" className="text-xs text-blue-600 hover:text-blue-700">
+              <Link href="/mot-de-passe-oublie" className="text-xs font-medium" style={{ color: C.terra }}>
                 Oublié?
               </Link>
             </div>
@@ -139,18 +178,41 @@ export default function ConnexionPage() {
               value={formData.password}
               onChange={handleChange}
               required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
+              style={inputStyle(!!errors.password)}
               placeholder="••••••••"
+              onFocus={(e) => {
+                if (!errors.password) e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terra}15`;
+              }}
+              onBlur={(e) => {
+                if (!errors.password) e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             />
-            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password}</p>}
+            {errors.password && <p className="text-xs mt-1" style={{ color: '#DC2626' }}>{errors.password}</p>}
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 font-medium"
+            className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+            style={{
+              background: loading ? C.muted : C.terra,
+              color: '#fff',
+              cursor: loading ? 'not-allowed' : 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) {
+                e.currentTarget.style.background = C.terraLight;
+                e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) {
+                e.currentTarget.style.background = C.terra;
+                e.currentTarget.style.boxShadow = 'none';
+              }
+            }}
           >
             {loading ? 'Connexion en cours...' : 'Se connecter'}
           </button>
@@ -159,31 +221,40 @@ export default function ConnexionPage() {
         {/* Divider */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
+            <div className="w-full" style={{ borderTop: `1px solid ${C.border}` }}></div>
           </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Nouveau client?</span>
+          <div className="relative flex justify-center text-xs">
+            <span className="px-3 bg-white" style={{ color: C.muted }}>Nouveau client?</span>
           </div>
         </div>
 
         {/* Lien inscription */}
         <Link
           href="/inscription"
-          className="w-full px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition font-medium text-center block"
+          className="w-full py-3 rounded-xl font-semibold text-sm text-center block transition-all duration-200"
+          style={{
+            background: 'transparent',
+            color: C.navy,
+            border: `1.5px solid ${C.border}`,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = C.terra;
+            e.currentTarget.style.background = '#FEF0EB';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = C.border;
+            e.currentTarget.style.background = 'transparent';
+          }}
         >
           Créer un compte
         </Link>
 
         {/* Footer */}
-        <p className="text-center text-xs text-gray-600 mt-6">
+        <p className="text-center text-xs mt-6" style={{ color: C.muted }}>
           En vous connectant, vous acceptez nos{' '}
-          <Link href="/cgv" className="text-blue-600 hover:text-blue-700">
-            CGV
-          </Link>{' '}
+          <Link href="/cgv" style={{ color: C.terra }}>CGV</Link>{' '}
           et notre{' '}
-          <Link href="/politique-confidentialite" className="text-blue-600 hover:text-blue-700">
-            politique de confidentialité
-          </Link>
+          <Link href="/politique-confidentialite" style={{ color: C.terra }}>politique de confidentialité</Link>
         </p>
       </div>
     </div>

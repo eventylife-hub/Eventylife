@@ -1,26 +1,26 @@
 import type { Metadata } from 'next';
-import { Outfit, Fraunces } from 'next/font/google';
+import { DM_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { ToastContainer } from '@/components/ui/toast';
 import { CookieBanner } from '@/components/cookie-banner';
 
-const outfit = Outfit({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-dm-sans',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
-const fraunces = Fraunces({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-playfair',
   display: 'swap',
-  weight: ['400', '600', '700', '800', '900'],
+  weight: ['600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
   title: 'Eventy Life - Voyages en Groupe',
-  description: 'Découvrez des voyages en groupe avec accompagnement, prix justes et qualité garantie.',
+  description: 'Découvrez des voyages en groupe avec accompagnement humain porte-à-porte, prix justes et qualité garantie.',
   keywords: [
     'voyages',
     'groupe',
@@ -28,11 +28,12 @@ export const metadata: Metadata = {
     'réservation voyage',
     'tourisme',
     'destinations',
+    'porte-à-porte',
   ],
   authors: [{ name: 'Eventy Life' }],
   openGraph: {
     title: 'Eventy Life - Voyages en Groupe',
-    description: 'Découvrez des voyages en groupe avec accompagnement, prix justes et qualité garantie.',
+    description: 'Découvrez des voyages en groupe avec accompagnement humain porte-à-porte, prix justes et qualité garantie.',
     type: 'website',
     locale: 'fr_FR',
   },
@@ -45,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={`${outfit.variable} ${fraunces.variable} ${outfit.className}`}>
+      <body className={`${dmSans.variable} ${playfair.variable} ${dmSans.className}`}>
         {children}
         <ToastContainer />
         <CookieBanner />

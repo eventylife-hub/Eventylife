@@ -12,19 +12,24 @@ interface HeaderProps {
 }
 
 /**
- * Header global de l'application
- * - Logo et branding
- * - Navigation principale
- * - Espace utilisateur (connecté/non connecté)
- * - Menu mobile
+ * Header global — Design Eventy v2
+ * Topbar navy, logo Playfair "Eventy.Life", nav cream
  */
 export function Header({ user }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const logout = useAuthStore((state) => state.logout);
+
+  // Détection scroll pour shadow
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Fermer le dropdown en cliquant ailleurs
   useEffect(() => {
@@ -56,56 +61,125 @@ export function Header({ user }: HeaderProps) {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+    <header
+      className="sticky top-0 z-40 transition-shadow duration-300"
+      style={{
+        background: '#1A1A2E',
+        boxShadow: scrolled ? '0 4px 20px rgba(26,26,46,0.3)' : 'none',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
-            <span className="font-bold text-lg text-gray-900">Eventy Life</span>
+          {/* Logo Eventy.Life */}
+          <Link href="/" className="flex items-center gap-0">
+            <span
+              className="font-display text-xl font-bold tracking-tight"
+              style={{ color: '#FAF7F2' }}
+            >
+              Eventy
+            </span>
+            <span
+              className="font-display text-xl font-bold"
+              style={{ color: '#D4A853' }}
+            >
+              .
+            </span>
+            <span
+              className="font-display text-xl font-bold tracking-tight"
+              style={{ color: '#FAF7F2' }}
+            >
+              Life
+            </span>
           </Link>
 
           {/* Navigation desktop */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href={ROUTES.VOYAGES} className="text-gray-700 hover:text-blue-600 transition">
-              Voyages
+            <Link
+              href={ROUTES.VOYAGES}
+              className="text-sm font-medium transition-colors duration-200"
+              style={{
+                color: pathname === '/voyages' ? '#D4A853' : 'rgba(250,247,242,0.8)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/voyages' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
+            >
+              Nos voyages
             </Link>
-            <Link href="/#how-it-works" className="text-gray-700 hover:text-blue-600 transition">
+            <Link
+              href="/#how-it-works"
+              className="text-sm font-medium transition-colors duration-200"
+              style={{ color: 'rgba(250,247,242,0.8)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(250,247,242,0.8)')}
+            >
               Comment ça marche
+            </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium transition-colors duration-200"
+              style={{ color: 'rgba(250,247,242,0.8)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(250,247,242,0.8)')}
+            >
+              Contact
             </Link>
           </nav>
 
           {/* Right section */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {user ? (
               // Utilisateur connecté
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors duration-200"
+                  style={{ color: '#FAF7F2' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.1)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full"></div>
-                  <span className="text-sm font-medium text-gray-900 hidden sm:inline">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
+                    style={{ background: '#C75B39', color: '#FAF7F2' }}
+                  >
+                    {user.firstName?.charAt(0) || 'U'}
+                  </div>
+                  <span className="text-sm font-medium hidden sm:inline">
                     {user.firstName}
                   </span>
                 </button>
 
                 {/* Dropdown menu */}
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
-                    <div className="p-4 border-b border-gray-200">
-                      <p className="text-sm font-medium text-gray-900">{user.email}</p>
+                  <div
+                    className="absolute right-0 mt-2 w-52 rounded-xl overflow-hidden animate-fade-up"
+                    style={{
+                      background: 'white',
+                      border: '1.5px solid #E5E0D8',
+                      boxShadow: '0 8px 32px rgba(26,26,46,0.12)',
+                    }}
+                  >
+                    <div className="p-4" style={{ borderBottom: '1px solid #E5E0D8' }}>
+                      <p className="text-sm font-semibold" style={{ color: '#1A1A2E' }}>
+                        {user.firstName} {user.lastName}
+                      </p>
+                      <p className="text-xs" style={{ color: '#6B7280' }}>{user.email}</p>
                     </div>
                     <div className="p-2">
                       <Link
                         href={getDashboardUrl()}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded transition"
+                        className="block px-3 py-2 text-sm rounded-lg transition-colors"
+                        style={{ color: '#1A1A2E' }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = '#FAF7F2')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                       >
                         Mon espace
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded transition"
+                        className="w-full text-left px-3 py-2 text-sm rounded-lg transition-colors"
+                        style={{ color: '#E63946' }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = '#FEF2F2')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                       >
                         Déconnexion
                       </button>
@@ -118,13 +192,32 @@ export function Header({ user }: HeaderProps) {
               <div className="hidden md:flex items-center gap-3">
                 <Link
                   href={ROUTES.AUTH.CONNEXION}
-                  className="px-4 py-2 text-gray-700 hover:text-blue-600 transition font-medium"
+                  className="px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200"
+                  style={{ color: '#FAF7F2' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(250,247,242,0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent';
+                  }}
                 >
                   Connexion
                 </Link>
                 <Link
                   href={ROUTES.AUTH.INSCRIPTION}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                  className="px-5 py-2 text-sm font-semibold rounded-lg transition-all duration-200"
+                  style={{
+                    background: '#C75B39',
+                    color: '#FAF7F2',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#D97B5E';
+                    e.currentTarget.style.boxShadow = '0 6px 24px rgba(199,91,57,0.25)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#C75B39';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                 >
                   S'inscrire
                 </Link>
@@ -134,33 +227,72 @@ export function Header({ user }: HeaderProps) {
             {/* Menu mobile */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              className="md:hidden p-2 rounded-lg transition-colors"
+              style={{ color: '#FAF7F2' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.1)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
               </svg>
             </button>
           </div>
         </div>
 
-        {/* Menu mobile */}
+        {/* Menu mobile déroulant */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-2">
-            <Link href={ROUTES.VOYAGES} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
-              Voyages
+          <div
+            className="md:hidden pb-4 space-y-1 animate-fade-up"
+            style={{ borderTop: '1px solid rgba(250,247,242,0.1)' }}
+          >
+            <Link
+              href={ROUTES.VOYAGES}
+              className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+              style={{ color: '#FAF7F2' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
+              Nos voyages
             </Link>
-            <Link href="/#how-it-works" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+            <Link
+              href="/#how-it-works"
+              className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+              style={{ color: '#FAF7F2' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
               Comment ça marche
             </Link>
+            <Link
+              href="/contact"
+              className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+              style={{ color: '#FAF7F2' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
+              Contact
+            </Link>
             {!user && (
-              <>
-                <Link href={ROUTES.AUTH.CONNEXION} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+              <div className="pt-2 space-y-2" style={{ borderTop: '1px solid rgba(250,247,242,0.1)' }}>
+                <Link
+                  href={ROUTES.AUTH.CONNEXION}
+                  className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                  style={{ color: '#FAF7F2' }}
+                >
                   Connexion
                 </Link>
-                <Link href={ROUTES.AUTH.INSCRIPTION} className="block px-4 py-2 bg-blue-600 text-white rounded">
+                <Link
+                  href={ROUTES.AUTH.INSCRIPTION}
+                  className="block px-4 py-3 rounded-lg text-sm font-semibold text-center transition-colors"
+                  style={{ background: '#C75B39', color: '#FAF7F2' }}
+                >
                   S'inscrire
                 </Link>
-              </>
+              </div>
             )}
           </div>
         )}

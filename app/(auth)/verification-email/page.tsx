@@ -9,6 +9,7 @@ import { apiClient } from '@/lib/api-client';
  * Page de vérification d'email
  * Traite le token depuis les params d'URL
  * Affiche succès ou erreur
+ * Eventy v2 Design System
  */
 export default function VerificationEmailPage() {
   const searchParams = useSearchParams();
@@ -48,47 +49,134 @@ export default function VerificationEmailPage() {
   }, [token, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 text-center">
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#FAF7F2',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <div
+        className="animate-fade-up"
+        style={{
+          width: '100%',
+          maxWidth: '28rem',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '20px',
+          border: '1.5px solid #E5E0D8',
+          boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+          padding: '2rem',
+          textAlign: 'center',
+        }}
+      >
         {/* Logo */}
-        <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Eventy Life</h1>
+        <h1
+          style={{
+            fontSize: '1.5rem',
+            fontWeight: '700',
+            color: '#1A1A2E',
+            margin: '0 0 1.5rem 0',
+            letterSpacing: '-0.5px',
+          }}
+        >
+          Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+        </h1>
 
         {/* Contenu selon le statut */}
         {status === 'loading' && (
-          <div className="space-y-4">
-            <div className="flex justify-center">
-              <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div
+                style={{
+                  width: '3rem',
+                  height: '3rem',
+                  border: '4px solid #E5E0D8',
+                  borderTop: '4px solid #C75B39',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite',
+                }}
+              />
             </div>
-            <p className="text-gray-600">{message}</p>
+            <p style={{ color: '#6B7280', fontSize: '0.875rem' }}>{message}</p>
           </div>
         )}
 
         {status === 'success' && (
-          <div className="space-y-4">
-            <div className="text-5xl">✓</div>
-            <h2 className="text-xl font-semibold text-gray-900">{message}</h2>
-            <p className="text-gray-600 text-sm">Redirection vers connexion...</p>
-            <Link href="/connexion" className="inline-block text-blue-600 hover:text-blue-700 font-medium">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ fontSize: '3rem' }}>✓</div>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#1A1A2E', margin: 0 }}>
+              {message}
+            </h2>
+            <p style={{ color: '#6B7280', fontSize: '0.875rem', margin: 0 }}>
+              Redirection vers connexion...
+            </p>
+            <Link
+              href="/connexion"
+              style={{
+                color: '#C75B39',
+                fontSize: '0.875rem',
+                textDecoration: 'none',
+                fontWeight: '500',
+                transition: 'color 200ms',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#B84A2F';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#C75B39';
+              }}
+            >
               Cliquez ici si vous n'êtes pas redirigé
             </Link>
           </div>
         )}
 
         {status === 'error' && (
-          <div className="space-y-4">
-            <div className="text-5xl">✗</div>
-            <h2 className="text-xl font-semibold text-red-600">Erreur</h2>
-            <p className="text-gray-600 text-sm">{message}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ fontSize: '3rem' }}>✗</div>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#DC2626', margin: 0 }}>
+              Erreur
+            </h2>
+            <p style={{ color: '#6B7280', fontSize: '0.875rem', margin: 0 }}>
+              {message}
+            </p>
             <Link
               href="/connexion"
-              className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              style={{
+                display: 'inline-block',
+                padding: '0.75rem 1rem',
+                backgroundColor: '#C75B39',
+                color: '#FFFFFF',
+                borderRadius: '10px',
+                textDecoration: 'none',
+                fontWeight: '500',
+                fontSize: '0.875rem',
+                transition: 'all 200ms',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#B84A2F';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#C75B39';
+              }}
             >
               Retour à la connexion
             </Link>
           </div>
         )}
       </div>
+
+      <style>{`
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }

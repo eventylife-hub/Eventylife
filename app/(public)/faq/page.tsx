@@ -7,8 +7,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+};
 
 // Données FAQ
 const faqData = {
@@ -203,11 +214,14 @@ export default function FAQPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-12 animate-fade-up">
+        <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">
+          Questions fréquentes
+        </p>
+        <h1 style={{ color: C.navy, fontFamily: 'Playfair, serif', fontSize: '2.25rem', fontWeight: '700' }} className="mb-4">
           Foire aux questions
         </h1>
-        <p className="text-lg text-gray-600 mb-8">
+        <p style={{ color: C.muted, fontSize: '1.125rem' }} className="mb-8">
           Trouvez les réponses à vos questions sur Eventy Life
         </p>
 
@@ -224,10 +238,10 @@ export default function FAQPage() {
       </div>
 
       {/* FAQ Sections */}
-      <div className="space-y-8">
+      <div className="space-y-8 animate-fade-up">
         {Object.entries(filteredFaqs).map(([key, category]) => (
           <section key={key} className="space-y-4">
-            <h2 className="text-2xl font-bold text-gray-900 pb-3 border-b-2 border-blue-500">
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: C.navy, paddingBottom: '0.75rem', borderBottom: `2px solid ${C.terra}` }}>
               {category.title}
             </h2>
 
@@ -238,21 +252,23 @@ export default function FAQPage() {
                 return (
                   <div
                     key={item.id}
-                    className="border border-gray-200 rounded-lg overflow-hidden transition-all"
+                    style={{ border: `1.5px solid ${C.border}`, borderRadius: '12px', overflow: 'hidden', transition: 'all 0.3s ease' }}
                   >
                     <button
                       onClick={() => toggleItem(item.id)}
-                      className="w-full text-left px-6 py-4 bg-white hover:bg-gray-50 flex items-center justify-between font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      style={{ width: '100%', textAlign: 'left', padding: '1rem 1.5rem', backgroundColor: 'white', color: C.navy, fontWeight: '500', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', transition: 'all 0.3s ease' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#f9f9f9'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'white'; }}
                     >
-                      <span className="text-lg">{item.q}</span>
-                      <span className={`text-2xl transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                      <span style={{ fontSize: '1.125rem' }}>{item.q}</span>
+                      <span style={{ fontSize: '1.25rem', transition: 'transform 0.3s ease', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                         ▼
                       </span>
                     </button>
 
                     {isOpen && (
-                      <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                        <p className="text-gray-700 leading-relaxed">
+                      <div style={{ padding: '1rem 1.5rem', backgroundColor: C.goldSoft, borderTop: `1.5px solid ${C.border}` }}>
+                        <p style={{ color: C.navy, lineHeight: '1.75' }}>
                           {item.a}
                         </p>
                       </div>
@@ -267,13 +283,15 @@ export default function FAQPage() {
 
       {/* No Results */}
       {Object.keys(filteredFaqs).length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600 mb-6">
+        <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
+          <p style={{ color: C.muted, marginBottom: '1.5rem' }}>
             Aucune question ne correspond à votre recherche.
           </p>
           <button
             onClick={() => setSearchQuery('')}
-            className="text-blue-600 hover:underline font-medium"
+            style={{ color: C.terra, textDecoration: 'none', fontWeight: '700', border: 'none', backgroundColor: 'transparent', cursor: 'pointer', transition: 'all 0.3s ease' }}
+            onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}
           >
             Réinitialiser la recherche
           </button>
@@ -281,17 +299,17 @@ export default function FAQPage() {
       )}
 
       {/* CTA Section */}
-      <section className="mt-16 bg-blue-50 rounded-2xl p-8 md:p-12 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+      <section style={{ marginTop: '4rem', backgroundColor: C.goldSoft, borderRadius: '20px', padding: '2rem', textAlign: 'center' }} className="md:p-12 animate-fade-up">
+        <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: C.navy, marginBottom: '1rem' }}>
           Vous n'avez pas trouvé votre réponse ?
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p style={{ color: C.muted, marginBottom: '1.5rem' }}>
           Notre équipe de support est disponible pour répondre à toutes vos questions.
         </p>
         <Link href="/contact">
-          <Button variant="primary" size="lg">
+          <button style={{ backgroundColor: C.terra, color: 'white', padding: '0.75rem 2rem', borderRadius: '12px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}>
             Nous contacter
-          </Button>
+          </button>
         </Link>
       </section>
     </div>

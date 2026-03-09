@@ -2,6 +2,20 @@
 
 import { useEffect, useState } from 'react';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface ProfileData {
   id: string;
   email: string;
@@ -269,11 +283,11 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="max-w-2xl mx-auto space-y-6">
-        <div className="h-12 bg-slate-200 rounded animate-pulse" />
+      <div className="max-w-2xl mx-auto space-y-6 animate-fade-up">
+        <div className="h-8 rounded-xl skeleton" style={{ width: '40%' }} />
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-10 bg-slate-200 rounded animate-pulse" />
+            <div key={i} className="h-10 rounded-xl skeleton" />
           ))}
         </div>
       </div>
@@ -281,98 +295,133 @@ export default function ProfilePage() {
   }
 
   if (!profile) {
-    return <div className="text-center text-red-600">Profil non disponible</div>;
+    return <div className="text-center font-medium" style={{ color: '#DC2626' }}>Profil non disponible</div>;
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto space-y-8 animate-fade-up">
       {/* En-tête */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Mon Profil</h1>
-        <p className="text-slate-600">Gérez vos informations personnelles</p>
+      <div>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mon Profil</h1>
+        <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos informations personnelles</p>
       </div>
 
       {/* Messages */}
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-          {error}
+        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium" style={{ color: '#DC2626' }}>⚠️ {error}</p>
         </div>
       )}
       {success && (
-        <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
-          Profil mis à jour avec succès!
+        <div className="p-6 rounded-2xl" style={{ background: C.forestBg, border: `1.5px solid ${C.forest}` }}>
+          <p className="text-sm font-medium" style={{ color: C.forest }}>✓ Profil mis à jour avec succès!</p>
         </div>
       )}
 
       {/* Formulaire principal */}
-      <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-4">Informations personnelles</h2>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <h2 className="font-bold text-base mb-6" style={{ color: C.navy }}>Informations personnelles</h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email (lecture seule) */}
           <div>
-            <label className="block text-sm font-semibold text-slate-900 mb-2">
+            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
               Adresse email
             </label>
             <input
               type="email"
               value={profile.email}
               disabled
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-600"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+              style={{ background: C.cream, border: `1.5px solid ${C.border}`, color: C.muted }}
             />
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs mt-2" style={{ color: C.muted }}>
               Votre email ne peut pas être modifié
             </p>
           </div>
 
           {/* Prénom */}
           <div>
-            <label className="block text-sm font-semibold text-slate-900 mb-2">
+            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
               Prénom
             </label>
             <input
               type="text"
               value={form.firstName}
               onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+              style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
               placeholder="Votre prénom"
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = C.terra;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = C.border;
+              }}
             />
           </div>
 
           {/* Nom */}
           <div>
-            <label className="block text-sm font-semibold text-slate-900 mb-2">
+            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
               Nom
             </label>
             <input
               type="text"
               value={form.lastName}
               onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+              style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
               placeholder="Votre nom"
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = C.terra;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = C.border;
+              }}
             />
           </div>
 
           {/* Téléphone */}
           <div>
-            <label className="block text-sm font-semibold text-slate-900 mb-2">
+            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
               Téléphone
             </label>
             <input
               type="tel"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+              style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
               placeholder="+33 6 XX XX XX XX"
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = C.terra;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = C.border;
+              }}
             />
           </div>
 
           {/* Boutons */}
-          <div className="flex gap-4 pt-4">
+          <div className="flex gap-3 pt-2">
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+              style={{ background: C.terra, color: '#fff', opacity: saving ? 0.6 : 1 }}
+              onMouseEnter={(e) => {
+                if (!saving) {
+                  e.currentTarget.style.background = C.terraLight;
+                  e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!saving) {
+                  e.currentTarget.style.background = C.terra;
+                  e.currentTarget.style.boxShadow = 'none';
+                }
+              }}
             >
               {saving ? 'Sauvegarde...' : 'Sauvegarder'}
             </button>
@@ -387,7 +436,14 @@ export default function ProfilePage() {
                   });
                 }
               }}
-              className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-colors"
+              className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+              style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = C.terraSoft;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#fff';
+              }}
             >
               Annuler
             </button>
@@ -396,20 +452,38 @@ export default function ProfilePage() {
       </div>
 
       {/* Section sécurité */}
-      <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-4">Sécurité</h2>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Sécurité</h2>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <button
             onClick={() => setShowPasswordModal(true)}
-            className="w-full px-4 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-left font-semibold"
+            className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
+            style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = C.terraSoft;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#fff';
+            }}
           >
             Changer mon mot de passe
           </button>
           <button
             onClick={twoFAEnabled ? handleDisable2FA : handleInit2FA}
             disabled={enabling2FA}
-            className="w-full px-4 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-left font-semibold disabled:opacity-50"
+            className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
+            style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}`, opacity: enabling2FA ? 0.6 : 1 }}
+            onMouseEnter={(e) => {
+              if (!enabling2FA) {
+                e.currentTarget.style.background = C.terraSoft;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!enabling2FA) {
+                e.currentTarget.style.background = '#fff';
+              }
+            }}
           >
             {enabling2FA
               ? 'Chargement...'
@@ -418,7 +492,7 @@ export default function ProfilePage() {
                 : 'Activer l\'authentification à deux facteurs'}
           </button>
           {twoFAEnabled && (
-            <p className="text-sm text-green-700 font-medium ml-1">2FA activé</p>
+            <p className="text-xs font-medium" style={{ color: C.forest }}>✓ 2FA activé</p>
           )}
         </div>
       </div>
@@ -426,58 +500,90 @@ export default function ProfilePage() {
       {/* Modal changement mot de passe */}
       {showPasswordModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">Changer mon mot de passe</h3>
+          <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
+            <h3 className="font-bold text-base mb-4" style={{ color: C.navy }}>Changer mon mot de passe</h3>
 
             {passwordError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
+              <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5`, color: '#DC2626' }}>
                 {passwordError}
               </div>
             )}
             {passwordSuccess && (
-              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded text-green-700 text-sm">
+              <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: C.forestBg, border: `1.5px solid ${C.forest}`, color: C.forest }}>
                 Mot de passe modifié avec succès !
               </div>
             )}
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-1">Mot de passe actuel</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Mot de passe actuel</label>
                 <input
                   type="password"
                   value={passwordForm.currentPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = C.terra;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                  }}
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-1">Nouveau mot de passe</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Nouveau mot de passe</label>
                 <input
                   type="password"
                   value={passwordForm.newPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = C.terra;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                  }}
                   required
                   minLength={8}
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-1">Confirmer le mot de passe</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Confirmer le mot de passe</label>
                 <input
                   type="password"
                   value={passwordForm.confirmPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-xl text-sm transition-all"
+                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = C.terra;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                  }}
                   required
                   minLength={8}
                 />
               </div>
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-2 pt-2">
                 <button
                   type="submit"
                   disabled={changingPassword}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50"
+                  className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
+                  style={{ background: C.terra, color: '#fff', opacity: changingPassword ? 0.6 : 1 }}
+                  onMouseEnter={(e) => {
+                    if (!changingPassword) {
+                      e.currentTarget.style.background = C.terraLight;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!changingPassword) {
+                      e.currentTarget.style.background = C.terra;
+                    }
+                  }}
                 >
                   {changingPassword ? 'Modification...' : 'Modifier'}
                 </button>
@@ -488,7 +594,14 @@ export default function ProfilePage() {
                     setPasswordError(null);
                     setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
                   }}
-                  className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50"
+                  className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
+                  style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = C.terraSoft;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#fff';
+                  }}
                 >
                   Annuler
                 </button>
@@ -501,44 +614,62 @@ export default function ProfilePage() {
       {/* Modal 2FA setup */}
       {show2FAModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">Configurer la double authentification</h3>
+          <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
+            <h3 className="font-bold text-base mb-4" style={{ color: C.navy }}>Configurer la double authentification</h3>
 
             <div className="space-y-4">
-              <p className="text-sm text-slate-600">
+              <p className="text-xs" style={{ color: C.muted }}>
                 Scannez ce QR code avec votre application d'authentification (Google Authenticator, Authy, etc.)
               </p>
 
               {twoFAQrUrl && (
-                <div className="flex justify-center p-4 bg-white border border-slate-200 rounded-lg">
+                <div className="flex justify-center p-4 rounded-xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
                   <img src={twoFAQrUrl} alt="QR Code 2FA" className="w-48 h-48" />
                 </div>
               )}
 
               {twoFASecret && (
-                <div className="p-3 bg-slate-50 rounded-lg">
-                  <p className="text-xs text-slate-500 mb-1">Clé secrète (saisie manuelle) :</p>
-                  <p className="text-sm font-mono font-bold text-slate-900 break-all">{twoFASecret}</p>
+                <div className="p-3 rounded-xl" style={{ background: C.cream }}>
+                  <p className="text-xs mb-1" style={{ color: C.muted }}>Clé secrète (saisie manuelle) :</p>
+                  <p className="text-xs font-mono font-bold" style={{ color: C.navy, wordBreak: 'break-all' }}>{twoFASecret}</p>
                 </div>
               )}
 
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-1">Code de vérification</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Code de vérification</label>
                 <input
                   type="text"
                   value={twoFACode}
                   onChange={(e) => setTwoFACode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                   placeholder="123456"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-center text-lg tracking-widest"
+                  className="w-full px-4 py-3 rounded-xl text-sm text-center transition-all"
+                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy, letterSpacing: '0.1em', fontSize: '1.125rem' }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = C.terra;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = C.border;
+                  }}
                   maxLength={6}
                 />
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 <button
                   onClick={handleVerify2FA}
                   disabled={enabling2FA || twoFACode.length !== 6}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50"
+                  className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
+                  style={{ background: C.terra, color: '#fff', opacity: enabling2FA || twoFACode.length !== 6 ? 0.6 : 1 }}
+                  onMouseEnter={(e) => {
+                    if (!enabling2FA && twoFACode.length === 6) {
+                      e.currentTarget.style.background = C.terraLight;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!enabling2FA && twoFACode.length === 6) {
+                      e.currentTarget.style.background = C.terra;
+                    }
+                  }}
                 >
                   {enabling2FA ? 'Vérification...' : 'Activer'}
                 </button>
@@ -547,7 +678,14 @@ export default function ProfilePage() {
                     setShow2FAModal(false);
                     setTwoFACode('');
                   }}
-                  className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50"
+                  className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
+                  style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = C.terraSoft;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#fff';
+                  }}
                 >
                   Annuler
                 </button>
@@ -558,48 +696,51 @@ export default function ProfilePage() {
       )}
 
       {/* Section préférences */}
-      <div className="bg-white rounded-lg border border-slate-200 p-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-4">
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>
           Préférences
           {savingPreferences && (
-            <span className="ml-2 text-sm font-normal text-slate-500">Sauvegarde...</span>
+            <span className="ml-2 text-xs font-normal" style={{ color: C.muted }}>Sauvegarde...</span>
           )}
         </h2>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-3 border border-slate-200 rounded-lg">
-            <label className="font-semibold text-slate-900">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: C.cream }}>
+            <label className="font-semibold text-sm" style={{ color: C.navy }}>
               Notifications par email
             </label>
             <input
               type="checkbox"
               checked={preferences.emailNotifications}
               onChange={(e) => handlePreferenceChange('emailNotifications', e.target.checked)}
-              className="w-5 h-5 rounded cursor-pointer accent-blue-600"
+              className="w-5 h-5 rounded cursor-pointer"
+              style={{ accentColor: C.terra }}
             />
           </div>
 
-          <div className="flex items-center justify-between p-3 border border-slate-200 rounded-lg">
-            <label className="font-semibold text-slate-900">
+          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: C.cream }}>
+            <label className="font-semibold text-sm" style={{ color: C.navy }}>
               Mises à jour sur les promotions
             </label>
             <input
               type="checkbox"
               checked={preferences.promotionUpdates}
               onChange={(e) => handlePreferenceChange('promotionUpdates', e.target.checked)}
-              className="w-5 h-5 rounded cursor-pointer accent-blue-600"
+              className="w-5 h-5 rounded cursor-pointer"
+              style={{ accentColor: C.terra }}
             />
           </div>
 
-          <div className="flex items-center justify-between p-3 border border-slate-200 rounded-lg">
-            <label className="font-semibold text-slate-900">
+          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: C.cream }}>
+            <label className="font-semibold text-sm" style={{ color: C.navy }}>
               Partager mes données avec les partenaires
             </label>
             <input
               type="checkbox"
               checked={preferences.shareDataWithPartners}
               onChange={(e) => handlePreferenceChange('shareDataWithPartners', e.target.checked)}
-              className="w-5 h-5 rounded cursor-pointer accent-blue-600"
+              className="w-5 h-5 rounded cursor-pointer"
+              style={{ accentColor: C.terra }}
             />
           </div>
         </div>

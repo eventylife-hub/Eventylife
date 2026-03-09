@@ -1,9 +1,21 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FileText, Download, Loader } from 'lucide-react';
-import { FilePreview } from '@/components/uploads/file-preview';
 import { formatDate } from '@/lib/utils';
+
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
 
 interface Document {
   id: string;
@@ -111,138 +123,163 @@ export default function ClientDocumentsPage() {
   const currentDocs = getDocumentsByType(activeTab);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* En-tête */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Mes documents
-          </h1>
-          <p className="text-gray-600">
-            Consultez et téléchargez vos confirmations, factures et documents de voyage
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
+      {/* En-tête */}
+      <div>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+          Mes documents
+        </h1>
+        <p className="text-sm mt-2" style={{ color: C.muted }}>
+          Consultez et téléchargez vos confirmations, factures et documents de voyage
+        </p>
+      </div>
+
+      {error && (
+        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+        </div>
+      )}
+
+      {/* Onglets */}
+      <div style={{ borderBottom: `1.5px solid ${C.border}` }}>
+        <div className="flex gap-6 overflow-x-auto">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            const count = getDocumentsByType(tab.id as DocumentTab).length;
+
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as DocumentTab)}
+                className="pb-4 font-medium transition-colors relative text-sm whitespace-nowrap"
+                style={{
+                  color: isActive ? C.terra : C.muted,
+                  borderBottom: isActive ? `2px solid ${C.terra}` : 'none',
+                  paddingBottom: '16px',
+                }}
+              >
+                {tab.label}
+                {count > 0 && (
+                  <span className="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full" style={{ background: C.terra, color: '#fff' }}>
+                    {count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Contenu */}
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="h-8 w-8 border-4 rounded-full" style={{ borderColor: C.border, borderTopColor: C.terra, animation: 'spin 1s linear infinite' }} />
+        </div>
+      ) : currentDocs.length === 0 ? (
+        <div className="text-center py-12 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+          <div className="text-5xl mb-4">📄</div>
+          <h3 className="font-bold text-base mb-2" style={{ color: C.navy }}>
+            Aucun document
+          </h3>
+          <p className="text-sm" style={{ color: C.muted }}>
+            Vous n'avez pas encore de documents pour cette catégorie
           </p>
         </div>
-
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-            {error}
-          </div>
-        )}
-
-        {/* Onglets */}
-        <div className="mb-8 border-b border-gray-200">
-          <div className="flex gap-8">
-            {tabs.map((tab) => {
-              const isActive = activeTab === tab.id;
-              const count = getDocumentsByType(tab.id as DocumentTab).length;
-
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as DocumentTab)}
-                  className={`pb-4 font-medium transition-colors relative ${
-                    isActive
-                      ? 'text-blue-600'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  {tab.label}
-                  {count > 0 && (
-                    <span className="ml-2 inline-flex items-center justify-center w-6 h-6 text-xs font-bold bg-blue-100 text-blue-700 rounded-full">
-                      {count}
-                    </span>
-                  )}
-                  {isActive && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Contenu */}
-        {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader className="h-8 w-8 text-gray-400 animate-spin" />
-          </div>
-        ) : currentDocs.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-            <FileText className="mx-auto h-12 w-12 text-gray-300 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              Aucun document
-            </h3>
-            <p className="text-gray-600">
-              Vous n'avez pas encore de documents pour cette catégorie
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {currentDocs.map((doc) => (
-              <div
-                key={doc.id}
-                className="bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-between hover:shadow-sm transition-shadow"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <FileText className="h-8 w-8 text-gray-400 flex-shrink-0" />
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-medium text-gray-900 truncate">
-                      {doc.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {formatDate(doc.createdAt)}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 ml-4 flex-shrink-0">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    {doc.status === 'CONFIRMED' ? 'Validé' : 'En attente'}
-                  </span>
-                  <button
-                    onClick={() => handleDownload(doc.id)}
-                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                    title="Télécharger"
-                  >
-                    <Download className="h-5 w-5" />
-                  </button>
+      ) : (
+        <div className="space-y-3">
+          {currentDocs.map((doc) => (
+            <div
+              key={doc.id}
+              className="rounded-2xl p-6 flex items-center justify-between transition-all duration-300"
+              style={{
+                background: '#fff',
+                border: `1.5px solid ${C.border}`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              <div className="flex items-center gap-4 flex-1 min-w-0">
+                <div className="text-2xl flex-shrink-0">📋</div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-sm font-medium truncate" style={{ color: C.navy }}>
+                    {doc.name}
+                  </h3>
+                  <p className="text-xs mt-1" style={{ color: C.muted }}>
+                    {formatDate(doc.createdAt)}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
 
-        {/* Bouton Télécharger tout */}
-        {currentDocs.length > 1 && (
-          <div className="mt-8 flex justify-end">
-            <button
-              onClick={async () => {
-                try {
-                  setDownloadingAll(true);
-                  for (const doc of currentDocs) {
-                    await handleDownload(doc.id);
-                    // Petit délai entre les téléchargements pour éviter le blocage navigateur
-                    await new Promise((r) => setTimeout(r, 500));
-                  }
-                } catch (err) {
-                  // Erreur silencieuse — téléchargement groupé échoué
-                } finally {
-                  setDownloadingAll(false);
+              <div className="flex items-center gap-3 ml-4 flex-shrink-0">
+                <span className="px-3 py-1 rounded-xl text-xs font-semibold" style={{ background: C.forestBg, color: C.forest }}>
+                  {doc.status === 'CONFIRMED' ? 'Validé' : 'En attente'}
+                </span>
+                <button
+                  onClick={() => handleDownload(doc.id)}
+                  className="p-2 rounded-xl transition-all"
+                  style={{ background: C.terraSoft, color: C.terra }}
+                  title="Télécharger"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = C.terra;
+                    e.currentTarget.style.color = '#fff';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = C.terraSoft;
+                    e.currentTarget.style.color = C.terra;
+                  }}
+                >
+                  ⬇️
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Bouton Télécharger tout */}
+      {currentDocs.length > 1 && (
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={async () => {
+              try {
+                setDownloadingAll(true);
+                for (const doc of currentDocs) {
+                  await handleDownload(doc.id);
+                  await new Promise((r) => setTimeout(r, 500));
                 }
-              }}
-              disabled={downloadingAll}
-              className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium flex items-center gap-2 disabled:opacity-50"
-            >
-              {downloadingAll ? (
-                <Loader className="h-5 w-5 animate-spin" />
-              ) : (
-                <Download className="h-5 w-5" />
-              )}
-              {downloadingAll ? 'Téléchargement en cours...' : 'Télécharger tous les documents'}
-            </button>
-          </div>
-        )}
-      </div>
+              } catch (err) {
+                // Erreur silencieuse — téléchargement groupé échoué
+              } finally {
+                setDownloadingAll(false);
+              }
+            }}
+            disabled={downloadingAll}
+            className="px-6 py-3 rounded-xl font-semibold text-sm transition-all flex items-center gap-2"
+            style={{
+              background: '#fff',
+              color: C.navy,
+              border: `1.5px solid ${C.border}`,
+              opacity: downloadingAll ? 0.6 : 1,
+            }}
+            onMouseEnter={(e) => {
+              if (!downloadingAll) {
+                e.currentTarget.style.background = C.terraSoft;
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#fff';
+            }}
+          >
+            {downloadingAll ? '⏳' : '⬇️'} {downloadingAll ? 'Téléchargement en cours...' : 'Télécharger tous les documents'}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

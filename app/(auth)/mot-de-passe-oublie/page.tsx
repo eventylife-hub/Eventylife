@@ -10,6 +10,7 @@ import { forgotPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth'
  * Page de réinitialisation de mot de passe
  * Demande d'email
  * Message de confirmation
+ * Eventy v2 Design System
  */
 export default function MotDePasseOubliePage() {
   const [email, setEmail] = useState('');
@@ -45,40 +46,101 @@ export default function MotDePasseOubliePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#FAF7F2',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <div
+        className="animate-fade-up"
+        style={{
+          width: '100%',
+          maxWidth: '28rem',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '20px',
+          border: '1.5px solid #E5E0D8',
+          boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+          padding: '2rem',
+        }}
+      >
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Eventy Life</h1>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h1
+            style={{
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              color: '#1A1A2E',
+              margin: 0,
+              letterSpacing: '-0.5px',
+            }}
+          >
+            Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+          </h1>
         </div>
 
         {/* Titre */}
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Mot de passe oublié</h2>
-        <p className="text-gray-600 text-sm mb-6">
+        <h2
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: '600',
+            color: '#1A1A2E',
+            marginBottom: '0.5rem',
+          }}
+        >
+          Mot de passe oublié
+        </h2>
+        <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
           Entrez votre email pour recevoir les instructions de réinitialisation
         </p>
 
         {/* Message de confirmation */}
         {submitted && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg">
-            <p className="font-medium">Email envoyé!</p>
-            <p className="mt-1">Vérifiez votre boîte mail pour les instructions de réinitialisation.</p>
+          <div
+            style={{
+              marginBottom: '1.5rem',
+              padding: '1rem',
+              backgroundColor: '#ECFDF5',
+              border: '1.5px solid #A7F3D0',
+              borderRadius: '10px',
+              fontSize: '0.875rem',
+            }}
+          >
+            <p style={{ fontWeight: '500', color: '#047857', margin: '0 0 0.25rem 0' }}>
+              Email envoyé!
+            </p>
+            <p style={{ color: '#059669', margin: '0.5rem 0 0 0' }}>
+              Vérifiez votre boîte mail pour les instructions de réinitialisation.
+            </p>
           </div>
         )}
 
         {/* Message d'erreur */}
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+          <div
+            style={{
+              marginBottom: '1rem',
+              padding: '0.75rem',
+              backgroundColor: '#FEF2F2',
+              border: '1.5px solid #FECACA',
+              borderRadius: '10px',
+              color: '#DC2626',
+              fontSize: '0.875rem',
+            }}
+          >
             {error}
           </div>
         )}
 
         {/* Formulaire */}
         {!submitted ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#1A1A2E', marginBottom: '0.25rem' }}>
                 Email
               </label>
               <input
@@ -87,30 +149,91 @@ export default function MotDePasseOubliePage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
                 placeholder="votre@email.com"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${errors.email ? '#DC2626' : '#E5E0D8'}`,
+                  borderRadius: '10px',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  transition: 'all 200ms',
+                  boxSizing: 'border-box',
+                  color: '#1A1A2E',
+                }}
+                onFocus={(e) => {
+                  if (!errors.email) {
+                    e.currentTarget.style.borderColor = '#C75B39';
+                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199, 91, 57, 0.1)';
+                  }
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               />
-              {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem', margin: '0.25rem 0 0 0' }}>
+                  {errors.email}
+                </p>
+              )}
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 font-medium"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: loading ? '#D97B5E' : '#C75B39',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                transition: 'all 200ms',
+                opacity: loading ? 0.7 : 1,
+              }}
+              onMouseEnter={(e) => {
+                if (!loading) {
+                  e.currentTarget.style.backgroundColor = '#B84A2F';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!loading) {
+                  e.currentTarget.style.backgroundColor = '#C75B39';
+                }
+              }}
             >
               {loading ? 'Envoi en cours...' : 'Envoyer les instructions'}
             </button>
           </form>
         ) : (
-          <div className="space-y-4">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <button
               onClick={() => {
                 setSubmitted(false);
                 setError(null);
               }}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: '#C75B39',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'all 200ms',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#B84A2F';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#C75B39';
+              }}
             >
               Envoyer à nouveau
             </button>
@@ -118,8 +241,23 @@ export default function MotDePasseOubliePage() {
         )}
 
         {/* Lien retour */}
-        <div className="text-center mt-6">
-          <Link href="/connexion" className="text-blue-600 hover:text-blue-700 text-sm">
+        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <Link
+            href="/connexion"
+            style={{
+              color: '#C75B39',
+              fontSize: '0.875rem',
+              textDecoration: 'none',
+              fontWeight: '500',
+              transition: 'color 200ms',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#B84A2F';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#C75B39';
+            }}
+          >
             Retour à la connexion
           </Link>
         </div>

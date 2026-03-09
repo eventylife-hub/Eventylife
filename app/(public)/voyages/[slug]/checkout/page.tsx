@@ -31,6 +31,20 @@ import { HoldTimer } from '@/components/checkout/hold-timer';
 import { ROUTES } from '@/lib/constants';
 import { formatDate } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 type LoadState = 'loading' | 'error' | 'empty' | 'data';
 
 interface RoomType {
@@ -237,13 +251,19 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
 
   if (loadState === 'loading') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4">
-        <div className="max-w-2xl mx-auto space-y-6 py-8">
-          <Skeleton className="h-8 w-40" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: C.cream,
+          padding: '1rem',
+        }}
+      >
+        <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ height: '32px', backgroundColor: C.border, borderRadius: '8px', width: '160px', opacity: 0.5 }}></div>
+          <div style={{ height: '16px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '40px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '40px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '40px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
         </div>
       </div>
     );
@@ -251,26 +271,55 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
 
   if (loadState === 'error') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4">
-        <div className="max-w-2xl mx-auto py-8">
-          <Card className="border-red-200 bg-red-50">
-            <CardContent className="pt-6 flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <h3 className="font-semibold text-red-900 mb-2">Erreur lors du chargement</h3>
-                <p className="text-sm text-red-800 mb-4">
-                  Impossible de charger les données du voyage. Veuillez réessayer.
-                </p>
-                <Button
-                  onClick={() => window.location.reload()}
-                  variant="outline"
-                  className="border-red-300 text-red-700 hover:bg-red-100"
-                >
-                  Réessayer
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: C.cream,
+          padding: '1rem',
+        }}
+      >
+        <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem' }}>
+          <div
+            style={{
+              backgroundColor: '#FEF2F2',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+              padding: '1.5rem',
+              display: 'flex',
+              gap: '1rem',
+            }}
+          >
+            <AlertCircle style={{ width: '24px', height: '24px', color: C.terra, flexShrink: 0, marginTop: '0.125rem' }} />
+            <div>
+              <h3 style={{ fontWeight: '600', color: C.terra, marginBottom: '0.5rem' }}>
+                Erreur lors du chargement
+              </h3>
+              <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '1rem' }}>
+                Impossible de charger les données du voyage. Veuillez réessayer.
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                style={{
+                  backgroundColor: 'transparent',
+                  color: C.terra,
+                  padding: '0.5rem 1rem',
+                  borderRadius: '8px',
+                  fontWeight: '600',
+                  border: `1.5px solid ${C.border}`,
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                }}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
+                }}
+              >
+                Réessayer
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -278,22 +327,61 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
 
   if (!travel) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4">
-        <div className="max-w-2xl mx-auto py-8 text-center">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Voyage non trouvé</h2>
-          <p className="text-gray-600 mb-6">Le voyage demandé n&apos;existe pas ou a été supprimé.</p>
-          <Button onClick={() => router.push(ROUTES.VOYAGES)}>Retour aux voyages</Button>
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: C.cream,
+          padding: '1rem',
+        }}
+      >
+        <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: C.navy, marginBottom: '0.5rem' }}>
+            Voyage non trouvé
+          </h2>
+          <p style={{ color: C.muted, marginBottom: '1.5rem' }}>
+            Le voyage demandé n&apos;existe pas ou a été supprimé.
+          </p>
+          <button
+            onClick={() => router.push(ROUTES.VOYAGES)}
+            style={{
+              backgroundColor: C.terra,
+              color: 'white',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '10px',
+              fontWeight: '600',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
+            }}
+          >
+            Retour aux voyages
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Réservation: {travel.title}</h1>
-          <p className="text-sm text-gray-600">
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: C.cream,
+        padding: '1rem',
+      }}
+    >
+      <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem' }}>
+        <div style={{ marginBottom: '2rem' }}>
+          <h1
+            style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              color: C.navy,
+              marginBottom: '0.5rem',
+            }}
+          >
+            Réservation: {travel.title}
+          </h1>
+          <p style={{ fontSize: '0.875rem', color: C.muted }}>
             Départ: {formatDate(travel.startDate)}
           </p>
         </div>

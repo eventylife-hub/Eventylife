@@ -1,16 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { PortalErrorBoundary } from '@/components/error-boundary';
+
+const C = {
+  navy: '#1A1A2E',
+  navyLight: '#2D2D44',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+};
 
 interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
-/** Liens sidebar espace client — chemins FR correspondant à l'arborescence réelle */
 const SIDEBAR_ITEMS = [
   { label: 'Tableau de bord', href: '/client', icon: '📊' },
   { label: 'Mes réservations', href: '/client/reservations', icon: '✈️' },
@@ -26,67 +36,148 @@ const SIDEBAR_ITEMS = [
 ];
 
 /**
- * Layout pour l'espace client
- * Sidebar + contenu principal avec ErrorBoundary
+ * Layout espace client — Design Eventy v2
+ * Sidebar navy, contenu cream
  */
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const logout = useAuthStore((state) => state.logout);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
+    router.push('/connexion');
   };
 
-  // Dashboard exact match, autres: prefix match
   const isActive = (href: string) =>
     href === '/client'
       ? pathname === '/client'
       : pathname === href || pathname.startsWith(href + '/');
 
-  return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 shadow-sm">
-        <div className="sticky top-0 h-screen overflow-y-auto">
-          {/* Header sidebar */}
-          <div className="p-6 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-blue-600">Eventy</h1>
-            <p className="text-sm text-gray-600 mt-2">Espace Client</p>
-          </div>
+  const SidebarContent = () => (
+    <>
+      {/* Logo */}
+      <div className="p-6" style={{ borderBottom: `1px solid rgba(250,247,242,0.08)` }}>
+        <Link href="/" className="flex items-center gap-0">
+          <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Eventy</span>
+          <span className="font-display text-lg font-bold" style={{ color: C.gold }}>.</span>
+          <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Life</span>
+        </Link>
+        <p className="text-xs mt-2" style={{ color: 'rgba(250,247,242,0.4)' }}>Espace Client</p>
+      </div>
 
-          {/* Menu items */}
-          <nav className="p-4 space-y-2">
-            {SIDEBAR_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  isActive(item.href)
-                    ? 'bg-blue-100 text-blue-700 font-medium'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <span className="text-lg">{item.icon}</span>
-                <span>{item.label}</span>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Footer sidebar */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
-            <button
-              onClick={handleLogout}
-              className="w-full px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-sm font-medium"
+      {/* Nav */}
+      <nav className="p-3 space-y-1 flex-1 overflow-y-auto">
+        {SIDEBAR_ITEMS.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200"
+              style={{
+                background: active ? 'rgba(199,91,57,0.15)' : 'transparent',
+                color: active ? '#FAF7F2' : 'rgba(250,247,242,0.6)',
+                fontWeight: active ? 600 : 400,
+              }}
+              onMouseEnter={(e) => {
+                if (!active) e.currentTarget.style.background = 'rgba(250,247,242,0.06)';
+              }}
+              onMouseLeave={(e) => {
+                if (!active) e.currentTarget.style.background = 'transparent';
+              }}
             >
-              Déconnexion
-            </button>
-          </div>
-        </div>
+              <span className="text-base">{item.icon}</span>
+              <span>{item.label}</span>
+              {active && (
+                <span
+                  className="ml-auto w-1.5 h-1.5 rounded-full"
+                  style={{ background: C.terra }}
+                />
+              )}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Déconnexion */}
+      <div className="p-3" style={{ borderTop: '1px solid rgba(250,247,242,0.08)' }}>
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200"
+          style={{ color: 'rgba(250,247,242,0.5)' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(230,57,70,0.1)';
+            e.currentTarget.style.color = '#E63946';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.color = 'rgba(250,247,242,0.5)';
+          }}
+        >
+          <span>🚪</span>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="flex min-h-screen" style={{ background: C.cream }}>
+      {/* Sidebar desktop */}
+      <aside
+        className="hidden md:flex w-64 flex-col sticky top-0 h-screen"
+        style={{ background: C.navy }}
+      >
+        <SidebarContent />
       </aside>
 
+      {/* Mobile header */}
+      <div
+        className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
+        style={{ background: C.navy }}
+      >
+        <Link href="/" className="flex items-center gap-0">
+          <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Eventy</span>
+          <span className="font-display text-lg font-bold" style={{ color: C.gold }}>.</span>
+          <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Life</span>
+        </Link>
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="p-2 rounded-lg"
+          style={{ color: '#FAF7F2' }}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {mobileOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile sidebar overlay */}
+      {mobileOpen && (
+        <>
+          <div
+            className="md:hidden fixed inset-0 z-40 bg-black/40"
+            onClick={() => setMobileOpen(false)}
+          />
+          <aside
+            className="md:hidden fixed top-0 left-0 w-72 h-full z-50 flex flex-col animate-slide-in-right"
+            style={{ background: C.navy }}
+          >
+            <SidebarContent />
+          </aside>
+        </>
+      )}
+
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="p-8">
+      <main className="flex-1 overflow-y-auto md:pt-0 pt-14">
+        <div className="p-6 sm:p-8">
           <PortalErrorBoundary portal="client">
             {children}
           </PortalErrorBoundary>

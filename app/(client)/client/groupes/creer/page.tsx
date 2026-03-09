@@ -11,6 +11,20 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 /**
  * Page de création d'un groupe de voyage
  * Formulaire avec prévisualisation du groupe créé
@@ -103,33 +117,34 @@ export default function CreerGroupePage() {
   const selectedVoyage = voyages.find(v => v.id === formData.travelId);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen p-4" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mx-auto max-w-2xl">
-        <Link href="/client/groupes" className="text-sm text-blue-600 hover:underline mb-4 inline-block">
+        <Link href="/client/groupes" className="text-sm hover:opacity-80 mb-4 inline-block" style={{ color: C.terra }}>
           ← Retour aux groupes
         </Link>
 
-        <h1 className="text-3xl font-bold mb-6">Créer un groupe</h1>
+        <h1 className="text-3xl font-bold mb-6" style={{ color: C.navy }}>Créer un groupe</h1>
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Formulaire */}
-          <Card>
+          <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
             <CardHeader>
-              <CardTitle>Informations du groupe</CardTitle>
+              <CardTitle style={{ color: C.navy }}>Informations du groupe</CardTitle>
             </CardHeader>
             <CardContent>
               {loading ? (
                 <div className="space-y-4">
                   {[...Array(3)].map((_, i) => (
-                    <div key={i} className="h-10 bg-gray-200 rounded animate-pulse" />
+                    <div key={i} className="h-10 rounded animate-pulse" style={{ backgroundColor: C.border }} />
                   ))}
                 </div>
               ) : voyages.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-gray-600 mb-4">Aucun voyage disponible pour créer un groupe</p>
+                  <p className="mb-4" style={{ color: C.muted }}>Aucun voyage disponible pour créer un groupe</p>
                   <Link
                     href="/voyages"
-                    className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="inline-block px-4 py-2 text-white rounded-lg transition-all hover:shadow-lg"
+                    style={{ backgroundColor: C.terra }}
                   >
                     Voir les voyages disponibles
                   </Link>
@@ -137,14 +152,14 @@ export default function CreerGroupePage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {error && (
-                    <div className="rounded-lg border border-red-200 bg-red-50 p-3 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-red-700">{error}</p>
+                    <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
+                      <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
+                      <p className="text-sm" style={{ color: '#DC2626' }}>{error}</p>
                     </div>
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="name">Nom du groupe</Label>
+                    <Label htmlFor="name" style={{ color: C.navy }}>Nom du groupe</Label>
                     <Input
                       id="name"
                       name="name"
@@ -153,18 +168,40 @@ export default function CreerGroupePage() {
                       onChange={handleChange}
                       disabled={submitting}
                       required
+                      style={{
+                        backgroundColor: 'white',
+                        border: `1.5px solid ${C.border}`,
+                        borderRadius: '10px',
+                        color: C.navy,
+                      }}
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = C.terra;
+                        e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terraSoft}`;
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = C.border;
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="travelId">Voyage</Label>
+                    <Label htmlFor="travelId" style={{ color: C.navy }}>Voyage</Label>
                     <select
                       id="travelId"
                       name="travelId"
                       value={formData.travelId}
                       onChange={handleChange}
                       disabled={submitting}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      style={{
+                        width: '100%',
+                        padding: '10px 12px',
+                        border: `1.5px solid ${C.border}`,
+                        borderRadius: '10px',
+                        fontSize: '0.875rem',
+                        color: C.navy,
+                        backgroundColor: 'white',
+                      }}
                       required
                     >
                       <option value="">-- Sélectionner --</option>
@@ -177,7 +214,7 @@ export default function CreerGroupePage() {
                   </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="maxMembers">Nombre max de membres</Label>
+                  <Label htmlFor="maxMembers" style={{ color: C.navy }}>Nombre max de membres</Label>
                   <Input
                     id="maxMembers"
                     name="maxMembers"
@@ -187,6 +224,20 @@ export default function CreerGroupePage() {
                     value={formData.maxMembers}
                     onChange={handleChange}
                     disabled={submitting}
+                    style={{
+                      backgroundColor: 'white',
+                      border: `1.5px solid ${C.border}`,
+                      borderRadius: '10px',
+                      color: C.navy,
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = C.terra;
+                      e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terraSoft}`;
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   />
                 </div>
 
@@ -199,7 +250,7 @@ export default function CreerGroupePage() {
                     }
                     disabled={submitting}
                   />
-                  <Label htmlFor="isPrivate" className="cursor-pointer">
+                  <Label htmlFor="isPrivate" className="cursor-pointer" style={{ color: C.navy }}>
                     Groupe privé (invitation requise)
                   </Label>
                 </div>
@@ -207,7 +258,21 @@ export default function CreerGroupePage() {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="w-full"
+                    className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                    style={{
+                      backgroundColor: C.terra,
+                      borderRadius: '10px',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!submitting) {
+                        e.currentTarget.style.backgroundColor = C.terraLight;
+                        e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = C.terra;
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   >
                     {submitting ? (
                       <>
@@ -224,44 +289,44 @@ export default function CreerGroupePage() {
           </Card>
 
           {/* Prévisualisation */}
-          <Card>
+          <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
             <CardHeader>
-              <CardTitle>Prévisualisation</CardTitle>
+              <CardTitle style={{ color: C.navy }}>Prévisualisation</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-gray-600 uppercase">Nom</label>
-                <p className="text-lg font-semibold">
+                <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Nom</label>
+                <p className="text-lg font-semibold" style={{ color: C.navy }}>
                   {formData.name || 'Nom du groupe'}
                 </p>
               </div>
 
               {selectedVoyage && (
                 <div>
-                  <label className="text-xs font-semibold text-gray-600 uppercase">Voyage</label>
-                  <p className="text-sm">{selectedVoyage.title as string}</p>
-                  <p className="text-xs text-gray-500">
+                  <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Voyage</label>
+                  <p className="text-sm" style={{ color: C.navy }}>{selectedVoyage.title as string}</p>
+                  <p className="text-xs" style={{ color: C.muted }}>
                     {formatDate(selectedVoyage.departureDate as string | Date)} - {formatDate(selectedVoyage.returnDate as string | Date)}
                   </p>
                 </div>
               )}
 
               <div>
-                <label className="text-xs font-semibold text-gray-600 uppercase">Capacité</label>
-                <p className="text-sm">
+                <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Capacité</label>
+                <p className="text-sm" style={{ color: C.navy }}>
                   Jusqu'à {formData.maxMembers || '?'} membres
                 </p>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-gray-600 uppercase">Visibilité</label>
-                <p className="text-sm">
+                <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Visibilité</label>
+                <p className="text-sm" style={{ color: C.navy }}>
                   {formData.isPrivate ? '🔒 Privé (invitation)' : '🔓 Public (ouvert)'}
                 </p>
               </div>
 
-              <div className="pt-4 border-t">
-                <p className="text-xs text-gray-600">
+              <div className="pt-4" style={{ borderTop: `1px solid ${C.border}` }}>
+                <p className="text-xs" style={{ color: C.muted }}>
                   Un code d'invitation sera généré automatiquement pour partager votre groupe avec d'autres membres.
                 </p>
               </div>

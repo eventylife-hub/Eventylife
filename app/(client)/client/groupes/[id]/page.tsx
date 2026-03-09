@@ -5,6 +5,20 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate, formatDateTime } from '@/lib/utils';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface Message {
   id: string;
   userId: string;
@@ -101,20 +115,18 @@ export default function GroupDetailPage() {
     }
   };
 
-  // formatDate et formatDateTime locales supprimées — utilise @/lib/utils
-
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto p-4" style={{ animation: 'fadeUp 0.6s ease-out' }}>
         <div className="mb-8">
-          <Link href="/client/groupes" className="text-blue-600 hover:text-blue-700 mb-4 inline-block">
+          <Link href="/client/groupes" style={{ color: C.terra }} className="hover:opacity-80 mb-4 inline-block">
             ← Retour
           </Link>
-          <h1 className="text-3xl font-bold text-slate-900">Détails du groupe</h1>
+          <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Détails du groupe</h1>
         </div>
         <div className="space-y-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-24 bg-slate-200 rounded-lg animate-pulse" />
+            <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>
       </div>
@@ -123,20 +135,20 @@ export default function GroupDetailPage() {
 
   if (error || !group) {
     return (
-      <div className="max-w-4xl mx-auto">
-        <Link href="/client/groupes" className="text-blue-600 hover:text-blue-700 mb-4 inline-block">
+      <div className="max-w-4xl mx-auto p-4" style={{ animation: 'fadeUp 0.6s ease-out' }}>
+        <Link href="/client/groupes" style={{ color: C.terra }} className="hover:opacity-80 mb-4 inline-block">
           ← Retour
         </Link>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700">
-          {error || 'Groupe non trouvé'}
+        <div className="rounded-lg p-6" style={{ backgroundColor: '#FEF2F2', borderLeft: `4px solid #DC2626` }}>
+          <p style={{ color: '#DC2626' }}>{error || 'Groupe non trouvé'}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <Link href="/client/groupes" className="text-blue-600 hover:text-blue-700 mb-4 inline-block">
+    <div className="max-w-4xl mx-auto p-4" style={{ animation: 'fadeUp 0.6s ease-out' }}>
+      <Link href="/client/groupes" style={{ color: C.terra }} className="hover:opacity-80 mb-4 inline-block">
         ← Retour
       </Link>
 
@@ -144,10 +156,13 @@ export default function GroupDetailPage() {
       <div className="mb-8">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">{group.name}</h1>
-            <p className="text-slate-600 mt-2">{group.travelTitle}</p>
+            <h1 className="text-3xl font-bold" style={{ color: C.navy }}>{group.name}</h1>
+            <p className="mt-2" style={{ color: C.muted }}>{group.travelTitle}</p>
           </div>
-          <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+          <span
+            className="px-3 py-1 rounded-full text-sm font-semibold"
+            style={{ backgroundColor: C.goldSoft, color: '#92400e' }}
+          >
             {group.status}
           </span>
         </div>
@@ -155,24 +170,45 @@ export default function GroupDetailPage() {
 
       {/* Description */}
       {group.description && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 text-slate-700">
-          {group.description}
+        <div
+          className="rounded-lg p-4 mb-8"
+          style={{ backgroundColor: C.terraSoft, borderLeft: `4px solid ${C.terra}` }}
+        >
+          <p style={{ color: C.navy }}>{group.description}</p>
         </div>
       )}
 
       {/* Grille d'infos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white border border-slate-200 rounded-lg p-6">
-          <p className="text-sm text-slate-600 mb-2">Destination</p>
-          <p className="text-2xl font-bold text-slate-900">📍 {group.destinationCity}</p>
+        <div
+          className="rounded-xl p-6"
+          style={{
+            backgroundColor: 'white',
+            border: `1.5px solid ${C.border}`,
+          }}
+        >
+          <p className="text-sm mb-2" style={{ color: C.muted }}>Destination</p>
+          <p className="text-2xl font-bold" style={{ color: C.navy }}>📍 {group.destinationCity}</p>
         </div>
-        <div className="bg-white border border-slate-200 rounded-lg p-6">
-          <p className="text-sm text-slate-600 mb-2">Départ</p>
-          <p className="text-lg font-bold text-slate-900">{formatDate(group.departureDate)}</p>
+        <div
+          className="rounded-xl p-6"
+          style={{
+            backgroundColor: 'white',
+            border: `1.5px solid ${C.border}`,
+          }}
+        >
+          <p className="text-sm mb-2" style={{ color: C.muted }}>Départ</p>
+          <p className="text-lg font-bold" style={{ color: C.navy }}>{formatDate(group.departureDate)}</p>
         </div>
-        <div className="bg-white border border-slate-200 rounded-lg p-6">
-          <p className="text-sm text-slate-600 mb-2">Membres</p>
-          <p className="text-2xl font-bold text-slate-900">👥 {group.memberCount}</p>
+        <div
+          className="rounded-xl p-6"
+          style={{
+            backgroundColor: 'white',
+            border: `1.5px solid ${C.border}`,
+          }}
+        >
+          <p className="text-sm mb-2" style={{ color: C.muted }}>Membres</p>
+          <p className="text-2xl font-bold" style={{ color: C.navy }}>👥 {group.memberCount}</p>
         </div>
       </div>
 
@@ -180,16 +216,22 @@ export default function GroupDetailPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Membres */}
         <div className="lg:col-span-1">
-          <div className="bg-white border border-slate-200 rounded-lg p-6">
-            <h2 className="text-lg font-bold text-slate-900 mb-4">Membres ({group.members.length})</h2>
+          <div
+            className="rounded-xl p-6"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+            }}
+          >
+            <h2 className="text-lg font-bold mb-4" style={{ color: C.navy }}>Membres ({group.members.length})</h2>
             <div className="space-y-3">
               {group.members.map((member) => (
-                <div key={member.id} className="py-2 border-b border-slate-100 last:border-0">
-                  <p className="font-semibold text-slate-900 text-sm">
+                <div key={member.id} className="py-2" style={{ borderBottom: `1px solid ${C.border}` }}>
+                  <p className="font-semibold text-sm" style={{ color: C.navy }}>
                     {member.firstName} {member.lastName}
                   </p>
-                  <p className="text-xs text-slate-600">{member.email}</p>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs mt-1" style={{ color: C.muted }}>{member.email}</p>
+                  <p className="text-xs mt-1" style={{ color: C.muted }}>
                     {member.role === 'ADMIN' ? '👤 Organisateur' : '👤 Membre'}
                   </p>
                 </div>
@@ -200,23 +242,29 @@ export default function GroupDetailPage() {
 
         {/* Discussion */}
         <div className="lg:col-span-2">
-          <div className="bg-white border border-slate-200 rounded-lg p-6 h-full flex flex-col">
-            <h2 className="text-lg font-bold text-slate-900 mb-4">Discussion du groupe</h2>
+          <div
+            className="rounded-xl p-6 h-full flex flex-col"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+            }}
+          >
+            <h2 className="text-lg font-bold mb-4" style={{ color: C.navy }}>Discussion du groupe</h2>
 
             {/* Messages */}
             <div className="flex-1 mb-4 space-y-4 max-h-96 overflow-y-auto">
               {group.messages && group.messages.length > 0 ? (
                 group.messages.map((message) => (
-                  <div key={message.id} className="border-b border-slate-100 pb-3 last:border-0">
+                  <div key={message.id} className="pb-3" style={{ borderBottom: `1px solid ${C.border}` }}>
                     <div className="flex justify-between items-start mb-1">
-                      <p className="font-semibold text-slate-900 text-sm">{message.userName}</p>
-                      <p className="text-xs text-slate-500">{formatDateTime(message.createdAt)}</p>
+                      <p className="font-semibold text-sm" style={{ color: C.navy }}>{message.userName}</p>
+                      <p className="text-xs" style={{ color: C.muted }}>{formatDateTime(message.createdAt)}</p>
                     </div>
-                    <p className="text-slate-700 text-sm">{message.content}</p>
+                    <p className="text-sm" style={{ color: C.navy }}>{message.content}</p>
                   </div>
                 ))
               ) : (
-                <p className="text-slate-500 text-center py-8">Aucun message pour le moment</p>
+                <p className="text-center py-8" style={{ color: C.muted }}>Aucun message pour le moment</p>
               )}
             </div>
 
@@ -226,14 +274,42 @@ export default function GroupDetailPage() {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Écrire un message..."
-                className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none"
+                className="flex-1 px-4 py-2 resize-none rounded-lg"
+                style={{
+                  backgroundColor: 'white',
+                  border: `1.5px solid ${C.border}`,
+                  color: C.navy,
+                  focusOutlineStyle: 'none',
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = C.terra;
+                  e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terraSoft}`;
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
                 rows={3}
                 disabled={sendingMessage}
               />
               <button
                 type="submit"
                 disabled={sendingMessage || !newMessage.trim()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 h-auto"
+                className="px-4 py-2 rounded-lg font-semibold text-white transition-all hover:shadow-lg disabled:opacity-50"
+                style={{
+                  backgroundColor: disabled ? C.muted : C.terra,
+                  backgroundImage: !sendingMessage && !newMessage.trim() ? 'none' : `linear-gradient(135deg, ${C.terra}, ${C.terraLight})`,
+                }}
+                onMouseEnter={(e) => {
+                  if (!sendingMessage && newMessage.trim()) {
+                    e.currentTarget.style.backgroundColor = C.terraLight;
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = C.terra;
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
                 {sendingMessage ? 'Envoi...' : 'Envoyer'}
               </button>
@@ -246,7 +322,19 @@ export default function GroupDetailPage() {
       <div className="mt-8 flex flex-wrap gap-4">
         <Link
           href={`/client/groupes/${params.id}/inviter`}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 text-center"
+          className="px-6 py-3 rounded-lg font-semibold text-white text-center transition-all hover:shadow-lg"
+          style={{
+            backgroundColor: C.terra,
+            backgroundImage: `linear-gradient(135deg, ${C.terra}, ${C.terraLight})`,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = C.terraLight;
+            e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = C.terra;
+            e.currentTarget.style.boxShadow = 'none';
+          }}
         >
           Inviter des membres
         </Link>
@@ -271,7 +359,12 @@ export default function GroupDetailPage() {
             }
           }}
           disabled={leavingGroup}
-          className="px-6 py-3 border border-red-300 text-red-700 rounded-lg font-semibold hover:bg-red-50 disabled:opacity-50"
+          className="px-6 py-3 rounded-lg font-semibold disabled:opacity-50 transition-all hover:opacity-80"
+          style={{
+            backgroundColor: '#FEF2F2',
+            border: `1.5px solid #DC2626`,
+            color: '#DC2626',
+          }}
         >
           {leavingGroup ? 'Sortie en cours...' : 'Quitter le groupe'}
         </button>

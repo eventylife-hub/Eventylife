@@ -9,13 +9,27 @@ import { RegisterResponse } from '@/types/api';
 import { registerSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 
 /**
- * Page d'inscription
+ * Page d'inscription - Eventy v2 Design System
  * Formulaire complet: prénom, nom, email, téléphone, mot de passe
  * Choix du type: Client ou Pro
  * Acceptation CGV + RGPD
  */
 export default function InscriptionPage() {
   const router = useRouter();
+
+  // Eventy v2 Color System
+  const C = {
+    navy: '#1A1A2E',
+    cream: '#FAF7F2',
+    terra: '#C75B39',
+    terraLight: '#D97B5E',
+    gold: '#D4A853',
+    border: '#E5E0D8',
+    muted: '#6B7280',
+    white: '#FFFFFF',
+    error: '#DC2626',
+    errorBg: '#FEF2F2',
+  };
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -32,6 +46,7 @@ export default function InscriptionPage() {
   const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [submitButtonHover, setSubmitButtonHover] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -95,30 +110,98 @@ export default function InscriptionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: C.cream,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <div
+        className="animate-fade-up"
+        style={{
+          width: '100%',
+          maxWidth: '448px',
+          backgroundColor: C.white,
+          borderRadius: '20px',
+          border: `1.5px solid ${C.border}`,
+          boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
+          padding: '2rem',
+        }}
+      >
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-blue-600 rounded-lg mb-4"></div>
-          <h1 className="text-2xl font-bold text-gray-900">Eventy Life</h1>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h1
+            style={{
+              fontSize: '1.875rem',
+              fontWeight: '700',
+              marginBottom: '1rem',
+              letterSpacing: '-0.5px',
+              fontFamily: 'Playfair Display, serif',
+            }}
+          >
+            <span style={{ color: C.navy }}>Eventy</span>
+            <span style={{ color: C.gold }}>.</span>
+            <span style={{ color: C.navy }}>Life</span>
+          </h1>
         </div>
 
         {/* Titre */}
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Créer un compte</h2>
-        <p className="text-gray-600 text-sm mb-6">Bienvenue chez Eventy Life!</p>
+        <h2
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: '600',
+            color: C.navy,
+            marginBottom: '0.5rem',
+          }}
+        >
+          Créer un compte
+        </h2>
+        <p
+          style={{
+            fontSize: '0.875rem',
+            color: C.muted,
+            marginBottom: '1.5rem',
+          }}
+        >
+          Bienvenue chez Eventy Life!
+        </p>
 
         {/* Message d'erreur */}
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+          <div
+            style={{
+              marginBottom: '1rem',
+              padding: '0.75rem',
+              backgroundColor: C.errorBg,
+              border: `1px solid ${C.error}`,
+              color: C.error,
+              fontSize: '0.875rem',
+              borderRadius: '8px',
+            }}
+          >
             {error}
           </div>
         )}
 
         {/* Formulaire */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {/* Prénom et Nom */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="firstName"
+                style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  color: C.navy,
+                  marginBottom: '0.25rem',
+                }}
+              >
                 Prénom
               </label>
               <input
@@ -128,14 +211,43 @@ export default function InscriptionPage() {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm ${
-                  errors.firstName ? 'border-red-500' : 'border-gray-300'
-                }`}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  backgroundColor: C.white,
+                  border: `1.5px solid ${errors.firstName ? C.error : C.border}`,
+                  borderRadius: '10px',
+                  fontSize: '0.875rem',
+                  color: C.navy,
+                  outline: 'none',
+                  transition: 'border-color 0.2s',
+                }}
+                onFocus={(e) => {
+                  if (!errors.firstName) {
+                    e.currentTarget.style.borderColor = C.terra;
+                  }
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = errors.firstName ? C.error : C.border;
+                }}
               />
-              {errors.firstName && <p className="text-red-600 text-xs mt-1">{errors.firstName}</p>}
+              {errors.firstName && (
+                <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                  {errors.firstName}
+                </p>
+              )}
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="lastName"
+                style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '500',
+                  color: C.navy,
+                  marginBottom: '0.25rem',
+                }}
+              >
                 Nom
               </label>
               <input
@@ -145,16 +257,46 @@ export default function InscriptionPage() {
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm ${
-                  errors.lastName ? 'border-red-500' : 'border-gray-300'
-                }`}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  backgroundColor: C.white,
+                  border: `1.5px solid ${errors.lastName ? C.error : C.border}`,
+                  borderRadius: '10px',
+                  fontSize: '0.875rem',
+                  color: C.navy,
+                  outline: 'none',
+                  transition: 'border-color 0.2s',
+                }}
+                onFocus={(e) => {
+                  if (!errors.lastName) {
+                    e.currentTarget.style.borderColor = C.terra;
+                  }
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = errors.lastName ? C.error : C.border;
+                }}
               />
-              {errors.lastName && <p className="text-red-600 text-xs mt-1">{errors.lastName}</p>}
+              {errors.lastName && (
+                <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                  {errors.lastName}
+                </p>
+              )}
             </div>
           </div>
 
+          {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: C.navy,
+                marginBottom: '0.25rem',
+              }}
+            >
               Email
             </label>
             <input
@@ -164,15 +306,45 @@ export default function InscriptionPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: C.white,
+                border: `1.5px solid ${errors.email ? C.error : C.border}`,
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                color: C.navy,
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.email) {
+                  e.currentTarget.style.borderColor = C.terra;
+                }
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = errors.email ? C.error : C.border;
+              }}
             />
-            {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
+            {errors.email && (
+              <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                {errors.email}
+              </p>
+            )}
           </div>
 
+          {/* Téléphone */}
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="phone"
+              style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: C.navy,
+                marginBottom: '0.25rem',
+              }}
+            >
               Téléphone (optionnel)
             </label>
             <input
@@ -181,13 +353,39 @@ export default function InscriptionPage() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm"
               placeholder="06 12 34 56 78"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: C.white,
+                border: `1.5px solid ${C.border}`,
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                color: C.navy,
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = C.terra;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = C.border;
+              }}
             />
           </div>
 
+          {/* Type de compte */}
           <div>
-            <label htmlFor="userType" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="userType"
+              style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: C.navy,
+                marginBottom: '0.25rem',
+              }}
+            >
               Type de compte
             </label>
             <select
@@ -195,15 +393,42 @@ export default function InscriptionPage() {
               name="userType"
               value={formData.userType}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: C.white,
+                border: `1.5px solid ${C.border}`,
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                color: C.navy,
+                outline: 'none',
+                transition: 'border-color 0.2s',
+                cursor: 'pointer',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = C.terra;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = C.border;
+              }}
             >
               <option value="CLIENT">Client</option>
               <option value="PRO">Professionnel</option>
             </select>
           </div>
 
+          {/* Mot de passe */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="password"
+              style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: C.navy,
+                marginBottom: '0.25rem',
+              }}
+            >
               Mot de passe
             </label>
             <input
@@ -213,16 +438,46 @@ export default function InscriptionPage() {
               value={formData.password}
               onChange={handleChange}
               required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
               placeholder="••••••••"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: C.white,
+                border: `1.5px solid ${errors.password ? C.error : C.border}`,
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                color: C.navy,
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.password) {
+                  e.currentTarget.style.borderColor = C.terra;
+                }
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = errors.password ? C.error : C.border;
+              }}
             />
-            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password}</p>}
+            {errors.password && (
+              <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                {errors.password}
+              </p>
+            )}
           </div>
 
+          {/* Confirmation mot de passe */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="confirmPassword"
+              style={{
+                display: 'block',
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: C.navy,
+                marginBottom: '0.25rem',
+              }}
+            >
               Confirmez le mot de passe
             </label>
             <input
@@ -232,62 +487,131 @@ export default function InscriptionPage() {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition text-sm ${
-                errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-              }`}
               placeholder="••••••••"
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: C.white,
+                border: `1.5px solid ${errors.confirmPassword ? C.error : C.border}`,
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                color: C.navy,
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                if (!errors.confirmPassword) {
+                  e.currentTarget.style.borderColor = C.terra;
+                }
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = errors.confirmPassword ? C.error : C.border;
+              }}
             />
-            {errors.confirmPassword && <p className="text-red-600 text-xs mt-1">{errors.confirmPassword}</p>}
+            {errors.confirmPassword && (
+              <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                {errors.confirmPassword}
+              </p>
+            )}
           </div>
 
           {/* Checkboxes */}
-          <div className="space-y-3 py-2">
-            <label className="flex items-start gap-3 cursor-pointer">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '0.5rem' }}>
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer' }}>
               <input
                 type="checkbox"
                 name="acceptCGV"
                 checked={formData.acceptCGV}
                 onChange={handleChange}
-                className="mt-1 w-4 h-4 rounded"
+                style={{
+                  marginTop: '0.25rem',
+                  width: '1rem',
+                  height: '1rem',
+                  cursor: 'pointer',
+                  accentColor: C.terra,
+                }}
               />
-              <span className="text-sm text-gray-700">
+              <span style={{ fontSize: '0.875rem', color: C.navy, lineHeight: '1.5' }}>
                 J'accepte les{' '}
-                <Link href="/cgv" className="text-blue-600 hover:text-blue-700">
+                <Link
+                  href="/cgv"
+                  style={{
+                    color: C.terra,
+                    textDecoration: 'underline',
+                    fontWeight: '500',
+                  }}
+                >
                   conditions générales de vente
                 </Link>
               </span>
             </label>
 
-            <label className="flex items-start gap-3 cursor-pointer">
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer' }}>
               <input
                 type="checkbox"
                 name="acceptRGPD"
                 checked={formData.acceptRGPD}
                 onChange={handleChange}
-                className="mt-1 w-4 h-4 rounded"
+                style={{
+                  marginTop: '0.25rem',
+                  width: '1rem',
+                  height: '1rem',
+                  cursor: 'pointer',
+                  accentColor: C.terra,
+                }}
               />
-              <span className="text-sm text-gray-700">
+              <span style={{ fontSize: '0.875rem', color: C.navy, lineHeight: '1.5' }}>
                 J'accepte la{' '}
-                <Link href="/politique-confidentialite" className="text-blue-600 hover:text-blue-700">
+                <Link
+                  href="/politique-confidentialite"
+                  style={{
+                    color: C.terra,
+                    textDecoration: 'underline',
+                    fontWeight: '500',
+                  }}
+                >
                   politique de confidentialité
                 </Link>
               </span>
             </label>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 font-medium"
+            onMouseEnter={() => !loading && setSubmitButtonHover(true)}
+            onMouseLeave={() => setSubmitButtonHover(false)}
+            style={{
+              width: '100%',
+              padding: '0.75rem 1rem',
+              marginTop: '0.5rem',
+              backgroundColor: submitButtonHover && !loading ? C.terraLight : C.terra,
+              color: C.white,
+              borderRadius: '10px',
+              border: 'none',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.7 : 1,
+              transition: 'background-color 0.2s',
+            }}
           >
             {loading ? 'Inscription en cours...' : 'Créer mon compte'}
           </button>
         </form>
 
         {/* Lien connexion */}
-        <p className="text-center text-sm text-gray-600 mt-6">
+        <p style={{ textAlign: 'center', fontSize: '0.875rem', color: C.muted, marginTop: '1.5rem' }}>
           Déjà inscrit?{' '}
-          <Link href="/connexion" className="text-blue-600 hover:text-blue-700 font-medium">
+          <Link
+            href="/connexion"
+            style={{
+              color: C.terra,
+              fontWeight: '600',
+              textDecoration: 'none',
+            }}
+          >
             Se connecter
           </Link>
         </p>

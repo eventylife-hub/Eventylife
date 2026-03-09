@@ -4,7 +4,20 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useNotificationStore } from '@/lib/stores/notification-store';
 import { NotificationItem } from '@/components/notifications/notification-item';
-import { Button } from '@/components/ui/button';
+
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
 
 /**
  * Page complète des notifications
@@ -66,127 +79,166 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Notifications
-          </h1>
-          <p className="text-gray-600">
-            {filteredNotifications.length} notification(s)
-            {unreadCount > 0 && ` • ${unreadCount} non lue(s)`}
-          </p>
-        </div>
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
+      {/* Header */}
+      <div>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+          Notifications
+        </h1>
+        <p className="text-sm mt-2" style={{ color: C.muted }}>
+          {filteredNotifications.length} notification(s)
+          {unreadCount > 0 && ` • ${unreadCount} non lue(s)`}
+        </p>
+      </div>
 
-        {/* Actions */}
-        <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-          {unreadCount > 0 && (
-            <Button
-              onClick={markAllAsRead}
-              variant="outline"
-              size="sm"
-            >
-              Marquer tout comme lu
-            </Button>
-          )}
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between flex-wrap">
+        {unreadCount > 0 && (
+          <button
+            onClick={markAllAsRead}
+            className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+            style={{
+              background: '#fff',
+              color: C.navy,
+              border: `1.5px solid ${C.border}`,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = C.terraSoft;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#fff';
+            }}
+          >
+            Marquer tout comme lu
+          </button>
+        )}
 
-          {/* Filtres */}
-          <div className="flex gap-2 flex-wrap">
+        {/* Filtres */}
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setFilter(null)}
+            className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
+            style={{
+              background: filter === null ? C.terra : '#fff',
+              color: filter === null ? '#fff' : C.navy,
+              border: `1.5px solid ${filter === null ? C.terra : C.border}`,
+            }}
+            onMouseEnter={(e) => {
+              if (filter !== null) {
+                e.currentTarget.style.background = C.terraSoft;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter !== null) {
+                e.currentTarget.style.background = '#fff';
+              }
+            }}
+          >
+            Tous
+          </button>
+          {types.map((type) => (
             <button
-              onClick={() => setFilter(null)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
-                filter === null
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-              }`}
+              key={type}
+              onClick={() => setFilter(type)}
+              className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
+              style={{
+                background: filter === type ? C.terra : '#fff',
+                color: filter === type ? '#fff' : C.navy,
+                border: `1.5px solid ${filter === type ? C.terra : C.border}`,
+              }}
+              onMouseEnter={(e) => {
+                if (filter !== type) {
+                  e.currentTarget.style.background = C.terraSoft;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (filter !== type) {
+                  e.currentTarget.style.background = '#fff';
+                }
+              }}
             >
-              Tous
+              {type}
             </button>
-            {types.map((type) => (
-              <button
-                key={type}
-                onClick={() => setFilter(type)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
-                  filter === type
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+          ))}
         </div>
+      </div>
 
-        {/* Contenu principal */}
-        <div className="bg-white rounded-lg shadow">
-          {error && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded">
-              Une erreur s'est produite: {error}
-            </div>
-          )}
+      {/* Contenu principal */}
+      <div className="rounded-2xl overflow-hidden" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        {error && (
+          <div className="p-6" style={{ background: '#FEF2F2', borderBottom: `1.5px solid #FCA5A5`, color: '#DC2626' }}>
+            <p className="text-sm font-medium">⚠️ Une erreur s'est produite: {error}</p>
+          </div>
+        )}
 
-          {filteredNotifications.length === 0 ? (
-            <div className="p-12 text-center">
-              <svg
-                className="w-16 h-16 text-gray-400 mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        {filteredNotifications.length === 0 ? (
+          <div className="p-12 text-center">
+            <div className="text-5xl mb-4">🔔</div>
+            <p className="text-base font-bold mb-2" style={{ color: C.navy }}>
+              Aucune notification pour le moment
+            </p>
+            <p className="text-sm mb-6" style={{ color: C.muted }}>
+              {filter
+                ? 'Essayez de changer le filtre pour voir d\'autres notifications'
+                : 'Vous recevrez des notifications quand des actions importantes auront lieu'}
+            </p>
+            <Link href="/client">
+              <button
+                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+                style={{
+                  background: '#fff',
+                  color: C.navy,
+                  border: `1.5px solid ${C.border}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = C.terraSoft;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#fff';
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-              <p className="text-gray-600 text-lg mb-2">
-                Aucune notification pour le moment
-              </p>
-              <p className="text-gray-500 mb-6">
-                {filter
-                  ? 'Essayez de changer le filtre pour voir d\'autres notifications'
-                  : 'Vous recevrez des notifications quand des actions importantes auront lieu'}
-              </p>
-              <Link href="/client">
-                <Button variant="outline">Retour au tableau de bord</Button>
-              </Link>
-            </div>
-          ) : (
-            <>
-              <div className="divide-y divide-gray-200">
-                {filteredNotifications.map((notification) => (
+                Retour au tableau de bord
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div style={{ borderTop: `1.5px solid ${C.border}` }}>
+              {filteredNotifications.map((notification, index) => (
+                <div
+                  key={notification.id}
+                  style={{
+                    borderBottom: index < filteredNotifications.length - 1 ? `1px solid ${C.border}` : 'none',
+                  }}
+                >
                   <NotificationItem
-                    key={notification.id}
                     {...notification}
                     onMarkAsRead={handleMarkAsRead}
                     onDelete={handleDelete}
                   />
-                ))}
-              </div>
-
-              {/* Loading indicator pour scroll infini */}
-              {isLoading && (
-                <div className="p-8 text-center">
-                  <div className="animate-spin inline-block w-6 h-6 border-2 border-gray-300 border-t-blue-600 rounded-full" />
                 </div>
-              )}
+              ))}
+            </div>
 
-              {/* Sentinel pour intersection observer */}
-              <div ref={observerTarget} className="p-4" />
-            </>
-          )}
-        </div>
+            {/* Loading indicator pour scroll infini */}
+            {isLoading && (
+              <div className="p-8 text-center">
+                <div className="inline-block w-6 h-6 border-2 rounded-full" style={{ borderColor: C.border, borderTopColor: C.terra, animation: 'spin 1s linear infinite' }} />
+              </div>
+            )}
 
-        {/* Footer */}
-        <div className="mt-8 text-center text-gray-600 text-sm">
-          <p>
-            Les notifications sont conservées pendant 30 jours, passé ce délai,
-            elles seront supprimées automatiquement.
-          </p>
-        </div>
+            {/* Sentinel pour intersection observer */}
+            <div ref={observerTarget} className="p-4" />
+          </>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="text-center text-sm" style={{ color: C.muted }}>
+        <p>
+          Les notifications sont conservées pendant 30 jours, passé ce délai,
+          elles seront supprimées automatiquement.
+        </p>
       </div>
     </div>
   );

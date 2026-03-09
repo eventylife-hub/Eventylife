@@ -17,6 +17,20 @@ import { formatPrice } from '@/lib/utils';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 interface ParticipantForm {
   roomBookingId: string;
   firstName: string;
@@ -155,152 +169,366 @@ export default function CheckoutStep2Page() {
   // État vide : pas de chambres sélectionnées
   if (rooms.length === 0) {
     return (
-      <div className="text-center py-8">
-        <p className="text-gray-600 mb-4">Aucune chambre sélectionnée</p>
-        <Button onClick={() => router.back()}>Retour à la sélection</Button>
+      <div
+        style={{
+          minHeight: '100vh',
+          backgroundColor: C.cream,
+          padding: '2rem 1rem',
+          textAlign: 'center',
+        }}
+      >
+        <p style={{ color: C.muted, marginBottom: '1rem' }}>
+          Aucune chambre sélectionnée
+        </p>
+        <button
+          onClick={() => router.back()}
+          style={{
+            backgroundColor: C.terra,
+            color: 'white',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '10px',
+            fontWeight: '600',
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
+          }}
+        >
+          Retour à la sélection
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-gray-900">Détails des participants</h1>
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
-          {error}
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: C.cream,
+        padding: '2rem 1rem',
+      }}
+    >
+      <div style={{ maxWidth: '42rem', margin: '0 auto' }} className="animate-fade-up">
+        <div style={{ marginBottom: '2rem' }}>
+          <h1
+            style={{
+              fontSize: '1.875rem',
+              fontWeight: 'bold',
+              color: C.navy,
+            }}
+          >
+            Détails des participants
+          </h1>
         </div>
-      )}
 
-      <div className="space-y-6">
-        {participantsByRoom.map(({ room, participants: roomParticipants }) => (
-          <div key={room.roomTypeId} className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              {room.label} — {formatPrice(room.priceTotalTTC)}
-            </h2>
-
-            {roomParticipants.map((participant, personIndex) => {
-              // Trouver l'index global du participant
-              const globalIndex = participants.findIndex(
-                (p) =>
-                  p.roomBookingId === room.roomTypeId &&
-                  participants
-                    .filter((pp) => pp.roomBookingId === room.roomTypeId)
-                    .indexOf(p) === personIndex,
-              );
-
-              return (
-                <div
-                  key={`${room.roomTypeId}-${personIndex}`}
-                  className="border rounded-lg p-6 space-y-4"
-                >
-                  <h3 className="font-semibold text-lg">
-                    {room.label} — Personne {personIndex + 1}
-                  </h3>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      placeholder="Prénom"
-                      value={participant.firstName}
-                      onChange={(e) =>
-                        handleParticipantChange(globalIndex, 'firstName', e.target.value)
-                      }
-                      className="border rounded px-3 py-2"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Nom"
-                      value={participant.lastName}
-                      onChange={(e) =>
-                        handleParticipantChange(globalIndex, 'lastName', e.target.value)
-                      }
-                      className="border rounded px-3 py-2"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      value={participant.email}
-                      onChange={(e) =>
-                        handleParticipantChange(globalIndex, 'email', e.target.value)
-                      }
-                      className="border rounded px-3 py-2"
-                    />
-                    <input
-                      type="tel"
-                      placeholder="Téléphone"
-                      value={participant.phone}
-                      onChange={(e) =>
-                        handleParticipantChange(globalIndex, 'phone', e.target.value)
-                      }
-                      className="border rounded px-3 py-2"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium block mb-2">
-                      Point d&apos;arrêt
-                    </label>
-                    <select
-                      value={participant.busStopId || ''}
-                      onChange={(e) =>
-                        handleParticipantChange(globalIndex, 'busStopId', e.target.value)
-                      }
-                      className="border rounded px-3 py-2 w-full"
-                      disabled={loadingBusStops}
-                    >
-                      <option value="">
-                        {loadingBusStops ? 'Chargement...' : 'Sélectionner un point'}
-                      </option>
-                      {busStops.map((stop) => (
-                        <option key={stop.id} value={stop.id}>
-                          {stop.name} ({stop.location})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      id={`insurance-${room.roomTypeId}-${personIndex}`}
-                      checked={participant.insuranceSelected}
-                      onChange={(e) =>
-                        handleParticipantChange(
-                          globalIndex,
-                          'insuranceSelected',
-                          e.target.checked,
-                        )
-                      }
-                      className="rounded"
-                    />
-                    <label
-                      htmlFor={`insurance-${room.roomTypeId}-${personIndex}`}
-                      className="text-sm"
-                    >
-                      Assurance voyage optionnelle
-                      {participant.insuranceAmountPerPersonTTC
-                        ? ` (+${formatPrice(participant.insuranceAmountPerPersonTTC)})`
-                        : ''}
-                    </label>
-                  </div>
-                </div>
-              );
-            })}
+        {error && (
+          <div
+            style={{
+              marginBottom: '1.5rem',
+              backgroundColor: '#FEF2F2',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+              padding: '1rem',
+              color: C.terra,
+            }}
+          >
+            {error}
           </div>
-        ))}
-      </div>
+        )}
 
-      <div className="flex gap-4">
-        <Button variant="outline" onClick={() => router.back()}>
-          Retour
-        </Button>
-        <Button onClick={handleContinue} disabled={loading} className="flex-1">
-          {loading ? 'Chargement...' : 'Continuer vers le paiement'}
-        </Button>
+        <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {participantsByRoom.map(({ room, participants: roomParticipants }) => (
+            <div key={room.roomTypeId} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h2
+                style={{
+                  fontSize: '1.125rem',
+                  fontWeight: '600',
+                  color: C.navy,
+                }}
+              >
+                {room.label} — {formatPrice(room.priceTotalTTC)}
+              </h2>
+
+              {roomParticipants.map((participant, personIndex) => {
+                // Trouver l'index global du participant
+                const globalIndex = participants.findIndex(
+                  (p) =>
+                    p.roomBookingId === room.roomTypeId &&
+                    participants
+                      .filter((pp) => pp.roomBookingId === room.roomTypeId)
+                      .indexOf(p) === personIndex,
+                );
+
+                return (
+                  <div
+                    key={`${room.roomTypeId}-${personIndex}`}
+                    style={{
+                      backgroundColor: 'white',
+                      border: `1.5px solid ${C.border}`,
+                      borderRadius: '20px',
+                      padding: '1.5rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '1rem',
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontWeight: '600',
+                        fontSize: '1.125rem',
+                        color: C.navy,
+                      }}
+                    >
+                      {room.label} — Personne {personIndex + 1}
+                    </h3>
+
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                        gap: '1rem',
+                      }}
+                    >
+                      <input
+                        type="text"
+                        placeholder="Prénom"
+                        value={participant.firstName}
+                        onChange={(e) =>
+                          handleParticipantChange(globalIndex, 'firstName', e.target.value)
+                        }
+                        style={{
+                          backgroundColor: 'white',
+                          border: `1.5px solid ${C.border}`,
+                          borderRadius: '10px',
+                          padding: '0.75rem',
+                          fontSize: '0.875rem',
+                          color: C.navy,
+                          outlineColor: C.terra,
+                        }}
+                        onFocus={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                        }}
+                        onBlur={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                        }}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Nom"
+                        value={participant.lastName}
+                        onChange={(e) =>
+                          handleParticipantChange(globalIndex, 'lastName', e.target.value)
+                        }
+                        style={{
+                          backgroundColor: 'white',
+                          border: `1.5px solid ${C.border}`,
+                          borderRadius: '10px',
+                          padding: '0.75rem',
+                          fontSize: '0.875rem',
+                          color: C.navy,
+                          outlineColor: C.terra,
+                        }}
+                        onFocus={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                        }}
+                        onBlur={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                        }}
+                      />
+                    </div>
+
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                        gap: '1rem',
+                      }}
+                    >
+                      <input
+                        type="email"
+                        placeholder="Email"
+                        value={participant.email}
+                        onChange={(e) =>
+                          handleParticipantChange(globalIndex, 'email', e.target.value)
+                        }
+                        style={{
+                          backgroundColor: 'white',
+                          border: `1.5px solid ${C.border}`,
+                          borderRadius: '10px',
+                          padding: '0.75rem',
+                          fontSize: '0.875rem',
+                          color: C.navy,
+                          outlineColor: C.terra,
+                        }}
+                        onFocus={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                        }}
+                        onBlur={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                        }}
+                      />
+                      <input
+                        type="tel"
+                        placeholder="Téléphone"
+                        value={participant.phone}
+                        onChange={(e) =>
+                          handleParticipantChange(globalIndex, 'phone', e.target.value)
+                        }
+                        style={{
+                          backgroundColor: 'white',
+                          border: `1.5px solid ${C.border}`,
+                          borderRadius: '10px',
+                          padding: '0.75rem',
+                          fontSize: '0.875rem',
+                          color: C.navy,
+                          outlineColor: C.terra,
+                        }}
+                        onFocus={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                        }}
+                        onBlur={(e) => {
+                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        style={{
+                          fontSize: '0.875rem',
+                          fontWeight: '500',
+                          display: 'block',
+                          marginBottom: '0.5rem',
+                          color: C.navy,
+                        }}
+                      >
+                        Point d&apos;arrêt
+                      </label>
+                      <select
+                        value={participant.busStopId || ''}
+                        onChange={(e) =>
+                          handleParticipantChange(globalIndex, 'busStopId', e.target.value)
+                        }
+                        style={{
+                          width: '100%',
+                          backgroundColor: 'white',
+                          border: `1.5px solid ${C.border}`,
+                          borderRadius: '10px',
+                          padding: '0.75rem',
+                          fontSize: '0.875rem',
+                          color: C.navy,
+                          cursor: 'pointer',
+                          opacity: loadingBusStops ? 0.5 : 1,
+                        }}
+                        disabled={loadingBusStops}
+                        onFocus={(e) => {
+                          (e.target as HTMLSelectElement).style.borderColor = C.terra;
+                        }}
+                        onBlur={(e) => {
+                          (e.target as HTMLSelectElement).style.borderColor = C.border;
+                        }}
+                      >
+                        <option value="">
+                          {loadingBusStops ? 'Chargement...' : 'Sélectionner un point'}
+                        </option>
+                        {busStops.map((stop) => (
+                          <option key={stop.id} value={stop.id}>
+                            {stop.name} ({stop.location})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <input
+                        type="checkbox"
+                        id={`insurance-${room.roomTypeId}-${personIndex}`}
+                        checked={participant.insuranceSelected}
+                        onChange={(e) =>
+                          handleParticipantChange(
+                            globalIndex,
+                            'insuranceSelected',
+                            e.target.checked,
+                          )
+                        }
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          cursor: 'pointer',
+                          accentColor: C.terra,
+                        }}
+                      />
+                      <label
+                        htmlFor={`insurance-${room.roomTypeId}-${personIndex}`}
+                        style={{
+                          fontSize: '0.875rem',
+                          color: C.navy,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Assurance voyage optionnelle
+                        {participant.insuranceAmountPerPersonTTC
+                          ? ` (+${formatPrice(participant.insuranceAmountPerPersonTTC)})`
+                          : ''}
+                      </label>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+          <button
+            onClick={() => router.back()}
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+              color: C.terra,
+              padding: '0.75rem 1.5rem',
+              borderRadius: '10px',
+              fontWeight: '600',
+              border: `1.5px solid ${C.border}`,
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
+            }}
+          >
+            Retour
+          </button>
+          <button
+            onClick={handleContinue}
+            disabled={loading}
+            style={{
+              flex: 1,
+              backgroundColor: loading ? C.muted : C.terra,
+              color: 'white',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '10px',
+              fontWeight: '600',
+              border: 'none',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.6 : 1,
+              boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) {
+                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) {
+                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+              }
+            }}
+          >
+            {loading ? 'Chargement...' : 'Continuer vers le paiement'}
+          </button>
+        </div>
       </div>
     </div>
   );

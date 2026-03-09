@@ -8,6 +8,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        navy: {
+          DEFAULT: '#1A1A2E',
+          light: '#2D2D44',
+        },
+        cream: {
+          DEFAULT: '#FAF7F2',
+          warm: '#FFF8ED',
+        },
+        terra: {
+          DEFAULT: '#C75B39',
+          light: '#D97B5E',
+          soft: '#FEF0EB',
+        },
+        gold: {
+          DEFAULT: '#D4A853',
+          light: '#E0BE7A',
+          soft: '#FDF6E8',
+        },
+        forest: {
+          DEFAULT: '#166534',
+          bg: '#DCFCE7',
+        },
+        border: '#E5E0D8',
+        muted: '#6B7280',
+        // Aliases pour compatibilité
+        primary: '#C75B39',
+        secondary: '#1A1A2E',
+        accent: '#D4A853',
+        // Anciennes couleurs gardées temporairement pour les portails Pro/Admin
         sun: {
           DEFAULT: '#FF6B35',
           light: '#FF8F5E',
@@ -19,11 +48,6 @@ const config: Config = {
           light: '#00B4D8',
           pale: '#E8F7FC',
         },
-        sky: '#48CAE4',
-        sand: {
-          DEFAULT: '#FEFCF3',
-          warm: '#FFF8ED',
-        },
         coral: {
           DEFAULT: '#E63946',
           soft: '#FFE0E3',
@@ -32,23 +56,19 @@ const config: Config = {
           DEFAULT: '#06D6A0',
           soft: '#E0FFF5',
         },
-        violet: '#7B2FF7',
-        dark: {
-          DEFAULT: '#0A1628',
-          mid: '#142438',
-        },
-        primary: '#FF6B35',
-        secondary: '#0077B6',
-        accent: '#7B2FF7',
       },
       fontFamily: {
-        sans: ['var(--font-outfit)', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
+        sans: ['var(--font-dm-sans)', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['var(--font-playfair)', 'Georgia', 'serif'],
+      },
+      borderRadius: {
+        'card': '14px',
+        'btn': '10px',
       },
       boxShadow: {
-        'card': '0 4px 24px rgba(10,22,40,0.08)',
-        'card-lg': '0 16px 48px rgba(10,22,40,0.14)',
-        'sun': '0 8px 32px rgba(255,107,53,0.2)',
+        'card': '0 2px 12px rgba(26,26,46,0.06)',
+        'card-lg': '0 8px 32px rgba(26,26,46,0.10)',
+        'terra': '0 6px 24px rgba(199,91,57,0.18)',
       },
     },
   },

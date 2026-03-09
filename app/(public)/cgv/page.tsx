@@ -8,29 +8,61 @@ export const metadata: Metadata = {
 };
 
 export default function CGV() {
+  const C = {
+    navy: '#1A1A2E',
+    cream: '#FAF7F2',
+    terra: '#C75B39',
+    terraLight: '#D97B5E',
+    gold: '#D4A853',
+    border: '#E5E0D8',
+    muted: '#6B7280',
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div
+      className="min-h-screen animate-fade-up"
+      style={{ backgroundColor: C.cream }}
+    >
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900">
+          <p
+            className="mb-2 tracking-widest uppercase text-sm font-medium"
+            style={{ color: C.gold }}
+          >
+            Conditions Légales
+          </p>
+          <h1
+            className="mb-4 text-4xl font-display font-bold"
+            style={{ color: C.navy, fontFamily: 'Playfair Display' }}
+          >
             Conditions Générales de Vente
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg" style={{ color: C.muted }}>
             Conditions applicables aux voyages organisés proposés par Eventy
             Life
           </p>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm" style={{ color: C.muted }}>
             En vigueur à compter du 2 mars 2026
           </p>
         </div>
 
         <div className="space-y-8">
           {/* Article 1 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 1 : Objet
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: C.navy }}>
               <p>
                 Les présentes Conditions Générales de Vente (ci-après "CGV")
                 régissent les relations contractuelles entre Eventy Life SAS
@@ -55,11 +87,21 @@ export default function CGV() {
           </section>
 
           {/* Article 2 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 2 : Définitions
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">
                   2.1 Voyage organisé ou circuit touristique
@@ -108,11 +150,21 @@ export default function CGV() {
           </section>
 
           {/* Article 3 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 3 : Inscription et réservation
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">3.1 Réservation en ligne</p>
                 <p className="mt-2">
@@ -156,11 +208,21 @@ export default function CGV() {
           </section>
 
           {/* Article 4 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 4 : Prix et paiement
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">4.1 Tarification</p>
                 <p className="mt-2">
@@ -236,11 +298,21 @@ export default function CGV() {
           </section>
 
           {/* Article 5 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 5 : Droit de rétractation
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">5.1 Délai de rétractation</p>
                 <p className="mt-2">
@@ -257,7 +329,7 @@ export default function CGV() {
                 <p className="mt-2">
                   Le droit de rétractation ne s&apos;applique pas :
                 </p>
-                <ul className="mt-2 list-inside space-y-1 text-gray-700">
+                <ul className="mt-2 list-inside space-y-1" style={{ color: C.navy }}>
                   <li>
                     - Aux voyages dont la date de départ est fixée à moins de
                     14 jours après la réservation
@@ -295,11 +367,21 @@ export default function CGV() {
           </section>
 
           {/* Article 6 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 6 : Annulation par le Client
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">6.1 Modalités d&apos;annulation</p>
                 <p className="mt-2">
@@ -314,10 +396,20 @@ export default function CGV() {
                   Les conditions de remboursement dépendent du délai
                   d&apos;annulation antérieur au départ :
                 </p>
-                <table className="mt-3 w-full border-collapse border border-gray-300 bg-gray-50">
+                <table
+                  className="mt-3 w-full border-collapse"
+                  style={{ borderColor: C.border }}
+                >
                   <thead>
                     <tr>
-                      <th className="border border-gray-300 p-2 text-left">
+                      <th
+                        className="p-2 text-left"
+                        style={{
+                          border: `1px solid ${C.border}`,
+                          color: C.navy,
+                          fontWeight: 'bold',
+                        }}
+                      >
                         Délai avant départ
                       </th>
                       <th className="border border-gray-300 p-2 text-left">
@@ -327,7 +419,13 @@ export default function CGV() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-gray-300 p-2">
+                      <td
+                        className="p-2"
+                        style={{
+                          border: `1px solid ${C.border}`,
+                          color: C.navy,
+                        }}
+                      >
                         Plus de 60 jours
                       </td>
                       <td className="border border-gray-300 p-2">
@@ -335,19 +433,37 @@ export default function CGV() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-300 p-2">
+                      <td
+                        className="p-2"
+                        style={{
+                          border: `1px solid ${C.border}`,
+                          color: C.navy,
+                        }}
+                      >
                         30 à 60 jours
                       </td>
                       <td className="border border-gray-300 p-2">50% du prix</td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-300 p-2">
+                      <td
+                        className="p-2"
+                        style={{
+                          border: `1px solid ${C.border}`,
+                          color: C.navy,
+                        }}
+                      >
                         15 à 30 jours
                       </td>
                       <td className="border border-gray-300 p-2">75% du prix</td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-300 p-2">
+                      <td
+                        className="p-2"
+                        style={{
+                          border: `1px solid ${C.border}`,
+                          color: C.navy,
+                        }}
+                      >
                         Moins de 15 jours
                       </td>
                       <td className="border border-gray-300 p-2">100% du prix</td>
@@ -368,11 +484,21 @@ export default function CGV() {
           </section>
 
           {/* Article 7 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 7 : Annulation par l&apos;Organisateur
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">
                   7.1 Motifs justifiant une annulation
@@ -381,7 +507,7 @@ export default function CGV() {
                   L&apos;Organisateur peut annuler ou reporter un voyage
                   préalablement confirmé dans les cas suivants :
                 </p>
-                <ul className="mt-2 list-inside space-y-1 text-gray-700">
+                <ul className="mt-2 list-inside space-y-1" style={{ color: C.navy }}>
                   <li>
                     - Nombre insuffisant de participants (minimum 10 personnes
                     pour les voyages groupés ; 50% pour les autres voyages)
@@ -416,7 +542,7 @@ export default function CGV() {
                   de la réservation, l&apos;Organisateur offre au Client le
                   choix entre :
                 </p>
-                <ul className="mt-3 list-inside space-y-2 text-gray-700">
+                <ul className="mt-3 list-inside space-y-2" style={{ color: C.navy }}>
                   <li>
                     - Un report à une date ultérieure (sans frais
                     supplémentaires)
@@ -447,11 +573,21 @@ export default function CGV() {
           </section>
 
           {/* Article 8 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 8 : Assurance voyage
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">8.1 Assurance recommandée</p>
                 <p className="mt-2">
@@ -485,11 +621,21 @@ export default function CGV() {
           </section>
 
           {/* Article 9 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 9 : Transport
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">9.1 Transport aérien</p>
                 <p className="mt-2">
@@ -527,11 +673,21 @@ export default function CGV() {
           </section>
 
           {/* Article 10 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 10 : Hébergement
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">10.1 Qualité et standing</p>
                 <p className="mt-2">
@@ -565,11 +721,21 @@ export default function CGV() {
           </section>
 
           {/* Article 11 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 11 : Responsabilité
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">11.1 Limitation de responsabilité</p>
                 <p className="mt-2">
@@ -577,7 +743,7 @@ export default function CGV() {
                   l&apos;exécution des prestations conformes aux conditions du
                   contrat. L&apos;Organisateur ne peut être tenu responsable :
                 </p>
-                <ul className="mt-2 list-inside space-y-1 text-gray-700">
+                <ul className="mt-2 list-inside space-y-1" style={{ color: C.navy }}>
                   <li>
                     - Des préjudices indirects (perte de revenus, manquement à
                     engagement)
@@ -619,11 +785,21 @@ export default function CGV() {
           </section>
 
           {/* Article 12 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 12 : Réclamations
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">12.1 Procédure de réclamation</p>
                 <p className="mt-2">
@@ -654,17 +830,28 @@ export default function CGV() {
           </section>
 
           {/* Article 13 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 13 : Protection des données personnelles
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <p>
                 Le traitement des données personnelles des Clients est régi par
                 la Politique de Confidentialité disponible à{' '}
                 <Link
                   href="/politique-confidentialite"
-                  className="text-blue-600 hover:underline"
+                  style={{ color: C.terra }}
+                  className="hover:underline"
                 >
                   /politique-confidentialite
                 </Link>
@@ -680,11 +867,21 @@ export default function CGV() {
           </section>
 
           {/* Article 14 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 14 : Médiation
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <div>
                 <p className="font-semibold">14.1 Tentative préalable</p>
                 <p className="mt-2">
@@ -713,11 +910,21 @@ export default function CGV() {
           </section>
 
           {/* Article 15 */}
-          <section className="rounded-lg border border-gray-200 bg-white p-8">
-            <h2 className="mb-4 text-2xl font-semibold text-gray-900">
+          <section
+            className="rounded-lg p-8"
+            style={{
+              backgroundColor: 'white',
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <h2
+              className="mb-4 text-2xl font-semibold"
+              style={{ color: C.navy }}
+            >
               Article 15 : Droit applicable et juridiction
             </h2>
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4" style={{ color: C.navy }}>
               <p>
                 <strong>Droit applicable :</strong> Les présentes CGV sont
                 régies par la loi française, notamment par les articles L.211-4
@@ -737,11 +944,18 @@ export default function CGV() {
           </section>
 
           {/* Final note */}
-          <div className="rounded-lg bg-blue-50 p-6">
-            <p className="text-sm text-gray-700">
+          <div
+            className="rounded-lg p-6"
+            style={{
+              backgroundColor: C.cream,
+              border: `1.5px solid ${C.border}`,
+              borderRadius: '20px',
+            }}
+          >
+            <p className="text-sm" style={{ color: C.navy }}>
               <strong>Dernière mise à jour :</strong> 2 mars 2026
             </p>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm" style={{ color: C.muted }}>
               Ces Conditions Générales de Vente sont conformes aux exigences du
               Code du tourisme français et des directives européennes sur les
               voyages à forfait.

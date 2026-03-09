@@ -10,6 +10,20 @@ import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import { DietaryForm } from '@/components/restauration/dietary-form';
 
+const C = {
+  navy: '#1A1A2E',
+  cream: '#FAF7F2',
+  terra: '#C75B39',
+  terraLight: '#D97B5E',
+  terraSoft: '#FEF0EB',
+  gold: '#D4A853',
+  goldSoft: '#FDF6E8',
+  border: '#E5E0D8',
+  muted: '#6B7280',
+  forest: '#166534',
+  forestBg: '#DCFCE7',
+};
+
 /**
  * Page des préférences alimentaires du client
  * Formulaire de configuration des allergies et régimes
@@ -55,35 +69,35 @@ export default function PreferencesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen p-4" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mx-auto max-w-2xl">
-        <Link href={`/client/reservations/${bookingId}`} className="text-sm text-blue-600 hover:underline mb-4 inline-block">
+        <Link href={`/client/reservations/${bookingId}`} className="text-sm hover:opacity-80 mb-4 inline-block" style={{ color: C.terra }}>
           ← Retour à la réservation
         </Link>
 
-        <h1 className="text-3xl font-bold mb-6">Mes préférences alimentaires</h1>
+        <h1 className="text-3xl font-bold mb-6" style={{ color: C.navy }}>Mes préférences alimentaires</h1>
 
         {error && (
-          <div className="rounded-lg border border-red-200 bg-red-50 p-4 mb-6">
+          <div className="rounded-lg p-4 mb-6" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
             <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-700">{error}</p>
+              <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
+              <p className="text-sm" style={{ color: '#DC2626' }}>{error}</p>
             </div>
           </div>
         )}
 
         {success && (
-          <div className="rounded-lg border border-green-200 bg-green-50 p-4 mb-6 flex items-start gap-3">
-            <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-green-700">
+          <div className="rounded-lg p-4 mb-6 flex items-start gap-3" style={{ backgroundColor: C.forestBg, border: `1.5px solid ${C.forest}` }}>
+            <CheckCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: C.forest }} />
+            <p className="text-sm" style={{ color: C.forest }}>
               Préférences sauvegardées avec succès! Redirection en cours...
             </p>
           </div>
         )}
 
-        <Card>
+        <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
           <CardHeader>
-            <CardTitle>Configuration de vos préférences</CardTitle>
+            <CardTitle style={{ color: C.navy }}>Configuration de vos préférences</CardTitle>
           </CardHeader>
           <CardContent>
             <DietaryForm
