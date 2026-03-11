@@ -850,7 +850,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
           <p className="text-sm text-slate-500 mb-2">Aucun arrêt de ce type</p>
           <a
             href="/pro/arrets"
-            target="_blank"
+            target="_blank" rel="noopener noreferrer"
             className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
           >
             Créer un arrêt →
@@ -942,7 +942,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
         <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
           <p className="text-sm text-amber-900">
             Vous n&apos;avez pas encore d&apos;arrêts de bus. Créez-les dans la section{' '}
-            <a href="/pro/arrets" target="_blank" className="font-medium underline">
+            <a href="/pro/arrets" target="_blank" rel="noopener noreferrer" className="font-medium underline">
               Mes arrêts
             </a>{' '}
             avant de les associer à un voyage.
