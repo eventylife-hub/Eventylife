@@ -146,7 +146,7 @@ export default function DepartIndexPage() {
         {/* Compteur */}
         <p
           className="text-center mb-8"
-          style={{ color: '#718096', fontSize: '0.875rem' }}
+          style={{ color: '#64748B', fontSize: '0.875rem' }}
         >
           {filteredCities.length} ville{filteredCities.length !== 1 ? 's' : ''}
           {search && (

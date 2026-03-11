@@ -297,7 +297,7 @@ export default function ReservationsPage() {
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rechercher</label>
           <div style={{ position: 'relative' }}>
-            <Search style={{ position: 'absolute', left: '0.75rem', top: '0.75rem', width: '1rem', height: '1rem', color: '#8896A6' }} />
+            <Search style={{ position: 'absolute', left: '0.75rem', top: '0.75rem', width: '1rem', height: '1rem', color: '#64748B' }} />
             <input
               type="text"
               value={search}
@@ -346,7 +346,7 @@ export default function ReservationsPage() {
       <div className="pro-panel">
         <div className="pro-panel-header">
           <h3 className="pro-panel-title">Détail des réservations</h3>
-          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>{filteredReservations.length} résultat(s)</p>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>{filteredReservations.length} résultat(s)</p>
         </div>
         <div className="pro-panel-body">
           {filteredReservations.length > 0 ? (
@@ -377,7 +377,7 @@ export default function ReservationsPage() {
                         <td style={{ padding: '1rem' }}>
                           <div>
                             <p style={{ fontWeight: '500', color: '#0A1628', margin: 0 }}>{res.clientName}</p>
-                            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>{res.clientEmail}</p>
+                            <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0 }}>{res.clientEmail}</p>
                           </div>
                         </td>
                         <td style={{ padding: '1rem', color: '#4A5568' }}>{res.roomType}</td>
@@ -409,7 +409,7 @@ export default function ReservationsPage() {
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
               <AlertCircle style={{ width: '3rem', height: '3rem', color: '#CBD5E0', margin: '0 auto 1rem' }} />
-              <p style={{ color: '#8896A6', margin: 0 }}>Aucune réservation trouvée</p>
+              <p style={{ color: '#64748B', margin: 0 }}>Aucune réservation trouvée</p>
             </div>
           )}
         </div>

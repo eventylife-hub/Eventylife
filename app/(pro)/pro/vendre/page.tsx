@@ -202,7 +202,7 @@ export default function QuickSellPage() {
       {/* Header */}
       <div>
         <h1 className="pro-page-title">Vendre rapidement</h1>
-        <p style={{ color: '#8896A6', marginTop: '8px', fontSize: '14px' }}>
+        <p style={{ color: '#64748B', marginTop: '8px', fontSize: '14px' }}>
           Créez un lien parrain pour vendre une place à un voyage
         </p>
       </div>
@@ -221,11 +221,11 @@ export default function QuickSellPage() {
 
       {trips.length === 0 ? (
         <div className="pro-panel" style={{ textAlign: 'center', padding: '48px 24px' }}>
-          <TrendingUp className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+          <TrendingUp className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
           <h3 style={{ fontWeight: 600, fontSize: '18px', marginBottom: '8px', color: '#0A1628' }}>
             Aucun voyage actif
           </h3>
-          <p style={{ color: '#8896A6', marginBottom: '16px', fontSize: '14px' }}>
+          <p style={{ color: '#64748B', marginBottom: '16px', fontSize: '14px' }}>
             Vous devez créer un voyage avant de pouvoir générer un lien de vente
           </p>
           <button type="button" onClick={() => (window.location.href = '/pro/voyages/nouveau')} className="pro-btn-sun">
@@ -253,7 +253,7 @@ export default function QuickSellPage() {
                     </option>
                   ))}
                 </select>
-                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>
+                <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>
                   Sélectionnez le voyage pour lequel vous souhaitez créer un lien de vente
                 </p>
               </div>
@@ -272,7 +272,7 @@ export default function QuickSellPage() {
                   className="pro-input"
                   style={{ width: '100%' }}
                 />
-                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>
+                <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>
                   Code unique pour identifier vos ventes
                 </p>
               </div>
@@ -334,24 +334,24 @@ export default function QuickSellPage() {
           {stats && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
               <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
-                <div style={{ fontSize: '14px', color: '#8896A6' }}>Clics</div>
+                <div style={{ fontSize: '14px', color: '#64748B' }}>Clics</div>
                 <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#0A1628' }}>{stats.clicks}</div>
               </div>
 
               <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
-                <div style={{ fontSize: '14px', color: '#8896A6' }}>Conversions</div>
+                <div style={{ fontSize: '14px', color: '#64748B' }}>Conversions</div>
                 <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: 'var(--pro-mint)' }}>{stats.conversions}</div>
               </div>
 
               <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
-                <div style={{ fontSize: '14px', color: '#8896A6' }}>Taux de conversion</div>
+                <div style={{ fontSize: '14px', color: '#64748B' }}>Taux de conversion</div>
                 <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#0A1628' }}>
                   {(stats.conversionRate * 100).toFixed(1)}%
                 </div>
               </div>
 
               <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
-                <div style={{ fontSize: '14px', color: '#8896A6' }}>Revenus attribués</div>
+                <div style={{ fontSize: '14px', color: '#64748B' }}>Revenus attribués</div>
                 <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: 'var(--pro-ocean)' }}>
                   {formatPrice(stats.revenue)}
                 </div>
@@ -364,7 +364,7 @@ export default function QuickSellPage() {
             <div className="pro-panel">
               <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '12px', marginBottom: '16px' }}>
                 <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628' }}>Ventes récentes</h3>
-                <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>
+                <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>
                   {sales.length} vente{sales.length > 1 ? 's' : ''} via ce lien
                 </p>
               </div>
@@ -376,10 +376,10 @@ export default function QuickSellPage() {
                   >
                     <div>
                       <p style={{ fontWeight: 500, color: '#0A1628' }}>{sale.clientName}</p>
-                      <p style={{ fontSize: '14px', color: '#8896A6' }}>
+                      <p style={{ fontSize: '14px', color: '#64748B' }}>
                         {formatDate(sale.date)}
                       </p>
-                      <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+                      <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
                         Réf: {sale.bookingReference}
                       </p>
                     </div>
@@ -394,7 +394,7 @@ export default function QuickSellPage() {
 
           {sales.length === 0 && stats && (
             <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
-              <p style={{ color: '#8896A6' }}>
+              <p style={{ color: '#64748B' }}>
                 Aucune vente pour le moment. Partagez votre lien pour commencer !
               </p>
             </div>

@@ -99,14 +99,14 @@ export default function FacturationPage() {
       <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <h1 className="pro-page-title">Facturation</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Paramètres et coordonnées bancaires</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Paramètres et coordonnées bancaires</p>
         </div>
 
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 className="pro-panel-title">Paramètres de facturation</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Numérotation et identification des factures</p>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Numérotation et identification des factures</p>
             </div>
             <button
               type="button"
@@ -205,7 +205,7 @@ export default function FacturationPage() {
 
                 {/* RIB complet (optionnel) */}
                 <div style={{ paddingTop: '16px', borderTop: '1px solid #E0E0E0' }}>
-                  <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>RIB (optionnel)</p>
+                  <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '12px' }}>RIB (optionnel)</p>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '8px' }}>
                     <div>
                       <label style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Code banque</label>
@@ -272,7 +272,7 @@ export default function FacturationPage() {
                       readOnly={!editable}
                       step="0.01"
                     />
-                    <span style={{ fontSize: '13px', color: '#8896A6' }}>%</span>
+                    <span style={{ fontSize: '13px', color: '#64748B' }}>%</span>
                   </div>
                 </div>
                 <div>
@@ -286,7 +286,7 @@ export default function FacturationPage() {
                       readOnly={!editable}
                       step="0.01"
                     />
-                    <span style={{ fontSize: '13px', color: '#8896A6' }}>%</span>
+                    <span style={{ fontSize: '13px', color: '#64748B' }}>%</span>
                   </div>
                 </div>
               </div>

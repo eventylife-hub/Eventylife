@@ -88,14 +88,14 @@ export default function ParametresPage() {
       <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <h1 className="pro-page-title">Paramètres généraux</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez les informations de votre agence</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez les informations de votre agence</p>
         </div>
 
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 className="pro-panel-title">Informations de l&apos;agence</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Données principales de votre compte</p>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Données principales de votre compte</p>
             </div>
             <button
               type="button"

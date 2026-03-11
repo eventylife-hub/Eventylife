@@ -105,7 +105,7 @@ export default function NotificationsPage() {
       <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <h1 className="pro-page-title">Notifications</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez vos préférences de notifications</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez vos préférences de notifications</p>
         </div>
 
         {/* Fréquence */}
@@ -133,7 +133,7 @@ export default function NotificationsPage() {
                     {freq === 'daily' && 'Quotidien'}
                     {freq === 'weekly' && 'Hebdomadaire'}
                   </p>
-                  <p style={{ fontSize: '12px', color: '#8896A6' }}>
+                  <p style={{ fontSize: '12px', color: '#64748B' }}>
                     {freq === 'immediate' && 'Recevoir les notifications en temps réel'}
                     {freq === 'daily' && 'Recevoir un résumé chaque jour'}
                     {freq === 'weekly' && 'Recevoir un résumé chaque semaine'}
@@ -148,7 +148,7 @@ export default function NotificationsPage() {
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px' }}>
             <h2 className="pro-panel-title">Notifications par email</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Événements importants et rapports</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Événements importants et rapports</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -166,7 +166,7 @@ export default function NotificationsPage() {
               <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '12px', borderBottom: '1px solid #E0E0E0' }}>
                 <div>
                   <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>{label}</p>
-                  <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>{desc}</p>
+                  <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>{desc}</p>
                 </div>
                 <button
                   type="button"
@@ -176,7 +176,7 @@ export default function NotificationsPage() {
                     borderRadius: '20px',
                     border: 'none',
                     backgroundColor: (prefs?.[key as keyof NotificationPreferences] as boolean) ? 'var(--pro-mint)' : '#E0E0E0',
-                    color: (prefs?.[key as keyof NotificationPreferences] as boolean) ? '#FFFFFF' : '#8896A6',
+                    color: (prefs?.[key as keyof NotificationPreferences] as boolean) ? '#FFFFFF' : '#64748B',
                     fontSize: '12px',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -193,7 +193,7 @@ export default function NotificationsPage() {
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px' }}>
             <h2 className="pro-panel-title">Notifications par SMS</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Alertes urgentes par message</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Alertes urgentes par message</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -205,7 +205,7 @@ export default function NotificationsPage() {
               <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '12px', borderBottom: '1px solid #E0E0E0' }}>
                 <div>
                   <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>{label}</p>
-                  <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>{desc}</p>
+                  <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>{desc}</p>
                 </div>
                 <button
                   type="button"
@@ -215,7 +215,7 @@ export default function NotificationsPage() {
                     borderRadius: '20px',
                     border: 'none',
                     backgroundColor: (prefs?.[key as keyof NotificationPreferences] as boolean) ? 'var(--pro-mint)' : '#E0E0E0',
-                    color: (prefs?.[key as keyof NotificationPreferences] as boolean) ? '#FFFFFF' : '#8896A6',
+                    color: (prefs?.[key as keyof NotificationPreferences] as boolean) ? '#FFFFFF' : '#64748B',
                     fontSize: '12px',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -233,7 +233,7 @@ export default function NotificationsPage() {
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 className="pro-panel-title">Notifications push</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Alertes dans votre navigateur</p>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Alertes dans votre navigateur</p>
             </div>
             <button
               type="button"
@@ -245,7 +245,7 @@ export default function NotificationsPage() {
                 borderRadius: '20px',
                 border: 'none',
                 backgroundColor: prefs?.pushNotificationsEnabled ? 'var(--pro-mint)' : '#E0E0E0',
-                color: prefs?.pushNotificationsEnabled ? '#FFFFFF' : '#8896A6',
+                color: prefs?.pushNotificationsEnabled ? '#FFFFFF' : '#64748B',
                 fontSize: '12px',
                 fontWeight: 600,
                 cursor: 'pointer',

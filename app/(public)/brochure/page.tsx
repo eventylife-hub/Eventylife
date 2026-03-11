@@ -112,7 +112,7 @@ export default function BrochurePage() {
                 <p className="text-sm mb-2" style={{ color: '#6B7280' }}>
                   {b.desc}
                 </p>
-                <span className="text-xs" style={{ color: '#A0AEC0' }}>
+                <span className="text-xs" style={{ color: '#6B7280' }}>
                   {b.pages} — PDF
                 </span>
               </div>

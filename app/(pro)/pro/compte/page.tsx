@@ -148,7 +148,7 @@ export default function AccountPage() {
         {/* Header */}
         <div>
           <h1 className="pro-page-title">Mon Compte</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez vos paramètres de compte et de facturation</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez vos paramètres de compte et de facturation</p>
         </div>
 
         {error && (
@@ -170,24 +170,24 @@ export default function AccountPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <Mail className="h-4 w-4" style={{ color: '#8896A6' }} />
-                  <p style={{ fontSize: '14px', color: '#8896A6' }}>Email</p>
+                  <Mail className="h-4 w-4" style={{ color: '#64748B' }} />
+                  <p style={{ fontSize: '14px', color: '#64748B' }}>Email</p>
                 </div>
                 <p style={{ fontSize: '16px', fontWeight: 500, color: '#0A1628' }}>{account.email}</p>
               </div>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <Phone className="h-4 w-4" style={{ color: '#8896A6' }} />
-                  <p style={{ fontSize: '14px', color: '#8896A6' }}>Téléphone</p>
+                  <Phone className="h-4 w-4" style={{ color: '#64748B' }} />
+                  <p style={{ fontSize: '14px', color: '#64748B' }}>Téléphone</p>
                 </div>
                 <p style={{ fontSize: '16px', fontWeight: 500, color: '#0A1628' }}>{account.phone}</p>
               </div>
               <div>
-                <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '8px' }}>Type d&apos;abonnement</p>
+                <p style={{ fontSize: '14px', color: '#64748B', marginBottom: '8px' }}>Type d&apos;abonnement</p>
                 <p style={{ fontSize: '16px', fontWeight: 500, color: '#0A1628' }}>{account.accountType}</p>
               </div>
               <div>
-                <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '8px' }}>Statut</p>
+                <p style={{ fontSize: '14px', color: '#64748B', marginBottom: '8px' }}>Statut</p>
                 <div style={{
                   display: 'inline-block',
                   padding: '6px 12px',
@@ -201,7 +201,7 @@ export default function AccountPage() {
                 </div>
               </div>
               <div>
-                <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '8px' }}>Prochaine facturation</p>
+                <p style={{ fontSize: '14px', color: '#64748B', marginBottom: '8px' }}>Prochaine facturation</p>
                 <p style={{ fontSize: '16px', fontWeight: 500, color: '#0A1628' }}>{formatDate(account.nextBillingDate)}</p>
               </div>
             </div>
@@ -213,7 +213,7 @@ export default function AccountPage() {
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
               <h2 className="pro-panel-title">Méthodes de paiement</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Cartes bancaires sauvegardées</p>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Cartes bancaires sauvegardées</p>
             </div>
             <button type="button" className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <CreditCard className="h-4 w-4" />
@@ -222,8 +222,8 @@ export default function AccountPage() {
           </div>
           {billingMethods.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <CreditCard className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
-              <p style={{ color: '#8896A6' }}>Aucune carte bancaire sauvegardée</p>
+              <CreditCard className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
+              <p style={{ color: '#64748B' }}>Aucune carte bancaire sauvegardée</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -233,7 +233,7 @@ export default function AccountPage() {
                     <CreditCard className="h-6 w-6" style={{ color: '#0A1628' }} />
                     <div>
                       <p style={{ fontWeight: 500, color: '#0A1628' }}>{method.type} •••• {method.last4}</p>
-                      <p style={{ fontSize: '14px', color: '#8896A6' }}>Expire le {method.expiryDate}</p>
+                      <p style={{ fontSize: '14px', color: '#64748B' }}>Expire le {method.expiryDate}</p>
                     </div>
                   </div>
                   {method.isDefault && (
@@ -258,11 +258,11 @@ export default function AccountPage() {
         <div className="pro-panel" style={{ padding: '24px' }}>
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px' }}>
             <h2 className="pro-panel-title">Factures</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Historique de vos factures</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Historique de vos factures</p>
           </div>
           {invoices.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#8896A6' }}>Aucune facture pour le moment</p>
+              <p style={{ color: '#64748B' }}>Aucune facture pour le moment</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -270,7 +270,7 @@ export default function AccountPage() {
                 <div key={invoice.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', border: '1px solid #E0E0E0', borderRadius: '8px' }}>
                   <div>
                     <p style={{ fontWeight: 500, color: '#0A1628' }}>{invoice.description}</p>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>{formatDate(invoice.date)}</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>{formatDate(invoice.date)}</p>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <p style={{ fontWeight: 600, color: '#0A1628', minWidth: '80px', textAlign: 'right' }}>{formatPrice(invoice.amount)}</p>
@@ -296,7 +296,7 @@ export default function AccountPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
               <h2 className="pro-panel-title" style={{ marginBottom: '4px' }}>Sécurité</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6' }}>Gérez votre mot de passe et vos paramètres de sécurité</p>
+              <p style={{ fontSize: '14px', color: '#64748B' }}>Gérez votre mot de passe et vos paramètres de sécurité</p>
             </div>
             <button type="button" className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Lock className="h-4 w-4" />

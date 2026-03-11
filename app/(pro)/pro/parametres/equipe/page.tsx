@@ -153,25 +153,25 @@ export default function EquipePage() {
       <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <h1 className="pro-page-title">Équipe</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez les membres de votre équipe et leurs permissions</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez les membres de votre équipe et leurs permissions</p>
         </div>
 
         {/* Résumé */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           <div className="pro-panel" style={{ padding: '16px' }}>
-            <p style={{ fontSize: '12px', color: '#8896A6', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+            <p style={{ fontSize: '12px', color: '#64748B', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
               Membres actuels
             </p>
             <p style={{ fontSize: '28px', fontWeight: 700, color: '#0A1628' }}>
               {team?.currentMemberCount || 0}
-              <span style={{ fontSize: '14px', color: '#8896A6', fontWeight: 400, marginLeft: '8px' }}>
+              <span style={{ fontSize: '14px', color: '#64748B', fontWeight: 400, marginLeft: '8px' }}>
                 / {team?.maxTeamMembers || 10}
               </span>
             </p>
           </div>
           <div className="pro-panel" style={{ padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
-              <p style={{ fontSize: '12px', color: '#8896A6', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+              <p style={{ fontSize: '12px', color: '#64748B', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
                 Nombre de places disponibles
               </p>
               <p style={{ fontSize: '28px', fontWeight: 700, color: '#0A1628' }}>
@@ -229,7 +229,7 @@ export default function EquipePage() {
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px' }}>
             <h2 className="pro-panel-title">Membres de l&apos;équipe ({team?.currentMemberCount || 0})</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Gestion des membres et permissions</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Gestion des membres et permissions</p>
           </div>
 
           {team?.members && team.members.length > 0 ? (
@@ -253,7 +253,7 @@ export default function EquipePage() {
                         <td style={{ paddingTop: '12px', paddingBottom: '12px', fontWeight: 500, color: '#0A1628' }}>
                           {member.name}
                         </td>
-                        <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6' }}>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B' }}>
                           {member.email}
                         </td>
                         <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#0A1628' }}>
@@ -274,7 +274,7 @@ export default function EquipePage() {
                             {statusColor.label}
                           </span>
                         </td>
-                        <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6' }}>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B' }}>
                           {member.lastActive ? new Date(member.lastActive).toLocaleDateString('fr-FR') : 'N/A'}
                         </td>
                         <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right' }}>
@@ -293,7 +293,7 @@ export default function EquipePage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#8896A6' }}>Aucun membre dans l&apos;équipe</p>
+              <p style={{ color: '#64748B' }}>Aucun membre dans l&apos;équipe</p>
             </div>
           )}
         </div>
@@ -335,7 +335,7 @@ export default function EquipePage() {
                 <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628', marginBottom: '4px' }}>
                   {label}
                 </p>
-                <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>
+                <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '12px' }}>
                   {desc}
                 </p>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>

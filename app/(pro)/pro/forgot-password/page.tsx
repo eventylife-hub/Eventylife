@@ -40,14 +40,14 @@ export default function ProForgotPasswordPage() {
         <div className="pro-panel" style={{ padding: '32px' }}>
           <Link
             href="/pro/login"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#8896A6', marginBottom: '24px', textDecoration: 'none' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#64748B', marginBottom: '24px', textDecoration: 'none' }}
           >
             <ArrowLeft className="w-4 h-4" />
             Retour connexion
           </Link>
 
           <h1 className="pro-page-title" style={{ marginBottom: '8px', fontSize: '24px' }}>Mot de passe oublie</h1>
-          <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>
+          <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>
             Entrez votre email professionnel pour recevoir un lien de reinitialisation.
           </p>
 

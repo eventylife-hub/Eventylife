@@ -200,7 +200,7 @@ export default function BlogPage() {
         {/* Compteur résultats */}
         <p
           className="text-center mb-8"
-          style={{ color: '#718096', fontSize: '0.875rem' }}
+          style={{ color: '#64748B', fontSize: '0.875rem' }}
         >
           {filteredArticles.length} article{filteredArticles.length !== 1 ? 's' : ''}
           {activeCategory !== 'Tous' && (
@@ -264,7 +264,7 @@ export default function BlogPage() {
                     </span>
                     <span
                       className="text-xs"
-                      style={{ color: '#718096' }}
+                      style={{ color: '#64748B' }}
                     >
                       {article.readTime} de lecture
                     </span>
@@ -279,7 +279,7 @@ export default function BlogPage() {
 
                   <p
                     className="text-sm line-clamp-3 mb-4 flex-1"
-                    style={{ color: '#718096' }}
+                    style={{ color: '#64748B' }}
                   >
                     {article.excerpt}
                   </p>
@@ -287,7 +287,7 @@ export default function BlogPage() {
                   <div className="flex items-center justify-between pt-3"
                     style={{ borderTop: '1px solid rgba(26,26,46,0.06)' }}
                   >
-                    <span className="text-xs" style={{ color: '#A0AEC0' }}>
+                    <span className="text-xs" style={{ color: '#6B7280' }}>
                       {article.date}
                     </span>
                     <span
@@ -318,7 +318,7 @@ export default function BlogPage() {
             >
               Aucun article dans cette catégorie
             </p>
-            <p style={{ color: '#718096' }}>
+            <p style={{ color: '#64748B' }}>
               De nouveaux articles arrivent bientôt !
             </p>
           </div>

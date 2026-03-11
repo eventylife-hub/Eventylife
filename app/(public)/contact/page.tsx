@@ -308,7 +308,7 @@ export default function ContactPage() {
                       <p
                         key={j}
                         className="text-sm"
-                        style={{ color: '#718096' }}
+                        style={{ color: '#64748B' }}
                       >
                         {line}
                       </p>
@@ -333,7 +333,7 @@ export default function ContactPage() {
               >
                 Consultez notre FAQ
               </p>
-              <p className="text-xs mb-3" style={{ color: '#718096' }}>
+              <p className="text-xs mb-3" style={{ color: '#64748B' }}>
                 Vous y trouverez peut-être votre réponse
               </p>
               <a

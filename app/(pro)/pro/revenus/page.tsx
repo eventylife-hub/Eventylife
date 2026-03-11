@@ -220,7 +220,7 @@ export default function RevenuesDashboardPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', justifyContent: 'space-between' }}>
           <div>
             <h1 className="pro-page-title">Revenus</h1>
-            <p style={{ color: '#8896A6', marginTop: '8px' }}>Vue d&apos;ensemble de vos revenus et versements</p>
+            <p style={{ color: '#64748B', marginTop: '8px' }}>Vue d&apos;ensemble de vos revenus et versements</p>
           </div>
           <Link href="/pro/revenus/releve" style={{ width: 'fit-content' }}>
             <button type="button" className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -246,27 +246,27 @@ export default function RevenuesDashboardPage() {
         {summary && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
             <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
-              <div style={{ fontSize: '14px', color: '#8896A6' }}>Total gagné</div>
+              <div style={{ fontSize: '14px', color: '#64748B' }}>Total gagné</div>
               <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>
                 {formatPrice(summary.totalEarned)}
               </div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Tous les temps</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>Tous les temps</p>
             </div>
 
             <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
-              <div style={{ fontSize: '14px', color: '#8896A6' }}>En attente de versement</div>
+              <div style={{ fontSize: '14px', color: '#64748B' }}>En attente de versement</div>
               <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: 'var(--pro-sun)' }}>
                 {formatPrice(summary.pendingAmount)}
               </div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>À traiter</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>À traiter</p>
             </div>
 
             <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
-              <div style={{ fontSize: '14px', color: '#8896A6' }}>Versements réalisés</div>
+              <div style={{ fontSize: '14px', color: '#64748B' }}>Versements réalisés</div>
               <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: 'var(--pro-mint)' }}>
                 {formatPrice(summary.paidOutAmount)}
               </div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Cumulé</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>Cumulé</p>
             </div>
           </div>
         )}
@@ -294,7 +294,7 @@ export default function RevenuesDashboardPage() {
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
               <h2 className="pro-panel-title">Revenus par voyage</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>
                 {trips.length > 0 ? `${trips.length} voyage${trips.length > 1 ? 's' : ''}` : 'Aucun voyage'}
               </p>
             </div>
@@ -305,8 +305,8 @@ export default function RevenuesDashboardPage() {
           </div>
           {trips.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <TrendingUp className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
-              <p style={{ color: '#8896A6' }}>Aucun voyage pour cette période</p>
+              <TrendingUp className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
+              <p style={{ color: '#64748B' }}>Aucun voyage pour cette période</p>
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
@@ -325,13 +325,13 @@ export default function RevenuesDashboardPage() {
                   {trips.map((trip) => (
                     <tr key={trip.tripId} style={{ borderBottom: '1px solid #E0E0E0' }}>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', fontWeight: 500, color: '#0A1628' }}>{trip.tripName}</td>
-                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6', fontSize: '12px' }}>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B', fontSize: '12px' }}>
                         {formatDate(trip.startDate)} -{' '}
                         {formatDate(trip.endDate)}
                       </td>
-                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6', textAlign: 'center' }}>{trip.reservationCount}</td>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B', textAlign: 'center' }}>{trip.reservationCount}</td>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#0A1628' }}>{formatPrice(trip.totalRevenueInclTax)}</td>
-                      <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#8896A6' }}>{trip.commissionPercent}%</td>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#64748B' }}>{trip.commissionPercent}%</td>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', fontWeight: 600, color: '#0A1628' }}>
                         {formatPrice(trip.netAmount)}
                       </td>
@@ -347,11 +347,11 @@ export default function RevenuesDashboardPage() {
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px' }}>
             <h2 className="pro-panel-title">Historique des versements</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Historique complet de vos versements</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Historique complet de vos versements</p>
           </div>
           {payouts.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#8896A6' }}>Aucun versement pour le moment</p>
+              <p style={{ color: '#64748B' }}>Aucun versement pour le moment</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -359,11 +359,11 @@ export default function RevenuesDashboardPage() {
                 <div key={payout.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', border: '1px solid #E0E0E0', borderRadius: '8px' }}>
                   <div>
                     <p style={{ fontWeight: 500, color: '#0A1628' }}>{formatPrice(payout.amount)}</p>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>
                       {formatDate(payout.date)}
                     </p>
                     {payout.bankReference && (
-                      <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>
+                      <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>
                         Référence: {payout.bankReference}
                       </p>
                     )}

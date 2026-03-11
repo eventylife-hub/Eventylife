@@ -48,7 +48,7 @@ export default function GlobalNotFound() {
       </h2>
       <p
         className="mb-8 max-w-md text-base leading-relaxed"
-        style={{ color: '#718096' }}
+        style={{ color: '#64748B' }}
       >
         Oups ! Cette page semble avoir pris un autre itinéraire.
         Pas de panique, on vous ramène à bon port.
@@ -96,12 +96,12 @@ export default function GlobalNotFound() {
             key={link.href}
             href={link.href}
             className="text-sm font-medium transition-colors duration-200"
-            style={{ color: '#718096' }}
+            style={{ color: '#64748B' }}
             onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
               (e.target as HTMLElement).style.color = '#C75B39';
             }}
             onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-              (e.target as HTMLElement).style.color = '#718096';
+              (e.target as HTMLElement).style.color = '#64748B';
             }}
           >
             {link.label}

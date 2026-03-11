@@ -200,7 +200,7 @@ export default function ConnexionPage() {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: '#718096',
+                  color: '#64748B',
                   padding: '4px',
                   display: 'flex',
                   alignItems: 'center',

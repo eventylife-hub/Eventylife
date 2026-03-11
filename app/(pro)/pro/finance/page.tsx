@@ -118,7 +118,7 @@ export default function FinanceDashboardPage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h1 className="pro-page-title">Finance</h1>
           <div className="pro-panel" style={{ textAlign: 'center', padding: '32px 24px' }}>
-            <p style={{ color: '#8896A6', marginBottom: '16px' }}>Aucun voyage créé</p>
+            <p style={{ color: '#64748B', marginBottom: '16px' }}>Aucun voyage créé</p>
             <button type="button" onClick={() => (window.location.href = '/pro/voyages/new')} className="pro-btn-sun">
               Créer un voyage
             </button>
@@ -133,7 +133,7 @@ export default function FinanceDashboardPage() {
       <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <h1 className="pro-page-title">Dashboard Finance</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Vue d&apos;ensemble financière de votre activité</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Vue d&apos;ensemble financière de votre activité</p>
         </div>
 
         {error && (
@@ -167,7 +167,7 @@ export default function FinanceDashboardPage() {
       <div className="pro-panel">
         <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '16px' }}>
           <h2 className="pro-panel-title">Voyages ({dashboard.travelCount || dashboard.travels.length || 0})</h2>
-          <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Rentabilité par voyage</p>
+          <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Rentabilité par voyage</p>
         </div>
         <div>
           {dashboard.travels && dashboard.travels.length > 0 ? (
@@ -195,7 +195,7 @@ export default function FinanceDashboardPage() {
                             {formatPrice(marge)}
                           </span>
                         </td>
-                        <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#8896A6' }}>
+                        <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#64748B' }}>
                           {formatPrice(tf.tvaMarge as number)}
                         </td>
                       </tr>
@@ -206,7 +206,7 @@ export default function FinanceDashboardPage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#8896A6' }}>Aucun voyage enregistré</p>
+              <p style={{ color: '#64748B' }}>Aucun voyage enregistré</p>
             </div>
           )}
         </div>

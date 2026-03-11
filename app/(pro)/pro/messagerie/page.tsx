@@ -9,7 +9,7 @@ const OCEAN = 'var(--pro-ocean)';
 const SUN = 'var(--pro-sun)';
 const SAND = '#FEFCF3';
 const DARK = '#0A1628';
-const MUTED = '#8896A6';
+const MUTED = '#64748B';
 const CORAL = 'var(--pro-coral)';
 
 interface Conversation {

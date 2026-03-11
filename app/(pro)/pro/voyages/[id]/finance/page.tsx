@@ -227,7 +227,7 @@ export default function VoyageFinancePage() {
       <div className="pro-panel" style={{ marginBottom: '0' }}>
         <div className="pro-panel-header">
           <h3 className="pro-panel-title">Détail des coûts</h3>
-          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Modifier et ajouter des coûts</p>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Modifier et ajouter des coûts</p>
         </div>
         <div className="pro-panel-body" style={{ padding: '0' }}>
           <CostTable

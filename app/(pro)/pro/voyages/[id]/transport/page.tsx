@@ -225,7 +225,7 @@ export default function TransportPage() {
       <div className="pro-panel">
         <div className="pro-panel-header">
           <h3 className="pro-panel-title">Mode Transport</h3>
-          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Sélectionnez le mode principal</p>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Sélectionnez le mode principal</p>
         </div>
         <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <select value={departureMode} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDepartureMode((e.target as HTMLInputElement).value)} className="pro-input">
@@ -302,7 +302,7 @@ export default function TransportPage() {
       <div className="pro-panel">
         <div className="pro-panel-header">
           <h3 className="pro-panel-title">Arrêts de route</h3>
-          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>{stops.length} arrêt(s) configuré(s)</p>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>{stops.length} arrêt(s) configuré(s)</p>
         </div>
         <div className="pro-panel-body">
           {stops.length === 0 ? (

@@ -87,13 +87,13 @@ export default function NouvelArretPage() {
         <div style={{ marginBottom: '32px' }}>
           <Link
             href="/pro/arrets"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#8896A6', marginBottom: '16px', textDecoration: 'none' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '14px', color: '#64748B', marginBottom: '16px', textDecoration: 'none' }}
           >
             <ArrowLeft className="w-4 h-4" />
             Retour aux arrets
           </Link>
           <h1 className="pro-page-title">Nouvel arret de bus</h1>
-          <p style={{ color: '#8896A6', marginTop: '4px' }}>
+          <p style={{ color: '#64748B', marginTop: '4px' }}>
             Creez un nouveau point de depart ou d&apos;arrivee pour vos voyages
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function NouvelArretPage() {
                   className="pro-input"
                   required
                 />
-                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+                <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
                   Ce nom sera visible par les voyageurs
                 </p>
               </div>
@@ -302,11 +302,11 @@ export default function NouvelArretPage() {
           <div className="pro-panel">
             <h2 className="pro-panel-header" style={{ marginBottom: '16px' }}>Photos</h2>
             <div style={{ border: '2px dashed #B3E5FC', borderRadius: '8px', padding: '32px 16px', textAlign: 'center' }}>
-              <Upload className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+              <Upload className="w-8 h-8" style={{ color: '#64748B', margin: '0 auto 12px' }} />
               <p style={{ fontSize: '14px', color: '#0A1628', fontWeight: 500 }}>
                 Glissez vos photos ici ou cliquez pour parcourir
               </p>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+              <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
                 JPG, PNG - Max 5 Mo par photo - 5 photos maximum
               </p>
             </div>
@@ -316,7 +316,7 @@ export default function NouvelArretPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Link
               href="/pro/arrets"
-              style={{ color: '#8896A6', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
+              style={{ color: '#64748B', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
             >
               Annuler
             </Link>

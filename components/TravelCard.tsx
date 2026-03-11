@@ -171,7 +171,7 @@ export function TravelCard({
           <p className="text-sm mb-1" style={{ color: '#4A5568' }}>
             📍 {destination}
           </p>
-          <p className="text-xs mb-4" style={{ color: '#718096' }}>
+          <p className="text-xs mb-4" style={{ color: '#64748B' }}>
             {formatDate(startDate)} - {formatDate(endDate)}
           </p>
 
@@ -193,10 +193,10 @@ export function TravelCard({
               {rating > 0 && (
                 <span className="flex items-center gap-1 text-sm">
                   <span style={{ color: 'var(--gold, #D4A853)' }}>⭐ {rating.toFixed(1)}</span>
-                  <span style={{ color: '#718096' }}>({reviewCount})</span>
+                  <span style={{ color: '#64748B' }}>({reviewCount})</span>
                 </span>
               )}
-              <span className="text-xs" style={{ color: '#718096' }}>
+              <span className="text-xs" style={{ color: '#64748B' }}>
                 {available} place{available !== 1 ? 's' : ''} restante{available !== 1 ? 's' : ''}
               </span>
             </div>

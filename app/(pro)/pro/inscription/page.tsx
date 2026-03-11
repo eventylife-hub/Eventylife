@@ -158,7 +158,7 @@ export default function InscriptionPage() {
         <div className="pro-panel" style={{ width: '100%', maxWidth: '448px', padding: '32px', textAlign: 'center' }}>
           <CheckCircle2 className="w-16 h-16" style={{ color: 'var(--pro-mint)', margin: '0 auto 16px' }} />
           <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Inscription réussie!</h2>
-          <p style={{ color: '#8896A6' }}>
+          <p style={{ color: '#64748B' }}>
             Merci de vous être inscrit. Redirection vers l'onboarding...
           </p>
         </div>
@@ -185,7 +185,7 @@ export default function InscriptionPage() {
                     fontWeight: 600,
                     fontSize: '14px',
                     backgroundColor: s <= step ? 'var(--pro-ocean)' : '#E0E0E0',
-                    color: s <= step ? 'white' : '#8896A6'
+                    color: s <= step ? 'white' : '#64748B'
                   }}
                 >
                   {s <= step && s < step ? <CheckCircle2 className="w-5 h-5" /> : s}
@@ -203,7 +203,7 @@ export default function InscriptionPage() {
               </div>
             ))}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#8896A6' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#64748B' }}>
             <span>Type Pro</span>
             <span>Infos perso</span>
             <span>Détails pro</span>
@@ -222,7 +222,7 @@ export default function InscriptionPage() {
         {step === 1 && (
           <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Quel type de professionnel êtes-vous?</h2>
-            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Sélectionnez le profil qui vous correspond</p>
+            <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Sélectionnez le profil qui vous correspond</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {PRO_TYPES.map((type) => {
                 const Icon = type.icon;
@@ -244,10 +244,10 @@ export default function InscriptionPage() {
                       gap: '12px'
                     }}
                   >
-                    <Icon style={{ width: '20px', height: '20px', marginTop: '4px', flexShrink: 0, color: form.proType === type.id ? 'var(--pro-ocean)' : '#8896A6' }} />
+                    <Icon style={{ width: '20px', height: '20px', marginTop: '4px', flexShrink: 0, color: form.proType === type.id ? 'var(--pro-ocean)' : '#64748B' }} />
                     <div style={{ flex: 1 }}>
                       <p style={{ fontWeight: 600, color: '#0A1628' }}>{type.label}</p>
-                      <p style={{ fontSize: '14px', color: '#8896A6' }}>{type.description}</p>
+                      <p style={{ fontSize: '14px', color: '#64748B' }}>{type.description}</p>
                     </div>
                     {form.proType === type.id && (
                       <CheckCircle2 style={{ width: '20px', height: '20px', color: 'var(--pro-ocean)', flexShrink: 0 }} />
@@ -263,7 +263,7 @@ export default function InscriptionPage() {
         {step === 2 && (
           <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Informations personnelles</h2>
-            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Vos coordonnées de contact</p>
+            <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Vos coordonnées de contact</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom complet *</label>
@@ -319,7 +319,7 @@ export default function InscriptionPage() {
         {step === 3 && (
           <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Détails professionnels</h2>
-            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Vos compétences et zone d&apos;expertise</p>
+            <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Vos compétences et zone d&apos;expertise</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
@@ -362,7 +362,7 @@ export default function InscriptionPage() {
                         width: '20px',
                         height: '20px',
                         borderRadius: '4px',
-                        border: '2px solid ' + (form.skills.includes(skill) ? 'var(--pro-ocean)' : '#8896A6'),
+                        border: '2px solid ' + (form.skills.includes(skill) ? 'var(--pro-ocean)' : '#64748B'),
                         backgroundColor: form.skills.includes(skill) ? 'var(--pro-ocean)' : 'transparent',
                         display: 'flex',
                         alignItems: 'center',
@@ -397,23 +397,23 @@ export default function InscriptionPage() {
         {step === 4 && (
           <div className="pro-panel" style={{ padding: '24px', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Conditions d&apos;utilisation</h2>
-            <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Acceptez nos conditions pour continuer</p>
+            <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Acceptez nos conditions pour continuer</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ backgroundColor: '#F5F5F5', padding: '16px', borderRadius: '8px', maxHeight: '256px', overflowY: 'auto', border: '1px solid #E0E0E0' }}>
                 <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Charte Eventy Life</h4>
-                <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '16px' }}>
+                <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '16px' }}>
                   En tant que professionnel partenaire, vous vous engagez à respecter nos valeurs
                   d'excellence, de transparence et de responsabilité envers nos clients...
                 </p>
 
                 <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Conditions Générales de Vente Pro</h4>
-                <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '16px' }}>
+                <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '16px' }}>
                   Vous acceptez les conditions de commission, les délais de paiement et les
                   responsabilités contractuelles définies dans nos CGV...
                 </p>
 
                 <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>RGPD & Confidentialité</h4>
-                <p style={{ fontSize: '12px', color: '#8896A6' }}>
+                <p style={{ fontSize: '12px', color: '#64748B' }}>
                   Vos données seront traitées conformément à la réglementation RGPD. Nous nous
                   engageons à protéger vos informations personnelles...
                 </p>

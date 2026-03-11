@@ -60,7 +60,7 @@ export default function BusStopsPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
           <div>
             <h1 className="pro-page-title">Mes arrêts de bus</h1>
-            <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez vos points de départ et d&apos;arrivée</p>
+            <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez vos points de départ et d&apos;arrivée</p>
           </div>
           <Link
             href="/pro/arrets/nouveau"
@@ -179,9 +179,9 @@ export default function BusStopsPage() {
         {!loading && viewMode === 'map' && (
           <div className="pro-panel" style={{ marginBottom: '24px', height: '384px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ textAlign: 'center' }}>
-              <MapPin className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+              <MapPin className="w-12 h-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
               <p style={{ color: '#0A1628', fontWeight: 500 }}>Intégration Google Maps à venir</p>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Cette fonction sera disponible bientôt</p>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Cette fonction sera disponible bientôt</p>
             </div>
           </div>
         )}
@@ -191,7 +191,7 @@ export default function BusStopsPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
             {filteredStops.length === 0 ? (
               <div className="pro-panel" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '48px 24px' }}>
-                <MapPin className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+                <MapPin className="w-12 h-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
                 <p style={{ color: '#0A1628', fontWeight: 500 }}>Aucun arrêt créé</p>
                 <Link
                   href="/pro/arrets/nouveau"
@@ -233,11 +233,11 @@ export default function BusStopsPage() {
 
                     <div style={{ marginBottom: '16px' }}>
                       <div style={{ marginBottom: '8px' }}>
-                        <p style={{ fontSize: '12px', color: '#8896A6', textTransform: 'uppercase', fontWeight: 600, marginBottom: '4px' }}>Adresse</p>
+                        <p style={{ fontSize: '12px', color: '#64748B', textTransform: 'uppercase', fontWeight: 600, marginBottom: '4px' }}>Adresse</p>
                         <p style={{ fontSize: '14px', color: '#0A1628', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{stop.addressLine}</p>
                       </div>
                       <div>
-                        <p style={{ fontSize: '12px', color: '#8896A6', textTransform: 'uppercase', fontWeight: 600 }}>
+                        <p style={{ fontSize: '12px', color: '#64748B', textTransform: 'uppercase', fontWeight: 600 }}>
                           {stop.city}, {stop.postalCode}
                         </p>
                       </div>

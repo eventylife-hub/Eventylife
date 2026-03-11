@@ -64,7 +64,7 @@ export default function GlobalError({
 
       {/* Digest pour le support technique */}
       {error.digest && (
-        <p className="text-xs mt-8" style={{ color: '#9CA3AF' }}>
+        <p className="text-xs mt-8" style={{ color: '#6B7280' }}>
           Référence erreur : {error.digest}
         </p>
       )}

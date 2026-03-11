@@ -177,7 +177,7 @@ export default function CommentCaMarchePage() {
                 </h2>
                 <p
                   className="text-base leading-relaxed mb-4"
-                  style={{ color: '#718096' }}
+                  style={{ color: '#64748B' }}
                 >
                   {step.description}
                 </p>
@@ -241,7 +241,7 @@ export default function CommentCaMarchePage() {
                 >
                   {g.title}
                 </h3>
-                <p className="text-xs" style={{ color: '#718096' }}>
+                <p className="text-xs" style={{ color: '#64748B' }}>
                   {g.text}
                 </p>
               </div>
@@ -292,7 +292,7 @@ export default function CommentCaMarchePage() {
                 >
                   {faq.q}
                 </h3>
-                <p className="text-sm" style={{ color: '#718096' }}>
+                <p className="text-sm" style={{ color: '#64748B' }}>
                   {faq.a}
                 </p>
               </div>

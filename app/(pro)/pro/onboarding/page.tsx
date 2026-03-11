@@ -152,7 +152,7 @@ export default function OnboardingPage() {
         {/* Header */}
         <div style={{ marginBottom: '32px' }}>
           <h1 className="pro-page-title">Complétez votre inscription</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>
             Nous avons besoin de quelques informations pour valider votre compte Pro
           </p>
         </div>
@@ -193,7 +193,7 @@ export default function OnboardingPage() {
                       fontWeight: 600,
                       fontSize: '14px',
                       backgroundColor: isCompleted ? 'var(--pro-mint)' : isCurrent ? 'var(--pro-ocean)' : '#E0E0E0',
-                      color: (isCompleted || isCurrent) ? 'white' : '#8896A6'
+                      color: (isCompleted || isCurrent) ? 'white' : '#64748B'
                     }}
                   >
                     {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : step.number}
@@ -209,7 +209,7 @@ export default function OnboardingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
             {STEPS.map((step) => (
               <div key={step.number} style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>{step.label}</p>
+                <p style={{ fontSize: '12px', fontWeight: 500, color: '#64748B' }}>{step.label}</p>
               </div>
             ))}
           </div>
@@ -412,7 +412,7 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
             className="pro-input"
             placeholder="FR76 3000 6000 0101 0009 7839"
           />
-          <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Format: FR + 2 chiffres + 23 caractères alphanumériques</p>
+          <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>Format: FR + 2 chiffres + 23 caractères alphanumériques</p>
         </div>
         <div>
           <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>BIC (optionnel)</label>
@@ -476,7 +476,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
               Pièce d&apos;identité <span style={{ color: 'var(--pro-coral)' }}>*</span>
             </h3>
           </div>
-          <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>
+          <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '12px' }}>
             Carte nationale d&apos;identité ou passeport en cours de validité (PDF, JPG ou PNG, max 5 Mo)
           </p>
           <FileUpload
@@ -497,10 +497,10 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
             <FileText className="w-5 h-5" style={{ color: 'var(--pro-ocean)' }} />
             <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>
-              Extrait KBIS <span style={{ color: '#8896A6', fontSize: '12px', fontWeight: 400 }}>(si société)</span>
+              Extrait KBIS <span style={{ color: '#64748B', fontSize: '12px', fontWeight: 400 }}>(si société)</span>
             </h3>
           </div>
-          <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>
+          <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '12px' }}>
             Extrait KBIS de moins de 3 mois (PDF, JPG ou PNG, max 5 Mo)
           </p>
           <FileUpload
@@ -534,7 +534,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
           />
           <div>
             <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Contrat prestataire indépendant</label>
-            <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+            <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
               Je confirme avoir lu et accepté les conditions d&apos;utilisation.
             </p>
           </div>
@@ -548,7 +548,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
           />
           <div>
             <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Charte de prestataire</label>
-            <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+            <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
               J&apos;accepte les règles d&apos;utilisation et d&apos;éthique.
             </p>
           </div>
@@ -562,7 +562,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
           />
           <div>
             <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Politique RGPD</label>
-            <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+            <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
               J&apos;accepte le traitement de mes données selon la politique RGPD.
             </p>
           </div>
@@ -586,7 +586,7 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
   return (
     <div>
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 6: Modules de formation</h2>
-      <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '16px' }}>Marquez les modules que vous avez complétés :</p>
+      <p style={{ fontSize: '14px', color: '#64748B', marginBottom: '16px' }}>Marquez les modules que vous avez complétés :</p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {modules.map((module, idx) => (
           <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0' }}>

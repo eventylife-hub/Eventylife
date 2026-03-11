@@ -116,14 +116,14 @@ export default function ComptesPage() {
       <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <h1 className="pro-page-title">Comptes & Sécurité</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez votre authentification et l&apos;accès à votre compte</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez votre authentification et l&apos;accès à votre compte</p>
         </div>
 
         {/* Sécurité */}
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px' }}>
             <h2 className="pro-panel-title">Sécurité</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Paramètres d&apos;authentification et de sécurité</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Paramètres d&apos;authentification et de sécurité</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -132,7 +132,7 @@ export default function ComptesPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>Mot de passe</p>
-                  <p style={{ fontSize: '13px', color: '#8896A6', marginTop: '4px' }}>
+                  <p style={{ fontSize: '13px', color: '#64748B', marginTop: '4px' }}>
                     Changé le {security?.lastPasswordChange ? new Date(security.lastPasswordChange).toLocaleDateString('fr-FR') : 'N/A'}
                   </p>
                 </div>
@@ -146,7 +146,7 @@ export default function ComptesPage() {
             <div style={{ paddingBottom: '16px', borderBottom: '1px solid #E0E0E0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>Authentification à deux facteurs (2FA)</p>
-                <p style={{ fontSize: '13px', color: '#8896A6', marginTop: '4px' }}>
+                <p style={{ fontSize: '13px', color: '#64748B', marginTop: '4px' }}>
                   {security?.twoFactorEnabled ? 'Activée' : 'Désactivée'}
                 </p>
               </div>
@@ -169,7 +169,7 @@ export default function ComptesPage() {
             <div style={{ paddingBottom: '16px', borderBottom: '1px solid #E0E0E0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>État du compte</p>
-                <p style={{ fontSize: '13px', color: '#8896A6', marginTop: '4px' }}>
+                <p style={{ fontSize: '13px', color: '#64748B', marginTop: '4px' }}>
                   {security?.accountLocked ? 'Verrouillé' : 'Actif'}
                 </p>
               </div>
@@ -192,7 +192,7 @@ export default function ComptesPage() {
             <div>
               <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628', marginBottom: '12px' }}>Tentatives de connexion</p>
               <div style={{ backgroundColor: '#F9FAFB', padding: '12px', borderRadius: '8px', display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '14px', color: '#8896A6' }}>Tentatives échouées</span>
+                <span style={{ fontSize: '14px', color: '#64748B' }}>Tentatives échouées</span>
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>
                   {security?.loginAttempts || 0} / {security?.maxLoginAttempts || 5}
                 </span>
@@ -206,7 +206,7 @@ export default function ComptesPage() {
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 className="pro-panel-title">Clés API</h2>
-              <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Intégrations et accès programmatique</p>
+              <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Intégrations et accès programmatique</p>
             </div>
             <button type="button" className="pro-btn-sun">
               Créer une clé
@@ -229,13 +229,13 @@ export default function ComptesPage() {
                   {apiKeys.map((key) => (
                     <tr key={key.id} style={{ borderBottom: '1px solid #E0E0E0' }}>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', fontWeight: 500, color: '#0A1628' }}>{key.name}</td>
-                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6', fontFamily: 'monospace', fontSize: '12px' }}>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B', fontFamily: 'monospace', fontSize: '12px' }}>
                         {key.key}
                       </td>
-                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6' }}>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B' }}>
                         {new Date(key.createdAt).toLocaleDateString('fr-FR')}
                       </td>
-                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6' }}>
+                      <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#64748B' }}>
                         {key.lastUsed ? new Date(key.lastUsed).toLocaleDateString('fr-FR') : 'Jamais utilisée'}
                       </td>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right' }}>
@@ -250,7 +250,7 @@ export default function ComptesPage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#8896A6', marginBottom: '16px' }}>Aucune clé API créée</p>
+              <p style={{ color: '#64748B', marginBottom: '16px' }}>Aucune clé API créée</p>
               <button type="button" className="pro-btn-sun">
                 Créer votre première clé
               </button>
@@ -262,14 +262,14 @@ export default function ComptesPage() {
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px' }}>
             <h2 className="pro-panel-title">Sessions actives</h2>
-            <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>Appareils et navigateurs avec accès à votre compte</p>
+            <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>Appareils et navigateurs avec accès à votre compte</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ padding: '12px', backgroundColor: '#F9FAFB', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>Chrome sur macOS</p>
-                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>Dernière utilisation: Aujourd&apos;hui à 14h30</p>
+                <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>Dernière utilisation: Aujourd&apos;hui à 14h30</p>
               </div>
               <div
                 style={{
@@ -289,7 +289,7 @@ export default function ComptesPage() {
             <div style={{ padding: '12px', backgroundColor: '#F9FAFB', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <p style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>Safari sur iPhone</p>
-                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>Dernière utilisation: Hier à 10h15</p>
+                <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>Dernière utilisation: Hier à 10h15</p>
               </div>
               <button type="button" className="pro-btn-outline" style={{ padding: '4px 12px', fontSize: '12px' }}>
                 Déconnecter

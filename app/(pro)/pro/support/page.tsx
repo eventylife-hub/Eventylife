@@ -54,7 +54,7 @@ const STATUS_CONFIG: Record<string, { label: string; icon: React.ComponentType<a
   CLOSED: {
     label: 'Fermé',
     icon: CheckCircle2,
-    color: '#8896A6',
+    color: '#64748B',
     bgColor: '#F0F4F9',
   },
 };
@@ -63,7 +63,7 @@ const PRIORITY_CONFIG: Record<string, { label: string; color: string }> = {
   P0: { label: 'Critique', color: '#dc2626' },
   P1: { label: 'Haute', color: 'var(--pro-coral)' },
   P2: { label: 'Normale', color: 'var(--pro-sun)' },
-  P3: { label: 'Basse', color: '#8896A6' },
+  P3: { label: 'Basse', color: '#64748B' },
 };
 
 export default function ProSupportPage() {
@@ -224,7 +224,7 @@ export default function ProSupportPage() {
             <h1 className="pro-page-title" style={{ marginBottom: '8px' }}>
               Support
             </h1>
-            <p style={{ color: '#8896A6' }}>
+            <p style={{ color: '#64748B' }}>
               Gérez vos demandes de support et trouvez des solutions
             </p>
           </div>
@@ -303,11 +303,11 @@ export default function ProSupportPage() {
           </div>
         ) : filteredTickets.length === 0 ? (
           <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '48px', paddingBottom: '48px' }}>
-            <HelpCircle className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+            <HelpCircle className="w-12 h-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
             <p style={{ color: '#0A1628', fontSize: '16px', fontWeight: 500, marginBottom: '8px' }}>
               Aucun ticket trouvé
             </p>
-            <p style={{ color: '#8896A6', marginBottom: '24px' }}>
+            <p style={{ color: '#64748B', marginBottom: '24px' }}>
               Vous n'avez pas de demande de support dans cette catégorie
             </p>
             <button
@@ -354,7 +354,7 @@ export default function ProSupportPage() {
                         </span>
                       )}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '12px', color: '#8896A6' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '12px', color: '#64748B' }}>
                       <span>{ticket.category}</span>
                       <span>•</span>
                       <span>Créé le {formatDate(ticket.createdAt)}</span>
@@ -384,7 +384,7 @@ export default function ProSupportPage() {
                       </span>
                     </div>
 
-                    <ChevronRight className="w-5 h-5" style={{ color: '#8896A6', flexShrink: 0 }} />
+                    <ChevronRight className="w-5 h-5" style={{ color: '#64748B', flexShrink: 0 }} />
                   </div>
                 </Link>
               );

@@ -213,7 +213,7 @@ export default function ManifestPage() {
                 <h3 className="pro-panel-title" style={{ fontSize: '1.125rem' }}>
                   {((stopData.stop as unknown)?.publicName as string) || 'Arrêt'} ({((stopData.stop as unknown)?.city as string) || ''})
                 </h3>
-                <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>
+                <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>
                   {((stopData.passengers as unknown) || []).length as number} passager(s)
                 </p>
               </div>

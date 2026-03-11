@@ -197,7 +197,7 @@ export default function ProDocumentsPage() {
           <h1 className="pro-page-title" style={{ marginBottom: '8px' }}>
             Mes documents
           </h1>
-          <p style={{ color: '#8896A6' }}>
+          <p style={{ color: '#64748B' }}>
             Gérez vos contrats, documents administratifs et pièces justificatives
           </p>
         </div>
@@ -210,7 +210,7 @@ export default function ProDocumentsPage() {
 
         {loading ? (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '48px', paddingBottom: '48px' }}>
-            <Loader className="h-8 w-8" style={{ color: '#8896A6', animation: 'spin 1s linear infinite' }} />
+            <Loader className="h-8 w-8" style={{ color: '#64748B', animation: 'spin 1s linear infinite' }} />
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
@@ -224,7 +224,7 @@ export default function ProDocumentsPage() {
 
               {groupedDocs.signed.length === 0 ? (
                 <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-                  <FileText className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+                  <FileText className="w-8 h-8" style={{ color: '#64748B', margin: '0 auto 12px' }} />
                   <p style={{ color: '#0A1628' }}>
                     Vous n\'avez pas encore de contrats signés
                   </p>
@@ -238,12 +238,12 @@ export default function ProDocumentsPage() {
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
-                        <FileText className="w-6 h-6" style={{ color: '#8896A6' }} />
+                        <FileText className="w-6 h-6" style={{ color: '#64748B' }} />
                         <div style={{ minWidth: 0, flex: 1 }}>
                           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {doc.name}
                           </p>
-                          <p style={{ fontSize: '12px', color: '#8896A6' }}>
+                          <p style={{ fontSize: '12px', color: '#64748B' }}>
                             {formatDate(doc.createdAt)}
                           </p>
                         </div>
@@ -251,7 +251,7 @@ export default function ProDocumentsPage() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: '16px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           {getStatusIcon(doc.status)}
-                          <span style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>
+                          <span style={{ fontSize: '12px', fontWeight: 500, color: '#64748B' }}>
                             {getStatusLabel(doc.status)}
                           </span>
                         </div>
@@ -287,7 +287,7 @@ export default function ProDocumentsPage() {
 
               {groupedDocs.admin.length === 0 ? (
                 <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-                  <Upload className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+                  <Upload className="w-8 h-8" style={{ color: '#64748B', margin: '0 auto 12px' }} />
                   <p style={{ color: '#0A1628', marginBottom: '16px' }}>
                     Vous n\'avez pas encore téléchargé de documents administratifs
                   </p>
@@ -301,12 +301,12 @@ export default function ProDocumentsPage() {
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
-                        <FileText className="w-6 h-6" style={{ color: '#8896A6' }} />
+                        <FileText className="w-6 h-6" style={{ color: '#64748B' }} />
                         <div style={{ minWidth: 0, flex: 1 }}>
                           <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {doc.name}
                           </p>
-                          <p style={{ fontSize: '12px', color: '#8896A6' }}>
+                          <p style={{ fontSize: '12px', color: '#64748B' }}>
                             {formatDate(doc.createdAt)}
                           </p>
                         </div>
@@ -314,7 +314,7 @@ export default function ProDocumentsPage() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: '16px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           {getStatusIcon(doc.status)}
-                          <span style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>
+                          <span style={{ fontSize: '12px', fontWeight: 500, color: '#64748B' }}>
                             {getStatusLabel(doc.status)}
                           </span>
                         </div>

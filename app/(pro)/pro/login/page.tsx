@@ -45,7 +45,7 @@ export default function ProLoginPage() {
       <div style={{ width: '100%', maxWidth: '448px' }}>
         <div className="pro-panel" style={{ padding: '32px' }}>
           <h1 className="pro-page-title" style={{ textAlign: 'center', marginBottom: '8px', fontSize: '28px' }}>Espace Pro</h1>
-          <p style={{ textAlign: 'center', color: '#8896A6', marginBottom: '32px' }}>Connexion organisateurs</p>
+          <p style={{ textAlign: 'center', color: '#64748B', marginBottom: '32px' }}>Connexion organisateurs</p>
 
           {error && (
             <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
@@ -107,7 +107,7 @@ export default function ProLoginPage() {
           </div>
 
           <div style={{ marginTop: '24px', textAlign: 'center', borderTop: '1px solid #E0E0E0', paddingTop: '24px' }}>
-            <p style={{ color: '#8896A6' }}>
+            <p style={{ color: '#64748B' }}>
               Devenir partenaire?{' '}
               <Link href="/" style={{ color: 'var(--pro-ocean)', textDecoration: 'none', fontWeight: 500 }}>
                 Nous contacter

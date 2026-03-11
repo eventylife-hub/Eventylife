@@ -126,19 +126,19 @@ export default function MarketingPage() {
         {/* Stats globales */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '24px' }}>
           <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
-            <div style={{ fontSize: '14px', color: '#8896A6' }}>Campagnes actives</div>
+            <div style={{ fontSize: '14px', color: '#64748B' }}>Campagnes actives</div>
             <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>{stats.activeCampaigns || 0}</div>
           </div>
 
           <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
-            <div style={{ fontSize: '14px', color: '#8896A6' }}>Budget total</div>
+            <div style={{ fontSize: '14px', color: '#64748B' }}>Budget total</div>
             <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>
               {formatPrice(stats.totalBudget || 0)}
             </div>
           </div>
 
           <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
-            <div style={{ fontSize: '14px', color: '#8896A6' }}>Budget dépensé</div>
+            <div style={{ fontSize: '14px', color: '#64748B' }}>Budget dépensé</div>
             <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#0A1628' }}>
               {formatPrice(stats.totalBudgetSpent || 0)}
             </div>
@@ -148,9 +148,9 @@ export default function MarketingPage() {
         {/* Liste des campagnes */}
         {campaigns.length === 0 ? (
           <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
-            <TrendingUp className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+            <TrendingUp className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
             <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628', marginBottom: '8px' }}>Pas de campagne</h3>
-            <p style={{ color: '#8896A6', marginBottom: '16px' }}>
+            <p style={{ color: '#64748B', marginBottom: '16px' }}>
               Créez votre première campagne marketing pour promouvoir vos voyages
             </p>
             <Link href="/pro/marketing/creer">
@@ -169,7 +169,7 @@ export default function MarketingPage() {
         )}
 
         {campaigns.length > 0 && (
-          <div style={{ marginTop: '32px', fontSize: '14px', color: '#8896A6', textAlign: 'center' }}>
+          <div style={{ marginTop: '32px', fontSize: '14px', color: '#64748B', textAlign: 'center' }}>
             {campaigns.length} campagne{campaigns.length > 1 ? 's' : ''}
           </div>
         )}

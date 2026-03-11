@@ -66,7 +66,7 @@ export default function PublicError({
       </div>
 
       {error.digest && (
-        <p className="text-xs mt-8" style={{ color: '#A0AEC0' }}>
+        <p className="text-xs mt-8" style={{ color: '#6B7280' }}>
           Réf. erreur : {error.digest}
         </p>
       )}

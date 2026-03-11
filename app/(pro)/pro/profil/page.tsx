@@ -135,7 +135,7 @@ export default function ProfilePage() {
         {/* Header */}
         <div>
           <h1 className="pro-page-title">Mon Profil</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>Gérez les informations de votre profil professionnel</p>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez les informations de votre profil professionnel</p>
         </div>
 
         {error && (

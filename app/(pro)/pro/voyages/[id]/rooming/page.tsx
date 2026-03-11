@@ -244,7 +244,7 @@ export default function RoomingPage() {
         <div className="pro-panel">
           <div className="pro-panel-header">
             <h3 className="pro-panel-title">Chambres réservées</h3>
-            <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Détails et assignation</p>
+            <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Détails et assignation</p>
           </div>
           <div className="pro-panel-body">
             <RoomingTable

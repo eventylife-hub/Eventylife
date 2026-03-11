@@ -209,7 +209,7 @@ export default function HotelBlocksPage() {
             <div className="pro-panel" style={{ border: '2px solid #0077B6' }}>
               <div className="pro-panel-header">
                 <h3 className="pro-panel-title">Modifier bloc</h3>
-                <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Mettre à jour les détails du bloc</p>
+                <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Mettre à jour les détails du bloc</p>
               </div>
               <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>

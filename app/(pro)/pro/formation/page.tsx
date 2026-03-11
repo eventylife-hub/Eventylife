@@ -104,7 +104,7 @@ export default function FormationPage() {
         {/* Header */}
         <div style={{ marginBottom: '32px' }}>
           <h1 className="pro-page-title">Formation Pro</h1>
-          <p style={{ color: '#8896A6', marginTop: '8px' }}>
+          <p style={{ color: '#64748B', marginTop: '8px' }}>
             Apprenez à maîtriser la plateforme Eventy Life avec nos modules interactifs
           </p>
         </div>
@@ -172,7 +172,7 @@ export default function FormationPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
             <div>
               <h2 className="pro-panel-title" style={{ marginBottom: '4px' }}>Votre progression</h2>
-              <p style={{ color: '#8896A6', fontSize: '14px' }}>
+              <p style={{ color: '#64748B', fontSize: '14px' }}>
                 {completedCount} sur {moduleCount} modules complétés
               </p>
             </div>
@@ -192,7 +192,7 @@ export default function FormationPage() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '14px' }}>
-            <span style={{ color: '#8896A6' }}>Progression globale</span>
+            <span style={{ color: '#64748B' }}>Progression globale</span>
             <span style={{ fontWeight: 600, color: 'var(--pro-ocean)' }}>{Math.round(completionPercentage)}%</span>
           </div>
         </div>
@@ -223,10 +223,10 @@ export default function FormationPage() {
                 {/* Module Content */}
                 <div style={{ padding: '24px' }}>
                   <h3 style={{ fontWeight: 600, color: '#0A1628', fontSize: '16px', marginBottom: '8px' }}>{module.title}</h3>
-                  <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '16px' }}>{module.description}</p>
+                  <p style={{ fontSize: '14px', color: '#64748B', marginBottom: '16px' }}>{module.description}</p>
 
                   {/* Duration Badge */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#8896A6', marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#64748B', marginBottom: '16px' }}>
                     <Clock className="w-4 h-4" />
                     {module.duration} minutes
                   </div>
@@ -263,7 +263,7 @@ export default function FormationPage() {
           <div style={{ marginTop: '32px', background: 'linear-gradient(to right, #E0FFF5, #E0FFF5)', border: '2px solid #06D6A0', borderRadius: '8px', padding: '32px', textAlign: 'center' }}>
             <Award className="w-12 h-12" style={{ color: 'var(--pro-mint)', margin: '0 auto 16px' }} />
             <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Félicitations!</h2>
-            <p style={{ color: '#8896A6', marginBottom: '24px' }}>
+            <p style={{ color: '#64748B', marginBottom: '24px' }}>
               Vous avez complété tous les modules de formation. Vous êtes maintenant prêt(e) à créer vos
               voyages!
             </p>

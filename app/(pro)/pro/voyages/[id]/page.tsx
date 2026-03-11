@@ -373,7 +373,7 @@ export default function VoyageDashboardPage() {
               Réservations
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.totalReservations}</div>
-            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Total des réservations</p>
+            <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0 }}>Total des réservations</p>
           </div>
 
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
@@ -382,7 +382,7 @@ export default function VoyageDashboardPage() {
               Chambres confirmées
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.confirmedRooms}</div>
-            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Confirmées et payées</p>
+            <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0 }}>Confirmées et payées</p>
           </div>
 
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
@@ -391,7 +391,7 @@ export default function VoyageDashboardPage() {
               Revenu TTC
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{formatPrice(dashboard.revenueTTC)}</div>
-            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Chiffre d&apos;affaires</p>
+            <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0 }}>Chiffre d&apos;affaires</p>
           </div>
 
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
@@ -400,7 +400,7 @@ export default function VoyageDashboardPage() {
               Taux d&apos;occupation
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.occupancyRate}%</div>
-            <p style={{ fontSize: '0.75rem', color: '#8896A6', margin: 0 }}>Capacité utilisée</p>
+            <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0 }}>Capacité utilisée</p>
           </div>
         </div>
 

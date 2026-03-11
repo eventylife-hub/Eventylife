@@ -90,7 +90,7 @@ export default function ProReservationsPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px', justifyContent: 'space-between' }}>
           <div>
             <h1 className="pro-page-title">Reservations</h1>
-            <p style={{ color: '#8896A6', marginTop: '4px' }}>Gerez les reservations de vos voyages</p>
+            <p style={{ color: '#64748B', marginTop: '4px' }}>Gerez les reservations de vos voyages</p>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
             <button type="button"
@@ -109,7 +109,7 @@ export default function ProReservationsPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', flex: 1 }}>
               <div style={{ position: 'relative', flex: 1 }}>
-                <Search className="w-4 h-4" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#8896A6' }} />
+                <Search className="w-4 h-4" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }} />
                 <input
                   type="text"
                   value={search}
@@ -177,9 +177,9 @@ export default function ProReservationsPage() {
           <>
             {filtered.length === 0 ? (
               <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
-                <Users className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
-                <p style={{ color: '#8896A6', fontWeight: 500 }}>Aucune reservation trouvee</p>
-                <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>
+                <Users className="w-12 h-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
+                <p style={{ color: '#64748B', fontWeight: 500 }}>Aucune reservation trouvee</p>
+                <p style={{ fontSize: '14px', color: '#64748B', marginTop: '4px' }}>
                   Les reservations apparaitront ici quand des clients reserveront vos voyages.
                 </p>
               </div>
@@ -211,7 +211,7 @@ export default function ProReservationsPage() {
                             {STATUS_LABELS[resa.status] || resa.status}
                           </span>
                         </div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px', fontSize: '14px', color: '#8896A6' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px', fontSize: '14px', color: '#64748B' }}>
                           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <MapPin className="w-3.5 h-3.5" />
                             {resa.voyageTitle}
@@ -229,7 +229,7 @@ export default function ProReservationsPage() {
                           </span>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5" style={{ color: '#8896A6' }} />
+                      <ChevronRight className="w-5 h-5" style={{ color: '#64748B' }} />
                     </div>
                   </Link>
                 ))}
@@ -242,25 +242,25 @@ export default function ProReservationsPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px', textAlign: 'center' }}>
                   <div>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{filtered.length}</p>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Total</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Total</p>
                   </div>
                   <div>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-mint)' }}>
                       {filtered.filter((r) => r.status === 'CONFIRMED').length}
                     </p>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Confirmees</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Confirmees</p>
                   </div>
                   <div>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-sun)' }}>
                       {filtered.filter((r) => r.status === 'PENDING').length}
                     </p>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>En attente</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>En attente</p>
                   </div>
                   <div>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-ocean)' }}>
                       {filtered.reduce((sum, r) => sum + r.passengers, 0)}
                     </p>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Passagers</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Passagers</p>
                   </div>
                 </div>
               </div>

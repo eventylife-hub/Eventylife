@@ -150,12 +150,12 @@ export default function AboutPage() {
                 manque d&apos;humanité. Trop souvent, les voyageurs se retrouvent
                 livrés à eux-mêmes, sans accompagnement réel.
               </p>
-              <p className="text-base leading-relaxed mb-4" style={{ color: '#718096' }}>
+              <p className="text-base leading-relaxed mb-4" style={{ color: '#64748B' }}>
                 Notre réponse : un accompagnement humain porte-à-porte. Un
                 accompagnateur vous attend près de chez vous, voyage avec vous,
                 et reste votre référent tout au long du séjour.
               </p>
-              <p className="text-base leading-relaxed" style={{ color: '#718096' }}>
+              <p className="text-base leading-relaxed" style={{ color: '#64748B' }}>
                 Que vous voyagiez seul, en couple ou en famille, vous faites
                 partie d&apos;un groupe bienveillant où chacun trouve sa place.
               </p>
@@ -194,7 +194,7 @@ export default function AboutPage() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-sm" style={{ color: '#718096' }}>
+                <div className="text-sm" style={{ color: '#64748B' }}>
                   {stat.label}
                 </div>
               </div>
@@ -251,7 +251,7 @@ export default function AboutPage() {
                 >
                   {value.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: '#718096' }}>
+                <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>
                   {value.description}
                 </p>
               </div>
@@ -314,7 +314,7 @@ export default function AboutPage() {
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: '#718096' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>
                     {step.description}
                   </p>
                 </div>

@@ -340,7 +340,7 @@ export default function FAQPage() {
         {searchQuery && (
           <p
             className="text-center mb-6"
-            style={{ color: '#718096', fontSize: '0.875rem' }}
+            style={{ color: '#64748B', fontSize: '0.875rem' }}
           >
             {totalResults} résultat{totalResults !== 1 ? 's' : ''} pour «{' '}
             <strong style={{ color: 'var(--terra, #C75B39)' }}>
@@ -437,7 +437,7 @@ export default function FAQPage() {
                           >
                             <p
                               className="text-base leading-relaxed"
-                              style={{ color: '#718096' }}
+                              style={{ color: '#64748B' }}
                             >
                               {item.a}
                             </p>
@@ -467,7 +467,7 @@ export default function FAQPage() {
             >
               Aucune question trouvée
             </p>
-            <p className="mb-4" style={{ color: '#718096' }}>
+            <p className="mb-4" style={{ color: '#64748B' }}>
               Essayez avec d&apos;autres termes ou réinitialisez les filtres.
             </p>
             <button type="button"

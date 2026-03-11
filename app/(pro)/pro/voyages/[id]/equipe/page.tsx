@@ -328,7 +328,7 @@ export default function EquipePage() {
             <Users className="w-5 h-5" />
             Membres de l'équipe
           </h3>
-          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>{team.length} membre(s)</p>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>{team.length} membre(s)</p>
         </div>
         <div className="pro-panel-body">
           {team.length > 0 ? (
@@ -414,7 +414,7 @@ export default function EquipePage() {
             <Briefcase className="w-5 h-5" />
             Préalables avant lancement
           </h3>
-          <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Éléments à valider avant la publication</p>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Éléments à valider avant la publication</p>
         </div>
         <div className="pro-panel-body">
           <div className="space-y-3">

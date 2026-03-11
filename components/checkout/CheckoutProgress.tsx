@@ -29,7 +29,7 @@ export function CheckoutProgress({ currentStep }: CheckoutProgressProps) {
               fontSize: '14px',
               transition: 'all 0.3s ease',
               background: step.number <= currentStep ? 'var(--terra, #C75B39)' : '#E2E8F0',
-              color: step.number <= currentStep ? '#FFFFFF' : '#718096',
+              color: step.number <= currentStep ? '#FFFFFF' : '#64748B',
               boxShadow: step.number === currentStep ? '0 0 0 4px rgba(199,91,57,0.2)' : 'none',
             }}>
               {step.number < currentStep ? '✓' : step.number}
@@ -38,7 +38,7 @@ export function CheckoutProgress({ currentStep }: CheckoutProgressProps) {
             <span style={{
               fontSize: '12px',
               fontWeight: step.number === currentStep ? 700 : 500,
-              color: step.number <= currentStep ? 'var(--navy, #1A1A2E)' : '#A0AEC0',
+              color: step.number <= currentStep ? 'var(--navy, #1A1A2E)' : '#6B7280',
               marginLeft: '8px',
               whiteSpace: 'nowrap',
             }}>

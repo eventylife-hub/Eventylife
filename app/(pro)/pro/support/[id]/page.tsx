@@ -64,7 +64,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; bgColor: str
   },
   CLOSED: {
     label: 'Fermé',
-    color: '#8896A6',
+    color: '#64748B',
     bgColor: '#F0F4F9',
   },
 };
@@ -73,7 +73,7 @@ const PRIORITY_CONFIG: Record<string, { label: string; color: string }> = {
   P0: { label: 'Critique', color: '#dc2626' },
   P1: { label: 'Haute', color: 'var(--pro-coral)' },
   P2: { label: 'Normale', color: 'var(--pro-sun)' },
-  P3: { label: 'Basse', color: '#8896A6' },
+  P3: { label: 'Basse', color: '#64748B' },
 };
 
 export default function TicketDetailPage() {
@@ -370,7 +370,7 @@ export default function TicketDetailPage() {
             Retour
           </button>
           <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '48px', paddingBottom: '48px' }}>
-            <AlertCircle className="w-12 h-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+            <AlertCircle className="w-12 h-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
             <p style={{ color: '#0A1628', fontSize: '16px', fontWeight: 500 }}>
               Ticket non trouvé
             </p>
@@ -400,14 +400,14 @@ export default function TicketDetailPage() {
             <h1 className="pro-page-title" style={{ marginBottom: '16px' }}>
               {ticket.subject}
             </h1>
-            <p style={{ color: '#8896A6', fontSize: '14px' }}>
+            <p style={{ color: '#64748B', fontSize: '14px' }}>
               Ticket #{ticket.id} · Créé le {formatDate(ticket.createdAt)} par {ticket.createdBy}
             </p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px', borderTop: '1px solid #E6EAEF', paddingTop: '20px' }}>
             <div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '8px' }}>État</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '8px' }}>État</p>
               <div
                 style={{
                   display: 'inline-flex',
@@ -425,7 +425,7 @@ export default function TicketDetailPage() {
             </div>
 
             <div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '8px' }}>Priorité</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '8px' }}>Priorité</p>
               <div
                 style={{
                   display: 'inline-block',
@@ -442,14 +442,14 @@ export default function TicketDetailPage() {
             </div>
 
             <div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '8px' }}>Catégorie</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '8px' }}>Catégorie</p>
               <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>
                 {ticket.category}
               </p>
             </div>
 
             <div>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '8px' }}>Dernière mise à jour</p>
+              <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '8px' }}>Dernière mise à jour</p>
               <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>
                 {formatDate(ticket.updatedAt)}
               </p>
@@ -458,7 +458,7 @@ export default function TicketDetailPage() {
 
           {ticket.description && (
             <div style={{ borderTop: '1px solid #E6EAEF', paddingTop: '20px', marginTop: '20px' }}>
-              <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px', fontWeight: 600 }}>
+              <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '12px', fontWeight: 600 }}>
                 Description
               </p>
               <p style={{ fontSize: '14px', color: '#0A1628', lineHeight: 1.6, whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
@@ -496,7 +496,7 @@ export default function TicketDetailPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
           {ticket.messages.length === 0 ? (
             <div className="pro-panel" style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <MessageSquare className="w-8 h-8" style={{ color: '#8896A6', margin: '0 auto 12px' }} />
+              <MessageSquare className="w-8 h-8" style={{ color: '#64748B', margin: '0 auto 12px' }} />
               <p style={{ color: '#0A1628' }}>
                 Aucun message pour le moment
               </p>
@@ -550,7 +550,7 @@ export default function TicketDetailPage() {
                         <p
                           style={{
                             fontSize: '12px',
-                            color: isSupport ? '#8896A6' : 'rgba(255,255,255,0.7)',
+                            color: isSupport ? '#64748B' : 'rgba(255,255,255,0.7)',
                             margin: '2px 0 0 0',
                           }}
                         >

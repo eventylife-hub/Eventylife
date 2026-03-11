@@ -211,7 +211,7 @@ export default function CampagneDetailPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
           <div>
             <h1 style={{ fontSize: '28px', fontWeight: 600, color: '#0A1628' }}>{campaign.title}</h1>
-            <p style={{ color: '#8896A6', marginTop: '8px' }}>
+            <p style={{ color: '#64748B', marginTop: '8px' }}>
               Statut: <span style={{ fontWeight: 600, textTransform: 'capitalize', color: '#0A1628' }}>{campaign.status}</span>
             </p>
           </div>
@@ -285,29 +285,29 @@ export default function CampagneDetailPage() {
                 <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Statistiques</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
                   <div>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Impressions</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Impressions</p>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.impressions}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Clics</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Clics</p>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.clicks}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>CTR</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>CTR</p>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.ctr}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Conversions</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Conversions</p>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>{metrics.conversions}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Budget</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Budget</p>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>
                       {formatPrice(metrics.budget)}
                     </p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '14px', color: '#8896A6' }}>Dépensé</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>Dépensé</p>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628' }}>
                       {formatPrice(metrics.spent)}
                     </p>
@@ -322,18 +322,18 @@ export default function CampagneDetailPage() {
             <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#0A1628', marginBottom: '16px' }}>Informations</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
-                <p style={{ fontSize: '14px', color: '#8896A6' }}>Date de création</p>
+                <p style={{ fontSize: '14px', color: '#64748B' }}>Date de création</p>
                 <p style={{ color: '#0A1628' }}>{formatDate(campaign.createdAt)}</p>
               </div>
               {campaign.startDate && (
                 <div>
-                  <p style={{ fontSize: '14px', color: '#8896A6' }}>Début prévue</p>
+                  <p style={{ fontSize: '14px', color: '#64748B' }}>Début prévue</p>
                   <p style={{ color: '#0A1628' }}>{formatDate(campaign.startDate)}</p>
                 </div>
               )}
               {campaign.endDate && (
                 <div>
-                  <p style={{ fontSize: '14px', color: '#8896A6' }}>Fin prévue</p>
+                  <p style={{ fontSize: '14px', color: '#64748B' }}>Fin prévue</p>
                   <p style={{ color: '#0A1628' }}>{formatDate(campaign.endDate)}</p>
                 </div>
               )}
