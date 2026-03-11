@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -223,13 +222,20 @@ export default function InviterPage() {
                   />
                 </div>
 
-                <Button
+                <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                  className="w-full text-white font-semibold transition-all"
                   style={{
                     backgroundColor: 'var(--terra, #C75B39)',
-                    borderRadius: '10px',
+                    color: 'white',
+                    borderRadius: '12px',
+                    fontWeight: 700,
+                    padding: '0.75rem 1.5rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '0.95rem',
+                    width: '100%',
                   }}
                   onMouseEnter={(e) => {
                     if (!submitting) {
@@ -250,7 +256,7 @@ export default function InviterPage() {
                   ) : (
                     'Envoyer invitation'
                   )}
-                </Button>
+                </button>
               </form>
             </CardContent>
           </Card>
@@ -271,13 +277,19 @@ export default function InviterPage() {
                 </p>
               </div>
 
-              <Button
+              <button
                 onClick={handleCopyCode}
-                className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                className="w-full text-white font-semibold transition-all"
                 style={{
                   backgroundColor: codeCopied ? '#166534' : 'var(--terra, #C75B39)',
-                  borderRadius: '10px',
+                  color: 'white',
+                  borderRadius: '12px',
+                  fontWeight: 700,
+                  padding: '0.75rem 1.5rem',
                   border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  width: '100%',
                 }}
                 onMouseEnter={(e) => {
                   if (!codeCopied) {
@@ -303,7 +315,7 @@ export default function InviterPage() {
                     Copier le code
                   </>
                 )}
-              </Button>
+              </button>
 
               <div className="pt-4" style={{ borderTop: '1px solid #E5E0D8' }}>
                 <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Invitations en attente</h3>

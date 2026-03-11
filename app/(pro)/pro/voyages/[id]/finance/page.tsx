@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { FinanceSummary } from '@/components/finance/finance-summary';
 import { Download } from 'lucide-react';
@@ -182,23 +181,24 @@ export default function VoyageFinancePage() {
           <p style={{ color: '#4A5568', marginTop: '0.5rem' }}>Analyse détaillée CA, coûts et marges</p>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <Button
+          <button
+            type="button"
             onClick={() => handleExport('csv')}
             disabled={exporting}
-            variant="outline"
-            className="gap-2"
+            style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
           >
             <Download className="w-4 h-4" />
             CSV
-          </Button>
-          <Button
+          </button>
+          <button
+            type="button"
             onClick={() => handleExport('pdf')}
             disabled={exporting}
-            className="gap-2"
+            style={{ backgroundColor: 'var(--terra, #C75B39)', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.75rem 1.5rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
           >
             <Download className="w-4 h-4" />
             PDF
-          </Button>
+          </button>
         </div>
       </div>
 

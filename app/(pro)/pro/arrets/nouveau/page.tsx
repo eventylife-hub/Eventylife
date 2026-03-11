@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, MapPin, Save, Loader, AlertCircle, Upload } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 interface BusStopForm {
   publicName: string;
   internalName: string;
@@ -324,8 +323,20 @@ export default function NouvelArretPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="pro-btn-sun"
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: 'var(--pro-sun, #F59E0B)',
+                  color: 'white',
+                  borderRadius: '8px',
+                  fontWeight: 600,
+                  padding: '0.75rem 1.5rem',
+                  border: 'none',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                  fontSize: '0.95rem',
+                  opacity: loading ? 0.6 : 1,
+                }}
               >
                 {loading ? (
                   <Loader className="w-4 h-4 animate-spin" />

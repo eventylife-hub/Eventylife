@@ -8,7 +8,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';

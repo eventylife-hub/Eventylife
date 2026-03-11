@@ -8,7 +8,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -234,9 +233,9 @@ export default function RoomingPage() {
         <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p style={{ color: 'var(--terra, #DC2626)' }}>Erreur : {error}</p>
           <Link href={`/client/reservations/${reservationId}`}>
-            <Button variant="outline" className="ml-4 mt-4">
+            <button className="ml-4 mt-4" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}>
               Retour à la réservation
-            </Button>
+            </button>
           </Link>
         </div>
       </div>
@@ -252,9 +251,9 @@ export default function RoomingPage() {
       {/* Header */}
       <div>
         <Link href={`/client/reservations/${reservationId}`}>
-          <Button variant="outline" size="sm" className="mb-4" style={{ color: 'var(--terra, #C75B39)', borderColor: 'var(--terra, #C75B39)' }}>
+          <button className="mb-4" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}>
             ← Retour
-          </Button>
+          </button>
         </Link>
         <h1 className="text-4xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Détails de la chambre</h1>
         <p style={{ color: '#6B7280' }}>{rooming.hotelName}</p>
@@ -411,13 +410,22 @@ export default function RoomingPage() {
               />
             </div>
 
-            <Button
-              variant="primary"
+            <button
               type="submit"
               disabled={preferencesLoading || isCutoffPassed}
+              style={{
+                backgroundColor: 'var(--terra, #C75B39)',
+                color: 'white',
+                borderRadius: '12px',
+                fontWeight: 700,
+                padding: '0.75rem 1.5rem',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '0.95rem',
+              }}
             >
               {preferencesLoading ? 'Sauvegarde...' : 'Sauvegarder les préférences'}
-            </Button>
+            </button>
 
             {preferencesMessage && (
               <div
@@ -481,13 +489,22 @@ export default function RoomingPage() {
                 </div>
               )}
 
-              <Button
-                variant="primary"
+              <button
                 type="submit"
                 disabled={documentsLoading || documents.length === 0}
+                style={{
+                  backgroundColor: 'var(--terra, #C75B39)',
+                  color: 'white',
+                  borderRadius: '12px',
+                  fontWeight: 700,
+                  padding: '0.75rem 1.5rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                }}
               >
                 {documentsLoading ? 'Upload...' : 'Uploader les documents'}
-              </Button>
+              </button>
 
               {documentsMessage && (
                 <div

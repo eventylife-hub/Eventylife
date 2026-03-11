@@ -8,7 +8,6 @@
 
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { api } from '@/lib/api';

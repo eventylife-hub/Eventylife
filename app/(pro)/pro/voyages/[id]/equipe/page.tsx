@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import {
   Plus,
   Mail,
@@ -368,32 +367,31 @@ export default function EquipePage() {
 
                     {deleteConfirming === member.id ? (
                       <div className="flex gap-2">
-                        <Button
+                        <button
+                          type="button"
                           onClick={() => handleRemove(member.id)}
                           disabled={deletingId === member.id}
-                          size="sm"
-                          variant="destructive"
+                          style={{ backgroundColor: '#DC2626', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.5rem 1rem', border: 'none', cursor: 'pointer', fontSize: '0.85rem' }}
                         >
                           Confirmer
-                        </Button>
-                        <Button
+                        </button>
+                        <button
+                          type="button"
                           onClick={() => setDeleteConfirming(null)}
-                          size="sm"
-                          variant="outline"
+                          style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.85rem' }}
                         >
                           Annuler
-                        </Button>
+                        </button>
                       </div>
                     ) : (
-                      <Button
+                      <button
+                        type="button"
                         onClick={() => setDeleteConfirming(member.id)}
-                        size="sm"
-                        variant="ghost"
-                        className="text-red-600 hover:text-red-700"
+                        style={{ backgroundColor: 'transparent', color: '#DC2626', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: 'none', cursor: 'pointer', fontSize: '0.875rem' }}
                         aria-label="Supprimer le membre"
                       >
                         <Trash2 className="w-4 h-4" />
-                      </Button>
+                      </button>
                     )}
                   </div>
                 );

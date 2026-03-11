@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -150,13 +149,20 @@ export default function RejoindrePage() {
                 </p>
               </div>
 
-              <Button
+              <button
                 type="submit"
                 disabled={loading || joining || !code.trim()}
-                className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                className="w-full text-white font-semibold transition-all"
                 style={{
                   backgroundColor: 'var(--terra, #C75B39)',
-                  borderRadius: '10px',
+                  color: 'white',
+                  borderRadius: '12px',
+                  fontWeight: 700,
+                  padding: '0.75rem 1.5rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  width: '100%',
                 }}
                 onMouseEnter={(e) => {
                   if (!loading && !joining && code.trim()) {
@@ -177,7 +183,7 @@ export default function RejoindrePage() {
                 ) : (
                   'Vérifier le code'
                 )}
-              </Button>
+              </button>
             </form>
 
             {/* Aperçu du groupe */}
@@ -210,13 +216,20 @@ export default function RejoindrePage() {
                   </p>
                 </div>
 
-                <Button
+                <button
                   onClick={handleJoin}
                   disabled={joining}
-                  className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                  className="w-full text-white font-semibold transition-all"
                   style={{
                     backgroundColor: 'var(--terra, #C75B39)',
-                    borderRadius: '10px',
+                    color: 'white',
+                    borderRadius: '12px',
+                    fontWeight: 700,
+                    padding: '0.75rem 1.5rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '0.95rem',
+                    width: '100%',
                   }}
                   onMouseEnter={(e) => {
                     if (!joining) {
@@ -237,7 +250,7 @@ export default function RejoindrePage() {
                   ) : (
                     'Rejoindre le groupe'
                   )}
-                </Button>
+                </button>
               </div>
             )}
           </CardContent>

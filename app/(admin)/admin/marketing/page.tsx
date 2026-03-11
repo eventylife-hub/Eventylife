@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
@@ -230,10 +229,10 @@ export default function AdminMarketingPage() {
           <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
           <p className="text-red-700 font-medium mb-2">{error}</p>
           <p className="text-red-600 text-sm mb-4">Vérifiez votre connexion et réessayez.</p>
-          <Button onClick={fetchStats} variant="outline" className="gap-2">
+          <button onClick={fetchStats} className="gap-2" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             <RefreshCw className="w-4 h-4" />
             Réessayer
-          </Button>
+          </button>
         </div>
       </div>
     );
@@ -255,7 +254,7 @@ export default function AdminMarketingPage() {
         <Alert variant="destructive">
           <AlertDescription className="flex justify-between items-center">
             <span>{error}</span>
-            <Button size="sm" variant="outline" onClick={() => setError(null)}>Fermer</Button>
+            <button size="sm" onClick={() => setError(null)} style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.85rem' }}>Fermer</button>
           </AlertDescription>
         </Alert>
       )}
@@ -430,13 +429,22 @@ export default function AdminMarketingPage() {
               </div>
 
               <div className="flex justify-end">
-                <Button
-                  variant="default"
+                <button
                   onClick={handleSaveAttributionSettings}
                   disabled={savingAttribution}
+                  style={{
+                    backgroundColor: 'var(--terra, #C75B39)',
+                    color: 'white',
+                    borderRadius: '12px',
+                    fontWeight: 700,
+                    padding: '0.75rem 1.5rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '0.95rem',
+                  }}
                 >
                   {savingAttribution ? 'Enregistrement...' : 'Enregistrer les paramètres'}
-                </Button>
+                </button>
               </div>
             </CardContent>
           </Card>

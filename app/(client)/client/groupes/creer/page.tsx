@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -268,13 +267,20 @@ export default function CreerGroupePage() {
                   </Label>
                 </div>
 
-                  <Button
+                  <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full text-white font-semibold transition-all hover:shadow-lg"
+                    className="w-full text-white font-semibold transition-all"
                     style={{
                       backgroundColor: 'var(--terra, #C75B39)',
-                      borderRadius: '10px',
+                      color: 'white',
+                      borderRadius: '12px',
+                      fontWeight: 700,
+                      padding: '0.75rem 1.5rem',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontSize: '0.95rem',
+                      width: '100%',
                     }}
                     onMouseEnter={(e) => {
                       if (!submitting) {
@@ -295,7 +301,7 @@ export default function CreerGroupePage() {
                     ) : (
                       'Créer le groupe'
                     )}
-                  </Button>
+                  </button>
                 </form>
               )}
             </CardContent>

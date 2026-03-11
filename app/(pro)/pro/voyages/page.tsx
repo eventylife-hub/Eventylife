@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { Plus, MapPin, Users, Clock, Grid, List, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils';
 const TABS = ['Brouillons', 'En révision', 'Publiés', 'Terminés', 'Annulés'];
 const STATUS_MAP: Record<string, string> = {

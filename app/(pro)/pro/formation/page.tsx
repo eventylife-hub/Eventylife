@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { CheckCircle2, Clock, BookOpen, Award, AlertCircle, RotateCcw } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
 export default function FormationPage() {
   const { formationModules, formationProgress, fetchFormationModules, fetchFormationProgress } =
     useProStore();

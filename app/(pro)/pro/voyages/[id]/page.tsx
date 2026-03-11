@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
   BarChart3,
@@ -152,13 +151,14 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
 
         <div className="flex flex-wrap gap-3">
           {travel.status === 'DRAFT' && (
-            <Button
+            <button
+              type="button"
               onClick={() => handleAction(`/pro/travels/${travel.id}/submit-p1`)}
               disabled={isLoading}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              style={{ backgroundColor: '#2563EB', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.75rem 1.5rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
             >
               {isLoading ? 'Envoi en cours...' : 'Soumettre Phase 1'}
-            </Button>
+            </button>
           )}
 
           {travel.status === 'PHASE1_REVIEW' && (
@@ -169,13 +169,14 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
           )}
 
           {travel.status === 'PHASE1_APPROVED' && (
-            <Button
+            <button
+              type="button"
               onClick={() => handleAction(`/pro/travels/${travel.id}/submit-p2`)}
               disabled={isLoading}
-              className="bg-purple-600 hover:bg-purple-700 text-white"
+              style={{ backgroundColor: '#9333EA', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.75rem 1.5rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
             >
               {isLoading ? 'Envoi en cours...' : 'Soumettre Phase 2'}
-            </Button>
+            </button>
           )}
 
           {travel.status === 'PHASE2_REVIEW' && (
@@ -186,34 +187,36 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
           )}
 
           {travel.status === 'PHASE2_APPROVED' && (
-            <Button
+            <button
+              type="button"
               onClick={() => handleAction(`/pro/travels/${travel.id}/publish`)}
               disabled={isLoading}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              style={{ backgroundColor: '#16A34A', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.75rem 1.5rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
             >
               {isLoading ? 'Publication en cours...' : 'Publier'}
-            </Button>
+            </button>
           )}
 
           {travel.status === 'PUBLISHED' && (
-            <Button
+            <button
+              type="button"
               onClick={() => setShowCancelConfirm(true)}
               disabled={isLoading || showCancelConfirm}
-              className="bg-red-600 hover:bg-red-700 text-white"
+              style={{ backgroundColor: '#DC2626', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.75rem 1.5rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
             >
               Annuler le voyage
-            </Button>
+            </button>
           )}
 
           {/* Duplicate button available for all statuses */}
-          <Button
+          <button
+            type="button"
             onClick={() => handleAction(`/pro/travels/${travel.id}/duplicate`)}
             disabled={isLoading}
-            variant="outline"
-            className="border-slate-300"
+            style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #CBD5E0', cursor: 'pointer', fontSize: '0.95rem' }}
           >
             {isLoading ? 'Duplication...' : 'Dupliquer'}
-          </Button>
+          </button>
 
           {/* Cancel confirmation dialog */}
           {showCancelConfirm && (
@@ -226,20 +229,22 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
                   Êtes-vous sûr de vouloir annuler ce voyage ? Cette action ne peut pas être annulée.
                 </p>
                 <div className="flex gap-3 justify-end">
-                  <Button
+                  <button
+                    type="button"
                     onClick={() => setShowCancelConfirm(false)}
-                    variant="outline"
                     disabled={isLoading}
+                    style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}
                   >
                     Non, garder le voyage
-                  </Button>
-                  <Button
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => handleAction(`/pro/travels/${travel.id}/cancel`, true)}
                     disabled={isLoading}
-                    className="bg-red-600 hover:bg-red-700 text-white"
+                    style={{ backgroundColor: '#DC2626', color: 'white', borderRadius: '12px', fontWeight: 700, padding: '0.75rem 1.5rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
                   >
                     {isLoading ? 'Annulation...' : 'Oui, annuler'}
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

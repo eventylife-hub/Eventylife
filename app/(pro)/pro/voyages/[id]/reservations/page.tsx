@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { formatPrice, formatDate } from '@/lib/utils';
 import {
   Download,
@@ -251,15 +250,15 @@ export default function ReservationsPage() {
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Réservations</h1>
           <p style={{ color: '#4A5568', marginTop: '0.5rem' }}>Gestion de toutes les réservations pour ce voyage</p>
         </div>
-        <Button
+        <button
+          type="button"
           onClick={handleExportCSV}
           disabled={exporting || filteredReservations.length === 0}
-          className="gap-2"
-          variant="outline"
+          style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
         >
           <Download className="w-4 h-4" />
           {exporting ? 'Export...' : 'Exporter CSV'}
-        </Button>
+        </button>
       </div>
 
       {/* Error Alert */}
