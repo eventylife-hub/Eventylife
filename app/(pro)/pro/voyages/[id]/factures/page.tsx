@@ -134,7 +134,7 @@ export default function InvoicesPage() {
       <p style={{ color: '#4A5568', marginBottom: '2rem' }}>Gestion des factures</p>
 
       {error && (
-        <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: '#E63946' }}>
+        <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: 'var(--pro-coral)' }}>
           {error}
         </div>
       )}
@@ -150,7 +150,7 @@ export default function InvoicesPage() {
           </div>
           <div style={{ background: '#F0E6D8', padding: '1rem', borderRadius: '0.5rem' }}>
             <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>Commission ({commissionRate}%)</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#E63946', margin: 0 }}>{formatPrice(commissionAmount)}</p>
+            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--pro-coral)', margin: 0 }}>{formatPrice(commissionAmount)}</p>
           </div>
         </div>
 
@@ -228,7 +228,7 @@ export default function InvoicesPage() {
                     <td style={{ padding: '1rem', textAlign: 'right' }}>
                       <button
                         onClick={() => handleDownloadClientInvoice(booking.id as string)}
-                        style={{ color: '#0077B6', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem', background: 'none', border: 'none', cursor: 'pointer' }}
+                        style={{ color: 'var(--pro-ocean)', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem', background: 'none', border: 'none', cursor: 'pointer' }}
                       >
                         Télécharger
                       </button>

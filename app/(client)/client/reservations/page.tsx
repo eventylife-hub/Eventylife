@@ -9,7 +9,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -37,8 +37,8 @@ const statusBadgeStyle = {
   HELD: { background: C.goldSoft, color: '#92400e' },
   PARTIALLY_PAID: { background: C.goldSoft, color: '#92400e' },
   DRAFT: { background: '#F3F4F6', color: '#4B5563' },
-  EXPIRED: { background: '#FEF2F2', color: '#DC2626' },
-  CANCELED: { background: '#FEF2F2', color: '#DC2626' },
+  EXPIRED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
+  CANCELED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
 };
 
 const statusLabels = {
@@ -104,8 +104,8 @@ export default function ReservationsPage() {
           <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes réservations</h1>
           <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos réservations de voyages</p>
         </div>
-        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
-          <p className="text-sm font-medium mb-4" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={() => fetchBookings()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"

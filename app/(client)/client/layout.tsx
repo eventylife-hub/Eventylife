@@ -11,7 +11,7 @@ const C = {
   navyLight: '#2D2D44',
   cream: '#FAF7F2',
   terra: '#C75B39',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   border: '#E5E0D8',
   muted: '#6B7280',

@@ -15,7 +15,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -137,7 +137,7 @@ export default function InviterPage() {
     return (
       <div className="min-h-screen p-4" style={{ backgroundColor: C.cream }}>
         <div className="mx-auto max-w-2xl">
-          <p style={{ color: '#DC2626' }}>{error || 'Groupe non trouvé'}</p>
+          <p style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Groupe non trouvé'}</p>
         </div>
       </div>
     );
@@ -161,9 +161,9 @@ export default function InviterPage() {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
-                  <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
-                    <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
-                    <p className="text-sm" style={{ color: '#DC2626' }}>{error}</p>
+                  <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+                    <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--terra, #DC2626)' }} />
+                    <p className="text-sm" style={{ color: 'var(--terra, #DC2626)' }}>{error}</p>
                   </div>
                 )}
 

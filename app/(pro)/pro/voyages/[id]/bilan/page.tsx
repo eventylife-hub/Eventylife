@@ -110,7 +110,7 @@ export default function TravelBilanPage() {
       <p style={{ color: '#4A5568', marginBottom: '2rem' }}>Bilan de voyage</p>
 
       {error && (
-        <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: '#E63946' }}>
+        <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: 'var(--pro-coral)' }}>
           {error}
         </div>
       )}

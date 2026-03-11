@@ -14,7 +14,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -111,9 +111,9 @@ export default function RejoindrePage() {
           <CardContent className="space-y-4">
             <form onSubmit={handleVerifyCode} className="space-y-4">
               {error && (
-                <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
-                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#DC2626' }} />
-                  <p className="text-sm" style={{ color: '#DC2626' }}>{error}</p>
+                <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--terra, #DC2626)' }} />
+                  <p className="text-sm" style={{ color: 'var(--terra, #DC2626)' }}>{error}</p>
                 </div>
               )}
 

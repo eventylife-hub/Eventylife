@@ -495,11 +495,11 @@ function InclusSection() {
           </div>
         </div>
         <div style={{ padding: '4px 0 4px 20px', borderLeft: `1.5px solid ${C.border}` }}>
-          <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#EF4444', marginBottom: 10 }}>✗ Non inclus</h4>
+          <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: 'var(--terra, #EF4444)', marginBottom: 10 }}>✗ Non inclus</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {tripData.notIncluded.map((item, i) => (
               <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: C.navy }}>
-                <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: '#FEE2E2', color: '#EF4444' }}>✗</div>
+                <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: '#FEE2E2', color: 'var(--terra, #EF4444)' }}>✗</div>
                 {item}
               </div>
             ))}
@@ -587,7 +587,7 @@ function OccurrencesSection() {
                 <div style={{ fontSize: 14, fontWeight: 700, color: C.navy }}>{occ.dates}</div>
                 <div style={{ fontSize: 12, color: C.muted }}>Départ Bordeaux · Retour Bordeaux</div>
                 <div style={{ height: 5, background: '#E5E7EB', borderRadius: 3, marginTop: 5, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', background: isFull ? '#EF4444' : C.terra, borderRadius: 3, width: `${occ.fill}%`, transition: 'width .4s' }} />
+                  <div style={{ height: '100%', background: isFull ? 'var(--terra, #EF4444)' : C.terra, borderRadius: 3, width: `${occ.fill}%`, transition: 'width .4s' }} />
                 </div>
               </div>
               <div style={{ textAlign: 'right', fontSize: 12, color: C.muted }}>

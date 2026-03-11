@@ -125,10 +125,10 @@ export default function MotDePasseOubliePage() {
             style={{
               marginBottom: '1rem',
               padding: '0.75rem',
-              backgroundColor: '#FEF2F2',
+              backgroundColor: 'var(--terra-soft, #FEF2F2)',
               border: '1.5px solid #FECACA',
               borderRadius: '10px',
-              color: '#DC2626',
+              color: 'var(--terra, #DC2626)',
               fontSize: '0.875rem',
             }}
           >
@@ -154,7 +154,7 @@ export default function MotDePasseOubliePage() {
                   width: '100%',
                   padding: '0.75rem 1rem',
                   backgroundColor: '#FFFFFF',
-                  border: `1.5px solid ${errors.email ? '#DC2626' : '#E5E0D8'}`,
+                  border: `1.5px solid ${errors.email ? 'var(--terra, #DC2626)' : '#E5E0D8'}`,
                   borderRadius: '10px',
                   fontSize: '0.875rem',
                   outline: 'none',
@@ -173,7 +173,7 @@ export default function MotDePasseOubliePage() {
                 }}
               />
               {errors.email && (
-                <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem', margin: '0.25rem 0 0 0' }}>
+                <p style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', marginTop: '0.25rem', margin: '0.25rem 0 0 0' }}>
                   {errors.email}
                 </p>
               )}

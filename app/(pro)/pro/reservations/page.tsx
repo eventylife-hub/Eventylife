@@ -131,7 +131,7 @@ export default function ProReservationsPage() {
                     fontSize: '12px',
                     fontWeight: 500,
                     transition: 'all 0.2s',
-                    backgroundColor: statusFilter === status ? '#0077B6' : '#F0F0F0',
+                    backgroundColor: statusFilter === status ? 'var(--pro-ocean)' : '#F0F0F0',
                     color: statusFilter === status ? 'white' : '#4A5568',
                     border: 'none',
                     cursor: 'pointer'
@@ -148,8 +148,8 @@ export default function ProReservationsPage() {
         {error && (
           <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <AlertCircle className="w-5 h-5" style={{ color: '#E63946' }} />
-              <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
+              <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)' }} />
+              <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
             </div>
             <button onClick={fetchReservations} className="pro-btn-outline">
               Reessayer
@@ -199,7 +199,7 @@ export default function ProReservationsPage() {
                               fontSize: '12px',
                               fontWeight: 500,
                               backgroundColor: resa.status === 'CONFIRMED' ? '#E0FFF5' : resa.status === 'PENDING' ? '#FFF0E8' : resa.status === 'CANCELLED' ? '#FFE0E3' : '#E8F7FC',
-                              color: resa.status === 'CONFIRMED' ? '#06D6A0' : resa.status === 'PENDING' ? '#FF6B35' : resa.status === 'CANCELLED' ? '#E63946' : '#0077B6'
+                              color: resa.status === 'CONFIRMED' ? 'var(--pro-mint)' : resa.status === 'PENDING' ? 'var(--pro-sun)' : resa.status === 'CANCELLED' ? 'var(--pro-coral)' : 'var(--pro-ocean)'
                             }}
                           >
                             {STATUS_LABELS[resa.status] || resa.status}
@@ -239,19 +239,19 @@ export default function ProReservationsPage() {
                     <p style={{ fontSize: '14px', color: '#8896A6' }}>Total</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#06D6A0' }}>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-mint)' }}>
                       {filtered.filter((r) => r.status === 'CONFIRMED').length}
                     </p>
                     <p style={{ fontSize: '14px', color: '#8896A6' }}>Confirmees</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#FF6B35' }}>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-sun)' }}>
                       {filtered.filter((r) => r.status === 'PENDING').length}
                     </p>
                     <p style={{ fontSize: '14px', color: '#8896A6' }}>En attente</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '24px', fontWeight: 600, color: '#0077B6' }}>
+                    <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-ocean)' }}>
                       {filtered.reduce((sum, r) => sum + r.passengers, 0)}
                     </p>
                     <p style={{ fontSize: '14px', color: '#8896A6' }}>Passagers</p>

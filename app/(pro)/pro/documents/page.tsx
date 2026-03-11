@@ -169,7 +169,7 @@ export default function ProDocumentsPage() {
         </div>
 
         {error && (
-          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', color: '#E63946', border: '1px solid #FFE0E3' }}>
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', color: 'var(--pro-coral)', border: '1px solid #FFE0E3' }}>
             {error}
           </div>
         )}
@@ -223,7 +223,7 @@ export default function ProDocumentsPage() {
                         </div>
                         <button
                           onClick={() => handleDownload(doc)}
-                          style={{ padding: '8px', color: '#0077B6', backgroundColor: 'transparent', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
+                          style={{ padding: '8px', color: 'var(--pro-ocean)', backgroundColor: 'transparent', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
                           title="Télécharger le document"
                         >
                           <Download className="h-5 w-5" />

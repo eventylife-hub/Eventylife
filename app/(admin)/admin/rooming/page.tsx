@@ -97,10 +97,10 @@ export default function AdminRoomingPage() {
   };
 
   const statusConfig = {
-    AVAILABLE: { label: 'Disponible', color: 'bg-green-100 text-green-800' },
-    OCCUPIED: { label: 'Occupée', color: 'bg-blue-100 text-blue-800' },
-    MAINTENANCE: { label: 'Maintenance', color: 'bg-gray-100 text-gray-800' },
-    HOLD: { label: 'En hold', color: 'bg-yellow-100 text-yellow-800' },
+    AVAILABLE: { label: 'Disponible', color: 'admin-badge admin-badge-success' },
+    OCCUPIED: { label: 'Occupée', color: 'admin-badge admin-badge-info' },
+    MAINTENANCE: { label: 'Maintenance', color: 'admin-badge admin-badge-neutral' },
+    HOLD: { label: 'En hold', color: 'admin-badge admin-badge-warning' },
   };
 
   const roomColumns: DataTableColumn<Room>[] = [

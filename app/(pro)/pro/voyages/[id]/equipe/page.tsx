@@ -211,8 +211,8 @@ export default function EquipePage() {
       {/* Error Alert */}
       {error && (
         <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946', flexShrink: 0 }} />
-          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+          <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: 'var(--pro-coral)', flexShrink: 0 }} />
+          <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
         </div>
       )}
 

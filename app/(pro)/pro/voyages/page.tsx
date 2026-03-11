@@ -94,7 +94,7 @@ export default function TravelsPage() {
               alignItems: 'center',
               gap: '0.5rem',
               padding: '0.75rem 1.5rem',
-              background: '#FF6B35',
+              background: 'var(--pro-sun)',
               color: 'white',
               borderRadius: '0.5rem',
               textDecoration: 'none',
@@ -104,7 +104,7 @@ export default function TravelsPage() {
               transition: 'background-color 0.2s',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = '#E55A24')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#FF6B35')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--pro-sun)')}
           >
             <Plus className="w-5 h-5" />
             Créer un voyage
@@ -135,7 +135,7 @@ export default function TravelsPage() {
                   fontWeight: '500',
                   whiteSpace: 'nowrap',
                   borderRadius: '0.5rem',
-                  background: activeTab === tab ? '#FF6B35' : '#FFFFFF',
+                  background: activeTab === tab ? 'var(--pro-sun)' : '#FFFFFF',
                   color: activeTab === tab ? '#FFFFFF' : '#4A5568',
                   border: 'none',
                   cursor: 'pointer',
@@ -159,7 +159,7 @@ export default function TravelsPage() {
               style={{
                 padding: '0.5rem',
                 borderRadius: '0.5rem',
-                background: viewMode === 'grid' ? '#FF6B35' : '#FFFFFF',
+                background: viewMode === 'grid' ? 'var(--pro-sun)' : '#FFFFFF',
                 color: viewMode === 'grid' ? '#FFFFFF' : '#4A5568',
                 border: 'none',
                 cursor: 'pointer',
@@ -176,7 +176,7 @@ export default function TravelsPage() {
               style={{
                 padding: '0.5rem',
                 borderRadius: '0.5rem',
-                background: viewMode === 'list' ? '#FF6B35' : '#FFFFFF',
+                background: viewMode === 'list' ? 'var(--pro-sun)' : '#FFFFFF',
                 color: viewMode === 'list' ? '#FFFFFF' : '#4A5568',
                 border: 'none',
                 cursor: 'pointer',
@@ -195,8 +195,8 @@ export default function TravelsPage() {
         {error && (
           <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-              <AlertCircle className="h-4 w-4" style={{ color: '#E63946', marginTop: '0.25rem', flexShrink: 0 }} />
-              <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)', marginTop: '0.25rem', flexShrink: 0 }} />
+              <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
             </div>
             <div style={{ marginTop: '1rem' }}>
               <button
@@ -215,7 +215,7 @@ export default function TravelsPage() {
                 style={{
                   padding: '0.5rem 1rem',
                   background: '#FFFFFF',
-                  color: '#E63946',
+                  color: 'var(--pro-coral)',
                   border: '1px solid #E63946',
                   borderRadius: '0.5rem',
                   cursor: 'pointer',
@@ -316,7 +316,7 @@ export default function TravelsPage() {
                         width: '100%',
                         padding: '0.5rem',
                         background: '#FFF0E8',
-                        color: '#FF6B35',
+                        color: 'var(--pro-sun)',
                         border: 'none',
                         borderRadius: '0.25rem',
                         cursor: 'pointer',
@@ -362,7 +362,7 @@ export default function TravelsPage() {
                         <td style={{ padding: '1rem 1.5rem' }}>
                           <Link
                             href={`/pro/voyages/${travel.id}`}
-                            style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem' }}
+                            style={{ color: 'var(--pro-sun)', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem' }}
                           >
                             Voir →
                           </Link>
@@ -380,7 +380,7 @@ export default function TravelsPage() {
                 <p style={{ color: '#4A5568', fontWeight: '500', marginBottom: '1rem' }}>Aucun voyage trouvé</p>
                 <Link
                   href="/pro/voyages/nouveau"
-                  style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500' }}
+                  style={{ color: 'var(--pro-sun)', textDecoration: 'none', fontWeight: '500' }}
                 >
                   Créer votre premier voyage →
                 </Link>

@@ -162,8 +162,8 @@ export default function RevenuesDashboardPage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h1 className="pro-page-title">Revenus</h1>
           <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <AlertCircle className="h-4 w-4" style={{ color: '#E63946' }} />
-            <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
+            <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
+            <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
           </div>
         </div>
       </div>
@@ -190,8 +190,8 @@ export default function RevenuesDashboardPage() {
         {error && (
           <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <AlertCircle className="h-4 w-4" style={{ color: '#E63946' }} />
-              <span style={{ color: '#E63946', fontSize: '14px' }}>{error}</span>
+              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
+              <span style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</span>
             </div>
             <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
               Fermer
@@ -212,7 +212,7 @@ export default function RevenuesDashboardPage() {
 
             <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
               <div style={{ fontSize: '14px', color: '#8896A6' }}>En attente de versement</div>
-              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#FF6B35' }}>
+              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: 'var(--pro-sun)' }}>
                 {formatPrice(summary.pendingAmount)}
               </div>
               <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>À traiter</p>
@@ -220,7 +220,7 @@ export default function RevenuesDashboardPage() {
 
             <div className="pro-panel" style={{ textAlign: 'center', padding: '24px' }}>
               <div style={{ fontSize: '14px', color: '#8896A6' }}>Versements réalisés</div>
-              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: '#06D6A0' }}>
+              <div style={{ fontSize: '28px', fontWeight: 600, marginTop: '12px', color: 'var(--pro-mint)' }}>
                 {formatPrice(summary.paidOutAmount)}
               </div>
               <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>Cumulé</p>
@@ -331,7 +331,7 @@ export default function RevenuesDashboardPage() {
                     fontSize: '14px',
                     fontWeight: 500,
                     backgroundColor: payout.status === 'PAID' ? '#E0FFF5' : payout.status === 'PENDING' ? '#FFF0E8' : '#FFE0E3',
-                    color: payout.status === 'PAID' ? '#06D6A0' : payout.status === 'PENDING' ? '#FF6B35' : '#E63946'
+                    color: payout.status === 'PAID' ? 'var(--pro-mint)' : payout.status === 'PENDING' ? 'var(--pro-sun)' : 'var(--pro-coral)'
                   }}>
                     {getPayoutStatusLabel(payout.status)}
                   </div>

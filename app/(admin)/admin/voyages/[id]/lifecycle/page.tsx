@@ -79,20 +79,20 @@ export default function TravelLifecyclePage() {
 
   const getStatusBadgeColor = (status: string) => {
     const colors: Record<string, string> = {
-      DRAFT: 'bg-gray-100 text-gray-800',
-      SUBMITTED: 'bg-yellow-100 text-yellow-800',
-      APPROVED_P1: 'bg-blue-100 text-blue-800',
-      APPROVED_P2: 'bg-blue-100 text-blue-800',
-      PUBLISHED: 'bg-purple-100 text-purple-800',
-      SALES_OPEN: 'bg-green-100 text-green-800',
-      DEPARTURE_CONFIRMED: 'bg-green-100 text-green-800',
-      IN_PROGRESS: 'bg-indigo-100 text-indigo-800',
+      DRAFT: 'admin-badge admin-badge-neutral',
+      SUBMITTED: 'admin-badge admin-badge-warning',
+      APPROVED_P1: 'admin-badge admin-badge-info',
+      APPROVED_P2: 'admin-badge admin-badge-info',
+      PUBLISHED: 'admin-badge admin-badge-violet',
+      SALES_OPEN: 'admin-badge admin-badge-success',
+      DEPARTURE_CONFIRMED: 'admin-badge admin-badge-success',
+      IN_PROGRESS: 'admin-badge admin-badge-violet',
       COMPLETED: 'bg-teal-100 text-teal-800',
-      CANCELED: 'bg-red-100 text-red-800',
-      NO_GO: 'bg-red-100 text-red-800',
+      CANCELED: 'admin-badge admin-badge-danger',
+      NO_GO: 'admin-badge admin-badge-danger',
     };
 
-    return colors[status] || 'bg-gray-100 text-gray-800';
+    return colors[status] || 'admin-badge admin-badge-neutral';
   };
 
   const getStatusLabel = (status: string) => {

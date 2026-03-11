@@ -160,8 +160,8 @@ export default function OnboardingPage() {
         {/* Error Message */}
         {error && (
           <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-            <AlertCircle className="w-5 h-5" style={{ color: '#E63946', flexShrink: 0, marginTop: '4px' }} />
-            <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+            <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)', flexShrink: 0, marginTop: '4px' }} />
+            <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
           </div>
         )}
 
@@ -192,14 +192,14 @@ export default function OnboardingPage() {
                       justifyContent: 'center',
                       fontWeight: 600,
                       fontSize: '14px',
-                      backgroundColor: isCompleted ? '#06D6A0' : isCurrent ? '#0077B6' : '#E0E0E0',
+                      backgroundColor: isCompleted ? 'var(--pro-mint)' : isCurrent ? 'var(--pro-ocean)' : '#E0E0E0',
                       color: (isCompleted || isCurrent) ? 'white' : '#8896A6'
                     }}
                   >
                     {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : step.number}
                   </div>
                   {idx < STEPS.length - 1 && (
-                    <div style={{ flex: 1, height: '2px', margin: '0 8px', backgroundColor: isCompleted ? '#06D6A0' : '#E0E0E0' }} />
+                    <div style={{ flex: 1, height: '2px', margin: '0 8px', backgroundColor: isCompleted ? 'var(--pro-mint)' : '#E0E0E0' }} />
                   )}
                 </div>
               );
@@ -242,7 +242,7 @@ export default function OnboardingPage() {
           {currentStep > 1 && (
             <button
               onClick={() => setCurrentStep(currentStep - 1)}
-              style={{ padding: '8px 24px', color: '#0077B6', fontWeight: 500, border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}
+              style={{ padding: '8px 24px', color: 'var(--pro-ocean)', fontWeight: 500, border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}
             >
               ← Précédent
             </button>
@@ -263,7 +263,7 @@ export default function OnboardingPage() {
               disabled={loading}
               style={{
                 padding: '8px 24px',
-                backgroundColor: '#06D6A0',
+                backgroundColor: 'var(--pro-mint)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '8px',
@@ -283,8 +283,8 @@ export default function OnboardingPage() {
 
         {/* Progress Info */}
         <div style={{ padding: '16px', backgroundColor: '#F0F7FF', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid #E8F0FA' }}>
-          <Clock className="w-5 h-5" style={{ color: '#0077B6', flexShrink: 0 }} />
-          <p style={{ fontSize: '14px', color: '#0077B6' }}>
+          <Clock className="w-5 h-5" style={{ color: 'var(--pro-ocean)', flexShrink: 0 }} />
+          <p style={{ fontSize: '14px', color: 'var(--pro-ocean)' }}>
             Votre progression est automatiquement sauvegardée. Cette procédure prend environ 10 minutes.
           </p>
         </div>
@@ -460,8 +460,8 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
 
       {/* Info sécurité */}
       <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#E0FFF5', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', border: '1px solid #B8F3E6' }}>
-        <Shield className="w-5 h-5" style={{ color: '#06D6A0', flexShrink: 0, marginTop: '4px' }} />
-        <p style={{ fontSize: '14px', color: '#06D6A0' }}>
+        <Shield className="w-5 h-5" style={{ color: 'var(--pro-mint)', flexShrink: 0, marginTop: '4px' }} />
+        <p style={{ fontSize: '14px', color: 'var(--pro-mint)' }}>
           Vos documents sont chiffrés et stockés de manière sécurisée.
           Ils ne seront consultés que par notre équipe de vérification.
         </p>
@@ -471,9 +471,9 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
         {/* Pièce d'identité */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <FileText className="w-5 h-5" style={{ color: '#0077B6' }} />
+            <FileText className="w-5 h-5" style={{ color: 'var(--pro-ocean)' }} />
             <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>
-              Pièce d&apos;identité <span style={{ color: '#E63946' }}>*</span>
+              Pièce d&apos;identité <span style={{ color: 'var(--pro-coral)' }}>*</span>
             </h3>
           </div>
           <p style={{ fontSize: '12px', color: '#8896A6', marginBottom: '12px' }}>
@@ -486,7 +486,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
             label="Déposer votre pièce d&apos;identité ici"
           />
           {formData.identityDocAssetId && (
-            <p style={{ fontSize: '12px', color: '#06D6A0', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <p style={{ fontSize: '12px', color: 'var(--pro-mint)', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 className="w-3 h-3" /> Document téléchargé avec succès
             </p>
           )}
@@ -495,7 +495,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
         {/* KBIS */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <FileText className="w-5 h-5" style={{ color: '#0077B6' }} />
+            <FileText className="w-5 h-5" style={{ color: 'var(--pro-ocean)' }} />
             <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#0A1628' }}>
               Extrait KBIS <span style={{ color: '#8896A6', fontSize: '12px', fontWeight: 400 }}>(si société)</span>
             </h3>
@@ -510,7 +510,7 @@ function StepDocuments({ formData, setFormData }: { formData: OnboardingFormData
             label="Déposer votre KBIS ici"
           />
           {formData.kbisDocAssetId && (
-            <p style={{ fontSize: '12px', color: '#06D6A0', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <p style={{ fontSize: '12px', color: 'var(--pro-mint)', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 className="w-3 h-3" /> Document téléchargé avec succès
             </p>
           )}

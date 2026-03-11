@@ -97,8 +97,8 @@ export default function NouvelArretPage() {
         {/* Error */}
         {error && (
           <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', border: '1px solid #FFE0E3' }}>
-            <AlertCircle className="w-5 h-5" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
-            <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+            <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
+            <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
           </div>
         )}
 
@@ -107,7 +107,7 @@ export default function NouvelArretPage() {
           {/* Informations generales */}
           <div className="pro-panel">
             <h2 className="pro-panel-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <MapPin className="w-5 h-5" style={{ color: '#FF6B35' }} />
+              <MapPin className="w-5 h-5" style={{ color: 'var(--pro-sun)' }} />
               Informations generales
             </h2>
 

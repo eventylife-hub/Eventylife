@@ -131,8 +131,8 @@ export default function VoyageFinancePage() {
 
       {error && (
         <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ color: '#E63946' }}>{error}</span>
-          <button onClick={() => setError(null)} style={{ padding: '0.5rem 1rem', background: '#FFFFFF', color: '#E63946', border: '1px solid #E63946', borderRadius: '0.25rem', cursor: 'pointer' }}>
+          <span style={{ color: 'var(--pro-coral)' }}>{error}</span>
+          <button onClick={() => setError(null)} style={{ padding: '0.5rem 1rem', background: '#FFFFFF', color: 'var(--pro-coral)', border: '1px solid #E63946', borderRadius: '0.25rem', cursor: 'pointer' }}>
             Fermer
           </button>
         </div>

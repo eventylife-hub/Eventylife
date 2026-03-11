@@ -10,7 +10,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -116,8 +116,8 @@ export default function BookingDetailPage() {
         <Link href="/client/reservations" className="text-sm font-medium transition-all" style={{ color: C.terra }}>
           ← Retour
         </Link>
-        <div className="p-6 rounded-2xl mt-6" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
-          <p className="font-semibold mb-4" style={{ color: '#DC2626' }}>{error || 'Réservation non trouvée'}</p>
+        <div className="p-6 rounded-2xl mt-6" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+          <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
@@ -152,8 +152,8 @@ export default function BookingDetailPage() {
     HELD: { background: C.goldSoft, color: '#92400e' },
     PARTIALLY_PAID: { background: C.goldSoft, color: '#92400e' },
     DRAFT: { background: '#F3F4F6', color: '#4B5563' },
-    EXPIRED: { background: '#FEF2F2', color: '#DC2626' },
-    CANCELED: { background: '#FEF2F2', color: '#DC2626' },
+    EXPIRED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
+    CANCELED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   };
 
   const days = getDaysDifference(booking.departureDate, booking.returnDate);
@@ -216,7 +216,7 @@ export default function BookingDetailPage() {
               <p className="font-bold text-sm">{formatPrice(paidAmount)}</p>
             </div>
             {remainingAmount > 0 && (
-              <div className="flex justify-between" style={{ color: '#DC2626' }}>
+              <div className="flex justify-between" style={{ color: 'var(--terra, #DC2626)' }}>
                 <p className="text-xs">Restant à payer</p>
                 <p className="font-bold text-sm">{formatPrice(remainingAmount)}</p>
               </div>
@@ -278,7 +278,7 @@ export default function BookingDetailPage() {
                       ? C.forest
                       : payment.status === 'PENDING'
                         ? '#92400e'
-                        : '#DC2626'
+                        : 'var(--terra, #DC2626)'
                   }}>
                     {payment.status === 'SUCCEEDED' ? 'Réussi' : payment.status === 'PENDING' ? 'En attente' : 'Échoué'}
                   </p>
@@ -334,9 +334,9 @@ export default function BookingDetailPage() {
             <Link
               href={`/client/reservations/${booking.id}/annuler`}
               className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: '#fff', color: '#DC2626', border: `1.5px solid #FCA5A5` }}
+              style={{ background: '#fff', color: 'var(--terra, #DC2626)', border: `1.5px solid #FCA5A5` }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#FEF2F2';
+                e.currentTarget.style.background = 'var(--terra-soft, #FEF2F2)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = '#fff';

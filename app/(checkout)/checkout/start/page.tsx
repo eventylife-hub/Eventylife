@@ -20,7 +20,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -64,7 +64,7 @@ export default function CheckoutStartPage() {
           </div>
           <div
             style={{
-              backgroundColor: '#FEF2F2',
+              backgroundColor: 'var(--terra-soft, #FEF2F2)',
               border: `1.5px solid ${C.border}`,
               borderRadius: '20px',
               padding: '1.5rem',
@@ -128,7 +128,7 @@ export default function CheckoutStartPage() {
           </div>
           <div
             style={{
-              backgroundColor: '#FEF2F2',
+              backgroundColor: 'var(--terra-soft, #FEF2F2)',
               border: `1.5px solid ${C.border}`,
               borderRadius: '20px',
               padding: '1.5rem',
@@ -223,7 +223,7 @@ export default function CheckoutStartPage() {
             style={{
               marginBottom: '1.5rem',
               padding: '1rem',
-              backgroundColor: '#FEF2F2',
+              backgroundColor: 'var(--terra-soft, #FEF2F2)',
               border: `1.5px solid ${C.border}`,
               borderRadius: '20px',
               color: C.terra,

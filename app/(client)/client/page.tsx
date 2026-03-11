@@ -10,7 +10,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -104,7 +104,7 @@ export default function ClientDashboardPage() {
           className="inline-block p-8 rounded-2xl"
           style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
         >
-          <p className="text-base mb-4" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+          <p className="text-base mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"

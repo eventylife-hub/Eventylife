@@ -112,7 +112,7 @@ export default function FinanceDashboardPage() {
 
         {error && (
           <div style={{ padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', border: '1px solid #FFE0E3', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-            <span style={{ fontSize: '14px', color: '#E63946' }}>{error}</span>
+            <span style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</span>
             <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
               Fermer
             </button>
@@ -165,7 +165,7 @@ export default function FinanceDashboardPage() {
                         <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#0A1628' }}>{formatPrice(tf.caTTC as number)}</td>
                         <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', color: '#0A1628' }}>{formatPrice(tf.coutsTTC as number)}</td>
                         <td style={{ paddingTop: '12px', paddingBottom: '12px', textAlign: 'right', fontWeight: 600 }}>
-                          <span style={{ color: marge >= 0 ? '#06D6A0' : '#E63946' }}>
+                          <span style={{ color: marge >= 0 ? 'var(--pro-mint)' : 'var(--pro-coral)' }}>
                             {formatPrice(marge)}
                           </span>
                         </td>

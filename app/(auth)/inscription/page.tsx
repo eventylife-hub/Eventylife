@@ -27,8 +27,8 @@ export default function InscriptionPage() {
     border: '#E5E0D8',
     muted: '#6B7280',
     white: '#FFFFFF',
-    error: '#DC2626',
-    errorBg: '#FEF2F2',
+    error: 'var(--terra, #DC2626)',
+    errorBg: 'var(--terra-soft, #FEF2F2)',
   };
 
   const [formData, setFormData] = useState({

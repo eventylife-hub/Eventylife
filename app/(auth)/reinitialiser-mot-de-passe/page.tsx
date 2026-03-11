@@ -63,7 +63,7 @@ export default function ReinitialiserMotDePassePage() {
             Eventy<span style={{ color: '#D4A853' }}>.</span>Life
           </h1>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#DC2626', marginBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--terra, #DC2626)', marginBottom: '0.5rem' }}>
             Lien invalide
           </h2>
           <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
@@ -246,12 +246,12 @@ export default function ReinitialiserMotDePassePage() {
             style={{
               marginBottom: '1rem',
               padding: '0.75rem',
-              backgroundColor: '#FEF2F2',
+              backgroundColor: 'var(--terra-soft, #FEF2F2)',
               border: '1.5px solid #FECACA',
               borderRadius: '10px',
             }}
           >
-            <p style={{ fontSize: '0.875rem', color: '#DC2626', margin: 0 }}>
+            <p style={{ fontSize: '0.875rem', color: 'var(--terra, #DC2626)', margin: 0 }}>
               {serverError}
             </p>
           </div>
@@ -275,7 +275,7 @@ export default function ReinitialiserMotDePassePage() {
                   padding: '0.75rem 1rem',
                   paddingRight: '2.5rem',
                   backgroundColor: '#FFFFFF',
-                  border: `1.5px solid ${errors.password ? '#DC2626' : '#E5E0D8'}`,
+                  border: `1.5px solid ${errors.password ? 'var(--terra, #DC2626)' : '#E5E0D8'}`,
                   borderRadius: '10px',
                   fontSize: '0.875rem',
                   outline: 'none',
@@ -320,7 +320,7 @@ export default function ReinitialiserMotDePassePage() {
               </button>
             </div>
             {errors.password && (
-              <p style={{ color: '#DC2626', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
+              <p style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
                 {errors.password}
               </p>
             )}
@@ -341,7 +341,7 @@ export default function ReinitialiserMotDePassePage() {
                 width: '100%',
                 padding: '0.75rem 1rem',
                 backgroundColor: '#FFFFFF',
-                border: `1.5px solid ${errors.passwordConfirm ? '#DC2626' : '#E5E0D8'}`,
+                border: `1.5px solid ${errors.passwordConfirm ? 'var(--terra, #DC2626)' : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
                 outline: 'none',
@@ -360,7 +360,7 @@ export default function ReinitialiserMotDePassePage() {
               }}
             />
             {errors.passwordConfirm && (
-              <p style={{ color: '#DC2626', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
+              <p style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
                 {errors.passwordConfirm}
               </p>
             )}

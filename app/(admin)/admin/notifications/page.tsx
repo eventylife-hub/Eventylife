@@ -174,16 +174,16 @@ export default function AdminNotificationsPage() {
   };
 
   const channelConfig = {
-    EMAIL: { label: 'Email', icon: Mail, color: 'bg-blue-100 text-blue-800' },
-    SMS: { label: 'SMS', icon: MessageSquare, color: 'bg-green-100 text-green-800' },
-    PUSH: { label: 'Push', icon: Bell, color: 'bg-purple-100 text-purple-800' },
+    EMAIL: { label: 'Email', icon: Mail, color: 'admin-badge admin-badge-info' },
+    SMS: { label: 'SMS', icon: MessageSquare, color: 'admin-badge admin-badge-success' },
+    PUSH: { label: 'Push', icon: Bell, color: 'admin-badge admin-badge-violet' },
   };
 
   const statusConfig = {
-    PENDING: { label: 'En attente', color: 'bg-yellow-100 text-yellow-800', icon: Clock },
-    SENT: { label: 'Envoyé', color: 'bg-blue-100 text-blue-800', icon: Send },
-    DELIVERED: { label: 'Délivré', color: 'bg-green-100 text-green-800', icon: CheckCircle },
-    FAILED: { label: 'Échoué', color: 'bg-red-100 text-red-800', icon: AlertCircle },
+    PENDING: { label: 'En attente', color: 'admin-badge admin-badge-warning', icon: Clock },
+    SENT: { label: 'Envoyé', color: 'admin-badge admin-badge-info', icon: Send },
+    DELIVERED: { label: 'Délivré', color: 'admin-badge admin-badge-success', icon: CheckCircle },
+    FAILED: { label: 'Échoué', color: 'admin-badge admin-badge-danger', icon: AlertCircle },
   };
 
   const templateColumns: DataTableColumn<NotificationTemplate>[] = [

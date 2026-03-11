@@ -161,7 +161,7 @@ export default function CampagneDetailPage() {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <p style={{ color: '#E63946' }}>{error || 'Campagne non trouvée'}</p>
+          <p style={{ color: 'var(--pro-coral)' }}>{error || 'Campagne non trouvée'}</p>
         </div>
       </div>
     );
@@ -170,14 +170,14 @@ export default function CampagneDetailPage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <Link href="/pro/marketing" style={{ fontSize: '14px', color: '#0077B6', textDecoration: 'none', marginBottom: '24px', display: 'inline-block' }}>
+        <Link href="/pro/marketing" style={{ fontSize: '14px', color: 'var(--pro-ocean)', textDecoration: 'none', marginBottom: '24px', display: 'inline-block' }}>
           ← Retour au marketing
         </Link>
 
         {error && (
           <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-            <AlertCircle className="h-5 w-5" style={{ color: '#E63946', flexShrink: 0, marginTop: '4px' }} />
-            <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+            <AlertCircle className="h-5 w-5" style={{ color: 'var(--pro-coral)', flexShrink: 0, marginTop: '4px' }} />
+            <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
           </div>
         )}
 
@@ -220,7 +220,7 @@ export default function CampagneDetailPage() {
                 onClick={handleEnd}
                 disabled={actionLoading}
                 style={{
-                  backgroundColor: '#E63946',
+                  backgroundColor: 'var(--pro-coral)',
                   color: 'white',
                   padding: '8px 16px',
                   borderRadius: '8px',

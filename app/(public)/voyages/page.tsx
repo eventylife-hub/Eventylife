@@ -20,7 +20,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -153,7 +153,7 @@ function VoyagesContent() {
           className="inline-block p-8 rounded-2xl"
           style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
         >
-          <p className="text-base mb-4" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+          <p className="text-base mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
@@ -294,7 +294,7 @@ function VoyagesContent() {
                       {available <= 5 && (
                         <span
                           className="text-xs font-semibold px-2.5 py-1 rounded-full animate-pulse-dot"
-                          style={{ background: '#FEF2F2', color: '#DC2626' }}
+                          style={{ background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' }}
                         >
                           Peu de places
                         </span>

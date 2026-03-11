@@ -177,8 +177,8 @@ export default function AdminAlertesPage() {
         return (
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
             isResolved
-              ? 'bg-green-100 text-green-800'
-              : 'bg-yellow-100 text-yellow-800'
+              ? 'admin-badge admin-badge-success'
+              : 'admin-badge admin-badge-warning'
           }`}>
             {isResolved ? 'Résolu' : 'Non résolu'}
           </span>
@@ -201,12 +201,12 @@ export default function AdminAlertesPage() {
         <div
           className="admin-kpi-card"
           style={{
-            borderTop: '3px solid #E63946',
+            borderTop: '3px solid var(--admin-coral)',
             background: 'rgba(230, 57, 70, 0.04)',
           }}
         >
           <div className="admin-kpi-label">Alertes non résolues</div>
-          <div className="admin-kpi-value" style={{ color: '#E63946' }}>
+          <div className="admin-kpi-value" style={{ color: 'var(--admin-coral)' }}>
             {unreadCount}
           </div>
           <div className="admin-kpi-sub">Demandent votre attention</div>
@@ -355,13 +355,13 @@ export default function AdminAlertesPage() {
                               alert.level === 'CRITIQUE'
                                 ? 'var(--admin-coral-soft)'
                                 : alert.level === 'WARNING'
-                                ? '#FEF3C7'
+                                ? 'var(--admin-warning-bg, #FEF3C7)'
                                 : 'var(--admin-ocean-light)',
                             color:
                               alert.level === 'CRITIQUE'
                                 ? 'var(--admin-coral)'
                                 : alert.level === 'WARNING'
-                                ? '#92400E'
+                                ? 'var(--admin-warning)'
                                 : 'var(--admin-ocean)',
                           }}
                         >

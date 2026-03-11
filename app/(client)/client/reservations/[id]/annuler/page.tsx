@@ -9,7 +9,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -153,8 +153,8 @@ export default function CancelReservationPage() {
       </div>
 
       {error && (
-        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
-          <p style={{ color: '#DC2626' }}>{error}</p>
+        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+          <p style={{ color: 'var(--terra, #DC2626)' }}>{error}</p>
         </div>
       )}
 
@@ -207,7 +207,7 @@ export default function CancelReservationPage() {
               <span style={{ color: C.navy }}>Montant payé:</span>
               <span className="font-bold" style={{ color: C.navy }}>{formatCurrency(booking.totalAmountCents || 0)}</span>
             </div>
-            <div className="flex justify-between items-center" style={{ color: '#DC2626' }}>
+            <div className="flex justify-between items-center" style={{ color: 'var(--terra, #DC2626)' }}>
               <span>Frais d&apos;annulation:</span>
               <span className="font-bold">
                 -{formatCurrency(refundCalc.cancellationFeeCents || 0)}
@@ -300,7 +300,7 @@ export default function CancelReservationPage() {
             disabled={submitting || !reason.trim()}
             className="flex-1 px-6 py-3 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg"
             style={{
-              backgroundColor: '#DC2626',
+              backgroundColor: 'var(--terra, #DC2626)',
             }}
             onMouseEnter={(e) => {
               if (!submitting && reason.trim()) {
@@ -309,7 +309,7 @@ export default function CancelReservationPage() {
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#DC2626';
+              e.currentTarget.style.backgroundColor = 'var(--terra, #DC2626)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >

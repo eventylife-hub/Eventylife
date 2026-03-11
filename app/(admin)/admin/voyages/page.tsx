@@ -106,15 +106,15 @@ export default function VoyagesPage() {
       label: 'Statut',
       render: (value: unknown) => {
         const statusColors = {
-          'SUBMITTED': 'bg-blue-100 text-blue-800',
-          'PENDING': 'bg-orange-100 text-orange-800',
-          'PUBLISHED': 'bg-green-100 text-green-800',
-          'ON_GOING': 'bg-purple-100 text-purple-800',
-          'COMPLETED': 'bg-gray-100 text-gray-800',
-          'CANCELED': 'bg-red-100 text-red-800',
+          'SUBMITTED': 'admin-badge admin-badge-info',
+          'PENDING': 'admin-badge admin-badge-warning',
+          'PUBLISHED': 'admin-badge admin-badge-success',
+          'ON_GOING': 'admin-badge admin-badge-violet',
+          'COMPLETED': 'admin-badge admin-badge-neutral',
+          'CANCELED': 'admin-badge admin-badge-danger',
         };
         return (
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[(value as string) as keyof typeof statusColors] || 'bg-gray-100 text-gray-800'}`}>
+          <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[(value as string) as keyof typeof statusColors] || 'admin-badge admin-badge-neutral'}`}>
             {value as string}
           </span>
         );

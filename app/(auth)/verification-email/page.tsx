@@ -139,7 +139,7 @@ export default function VerificationEmailPage() {
         {status === 'error' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ fontSize: '3rem' }}>✗</div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#DC2626', margin: 0 }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--terra, #DC2626)', margin: 0 }}>
               Erreur
             </h2>
             <p style={{ color: '#6B7280', fontSize: '0.875rem', margin: 0 }}>

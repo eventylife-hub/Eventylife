@@ -115,7 +115,7 @@ export default function CancellationsPage() {
                 style={{
                   background:
                     filter === status
-                      ? 'linear-gradient(135deg, #FF6B35, #FF8F5E)'
+                      ? 'linear-gradient(135deg, var(--admin-accent), var(--admin-accent))'
                       : 'var(--admin-surface)',
                 }}
               >

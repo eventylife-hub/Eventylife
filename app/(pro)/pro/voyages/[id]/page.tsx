@@ -144,8 +144,8 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
       <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {actionError && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem' }}>
-            <AlertCircle style={{ width: '1rem', height: '1rem', color: '#E63946' }} />
-            <p style={{ fontSize: '0.875rem', color: '#E63946', margin: 0 }}>{actionError}</p>
+            <AlertCircle style={{ width: '1rem', height: '1rem', color: 'var(--pro-coral)' }} />
+            <p style={{ fontSize: '0.875rem', color: 'var(--pro-coral)', margin: 0 }}>{actionError}</p>
           </div>
         )}
 
@@ -302,8 +302,8 @@ export default function VoyageDashboardPage() {
         <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
           <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946' }} />
-              <p style={{ color: '#E63946', margin: 0 }}>{error || 'Données non disponibles'}</p>
+              <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: 'var(--pro-coral)' }} />
+              <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error || 'Données non disponibles'}</p>
             </div>
           </div>
         </div>
@@ -348,7 +348,7 @@ export default function VoyageDashboardPage() {
         <div className="pro-kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
             <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
-              <Users style={{ width: '1rem', height: '1rem', color: '#FF6B35' }} />
+              <Users style={{ width: '1rem', height: '1rem', color: 'var(--pro-sun)' }} />
               Réservations
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.totalReservations}</div>
@@ -357,7 +357,7 @@ export default function VoyageDashboardPage() {
 
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
             <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
-              <BarChart3 style={{ width: '1rem', height: '1rem', color: '#06D6A0' }} />
+              <BarChart3 style={{ width: '1rem', height: '1rem', color: 'var(--pro-mint)' }} />
               Chambres confirmées
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.confirmedRooms}</div>
@@ -366,7 +366,7 @@ export default function VoyageDashboardPage() {
 
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
             <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
-              <DollarSign style={{ width: '1rem', height: '1rem', color: '#0077B6' }} />
+              <DollarSign style={{ width: '1rem', height: '1rem', color: 'var(--pro-ocean)' }} />
               Revenu TTC
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{formatPrice(dashboard.revenueTTC)}</div>
@@ -375,7 +375,7 @@ export default function VoyageDashboardPage() {
 
           <div className="pro-kpi-card" style={{ background: '#FFFFFF', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #E8F7FC' }}>
             <div className="pro-kpi-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.75rem' }}>
-              <Percent style={{ width: '1rem', height: '1rem', color: '#FF6B35' }} />
+              <Percent style={{ width: '1rem', height: '1rem', color: 'var(--pro-sun)' }} />
               Taux d&apos;occupation
             </div>
             <div className="pro-kpi-value" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.25rem' }}>{dashboard.occupancyRate}%</div>

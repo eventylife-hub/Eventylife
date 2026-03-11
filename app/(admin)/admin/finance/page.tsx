@@ -178,8 +178,8 @@ export default function FinancePage() {
 
             <Link href="/admin/parametres" className="block">
               <div className="admin-btn-secondary" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px', padding: '16px', cursor: 'pointer' }}>
-                <div style={{ padding: '12px', background: '#E9D5FF', borderRadius: '10px' }}>
-                  <Settings className="w-6 h-6" style={{ color: '#A855F7' }} />
+                <div style={{ padding: '12px', background: 'var(--admin-violet-soft)', borderRadius: '10px' }}>
+                  <Settings className="w-6 h-6" style={{ color: 'var(--admin-violet)' }} />
                 </div>
                 <div>
                   <h3 style={{ fontWeight: '600', color: 'var(--admin-text-primary)', marginBottom: '4px' }}>Paramètres financiers</h3>

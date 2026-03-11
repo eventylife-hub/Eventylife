@@ -147,7 +147,7 @@ export default function RestauratPage() {
   return (
     <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
       <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
-        <Link href={`/pro/voyages/${travelId}`} style={{ fontSize: '0.875rem', color: '#0077B6', textDecoration: 'none', marginBottom: '1rem', display: 'inline-block' }}>
+        <Link href={`/pro/voyages/${travelId}`} style={{ fontSize: '0.875rem', color: 'var(--pro-ocean)', textDecoration: 'none', marginBottom: '1rem', display: 'inline-block' }}>
           ← Retour au voyage
         </Link>
 
@@ -165,8 +165,8 @@ export default function RestauratPage() {
 
         {error && (
           <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-            <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: '#E63946', flexShrink: 0, marginTop: '0.125rem' }} />
-            <p style={{ fontSize: '0.875rem', color: '#E63946', margin: 0 }}>{error}</p>
+            <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: 'var(--pro-coral)', flexShrink: 0, marginTop: '0.125rem' }} />
+            <p style={{ fontSize: '0.875rem', color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
           </div>
         )}
 

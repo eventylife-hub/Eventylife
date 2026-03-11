@@ -15,7 +15,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -58,7 +58,7 @@ const priorityBadgeStyle: Record<string, { background: string; color: string }> 
   LOW: { background: '#EFF6FF', color: '#0369A1' },
   MEDIUM: { background: C.goldSoft, color: '#92400e' },
   HIGH: { background: '#FEF3C7', color: '#92400e' },
-  URGENT: { background: '#FEF2F2', color: '#DC2626' },
+  URGENT: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
 };
 
 const priorityLabels: Record<string, string> = {
@@ -183,8 +183,8 @@ export default function SupportPage() {
   if (state === 'error') {
     return (
       <div className="max-w-4xl mx-auto animate-fade-up">
-        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
-          <p className="text-sm font-medium mb-4" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={fetchTickets}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
@@ -239,9 +239,9 @@ export default function SupportPage() {
         <div
           className="p-6 rounded-2xl text-sm"
           style={{
-            background: submitMessage.type === 'success' ? C.forestBg : '#FEF2F2',
+            background: submitMessage.type === 'success' ? C.forestBg : 'var(--terra-soft, #FEF2F2)',
             border: `1.5px solid ${submitMessage.type === 'success' ? C.forest : '#FCA5A5'}`,
-            color: submitMessage.type === 'success' ? C.forest : '#DC2626',
+            color: submitMessage.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
           }}
         >
           {submitMessage.text}

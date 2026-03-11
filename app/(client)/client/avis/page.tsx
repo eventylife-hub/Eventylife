@@ -8,7 +8,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -295,8 +295,8 @@ export default function AvisPage() {
 
       {/* Messages d'erreur */}
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
-          <p className="text-sm font-medium" style={{ color: '#DC2626' }}>⚠️ {error}</p>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
         </div>
       )}
 

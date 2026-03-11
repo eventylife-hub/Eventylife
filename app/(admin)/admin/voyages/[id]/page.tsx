@@ -96,12 +96,12 @@ export default function AdminVoyageDetailPage() {
   }, [travelId]);
 
   const statusConfig = {
-    DRAFT: { label: 'Brouillon', color: 'bg-gray-100 text-gray-800', step: 0 },
-    PHASE_1: { label: 'Phase 1', color: 'bg-blue-100 text-blue-800', step: 1 },
-    PHASE_2: { label: 'Phase 2', color: 'bg-indigo-100 text-indigo-800', step: 2 },
-    PUBLISHED: { label: 'Publié', color: 'bg-green-100 text-green-800', step: 3 },
-    ON_GOING: { label: 'En cours', color: 'bg-orange-100 text-orange-800', step: 4 },
-    COMPLETED: { label: 'Complété', color: 'bg-purple-100 text-purple-800', step: 5 },
+    DRAFT: { label: 'Brouillon', color: 'admin-badge admin-badge-neutral', step: 0 },
+    PHASE_1: { label: 'Phase 1', color: 'admin-badge admin-badge-info', step: 1 },
+    PHASE_2: { label: 'Phase 2', color: 'admin-badge admin-badge-violet', step: 2 },
+    PUBLISHED: { label: 'Publié', color: 'admin-badge admin-badge-success', step: 3 },
+    ON_GOING: { label: 'En cours', color: 'admin-badge admin-badge-warning', step: 4 },
+    COMPLETED: { label: 'Complété', color: 'admin-badge admin-badge-violet', step: 5 },
   };
 
   const phases = ['DRAFT', 'PHASE_1', 'PHASE_2', 'PUBLISHED', 'ON_GOING', 'COMPLETED'] as const;

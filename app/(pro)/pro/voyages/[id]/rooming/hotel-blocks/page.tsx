@@ -125,7 +125,7 @@ export default function HotelBlocksPage() {
 
       {error && (
         <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
-          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+          <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
           <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer
           </button>
@@ -134,8 +134,8 @@ export default function HotelBlocksPage() {
 
       {expiringBlocks.length > 0 && (
         <div style={{ padding: '1rem', background: '#E8F7FC', border: '1px solid #0077B6', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <AlertCircle style={{ width: '1rem', height: '1rem', color: '#0077B6', flexShrink: 0 }} />
-          <p style={{ color: '#0077B6', margin: 0 }}>
+          <AlertCircle style={{ width: '1rem', height: '1rem', color: 'var(--pro-ocean)', flexShrink: 0 }} />
+          <p style={{ color: 'var(--pro-ocean)', margin: 0 }}>
             {expiringBlocks.length} bloc(s) expirent dans les 3 jours
           </p>
         </div>

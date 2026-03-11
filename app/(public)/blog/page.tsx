@@ -86,7 +86,7 @@ export default function BlogPage() {
     cream: '#FAF7F2',
     terra: '#C75B39',
     terraLight: '#D97B5E',
-    terraSoft: '#FEF0EB',
+    terraSoft: 'var(--terra-soft)',
     gold: '#D4A853',
     goldSoft: '#FDF6E8',
     border: '#E5E0D8',

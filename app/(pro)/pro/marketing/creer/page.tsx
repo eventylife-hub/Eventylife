@@ -73,7 +73,7 @@ export default function CreerCampaignePage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
       <div style={{ maxWidth: '896px', margin: '0 auto' }}>
-        <Link href="/pro/marketing" style={{ fontSize: '14px', color: '#0077B6', textDecoration: 'none', marginBottom: '16px', display: 'inline-block' }}>
+        <Link href="/pro/marketing" style={{ fontSize: '14px', color: 'var(--pro-ocean)', textDecoration: 'none', marginBottom: '16px', display: 'inline-block' }}>
           ← Retour au marketing
         </Link>
 
@@ -81,10 +81,10 @@ export default function CreerCampaignePage() {
 
         {error && (
           <div style={{ borderRadius: '8px', border: '1px solid #FFE0E3', backgroundColor: '#FFE0E3', padding: '16px', marginBottom: '24px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-            <AlertCircle className="h-5 w-5" style={{ color: '#E63946', flexShrink: 0, marginTop: '2px' }} />
+            <AlertCircle className="h-5 w-5" style={{ color: 'var(--pro-coral)', flexShrink: 0, marginTop: '2px' }} />
             <div>
-              <h2 style={{ fontWeight: 600, color: '#E63946' }}>Erreur</h2>
-              <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+              <h2 style={{ fontWeight: 600, color: 'var(--pro-coral)' }}>Erreur</h2>
+              <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
             </div>
           </div>
         )}

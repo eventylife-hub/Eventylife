@@ -15,7 +15,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -52,7 +52,7 @@ const typeLabels: Record<Transaction['type'], string> = {
 
 const typeBadgeStyle: Record<Transaction['type'], { background: string; color: string }> = {
   CREDIT: { background: C.forestBg, color: C.forest },
-  DEBIT: { background: '#FEF2F2', color: '#DC2626' },
+  DEBIT: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   REFUND: { background: '#EFF6FF', color: '#0369A1' },
   VOUCHER: { background: C.goldSoft, color: '#92400e' }
 };
@@ -182,8 +182,8 @@ export default function WalletPage() {
   if (state === 'error') {
     return (
       <div className="max-w-6xl mx-auto animate-fade-up">
-        <div className="p-6 rounded-2xl" style={{ background: '#FEF2F2', border: `1.5px solid #FCA5A5` }}>
-          <p className="text-sm font-medium mb-4" style={{ color: '#DC2626' }}>⚠️ Erreur : {error}</p>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+          <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ Erreur : {error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
@@ -232,7 +232,7 @@ export default function WalletPage() {
           </div>
           <div>
             <p className="text-xs mb-1" style={{ color: C.muted }}>Total dépensé</p>
-            <p className="text-xl font-bold" style={{ color: '#DC2626' }}>
+            <p className="text-xl font-bold" style={{ color: 'var(--terra, #DC2626)' }}>
               {formatPrice(wallet.totalDebitsCents)}
             </p>
           </div>
@@ -290,9 +290,9 @@ export default function WalletPage() {
           <div
             className="mt-3 p-3 rounded-xl text-sm"
             style={{
-              background: voucherMessage.type === 'success' ? C.forestBg : '#FEF2F2',
+              background: voucherMessage.type === 'success' ? C.forestBg : 'var(--terra-soft, #FEF2F2)',
               border: `1.5px solid ${voucherMessage.type === 'success' ? C.forest : '#FCA5A5'}`,
-              color: voucherMessage.type === 'success' ? C.forest : '#DC2626',
+              color: voucherMessage.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
             }}
           >
             {voucherMessage.text}
@@ -432,7 +432,7 @@ export default function WalletPage() {
                     <td
                       className="py-4 px-4 text-right font-semibold"
                       style={{
-                        color: transaction.type === 'DEBIT' ? '#DC2626' : C.forest,
+                        color: transaction.type === 'DEBIT' ? 'var(--terra, #DC2626)' : C.forest,
                       }}
                     >
                       {transaction.type === 'DEBIT' ? '-' : '+'}

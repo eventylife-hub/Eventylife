@@ -35,11 +35,11 @@ export default function SupportPage() {
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
 
   const statuses = [
-    { value: 'open', label: 'Ouvert', color: 'bg-blue-100 text-blue-800' },
-    { value: 'in_progress', label: 'En cours', color: 'bg-orange-100 text-orange-800' },
-    { value: 'waiting', label: 'En attente', color: 'bg-yellow-100 text-yellow-800' },
-    { value: 'resolved', label: 'Résolu', color: 'bg-green-100 text-green-800' },
-    { value: 'closed', label: 'Fermé', color: 'bg-gray-100 text-gray-800' },
+    { value: 'open', label: 'Ouvert', color: 'admin-badge admin-badge-info' },
+    { value: 'in_progress', label: 'En cours', color: 'admin-badge admin-badge-warning' },
+    { value: 'waiting', label: 'En attente', color: 'admin-badge admin-badge-warning' },
+    { value: 'resolved', label: 'Résolu', color: 'admin-badge admin-badge-success' },
+    { value: 'closed', label: 'Fermé', color: 'admin-badge admin-badge-neutral' },
   ];
 
   const fetchAllTickets = async () => {
@@ -85,13 +85,13 @@ export default function SupportPage() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'P0':
-        return 'bg-red-100 text-red-800';
+        return 'admin-badge admin-badge-danger';
       case 'P1':
-        return 'bg-orange-100 text-orange-800';
+        return 'admin-badge admin-badge-warning';
       case 'P2':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'admin-badge admin-badge-warning';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'admin-badge admin-badge-neutral';
     }
   };
 

@@ -114,8 +114,8 @@ export default function FormationPage() {
         {error && (
           <div style={{ marginBottom: '24px' }}>
             <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px' }}>
-              <AlertCircle className="h-4 w-4" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
-              <p style={{ color: '#E63946', fontSize: '14px' }}>{error}</p>
+              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
             </div>
             <button
               onClick={() => {
@@ -179,8 +179,8 @@ export default function FormationPage() {
             </div>
             {completionPercentage === 100 && (
               <div style={{ backgroundColor: '#E0FFF5', padding: '8px 16px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Award className="w-5 h-5" style={{ color: '#06D6A0' }} />
-                <span style={{ fontWeight: 600, color: '#06D6A0' }}>Complété!</span>
+                <Award className="w-5 h-5" style={{ color: 'var(--pro-mint)' }} />
+                <span style={{ fontWeight: 600, color: 'var(--pro-mint)' }}>Complété!</span>
               </div>
             )}
           </div>
@@ -188,13 +188,13 @@ export default function FormationPage() {
           {/* Progress Bar */}
           <div style={{ position: 'relative', height: '12px', backgroundColor: '#E0E0E0', borderRadius: '999px', overflow: 'hidden', marginBottom: '16px' }}>
             <div
-              style={{ height: '100%', backgroundColor: '#0077B6', borderRadius: '999px', transition: 'width 0.5s ease', width: `${completionPercentage}%` }}
+              style={{ height: '100%', backgroundColor: 'var(--pro-ocean)', borderRadius: '999px', transition: 'width 0.5s ease', width: `${completionPercentage}%` }}
             ></div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '14px' }}>
             <span style={{ color: '#8896A6' }}>Progression globale</span>
-            <span style={{ fontWeight: 600, color: '#0077B6' }}>{Math.round(completionPercentage)}%</span>
+            <span style={{ fontWeight: 600, color: 'var(--pro-ocean)' }}>{Math.round(completionPercentage)}%</span>
           </div>
         </div>
         )}
@@ -215,7 +215,7 @@ export default function FormationPage() {
                 <div style={{ height: '96px', background: 'linear-gradient(135deg, #E8F7FC, #B3E5FC)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                   <span style={{ fontSize: '48px' }}>{getIcon(module.icon)}</span>
                   {isCompleted && (
-                    <div style={{ position: 'absolute', top: '8px', right: '8px', backgroundColor: '#06D6A0', borderRadius: '999px', padding: '6px' }}>
+                    <div style={{ position: 'absolute', top: '8px', right: '8px', backgroundColor: 'var(--pro-mint)', borderRadius: '999px', padding: '6px' }}>
                       <CheckCircle2 className="w-5 h-5" style={{ color: 'white' }} />
                     </div>
                   )}
@@ -235,7 +235,7 @@ export default function FormationPage() {
                   {/* Status Badge */}
                   <div style={{ marginBottom: '16px' }}>
                     {isCompleted ? (
-                      <span style={{ display: 'inline-block', padding: '6px 12px', backgroundColor: '#E0FFF5', color: '#06D6A0', fontSize: '12px', fontWeight: 600, borderRadius: '999px' }}>
+                      <span style={{ display: 'inline-block', padding: '6px 12px', backgroundColor: '#E0FFF5', color: 'var(--pro-mint)', fontSize: '12px', fontWeight: 600, borderRadius: '999px' }}>
                         ✓ Terminé
                       </span>
                     ) : (
@@ -248,7 +248,7 @@ export default function FormationPage() {
                   {/* View Button */}
                   <Link
                     href={`/pro/formation/${module.id}`}
-                    style={{ display: 'block', width: '100%', padding: '12px 16px', backgroundColor: '#FFF0E8', color: '#FF6B35', borderRadius: '8px', textDecoration: 'none', fontWeight: 500, fontSize: '14px', textAlign: 'center', transition: 'background-color 0.2s' }}
+                    style={{ display: 'block', width: '100%', padding: '12px 16px', backgroundColor: '#FFF0E8', color: 'var(--pro-sun)', borderRadius: '8px', textDecoration: 'none', fontWeight: 500, fontSize: '14px', textAlign: 'center', transition: 'background-color 0.2s' }}
                   >
                     {isCompleted ? 'Revoir le module' : 'Voir le module'} →
                   </Link>
@@ -262,7 +262,7 @@ export default function FormationPage() {
         {/* Certification Card */}
         {!loading && !error && completionPercentage === 100 && (
           <div style={{ marginTop: '32px', background: 'linear-gradient(to right, #E0FFF5, #E0FFF5)', border: '2px solid #06D6A0', borderRadius: '8px', padding: '32px', textAlign: 'center' }}>
-            <Award className="w-12 h-12" style={{ color: '#06D6A0', margin: '0 auto 16px' }} />
+            <Award className="w-12 h-12" style={{ color: 'var(--pro-mint)', margin: '0 auto 16px' }} />
             <h2 style={{ fontSize: '24px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Félicitations!</h2>
             <p style={{ color: '#8896A6', marginBottom: '24px' }}>
               Vous avez complété tous les modules de formation. Vous êtes maintenant prêt(e) à créer vos
@@ -270,7 +270,7 @@ export default function FormationPage() {
             </p>
             <Link
               href="/pro/voyages/nouveau"
-              style={{ display: 'inline-block', padding: '12px 32px', backgroundColor: '#06D6A0', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: 500 }}
+              style={{ display: 'inline-block', padding: '12px 32px', backgroundColor: 'var(--pro-mint)', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: 500 }}
             >
               Créer mon premier voyage →
             </Link>

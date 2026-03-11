@@ -88,10 +88,10 @@ export default function MarketingPage() {
           <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Marketing</h1>
           <div style={{ borderRadius: '8px', border: '1px solid #FFE0E3', backgroundColor: '#FFE0E3', padding: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
-              <AlertCircle className="h-6 w-6" style={{ color: '#E63946', flexShrink: 0 }} />
+              <AlertCircle className="h-6 w-6" style={{ color: 'var(--pro-coral)', flexShrink: 0 }} />
               <div>
-                <h2 style={{ fontWeight: 600, color: '#E63946' }}>Erreur</h2>
-                <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+                <h2 style={{ fontWeight: 600, color: 'var(--pro-coral)' }}>Erreur</h2>
+                <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
               </div>
             </div>
           </div>

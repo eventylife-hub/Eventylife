@@ -38,11 +38,11 @@ export default function AdminBookingsPage() {
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const statusConfig = {
-    HOLD: { label: 'En attente', color: 'bg-yellow-100 text-yellow-800' },
-    PARTIALLY_PAID: { label: 'Partiellement payé', color: 'bg-blue-100 text-blue-800' },
-    CONFIRMED: { label: 'Confirmé', color: 'bg-green-100 text-green-800' },
-    CANCELLED: { label: 'Annulé', color: 'bg-red-100 text-red-800' },
-    EXPIRED: { label: 'Expiré', color: 'bg-gray-100 text-gray-800' },
+    HOLD: { label: 'En attente', color: 'admin-badge admin-badge-warning' },
+    PARTIALLY_PAID: { label: 'Partiellement payé', color: 'admin-badge admin-badge-info' },
+    CONFIRMED: { label: 'Confirmé', color: 'admin-badge admin-badge-success' },
+    CANCELLED: { label: 'Annulé', color: 'admin-badge admin-badge-danger' },
+    EXPIRED: { label: 'Expiré', color: 'admin-badge admin-badge-neutral' },
   };
 
   const fetchBookings = async () => {

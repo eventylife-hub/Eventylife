@@ -20,7 +20,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -201,8 +201,8 @@ export default function RoomingPage() {
   if (state === 'error') {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12" style={{ backgroundColor: C.cream }}>
-        <div className="rounded-lg p-6" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
-          <p style={{ color: '#DC2626' }}>Erreur : {error}</p>
+        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+          <p style={{ color: 'var(--terra, #DC2626)' }}>Erreur : {error}</p>
           <Link href={`/client/reservations/${reservationId}`}>
             <Button variant="outline" className="ml-4 mt-4">
               Retour à la réservation

@@ -55,15 +55,15 @@ export default function PayoutsPage() {
   const getStatusBadgeColor = (status: Payout['status']): string => {
     switch (status) {
       case 'COMPLETED':
-        return 'bg-green-100 text-green-700';
+        return 'admin-badge admin-badge-success';
       case 'PROCESSING':
-        return 'bg-blue-100 text-blue-700';
+        return 'admin-badge admin-badge-info';
       case 'PENDING':
-        return 'bg-yellow-100 text-yellow-700';
+        return 'admin-badge admin-badge-warning';
       case 'FAILED':
-        return 'bg-red-100 text-red-700';
+        return 'admin-badge admin-badge-danger';
       default:
-        return 'bg-gray-100 text-gray-700';
+        return 'admin-badge admin-badge-neutral';
     }
   };
 

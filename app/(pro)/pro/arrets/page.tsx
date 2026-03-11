@@ -50,11 +50,11 @@ export default function BusStopsPage() {
     ? busStops.filter((s) => s.type === activeFilter)
     : busStops;
 
-  const OCEAN = '#0077B6';
-  const SUN = '#FF6B35';
+  const OCEAN = 'var(--pro-ocean)';
+  const SUN = 'var(--pro-sun)';
   const DARK = '#0A1628';
   const SAND = '#FEFCF3';
-  const MINT = '#06D6A0';
+  const MINT = 'var(--pro-mint)';
 
   return (
     <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
@@ -79,8 +79,8 @@ export default function BusStopsPage() {
         {error && (
           <div style={{ marginBottom: '24px' }}>
             <div style={{ border: '1px solid #FFE0E3', backgroundColor: '#FFE0E3', borderRadius: '8px', padding: '16px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-              <AlertCircle className="h-4 w-4" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
-              <p style={{ fontSize: '14px', color: '#E63946' }}>
+              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>
                 {error}
               </p>
             </div>
@@ -198,7 +198,7 @@ export default function BusStopsPage() {
                 <p style={{ color: '#0A1628', fontWeight: 500 }}>Aucun arrêt créé</p>
                 <Link
                   href="/pro/arrets/nouveau"
-                  style={{ color: '#0077B6', fontWeight: 500, fontSize: '14px', marginTop: '8px', display: 'inline-block' }}
+                  style={{ color: 'var(--pro-ocean)', fontWeight: 500, fontSize: '14px', marginTop: '8px', display: 'inline-block' }}
                 >
                   Créer votre premier arrêt →
                 </Link>
@@ -248,34 +248,34 @@ export default function BusStopsPage() {
 
                     {/* Type Badge */}
                     <div style={{ marginBottom: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 500, padding: '4px 8px', backgroundColor: '#E8F7FC', color: '#0077B6', borderRadius: '4px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 500, padding: '4px 8px', backgroundColor: '#E8F7FC', color: 'var(--pro-ocean)', borderRadius: '4px' }}>
                         {stop.type === 'PICKUP_DEPARTURE' ? '🚌 Départ' : '📍 Arrivée'}
                       </span>
                     </div>
 
                     {/* Status Info */}
                     {stop.status === 'DRAFT' && (
-                      <div style={{ padding: '8px', backgroundColor: '#E0FFF5', borderRadius: '4px', fontSize: '12px', color: '#06D6A0', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ padding: '8px', backgroundColor: '#E0FFF5', borderRadius: '4px', fontSize: '12px', color: 'var(--pro-mint)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <Clock className="w-3 h-3" />
                         À soumettre pour validation
                       </div>
                     )}
 
                     {stop.status === 'VALIDATED' && (
-                      <div style={{ padding: '8px', backgroundColor: '#E0FFF5', borderRadius: '4px', fontSize: '12px', color: '#06D6A0', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ padding: '8px', backgroundColor: '#E0FFF5', borderRadius: '4px', fontSize: '12px', color: 'var(--pro-mint)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <CheckCircle2 className="w-3 h-3" />
                         Prêt à être utilisé
                       </div>
                     )}
 
                     {stop.status === 'CHANGES_REQUESTED' && (
-                      <div style={{ padding: '8px', backgroundColor: '#FFE0E3', borderRadius: '4px', fontSize: '12px', color: '#E63946', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ padding: '8px', backgroundColor: '#FFE0E3', borderRadius: '4px', fontSize: '12px', color: 'var(--pro-coral)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <AlertCircle className="w-3 h-3" />
                         Modifications demandées
                       </div>
                     )}
 
-                    <button style={{ width: '100%', padding: '8px 12px', backgroundColor: '#FFF0E8', color: '#FF6B35', borderRadius: '4px', border: 'none', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }}>
+                    <button style={{ width: '100%', padding: '8px 12px', backgroundColor: '#FFF0E8', color: 'var(--pro-sun)', borderRadius: '4px', border: 'none', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }}>
                       Voir les détails →
                     </button>
                   </div>
@@ -291,23 +291,23 @@ export default function BusStopsPage() {
             <h3 className="pro-panel-title" style={{ marginBottom: '16px' }}>Résumé</h3>
             <div className="pro-kpi-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
-                <p className="pro-kpi-value" style={{ color: '#0077B6' }}>{filteredStops.length}</p>
+                <p className="pro-kpi-value" style={{ color: 'var(--pro-ocean)' }}>{filteredStops.length}</p>
                 <p className="pro-kpi-label">Arrêts total</p>
               </div>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
-                <p className="pro-kpi-value" style={{ color: '#06D6A0' }}>
+                <p className="pro-kpi-value" style={{ color: 'var(--pro-mint)' }}>
                   {filteredStops.filter((s) => s.status === 'VALIDATED').length}
                 </p>
                 <p className="pro-kpi-label">Validés</p>
               </div>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
-                <p className="pro-kpi-value" style={{ color: '#0077B6' }}>
+                <p className="pro-kpi-value" style={{ color: 'var(--pro-ocean)' }}>
                   {filteredStops.filter((s) => s.status === 'DRAFT').length}
                 </p>
                 <p className="pro-kpi-label">Brouillons</p>
               </div>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
-                <p className="pro-kpi-value" style={{ color: '#FF6B35' }}>
+                <p className="pro-kpi-value" style={{ color: 'var(--pro-sun)' }}>
                   {filteredStops.filter((s) => s.status === 'CHANGES_REQUESTED').length}
                 </p>
                 <p className="pro-kpi-label">À modifier</p>

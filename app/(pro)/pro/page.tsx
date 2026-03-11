@@ -6,12 +6,12 @@ import { useProStore } from '@/lib/stores/pro-store';
 import { BarChart, Users, TrendingUp, AlertCircle, RefreshCw, Calendar, DollarSign, Star } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
-const SUN = '#FF6B35';
-const OCEAN = '#0077B6';
+const SUN = 'var(--pro-sun)';
+const OCEAN = 'var(--pro-ocean)';
 const DARK = '#0A1628';
 const SAND = '#FEFCF3';
-const CORAL = '#E63946';
-const MINT = '#06D6A0';
+const CORAL = 'var(--pro-coral)';
+const MINT = 'var(--pro-mint)';
 
 interface ProDashboardStats {
   activeVoyages: number;
@@ -214,7 +214,7 @@ export default function ProDashboard() {
                   <p className="pro-kpi-sub">Total: {formatPrice(stats.totalRevenue)}</p>
                 </div>
                 <div style={{ backgroundColor: '#7B2FF71A', padding: '12px', borderRadius: '8px' }}>
-                  <DollarSign style={{ width: '24px', height: '24px', color: '#7B2FF7' }} />
+                  <DollarSign style={{ width: '24px', height: '24px', color: 'var(--pro-violet)' }} />
                 </div>
               </div>
             </div>

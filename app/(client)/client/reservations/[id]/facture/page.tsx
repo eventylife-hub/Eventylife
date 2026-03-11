@@ -9,7 +9,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -121,12 +121,12 @@ export default function InvoicePage() {
     return (
       <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
         <h1 className="text-3xl font-bold mb-8" style={{ color: C.navy }}>Ma Facture</h1>
-        <div className="rounded-lg p-6" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
-          <p className="font-semibold mb-4" style={{ color: '#DC2626' }}>{error || 'Réservation non trouvée'}</p>
+        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+          <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
           <button
             onClick={() => fetchBooking()}
             className="px-4 py-2 text-white rounded transition-all hover:opacity-80"
-            style={{ backgroundColor: '#DC2626' }}
+            style={{ backgroundColor: 'var(--terra, #DC2626)' }}
           >
             Réessayer
           </button>

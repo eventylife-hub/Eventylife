@@ -126,10 +126,10 @@ export default function AdminMarketingPage() {
   };
 
   const statusConfig = {
-    DRAFT: { label: 'Brouillon', color: 'bg-gray-100 text-gray-800', icon: null },
-    ACTIVE: { label: 'Actif', color: 'bg-green-100 text-green-800', icon: CheckCircle },
-    PAUSED: { label: 'En pause', color: 'bg-yellow-100 text-yellow-800', icon: Pause },
-    ENDED: { label: 'Terminé', color: 'bg-red-100 text-red-800', icon: XCircle },
+    DRAFT: { label: 'Brouillon', color: 'admin-badge admin-badge-neutral', icon: null },
+    ACTIVE: { label: 'Actif', color: 'admin-badge admin-badge-success', icon: CheckCircle },
+    PAUSED: { label: 'En pause', color: 'admin-badge admin-badge-warning', icon: Pause },
+    ENDED: { label: 'Terminé', color: 'admin-badge admin-badge-danger', icon: XCircle },
   };
 
   const campaignColumns: DataTableColumn<Campaign>[] = [

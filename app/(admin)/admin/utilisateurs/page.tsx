@@ -100,12 +100,12 @@ export default function UtilisateursPage() {
       label: 'Rôle',
       render: (value: unknown) => {
         const roleColors: Record<string, string> = {
-          ADMIN: 'bg-red-100 text-red-800',
-          PRO: 'bg-purple-100 text-purple-800',
-          CLIENT: 'bg-blue-100 text-blue-800',
+          ADMIN: 'admin-badge admin-badge-danger',
+          PRO: 'admin-badge admin-badge-violet',
+          CLIENT: 'admin-badge admin-badge-info',
         };
         return (
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${roleColors[value as string] || 'bg-gray-100 text-gray-800'}`}>
+          <span className={`px-2 py-1 rounded-full text-xs font-medium ${roleColors[value as string] || 'admin-badge admin-badge-neutral'}`}>
             {value as string}
           </span>
         );
@@ -122,8 +122,8 @@ export default function UtilisateursPage() {
       render: (value: unknown) => (
         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
           value
-            ? 'bg-green-100 text-green-800'
-            : 'bg-red-100 text-red-800'
+            ? 'admin-badge admin-badge-success'
+            : 'admin-badge admin-badge-danger'
         }`}>
           {value ? 'Actif' : 'Inactif'}
         </span>

@@ -190,7 +190,7 @@ export default function ReleveMensuelPage() {
             background: 'transparent',
             border: 'none',
             cursor: 'pointer',
-            color: '#FF6B35',
+            color: 'var(--pro-sun)',
             fontSize: '0.875rem',
             fontWeight: '500',
           }}
@@ -222,7 +222,7 @@ export default function ReleveMensuelPage() {
             background: 'transparent',
             border: 'none',
             cursor: 'pointer',
-            color: '#FF6B35',
+            color: 'var(--pro-sun)',
             fontSize: '0.875rem',
             fontWeight: '500',
           }}
@@ -283,7 +283,7 @@ export default function ReleveMensuelPage() {
             background: 'transparent',
             border: 'none',
             cursor: 'pointer',
-            color: '#FF6B35',
+            color: 'var(--pro-sun)',
             fontSize: '0.875rem',
             fontWeight: '500',
           }}
@@ -309,7 +309,7 @@ export default function ReleveMensuelPage() {
               onClick={() => handleMonthChange(month)}
               style={{
                 padding: '0.5rem 1rem',
-                background: currentMonth === month ? '#FF6B35' : 'white',
+                background: currentMonth === month ? 'var(--pro-sun)' : 'white',
                 color: currentMonth === month ? 'white' : '#0A1628',
                 border: currentMonth === month ? 'none' : '1px solid #ccc',
                 borderRadius: '0.375rem',
@@ -359,7 +359,7 @@ export default function ReleveMensuelPage() {
           background: 'transparent',
           border: 'none',
           cursor: 'pointer',
-          color: '#FF6B35',
+          color: 'var(--pro-sun)',
           fontSize: '0.875rem',
           fontWeight: '500',
         }}
@@ -423,7 +423,7 @@ export default function ReleveMensuelPage() {
             onClick={() => handleMonthChange(month)}
             style={{
               padding: '0.5rem 1rem',
-              background: currentMonth === month ? '#FF6B35' : 'white',
+              background: currentMonth === month ? 'var(--pro-sun)' : 'white',
               color: currentMonth === month ? 'white' : '#0A1628',
               border: currentMonth === month ? 'none' : '1px solid #ccc',
               borderRadius: '0.375rem',
@@ -526,10 +526,10 @@ export default function ReleveMensuelPage() {
                     <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#666' }}>
                       {trip.commissionPercent}%
                     </td>
-                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#E63946' }}>
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: 'var(--pro-coral)' }}>
                       -{formatPrice(trip.commissionCents)}
                     </td>
-                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', fontWeight: '600', color: '#06D6A0' }}>
+                    <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', fontWeight: '600', color: 'var(--pro-mint)' }}>
                       {formatPrice(trip.netAmountCents)}
                     </td>
                   </tr>
@@ -548,13 +548,13 @@ export default function ReleveMensuelPage() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
               <span style={{ fontWeight: '600' }}>Total commissions:</span>
-              <span style={{ fontWeight: 'bold', fontSize: '1.125rem', color: '#E63946' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '1.125rem', color: 'var(--pro-coral)' }}>
                 -{formatPrice(statement.totalCommissionCents)}
               </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem', background: '#e0f7f4', borderRadius: '0.5rem' }}>
               <span style={{ fontWeight: '600' }}>Montant net reçu:</span>
-              <span style={{ fontWeight: 'bold', fontSize: '1.25rem', color: '#06D6A0' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '1.25rem', color: 'var(--pro-mint)' }}>
                 {formatPrice(statement.totalNetCents)}
               </span>
             </div>

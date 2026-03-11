@@ -173,7 +173,7 @@ export default function AdminDocumentsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'Total', value: stats.total, bgColor: 'var(--admin-ocean-light)' },
-          { label: 'En attente', value: stats.pending, bgColor: '#FEF3C7' },
+          { label: 'En attente', value: stats.pending, bgColor: 'var(--admin-warning-bg, #FEF3C7)' },
           { label: 'Approuvés', value: stats.approved, bgColor: 'var(--admin-mint-soft)' },
           { label: 'Rejetés', value: stats.rejected, bgColor: 'var(--admin-coral-soft)' },
         ].map((stat) => (

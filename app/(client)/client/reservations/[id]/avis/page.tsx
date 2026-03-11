@@ -9,7 +9,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -187,12 +187,12 @@ export default function FeedbackPage() {
           </button>
           <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Laisser un Avis</h1>
         </div>
-        <div className="rounded-lg p-6" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626` }}>
-          <p className="font-semibold mb-4" style={{ color: '#DC2626' }}>{error || 'Réservation non trouvée'}</p>
+        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+          <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
           <button
             onClick={() => fetchBooking()}
             className="px-4 py-2 text-white rounded transition-all hover:opacity-80"
-            style={{ backgroundColor: '#DC2626' }}
+            style={{ backgroundColor: 'var(--terra, #DC2626)' }}
           >
             Réessayer
           </button>
@@ -222,9 +222,9 @@ export default function FeedbackPage() {
         <div
           className="mb-6 p-4 rounded-lg border"
           style={{
-            backgroundColor: toast.type === 'success' ? C.forestBg : '#FEF2F2',
-            borderColor: toast.type === 'success' ? C.forest : '#DC2626',
-            color: toast.type === 'success' ? C.forest : '#DC2626',
+            backgroundColor: toast.type === 'success' ? C.forestBg : 'var(--terra-soft, #FEF2F2)',
+            borderColor: toast.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
+            color: toast.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
           }}
         >
           {toast.message}
@@ -232,7 +232,7 @@ export default function FeedbackPage() {
       )}
 
       {error && (
-        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: '#FEF2F2', border: `1.5px solid #DC2626`, color: '#DC2626' }}>
+        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626`, color: 'var(--terra, #DC2626)' }}>
           {error}
         </div>
       )}

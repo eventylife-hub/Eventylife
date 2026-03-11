@@ -54,13 +54,13 @@ export default function ProForgotPasswordPage() {
 
           {sent ? (
             <div style={{ padding: '24px', backgroundColor: '#E0FFF5', border: '1px solid #E0FFF5', borderRadius: '8px', textAlign: 'center' }}>
-              <CheckCircle2 className="w-12 h-12" style={{ color: '#06D6A0', margin: '0 auto 12px' }} />
-              <h2 style={{ fontWeight: 600, color: '#06D6A0', marginBottom: '8px' }}>Email envoye</h2>
-              <p style={{ fontSize: '14px', color: '#06D6A0', marginBottom: '12px' }}>
+              <CheckCircle2 className="w-12 h-12" style={{ color: 'var(--pro-mint)', margin: '0 auto 12px' }} />
+              <h2 style={{ fontWeight: 600, color: 'var(--pro-mint)', marginBottom: '8px' }}>Email envoye</h2>
+              <p style={{ fontSize: '14px', color: 'var(--pro-mint)', marginBottom: '12px' }}>
                 Si un compte existe avec l&apos;adresse <strong>{email}</strong>,
                 vous recevrez un lien de reinitialisation dans quelques minutes.
               </p>
-              <p style={{ fontSize: '12px', color: '#06D6A0' }}>
+              <p style={{ fontSize: '12px', color: 'var(--pro-mint)' }}>
                 Pensez a verifier vos spams.
               </p>
             </div>
@@ -68,8 +68,8 @@ export default function ProForgotPasswordPage() {
             <>
               {error && (
                 <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <AlertCircle className="w-5 h-5" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
-                  <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+                  <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
+                  <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
                 </div>
               )}
 

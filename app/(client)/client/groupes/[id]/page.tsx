@@ -10,7 +10,7 @@ const C = {
   cream: '#FAF7F2',
   terra: '#C75B39',
   terraLight: '#D97B5E',
-  terraSoft: '#FEF0EB',
+  terraSoft: 'var(--terra-soft)',
   gold: '#D4A853',
   goldSoft: '#FDF6E8',
   border: '#E5E0D8',
@@ -139,8 +139,8 @@ export default function GroupDetailPage() {
         <Link href="/client/groupes" style={{ color: C.terra }} className="hover:opacity-80 mb-4 inline-block">
           ← Retour
         </Link>
-        <div className="rounded-lg p-6" style={{ backgroundColor: '#FEF2F2', borderLeft: `4px solid #DC2626` }}>
-          <p style={{ color: '#DC2626' }}>{error || 'Groupe non trouvé'}</p>
+        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', borderLeft: `4px solid #DC2626` }}>
+          <p style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Groupe non trouvé'}</p>
         </div>
       </div>
     );
@@ -361,9 +361,9 @@ export default function GroupDetailPage() {
           disabled={leavingGroup}
           className="px-6 py-3 rounded-lg font-semibold disabled:opacity-50 transition-all hover:opacity-80"
           style={{
-            backgroundColor: '#FEF2F2',
+            backgroundColor: 'var(--terra-soft, #FEF2F2)',
             border: `1.5px solid #DC2626`,
-            color: '#DC2626',
+            color: 'var(--terra, #DC2626)',
           }}
         >
           {leavingGroup ? 'Sortie en cours...' : 'Quitter le groupe'}

@@ -131,7 +131,7 @@ export default function ConnexionPage() {
         {error && (
           <div
             className="mb-4 p-3 rounded-lg text-sm"
-            style={{ background: '#FEF2F2', border: '1px solid #FECACA', color: '#DC2626' }}
+            style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1px solid #FECACA', color: 'var(--terra, #DC2626)' }}
           >
             {error}
           </div>
@@ -161,7 +161,7 @@ export default function ConnexionPage() {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
-            {errors.email && <p className="text-xs mt-1" style={{ color: '#DC2626' }}>{errors.email}</p>}
+            {errors.email && <p className="text-xs mt-1" style={{ color: 'var(--terra, #DC2626)' }}>{errors.email}</p>}
           </div>
 
           <div>
@@ -191,7 +191,7 @@ export default function ConnexionPage() {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
-            {errors.password && <p className="text-xs mt-1" style={{ color: '#DC2626' }}>{errors.password}</p>}
+            {errors.password && <p className="text-xs mt-1" style={{ color: 'var(--terra, #DC2626)' }}>{errors.password}</p>}
           </div>
 
           <button
@@ -241,7 +241,7 @@ export default function ConnexionPage() {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = C.terra;
-            e.currentTarget.style.background = '#FEF0EB';
+            e.currentTarget.style.background = 'var(--terra-soft)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = C.border;

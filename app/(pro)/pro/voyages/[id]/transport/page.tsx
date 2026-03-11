@@ -167,7 +167,7 @@ export default function TransportPage() {
 
       {error && (
         <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
-          <p style={{ color: '#E63946', margin: 0 }}>{error}</p>
+          <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
           <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer
           </button>

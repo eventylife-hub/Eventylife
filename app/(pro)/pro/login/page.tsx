@@ -50,8 +50,8 @@ export default function ProLoginPage() {
 
           {error && (
             <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-              <AlertCircle className="w-5 h-5" style={{ color: '#E63946', marginTop: '2px', flexShrink: 0 }} />
-              <p style={{ fontSize: '14px', color: '#E63946' }}>{error}</p>
+              <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</p>
             </div>
           )}
 
@@ -100,7 +100,7 @@ export default function ProLoginPage() {
           </form>
 
           <div style={{ marginTop: '16px', textAlign: 'center' }}>
-            <Link href="/pro/forgot-password" style={{ fontSize: '14px', color: '#0077B6', textDecoration: 'none', fontWeight: 500 }}>
+            <Link href="/pro/forgot-password" style={{ fontSize: '14px', color: 'var(--pro-ocean)', textDecoration: 'none', fontWeight: 500 }}>
               Mot de passe oublié?
             </Link>
           </div>
@@ -108,7 +108,7 @@ export default function ProLoginPage() {
           <div style={{ marginTop: '24px', textAlign: 'center', borderTop: '1px solid #E0E0E0', paddingTop: '24px' }}>
             <p style={{ color: '#8896A6' }}>
               Devenir partenaire?{' '}
-              <Link href="/" style={{ color: '#0077B6', textDecoration: 'none', fontWeight: 500 }}>
+              <Link href="/" style={{ color: 'var(--pro-ocean)', textDecoration: 'none', fontWeight: 500 }}>
                 Nous contacter
               </Link>
             </p>
