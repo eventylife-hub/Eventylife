@@ -8,16 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default function CookiesPolicy() {
-  const C = {
-    navy: '#1A1A2E',
-    cream: '#FAF7F2',
-    terra: '#C75B39',
-    terraLight: '#D97B5E',
-    gold: '#D4A853',
-    border: '#E5E0D8',
-    muted: '#6B7280',
-  };
-
   const cookies = [
     {
       name: 'session_id',
@@ -87,26 +77,26 @@ export default function CookiesPolicy() {
   return (
     <div
       className="min-h-screen animate-fade-up"
-      style={{ backgroundColor: C.cream }}
+      style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}
     >
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-12">
           <p
             className="mb-2 tracking-widest uppercase text-sm font-medium"
-            style={{ color: C.gold }}
+            style={{ color: 'var(--gold, #D4A853)' }}
           >
             Confidentialité
           </p>
           <h1
             className="mb-4 text-4xl font-display font-bold"
-            style={{ color: C.navy, fontFamily: 'Playfair Display' }}
+            style={{ color: 'var(--navy, #1A1A2E)', fontFamily: 'Playfair Display' }}
           >
             Politique de Cookies
           </h1>
-          <p className="text-lg" style={{ color: C.muted }}>
+          <p className="text-lg" style={{ color: '#6B7280' }}>
             Gestion des cookies et technologies de suivi
           </p>
-          <p className="mt-2 text-sm" style={{ color: C.muted }}>
+          <p className="mt-2 text-sm" style={{ color: '#6B7280' }}>
             En vigueur à compter du 2 mars 2026
           </p>
         </div>
@@ -116,18 +106,18 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Qu&apos;est-ce qu&apos;un cookie ?
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Un cookie est un petit fichier texte stocké sur votre appareil
                 (ordinateur, smartphone, tablette) lors de la visite d&apos;un
@@ -160,20 +150,20 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Types de cookies utilisés
             </h2>
-            <div className="space-y-6" style={{ color: C.navy }}>
+            <div className="space-y-6" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <div>
-                <h3 className="mb-3 text-xl font-semibold" style={{ color: C.navy }}>
+                <h3 className="mb-3 text-xl font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   1. Cookies essentiels / strictement nécessaires
                 </h3>
                 <p className="mb-3">
@@ -188,7 +178,7 @@ export default function CookiesPolicy() {
               </div>
 
               <div>
-                <h3 className="mb-3 text-xl font-semibold" style={{ color: C.navy }}>
+                <h3 className="mb-3 text-xl font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   2. Cookies d&apos;analyse (Analytics)
                 </h3>
                 <p className="mb-3">
@@ -202,7 +192,7 @@ export default function CookiesPolicy() {
               </div>
 
               <div>
-                <h3 className="mb-3 text-xl font-semibold" style={{ color: C.navy }}>
+                <h3 className="mb-3 text-xl font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   3. Cookies fonctionnels
                 </h3>
                 <p className="mb-3">
@@ -216,7 +206,7 @@ export default function CookiesPolicy() {
               </div>
 
               <div>
-                <h3 className="mb-3 text-xl font-semibold" style={{ color: C.navy }}>
+                <h3 className="mb-3 text-xl font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   4. Cookies marketing / de reciblage
                 </h3>
                 <p className="mb-3">
@@ -236,37 +226,37 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Tableau détaillé des cookies
             </h2>
             <div className="overflow-x-auto">
               <table
                 className="w-full border-collapse text-sm"
-                style={{ borderColor: C.border }}
+                style={{ borderColor: '#E5E0D8' }}
               >
-                <thead style={{ backgroundColor: C.cream }}>
+                <thead style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
                   <tr>
                     <th
                       className="p-3 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >Nom</th>
                     <th
                       className="p-3 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >
@@ -275,24 +265,24 @@ export default function CookiesPolicy() {
                     <th
                       className="p-3 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >Finalité</th>
                     <th
                       className="p-3 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >Durée</th>
                     <th
                       className="p-3 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >
@@ -305,14 +295,14 @@ export default function CookiesPolicy() {
                     <tr
                       key={index}
                       style={{
-                        backgroundColor: index % 2 === 0 ? 'white' : C.cream,
+                        backgroundColor: index % 2 === 0 ? '#FFFFFF' : 'var(--cream, #FAF7F2)',
                       }}
                     >
                       <td
                         className="p-3"
                         style={{
-                          border: `1px solid ${C.border}`,
-                          color: C.navy,
+                          border: '1px solid #E5E0D8',
+                          color: 'var(--navy, #1A1A2E)',
                         }}
                       >
                         <code className="text-xs font-mono">{cookie.name}</code>
@@ -320,8 +310,8 @@ export default function CookiesPolicy() {
                       <td
                         className="p-3"
                         style={{
-                          border: `1px solid ${C.border}`,
-                          color: C.navy,
+                          border: '1px solid #E5E0D8',
+                          color: 'var(--navy, #1A1A2E)',
                         }}
                       >
                         <span
@@ -341,8 +331,8 @@ export default function CookiesPolicy() {
                       <td
                         className="p-3"
                         style={{
-                          border: `1px solid ${C.border}`,
-                          color: C.navy,
+                          border: '1px solid #E5E0D8',
+                          color: 'var(--navy, #1A1A2E)',
                         }}
                       >
                         {cookie.purpose}
@@ -350,8 +340,8 @@ export default function CookiesPolicy() {
                       <td
                         className="p-3"
                         style={{
-                          border: `1px solid ${C.border}`,
-                          color: C.navy,
+                          border: '1px solid #E5E0D8',
+                          color: 'var(--navy, #1A1A2E)',
                         }}
                       >
                         {cookie.duration}
@@ -359,8 +349,8 @@ export default function CookiesPolicy() {
                       <td
                         className="p-3"
                         style={{
-                          border: `1px solid ${C.border}`,
-                          color: C.navy,
+                          border: '1px solid #E5E0D8',
+                          color: 'var(--navy, #1A1A2E)',
                         }}
                       >
                         {cookie.provider}
@@ -376,18 +366,18 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Comment gérer les cookies
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <div>
                 <p className="font-semibold">Option 1 : Bandeau de consentement</p>
                 <p className="mt-2">
@@ -434,7 +424,7 @@ export default function CookiesPolicy() {
                       href="https://tools.google.com/dlpage/gaoptout"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: C.terra }}
+                      style={{ color: 'var(--terra, #C75B39)' }}
                       className="hover:underline"
                     >
                       Google Analytics Opt-out
@@ -446,7 +436,7 @@ export default function CookiesPolicy() {
                       href="https://www.facebook.com/ads/preferences/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: C.terra }}
+                      style={{ color: 'var(--terra, #C75B39)' }}
                       className="hover:underline"
                     >
                       Centre de préférences Facebook
@@ -458,14 +448,14 @@ export default function CookiesPolicy() {
               <div
                 className="rounded-lg p-4"
                 style={{
-                  backgroundColor: C.cream,
-                  border: `1.5px solid ${C.border}`,
+                  backgroundColor: 'var(--cream, #FAF7F2)',
+                  border: '1.5px solid #E5E0D8',
                   borderRadius: '20px',
                 }}
               >
                 <p
                   className="text-sm font-semibold"
-                  style={{ color: C.navy }}
+                  style={{ color: 'var(--navy, #1A1A2E)' }}
                 >
                   Important : Désactiver les cookies essentiels peut affecter le
                   fonctionnement du site et votre expérience utilisateur.
@@ -478,18 +468,18 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Autres technologies de suivi
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <div>
                 <p className="font-semibold">Pixels de suivi</p>
                 <p className="mt-2">
@@ -521,18 +511,18 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Nos partenaires et prestataires
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Nous travaillons avec les partenaires suivants qui peuvent
                 placer des cookies :
@@ -566,18 +556,18 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Vos droits
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Conformément au RGPD et à la loi Informatique et Libertés, vous avez
                 le droit de :
@@ -603,7 +593,7 @@ export default function CookiesPolicy() {
                 Pour exercer ces droits, veuillez consulter notre{' '}
                 <Link
                   href="/politique-confidentialite"
-                  style={{ color: C.terra }}
+                  style={{ color: 'var(--terra, #C75B39)' }}
                   className="hover:underline"
                 >
                   Politique de Confidentialité
@@ -617,18 +607,18 @@ export default function CookiesPolicy() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Nous contacter
             </h2>
-            <div className="space-y-2 text-gray-700">
+            <div className="space-y-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Pour toute question concernant cette Politique de Cookies :
               </p>
@@ -636,7 +626,7 @@ export default function CookiesPolicy() {
                 <strong>Email :</strong>{' '}
                 <a
                   href="mailto:dpo@eventy.life"
-                  style={{ color: C.terra }}
+                  style={{ color: 'var(--terra, #C75B39)' }}
                   className="hover:underline"
                 >
                   dpo@eventy.life
@@ -652,12 +642,12 @@ export default function CookiesPolicy() {
           <div
             className="rounded-lg p-6"
             style={{
-              backgroundColor: C.cream,
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: 'var(--cream, #FAF7F2)',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
-            <p className="text-sm" style={{ color: C.navy }}>
+            <p className="text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <strong>Dernière mise à jour :</strong> 2 mars 2026
             </p>
           </div>

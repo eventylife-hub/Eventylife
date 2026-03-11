@@ -8,36 +8,26 @@ export const metadata: Metadata = {
 };
 
 export default function MentionsLegales() {
-  const C = {
-    navy: '#1A1A2E',
-    cream: '#FAF7F2',
-    terra: '#C75B39',
-    terraLight: '#D97B5E',
-    gold: '#D4A853',
-    border: '#E5E0D8',
-    muted: '#6B7280',
-  };
-
   return (
     <div
       className="min-h-screen animate-fade-up"
-      style={{ backgroundColor: C.cream }}
+      style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}
     >
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-12">
           <p
             className="mb-2 tracking-widest uppercase text-sm font-medium"
-            style={{ color: C.gold }}
+            style={{ color: 'var(--gold, #D4A853)' }}
           >
             Informations
           </p>
           <h1
             className="mb-4 text-4xl font-display font-bold"
-            style={{ color: C.navy, fontFamily: 'Playfair Display' }}
+            style={{ color: 'var(--navy, #1A1A2E)', fontFamily: 'Playfair Display' }}
           >
             Mentions Légales
           </h1>
-          <p className="text-lg" style={{ color: C.muted }}>
+          <p className="text-lg" style={{ color: '#6B7280' }}>
             Informations légales relatives au site Eventy Life
           </p>
         </div>
@@ -47,18 +37,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Éditeur du site
             </h2>
-            <div className="space-y-2" style={{ color: C.navy }}>
+            <div className="space-y-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 <strong>Entreprise :</strong> Eventy Life SAS
               </p>
@@ -79,7 +69,8 @@ export default function MentionsLegales() {
                 <strong>Email :</strong>{' '}
                 <a
                   href="mailto:contact@eventy.life"
-                  className="text-blue-600 hover:underline"
+                  style={{ color: 'var(--terra, #C75B39)' }}
+                  className="hover:underline"
                 >
                   contact@eventy.life
                 </a>
@@ -94,18 +85,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Directeur de la publication
             </h2>
-            <div style={{ color: C.navy }}>
+            <div style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 <strong>Directeur de publication :</strong> Martin Dupont
               </p>
@@ -120,18 +111,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Hébergement
             </h2>
-            <div className="space-y-2" style={{ color: C.navy }}>
+            <div className="space-y-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 <strong>Hébergeur :</strong> Vercel Inc.
               </p>
@@ -145,7 +136,7 @@ export default function MentionsLegales() {
                   href="https://vercel.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: C.terra }}
+                  style={{ color: 'var(--terra, #C75B39)' }}
                   className="hover:underline"
                 >
                   www.vercel.com
@@ -162,18 +153,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Responsabilité du contenu
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Eventy Life SAS s&apos;efforce de maintenir les informations
                 contenues sur ce site à jour et exactes. Cependant, elle ne
@@ -199,18 +190,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Propriété intellectuelle
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Tous les contenus du site (textes, images, graphiques, logos,
                 vidéos, icônes) sont la propriété d&apos;Eventy Life SAS ou de
@@ -229,18 +220,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Protection des données personnelles
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Le site collecte des données personnelles conformément à la
                 législation applicable, notamment le Règlement Général sur la
@@ -251,7 +242,7 @@ export default function MentionsLegales() {
                 personnelles, veuillez consulter notre{' '}
                 <Link
                   href="/politique-confidentialite"
-                  style={{ color: C.terra }}
+                  style={{ color: 'var(--terra, #C75B39)' }}
                   className="hover:underline"
                 >
                   Politique de Confidentialité
@@ -265,18 +256,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Cookies et traceurs
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Le site utilise des cookies et des technologies similaires pour
                 améliorer l&apos;expérience utilisateur et mesurer
@@ -285,7 +276,7 @@ export default function MentionsLegales() {
               <p>
                 Pour plus de détails et pour gérer vos préférences de cookies,
                 veuillez consulter notre{' '}
-                <Link href="/cookies" style={{ color: C.terra }} className="hover:underline">
+                <Link href="/cookies" style={{ color: 'var(--terra, #C75B39)' }} className="hover:underline">
                   Politique de Cookies
                 </Link>
                 .
@@ -297,22 +288,22 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Conditions d&apos;utilisation
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 L&apos;utilisation du site implique l&apos;acceptation de ces
                 mentions légales et des{' '}
-                <Link href="/cgv" style={{ color: C.terra }} className="hover:underline">
+                <Link href="/cgv" style={{ color: 'var(--terra, #C75B39)' }} className="hover:underline">
                   Conditions Générales de Vente
                 </Link>
                 .
@@ -328,18 +319,18 @@ export default function MentionsLegales() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Nous contacter
             </h2>
-            <div className="space-y-2" style={{ color: C.navy }}>
+            <div className="space-y-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Pour toute question concernant ces mentions légales, veuillez
                 nous contacter :
@@ -349,7 +340,7 @@ export default function MentionsLegales() {
                   <strong>Email :</strong>{' '}
                   <a
                     href="mailto:legal@eventy.life"
-                    style={{ color: C.terra }}
+                    style={{ color: 'var(--terra, #C75B39)' }}
                     className="hover:underline"
                   >
                     legal@eventy.life
@@ -370,10 +361,10 @@ export default function MentionsLegales() {
           <div
             className="rounded-lg p-6 text-sm"
             style={{
-              backgroundColor: C.cream,
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: 'var(--cream, #FAF7F2)',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
-              color: C.muted,
+              color: '#6B7280',
             }}
           >
             <p>

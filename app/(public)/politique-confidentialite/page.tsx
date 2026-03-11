@@ -8,39 +8,29 @@ export const metadata: Metadata = {
 };
 
 export default function PolitiqueConfidentialite() {
-  const C = {
-    navy: '#1A1A2E',
-    cream: '#FAF7F2',
-    terra: '#C75B39',
-    terraLight: '#D97B5E',
-    gold: '#D4A853',
-    border: '#E5E0D8',
-    muted: '#6B7280',
-  };
-
   return (
     <div
       className="min-h-screen animate-fade-up"
-      style={{ backgroundColor: C.cream }}
+      style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}
     >
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-12">
           <p
             className="mb-2 tracking-widest uppercase text-sm font-medium"
-            style={{ color: C.gold }}
+            style={{ color: 'var(--gold, #D4A853)' }}
           >
             Confidentialité
           </p>
           <h1
             className="mb-4 text-4xl font-display font-bold"
-            style={{ color: C.navy, fontFamily: 'Playfair Display' }}
+            style={{ color: 'var(--navy, #1A1A2E)', fontFamily: 'Playfair Display' }}
           >
             Politique de Confidentialité
           </h1>
-          <p className="text-lg" style={{ color: C.muted }}>
+          <p className="text-lg" style={{ color: '#6B7280' }}>
             Protection de vos données personnelles - Conforme au RGPD
           </p>
-          <p className="mt-2 text-sm" style={{ color: C.muted }}>
+          <p className="mt-2 text-sm" style={{ color: '#6B7280' }}>
             En vigueur à compter du 2 mars 2026
           </p>
         </div>
@@ -50,18 +40,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               Introduction
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Eventy Life SAS (ci-après "l&apos;Entreprise", "nous" ou "le
                 Responsable de traitement") s&apos;engage à protéger vos
@@ -86,18 +76,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               1. Responsable de traitement
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 <strong>Responsable de traitement :</strong> Eventy Life SAS
               </p>
@@ -127,18 +117,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               2. Données personnelles collectées
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <div>
                 <p className="font-semibold">2.1 Données d&apos;identité</p>
                 <p className="mt-2">
@@ -212,18 +202,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               3. Finalités du traitement
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Nous traitons vos données personnelles pour les finalités suivantes :
               </p>
@@ -284,18 +274,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               4. Fondement juridique du traitement
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Nous basons le traitement de vos données sur les fondements
                 juridiques suivants, énoncés à l&apos;article 6 du RGPD :
@@ -349,18 +339,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               5. Destinataires des données
             </h2>
-            <div className="space-y-3" style={{ color: C.navy }}>
+            <div className="space-y-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Vos données personnelles sont communiquées aux destinataires suivants :
               </p>
@@ -406,18 +396,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               6. Transferts de données en dehors de l&apos;UE
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Certaines données peuvent être transférées vers des pays situés
                 en dehors de l&apos;Espace Économique Européen (EEE), notamment
@@ -461,33 +451,33 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               7. Durée de conservation des données
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Nous ne conservons vos données que pendant la période nécessaire
                 à chaque finalité :
               </p>
               <table
                 className="mt-4 w-full border-collapse"
-                style={{ borderColor: C.border }}
+                style={{ borderColor: '#E5E0D8' }}
               >
                 <thead>
                   <tr>
                     <th
                       className="p-2 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >
@@ -496,8 +486,8 @@ export default function PolitiqueConfidentialite() {
                     <th
                       className="p-2 text-left"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                         fontWeight: 'bold',
                       }}
                     >
@@ -510,8 +500,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Données de réservation et voyage
@@ -519,8 +509,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       3 ans après la fin du voyage
@@ -530,8 +520,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Données de paiement
@@ -539,8 +529,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       7 ans (obligation comptable) ou jusqu&apos;à la
@@ -551,8 +541,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Données de contact/compte
@@ -560,8 +550,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Tant que le compte est actif + 2 ans de fermeture
@@ -571,8 +561,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Données de navigation/cookies
@@ -580,8 +570,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       13 mois maximum
@@ -591,8 +581,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Données marketing
@@ -600,8 +590,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Jusqu&apos;à retrait du consentement
@@ -611,8 +601,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       Logs de sécurité
@@ -620,8 +610,8 @@ export default function PolitiqueConfidentialite() {
                     <td
                       className="p-2"
                       style={{
-                        border: `1px solid ${C.border}`,
-                        color: C.navy,
+                        border: '1px solid #E5E0D8',
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       12 mois
@@ -640,18 +630,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               8. Vos droits concernant vos données
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Vous disposez des droits suivants, prévus par le RGPD :
               </p>
@@ -753,18 +743,18 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               9. Sécurité et protection des données
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Nous mettons en œuvre les mesures techniques et organisationnelles
                 nécessaires pour protéger vos données contre l&apos;accès non
@@ -805,23 +795,23 @@ export default function PolitiqueConfidentialite() {
           <section
             className="rounded-lg p-8"
             style={{
-              backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: '#FFFFFF',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <h2
               className="mb-4 text-2xl font-semibold"
-              style={{ color: C.navy }}
+              style={{ color: 'var(--navy, #1A1A2E)' }}
             >
               10. Cookies et technologies de suivi
             </h2>
-            <div className="space-y-4" style={{ color: C.navy }}>
+            <div className="space-y-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <p>
                 Nous utilisons des cookies et technologies similaires pour
                 améliorer votre expérience. Pour plus d&apos;informations,
                 consultez notre{' '}
-                <Link href="/cookies" style={{ color: C.terra }} className="hover:underline">
+                <Link href="/cookies" style={{ color: 'var(--terra, #C75B39)' }} className="hover:underline">
                   Politique de Cookies
                 </Link>
                 .
@@ -837,15 +827,15 @@ export default function PolitiqueConfidentialite() {
           <div
             className="rounded-lg p-6"
             style={{
-              backgroundColor: C.cream,
-              border: `1.5px solid ${C.border}`,
+              backgroundColor: 'var(--cream, #FAF7F2)',
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
-            <p className="text-sm" style={{ color: C.navy }}>
+            <p className="text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               <strong>Dernière mise à jour :</strong> 2 mars 2026
             </p>
-            <p className="mt-2 text-sm" style={{ color: C.muted }}>
+            <p className="mt-2 text-sm" style={{ color: '#6B7280' }}>
               Cette Politique de Confidentialité est conforme au Règlement
               Général sur la Protection des Données (RGPD) et à la loi française
               Informatique et Libertés.
