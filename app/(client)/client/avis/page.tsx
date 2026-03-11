@@ -115,8 +115,9 @@ export default function AvisPage() {
       const resList = await fetch('/api/reviews/mine', {
         credentials: 'include',
       });
-      const data = (await resList.json() as unknown) as unknown;
-      setReviews(data);
+      const data = (await resList.json() as unknown) as Record<string, unknown>;
+      const reviewsData = (data.items || data || []) as Review[];
+      setReviews(reviewsData);
       setShowForm(false);
       setFormData({ travelId: '', rating: 5, comment: '' });
     } catch (err: unknown) {

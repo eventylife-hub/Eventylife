@@ -104,16 +104,16 @@ export default function FinancePage() {
         throw new Error('Impossible de charger les données financières');
       }
 
-      const revenueData = (await revenueRes.json() as unknown) as unknown;
+      const revenueData = (await revenueRes.json() as unknown) as RevenueStats;
       setStats(revenueData);
 
       if (paymentsRes.ok) {
-        const paymentsData = (await paymentsRes.json() as unknown) as unknown;
+        const paymentsData = (await paymentsRes.json() as unknown) as Record<string, unknown>;
         setPayments(paymentsData.items || paymentsData || []);
       }
 
       if (refundsRes.ok) {
-        const refundsData = (await refundsRes.json() as unknown) as unknown;
+        const refundsData = (await refundsRes.json() as unknown) as Record<string, unknown>;
         setRefunds(refundsData.items || refundsData || []);
       }
     } catch (err: unknown) {

@@ -43,7 +43,7 @@ export default function RejoindrePage() {
       if (!res.ok) {
         throw new Error('Code d\'invitation invalide');
       }
-      const data = (await res.json() as unknown) as unknown;
+      const data = (await res.json() as unknown) as Record<string, unknown>;
       setGroupePreview(data);
     } catch (err: unknown) {
       console.warn('API groups/code indisponible — données démo');
@@ -80,8 +80,8 @@ export default function RejoindrePage() {
       });
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
-        throw new Error(data.message || 'Erreur lors de l\'adhésion');
+        const data = (await res.json() as unknown) as Record<string, unknown>;
+        throw new Error((data.message as string) || 'Erreur lors de l\'adhésion');
       }
 
       router.push(`/client/groupes/${groupePreview.id}`);

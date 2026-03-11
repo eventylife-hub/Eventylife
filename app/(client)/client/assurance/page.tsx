@@ -31,9 +31,8 @@ export default function AssurancePage() {
         });
         if (!res.ok) throw new Error('Erreur chargement assurances');
 
-        const data = (await res.json() as unknown) as unknown;
-        const insuranceData = data as Record<string, unknown>;
-        setInsurances((insuranceData.insurances || insuranceData || []) as Record<string, unknown>[]);
+        const data = (await res.json() as unknown) as Record<string, unknown>;
+        setInsurances((data.insurances || data || []) as Record<string, unknown>[]);
         setError(null);
       } catch {
         console.warn('API assurances indisponible — données démo');

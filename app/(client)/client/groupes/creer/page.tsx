@@ -37,7 +37,7 @@ export default function CreerGroupePage() {
           credentials: 'include',
         });
         if (!res.ok) throw new Error('Erreur lors du chargement des voyages');
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as Record<string, unknown>;
         setVoyages(data.travels || []);
       } catch (err: unknown) {
         console.warn('API travels indisponible — données démo');
@@ -111,12 +111,12 @@ export default function CreerGroupePage() {
       });
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
-        throw new Error(data.message || 'Erreur lors de la création');
+        const data = (await res.json() as unknown) as Record<string, unknown>;
+        throw new Error((data.message as string) || 'Erreur lors de la création');
       }
 
-      const newGroup = (await res.json() as unknown) as unknown;
-      router.push(`/client/groupes/${newGroup.id}`);
+      const newGroup = (await res.json() as unknown) as Record<string, unknown>;
+      router.push(`/client/groupes/${newGroup.id as string}`);
     } catch (err: unknown) {
       console.warn('API groups indisponible — données démo');
       const demoGroupId = 'demo-group-' + Date.now();
