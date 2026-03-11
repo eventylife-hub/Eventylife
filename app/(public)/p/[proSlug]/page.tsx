@@ -258,7 +258,7 @@ export default function ProPublicPage() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form */}
-          <form onSubmit={handleLeadSubmit} className="space-y-4">
+          <form role="search" onSubmit={handleLeadSubmit} className="space-y-4">
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: C.navy, marginBottom: '0.25rem' }}>Nom</label>
               <Input
@@ -357,7 +357,7 @@ export default function ProPublicPage() {
             {/* Follow Email Opt-in */}
             <div style={{ backgroundColor: C.goldSoft, borderRadius: '12px', padding: '1rem' }}>
               <h4 style={{ fontWeight: '700', color: C.navy, marginBottom: '0.75rem' }}>Suivre les voyages</h4>
-              <form onSubmit={handleFollowEmail} className="space-y-2">
+              <form role="search" onSubmit={handleFollowEmail} className="space-y-2">
                 <Input
                   type="email"
                   placeholder="votre@email.com"

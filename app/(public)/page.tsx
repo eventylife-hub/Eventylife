@@ -471,7 +471,7 @@ export default function HomePage() {
               Inscrivez-vous pour découvrir nos meilleures destinations avant tout le monde.
             </p>
 
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form role="search" onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
                 type="email"
                 value={email}

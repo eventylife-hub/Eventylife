@@ -67,7 +67,7 @@ export default function ContactPage() {
               <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: C.navy }}>Envoyez-nous un message</h2>
             </div>
             <div className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form role="search" onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label style={{ color: C.navy, fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.375rem', display: 'block' }}>
                     Nom complet

@@ -41,7 +41,7 @@ export default function SuiviCommandePage() {
       <div className="mx-auto max-w-xl px-4 py-12">
         {/* Formulaire de recherche */}
         <div style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '2rem' }}>
-          <form onSubmit={handleSearch} className="space-y-5">
+          <form role="search" onSubmit={handleSearch} className="space-y-5">
             <div>
               <label
                 htmlFor="orderRef"
