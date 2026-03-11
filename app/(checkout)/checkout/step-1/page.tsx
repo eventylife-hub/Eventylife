@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
+import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 
 interface RoomSelection {
   roomTypeId: string;
@@ -177,6 +178,8 @@ export default function CheckoutStep1Page() {
       }}
     >
       <div style={{ maxWidth: '42rem', margin: '0 auto' }} className="animate-fade-up">
+        <CheckoutProgress currentStep={1} />
+
         <div style={{ marginBottom: '2rem' }}>
           <h1
             style={{

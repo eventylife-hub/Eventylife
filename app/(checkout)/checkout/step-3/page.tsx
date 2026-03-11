@@ -15,6 +15,7 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
 import { formatPrice } from '@/lib/utils';
+import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 
 const FALLBACK_PAYMENT_URL = 'https://checkout.stripe.demo/pay/demo-session-001';
 export default function CheckoutStep3Page() {
@@ -60,6 +61,8 @@ export default function CheckoutStep3Page() {
       }}
     >
       <div style={{ maxWidth: '42rem', margin: '0 auto' }} className="animate-fade-up">
+        <CheckoutProgress currentStep={3} />
+
         <div style={{ marginBottom: '2rem' }}>
           <h1
             style={{

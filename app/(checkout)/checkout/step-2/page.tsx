@@ -17,6 +17,7 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { formatPrice } from '@/lib/utils';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
+import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 
 interface ParticipantForm {
   roomBookingId: string;
@@ -211,6 +212,8 @@ export default function CheckoutStep2Page() {
       }}
     >
       <div style={{ maxWidth: '42rem', margin: '0 auto' }} className="animate-fade-up">
+        <CheckoutProgress currentStep={2} />
+
         <div style={{ marginBottom: '2rem' }}>
           <h1
             style={{

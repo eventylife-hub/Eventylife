@@ -14,6 +14,7 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice } from '@/lib/utils';
+import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 
 interface BookingDetails {
   id: string;
@@ -243,15 +244,38 @@ export default function CheckoutConfirmationPage() {
       }}
     >
       <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem' }} className="animate-fade-up">
+        <CheckoutProgress currentStep={4} />
+
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <CheckCircle
+          <div
             style={{
-              width: '80px',
-              height: '80px',
-              color: '#166534',
-              margin: '0 auto 1rem',
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1.5rem',
+              animation: 'successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+              boxShadow: '0 8px 30px rgba(22, 101, 52, 0.15)',
             }}
-          />
+          >
+            <CheckCircle
+              style={{
+                width: '56px',
+                height: '56px',
+                color: '#166534',
+              }}
+            />
+          </div>
+          <style>{`
+            @keyframes successPop {
+              0% { transform: scale(0); opacity: 0; }
+              50% { transform: scale(1.1); }
+              100% { transform: scale(1); opacity: 1; }
+            }
+          `}</style>
           <h1
             style={{
               fontSize: '1.875rem',

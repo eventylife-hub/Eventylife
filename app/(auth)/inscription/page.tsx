@@ -33,6 +33,8 @@ export default function InscriptionPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [submitButtonHover, setSubmitButtonHover] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -42,6 +44,22 @@ export default function InscriptionPage() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  };
+
+  const calculatePasswordStrength = (password: string) => {
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    return strength;
+  };
+
+  const getPasswordStrengthLabel = (password: string) => {
+    const strength = calculatePasswordStrength(password);
+    if (strength <= 1) return { label: 'Faible', color: '#DC2626' };
+    if (strength === 2 || strength === 3) return { label: 'Moyen', color: '#F59E0B' };
+    return { label: 'Fort', color: '#10B981' };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -421,35 +439,86 @@ export default function InscriptionPage() {
             >
               Mot de passe
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-                autoComplete="new-password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-              style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                backgroundColor: '#FFFFFF',
-                border: `1.5px solid ${errors.password ? '#DC2626' : '#E5E0D8'}`,
-                borderRadius: '10px',
-                fontSize: '0.875rem',
-                color: 'var(--navy, #1A1A2E)',
-                outline: 'none',
-                transition: 'border-color 0.2s',
-              }}
-              onFocus={(e) => {
-                if (!errors.password) {
-                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                }
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.password ? '#DC2626' : '#E5E0D8';
-              }}
-            />
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                  autoComplete="new-password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="••••••••"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${errors.password ? '#DC2626' : '#E5E0D8'}`,
+                  borderRadius: '10px',
+                  fontSize: '0.875rem',
+                  color: 'var(--navy, #1A1A2E)',
+                  outline: 'none',
+                  transition: 'border-color 0.2s',
+                }}
+                onFocus={(e) => {
+                  if (!errors.password) {
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                  }
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = errors.password ? '#DC2626' : '#E5E0D8';
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#718096',
+                  padding: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+              >
+                {showPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+              </button>
+            </div>
+            {formData.password && (
+              <div style={{ marginTop: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div
+                    style={{
+                      height: '4px',
+                      flex: 1,
+                      backgroundColor: getPasswordStrengthLabel(formData.password).color,
+                      borderRadius: '2px',
+                      opacity: 0.7,
+                    }}
+                  />
+                  <span style={{ fontSize: '0.75rem', color: getPasswordStrengthLabel(formData.password).color, fontWeight: '500' }}>
+                    {getPasswordStrengthLabel(formData.password).label}
+                  </span>
+                </div>
+              </div>
+            )}
             {errors.password && (
               <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.password}
@@ -471,35 +540,68 @@ export default function InscriptionPage() {
             >
               Confirmez le mot de passe
             </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-                autoComplete="new-password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-              style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                backgroundColor: '#FFFFFF',
-                border: `1.5px solid ${errors.confirmPassword ? '#DC2626' : '#E5E0D8'}`,
-                borderRadius: '10px',
-                fontSize: '0.875rem',
-                color: 'var(--navy, #1A1A2E)',
-                outline: 'none',
-                transition: 'border-color 0.2s',
-              }}
-              onFocus={(e) => {
-                if (!errors.confirmPassword) {
-                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                }
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.confirmPassword ? '#DC2626' : '#E5E0D8';
-              }}
-            />
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                id="confirmPassword"
+                name="confirmPassword"
+                  autoComplete="new-password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                placeholder="••••••••"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${errors.confirmPassword ? '#DC2626' : '#E5E0D8'}`,
+                  borderRadius: '10px',
+                  fontSize: '0.875rem',
+                  color: 'var(--navy, #1A1A2E)',
+                  outline: 'none',
+                  transition: 'border-color 0.2s',
+                }}
+                onFocus={(e) => {
+                  if (!errors.confirmPassword) {
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                  }
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = errors.confirmPassword ? '#DC2626' : '#E5E0D8';
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#718096',
+                  padding: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                aria-label={showConfirmPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+              >
+                {showConfirmPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+              </button>
+            </div>
             {errors.confirmPassword && (
               <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.confirmPassword}
