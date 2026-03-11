@@ -342,7 +342,7 @@ export default function CreateTripPage() {
             </button>
           </div>
         </div>
-      }
+      )}
 
       {/* Indicateur de progression */}
       <div className="flex items-center justify-between">
