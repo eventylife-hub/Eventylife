@@ -190,7 +190,7 @@ function Topbar() {
         <span style={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tripData.title}</span>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-        <button type="button" onClick={handleShare} style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all .2s' }}>
+        <button type="button" aria-label="Partager ce voyage" onClick={handleShare} style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all .2s' }}>
           {copied ? '✅ Copié !' : '📤 Partager'}
         </button>
       </div>
@@ -236,9 +236,9 @@ function HeroSection({ paxCount, setPaxCount }: { paxCount: number; setPaxCount:
         </div>
 
         {/* Price box */}
-        <div style={{ background: 'rgba(26,26,46,.9)', border: '1.5px solid rgba(255,255,255,.2)', backdropFilter: 'blur(10px)', borderRadius: 14, padding: '18px 24px', textAlign: 'right', minWidth: 220 }}>
+        <div style={{ background: 'rgba(26,26,46,.9)', border: '1.5px solid rgba(255,255,255,.2)', backdropFilter: 'blur(10px)', borderRadius: 14, padding: '18px 24px', textAlign: 'right', minWidth: 180 }}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,.55)', letterSpacing: '.8px', textTransform: 'uppercase', marginBottom: 2 }}>À partir de</div>
-          <div id="hero-price" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, color: 'var(--gold, #D4A853)', fontWeight: 700 }}>
+          <div id="hero-price" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(24px, 4vw, 32px)', color: 'var(--gold, #D4A853)', fontWeight: 700 }}>
             {(tripData.basePrice * paxCount).toLocaleString('fr-FR')} €
           </div>
           <div style={{ fontSize: 11.5, color: 'rgba(255,255,255,.55)', marginTop: 2 }}>
@@ -247,12 +247,12 @@ function HeroSection({ paxCount, setPaxCount }: { paxCount: number; setPaxCount:
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 10, justifyContent: 'flex-end' }}>
             <span style={{ fontSize: 12, color: 'rgba(255,255,255,.6)' }}>Voyageurs :</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <button type="button" onClick={() => setPaxCount(Math.max(1, paxCount - 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>−</button>
-              <span style={{ fontSize: 15, fontWeight: 700, color: 'white', minWidth: 20, textAlign: 'center' }}>{paxCount}</span>
-              <button type="button" onClick={() => setPaxCount(Math.min(available, paxCount + 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
+              <button type="button" aria-label="Retirer un voyageur" onClick={() => setPaxCount(Math.max(1, paxCount - 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>−</button>
+              <span aria-live="polite" style={{ fontSize: 15, fontWeight: 700, color: 'white', minWidth: 20, textAlign: 'center' }}>{paxCount}</span>
+              <button type="button" aria-label="Ajouter un voyageur" onClick={() => setPaxCount(Math.min(available, paxCount + 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
             </div>
           </div>
-          <button type="button" style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 24px', fontWeight: 700, fontSize: 15, cursor: 'pointer', marginTop: 12, width: '100%' }}>
+          <button type="button" aria-label={`Réserver ${tripData.title} pour ${paxCount} voyageur${paxCount > 1 ? 's' : ''}`} style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 24px', fontWeight: 700, fontSize: 15, cursor: 'pointer', marginTop: 12, width: '100%' }}>
             Réserver ce voyage →
           </button>
         </div>
@@ -280,12 +280,12 @@ function StickyCTA() {
       boxShadow: '0 -4px 20px rgba(0,0,0,.1)', transform: visible ? 'translateY(0)' : 'translateY(100%)', transition: 'transform .3s'
     }}>
       <div>
-        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700, color: 'var(--navy, #1A1A2E)' }}>
+        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(18px, 3vw, 22px)', fontWeight: 700, color: 'var(--navy, #1A1A2E)' }}>
           {tripData.basePrice.toLocaleString('fr-FR')} € <small style={{ fontSize: 12, fontWeight: 400, color: '#6B7280' }}>/ pers.</small>
         </div>
         <div style={{ fontSize: 12, color: '#166534', fontWeight: 600 }}>✓ Départ confirmé · {available} places restantes</div>
       </div>
-      <button type="button" style={{ background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>
+      <button type="button" aria-label={`Réserver ${tripData.title}`} style={{ background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>
         Réserver →
       </button>
     </div>
@@ -306,7 +306,7 @@ function SectionNav() {
   const [active, setActive] = useState('ramassage');
 
   return (
-    <nav style={{
+    <nav aria-label="Sections du voyage" style={{
       background: 'white', border: '1.5px solid #E5E0D8', borderRadius: 12, marginBottom: 28,
       overflow: 'hidden', display: 'flex'
     }}>
@@ -315,6 +315,7 @@ function SectionNav() {
           key={item.id}
           href={`#${item.id}`}
           onClick={() => setActive(item.id)}
+          aria-current={active === item.id ? 'true' : undefined}
           style={{
             flex: 1, background: active === item.id ? 'var(--navy, #1A1A2E)' : 'transparent', border: 'none',
             borderRight: i < items.length - 1 ? '1px solid #E5E0D8' : 'none',
@@ -618,7 +619,7 @@ function EquipeSection() {
     <Section id="equipe" icon="👤" title="Ton équipe sur ce voyage">
       <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
         {tripData.team.map((m, i) => (
-          <div key={i} style={{ background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 12, padding: 14, flex: 1, minWidth: 200 }}>
+          <div key={i} style={{ background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 12, padding: 14, flex: '1 1 250px' }}>
             <div style={{ width: 52, height: 52, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, marginBottom: 10, background: avatarBg[m.type] }}>
               {avatarEmoji[m.type]}
             </div>
@@ -626,8 +627,8 @@ function EquipeSection() {
             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 2 }}>{m.name}</div>
             <div style={{ fontSize: 12.5, color: '#6B7280', marginBottom: 10 }}>{m.bio}</div>
             <div style={{ display: 'flex', gap: 6 }}>
-              <button type="button" style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>💬 Message</button>
-              <button type="button" style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>📞 Appeler</button>
+              <button type="button" aria-label={`Envoyer un message à ${m.name}`} style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>💬 Message</button>
+              <button type="button" aria-label={`Appeler ${m.name}`} style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>📞 Appeler</button>
             </div>
           </div>
         ))}
@@ -636,9 +637,9 @@ function EquipeSection() {
         Ils suivent la préparation du voyage et gèrent le séjour sur place. Vous pouvez les contacter à tout moment avant, pendant et après le voyage.
       </div>
       <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-        <button type="button" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>📘 Facebook</button>
-        <button type="button" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>💬 WhatsApp</button>
-        <button type="button" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>🔗 Copier le lien</button>
+        <button type="button" aria-label="Rejoindre le groupe Facebook du voyage" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>📘 Facebook</button>
+        <button type="button" aria-label="Rejoindre le groupe WhatsApp du voyage" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>💬 WhatsApp</button>
+        <button type="button" aria-label="Copier le lien du voyage" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>🔗 Copier le lien</button>
       </div>
     </Section>
   );
@@ -707,13 +708,13 @@ function AsideCard({ paxCount }: { paxCount: number }) {
           Pour {paxCount} voyageur{paxCount > 1 ? 's' : ''} · chambre double · sans assurance renforcée
         </div>
 
-        <button type="button" style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer', width: '100%', marginTop: 16 }}>
+        <button type="button" aria-label={`Réserver ${tripData.title} pour ${paxCount} voyageur${paxCount > 1 ? 's' : ''}`} style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer', width: '100%', marginTop: 16 }}>
           Réserver ce voyage →
         </button>
-        <button type="button" style={{ display: 'block', background: 'white', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 12, fontWeight: 600, fontSize: 14, cursor: 'pointer', width: '100%', marginTop: 8, textAlign: 'center' }}>
+        <button type="button" aria-label="Recevoir le programme du voyage par email" style={{ display: 'block', background: 'white', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 12, fontWeight: 600, fontSize: 14, cursor: 'pointer', width: '100%', marginTop: 8, textAlign: 'center' }}>
           📄 Recevoir le programme
         </button>
-        <button type="button" style={{ display: 'block', background: 'white', color: '#6B7280', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 6, textAlign: 'center' }}>
+        <button type="button" aria-label="Demander à être rappelé par Marie-Claire" style={{ display: 'block', background: 'white', color: '#6B7280', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 6, textAlign: 'center' }}>
           📞 Être rappelé par Marie-Claire
         </button>
 
@@ -769,6 +770,7 @@ export default function VoyageDetailPage() {
       }}>
       <style>{`
         .voyage-detail-grid { grid-template-columns: 1fr 340px; }
+        @media (max-width: 1024px) { .voyage-detail-grid { grid-template-columns: 1fr 300px; } }
         @media (max-width: 768px) { .voyage-detail-grid { grid-template-columns: 1fr; } }
       `}</style>
         {/* Main column */}

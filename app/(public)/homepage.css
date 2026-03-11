@@ -850,13 +850,21 @@
   .how-grid::before { display: none; }
 }
 @media (max-width: 768px) {
+  .hero-home { padding: 72px 16px 32px; }
   .hero-search { flex-direction: column; border-radius: var(--radius); max-width: 100%; }
   .hero-search input { border-bottom: 1px solid var(--border); border-radius: 0; }
   .btn-loc { padding: 10px; justify-content: center; }
   .btn-go { margin: 5px; border-radius: var(--radius-xs); }
   .trip-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sec-why, .sec-how { padding: 48px 16px; }
   .trust-pills { gap: 8px; }
   .car-content { padding: 36px 24px; }
   .car-floats { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .hero-home { padding: 60px 12px 24px; }
+  .how-grid { grid-template-columns: 1fr; }
+  .sec-why, .sec-how { padding: 36px 12px; }
 }
