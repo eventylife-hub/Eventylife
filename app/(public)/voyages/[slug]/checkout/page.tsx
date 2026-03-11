@@ -608,7 +608,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
               <Card className="border-amber-200 bg-amber-50">
                 <CardContent className="pt-6">
                   <label className="block text-sm font-medium text-gray-900 mb-3">
-                    Combien de parts voulez-vous payer?
+                    Combien de parts voulez-vous payer ?
                   </label>
                   <div className="flex items-center gap-3">
                     <Button

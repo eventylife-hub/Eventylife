@@ -406,19 +406,19 @@ export default function HomePage() {
             {[
               {
                 name: 'Marie D.',
-                text: 'Un voyage merveilleux! Équipe au top, pas stressée une seconde.',
+                text: 'Un voyage merveilleux ! Équipe au top, pas stressée une seconde.',
                 rating: 5,
                 trip: 'Maroc — Sept 2025',
               },
               {
                 name: 'Jean P.',
-                text: 'Prix honnête et service exceptionnel. Je réserve ma prochaine destination!',
+                text: 'Prix honnête et service exceptionnel. Je réserve ma prochaine destination !',
                 rating: 5,
                 trip: 'Grèce — Juin 2025',
               },
               {
                 name: 'Sophie L.',
-                text: 'Voyage en petit groupe, vraiment sympathique. À recommander!',
+                text: 'Voyage en petit groupe, vraiment sympathique. À recommander !',
                 rating: 5,
                 trip: 'Italie — Oct 2025',
               },
@@ -505,7 +505,7 @@ export default function HomePage() {
 
             {subscribed && (
               <p className="mt-4 text-sm animate-fade-up" style={{ color: '#DCFCE7' }}>
-                Merci! Vérifiez votre boîte mail.
+                Merci ! Vérifiez votre boîte mail.
               </p>
             )}
           </RevealDiv>
