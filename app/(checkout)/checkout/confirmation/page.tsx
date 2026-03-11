@@ -5,7 +5,6 @@
  * Affichée après paiement réussi
  */
 
-'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';

@@ -7,7 +7,6 @@
  * 2. "Partager le paiement" - Split-pay avec invitations
  */
 
-'use client';
 
 import { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';

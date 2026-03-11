@@ -191,14 +191,18 @@ function VoyagesContent() {
   return (
     <div className="space-y-8">
       {/* Filtres */}
-      <div
+      <form
+        role="search"
+        aria-label="Filtrer les voyages"
         className="p-6 rounded-2xl"
         style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+        onSubmit={(e) => e.preventDefault()}
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Destination</label>
+            <label htmlFor="filter-destination" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Destination</label>
             <input
+              id="filter-destination"
               placeholder="Chercher..."
               value={destination}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDestination((e.target as HTMLInputElement).value)}
@@ -208,9 +212,11 @@ function VoyagesContent() {
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix min (€)</label>
+            <label htmlFor="filter-min-price" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix min (€)</label>
             <input
+              id="filter-min-price"
               type="number"
+              min="0"
               placeholder="0"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
               style={inputStyle}
@@ -219,9 +225,11 @@ function VoyagesContent() {
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix max (€)</label>
+            <label htmlFor="filter-max-price" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix max (€)</label>
             <input
+              id="filter-max-price"
               type="number"
+              min="0"
               placeholder="10 000"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
               style={inputStyle}
@@ -230,10 +238,11 @@ function VoyagesContent() {
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Trier par</label>
+            <label htmlFor="filter-sort" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Trier par</label>
             <select
+              id="filter-sort"
               value={sortBy}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSortBy((e.target as HTMLInputElement).value)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value)}
               style={selectStyle}
             >
               <option value="popular">Plus populaires</option>
@@ -243,7 +252,7 @@ function VoyagesContent() {
             </select>
           </div>
         </div>
-      </div>
+      </form>
 
       {/* Résultats */}
       <div>

@@ -16,7 +16,6 @@
  * - Money = centimes Int (JAMAIS Float)
  */
 
-'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';

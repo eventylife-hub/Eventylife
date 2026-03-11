@@ -5,7 +5,6 @@
  * Endpoints : GET /api/support/tickets, POST /api/support/tickets
  */
 
-'use client';
 
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '@/lib/utils';

@@ -5,7 +5,6 @@
  * Accessible via QR code ou lien partagé
  */
 
-'use client';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';

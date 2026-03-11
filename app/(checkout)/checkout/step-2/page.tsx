@@ -9,7 +9,6 @@
  * - Assurance optionnelle avec prix
  */
 
-'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';

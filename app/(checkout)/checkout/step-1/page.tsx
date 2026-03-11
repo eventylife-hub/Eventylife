@@ -7,7 +7,6 @@
  * Calcule les prix par personne en respectant les INVARIANTS
  */
 
-'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';

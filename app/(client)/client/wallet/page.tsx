@@ -5,7 +5,6 @@
  * Gestion du solde et de l'historique des transactions
  */
 
-'use client';
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
