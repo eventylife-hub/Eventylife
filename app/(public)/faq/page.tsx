@@ -10,6 +10,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -214,6 +215,7 @@ export default function FAQPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
+      <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Questions fréquentes',href:'/faq'}]} />
       {/* Header */}
       <div className="text-center mb-12 animate-fade-up">
         <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">

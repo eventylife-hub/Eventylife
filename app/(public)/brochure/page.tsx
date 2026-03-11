@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 
 const brochures = [
   {
@@ -52,6 +53,7 @@ export default function BrochurePage() {
       </div>
 
       <div className="mx-auto max-w-4xl px-4 py-12">
+        <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Brochure',href:'/brochure'}]} />
         {/* Brochures disponibles */}
         <div className="space-y-6 mb-16">
           {brochures.map((b: unknown, i: number) => (

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 interface Review {
   id: string;
   userId: string;
@@ -135,13 +136,14 @@ export default function TravelReviewsPage() {
       className="max-w-4xl mx-auto px-4 py-12 animate-fade-up"
       style={{ backgroundColor: C.cream }}
     >
-      <Link
-        href={`/voyages/${params.slug}`}
-        style={{ color: C.terra }}
-        className="hover:underline mb-4 inline-block"
-      >
-        ← Retour au voyage
-      </Link>
+      <Breadcrumb
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Nos voyages', href: '/voyages' },
+          { name: travel?.title || 'Voyage', href: `/voyages/${params.slug}` },
+          { name: 'Avis', href: `/voyages/${params.slug}/avis` },
+        ]}
+      />
 
       {/* En-tête */}
       <div className="mb-8">

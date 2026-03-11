@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 
 const articles = [
   {
@@ -102,6 +103,7 @@ export default function BlogPage() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-12">
+        <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Blog',href:'/blog'}]} />
         {/* Categories */}
         <div className="flex flex-wrap gap-2 mb-10 justify-center">
           {categories.map((cat: unknown) => (

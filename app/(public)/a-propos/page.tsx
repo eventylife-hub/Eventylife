@@ -9,6 +9,7 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/lib/constants';
 import Link from 'next/link';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -26,6 +27,7 @@ const C = {
 export default function AboutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'À propos',href:'/a-propos'}]} />
       <div className="animate-fade-up mb-12">
         <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">
           Qui sommes-nous

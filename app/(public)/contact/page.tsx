@@ -9,6 +9,7 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/lib/stores/ui-store';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -49,6 +50,7 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Contact',href:'/contact'}]} />
       <div className="animate-fade-up mb-12">
         <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">
           Nous sommes à votre écoute

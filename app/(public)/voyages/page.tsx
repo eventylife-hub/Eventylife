@@ -12,6 +12,7 @@ import { SkeletonGrid } from '@/components/ui/skeleton';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { apiClient } from '@/lib/api-client';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -353,6 +354,12 @@ function VoyagesContent() {
 export default function VoyagesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <Breadcrumb
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Nos voyages', href: '/voyages' },
+        ]}
+      />
       <div className="mb-8">
         <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
           Explorer

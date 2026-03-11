@@ -7,6 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { GroupCard } from '@/components/groups/group-card';
 import { Button } from '@/components/ui/button';
 import { AlertCircle, Plus } from 'lucide-react';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 interface Group {
   id: string;
   code: string;
@@ -175,6 +176,14 @@ export default function GroupesPage() {
   return (
     <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
       <div className="mx-auto max-w-6xl">
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'Nos voyages', href: '/voyages' },
+            { name: 'Voyage', href: `/voyages/${slug}` },
+            { name: 'Groupes', href: `/voyages/${slug}/groupes` },
+          ]}
+        />
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold" style={{ color: C.navy }}>
             Groupes de voyage

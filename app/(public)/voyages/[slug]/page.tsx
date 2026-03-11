@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 /* ════════════════════════════════════════════
    PALETTE & DESIGN TOKENS
    Inspiré du mockup HTML — Navy / Cream / Terra / Gold
@@ -752,6 +753,15 @@ export default function VoyageDetailPage() {
   return (
     <div style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif", background: C.cream, color: C.navy, fontSize: 15, lineHeight: 1.6 }}>
       <Topbar />
+      <div style={{ maxWidth: 1180, margin: '0 auto', padding: '16px 24px 0' }}>
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'Nos voyages', href: '/voyages' },
+            { name: tripData.title, href: `/voyages/${tripData.slug}` },
+          ]}
+        />
+      </div>
       <HeroSection paxCount={paxCount} setPaxCount={setPaxCount} />
       <StickyCTA />
 

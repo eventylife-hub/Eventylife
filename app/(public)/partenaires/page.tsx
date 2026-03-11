@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 
 const avantages = [
   {
@@ -100,6 +101,7 @@ export default function PartenairesPage() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-16">
+        <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Devenir partenaire',href:'/partenaires'}]} />
         {/* Avantages */}
         <div className="text-center mb-12">
           <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
