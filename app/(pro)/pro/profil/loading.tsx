@@ -1,27 +1,29 @@
 /**
  * Loading skeleton
  */
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PageLoading() {
   return (
+      <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="space-y-6 animate-in fade-in duration-300">
       <div className="space-y-2">
-        <Skeleton className="h-8 w-48" />
-        <Skeleton className="h-4 w-72" />
+        <div style={{ height: 32, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        <div style={{ height: 16, width: 288, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
       </div>
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} className="flex items-center gap-4">
-            <Skeleton className="h-10 w-10 rounded-full" />
+            <div style={{ height: 40, width: 40, borderRadius: '50%', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             <div className="flex-1 space-y-2">
-              <Skeleton className="h-4 w-full max-w-md" />
-              <Skeleton className="h-3 w-full max-w-sm" />
+              <div style={{ height: 16, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              <div style={{ height: 12, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             </div>
-            <Skeleton className="h-6 w-16 rounded" />
+            <div style={{ height: 24, width: 64, borderRadius: 6, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           </div>
         ))}
       </div>
     </div>
+  </>
   );
 }

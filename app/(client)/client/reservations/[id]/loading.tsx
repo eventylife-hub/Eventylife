@@ -1,28 +1,30 @@
-import { Skeleton } from '@/components/ui/skeleton';
 
 /** Squelette de chargement — Détail réservation */
 export default function Loading() {
   return (
+      <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="space-y-6 p-6">
       <div className="space-y-3">
-        <Skeleton height="2rem" width="55%" />
-        <Skeleton height="1rem" width="45%" />
+        <div style={{ height: '2rem', width: '55%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        <div style={{ height: '1rem', width: '45%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2 space-y-4">
           <div className="p-4 border rounded-lg space-y-3">
-            <Skeleton height="1.25rem" width="60%" />
-            <Skeleton height="1rem" count={4} />
+            <div style={{ height: '1.25rem', width: '60%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+            <div style={{ height: '1rem', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           </div>
         </div>
         <div className="space-y-4">
           <div className="p-4 border rounded-lg space-y-3">
-            <Skeleton height="1rem" width="50%" />
-            <Skeleton height="1.5rem" width="100%" />
+            <div style={{ height: '1rem', width: '50%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+            <div style={{ height: '1.5rem', width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           </div>
-          <Skeleton height="2.5rem" width="100%" />
+          <div style={{ height: '2.5rem', width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
       </div>
     </div>
+  </>
   );
 }

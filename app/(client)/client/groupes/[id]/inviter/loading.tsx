@@ -1,24 +1,26 @@
-import { Skeleton } from '@/components/ui/skeleton';
 
 /** Squelette de chargement — Inviter groupe */
 export default function Loading() {
   return (
+      <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="space-y-6 p-6">
-      <Skeleton height="2rem" width="45%" />
+      <div style={{ height: '2rem', width: '45%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
       <div className="max-w-2xl space-y-4">
         <div className="space-y-2">
-          <Skeleton height="1rem" width="30%" />
-          <Skeleton height="2.5rem" width="100%" />
+          <div style={{ height: '1rem', width: '30%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: '2.5rem', width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
         <div className="space-y-2">
-          <Skeleton height="1rem" width="35%" />
-          <Skeleton height="6rem" width="100%" />
+          <div style={{ height: '1rem', width: '35%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: '6rem', width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
         <div className="flex gap-3 pt-4">
-          <Skeleton height="2.5rem" width="120px" />
-          <Skeleton height="2.5rem" width="120px" />
+          <div style={{ height: '2.5rem', width: '120px', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: '2.5rem', width: '120px', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
       </div>
     </div>
+  </>
   );
 }

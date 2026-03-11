@@ -1,16 +1,18 @@
-import { Skeleton } from '@/components/ui/skeleton';
 
 /** Squelette de chargement — Finance Voyage */
 export default function Loading() {
   return (
+      <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="space-y-6 p-6">
-      <Skeleton className="h-10 w-48" />
+      <div style={{ height: 40, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
       <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
         {[...Array(3)].map((_, i) => (
-          <Skeleton key={i} className="h-24" />
+          <div key={i} style={{ height: 96, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         ))}
       </div>
-      <Skeleton className="h-80" />
+      <div style={{ height: 320, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
     </div>
+  </>
   );
 }
