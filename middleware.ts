@@ -22,10 +22,20 @@ function decodeJwt<T>(token: string): T {
 const PUBLIC_ROUTES = [
   '/',
   '/voyages',
+  // Pages publiques
+  '/contact',
+  '/faq',
+  '/a-propos',
+  '/blog',
+  '/brochure',
+  '/partenaires',
+  '/suivi-commande',
+  '/confidentialite',
   // Auth — routes principales FR
   '/connexion',
   '/inscription',
   '/mot-de-passe-oublie',
+  '/reinitialiser-mot-de-passe',
   '/verification-email',
   // Auth — anciennes routes EN (redirections)
   '/login',
@@ -36,11 +46,17 @@ const PUBLIC_ROUTES = [
   '/cookies',
   '/politique-confidentialite',
   '/sitemap.xml',
+  '/robots.txt',
 ];
 
 // Pattern pour les routes avec paramètres dynamiques
 const DYNAMIC_PUBLIC_PATTERNS = [
-  /^\/voyages\/[^/]+$/,
+  /^\/voyages\/[^/]+$/,       // /voyages/:slug
+  /^\/voyages\/[^/]+\/avis$/, // /voyages/:slug/avis
+  /^\/voyages\/[^/]+\/groupes$/, // /voyages/:slug/groupes
+  /^\/depart\/[^/]+$/,        // /depart/:ville
+  /^\/p\/[^/]+$/,             // /p/:proSlug (page pro publique)
+  /^\/blog\/.+$/,             // /blog/:slug
 ];
 
 interface JwtPayload {
