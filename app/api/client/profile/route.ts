@@ -25,11 +25,18 @@ const MOCK_PROFILE = {
     smsNotifications: false,
     language: 'fr',
   },
+  stats: {
+    totalBookings: 3,
+    confirmedBookings: 2,
+    pendingBookings: 1,
+    cancelledBookings: 0,
+    totalAmountSpentCents: 234700,
+  },
   createdAt: '2025-09-15T10:30:00Z',
 };
 
 export async function GET() {
-  return NextResponse.json({ data: MOCK_PROFILE });
+  return NextResponse.json(MOCK_PROFILE);
 }
 
 export async function PATCH(request: NextRequest) {
