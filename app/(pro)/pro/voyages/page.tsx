@@ -74,7 +74,7 @@ export default function TravelsPage() {
   });
 
   return (
-    <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
+    <div className="pro-fade-in page-enter min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
       <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
@@ -267,24 +267,24 @@ export default function TravelsPage() {
             {viewMode === 'grid' ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
                 {filteredTravels.map((travel) => (
-                  <Link
-                    key={travel.id}
-                    href={`/pro/voyages/${travel.id}`}
-                    style={{
-                      background: '#FFFFFF',
-                      borderRadius: '0.5rem',
-                      border: '1px solid #E8F7FC',
-                      overflow: 'hidden',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      transition: 'box-shadow 0.2s',
-                      cursor: 'pointer',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)')}
-                  >
+                  <div key={travel.id} className="hover-lift">
+                    <Link
+                      href={`/pro/voyages/${travel.id}`}
+                      style={{
+                        background: '#FFFFFF',
+                        borderRadius: '0.5rem',
+                        border: '1px solid #E8F7FC',
+                        overflow: 'hidden',
+                        textDecoration: 'none',
+                        color: 'inherit',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        transition: 'box-shadow 0.2s',
+                        cursor: 'pointer',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)')}
+                    >
                     <div style={{ height: '12rem', background: 'linear-gradient(135deg, #FF6B35 0%, #FF8F5E 100%)' }}></div>
                     <div style={{ padding: '1.5rem' }}>
                       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.75rem', gap: '0.75rem' }}>
@@ -325,7 +325,8 @@ export default function TravelsPage() {
                         Voir les détails →
                       </button>
                     </div>
-                  </Link>
+                    </Link>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -342,7 +343,7 @@ export default function TravelsPage() {
                   </thead>
                   <tbody style={{ borderTop: '1px solid #E8F7FC' }}>
                     {filteredTravels.map((travel) => (
-                      <tr key={travel.id} style={{ borderBottom: '1px solid #E8F7FC', transition: 'background-color 0.2s' }}
+                      <tr key={travel.id} className="hover-lift" style={{ borderBottom: '1px solid #E8F7FC', transition: 'background-color 0.2s' }}
                         onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F5F5')}
                         onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}
                       >

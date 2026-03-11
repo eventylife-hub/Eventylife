@@ -260,7 +260,7 @@ export function Header({ user }: HeaderProps) {
         {/* Menu mobile déroulant */}
         {isMobileMenuOpen && (
           <div
-            className="md:hidden pb-4 space-y-1 animate-fade-up"
+            className="md:hidden pb-4 space-y-1 animate-fade-up transition-all duration-300"
             style={{ borderTop: '1px solid rgba(250,247,242,0.1)' }}
           >
             <Link

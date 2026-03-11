@@ -142,7 +142,7 @@ export default function ClientDashboardPage() {
   const days = data?.nextTravel ? daysUntilDeparture(data.nextTravel.departureDate) : null;
 
   return (
-    <div className="space-y-8 animate-fade-up">
+    <div className="space-y-8 animate-fade-up page-enter">
       {/* ── En-tête bienvenue ── */}
       <div
         className="rounded-2xl p-8"
@@ -160,7 +160,7 @@ export default function ClientDashboardPage() {
       </div>
 
       {/* ── Statistiques ── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
         {[
           { label: 'Voyages réservés', value: data.stats.totalBookings || 0, color: 'var(--navy, #1A1A2E)' },
           { label: 'Confirmées', value: data.stats.confirmedBookings || 0, color: '#166534' },
@@ -169,7 +169,7 @@ export default function ClientDashboardPage() {
         ].map((stat, i) => (
           <div
             key={i}
-            className="p-5 rounded-2xl transition-all duration-300"
+            className="p-5 rounded-2xl transition-all duration-300 hover-lift"
             style={{
               background: '#fff',
               border: '1.5px solid #E5E0D8',
@@ -257,7 +257,7 @@ export default function ClientDashboardPage() {
       )}
 
       {/* ── Actions rapides ── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 stagger-children">
         {[
           { href: '/client/reservations', icon: '📋', title: 'Mes réservations', desc: 'Voir toutes vos réservations', accent: 'var(--terra, #C75B39)' },
           { href: '/client/groupes', icon: '👥', title: 'Mes groupes', desc: 'Gérez vos groupes de voyage', accent: '#166534' },
@@ -265,7 +265,7 @@ export default function ClientDashboardPage() {
         ].map((action, i) => (
           <Link key={i} href={action.href} className="group">
             <div
-              className="p-6 rounded-2xl h-full transition-all duration-300"
+              className="p-6 rounded-2xl h-full transition-all duration-300 hover-lift"
               style={{
                 background: '#fff',
                 border: '1.5px solid #E5E0D8',

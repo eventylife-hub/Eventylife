@@ -284,21 +284,22 @@ function VoyagesContent() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTravels.map((voyage) => (
-            <TravelCard
-              key={voyage.id}
-              id={voyage.id}
-              title={voyage.title}
-              destination={voyage.destination}
-              startDate={voyage.startDate}
-              endDate={voyage.endDate}
-              priceInCents={voyage.price}
-              imageUrl={voyage.image !== '✈️' ? voyage.image : undefined}
-              rating={voyage.rating}
-              reviewCount={voyage.reviews}
-              capacity={voyage.capacity}
-              currentBookings={voyage.currentBookings}
-              slug={voyage.slug}
-            />
+            <div key={voyage.id} className="hover-lift">
+              <TravelCard
+                id={voyage.id}
+                title={voyage.title}
+                destination={voyage.destination}
+                startDate={voyage.startDate}
+                endDate={voyage.endDate}
+                priceInCents={voyage.price}
+                imageUrl={voyage.image !== '✈️' ? voyage.image : undefined}
+                rating={voyage.rating}
+                reviewCount={voyage.reviews}
+                capacity={voyage.capacity}
+                currentBookings={voyage.currentBookings}
+                slug={voyage.slug}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -308,7 +309,7 @@ function VoyagesContent() {
 
 export default function VoyagesPage() {
   return (
-    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
+    <div className="page-enter" style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
       {/* Hero V4 */}
       <div
         style={{

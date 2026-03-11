@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { BackToTop } from '@/components/ui/back-to-top';
+import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
 // Note: This layout provides default metadata for public pages
 // Individual pages may override this with their own metadata in layout files
@@ -15,6 +16,7 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <OrganizationJsonLd />
       <Header />
       <main id="main-content">{children}</main>
       <Footer />

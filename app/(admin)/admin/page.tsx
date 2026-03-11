@@ -188,7 +188,7 @@ export default function AdminDashboardPage() {
   }, []);
 
   return (
-    <div>
+    <div className="page-enter">
       {/* ═══════ PAGE HEADER ═══════ */}
       <div className="admin-page-header admin-fade-in">
         <div>
@@ -222,29 +222,29 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* ═══════ KPI WIDGETS ═══════ */}
-      <div className="admin-kpi-grid">
-        <div className="admin-kpi-card urgent admin-fade-in delay-1">
+      <div className="admin-kpi-grid stagger-children">
+        <div className="admin-kpi-card urgent admin-fade-in delay-1 hover-lift">
           <div className="admin-kpi-label">Pro à valider</div>
           <div className="admin-kpi-value">{stats?.pendingPros ?? 8}</div>
           <div className="admin-kpi-sub">
             <span className="trend-down">↑ 3</span> depuis hier
           </div>
         </div>
-        <div className="admin-kpi-card admin-fade-in delay-2">
+        <div className="admin-kpi-card admin-fade-in delay-2 hover-lift">
           <div className="admin-kpi-label">Voyages en préparation</div>
           <div className="admin-kpi-value">{stats?.totalTravels ?? 14}</div>
           <div className="admin-kpi-sub">
             dont <strong>5</strong> départs confirmés
           </div>
         </div>
-        <div className="admin-kpi-card admin-fade-in delay-3">
+        <div className="admin-kpi-card admin-fade-in delay-3 hover-lift">
           <div className="admin-kpi-label">Paiements fournisseurs</div>
           <div className="admin-kpi-value">{stats?.supplierPayments ?? 6}</div>
           <div className="admin-kpi-sub">
             <span className="trend-down">€ {stats?.supplierPaymentAmount ? (stats.supplierPaymentAmount / 100).toLocaleString('fr-FR') : '24 800'}</span> en attente validation
           </div>
         </div>
-        <div className="admin-kpi-card admin-fade-in delay-4">
+        <div className="admin-kpi-card admin-fade-in delay-4 hover-lift">
           <div className="admin-kpi-label">Tickets support ouverts</div>
           <div className="admin-kpi-value">{stats?.openTickets ?? 4}</div>
           <div className="admin-kpi-sub">

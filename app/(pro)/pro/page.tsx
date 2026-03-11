@@ -104,7 +104,7 @@ export default function ProDashboard() {
     ].filter(Boolean).length || 0;
 
   return (
-    <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
+    <div className="pro-fade-in page-enter" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
       <div style={{ maxWidth: '1280px', marginX: 'auto' }}>
         {/* Header with Welcome */}
         <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -172,7 +172,7 @@ export default function ProDashboard() {
 
         {/* Stats Cards Grid - with Loading State */}
         {loading ? (
-          <div className="pro-kpi-grid" style={{ marginBottom: '32px' }}>
+          <div className="pro-kpi-grid stagger-children" style={{ marginBottom: '32px' }}>
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
@@ -182,10 +182,10 @@ export default function ProDashboard() {
             ))}
           </div>
         ) : (
-          <div className="pro-kpi-grid" style={{ marginBottom: '32px' }}>
+          <div className="pro-kpi-grid stagger-children" style={{ marginBottom: '32px' }}>
             {/* Voyages Actifs */}
             <Link href="/pro/voyages">
-              <div className="pro-kpi-card" style={{ borderLeft: `4px solid ${SUN}`, cursor: 'pointer' }}>
+              <div className="pro-kpi-card hover-lift" style={{ borderLeft: `4px solid ${SUN}`, cursor: 'pointer' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
                     <p className="pro-kpi-label">Voyages actifs</p>
@@ -201,7 +201,7 @@ export default function ProDashboard() {
 
             {/* Réservations Totales */}
             <Link href="/pro/reservations">
-              <div className="pro-kpi-card" style={{ borderLeft: `4px solid ${MINT}`, cursor: 'pointer' }}>
+              <div className="pro-kpi-card hover-lift" style={{ borderLeft: `4px solid ${MINT}`, cursor: 'pointer' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
                     <p className="pro-kpi-label">Réservations</p>
@@ -216,7 +216,7 @@ export default function ProDashboard() {
             </Link>
 
             {/* CA Ce Mois */}
-            <div className="pro-kpi-card" style={{ borderLeft: `4px solid #7B2FF7` }}>
+            <div className="pro-kpi-card hover-lift" style={{ borderLeft: `4px solid #7B2FF7` }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <p className="pro-kpi-label">CA ce mois</p>
@@ -232,7 +232,7 @@ export default function ProDashboard() {
             </div>
 
             {/* Taux d'Occupation */}
-            <div className="pro-kpi-card" style={{ borderLeft: `4px solid ${OCEAN}` }}>
+            <div className="pro-kpi-card hover-lift" style={{ borderLeft: `4px solid ${OCEAN}` }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <p className="pro-kpi-label">Taux d&apos;occupation</p>

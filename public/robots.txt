@@ -1,11 +1,12 @@
-# Eventy — robots.txt
+# Eventy Life — robots.txt
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /pro
+Disallow: /client
+Disallow: /checkout
+Disallow: /auth
 Disallow: /api
-Disallow: /connexion
-Disallow: /inscription
 
 # Sitemap
-Sitemap: https://eventy.fr/sitemap.xml
+Sitemap: https://www.eventylife.fr/sitemap.xml

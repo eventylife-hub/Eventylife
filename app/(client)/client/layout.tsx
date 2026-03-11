@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { PortalErrorBoundary } from '@/components/error-boundary';
+import BackToTop from '@/components/ui/back-to-top';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -184,6 +185,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             {children}
           </PortalErrorBoundary>
         </div>
+        <BackToTop />
       </main>
     </div>
   );

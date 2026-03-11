@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Fraunces } from 'next/font/google';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { PortalErrorBoundary } from '@/components/error-boundary';
+import BackToTop from '@/components/ui/back-to-top';
 import './pro.css';
 
 const fraunces = Fraunces({
@@ -154,6 +155,7 @@ export default function ProLayout({ children }: ProLayoutProps) {
             {children}
           </PortalErrorBoundary>
         </div>
+        <BackToTop />
       </main>
     </div>
   );
