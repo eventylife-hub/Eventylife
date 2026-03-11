@@ -151,11 +151,27 @@ const tripData = {
    ════════════════════════════════════════════ */
 function Topbar() {
   const [solid, setSolid] = useState(false);
+  const [copied, setCopied] = useState(false);
   useEffect(() => {
     const h = () => setSolid(window.scrollY > 60);
     window.addEventListener('scroll', h);
     return () => window.removeEventListener('scroll', h);
   }, []);
+
+  const handleShare = async () => {
+    const shareData = {
+      title: tripData.title,
+      text: `Découvrez "${tripData.title}" — ${tripData.destination} avec Eventy Life`,
+      url: window.location.href,
+    };
+    if (navigator.share) {
+      try { await navigator.share(shareData); } catch { /* user cancelled */ }
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
     <nav style={{
@@ -171,11 +187,11 @@ function Topbar() {
       <div style={{ fontSize: 12.5, color: solid ? '#6B7280' : 'rgba(255,255,255,.5)', display: 'flex', gap: 6, alignItems: 'center' }}>
         <Link href="/voyages" style={{ color: solid ? '#6B7280' : 'rgba(255,255,255,.65)', textDecoration: 'none' }}>Voyages</Link>
         <span>›</span>
-        <span>{tripData.title}</span>
+        <span style={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tripData.title}</span>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-        <button type="button" style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
-          📤 Partager
+        <button type="button" onClick={handleShare} style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all .2s' }}>
+          {copied ? '✅ Copié !' : '📤 Partager'}
         </button>
       </div>
     </nav>
@@ -732,7 +748,7 @@ export default function VoyageDetailPage() {
   const [paxCount, setPaxCount] = useState(2);
 
   return (
-    <div style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif", background: 'var(--cream, #FAF7F2)', color: 'var(--navy, #1A1A2E)', fontSize: 15, lineHeight: 1.6 }}>
+    <div className="page-enter" style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif", background: 'var(--cream, #FAF7F2)', color: 'var(--navy, #1A1A2E)', fontSize: 15, lineHeight: 1.6 }}>
       <Topbar />
       <div style={{ maxWidth: 1180, margin: '0 auto', padding: '16px 24px 0' }}>
         <Breadcrumb
@@ -746,11 +762,15 @@ export default function VoyageDetailPage() {
       <HeroSection paxCount={paxCount} setPaxCount={setPaxCount} />
       <StickyCTA />
 
-      {/* 2-column layout */}
-      <div style={{
+      {/* 2-column layout — responsive */}
+      <div className="voyage-detail-grid" style={{
         maxWidth: 1180, margin: '0 auto', padding: '32px 24px 120px',
-        display: 'grid', gridTemplateColumns: '1fr 340px', gap: 32, alignItems: 'start'
+        display: 'grid', gap: 32, alignItems: 'start'
       }}>
+      <style>{`
+        .voyage-detail-grid { grid-template-columns: 1fr 340px; }
+        @media (max-width: 768px) { .voyage-detail-grid { grid-template-columns: 1fr; } }
+      `}</style>
         {/* Main column */}
         <div>
           <SectionNav />
