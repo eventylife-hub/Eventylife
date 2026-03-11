@@ -1,13 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
-import { MealPlanEditor } from '@/components/restauration/meal-plan-editor';
 import { RestaurantCard } from '@/components/restauration/restaurant-card';
 import { AlertCircle, Loader2, FileText } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+
+const MealPlanEditor = dynamic(
+  () => import('@/components/restauration/meal-plan-editor').then((m) => m.MealPlanEditor),
+  { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 interface MealPlan {
   [key: string]: Record<string, unknown>;
 }

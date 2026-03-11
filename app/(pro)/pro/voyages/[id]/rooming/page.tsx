@@ -1,11 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
-import { RoomingTable } from '@/components/rooming/rooming-table';
 import { Download, AlertCircle } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+
+const RoomingTable = dynamic(
+  () => import('@/components/rooming/rooming-table').then((m) => m.RoomingTable),
+  { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 interface RoomingStats {
   totalRooms?: number;
   occupiedRooms?: number;

@@ -1,14 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { FinanceSummary } from '@/components/finance/finance-summary';
-import { CostTable } from '@/components/finance/cost-table';
 import { Download } from 'lucide-react';
+
+const CostTable = dynamic(
+  () => import('@/components/finance/cost-table').then((m) => m.CostTable),
+  { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 /**
  * Page Finance par Voyage - Détails financiers d'un voyage
  *

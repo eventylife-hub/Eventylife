@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import { ToastContainer } from '@/components/ui/toast';
-import { CookieBanner } from '@/components/cookie-banner';
+import { ClientProviders } from '@/components/layout/client-providers';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -76,8 +75,7 @@ export default function RootLayout({
     <html lang="fr">
       <body className={`${dmSans.variable} ${playfair.variable} ${dmSans.className}`}>
         {children}
-        <ToastContainer />
-        <CookieBanner />
+        <ClientProviders />
       </body>
     </html>
   );

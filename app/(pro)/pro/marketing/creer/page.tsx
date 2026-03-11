@@ -2,10 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 // shadcn component imports removed - using pro-panel and pro-btn-* classes
 import { AlertCircle, Loader2, ChevronRight } from 'lucide-react';
-import { CampaignWizard } from '@/components/marketing/campaign-wizard';
+
+const CampaignWizard = dynamic(
+  () => import('@/components/marketing/campaign-wizard').then((m) => m.CampaignWizard),
+  { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 // Interface pour les données de création de campagne
 interface CreateCampaignData {
   title: string;
