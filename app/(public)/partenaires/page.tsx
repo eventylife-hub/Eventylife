@@ -5,95 +5,124 @@ import { Breadcrumb } from '@/components/seo/breadcrumb';
 
 const avantages = [
   {
-    icon: '\u{1F4C8}',
-    title: 'Visibilite accrue',
-    desc: 'Accedez a des milliers de voyageurs actifs chaque mois via notre plateforme.',
+    icon: '📈',
+    title: 'Visibilité accrue',
+    desc: 'Accédez à des milliers de voyageurs actifs chaque mois via notre plateforme.',
   },
   {
-    icon: '\u{1F4B0}',
-    title: 'Revenus supplementaires',
-    desc: 'Remplissez vos capacites avec des groupes reguliers toute l\'annee.',
+    icon: '💰',
+    title: 'Revenus supplémentaires',
+    desc: 'Remplissez vos capacités avec des groupes réguliers toute l\u2019année.',
   },
   {
-    icon: '\u{1F91D}',
-    title: 'Accompagnement dedie',
-    desc: 'Un charge de compte personnel pour optimiser votre partenariat.',
+    icon: '🤝',
+    title: 'Accompagnement dédié',
+    desc: 'Un chargé de compte personnel pour optimiser votre partenariat.',
   },
   {
-    icon: '\u{1F4CA}',
+    icon: '📊',
     title: 'Dashboard pro',
-    desc: 'Suivez vos reservations, revenus et avis clients en temps reel.',
+    desc: 'Suivez vos réservations, revenus et avis clients en temps réel.',
   },
   {
-    icon: '\u{2B50}',
-    title: 'Avis verifies',
-    desc: 'Beneficiez de retours clients authentiques pour ameliorer votre offre.',
+    icon: '⭐',
+    title: 'Avis vérifiés',
+    desc: 'Bénéficiez de retours clients authentiques pour améliorer votre offre.',
   },
   {
-    icon: '\u{1F680}',
+    icon: '🚀',
     title: 'Sans engagement',
-    desc: 'Inscription gratuite, commission uniquement sur les reservations confirmees.',
+    desc: 'Inscription gratuite, commission uniquement sur les réservations confirmées.',
   },
 ];
 
 const typePartenaires = [
   {
-    type: 'Hotels & Hebergements',
-    desc: 'Riads, hotels, gites, campings... Proposez vos chambres aux groupes Eventy Life.',
-    icon: '\u{1F3E8}',
+    type: 'Hôtels & Hébergements',
+    desc: 'Riads, hôtels, gîtes, campings… Proposez vos chambres aux groupes Eventy Life.',
+    icon: '🏨',
   },
   {
     type: 'Restaurants & Traiteurs',
-    desc: 'Accueillez nos groupes pour des experiences culinaires authentiques.',
-    icon: '\u{1F37D}',
+    desc: 'Accueillez nos groupes pour des expériences culinaires authentiques.',
+    icon: '🍽',
   },
   {
-    type: 'Activites & Excursions',
-    desc: 'Guides touristiques, sports, bien-etre... Enrichissez nos voyages.',
-    icon: '\u{1F3D4}',
+    type: 'Activités & Excursions',
+    desc: 'Guides touristiques, sports, bien-être… Enrichissez nos voyages.',
+    icon: '🏔',
   },
   {
     type: 'Transport',
-    desc: 'Autocaristes, transferts aeroport, location de vehicules pour groupes.',
-    icon: '\u{1F68C}',
+    desc: 'Autocaristes, transferts aéroport, location de véhicules pour groupes.',
+    icon: '🚌',
   },
 ];
 
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
-
 export default function PartenairesPage() {
   return (
-    <div style={{ backgroundColor: C.cream, minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
       {/* Hero */}
-      <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, color: 'white', paddingTop: '5rem', paddingBottom: '5rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+          color: 'white',
+          padding: '5rem 1rem',
+        }}
+      >
         <div className="mx-auto max-w-5xl text-center">
-          <span style={{ backgroundColor: 'rgba(199, 91, 57, 0.2)', color: C.terra, padding: '0.375rem 1rem', borderRadius: '9999px', fontSize: '0.875rem', fontWeight: '700', display: 'inline-block', marginBottom: '1.5rem' }}>
+          <p
+            className="mb-4"
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+            }}
+          >
             Partenariat
-          </span>
-          <h1 style={{ fontSize: '3rem', fontWeight: '700', marginBottom: '1.5rem', fontFamily: 'Playfair, serif' }} className="sm:text-5xl mb-6">
-            Developpez votre activite avec{' '}
-            <span style={{ color: C.terra }}>Eventy Life</span>
+          </p>
+          <h1
+            className="text-3xl sm:text-5xl mb-6"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Développez votre activité avec{' '}
+            <span style={{ color: 'var(--terra, #C75B39)' }}>Eventy Life</span>
           </h1>
-          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.8)', maxWidth: '42rem' }} className="mx-auto mb-8">
-            Rejoignez notre reseau de partenaires et accedez a des milliers de
+          <p
+            className="mx-auto mb-8"
+            style={{
+              fontSize: '1.125rem',
+              color: 'rgba(255,255,255,0.75)',
+              maxWidth: '42rem',
+            }}
+          >
+            Rejoignez notre réseau de partenaires et accédez à des milliers de
             voyageurs. Inscription gratuite, commission uniquement sur les
-            reservations.
+            réservations.
           </p>
           <Link
             href="/pro"
-            style={{ display: 'inline-block', backgroundColor: C.terra, color: 'white', padding: '1rem 2rem', borderRadius: '12px', fontWeight: '700', fontSize: '1.125rem', textDecoration: 'none', transition: 'all 0.3s ease', boxShadow: `0 10px 25px rgba(199, 91, 57, 0.2)` }}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; e.currentTarget.style.transform = 'scale(1.05)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; e.currentTarget.style.transform = 'scale(1)'; }}
+            className="inline-block rounded-xl font-bold text-lg transition-all duration-200"
+            style={{
+              backgroundColor: 'var(--terra, #C75B39)',
+              color: 'white',
+              padding: '1rem 2rem',
+              textDecoration: 'none',
+              boxShadow: '0 10px 25px rgba(199,91,57,0.2)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 14px 30px rgba(199,91,57,0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 10px 25px rgba(199,91,57,0.2)';
+            }}
           >
             Devenir partenaire →
           </Link>
@@ -101,13 +130,42 @@ export default function PartenairesPage() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-16">
-        <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Devenir partenaire',href:'/partenaires'}]} />
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'Devenir partenaire', href: '/partenaires' },
+          ]}
+        />
+
         {/* Avantages */}
-        <div className="text-center mb-12">
-          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
+        <div className="text-center mb-12 mt-10">
+          <p
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+            }}
+          >
+            Avantages
+          </p>
+          <h2
+            className="text-2xl sm:text-3xl"
+            style={{
+              fontWeight: '700',
+              color: 'var(--navy, #1A1A2E)',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+              marginBottom: '1rem',
+            }}
+          >
             Pourquoi devenir partenaire ?
           </h2>
-          <p style={{ color: C.muted, maxWidth: '26rem' }} className="mx-auto">
+          <p
+            className="mx-auto"
+            style={{ color: '#6B7280', maxWidth: '26rem' }}
+          >
             Des avantages concrets pour faire grandir votre business.
           </p>
         </div>
@@ -116,20 +174,55 @@ export default function PartenairesPage() {
           {avantages.map((a, i) => (
             <div
               key={i}
-              style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '1.5rem', transition: 'all 0.3s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              className="rounded-2xl transition-all duration-300 hover:-translate-y-1"
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid rgba(26,26,46,0.08)',
+                boxShadow: '0 2px 8px rgba(26,26,46,0.04)',
+                padding: '1.5rem',
+              }}
             >
-              <span style={{ fontSize: '1.875rem', display: 'block', marginBottom: '1rem' }}>{a.icon}</span>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>{a.title}</h3>
-              <p style={{ fontSize: '0.875rem', color: C.muted }}>{a.desc}</p>
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
+                style={{ background: 'rgba(199,91,57,0.06)' }}
+              >
+                {a.icon}
+              </div>
+              <h3
+                className="text-base font-bold mb-2"
+                style={{ color: 'var(--navy, #1A1A2E)' }}
+              >
+                {a.title}
+              </h3>
+              <p className="text-sm" style={{ color: '#6B7280' }}>
+                {a.desc}
+              </p>
             </div>
           ))}
         </div>
 
         {/* Types de partenaires */}
         <div className="text-center mb-12">
-          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
+          <p
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+            }}
+          >
+            Catégories
+          </p>
+          <h2
+            className="text-2xl sm:text-3xl"
+            style={{
+              fontWeight: '700',
+              color: 'var(--navy, #1A1A2E)',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
             Qui peut devenir partenaire ?
           </h2>
         </div>
@@ -138,74 +231,144 @@ export default function PartenairesPage() {
           {typePartenaires.map((t, i) => (
             <div
               key={i}
-              style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '2rem', display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}
+              className="flex gap-5 items-start rounded-2xl transition-all duration-300 hover:-translate-y-1"
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid rgba(26,26,46,0.08)',
+                boxShadow: '0 2px 8px rgba(26,26,46,0.04)',
+                padding: '2rem',
+              }}
             >
-              <span style={{ fontSize: '2.25rem', flexShrink: 0 }}>{t.icon}</span>
+              <div
+                className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl flex-shrink-0"
+                style={{ background: 'rgba(199,91,57,0.06)' }}
+              >
+                {t.icon}
+              </div>
               <div>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>{t.type}</h3>
-                <p style={{ fontSize: '0.875rem', color: C.muted }}>{t.desc}</p>
+                <h3
+                  className="text-base font-bold mb-2"
+                  style={{ color: 'var(--navy, #1A1A2E)' }}
+                >
+                  {t.type}
+                </h3>
+                <p className="text-sm" style={{ color: '#6B7280' }}>
+                  {t.desc}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Comment ca marche */}
-        <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, borderRadius: '20px', padding: '2rem', color: 'white', paddingTop: '3rem', paddingBottom: '3rem' }} className="sm:p-12 mb-20">
-          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', textAlign: 'center', marginBottom: '2.5rem', fontFamily: 'Playfair, serif' }}>Comment ca marche ?</h2>
+        {/* Comment ça marche */}
+        <div
+          className="rounded-2xl mb-20"
+          style={{
+            background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+            padding: '3rem 2rem',
+            color: 'white',
+          }}
+        >
+          <h2
+            className="text-2xl sm:text-3xl text-center mb-10"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Comment ça marche ?
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: C.terra, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: '700', marginLeft: 'auto', marginRight: 'auto', marginBottom: '1rem' }}>
-                1
+            {[
+              {
+                num: '1',
+                title: 'Inscription gratuite',
+                desc: 'Créez votre profil pro en 5 minutes. Sans engagement ni frais.',
+              },
+              {
+                num: '2',
+                title: 'Publiez vos offres',
+                desc: 'Ajoutez vos prestations, tarifs et disponibilités sur votre dashboard.',
+              },
+              {
+                num: '3',
+                title: 'Recevez des groupes',
+                desc: "Accueillez des voyageurs et développez votre chiffre d\u2019affaires.",
+              },
+            ].map((step) => (
+              <div key={step.num} className="text-center">
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4"
+                  style={{ backgroundColor: 'var(--terra, #C75B39)' }}
+                >
+                  {step.num}
+                </div>
+                <h3 className="font-bold mb-2">{step.title}</h3>
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  {step.desc}
+                </p>
               </div>
-              <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Inscription gratuite</h3>
-              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
-                Creez votre profil pro en 5 minutes. Sans engagement ni frais.
-              </p>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: C.terra, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: '700', marginLeft: 'auto', marginRight: 'auto', marginBottom: '1rem' }}>
-                2
-              </div>
-              <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Publiez vos offres</h3>
-              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
-                Ajoutez vos prestations, tarifs et disponibilites sur votre dashboard.
-              </p>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ width: '3.5rem', height: '3.5rem', backgroundColor: C.terra, borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: '700', marginLeft: 'auto', marginRight: 'auto', marginBottom: '1rem' }}>
-                3
-              </div>
-              <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Recevez des groupes</h3>
-              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
-                Accueillez des voyageurs et developpez votre chiffre d&apos;affaires.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA final */}
         <div className="text-center">
-          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '1rem', fontFamily: 'Playfair, serif' }}>
-            Pret a nous rejoindre ?
+          <h2
+            className="text-2xl sm:text-3xl mb-4"
+            style={{
+              fontWeight: '700',
+              color: 'var(--navy, #1A1A2E)',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Prêt à nous rejoindre ?
           </h2>
-          <p style={{ color: C.muted, marginBottom: '2rem', maxWidth: '32rem' }} className="mx-auto">
-            Rejoignez les partenaires qui font confiance a Eventy Life pour
-            developper leur activite touristique.
+          <p
+            className="mx-auto mb-8"
+            style={{ color: '#6B7280', maxWidth: '32rem' }}
+          >
+            Rejoignez les partenaires qui font confiance à Eventy Life pour
+            développer leur activité touristique.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/pro"
-              style={{ display: 'inline-block', backgroundColor: C.terra, color: 'white', padding: '1rem 2rem', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', transition: 'all 0.3s ease', boxShadow: `0 10px 25px rgba(199, 91, 57, 0.2)` }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}
+              className="inline-block rounded-xl font-bold transition-all duration-200"
+              style={{
+                backgroundColor: 'var(--terra, #C75B39)',
+                color: 'white',
+                padding: '1rem 2rem',
+                textDecoration: 'none',
+                boxShadow: '0 10px 25px rgba(199,91,57,0.2)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
-              Creer mon compte pro
+              Créer mon compte pro
             </Link>
             <a
               href="mailto:partenaires@eventylife.fr"
-              style={{ display: 'inline-block', backgroundColor: 'white', color: C.navy, padding: '1rem 2rem', borderRadius: '12px', fontWeight: '700', border: `2px solid ${C.border}`, textDecoration: 'none', transition: 'all 0.3s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.color = C.terra; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.navy; }}
+              className="inline-block rounded-xl font-bold transition-all duration-200"
+              style={{
+                backgroundColor: 'white',
+                color: 'var(--navy, #1A1A2E)',
+                padding: '1rem 2rem',
+                border: '2px solid #E5E0D8',
+                textDecoration: 'none',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                e.currentTarget.style.color = 'var(--terra, #C75B39)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#E5E0D8';
+                e.currentTarget.style.color = 'var(--navy, #1A1A2E)';
+              }}
             >
               Nous contacter
             </a>
