@@ -2,9 +2,21 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
-  title: 'Voyages en Groupe | Eventy Life',
+  title: 'Nos Voyages en Groupe Accompagnés',
   description:
     'Découvrez notre sélection de voyages en groupe accompagnés. Destinations variées, prix justes et qualité garantie pour vos voyages de groupe.',
+  openGraph: {
+    title: 'Voyages en Groupe Accompagnés | Eventy Life',
+    description:
+      'Explorez nos voyages de groupe : Maroc, Italie, Espagne, Turquie… Transport porte-à-porte, accompagnateur dédié, prix tout compris.',
+    url: 'https://www.eventylife.fr/voyages',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Voyages en Groupe | Eventy Life',
+    description:
+      'Découvrez nos voyages de groupe accompagnés. Destinations variées, prix justes, transport inclus.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/voyages' },
 };
 
