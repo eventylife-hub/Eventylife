@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
-import { CookiePreferencesModal } from './CookiePreferencesModal';
+import dynamic from 'next/dynamic';
+const CookiePreferencesModal = dynamic(() => import('./CookiePreferencesModal').then(m => ({ default: m.CookiePreferencesModal })), { ssr: false });
 
 /**
  * CNIL-Compliant Cookie Banner

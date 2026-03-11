@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
-import { ApprovalModal } from '@/components/admin/approval-modal';
+import dynamic from 'next/dynamic';
+const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').then(m => ({ default: m.ApprovalModal })), { ssr: false });
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate } from '@/lib/utils';
 interface ProProfile {
