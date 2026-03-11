@@ -1,105 +1,384 @@
 'use client';
 
 /**
- * Page À propos
+ * Page À propos — Design Sun/Ocean V4
  */
 
-'use client';
-
-import { Button } from '@/components/ui/button';
-import { ROUTES } from '@/lib/constants';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
+
+const values = [
+  {
+    icon: '❤️',
+    title: 'Humain avant tout',
+    description:
+      'Un accompagnateur dédié de votre porte à votre destination. Vous n\'êtes jamais seul.',
+  },
+  {
+    icon: '🎯',
+    title: 'Qualité sans compromis',
+    description:
+      'Hôtels sélectionnés, restaurants testés, excursions vérifiées. Chaque détail compte.',
+  },
+  {
+    icon: '🌍',
+    title: 'Tourisme responsable',
+    description:
+      'Prestataires locaux, empreinte carbone réduite, respect des communautés visitées.',
+  },
+  {
+    icon: '🤝',
+    title: 'Accessibilité',
+    description:
+      'Des voyages de qualité à prix justes, ouverts à tous, quels que soient l\'âge ou la mobilité.',
+  },
+];
+
+const stats = [
+  { value: '50+', label: 'Destinations', icon: '📍' },
+  { value: '10 000+', label: 'Voyageurs accompagnés', icon: '👥' },
+  { value: '4.8/5', label: 'Note moyenne', icon: '⭐' },
+  { value: '98%', label: 'Taux de satisfaction', icon: '💯' },
+];
+
+const timeline = [
+  {
+    year: '2024',
+    title: 'L\'idée naît',
+    description: 'Le constat : voyager en groupe manque d\'humain. L\'idée d\'Eventy Life germe.',
+  },
+  {
+    year: '2025',
+    title: 'Développement',
+    description: 'Conception de la plateforme, premiers tests avec des groupes pilotes.',
+  },
+  {
+    year: '2026',
+    title: 'Lancement officiel',
+    description: 'Ouverture au public avec 50+ destinations et un réseau de partenaires vérifiés.',
+  },
+];
 
 export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'À propos',href:'/a-propos'}]} />
-      <div className="animate-fade-up mb-12">
-        <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">
-          Qui sommes-nous
-        </p>
-        <h1 style={{ color: C.navy, fontFamily: 'Playfair, serif', fontSize: '3rem', fontWeight: '700' }} className="mb-8">
-          À propos d&apos;Eventy Life
-        </h1>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16 animate-fade-up">
-        <div>
-          <p style={{ color: C.navy }} className="text-lg font-semibold mb-4 leading-relaxed">
-            Eventy Life est une plateforme française spécialisée dans l&apos;organisation de voyages de groupe
-            avec accompagnement humain. Depuis plusieurs années, nous offrons à nos clients des expériences
-            de voyage inoubliables, organisées de A à Z.
+    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
+      {/* Hero */}
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+          color: 'white',
+          padding: '5rem 1rem 4rem',
+        }}
+      >
+        <div className="mx-auto max-w-6xl text-center">
+          <p
+            className="mb-4"
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+            }}
+          >
+            Qui sommes-nous
           </p>
-          <p style={{ color: C.muted }} className="text-base mb-4 leading-relaxed">
-            Notre mission est de rendre accessible les voyages de qualité à tous, en proposant une
-            alternative sûre et conviviale aux voyages en solitaire.
+          <h1
+            className="text-3xl sm:text-5xl mb-4"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            À propos d&apos;
+            <span style={{ color: 'var(--terra, #C75B39)' }}>Eventy Life</span>
+          </h1>
+          <p
+            className="mx-auto"
+            style={{
+              fontSize: '1.125rem',
+              color: 'rgba(255,255,255,0.75)',
+              maxWidth: '38rem',
+            }}
+          >
+            Le voyage de groupe réinventé. Avec accompagnement humain,
+            de votre porte à votre destination.
           </p>
         </div>
-        <div style={{ background: `linear-gradient(135deg, ${C.terraSoft}, ${C.goldSoft})`, borderRadius: '20px' }} className="aspect-square flex items-center justify-center text-9xl">
-          ✈️
-        </div>
       </div>
 
-      <div className="mb-16 animate-fade-up">
-        <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">
-          Nos convictions
-        </p>
-        <h2 style={{ color: C.navy, fontFamily: 'Playfair, serif', fontSize: '2rem', fontWeight: '700' }} className="mb-8">
-          Nos valeurs
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: '❤️',
-              title: 'Humain',
-              description: 'L\'accompagnement humain est au cœur de notre démarche'
-            },
-            {
-              icon: '🎯',
-              title: 'Qualité',
-              description: 'Nous ne faisons jamais de compromis sur la qualité des expériences'
-            },
-            {
-              icon: '🌍',
-              title: 'Durabilité',
-              description: 'Nous favorisons le tourisme responsable et durable'
-            }
-          ].map((value, i) => (
-            <div key={i} style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px' }} className="p-6 text-center">
-              <div className="text-5xl mb-4">{value.icon}</div>
-              <h3 style={{ color: C.navy }} className="font-bold text-lg mb-2">{value.title}</h3>
-              <p style={{ color: C.muted }} className="text-sm">{value.description}</p>
+      <div className="mx-auto max-w-6xl px-4 py-12">
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'À propos', href: '/a-propos' },
+          ]}
+        />
+
+        {/* Notre histoire */}
+        <section className="mt-10 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p
+                className="mb-3"
+                style={{
+                  color: 'var(--gold, #D4A853)',
+                  fontSize: '0.75rem',
+                  fontWeight: '700',
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Notre histoire
+              </p>
+              <h2
+                className="text-2xl sm:text-3xl mb-6"
+                style={{
+                  color: 'var(--navy, #1A1A2E)',
+                  fontWeight: '700',
+                  fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+                }}
+              >
+                Le client doit se sentir aimé
+              </h2>
+              <p
+                className="text-lg mb-4 leading-relaxed"
+                style={{ color: 'var(--navy, #1A1A2E)' }}
+              >
+                Eventy Life est née d&apos;un constat simple : le voyage en groupe
+                manque d&apos;humanité. Trop souvent, les voyageurs se retrouvent
+                livrés à eux-mêmes, sans accompagnement réel.
+              </p>
+              <p className="text-base leading-relaxed mb-4" style={{ color: '#718096' }}>
+                Notre réponse : un accompagnement humain porte-à-porte. Un
+                accompagnateur vous attend près de chez vous, voyage avec vous,
+                et reste votre référent tout au long du séjour.
+              </p>
+              <p className="text-base leading-relaxed" style={{ color: '#718096' }}>
+                Que vous voyagiez seul, en couple ou en famille, vous faites
+                partie d&apos;un groupe bienveillant où chacun trouve sa place.
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
+            <div
+              className="aspect-square flex items-center justify-center rounded-3xl"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(199,91,57,0.08) 0%, rgba(212,168,83,0.08) 100%)',
+              }}
+            >
+              <span className="text-9xl">✈️</span>
+            </div>
+          </div>
+        </section>
 
-      <div style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', background: `linear-gradient(135deg, ${C.terra}, ${C.terraLight})` }} className="p-8 text-center animate-fade-up">
-        <h2 style={{ color: 'white', fontFamily: 'Playfair, serif', fontSize: '1.875rem', fontWeight: '700' }} className="mb-4">
-          Prêt à rejoindre notre communauté?
-        </h2>
-        <p className="mb-6" style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.125rem' }}>
-          Découvrez nos voyages et vivez une expérience unique avec Eventy Life
-        </p>
-        <Link href={ROUTES.VOYAGES}>
-          <button style={{ backgroundColor: 'white', color: C.terra, padding: '12px 32px', borderRadius: '12px', fontWeight: '700', fontSize: '1rem', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', boxShadow: `0 4px 12px rgba(199, 91, 57, 0.2)` }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 20px rgba(199, 91, 57, 0.3)`; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 12px rgba(199, 91, 57, 0.2)`; }}>
-            Découvrir nos voyages
-          </button>
-        </Link>
+        {/* Chiffres clés */}
+        <section className="mb-20">
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          >
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                className="text-center p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  background: 'white',
+                  border: '1px solid rgba(26,26,46,0.08)',
+                  boxShadow: '0 2px 8px rgba(26,26,46,0.04)',
+                }}
+              >
+                <div className="text-3xl mb-2">{stat.icon}</div>
+                <div
+                  className="text-2xl sm:text-3xl font-bold mb-1"
+                  style={{ color: 'var(--terra, #C75B39)' }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-sm" style={{ color: '#718096' }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Nos valeurs */}
+        <section className="mb-20">
+          <div className="text-center mb-10">
+            <p
+              className="mb-3"
+              style={{
+                color: 'var(--gold, #D4A853)',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+              }}
+            >
+              Nos convictions
+            </p>
+            <h2
+              className="text-2xl sm:text-3xl"
+              style={{
+                color: 'var(--navy, #1A1A2E)',
+                fontWeight: '700',
+                fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+              }}
+            >
+              Nos valeurs
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value, i) => (
+              <div
+                key={i}
+                className="text-center p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  background: 'white',
+                  border: '1px solid rgba(26,26,46,0.08)',
+                  boxShadow: '0 2px 8px rgba(26,26,46,0.04)',
+                }}
+              >
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4"
+                  style={{ background: 'rgba(199,91,57,0.06)' }}
+                >
+                  {value.icon}
+                </div>
+                <h3
+                  className="font-bold text-lg mb-2"
+                  style={{ color: 'var(--navy, #1A1A2E)' }}
+                >
+                  {value.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#718096' }}>
+                  {value.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Timeline */}
+        <section className="mb-20">
+          <div className="text-center mb-10">
+            <p
+              className="mb-3"
+              style={{
+                color: 'var(--gold, #D4A853)',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+              }}
+            >
+              Notre parcours
+            </p>
+            <h2
+              className="text-2xl sm:text-3xl"
+              style={{
+                color: 'var(--navy, #1A1A2E)',
+                fontWeight: '700',
+                fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+              }}
+            >
+              Les étapes clés
+            </h2>
+          </div>
+          <div className="max-w-2xl mx-auto">
+            {timeline.map((step, i) => (
+              <div key={i} className="flex gap-6 mb-8 last:mb-0">
+                {/* Cercle + ligne */}
+                <div className="flex flex-col items-center">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                    style={{
+                      background: 'var(--terra, #C75B39)',
+                      color: 'white',
+                    }}
+                  >
+                    {step.year}
+                  </div>
+                  {i < timeline.length - 1 && (
+                    <div
+                      className="flex-1 w-0.5 mt-2"
+                      style={{ background: 'rgba(199,91,57,0.2)' }}
+                    />
+                  )}
+                </div>
+                {/* Contenu */}
+                <div className="pb-8">
+                  <h3
+                    className="font-bold text-lg mb-1"
+                    style={{ color: 'var(--navy, #1A1A2E)' }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#718096' }}>
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section
+          className="text-center rounded-3xl"
+          style={{
+            background: 'linear-gradient(135deg, #C75B39, #D97B5E)',
+            padding: '3rem 2rem',
+            color: 'white',
+          }}
+        >
+          <h2
+            className="text-2xl sm:text-3xl mb-3"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Prêt à rejoindre l&apos;aventure ?
+          </h2>
+          <p
+            className="mx-auto mb-6"
+            style={{
+              color: 'rgba(255,255,255,0.9)',
+              maxWidth: '32rem',
+            }}
+          >
+            Découvrez nos voyages et vivez une expérience unique avec Eventy Life
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/voyages">
+              <button
+                className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
+                style={{
+                  backgroundColor: 'white',
+                  color: 'var(--terra, #C75B39)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                }}
+              >
+                Découvrir nos voyages
+              </button>
+            </Link>
+            <Link href="/contact">
+              <button
+                className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
+                style={{
+                  backgroundColor: 'transparent',
+                  color: 'white',
+                  border: '2px solid rgba(255,255,255,0.5)',
+                  cursor: 'pointer',
+                }}
+              >
+                Nous contacter
+              </button>
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );
