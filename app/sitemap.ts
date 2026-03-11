@@ -1,17 +1,17 @@
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://example.com';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://eventy.fr';
 
   // Fetch travels from API
   let travelSlugs: string[] = [];
   try {
     const response = await fetch(`${baseUrl}/api/travels`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 3600 },
     });
     if (response.ok) {
-      const travels = await response.json() as unknown;
-      travelSlugs = travels.map((t: { slug: string }) => t.slug);
+      const data = (await response.json()) as unknown;
+      travelSlugs = (data as Array<{ slug: string }>).map((t) => t.slug);
     }
   } catch {
     // Erreur silencieuse — récupération voyages pour sitemap échouée
@@ -35,12 +35,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/a-propos`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/faq`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/partenaires`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/brochure`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
       priority: 0.5,
     },
     {
@@ -70,20 +94,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic travel pages
-  const travelPages: MetadataRoute.Sitemap = travelSlugs.map((slug: unknown) => ({
+  const travelPages: MetadataRoute.Sitemap = travelSlugs.map((slug) => ({
     url: `${baseUrl}/voyages/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
 
-  // Travel reviews pages
-  const travelReviewsPages: MetadataRoute.Sitemap = travelSlugs.map((slug: unknown) => ({
-    url: `${baseUrl}/voyages/${slug}/avis`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
+  // Travel sub-pages (avis + groupes)
+  const travelSubPages: MetadataRoute.Sitemap = travelSlugs.flatMap((slug) => [
+    {
+      url: `${baseUrl}/voyages/${slug}/avis`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/voyages/${slug}/groupes`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+  ]);
 
-  return [...staticPages, ...travelPages, ...travelReviewsPages];
+  return [...staticPages, ...travelPages, ...travelSubPages];
 }
