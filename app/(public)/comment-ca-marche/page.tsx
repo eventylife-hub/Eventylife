@@ -7,6 +7,7 @@
 
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 const steps = [
   {
@@ -349,6 +350,9 @@ export default function CommentCaMarchePage() {
             </button>
           </Link>
         </section>
+
+        {/* Newsletter */}
+        <NewsletterCTA variant="terra" className="mt-16" />
       </div>
     </div>
   );

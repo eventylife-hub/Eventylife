@@ -10,6 +10,7 @@ import { SkeletonGrid } from '@/components/ui/skeleton';
 import { apiClient } from '@/lib/api-client';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { TravelCard } from '@/components/TravelCard';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -342,6 +343,9 @@ export default function VoyagesPage() {
         <Suspense fallback={<SkeletonGrid columns={2} count={4} />}>
           <VoyagesContent />
         </Suspense>
+
+        {/* Newsletter */}
+        <NewsletterCTA variant="terra" className="mt-16" />
       </div>
     </div>
   );

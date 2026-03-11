@@ -6,6 +6,7 @@
 
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 const values = [
   {
@@ -379,6 +380,9 @@ export default function AboutPage() {
             </Link>
           </div>
         </section>
+
+        {/* Newsletter */}
+        <NewsletterCTA variant="navy" className="mt-16" />
       </div>
     </div>
   );

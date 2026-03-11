@@ -8,6 +8,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 /** Villes de départ principales — à terme depuis l'API */
 const departureCities = [
@@ -282,6 +283,9 @@ export default function DepartIndexPage() {
             Nous contacter
           </Link>
         </div>
+
+        {/* Newsletter */}
+        <NewsletterCTA variant="navy" className="mt-16" />
       </div>
     </div>
   );
