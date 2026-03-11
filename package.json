@@ -32,7 +32,8 @@
     "lucide-react": "^0.369.0",
     "clsx": "^2.0.0",
     "tailwind-merge": "^2.2.0",
-    "@sentry/nextjs": "^7.80.0"
+    "@sentry/nextjs": "^7.80.0",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
     "typescript": "^5.3.3",
