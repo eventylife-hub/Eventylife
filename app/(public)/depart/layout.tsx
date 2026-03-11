@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
   title: 'Villes de départ — Trouvez un voyage près de chez vous',
@@ -9,8 +10,23 @@ export const metadata: Metadata = {
     description:
       'Voyages de groupe au départ de votre ville avec transport porte-à-porte.',
   },
+  alternates: { canonical: 'https://eventy.fr/depart' },
 };
 
-export default function DepartLayout({ children }: { children: React.ReactNode }) {
-  return children;
+export default function DepartLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Villes de départ', href: '/depart' },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

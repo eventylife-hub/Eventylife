@@ -5,18 +5,9 @@
  * Liste toutes les villes avec lien vers la page dédiée
  */
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
-
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  gold: '#D4A853',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
 
 /** Villes de départ principales — à terme depuis l'API */
 const departureCities = [
@@ -45,143 +36,252 @@ const departureCities = [
 export default function DepartIndexPage() {
   const [search, setSearch] = useState('');
 
-  const filteredCities = departureCities.filter((city) =>
-    city.name.toLowerCase().includes(search.toLowerCase()) ||
-    city.region.toLowerCase().includes(search.toLowerCase())
+  const filteredCities = useMemo(
+    () =>
+      departureCities.filter(
+        (city) =>
+          city.name.toLowerCase().includes(search.toLowerCase()) ||
+          city.region.toLowerCase().includes(search.toLowerCase()),
+      ),
+    [search],
   );
 
   // Grouper par région
-  const byRegion = filteredCities.reduce((acc, city) => {
-    if (!acc[city.region]) acc[city.region] = [];
-    acc[city.region].push(city);
-    return acc;
-  }, {} as Record<string, typeof departureCities>);
+  const byRegion = useMemo(() => {
+    return filteredCities.reduce(
+      (acc, city) => {
+        if (!acc[city.region]) acc[city.region] = [];
+        acc[city.region].push(city);
+        return acc;
+      },
+      {} as Record<string, typeof departureCities>,
+    );
+  }, [filteredCities]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
-      <Breadcrumb items={[
-        { name: 'Accueil', href: '/' },
-        { name: 'Villes de départ', href: '/depart' },
-      ]} />
-
-      {/* Header */}
-      <div className="text-center mb-12">
-        <p style={{ color: C.gold, fontSize: '12px', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase' }} className="mb-3">
-          Nos points de départ
-        </p>
-        <h1 style={{ color: C.navy, fontFamily: 'Playfair, serif', fontSize: '2.25rem', fontWeight: '700' }} className="mb-4">
-          Villes de départ
-        </h1>
-        <p style={{ color: C.muted, maxWidth: '600px', margin: '0 auto' }}>
-          Retrouvez tous nos voyages de groupe au départ de votre ville.
-          Transport porte-à-porte avec accompagnement personnalisé.
-        </p>
+    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
+      {/* Hero V4 */}
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+          color: 'white',
+          padding: '5rem 1rem 4rem',
+        }}
+      >
+        <div className="mx-auto max-w-5xl text-center">
+          <p
+            className="mb-4"
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+            }}
+          >
+            Nos points de départ
+          </p>
+          <h1
+            className="text-3xl sm:text-5xl mb-4"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Villes de{' '}
+            <span style={{ color: 'var(--terra, #C75B39)' }}>départ</span>
+          </h1>
+          <p
+            className="mx-auto"
+            style={{
+              fontSize: '1.125rem',
+              color: 'rgba(255,255,255,0.75)',
+              maxWidth: '42rem',
+            }}
+          >
+            Retrouvez tous nos voyages de groupe au départ de votre ville.
+            Transport porte-à-porte avec accompagnement personnalisé.
+          </p>
+        </div>
       </div>
 
-      {/* Recherche */}
-      <div className="mb-10 max-w-md mx-auto">
-        <input
-          type="text"
-          placeholder="Rechercher une ville ou une région..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          aria-label="Rechercher une ville de départ"
-          style={{
-            width: '100%',
-            padding: '12px 20px',
-            borderRadius: '14px',
-            border: `1.5px solid ${C.border}`,
-            fontSize: '0.95rem',
-            color: C.navy,
-            background: 'white',
-            outline: 'none',
-          }}
+      <div className="mx-auto max-w-5xl px-4 py-12">
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'Villes de départ', href: '/depart' },
+          ]}
         />
-      </div>
 
-      {/* Grille par région */}
-      {Object.entries(byRegion).sort(([a], [b]) => a.localeCompare(b)).map(([region, cities]) => (
-        <div key={region} className="mb-10">
-          <h2 style={{ color: C.navy, fontSize: '1.25rem', fontWeight: '700', marginBottom: '16px', paddingBottom: '8px', borderBottom: `2px solid ${C.border}` }}>
-            {region}
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {cities.map((city) => (
-              <Link
-                key={city.slug}
-                href={`/depart/${city.slug}`}
+        {/* Recherche */}
+        <div className="mb-10 mt-8 max-w-md mx-auto">
+          <input
+            type="text"
+            placeholder="Rechercher une ville ou une région..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            aria-label="Rechercher une ville de départ"
+            className="w-full text-sm"
+            style={{
+              padding: '12px 20px',
+              borderRadius: '12px',
+              border: '1.5px solid #E5E0D8',
+              color: 'var(--navy, #1A1A2E)',
+              background: 'white',
+              outline: 'none',
+              transition: 'border-color 0.2s, box-shadow 0.2s',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.1)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = '#E5E0D8';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          />
+        </div>
+
+        {/* Compteur */}
+        <p
+          className="text-center mb-8"
+          style={{ color: '#718096', fontSize: '0.875rem' }}
+        >
+          {filteredCities.length} ville{filteredCities.length !== 1 ? 's' : ''}
+          {search && (
+            <>
+              {' '}pour «{' '}
+              <strong style={{ color: 'var(--terra, #C75B39)' }}>{search}</strong>{' '}
+              »
+            </>
+          )}
+        </p>
+
+        {/* Grille par région */}
+        {Object.entries(byRegion)
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([region, cities]) => (
+            <div key={region} className="mb-10">
+              <h2
+                className="text-lg font-bold mb-4 pb-2"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  padding: '16px 20px',
-                  borderRadius: '14px',
-                  border: `1.5px solid ${C.border}`,
-                  background: 'white',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s',
-                }}
-                className="hover:shadow-md"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = C.terra;
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = C.border;
-                  e.currentTarget.style.transform = 'translateY(0)';
+                  color: 'var(--navy, #1A1A2E)',
+                  borderBottom: '2px solid #E5E0D8',
                 }}
               >
-                <span style={{ fontSize: '1.5rem' }}>{city.icon}</span>
-                <span style={{ color: C.navy, fontWeight: '600', fontSize: '0.95rem' }}>{city.name}</span>
+                {region}
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {cities.map((city) => (
+                  <Link
+                    key={city.slug}
+                    href={`/depart/${city.slug}`}
+                    className="flex items-center gap-3 rounded-xl transition-all duration-200 hover:-translate-y-1"
+                    style={{
+                      padding: '14px 18px',
+                      border: '1px solid rgba(26,26,46,0.08)',
+                      backgroundColor: 'white',
+                      boxShadow: '0 2px 8px rgba(26,26,46,0.04)',
+                      textDecoration: 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(26,26,46,0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(26,26,46,0.08)';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(26,26,46,0.04)';
+                    }}
+                  >
+                    <span className="text-xl">{city.icon}</span>
+                    <span
+                      className="font-semibold text-sm"
+                      style={{ color: 'var(--navy, #1A1A2E)' }}
+                    >
+                      {city.name}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+
+        {/* État vide */}
+        {filteredCities.length === 0 && (
+          <div className="text-center py-16">
+            <div
+              className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4"
+              style={{ backgroundColor: 'rgba(199,91,57,0.08)' }}
+            >
+              🔍
+            </div>
+            <p
+              className="text-lg font-semibold mb-2"
+              style={{ color: 'var(--navy, #1A1A2E)' }}
+            >
+              Aucune ville trouvée
+            </p>
+            <p style={{ color: '#6B7280' }}>
+              Essayez un autre terme de recherche ou{' '}
+              <Link
+                href="/contact"
+                className="font-semibold"
+                style={{ color: 'var(--terra, #C75B39)', textDecoration: 'none' }}
+              >
+                contactez-nous
               </Link>
-            ))}
+            </p>
           </div>
-        </div>
-      ))}
+        )}
 
-      {/* État vide */}
-      {filteredCities.length === 0 && (
-        <div className="text-center py-16">
-          <p style={{ fontSize: '3rem', marginBottom: '12px' }}>🔍</p>
-          <p style={{ color: C.navy, fontWeight: '600', fontSize: '1.1rem', marginBottom: '8px' }}>
-            Aucune ville trouvée
-          </p>
-          <p style={{ color: C.muted }}>
-            Essayez un autre terme de recherche ou{' '}
-            <Link href="/contact" style={{ color: C.terra, fontWeight: '600' }}>
-              contactez-nous
-            </Link>
-          </p>
-        </div>
-      )}
-
-      {/* CTA */}
-      <div
-        className="text-center mt-16 py-12 px-8 rounded-2xl"
-        style={{ background: `linear-gradient(135deg, ${C.navy}, #2D2D4E)` }}
-      >
-        <h2 style={{ color: '#FAF7F2', fontFamily: 'Playfair, serif', fontSize: '1.5rem', fontWeight: '700', marginBottom: '12px' }}>
-          Votre ville n&apos;est pas dans la liste ?
-        </h2>
-        <p style={{ color: 'rgba(250,247,242,0.7)', marginBottom: '24px', maxWidth: '500px', margin: '0 auto 24px' }}>
-          Contactez-nous pour organiser un point de départ personnalisé.
-          Notre service porte-à-porte s&apos;adapte à votre localisation.
-        </p>
-        <Link
-          href="/contact"
+        {/* CTA */}
+        <div
+          className="text-center mt-16 rounded-2xl"
           style={{
-            display: 'inline-block',
-            padding: '14px 32px',
-            borderRadius: '14px',
-            background: C.terra,
+            background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+            padding: '3rem 2rem',
             color: 'white',
-            fontWeight: '700',
-            textDecoration: 'none',
-            transition: 'opacity 0.2s',
           }}
         >
-          Nous contacter
-        </Link>
+          <h2
+            className="text-xl sm:text-2xl mb-3"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Votre ville n&apos;est pas dans la liste ?
+          </h2>
+          <p
+            className="mx-auto mb-6"
+            style={{
+              color: 'rgba(255,255,255,0.75)',
+              maxWidth: '32rem',
+            }}
+          >
+            Contactez-nous pour organiser un point de départ personnalisé.
+            Notre service porte-à-porte s&apos;adapte à votre localisation.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block rounded-xl font-bold transition-all duration-200"
+            style={{
+              backgroundColor: 'var(--terra, #C75B39)',
+              color: 'white',
+              padding: '0.875rem 2rem',
+              textDecoration: 'none',
+              boxShadow: '0 10px 25px rgba(199,91,57,0.2)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            Nous contacter
+          </Link>
+        </div>
       </div>
     </div>
   );
