@@ -123,7 +123,7 @@ export default function ConnexionPage() {
         {/* Titre */}
         <h2 className="font-display text-xl font-bold mb-1" style={{ color: C.navy }}>Connexion</h2>
         <p className="text-sm mb-6" style={{ color: C.muted }}>
-          Bienvenue! Connectez-vous à votre compte
+          Bienvenue ! Connectez-vous à votre compte
         </p>
 
         {/* Message d'erreur */}
@@ -169,7 +169,7 @@ export default function ConnexionPage() {
                 Mot de passe
               </label>
               <Link href="/mot-de-passe-oublie" className="text-xs font-medium" style={{ color: C.terra }}>
-                Oublié?
+                Oublié ?
               </Link>
             </div>
             <input
@@ -225,7 +225,7 @@ export default function ConnexionPage() {
             <div className="w-full" style={{ borderTop: `1px solid ${C.border}` }}></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-white" style={{ color: C.muted }}>Nouveau client?</span>
+            <span className="px-3 bg-white" style={{ color: C.muted }}>Nouveau client ?</span>
           </div>
         </div>
 

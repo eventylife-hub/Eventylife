@@ -31,7 +31,7 @@ export default function VerificationEmailPage() {
       try {
         await apiClient.post('/auth/verify-email', { token });
         setStatus('success');
-        setMessage('Email vérifié avec succès!');
+        setMessage('Email vérifié avec succès !');
         // Rediriger après 3 secondes
         setTimeout(() => {
           router.push('/connexion');

@@ -167,7 +167,7 @@ export default function ReinitialiserMotDePassePage() {
           </h1>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✓</div>
           <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#1A1A2E', marginBottom: '0.5rem' }}>
-            Mot de passe modifié!
+            Mot de passe modifié !
           </h2>
           <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1rem' }}>
             Votre mot de passe a été réinitialisé avec succès.

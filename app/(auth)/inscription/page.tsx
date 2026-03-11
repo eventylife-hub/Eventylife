@@ -166,7 +166,7 @@ export default function InscriptionPage() {
             marginBottom: '1.5rem',
           }}
         >
-          Bienvenue chez Eventy Life!
+          Bienvenue chez Eventy Life !
         </p>
 
         {/* Message d'erreur */}
@@ -602,7 +602,7 @@ export default function InscriptionPage() {
 
         {/* Lien connexion */}
         <p style={{ textAlign: 'center', fontSize: '0.875rem', color: C.muted, marginTop: '1.5rem' }}>
-          Déjà inscrit?{' '}
+          Déjà inscrit ?{' '}
           <Link
             href="/connexion"
             style={{
