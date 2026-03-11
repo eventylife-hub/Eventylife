@@ -68,7 +68,11 @@ export function ToastContainer() {
   const removeToast = useUIStore((state) => state.removeToast);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-auto">
+    <div
+      className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-auto"
+      aria-live="polite"
+      aria-atomic="false"
+    >
       {toasts.map((toast) => (
         <ToastItem
           key={toast.id}

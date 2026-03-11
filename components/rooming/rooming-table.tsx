@@ -105,6 +105,7 @@ export function RoomingTable({
                       disabled={isSaving}
                       variant="ghost"
                       className="h-7 px-2"
+                      aria-label="Enregistrer le numéro de chambre"
                     >
                       <Check className="w-4 h-4" />
                     </Button>

@@ -149,6 +149,7 @@ export function NewsletterCTA({
             <p
               className="mt-4 text-sm"
               style={{ color: '#DCFCE7' }}
+              role="status"
             >
               Merci ! Vérifiez votre boîte mail.
             </p>

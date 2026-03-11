@@ -65,12 +65,21 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     siteName: 'Eventy Life',
     url: 'https://www.eventylife.fr',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Eventy Life — Voyages de Groupe avec Accompagnement',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Eventy Life — Voyages de Groupe',
     description:
       'Voyages en groupe avec accompagnement humain porte-à-porte.',
+    images: ['/opengraph-image'],
   },
   alternates: {
     canonical: 'https://www.eventylife.fr',
@@ -89,6 +98,10 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://js.stripe.com" />
       </head>
       <body className={`${dmSans.variable} ${playfair.variable} ${dmSans.className}`}>
         <SkipToContent />
