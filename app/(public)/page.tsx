@@ -475,6 +475,29 @@ export default function HomePage() {
             </div></Rv>
 
           </div>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+            <Link
+              href="/avis"
+              className="inline-block rounded-xl font-bold text-sm transition-all duration-200"
+              style={{
+                backgroundColor: 'var(--terra, #C75B39)',
+                color: 'white',
+                padding: '0.875rem 2rem',
+                textDecoration: 'none',
+                boxShadow: '0 4px 12px rgba(199,91,57,0.2)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(199,91,57,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(199,91,57,0.2)';
+              }}
+            >
+              Voir tous les avis →
+            </Link>
+          </div>
         </div>
       </section>
 

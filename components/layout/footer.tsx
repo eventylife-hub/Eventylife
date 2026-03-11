@@ -83,6 +83,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/avis" className="text-sm hover:text-white transition-colors duration-200">
+                  Avis voyageurs
+                </Link>
+              </li>
+              <li>
                 <Link href="/partenaires" className="text-sm hover:text-white transition-colors duration-200">
                   Devenir partenaire
                 </Link>

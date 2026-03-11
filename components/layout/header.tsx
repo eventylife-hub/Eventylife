@@ -117,18 +117,33 @@ export function Header({ user }: HeaderProps) {
             <Link
               href="/comment-ca-marche"
               className="text-sm font-medium transition-colors duration-200"
-              style={{ color: 'rgba(250,247,242,0.8)' }}
+              style={{
+                color: pathname === '/comment-ca-marche' ? '#D4A853' : 'rgba(250,247,242,0.8)',
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(250,247,242,0.8)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/comment-ca-marche' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
             >
               Comment ça marche
             </Link>
             <Link
+              href="/avis"
+              className="text-sm font-medium transition-colors duration-200"
+              style={{
+                color: pathname === '/avis' ? '#D4A853' : 'rgba(250,247,242,0.8)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/avis' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
+            >
+              Avis
+            </Link>
+            <Link
               href="/contact"
               className="text-sm font-medium transition-colors duration-200"
-              style={{ color: 'rgba(250,247,242,0.8)' }}
+              style={{
+                color: pathname === '/contact' ? '#D4A853' : 'rgba(250,247,242,0.8)',
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(250,247,242,0.8)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/contact' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
             >
               Contact
             </Link>
@@ -281,6 +296,15 @@ export function Header({ user }: HeaderProps) {
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >
               Comment ça marche
+            </Link>
+            <Link
+              href="/avis"
+              className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+              style={{ color: '#FAF7F2' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
+              Avis
             </Link>
             <Link
               href="/contact"
