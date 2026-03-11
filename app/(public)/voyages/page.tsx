@@ -6,13 +6,10 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { SkeletonGrid } from '@/components/ui/skeleton';
-import { ROUTES } from '@/lib/constants';
-import { formatPrice, formatDate } from '@/lib/utils';
 import { apiClient } from '@/lib/api-client';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { TravelCard } from '@/components/TravelCard';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -255,96 +252,23 @@ function VoyagesContent() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTravels.map((voyage) => {
-            const available = voyage.capacity - voyage.currentBookings;
-
-            return (
-              <Link key={voyage.id} href={ROUTES.VOYAGE_DETAIL(voyage.slug)}>
-                <div
-                  className="h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-300"
-                  style={{
-                    background: '#fff',
-                    border: `1.5px solid ${C.border}`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(26,26,46,0.10)';
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div
-                    className="aspect-video flex items-center justify-center text-6xl"
-                    style={{ background: `linear-gradient(135deg, ${C.terra}15, ${C.gold}15)` }}
-                  >
-                    {voyage.image}
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex items-start justify-between mb-2">
-                      <span
-                        className="text-xs font-semibold px-2.5 py-1 rounded-full"
-                        style={{ background: C.goldSoft, color: '#92400e' }}
-                      >
-                        {voyage.daysCount} jours
-                      </span>
-                      {available <= 5 && (
-                        <span
-                          className="text-xs font-semibold px-2.5 py-1 rounded-full animate-pulse-dot"
-                          style={{ background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' }}
-                        >
-                          Peu de places
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="font-bold text-base mb-1 line-clamp-2" style={{ color: C.navy }}>
-                      {voyage.title}
-                    </h3>
-
-                    <p className="text-sm mb-1" style={{ color: C.muted }}>
-                      📍 {voyage.destination}
-                    </p>
-
-                    <p className="text-xs mb-3" style={{ color: '#9CA3AF' }}>
-                      Du {formatDate(voyage.startDate)} au {formatDate(voyage.endDate)}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-3 mt-auto">
-                      <span className="text-lg font-bold" style={{ color: C.terra }}>
-                        À partir de {formatPrice(voyage.price)}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="flex items-center gap-1 text-sm">
-                        <span style={{ color: C.gold }}>★</span>
-                        <span style={{ color: C.navy }}>{voyage.rating}</span>
-                        <span style={{ color: C.muted }}>({voyage.reviews})</span>
-                      </span>
-                      <span className="text-xs" style={{ color: C.muted }}>
-                        {available} place{available !== 1 ? 's' : ''} restante{available !== 1 ? 's' : ''}
-                      </span>
-                    </div>
-
-                    <button
-                      className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                      style={{ background: C.terra, color: '#fff' }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = C.terraLight;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = C.terra;
-                      }}
-                    >
-                      Voir détails
-                    </button>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {filteredTravels.map((voyage) => (
+            <TravelCard
+              key={voyage.id}
+              id={voyage.id}
+              title={voyage.title}
+              destination={voyage.destination}
+              startDate={voyage.startDate}
+              endDate={voyage.endDate}
+              priceInCents={voyage.price}
+              imageUrl={voyage.image !== '✈️' ? voyage.image : undefined}
+              rating={voyage.rating}
+              reviewCount={voyage.reviews}
+              capacity={voyage.capacity}
+              currentBookings={voyage.currentBookings}
+              slug={voyage.slug}
+            />
+          ))}
         </div>
       </div>
     </div>

@@ -1,10 +1,8 @@
 'use client';
 
 /**
- * Page Contact
+ * Page Contact — Design Sun/Ocean V4
  */
-
-'use client';
 
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
@@ -112,7 +110,7 @@ export default function ContactPage() {
                   <textarea
                     placeholder="Votre message..."
                     value={formData.message}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, message: (e.target as HTMLInputElement).value })}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, message: e.target.value })}
                     rows={6}
                     required
                     style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${C.border}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
