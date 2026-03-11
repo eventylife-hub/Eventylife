@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page 404 globale — Design Sun/Ocean V4
  */
