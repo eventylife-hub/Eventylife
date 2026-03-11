@@ -9,7 +9,7 @@ import Link from 'next/link';
  */
 export function Footer() {
   return (
-    <footer style={{ background: '#1A1A2E', color: 'rgba(250,247,242,0.7)' }} className="mt-16">
+    <footer style={{ background: '#1A1A2E', color: 'rgba(250,247,242,0.7)' }} className="mt-16" role="contentinfo" aria-label="Pied de page">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         {/* Top — Logo + Tagline */}
         <div className="mb-10">

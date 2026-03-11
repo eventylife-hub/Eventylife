@@ -67,7 +67,16 @@ export function Header({ user }: HeaderProps) {
         background: '#1A1A2E',
         boxShadow: scrolled ? '0 4px 20px rgba(26,26,46,0.3)' : 'none',
       }}
+      role="banner"
     >
+      {/* Skip to content — Accessibilité */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-sm focus:font-medium"
+        style={{ backgroundColor: '#C75B39' }}
+      >
+        Aller au contenu principal
+      </a>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo Eventy.Life */}
@@ -93,7 +102,7 @@ export function Header({ user }: HeaderProps) {
           </Link>
 
           {/* Navigation desktop */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8" aria-label="Navigation principale">
             <Link
               href={ROUTES.VOYAGES}
               className="text-sm font-medium transition-colors duration-200"
@@ -136,6 +145,9 @@ export function Header({ user }: HeaderProps) {
                   style={{ color: '#FAF7F2' }}
                   onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.1)')}
                   onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                  aria-label="Menu utilisateur"
+                  aria-expanded={isDropdownOpen}
+                  aria-haspopup="true"
                 >
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
@@ -231,6 +243,8 @@ export function Header({ user }: HeaderProps) {
               style={{ color: '#FAF7F2' }}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.1)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+              aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              aria-expanded={isMobileMenuOpen}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMobileMenuOpen ? (
