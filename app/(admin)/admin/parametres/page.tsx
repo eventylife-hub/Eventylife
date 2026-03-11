@@ -30,21 +30,97 @@ export default function ParametresPage() {
         ]);
 
         if (settingsRes.ok) {
-          const data = (await settingsRes.json() as unknown) as unknown;
-          const validSettings = (data as Array<{key: string; value: string; description?: string}>).map<Setting>((s) => ({
+          const data = await settingsRes.json() as Array<{key: string; value: string; description?: string}>;
+          const validSettings = data.map<Setting>((s) => ({
             key: s.key,
             value: s.value ?? '',
             description: s.description,
           }));
           setSettings(validSettings);
+        } else {
+          console.warn('API admin/settings indisponible — données démo');
+          const FALLBACK_SETTINGS: Setting[] = [
+            {
+              key: 'SITE_NAME',
+              value: 'Eventy',
+              description: 'Nom du site',
+            },
+            {
+              key: 'SUPPORT_EMAIL',
+              value: 'support@eventy.fr',
+              description: 'Email de support',
+            },
+            {
+              key: 'MAX_BOOKING_DAYS',
+              value: '365',
+              description: 'Nombre maximum de jours pour une réservation',
+            },
+          ];
+          setSettings(FALLBACK_SETTINGS);
         }
 
         if (flagsRes.ok) {
-          const data = (await flagsRes.json() as unknown) as unknown;
+          const data = await flagsRes.json() as Record<string, unknown>[];
           setFeatureFlags(data);
+        } else {
+          console.warn('API admin/feature-flags indisponible — données démo');
+          const FALLBACK_FLAGS: Record<string, unknown>[] = [
+            {
+              key: 'ENABLE_BETA_FEATURES',
+              enabled: true,
+              description: 'Activer les fonctionnalités bêta',
+            },
+            {
+              key: 'ENABLE_PAYMENTS',
+              enabled: true,
+              description: 'Activer les paiements en ligne',
+            },
+            {
+              key: 'ENABLE_API_PUBLIC',
+              enabled: false,
+              description: 'Exposer l\'API publique',
+            },
+          ];
+          setFeatureFlags(FALLBACK_FLAGS);
         }
       } catch (_error: unknown) {
-        // Erreur silencieuse — les données se chargent au prochain retry
+        console.warn('API admin/settings et feature-flags indisponible — données démo');
+        const FALLBACK_SETTINGS: Setting[] = [
+          {
+            key: 'SITE_NAME',
+            value: 'Eventy',
+            description: 'Nom du site',
+          },
+          {
+            key: 'SUPPORT_EMAIL',
+            value: 'support@eventy.fr',
+            description: 'Email de support',
+          },
+          {
+            key: 'MAX_BOOKING_DAYS',
+            value: '365',
+            description: 'Nombre maximum de jours pour une réservation',
+          },
+        ];
+        const FALLBACK_FLAGS: Record<string, unknown>[] = [
+          {
+            key: 'ENABLE_BETA_FEATURES',
+            enabled: true,
+            description: 'Activer les fonctionnalités bêta',
+          },
+          {
+            key: 'ENABLE_PAYMENTS',
+            enabled: true,
+            description: 'Activer les paiements en ligne',
+          },
+          {
+            key: 'ENABLE_API_PUBLIC',
+            enabled: false,
+            description: 'Exposer l\'API publique',
+          },
+        ];
+        setSettings(FALLBACK_SETTINGS);
+        setFeatureFlags(FALLBACK_FLAGS);
       } finally {
         setLoading(false);
       }

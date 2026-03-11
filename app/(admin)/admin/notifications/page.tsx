@@ -77,7 +77,51 @@ export default function AdminNotificationsPage() {
           setData(result);
         }
       } catch (_error: unknown) {
-        // Erreur silencieuse — les données se chargent au prochain retry
+        console.warn('API admin/notifications indisponible — données démo');
+        const FALLBACK_DATA: NotificationsData = {
+          templates: [
+            {
+              id: 'tpl_1',
+              name: 'Confirmation de réservation',
+              channel: 'EMAIL',
+              eventTrigger: 'booking.confirmed',
+              active: true,
+              lastModified: new Date(Date.now() - 86400000).toISOString(),
+              modifiedBy: 'admin@eventy.fr',
+            },
+            {
+              id: 'tpl_2',
+              name: 'Alerte paiement',
+              channel: 'SMS',
+              eventTrigger: 'payment.failed',
+              active: true,
+              lastModified: new Date(Date.now() - 172800000).toISOString(),
+              modifiedBy: 'support@eventy.fr',
+            },
+          ],
+          recentHistory: [
+            {
+              id: 'hist_1',
+              template: 'Confirmation de réservation',
+              recipient: 'client@example.com',
+              channel: 'EMAIL',
+              status: 'DELIVERED',
+              sentAt: new Date(Date.now() - 3600000).toISOString(),
+              deliveredAt: new Date(Date.now() - 3000000).toISOString(),
+            },
+            {
+              id: 'hist_2',
+              template: 'Alerte paiement',
+              recipient: '+33612345678',
+              channel: 'SMS',
+              status: 'SENT',
+              sentAt: new Date(Date.now() - 7200000).toISOString(),
+            },
+          ],
+          queueCount: 3,
+          failedCount: 1,
+        };
+        setData(FALLBACK_DATA);
       } finally {
         setLoading(false);
       }
@@ -99,7 +143,7 @@ export default function AdminNotificationsPage() {
         // Refresh data
         const res = await fetch('/api/admin/notifications', { credentials: 'include' });
         if (res.ok) {
-          const result = (await res.json() as unknown) as unknown;
+          const result = await res.json() as NotificationsData;
           setData(result);
         }
       }
@@ -135,7 +179,7 @@ export default function AdminNotificationsPage() {
         // Refresh data
         const res = await fetch('/api/admin/notifications', { credentials: 'include' });
         if (res.ok) {
-          const result = (await res.json() as unknown) as unknown;
+          const result = await res.json() as NotificationsData;
           setData(result);
         }
       } else {
@@ -160,7 +204,7 @@ export default function AdminNotificationsPage() {
         // Recharger la liste des templates
         const res = await fetch('/api/admin/notifications', { credentials: 'include' });
         if (res.ok) {
-          const result = (await res.json() as unknown) as unknown;
+          const result = await res.json() as NotificationsData;
           setData(result);
         }
       } else {

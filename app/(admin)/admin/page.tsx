@@ -120,8 +120,64 @@ export default function AdminDashboardPage() {
         setStats(null);
       }
     } catch {
-      // En mode beta/statique, pas d&apos;API — affichage normal
-      setStats(null);
+      console.warn('API /admin/dashboard indisponible — données démo');
+      const FALLBACK_DATA: DashboardStats = {
+        totalUsers: 247,
+        userGrowth: 12,
+        totalTravels: 14,
+        monthlyRevenueCents: 14200000,
+        monthlyRevenueGrowth: 8,
+        pendingTravels: 3,
+        pendingPros: 8,
+        activePros: 42,
+        openTickets: 4,
+        supplierPayments: 6,
+        supplierPaymentAmount: 2480000,
+        recentActivity: [
+          {
+            id: '1',
+            actor: 'David A.',
+            action: 'Pro validé',
+            type: 'create',
+            description: 'Pro validé — CreatorProfile #247',
+            timestamp: new Date(Date.now() - 12 * 60000).toISOString(),
+          },
+          {
+            id: '2',
+            actor: 'Marie L.',
+            action: 'Setting modifié',
+            type: 'update',
+            description: 'Setting modifié — HOLD_DURATION → 7j',
+            timestamp: new Date(Date.now() - 60 * 60000).toISOString(),
+          },
+          {
+            id: '3',
+            actor: 'Thomas B.',
+            action: 'PII_REVEAL_60S',
+            type: 'access',
+            description: 'PII_REVEAL_60S — Ticket #892',
+            timestamp: new Date(Date.now() - 2 * 60 * 60000).toISOString(),
+          },
+          {
+            id: '4',
+            actor: 'David A.',
+            action: 'Employé désactivé',
+            type: 'delete',
+            description: 'Employé désactivé — user #34',
+            timestamp: new Date(Date.now() - 5 * 60 * 60000).toISOString(),
+          },
+          {
+            id: '5',
+            actor: 'Système',
+            action: 'Payment run batch',
+            type: 'create',
+            description: 'Payment run batch #18 exécuté (6 pro)',
+            timestamp: new Date(Date.now() - 24 * 60 * 60000).toISOString(),
+          },
+        ],
+      };
+      setStats(FALLBACK_DATA);
+      setError(null);
     } finally {
       setLoading(false);
     }

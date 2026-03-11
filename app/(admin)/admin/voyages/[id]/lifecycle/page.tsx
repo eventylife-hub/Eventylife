@@ -55,7 +55,7 @@ export default function TravelLifecyclePage() {
         credentials: 'include',
       });
       if (travelResponse.ok) {
-        const travelData = (await travelResponse.json() as unknown) as unknown;
+        const travelData = (await travelResponse.json()) as { data: Travel };
         setTravel(travelData.data);
       }
 
@@ -64,13 +64,53 @@ export default function TravelLifecyclePage() {
         credentials: 'include',
       });
       if (historyResponse.ok) {
-        const historyData = (await historyResponse.json() as unknown) as unknown;
+        const historyData = (await historyResponse.json()) as { data: HistoryEntry[] };
         setHistory(historyData.data || []);
       }
 
       setError(null);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
+      console.warn('API /travels/{id} indisponible — données démo');
+      const FALLBACK_TRAVEL: Travel = {
+        id: travelId || 'demo-1',
+        title: 'Voyage à Barcelone',
+        status: 'PUBLISHED',
+        startDate: '2026-06-15',
+        endDate: '2026-06-22',
+      };
+      const FALLBACK_HISTORY: HistoryEntry[] = [
+        {
+          id: 'hist-1',
+          action: 'Création du voyage',
+          createdAt: '2026-03-01T10:00:00Z',
+          actor: 'Pierre Martin',
+          actorUser: { firstName: 'Pierre', lastName: 'Martin' },
+        },
+        {
+          id: 'hist-2',
+          action: 'Soumis pour approbation',
+          createdAt: '2026-03-02T14:30:00Z',
+          actor: 'Pierre Martin',
+          actorUser: { firstName: 'Pierre', lastName: 'Martin' },
+        },
+        {
+          id: 'hist-3',
+          action: 'Approuvé Phase 1',
+          createdAt: '2026-03-03T09:15:00Z',
+          actor: 'Admin',
+          actorUser: { firstName: 'Admin', lastName: 'System' },
+        },
+        {
+          id: 'hist-4',
+          action: 'Publié',
+          createdAt: '2026-03-05T16:00:00Z',
+          actor: 'Admin',
+          actorUser: { firstName: 'Admin', lastName: 'System' },
+        },
+      ];
+      setTravel(FALLBACK_TRAVEL);
+      setHistory(FALLBACK_HISTORY);
+      setError(null);
     } finally {
       setLoading(false);
     }

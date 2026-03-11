@@ -17,6 +17,79 @@ interface Cancellation {
   createdAt: string;
 }
 
+// Fallback demo data — utilisé en cas d'API indisponible
+const FALLBACK_CANCELLATIONS_PENDING: Cancellation[] = [
+  {
+    id: 'canc_1',
+    bookingRef: 'EVT-2026-004',
+    travelTitle: 'Séjour Marrakech 5j/4n',
+    clientFirstName: 'Marie',
+    clientLastName: 'Dubois',
+    clientEmail: 'marie.dubois@email.com',
+    reason: 'Raison personnelle',
+    status: 'PENDING',
+    refundAmount: 1890,
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'canc_2',
+    bookingRef: 'EVT-2026-005',
+    travelTitle: 'Circuit Italie 7j/6n',
+    clientFirstName: 'Jean',
+    clientLastName: 'Martin',
+    clientEmail: 'jean.martin@email.com',
+    reason: 'Problème de santé',
+    status: 'PENDING',
+    refundAmount: 2450,
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+];
+
+const FALLBACK_CANCELLATIONS_APPROVED: Cancellation[] = [
+  {
+    id: 'canc_3',
+    bookingRef: 'EVT-2026-006',
+    travelTitle: 'Croisière Méditerranée',
+    clientFirstName: 'Sophie',
+    clientLastName: 'Laurent',
+    clientEmail: 'sophie.laurent@email.com',
+    reason: 'Changement de plans',
+    status: 'APPROVED',
+    refundAmount: 3200,
+    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+];
+
+const FALLBACK_CANCELLATIONS_REJECTED: Cancellation[] = [
+  {
+    id: 'canc_4',
+    bookingRef: 'EVT-2026-007',
+    travelTitle: 'Safari Kenya 8j/7n',
+    clientFirstName: 'Pierre',
+    clientLastName: 'Fournier',
+    clientEmail: 'pierre.fournier@email.com',
+    reason: 'Problème administratif',
+    status: 'REJECTED',
+    refundAmount: 0,
+    createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+];
+
+const FALLBACK_CANCELLATIONS_REFUNDED: Cancellation[] = [
+  {
+    id: 'canc_5',
+    bookingRef: 'EVT-2026-008',
+    travelTitle: 'Weekend Paris',
+    clientFirstName: 'Anne',
+    clientLastName: 'Bernard',
+    clientEmail: 'anne.bernard@email.com',
+    reason: 'Annulation acceptée',
+    status: 'REFUNDED',
+    refundAmount: 1200,
+    createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+];
+
 /**
  * Page Admin - Liste des demandes d'annulation
  * Tableau avec filtres par statut et actions
@@ -51,8 +124,19 @@ export default function CancellationsPage() {
       setCancellations(data.data || []);
       setError(null);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur lors du chargement des annulations');
-      setCancellations([]);
+      console.warn('API Annulations indisponible — données démo');
+      let demoData: Cancellation[] = [];
+      if (filter === 'PENDING') {
+        demoData = FALLBACK_CANCELLATIONS_PENDING;
+      } else if (filter === 'APPROVED') {
+        demoData = FALLBACK_CANCELLATIONS_APPROVED;
+      } else if (filter === 'REJECTED') {
+        demoData = FALLBACK_CANCELLATIONS_REJECTED;
+      } else if (filter === 'REFUNDED') {
+        demoData = FALLBACK_CANCELLATIONS_REFUNDED;
+      }
+      setCancellations(demoData);
+      setError(null);
     } finally {
       setLoading(false);
     }

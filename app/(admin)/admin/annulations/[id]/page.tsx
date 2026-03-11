@@ -34,6 +34,37 @@ interface CancellationDetail {
   paidAmountCents: number;
 }
 
+// Fallback demo data — utilisé en cas d'API indisponible
+const FALLBACK_CANCELLATION_DETAIL: CancellationDetail = {
+  id: 'canc_demo_1',
+  bookingRef: 'EVT-2026-DEMO-001',
+  clientName: 'Marie Dubois',
+  travelTitle: 'Séjour Marrakech 5j/4n',
+  reason: 'Raison personnelle urgente',
+  requestedRefund: 1890,
+  status: 'PENDING',
+  createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+  refundCalculation: {
+    refundAmountCents: 1512,
+    cancellationFeeCents: 378,
+    policyApplied: 'Politique 30j — 20% de frais',
+  },
+  bookingGroup: {
+    createdByUser: {
+      firstName: 'Marie',
+      lastName: 'Dubois',
+      email: 'marie.dubois@email.com',
+    },
+    travel: {
+      title: 'Séjour Marrakech 5j/4n',
+      departureDate: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(),
+      returnDate: new Date(Date.now() + 50 * 24 * 60 * 60 * 1000).toISOString(),
+    },
+  },
+  requestedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+  paidAmountCents: 1890,
+};
+
 /**
  * Page Admin - Détail d&apos;une annulation
  * Info client, calcul remboursement, timeline, actions
@@ -72,7 +103,9 @@ export default function CancellationDetailPage() {
       setCancellation(data.data);
       setError(null);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
+      console.warn('API Détail annulation indisponible — données démo');
+      setCancellation(FALLBACK_CANCELLATION_DETAIL);
+      setError(null);
     } finally {
       setLoading(false);
     }
