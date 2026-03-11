@@ -524,7 +524,7 @@ function HebergementSection() {
             <div style={{ fontSize: 12.5, color: '#6B7280', marginTop: 2 }}>{item.detail}</div>
             <span style={{
               display: 'inline-block', fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 8, marginTop: 5,
-              background: item.badgeType === 'incl' ? '#166534'Bg : '#FEF3C7',
+              background: item.badgeType === 'incl' ? '#166534' : '#FEF3C7',
               color: item.badgeType === 'incl' ? '#166534' : '#92400e',
             }}>{item.badge}</span>
           </div>
@@ -541,7 +541,7 @@ function OccurrencesSection() {
   const [selectedOcc, setSelectedOcc] = useState(0);
 
   const badgeColors: Record<string, { bg: string; color: string }> = {
-    ok: { bg: '#166534'Bg, color: '#166534' },
+    ok: { bg: '#166534', color: '#166534' },
     soon: { bg: '#FEF3C7', color: '#92400e' },
     full: { bg: '#FEE2E2', color: '#991B1B' },
   };

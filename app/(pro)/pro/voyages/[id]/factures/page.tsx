@@ -240,7 +240,6 @@ export default function InvoicesPage() {
         )}
       </div>
     </div>
-    </div>
 
       {/* Toast de notification */}
       {toastMessage && (

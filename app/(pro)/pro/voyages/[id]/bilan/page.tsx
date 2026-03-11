@@ -263,5 +263,6 @@ export default function TravelBilanPage() {
         </div>
       )}
     </div>
+    </div>
   );
 }

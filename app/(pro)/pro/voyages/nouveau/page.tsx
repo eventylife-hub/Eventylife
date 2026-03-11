@@ -144,7 +144,7 @@ export default function CreateTravelPage() {
           router.push(`/pro/voyages/${travel.data?.id || travel.id}`);
         }, 1500);
       } else {
-        const error = await response.json();.catch(() => null);
+        const error = await response.json().catch(() => null);
         setSaveMessage(
           error?.message || 'Erreur lors de la sauvegarde. Veuillez réessayer.',
         );

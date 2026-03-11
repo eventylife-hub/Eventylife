@@ -338,5 +338,6 @@ export default function ReservationsPage() {
         </div>
       </div>
     </div>
+    </div>
   );
 }
