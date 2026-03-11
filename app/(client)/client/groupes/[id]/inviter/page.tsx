@@ -3,9 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
 /**
  * Page d'invitation des membres au groupe
@@ -174,23 +171,18 @@ export default function InviterPage() {
                 )}
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" style={{ color: 'var(--navy, #1A1A2E)' }}>Email</Label>
-                  <Input
+                  <label htmlFor="email" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>Email</label>
+                  <input
                     id="email"
                     name="email"
                     type="email"
-                autoComplete="email"
+                    autoComplete="email"
                     placeholder="membre@example.com"
                     value={formData.email}
                     onChange={handleChange}
                     disabled={submitting}
                     required
-                    style={{
-                      backgroundColor: 'white',
-                      border: '1.5px solid #E5E0D8',
-                      borderRadius: '10px',
-                      color: 'var(--navy, #1A1A2E)',
-                    }}
+                    style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
                     onFocus={(e) => {
                       e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                       e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
@@ -203,8 +195,8 @@ export default function InviterPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" style={{ color: 'var(--navy, #1A1A2E)' }}>Message personnalisé (optionnel)</Label>
-                  <Textarea
+                  <label htmlFor="message" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>Message personnalisé (optionnel)</label>
+                  <textarea
                     id="message"
                     name="message"
                     placeholder="Bienvenue dans notre groupe..."
@@ -212,12 +204,7 @@ export default function InviterPage() {
                     onChange={handleChange}
                     disabled={submitting}
                     rows={3}
-                    style={{
-                      backgroundColor: 'white',
-                      border: '1.5px solid #E5E0D8',
-                      borderRadius: '10px',
-                      color: 'var(--navy, #1A1A2E)',
-                    }}
+                    style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', minHeight: '100px', resize: 'vertical', color: 'var(--navy, #1A1A2E)' }}
                   />
                 </div>
 

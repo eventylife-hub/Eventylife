@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { StatsCard } from '@/components/admin/stats-card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useParams } from 'next/navigation';
 import {
   CheckCircle,
@@ -360,18 +359,17 @@ export default function AdminVoyageDetailPage() {
 
       {/* Onglets */}
       <div className="admin-panel admin-fade-in delay-5">
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList>
-            <TabsTrigger value="overview">Vue d&apos;ensemble</TabsTrigger>
-            <TabsTrigger value="transport">Transport</TabsTrigger>
-            <TabsTrigger value="rooming">Logements</TabsTrigger>
-            <TabsTrigger value="finance">Finance</TabsTrigger>
-            <TabsTrigger value="team">Équipe</TabsTrigger>
-            <TabsTrigger value="audit">Audit Log</TabsTrigger>
-          </TabsList>
+        <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
+          <button onClick={() => setActiveTab('overview')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'overview' ? 'white' : 'transparent', color: activeTab === 'overview' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'overview' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>Vue d&apos;ensemble</button>
+          <button onClick={() => setActiveTab('transport')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'transport' ? 'white' : 'transparent', color: activeTab === 'transport' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'transport' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>Transport</button>
+          <button onClick={() => setActiveTab('rooming')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'rooming' ? 'white' : 'transparent', color: activeTab === 'rooming' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'rooming' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>Logements</button>
+          <button onClick={() => setActiveTab('finance')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'finance' ? 'white' : 'transparent', color: activeTab === 'finance' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'finance' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>Finance</button>
+          <button onClick={() => setActiveTab('team')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'team' ? 'white' : 'transparent', color: activeTab === 'team' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'team' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>Équipe</button>
+          <button onClick={() => setActiveTab('audit')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'audit' ? 'white' : 'transparent', color: activeTab === 'audit' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'audit' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>Audit Log</button>
+        </div>
 
-          <div className="admin-panel-body p-6">
-            <TabsContent value="overview" className="mt-0">
+        <div className="admin-panel-body p-6">
+          {activeTab === 'overview' && (
               <div className="space-y-4">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex gap-3">
@@ -396,9 +394,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            )}
 
-            <TabsContent value="transport" className="mt-0">
+            {activeTab === 'transport' && (
               <div className="space-y-4">
                 {travel?.transport ? (
                   <>
@@ -434,9 +432,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </TabsContent>
+            )}
 
-            <TabsContent value="rooming" className="mt-0">
+            {activeTab === 'rooming' && (
               <div className="space-y-4">
                 {travel?.rooming?.hotels && travel.rooming.hotels.length > 0 ? (
                   <>
@@ -470,9 +468,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </TabsContent>
+            )}
 
-            <TabsContent value="finance" className="mt-0">
+            {activeTab === 'finance' && (
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 bg-green-50 rounded-lg border border-green-200">
@@ -499,9 +497,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            )}
 
-            <TabsContent value="team" className="mt-0">
+            {activeTab === 'team' && (
               <div className="space-y-4">
                 {travel?.team && travel.team.length > 0 ? (
                   <div className="space-y-3">
@@ -526,9 +524,9 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </TabsContent>
+            )}
 
-            <TabsContent value="audit" className="mt-0">
+            {activeTab === 'audit' && (
               <div className="space-y-4">
                 {travel?.auditLog && travel.auditLog.length > 0 ? (
                   <div className="space-y-2">
@@ -559,9 +557,8 @@ export default function AdminVoyageDetailPage() {
                   </div>
                 )}
               </div>
-            </TabsContent>
-          </div>
-        </Tabs>
+            )}
+        </div>
       </div>
 
       {/* Toast notification */}

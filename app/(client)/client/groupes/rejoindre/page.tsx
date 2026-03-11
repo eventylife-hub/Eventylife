@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 /**
  * Page pour rejoindre un groupe via code d'invitation
@@ -115,24 +113,15 @@ export default function RejoindrePage() {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="code" style={{ color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</Label>
-                <Input
+                <label htmlFor="code" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>Code d&apos;invitation</label>
+                <input
                   id="code"
                   placeholder="Ex: ABC12DEF"
                   value={code}
                   onChange={handleCodeChange}
                   disabled={loading || joining}
                   maxLength={12}
-                  style={{
-                    backgroundColor: 'white',
-                    border: '1.5px solid #E5E0D8',
-                    borderRadius: '10px',
-                    color: 'var(--navy, #1A1A2E)',
-                    textTransform: 'uppercase',
-                    textAlign: 'center',
-                    fontSize: '1.125rem',
-                    letterSpacing: '0.1em',
-                  }}
+                  style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)', textTransform: 'uppercase', textAlign: 'center', fontSize: '1.125rem', letterSpacing: '0.1em' }}
                   onFocus={(e) => {
                     e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                     e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import dynamic from 'next/dynamic';
 const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').then(m => ({ default: m.ApprovalModal })), { ssr: false });
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate } from '@/lib/utils';
 interface ProProfile {
   id: string;
@@ -26,6 +25,7 @@ export default function ProsPage() {
   const [statusFilter, setStatusFilter] = useState('pending');
   const [selectedProfile, setSelectedProfile] = useState<ProProfile | null>(null);
   const [showApprovalModal, setShowApprovalModal] = useState(false);
+  const [activeTab, setActiveTab] = useState('pending');
 
   const statuses = [
     { value: 'pending', label: 'En attente' },
@@ -240,17 +240,24 @@ export default function ProsPage() {
       {/* Onglets */}
       <div className="admin-panel admin-fade-in delay-1">
         <div className="admin-panel-body p-6">
-          <Tabs value={statusFilter} onValueChange={setStatusFilter}>
-            <TabsList className="mb-6">
-              {statuses.map((status) => (
-                <TabsTrigger key={status.value} value={status.value}>
-                  {status.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
+          <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
             {statuses.map((status) => (
-              <TabsContent key={status.value} value={status.value}>
+              <button
+                key={status.value}
+                onClick={() => {
+                  setActiveTab(status.value);
+                  setStatusFilter(status.value);
+                }}
+                style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === status.value ? 'white' : 'transparent', color: activeTab === status.value ? '#1A1A2E' : '#64748B', boxShadow: activeTab === status.value ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}
+              >
+                {status.label}
+              </button>
+            ))}
+          </div>
+
+          {statuses.map((status) => (
+            activeTab === status.value && (
+              <div key={status.value}>
                 <DataTable
                   columns={columns}
                   data={profiles}
@@ -258,9 +265,9 @@ export default function ProsPage() {
                   emptyMessage="Aucun profil trouvé"
                   rowActions={rowActions}
                 />
-              </TabsContent>
-            ))}
-          </Tabs>
+              </div>
+            )
+          ))}
         </div>
       </div>
 

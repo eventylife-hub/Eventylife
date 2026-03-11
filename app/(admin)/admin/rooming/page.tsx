@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download, Home, Users, Sofa, AlertCircle, X } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 interface Room {
@@ -283,18 +282,17 @@ export default function AdminRoomingPage() {
               <label className="text-sm font-medium text-gray-700 mb-2 block">
                 Sélectionner un voyage
               </label>
-              <Select value={selectedTrip} onValueChange={setSelectedTrip}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {rooming.trips.map((trip) => (
-                    <SelectItem key={trip.id} value={trip.id}>
-                      {trip.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <select
+                value={selectedTrip}
+                onChange={(e) => setSelectedTrip(e.target.value)}
+                style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', background: 'white', fontSize: '0.95rem', cursor: 'pointer', outline: 'none', width: '100%' }}
+              >
+                {rooming.trips.map((trip) => (
+                  <option key={trip.id} value={trip.id}>
+                    {trip.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="flex gap-2">

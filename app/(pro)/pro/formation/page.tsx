@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { CheckCircle2, Clock, BookOpen, Award, AlertCircle, RotateCcw } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 export default function FormationPage() {
   const { formationModules, formationProgress, fetchFormationModules, fetchFormationProgress } =
     useProStore();
@@ -112,9 +111,9 @@ export default function FormationPage() {
         {/* Error Alert */}
         {error && (
           <div style={{ marginBottom: '24px' }}>
-            <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px' }}>
-              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
-              <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
+            <div style={{ padding: '16px', backgroundColor: '#FEF2F2', border: '1.5px solid #FECACA', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px' }} role="alert">
+              <AlertCircle className="h-4 w-4" style={{ color: '#991B1B', marginTop: '2px', flexShrink: 0 }} />
+              <p style={{ color: '#991B1B', fontSize: '14px', margin: 0 }}>{error}</p>
             </div>
             <button type="button"
               onClick={() => {

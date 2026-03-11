@@ -5,7 +5,6 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import dynamic from 'next/dynamic';
 const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').then(m => ({ default: m.ApprovalModal })), { ssr: false });
 import { ExportCta } from '@/components/admin/export-cta';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate, formatPrice } from '@/lib/utils';
 import { Search, RefreshCw } from 'lucide-react';
 interface Travel {
@@ -34,6 +33,7 @@ export default function VoyagesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTravel, setSelectedTravel] = useState<Travel | null>(null);
   const [showApprovalModal, setShowApprovalModal] = useState(false);
+  const [activeTab, setActiveTab] = useState('pending');
 
   const statuses = [
     { value: 'all', label: 'Tous' },
@@ -286,17 +286,24 @@ export default function VoyagesPage() {
           </div>
         </div>
         <div className="admin-panel-body p-6 pt-0">
-          <Tabs value={statusFilter} onValueChange={setStatusFilter}>
-            <TabsList className="mb-6">
-              {statuses.map((status) => (
-                <TabsTrigger key={status.value} value={status.value}>
-                  {status.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
+          <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
             {statuses.map((status) => (
-              <TabsContent key={status.value} value={status.value}>
+              <button
+                key={status.value}
+                onClick={() => {
+                  setActiveTab(status.value);
+                  setStatusFilter(status.value);
+                }}
+                style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === status.value ? 'white' : 'transparent', color: activeTab === status.value ? '#1A1A2E' : '#64748B', boxShadow: activeTab === status.value ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}
+              >
+                {status.label}
+              </button>
+            ))}
+          </div>
+
+          {statuses.map((status) => (
+            activeTab === status.value && (
+              <div key={status.value}>
                 {loading ? (
                   <div className="space-y-3">
                     {[...Array(5)].map((_, i) => (
@@ -324,9 +331,9 @@ export default function VoyagesPage() {
                     rowActions={rowActions}
                   />
                 )}
-              </TabsContent>
-            ))}
-          </Tabs>
+              </div>
+            )
+          ))}
         </div>
       </div>
 

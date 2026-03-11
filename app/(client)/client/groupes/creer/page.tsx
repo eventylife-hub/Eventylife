@@ -3,9 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 /**
@@ -170,8 +167,8 @@ export default function CreerGroupePage() {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="name" style={{ color: 'var(--navy, #1A1A2E)' }}>Nom du groupe</Label>
-                    <Input
+                    <label htmlFor="name" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>Nom du groupe</label>
+                    <input
                       id="name"
                       name="name"
                       placeholder="Ex: Groupe Île-de-France"
@@ -179,12 +176,7 @@ export default function CreerGroupePage() {
                       onChange={handleChange}
                       disabled={submitting}
                       required
-                      style={{
-                        backgroundColor: 'white',
-                        border: '1.5px solid #E5E0D8',
-                        borderRadius: '10px',
-                        color: 'var(--navy, #1A1A2E)',
-                      }}
+                      style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                         e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
@@ -197,7 +189,7 @@ export default function CreerGroupePage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="travelId" style={{ color: 'var(--navy, #1A1A2E)' }}>Voyage</Label>
+                    <label htmlFor="travelId" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>Voyage</label>
                     <select
                       id="travelId"
                       name="travelId"
@@ -225,8 +217,8 @@ export default function CreerGroupePage() {
                   </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="maxMembers" style={{ color: 'var(--navy, #1A1A2E)' }}>Nombre max de membres</Label>
-                  <Input
+                  <label htmlFor="maxMembers" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>Nombre max de membres</label>
+                  <input
                     id="maxMembers"
                     name="maxMembers"
                     type="number"
@@ -235,12 +227,7 @@ export default function CreerGroupePage() {
                     value={formData.maxMembers}
                     onChange={handleChange}
                     disabled={submitting}
-                    style={{
-                      backgroundColor: 'white',
-                      border: '1.5px solid #E5E0D8',
-                      borderRadius: '10px',
-                      color: 'var(--navy, #1A1A2E)',
-                    }}
+                    style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
                     onFocus={(e) => {
                       e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                       e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
@@ -253,17 +240,10 @@ export default function CreerGroupePage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="isPrivate"
-                    checked={formData.isPrivate}
-                    onCheckedChange={(checked) =>
-                      setFormData(prev => ({ ...prev, isPrivate: checked === true }))
-                    }
-                    disabled={submitting}
-                  />
-                  <Label htmlFor="isPrivate" className="cursor-pointer" style={{ color: 'var(--navy, #1A1A2E)' }}>
+                  <input type="checkbox" id="isPrivate" checked={formData.isPrivate} onChange={(e) => setFormData(prev => ({ ...prev, isPrivate: e.target.checked }))} disabled={submitting} style={{ width: 18, height: 18, accentColor: '#C75B39', cursor: 'pointer' }} />
+                  <label htmlFor="isPrivate" className="cursor-pointer" style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1A1A2E' }}>
                     Groupe privé (invitation requise)
-                  </Label>
+                  </label>
                 </div>
 
                   <button

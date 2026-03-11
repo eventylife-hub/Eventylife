@@ -8,8 +8,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 interface CoOccupant {
   id: string;
@@ -314,16 +312,9 @@ export default function RoomingPage() {
                     <p className="text-sm" style={{ color: '#6B7280' }}>{occupant.phone}</p>
                   </div>
 
-                  <Badge
-                    variant="outline"
-                    style={{
-                      backgroundColor: paymentStatusBadge[occupant.paymentStatus].bg,
-                      color: paymentStatusBadge[occupant.paymentStatus].color,
-                      borderColor: paymentStatusBadge[occupant.paymentStatus].color,
-                    }}
-                  >
+                  <span style={{ display: 'inline-flex', alignItems: 'center', padding: '0.25rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, backgroundColor: paymentStatusBadge[occupant.paymentStatus].bg, color: paymentStatusBadge[occupant.paymentStatus].color, border: `1px solid ${paymentStatusBadge[occupant.paymentStatus].color}` }}>
                     {paymentStatusLabel[occupant.paymentStatus]}
-                  </Badge>
+                  </span>
                 </div>
               ))}
             </div>
@@ -350,17 +341,12 @@ export default function RoomingPage() {
               <label className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Étage (optionnel)
               </label>
-              <Input
+              <input
                 placeholder="ex: Rez-de-chaussée, 1er étage..."
                 value={preferences.floor}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, floor: (e.target as HTMLInputElement).value })}
                 disabled={isCutoffPassed}
-                style={{
-                  backgroundColor: 'white',
-                  border: '1.5px solid #E5E0D8',
-                  borderRadius: '10px',
-                  color: 'var(--navy, #1A1A2E)',
-                }}
+                style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
               />
             </div>
 

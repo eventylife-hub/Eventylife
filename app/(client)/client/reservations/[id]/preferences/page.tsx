@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import { DietaryForm } from '@/components/restauration/dietary-form';
 /**

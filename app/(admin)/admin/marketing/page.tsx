@@ -1,10 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TrendingUp, Users, Target, DollarSign, CheckCircle, XCircle, Pause, AlertCircle, RefreshCw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
@@ -65,6 +63,7 @@ export default function AdminMarketingPage() {
   const [actionMessage, setActionMessage] = useState<string | null>(null);
   const [attributionModel, setAttributionModel] = useState<string>('first-touch');
   const [savingAttribution, setSavingAttribution] = useState(false);
+  const [activeTab, setActiveTab] = useState('campaigns');
 
   const fetchStats = async () => {
     try {
@@ -243,19 +242,19 @@ export default function AdminMarketingPage() {
     <div className="space-y-6">
       {/* Toast action */}
       {actionMessage && (
-        <Alert className="bg-green-50 border-green-200">
-          <AlertDescription className="text-green-700">{actionMessage}</AlertDescription>
-        </Alert>
+        <div style={{ padding: '1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', backgroundColor: '#F0FDF4', display: 'flex', gap: '0.75rem', alignItems: 'center' }} role="alert">
+          <p style={{ fontSize: '0.875rem', color: '#22C55E', margin: 0 }}>{actionMessage}</p>
+        </div>
       )}
 
       {/* Toast erreur non-bloquante */}
       {error && (
-        <Alert variant="destructive">
-          <AlertDescription className="flex justify-between items-center">
-            <span>{error}</span>
-            <button size="sm" onClick={() => setError(null)} style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.85rem' }}>Fermer</button>
-          </AlertDescription>
-        </Alert>
+        <div style={{ padding: '1rem', borderRadius: '12px', border: '1.5px solid #FECACA', backgroundColor: '#FEF2F2' }} role="alert">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '0.875rem', color: '#991B1B' }}>{error}</span>
+            <button onClick={() => setError(null)} style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.85rem' }}>Fermer</button>
+          </div>
+        </div>
       )}
 
       {/* En-tête */}
@@ -298,84 +297,89 @@ export default function AdminMarketingPage() {
       </div>
 
       {/* Onglets */}
-      <Tabs defaultValue="campaigns">
-        <TabsList>
-          <TabsTrigger value="campaigns">Campagnes</TabsTrigger>
-          <TabsTrigger value="sources">Sources de leads</TabsTrigger>
-          <TabsTrigger value="settings">Paramètres</TabsTrigger>
-        </TabsList>
+      <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
+        <button onClick={() => setActiveTab('campaigns')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'campaigns' ? 'white' : 'transparent', color: activeTab === 'campaigns' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'campaigns' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
+          Campagnes
+        </button>
+        <button onClick={() => setActiveTab('sources')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'sources' ? 'white' : 'transparent', color: activeTab === 'sources' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'sources' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
+          Sources de leads
+        </button>
+        <button onClick={() => setActiveTab('settings')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'settings' ? 'white' : 'transparent', color: activeTab === 'settings' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'settings' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
+          Paramètres
+        </button>
+      </div>
 
-        {/* Onglet Campagnes */}
-        <TabsContent value="campaigns">
-          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
-            <div style={{ padding: '1.5rem' }}>
-              <DataTable
-                columns={campaignColumns}
-                data={stats.campaigns}
-                loading={false}
-                emptyMessage="Aucune campagne trouvée"
-                rowActions={[
-                  {
-                    label: 'Approuver',
-                    onClick: (row) => handleCampaignAction(row.id, 'approve'),
-                  },
-                  {
-                    label: 'Rejeter',
-                    onClick: (row) => handleCampaignAction(row.id, 'reject'),
-                  },
-                  {
-                    label: 'Mettre en pause',
-                    onClick: (row) => handleCampaignAction(row.id, 'pause'),
-                  },
-                  {
-                    label: 'En avant sur accueil',
-                    onClick: (row) => handleCampaignAction(row.id, 'feature'),
-                  },
-                ]}
-              />
-            </div>
+      {/* Onglet Campagnes */}
+      {activeTab === 'campaigns' && (
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '1.5rem' }}>
+            <DataTable
+              columns={campaignColumns}
+              data={stats.campaigns}
+              loading={false}
+              emptyMessage="Aucune campagne trouvée"
+              rowActions={[
+                {
+                  label: 'Approuver',
+                  onClick: (row) => handleCampaignAction(row.id, 'approve'),
+                },
+                {
+                  label: 'Rejeter',
+                  onClick: (row) => handleCampaignAction(row.id, 'reject'),
+                },
+                {
+                  label: 'Mettre en pause',
+                  onClick: (row) => handleCampaignAction(row.id, 'pause'),
+                },
+                {
+                  label: 'En avant sur accueil',
+                  onClick: (row) => handleCampaignAction(row.id, 'feature'),
+                },
+              ]}
+            />
           </div>
-        </TabsContent>
+        </div>
+      )}
 
-        {/* Onglet Sources de leads */}
-        <TabsContent value="sources">
-          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
-            <div style={{ padding: '1.5rem 1.5rem 0' }}>
-              <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Détails des sources de leads</h3>
-            </div>
-            <div style={{ padding: '1.5rem' }}>
-              <div className="space-y-3">
-                {stats.leadSources.map((source, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">{source.name}</div>
-                      <div className="text-sm text-gray-600 mt-1">
-                        {source.count.toLocaleString('fr-FR')} leads
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-semibold text-gray-900">{(source.percentage * 100).toFixed(1)}%</div>
-                      <div className="w-32 h-2 bg-gray-200 rounded-full mt-1 overflow-hidden">
-                        <div
-                          className="h-full bg-blue-500"
-                          style={{ width: `${source.percentage * 100}%` }}
-                        />
-                      </div>
+      {/* Onglet Sources de leads */}
+      {activeTab === 'sources' && (
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Détails des sources de leads</h3>
+          </div>
+          <div style={{ padding: '1.5rem' }}>
+            <div className="space-y-3">
+              {stats.leadSources.map((source, index) => (
+                <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">{source.name}</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      {source.count.toLocaleString('fr-FR')} leads
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-gray-900">{(source.percentage * 100).toFixed(1)}%</div>
+                    <div className="w-32 h-2 bg-gray-200 rounded-full mt-1 overflow-hidden">
+                      <div
+                        className="h-full bg-blue-500"
+                        style={{ width: `${source.percentage * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </TabsContent>
+        </div>
+      )}
 
-        {/* Onglet Paramètres */}
-        <TabsContent value="settings">
-          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
-            <div style={{ padding: '1.5rem 1.5rem 0' }}>
-              <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Paramètres d&apos;attribution</h3>
-            </div>
-            <div style={{ padding: '1.5rem' }} className="space-y-6">
+      {/* Onglet Paramètres */}
+      {activeTab === 'settings' && (
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Paramètres d&apos;attribution</h3>
+          </div>
+          <div style={{ padding: '1.5rem' }} className="space-y-6">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-medium text-blue-900 mb-2">Modèles d&apos;attribution</h4>
                 <p className="text-sm text-blue-800 mb-4">
@@ -447,8 +451,7 @@ export default function AdminMarketingPage() {
               </div>
             </div>
           </div>
-        </TabsContent>
-      </Tabs>
+        )}
     </div>
   );
 }

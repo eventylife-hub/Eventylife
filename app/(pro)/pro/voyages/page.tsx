@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { Plus, MapPin, Users, Clock, Grid, List, AlertCircle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { formatDate } from '@/lib/utils';
 const TABS = ['Brouillons', 'En révision', 'Publiés', 'Terminés', 'Annulés'];
 const STATUS_MAP: Record<string, string> = {
@@ -193,9 +192,9 @@ export default function TravelsPage() {
         {/* Erreur */}
         {error && (
           <div style={{ marginBottom: '1.5rem' }}>
-            <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)', marginTop: '0.25rem', flexShrink: 0 }} />
-              <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
+            <div style={{ padding: '1rem', background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '0.5rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }} role="alert">
+              <AlertCircle className="h-4 w-4" style={{ color: '#991B1B', marginTop: '0.25rem', flexShrink: 0 }} />
+              <p style={{ color: '#991B1B', margin: 0 }}>{error}</p>
             </div>
             <div style={{ marginTop: '1rem' }}>
               <button type="button"

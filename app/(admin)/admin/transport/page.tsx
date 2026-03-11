@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { StatsCard } from '@/components/admin/stats-card';
 import { Download, Bus, Plane, Package, AlertCircle } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';

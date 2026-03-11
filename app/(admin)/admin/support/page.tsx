@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ExportCta } from '@/components/admin/export-cta';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate } from '@/lib/utils';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 interface SupportTicket {
@@ -40,6 +39,7 @@ export default function SupportPage() {
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState('open');
   const [ticketCounts, setTicketCounts] = useState<Record<string, number>>({});
+  const [activeTab, setActiveTab] = useState('open');
 
   const statuses = [
     { value: 'open', label: 'Ouvert', color: 'admin-badge admin-badge-info' },
@@ -201,22 +201,29 @@ export default function SupportPage() {
       {/* Onglets */}
       <div className="admin-panel admin-fade-in delay-2">
         <div className="admin-panel-body p-6">
-          <Tabs value={statusFilter} onValueChange={setStatusFilter}>
-            <TabsList className="mb-6">
-              {statuses.map((status) => (
-                <TabsTrigger key={status.value} value={status.value}>
-                  {status.label}
-                  {ticketCounts[status.value] !== undefined && (
-                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-gray-200 text-gray-700">
-                      {ticketCounts[status.value] || 0}
-                    </span>
-                  )}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
+          <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
             {statuses.map((status) => (
-              <TabsContent key={status.value} value={status.value}>
+              <button
+                key={status.value}
+                onClick={() => {
+                  setActiveTab(status.value);
+                  setStatusFilter(status.value);
+                }}
+                style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === status.value ? 'white' : 'transparent', color: activeTab === status.value ? '#1A1A2E' : '#64748B', boxShadow: activeTab === status.value ? '0 1px 3px rgba(0,0,0,0.1)' : 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                {status.label}
+                {ticketCounts[status.value] !== undefined && (
+                  <span style={{ marginLeft: '0.5rem', padding: '0.125rem 0.5rem', borderRadius: '999px', fontSize: '0.75rem', backgroundColor: '#E5E0D8', color: '#4A5568' }}>
+                    {ticketCounts[status.value] || 0}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          {statuses.map((status) => (
+            activeTab === status.value && (
+              <div key={status.value}>
                 <DataTable
                   columns={columns}
                   data={tickets}
@@ -231,9 +238,9 @@ export default function SupportPage() {
                     },
                   ]}
                 />
-              </TabsContent>
-            ))}
-          </Tabs>
+              </div>
+            )
+          ))}
         </div>
       </div>
     </div>
