@@ -2,14 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Assurance | Mon Espace Eventy',
-  description: 'Gérez vos assurances voyage',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

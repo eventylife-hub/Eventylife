@@ -1,13 +1,6 @@
 'use client';
 
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Blog Voyage | Eventy Life',
-  description:
-    'Conseils voyage, inspirations et actualites Eventy Life. Decouvrez nos guides de voyage en groupe.',
-};
 
 const articles = [
   {

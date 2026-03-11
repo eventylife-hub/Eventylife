@@ -4,14 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Download, Wallet, TrendingUp, AlertCircle, RefreshCw, CreditCard, RotateCcw, Settings, FileText, Zap } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Finance | Admin Eventy',
-  description: 'Tableau de bord financier et comptabilité',
-};
-
 /**
  * PATCH LOT 8 — G1 : Page Finance corrigée
  *

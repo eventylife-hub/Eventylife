@@ -7,14 +7,6 @@ import { CheckCircle2, Clock, BookOpen, Award, AlertCircle, RotateCcw } from 'lu
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Formation | Eventy Pro',
-  description: 'Modules de formation partenaire',
-};
-
 export default function FormationPage() {
   const { formationModules, formationProgress, fetchFormationModules, fetchFormationProgress } =
     useProStore();

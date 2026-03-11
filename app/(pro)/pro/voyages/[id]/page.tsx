@@ -8,13 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Mon Voyage | Eventy Pro',
-  description: 'Détail de votre voyage',
-};
-
   BarChart3,
   Users,
   DollarSign,

@@ -3,13 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Inscription | Eventy Life',
-  description: 'Créez votre compte Eventy Life et partez en voyage',
-};
-
   Briefcase,
   User,
   Mail,

@@ -1,13 +1,6 @@
 'use client';
 
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Devenir Partenaire | Eventy Life',
-  description:
-    'Rejoignez le reseau de partenaires Eventy Life. Hotels, restaurants, activites : developpez votre business avec nous.',
-};
 
 const avantages = [
   {

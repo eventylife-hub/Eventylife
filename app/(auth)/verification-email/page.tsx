@@ -6,14 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { apiClient } from '@/lib/api-client';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Vérification email | Eventy Life',
-  description: 'Vérifiez votre adresse email',
-};
-
 /**
  * Page de vérification d'email
  * Traite le token depuis les params d'URL

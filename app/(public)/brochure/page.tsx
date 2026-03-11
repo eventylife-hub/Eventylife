@@ -1,13 +1,6 @@
 'use client';
 
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Brochure Voyages | Eventy Life',
-  description:
-    'Telechargez notre brochure de voyages en groupe. Decouvrez toutes nos destinations et formules.',
-};
 
 const brochures = [
   {

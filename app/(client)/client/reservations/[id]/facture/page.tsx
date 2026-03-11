@@ -3,14 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Facture | Eventy Life',
-  description: 'Votre facture de réservation',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

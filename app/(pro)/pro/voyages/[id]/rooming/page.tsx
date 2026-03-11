@@ -6,14 +6,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { RoomingTable } from '@/components/rooming/rooming-table';
 import { Download, AlertCircle } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Rooming | Eventy Pro',
-  description: 'Attribution des chambres',
-};
-
 interface RoomingStats {
   totalRooms?: number;
   occupiedRooms?: number;

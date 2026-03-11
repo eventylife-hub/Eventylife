@@ -11,14 +11,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TrendingUp, Users, Target, DollarSign, CheckCircle, XCircle, Pause, AlertCircle, RefreshCw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Marketing | Admin Eventy',
-  description: 'Campagnes marketing et statistiques',
-};
-
 interface Campaign {
   id: string;
   name: string;

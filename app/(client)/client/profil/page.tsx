@@ -1,14 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Mon Profil | Eventy Life',
-  description: 'Gérez votre profil et vos préférences',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

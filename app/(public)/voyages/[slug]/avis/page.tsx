@@ -4,14 +4,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Avis Voyage | Eventy Life',
-  description: 'Avis et retours des voyageurs',
-};
-
 interface Review {
   id: string;
   userId: string;

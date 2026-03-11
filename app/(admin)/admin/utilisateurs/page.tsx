@@ -4,14 +4,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Search, RefreshCw, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Utilisateurs | Admin Eventy',
-  description: 'Gestion des comptes utilisateurs',
-};
-
 interface User {
   id: string;
   email: string;

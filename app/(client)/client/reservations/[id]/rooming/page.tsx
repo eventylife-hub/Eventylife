@@ -14,14 +14,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Chambres | Eventy Life',
-  description: 'Attribution de votre chambre',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

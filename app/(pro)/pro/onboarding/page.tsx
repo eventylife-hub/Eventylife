@@ -5,14 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useProStore } from '@/lib/stores/pro-store';
 import { ChevronRight, CheckCircle2, Clock, Shield, FileText, AlertCircle } from 'lucide-react';
 import { FileUpload } from '@/components/uploads/file-upload';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Onboarding | Eventy Pro',
-  description: 'Bienvenue dans l\'espace partenaire Eventy',
-};
-
 const STEPS = [
   { number: 1, label: 'Profil', description: 'Informations personnelles' },
   { number: 2, label: 'Légal', description: 'Informations légales' },

@@ -2,14 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDateTime, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Paiements | Mon Espace Eventy',
-  description: 'Historique et suivi de vos paiements',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

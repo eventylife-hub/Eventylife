@@ -3,14 +3,6 @@
 import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Copy, QrCode, TrendingUp } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Vendre | Eventy Pro',
-  description: 'Vendez des voyages Eventy',
-};
-
 interface Trip {
   id: string;
   name: string;

@@ -17,14 +17,6 @@ import {
   Briefcase,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Équipe | Eventy Pro',
-  description: 'Gestion de l\'équipe du voyage',
-};
-
 /**
  * Page: Pro Voyage Équipe (/pro/voyages/[id]/equipe)
  * 

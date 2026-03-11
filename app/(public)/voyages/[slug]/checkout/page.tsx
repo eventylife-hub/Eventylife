@@ -32,14 +32,6 @@ import { PriceSummary } from '@/components/checkout/price-summary';
 import { HoldTimer } from '@/components/checkout/hold-timer';
 import { ROUTES } from '@/lib/constants';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Réserver | Eventy Life',
-  description: 'Réservez ce voyage',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

@@ -4,14 +4,6 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Download, ChevronLeft, FileText } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Relevé | Eventy Pro',
-  description: 'Relevé détaillé de vos revenus',
-};
-
 interface StatementTrip {
   tripName: string;
   startDate: string;

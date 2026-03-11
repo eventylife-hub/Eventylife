@@ -9,14 +9,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import { DietaryForm } from '@/components/restauration/dietary-form';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Préférences | Eventy Life',
-  description: 'Vos préférences pour ce voyage',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

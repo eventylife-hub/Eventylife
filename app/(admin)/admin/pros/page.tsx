@@ -5,14 +5,6 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ApprovalModal } from '@/components/admin/approval-modal';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Partenaires Pro | Admin Eventy',
-  description: 'Gestion des comptes partenaires professionnels',
-};
-
 interface ProProfile {
   id: string;
   firstName: string;

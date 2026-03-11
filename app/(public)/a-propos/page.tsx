@@ -9,14 +9,6 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/lib/constants';
 import Link from 'next/link';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'À Propos | Eventy Life',
-  description: 'Découvrez l\'histoire et la mission d\'Eventy Life',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

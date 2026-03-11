@@ -4,14 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Mon Espace | Eventy Life',
-  description: 'Votre espace personnel Eventy Life',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

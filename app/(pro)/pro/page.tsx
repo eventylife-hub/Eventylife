@@ -5,14 +5,6 @@ import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { BarChart, Users, TrendingUp, AlertCircle, RefreshCw, Calendar, DollarSign, Star } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Espace Pro | Eventy',
-  description: 'Tableau de bord partenaire professionnel',
-};
-
 const SUN = 'var(--pro-sun)';
 const OCEAN = 'var(--pro-ocean)';
 const DARK = '#0A1628';

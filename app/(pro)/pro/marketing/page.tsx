@@ -7,14 +7,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { CampaignCard } from '@/components/marketing/campaign-card';
 import { AlertCircle, Plus, TrendingUp } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Marketing | Eventy Pro',
-  description: 'Outils marketing et campagnes',
-};
-
 // Interface pour le dashboard marketing
 interface MarketingDashboard {
   stats?: {

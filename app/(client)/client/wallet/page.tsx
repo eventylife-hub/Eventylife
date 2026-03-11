@@ -9,14 +9,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Portefeuille | Mon Espace Eventy',
-  description: 'Votre portefeuille et avoirs Eventy',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

@@ -9,14 +9,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Support | Mon Espace Eventy',
-  description: 'Contactez notre équipe de support',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

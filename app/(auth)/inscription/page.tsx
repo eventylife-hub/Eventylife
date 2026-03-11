@@ -7,14 +7,6 @@ import { ZodError } from 'zod';
 import { apiClient } from '@/lib/api-client';
 import { RegisterResponse } from '@/types/api';
 import { registerSchema, zodErrorsToRecord } from '@/lib/validations/auth';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Inscription | Eventy Life',
-  description: 'Créez votre compte Eventy Life et partez en voyage',
-};
-
 /**
  * Page d'inscription - Eventy v2 Design System
  * Formulaire complet: prénom, nom, email, téléphone, mot de passe

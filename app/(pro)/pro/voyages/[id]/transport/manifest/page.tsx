@@ -4,14 +4,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Download, AlertCircle } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Manifeste | Eventy Pro',
-  description: 'Manifeste passagers',
-};
-
 /**
  * Page Manifest Passagers - Tableau des passagers par arrêt
  *

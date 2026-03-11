@@ -3,14 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { formatDate } from '@/lib/utils';
 import { AlertCircle, AlertTriangle, Info, CheckCircle, XCircle, Clock, Filter, X } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Alertes | Admin Eventy',
-  description: 'Gestion des alertes système et notifications critiques',
-};
-
 interface Alert {
   id: string;
   level: 'CRITIQUE' | 'WARNING' | 'INFO';

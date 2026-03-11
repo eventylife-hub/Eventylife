@@ -7,13 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate } from '@/lib/utils';
 import {
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Réservations Voyage | Eventy Pro',
-  description: 'Réservations de ce voyage',
-};
-
   Download,
   Search,
   Filter,

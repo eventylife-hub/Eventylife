@@ -6,14 +6,6 @@ import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Download, TrendingUp, FileText } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Revenus | Eventy Pro',
-  description: 'Détail de vos revenus et commissions',
-};
-
 interface RevenueSummary {
   totalEarned: number;
   pendingAmount: number;

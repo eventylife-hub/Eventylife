@@ -19,14 +19,6 @@ import {
 } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import Link from 'next/link';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Détail Voyage | Admin Eventy',
-  description: 'Vue détaillée d\'un voyage',
-};
-
 interface TravelDetail {
   id: string;
   title: string;

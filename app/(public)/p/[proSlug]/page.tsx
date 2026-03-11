@@ -17,14 +17,6 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/lib/stores/ui-store';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Partenaire | Eventy Life',
-  description: 'Page partenaire Eventy Life',
-};
-
 interface Travel {
   id: string;
   title: string;

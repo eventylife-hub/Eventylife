@@ -3,14 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Détail Annulation | Admin Eventy',
-  description: 'Détail d\'une demande d\'annulation',
-};
-
 interface CancellationDetail {
   id: string;
   bookingRef: string;

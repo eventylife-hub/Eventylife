@@ -3,14 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { AlertCircle, Loader, CheckCircle2, ArrowLeft } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Mot de passe oublié | Eventy Pro',
-  description: 'Réinitialisez votre mot de passe pro',
-};
-
 export default function ProForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);

@@ -8,14 +8,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Mes Voyages | Eventy Pro',
-  description: 'Gestion de vos voyages',
-};
-
 const TABS = ['Brouillons', 'En révision', 'Publiés', 'Terminés', 'Annulés'];
 const STATUS_MAP: Record<string, string> = {
   'Brouillons': 'DRAFT',

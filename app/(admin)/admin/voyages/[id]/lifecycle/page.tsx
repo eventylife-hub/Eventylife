@@ -5,14 +5,6 @@ import { useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Cycle de Vie | Admin Eventy',
-  description: 'Suivi du cycle de vie du voyage',
-};
-
 interface Travel {
   id: string;
   title: string;

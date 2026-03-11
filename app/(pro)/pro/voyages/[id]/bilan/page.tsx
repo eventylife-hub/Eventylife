@@ -4,14 +4,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice } from '@/lib/utils';
 import { CheckCircle, XCircle, X } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Bilan | Eventy Pro',
-  description: 'Bilan financier du voyage',
-};
-
 /**
  * Page Pro - Bilan du voyage post-voyage
  * Résumé financier, stats, avis, actions

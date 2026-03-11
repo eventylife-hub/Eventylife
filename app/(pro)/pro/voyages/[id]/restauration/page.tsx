@@ -8,14 +8,6 @@ import { MealPlanEditor } from '@/components/restauration/meal-plan-editor';
 import { RestaurantCard } from '@/components/restauration/restaurant-card';
 import { AlertCircle, Loader2, FileText } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Restauration | Eventy Pro',
-  description: 'Gestion de la restauration',
-};
-
 interface MealPlan {
   [key: string]: Record<string, unknown>;
 }

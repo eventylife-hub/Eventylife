@@ -5,14 +5,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, MapPin, Save, Loader, AlertCircle, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Nouveau Point d\'Arrêt | Eventy Pro',
-  description: 'Créez un nouveau point d\'arrêt',
-};
-
 interface BusStopForm {
   publicName: string;
   internalName: string;

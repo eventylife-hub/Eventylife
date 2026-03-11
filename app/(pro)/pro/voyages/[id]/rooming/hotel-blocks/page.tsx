@@ -5,14 +5,6 @@ import { useParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { HotelBlockCard } from '@/components/rooming/hotel-block-card';
 import { AlertCircle } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Blocs Hôtel | Eventy Pro',
-  description: 'Gestion des blocs hôteliers',
-};
-
 /**
  * Page Gestion Blocs Hôtel - Négociation prix et disponibilités
  *

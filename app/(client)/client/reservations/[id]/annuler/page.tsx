@@ -3,14 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Annulation | Eventy Life',
-  description: 'Demande d\'annulation de réservation',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

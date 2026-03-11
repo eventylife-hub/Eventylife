@@ -8,14 +8,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { ZodError } from 'zod';
 import { apiClient } from '@/lib/api-client';
 import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Connexion | Eventy Life',
-  description: 'Connectez-vous à votre espace Eventy Life',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

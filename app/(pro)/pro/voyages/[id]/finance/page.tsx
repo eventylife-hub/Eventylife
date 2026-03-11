@@ -9,14 +9,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { FinanceSummary } from '@/components/finance/finance-summary';
 import { CostTable } from '@/components/finance/cost-table';
 import { Download } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Finance Voyage | Eventy Pro',
-  description: 'Détail financier du voyage',
-};
-
 /**
  * Page Finance par Voyage - Détails financiers d'un voyage
  *

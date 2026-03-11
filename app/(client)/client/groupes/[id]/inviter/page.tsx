@@ -9,14 +9,6 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Inviter | Eventy Life',
-  description: 'Invitez des amis à rejoindre votre groupe',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

@@ -2,14 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Documents | Mon Espace Eventy',
-  description: 'Vos documents de voyage',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

@@ -10,14 +10,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'FAQ | Eventy Life',
-  description: 'Questions fréquentes sur nos voyages de groupe',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',

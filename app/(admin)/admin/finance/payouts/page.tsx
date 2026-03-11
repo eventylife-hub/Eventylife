@@ -4,14 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, AlertCircle, RefreshCw, CreditCard, CheckCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Virements | Admin Eventy',
-  description: 'Gestion des virements aux partenaires',
-};
-
 /**
  * Page Versements & PayRun
  * Gestion des versements aux professionnels

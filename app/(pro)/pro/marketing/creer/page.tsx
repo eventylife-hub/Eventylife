@@ -6,14 +6,6 @@ import { useRouter } from 'next/navigation';
 // shadcn component imports removed - using pro-panel and pro-btn-* classes
 import { AlertCircle, Loader2, ChevronRight } from 'lucide-react';
 import { CampaignWizard } from '@/components/marketing/campaign-wizard';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Créer Campagne | Eventy Pro',
-  description: 'Lancez une nouvelle campagne marketing',
-};
-
 // Interface pour les données de création de campagne
 interface CreateCampaignData {
   title: string;

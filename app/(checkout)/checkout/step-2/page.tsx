@@ -18,14 +18,6 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { formatPrice } from '@/lib/utils';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Options | Eventy Life',
-  description: 'Choisissez vos options de voyage',
-};
-
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
