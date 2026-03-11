@@ -286,28 +286,63 @@ function VoyagesContent() {
 
 export default function VoyagesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <Breadcrumb
-        items={[
-          { name: 'Accueil', href: '/' },
-          { name: 'Nos voyages', href: '/voyages' },
-        ]}
-      />
-      <div className="mb-8">
-        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
-          Explorer
-        </span>
-        <h1 className="font-display text-3xl sm:text-4xl font-bold mt-2" style={{ color: C.navy }}>
-          Nos voyages
-        </h1>
-        <p className="text-base mt-2" style={{ color: C.muted }}>
-          Découvrez notre sélection de voyages en groupe avec accompagnement humain
-        </p>
+    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
+      {/* Hero V4 */}
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+          color: 'white',
+          padding: '5rem 1rem 4rem',
+        }}
+      >
+        <div className="mx-auto max-w-5xl text-center">
+          <p
+            className="mb-4"
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+            }}
+          >
+            Explorer
+          </p>
+          <h1
+            className="text-3xl sm:text-5xl mb-4"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Nos <span style={{ color: 'var(--terra, #C75B39)' }}>voyages</span>
+          </h1>
+          <p
+            className="mx-auto"
+            style={{
+              fontSize: '1.125rem',
+              color: 'rgba(255,255,255,0.75)',
+              maxWidth: '42rem',
+            }}
+          >
+            Découvrez notre sélection de voyages en groupe avec accompagnement
+            humain porte-à-porte.
+          </p>
+        </div>
       </div>
 
-      <Suspense fallback={<SkeletonGrid columns={2} count={4} />}>
-        <VoyagesContent />
-      </Suspense>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'Nos voyages', href: '/voyages' },
+          ]}
+        />
+
+        <Suspense fallback={<SkeletonGrid columns={2} count={4} />}>
+          <VoyagesContent />
+        </Suspense>
+      </div>
     </div>
   );
 }
