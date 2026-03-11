@@ -14,6 +14,13 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Réservation | Eventy Life',
+  description: 'Commencez votre réservation de voyage',
+};
 
 const C = {
   navy: '#1A1A2E',

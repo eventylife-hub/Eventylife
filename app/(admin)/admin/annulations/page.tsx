@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { ExportCta } from '@/components/admin/export-cta';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Annulations | Admin Eventy',
+  description: 'Suivi et gestion des demandes d\'annulation',
+};
 
 interface Cancellation {
   id: string;

@@ -6,6 +6,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { StatsCard } from '@/components/admin/stats-card';
 import { Download, Bus, Plane, Package, AlertCircle } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Transport | Admin Eventy',
+  description: 'Gestion des transports et logistique',
+};
 
 interface TransportTrip {
   id: string;

@@ -2,6 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Administration | Eventy',
+  description: 'Back-office d\'administration Eventy',
+};
 
 /* ────────────────────────────── Types ────────────────────────────── */
 interface DashboardStats {

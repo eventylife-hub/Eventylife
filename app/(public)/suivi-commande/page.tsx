@@ -2,6 +2,13 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Suivi Commande | Eventy Life',
+  description: 'Suivez l\'état de votre réservation',
+};
 
 const C = {
   navy: '#1A1A2E',

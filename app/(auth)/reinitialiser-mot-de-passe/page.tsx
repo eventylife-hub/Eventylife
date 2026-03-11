@@ -8,6 +8,13 @@ import Link from 'next/link';
 import { apiClient } from '@/lib/api-client';
 import { resetPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 import { ZodError } from 'zod';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Réinitialiser le mot de passe | Eventy Life',
+  description: 'Définissez un nouveau mot de passe',
+};
 
 /**
  * Page de réinitialisation du mot de passe

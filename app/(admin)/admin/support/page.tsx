@@ -6,6 +6,13 @@ import { ExportCta } from '@/components/admin/export-cta';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate } from '@/lib/utils';
 import { AlertCircle, RefreshCw } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Support | Admin Eventy',
+  description: 'Gestion des tickets de support client',
+};
 
 interface SupportTicket {
   id: string;

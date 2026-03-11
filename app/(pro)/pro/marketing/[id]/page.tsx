@@ -7,6 +7,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { MetricsChart } from '@/components/marketing/metrics-chart';
 import { AlertCircle, Loader2, Copy, Trash2 } from 'lucide-react';
 import { formatDate, formatPrice } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Campagne | Eventy Pro',
+  description: 'Détail de votre campagne marketing',
+};
 
 // Interface pour une campagne marketing
 interface Campaign {

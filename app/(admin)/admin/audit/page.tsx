@@ -4,6 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download } from 'lucide-react';
 import { formatDateTime } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Journal d\'Audit | Admin Eventy',
+  description: 'Historique des actions et modifications système',
+};
 
 interface AuditLog {
   id: string;

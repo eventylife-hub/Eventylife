@@ -10,6 +10,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Créer un Groupe | Eventy Life',
+  description: 'Créez un groupe de voyage',
+};
 
 const C = {
   navy: '#1A1A2E',

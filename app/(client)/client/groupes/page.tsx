@@ -3,6 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Mes Groupes | Eventy Life',
+  description: 'Gérez vos groupes de voyage',
+};
 
 const C = {
   navy: '#1A1A2E',

@@ -16,6 +16,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Départs | Eventy Life',
+  description: 'Voyages au départ de votre ville',
+};
 
 interface Travel {
   id: string;

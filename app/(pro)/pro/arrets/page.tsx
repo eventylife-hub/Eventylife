@@ -7,6 +7,13 @@ import { Plus, MapPin, Image as ImageIcon, CheckCircle2, Clock, AlertCircle, Rot
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Points d\'Arrêt | Eventy Pro',
+  description: 'Gestion des points d\'arrêt',
+};
 
 const STATUS_COLORS: Record<string, string> = {
   DRAFT: 'bg-slate-100 text-slate-800',

@@ -15,6 +15,13 @@ import { Button } from '@/components/ui/button';
 import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Voyageurs | Eventy Life',
+  description: 'Informations des voyageurs',
+};
 
 const C = {
   navy: '#1A1A2E',

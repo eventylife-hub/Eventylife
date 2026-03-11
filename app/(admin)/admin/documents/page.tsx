@@ -12,6 +12,13 @@ import {
   Eye,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Documents | Admin Eventy',
+  description: 'Gestion des documents et fichiers',
+};
 
 interface AdminDocument {
   id: string;

@@ -4,6 +4,13 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useNotificationStore } from '@/lib/stores/notification-store';
 import { NotificationItem } from '@/components/notifications/notification-item';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Notifications | Mon Espace Eventy',
+  description: 'Vos notifications et alertes',
+};
 
 const C = {
   navy: '#1A1A2E',

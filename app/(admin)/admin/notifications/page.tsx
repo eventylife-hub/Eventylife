@@ -15,6 +15,13 @@ import {
   XCircle as XCircleIcon
 } from 'lucide-react';
 import { formatDate, formatDateTime } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Notifications | Admin Eventy',
+  description: 'Centre de notifications et alertes',
+};
 
 interface NotificationTemplate {
   id: string;

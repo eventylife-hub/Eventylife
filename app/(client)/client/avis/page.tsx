@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Mes Avis | Mon Espace Eventy',
+  description: 'Vos avis et retours d\'expérience',
+};
 
 const C = {
   navy: '#1A1A2E',

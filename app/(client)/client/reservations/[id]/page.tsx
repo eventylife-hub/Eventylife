@@ -4,6 +4,13 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Ma Réservation | Eventy Life',
+  description: 'Détail de votre réservation',
+};
 
 const C = {
   navy: '#1A1A2E',

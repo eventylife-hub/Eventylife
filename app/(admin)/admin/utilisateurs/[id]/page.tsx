@@ -5,6 +5,13 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Détail Utilisateur | Admin Eventy',
+  description: 'Profil et historique d\'un utilisateur',
+};
 
 interface UserDetail {
   id: string;

@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { ZodError } from 'zod';
 import { apiClient } from '@/lib/api-client';
 import { forgotPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Mot de passe oublié | Eventy Life',
+  description: 'Réinitialisez votre mot de passe Eventy Life',
+};
 
 /**
  * Page de réinitialisation de mot de passe

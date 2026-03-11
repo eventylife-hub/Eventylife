@@ -7,6 +7,13 @@ import { ExportCta } from '@/components/admin/export-cta';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDate, formatPrice } from '@/lib/utils';
 import { Search, RefreshCw } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Voyages | Admin Eventy',
+  description: 'Liste et gestion de tous les voyages',
+};
 
 interface Travel {
   id: string;

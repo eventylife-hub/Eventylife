@@ -5,6 +5,13 @@ import { useRouter } from 'next/navigation';
 import { ChevronRight, ChevronLeft, CheckCircle2, AlertCircle, Save, Plus, Trash2, Image, MapPin, Calendar } from 'lucide-react';
 import { FileUpload } from '@/components/uploads/file-upload';
 import { formatPrice } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Nouveau Voyage | Eventy Pro',
+  description: 'Créez un nouveau voyage',
+};
 
 // ============================================================================
 // TYPES & INTERFACES

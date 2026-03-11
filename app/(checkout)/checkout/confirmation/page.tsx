@@ -15,6 +15,13 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Confirmation | Eventy Life',
+  description: 'Confirmation de votre réservation',
+};
 
 const C = {
   navy: '#1A1A2E',

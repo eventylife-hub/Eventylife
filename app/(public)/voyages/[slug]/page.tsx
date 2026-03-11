@@ -2,6 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Voyage | Eventy Life',
+  description: 'Détail du voyage',
+};
 
 /* ════════════════════════════════════════════
    PALETTE & DESIGN TOKENS

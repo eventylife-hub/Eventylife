@@ -7,6 +7,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { AlertCircle, Loader } from 'lucide-react'
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Connexion Pro | Eventy',
+  description: 'Connectez-vous à votre espace professionnel',
+};
 
 export default function ProLoginPage() {
   const router = useRouter()

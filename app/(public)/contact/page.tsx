@@ -9,6 +9,13 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/lib/stores/ui-store';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Contact | Eventy Life',
+  description: 'Contactez l\'équipe Eventy Life',
+};
 
 const C = {
   navy: '#1A1A2E',

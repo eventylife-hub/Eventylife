@@ -3,6 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Créer un Voyage | Admin Eventy',
+  description: 'Création d\'un nouveau voyage',
+};
 
 type TransportMode = 'BUS' | 'FLIGHT' | 'MIXED';
 type Step = 1 | 2 | 3 | 4 | 5;

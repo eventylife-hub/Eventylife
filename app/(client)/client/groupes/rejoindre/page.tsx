@@ -8,6 +8,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Rejoindre un Groupe | Eventy Life',
+  description: 'Rejoignez un groupe de voyage existant',
+};
 
 const C = {
   navy: '#1A1A2E',

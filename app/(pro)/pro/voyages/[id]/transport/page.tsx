@@ -6,6 +6,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { StopCard } from '@/components/transport/stop-card';
 import { StopMap } from '@/components/transport/stop-map';
 import { AlertCircle } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Transport | Eventy Pro',
+  description: 'Gestion du transport',
+};
 
 interface TransportConfig {
   mode: 'BUS' | 'FLIGHT' | 'MIXED';

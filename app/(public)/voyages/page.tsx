@@ -14,6 +14,13 @@ import { SkeletonGrid } from '@/components/ui/skeleton';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { apiClient } from '@/lib/api-client';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Tous les Voyages | Eventy Life',
+  description: 'Explorez tous nos voyages de groupe',
+};
 
 const C = {
   navy: '#1A1A2E',

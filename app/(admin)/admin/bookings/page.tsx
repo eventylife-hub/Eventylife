@@ -4,6 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { AlertCircle, Search, X, Clock, XCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Réservations | Admin Eventy',
+  description: 'Gestion centralisée des réservations',
+};
 
 interface Booking {
   id: string;

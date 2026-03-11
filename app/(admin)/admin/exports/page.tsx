@@ -4,6 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download, FileText, Users, Phone, Truck, Plane, FileStack } from 'lucide-react';
 import { formatDateTime } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Exports | Admin Eventy',
+  description: 'Export de données et rapports',
+};
 
 interface ExportLog {
   id: string;

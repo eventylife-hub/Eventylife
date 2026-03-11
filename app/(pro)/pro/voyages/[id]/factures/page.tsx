@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { CheckCircle, XCircle, X } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Factures | Eventy Pro',
+  description: 'Factures liées au voyage',
+};
 
 interface Travel {
   id: string;

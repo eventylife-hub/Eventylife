@@ -2,6 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { Save, CheckCircle, XCircle, X } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Paramètres | Admin Eventy',
+  description: 'Configuration système et préférences',
+};
 
 interface Setting {
   key: string;

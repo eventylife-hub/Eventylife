@@ -12,6 +12,13 @@ import {
 } from 'lucide-react';
 import { FileUpload } from '@/components/uploads/file-upload';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Documents | Eventy Pro',
+  description: 'Vos documents professionnels',
+};
 
 interface ProDocument {
   id: string;

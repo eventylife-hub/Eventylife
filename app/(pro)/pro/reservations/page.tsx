@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { Search, Filter, Users, Calendar, MapPin, ChevronRight, AlertCircle, RotateCcw } from 'lucide-react';
 // Button import removed - using native buttons with pro-btn-* classes
 import { Skeleton } from '@/components/ui/skeleton';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Réservations | Eventy Pro',
+  description: 'Suivi de vos réservations clients',
+};
 
 interface Reservation {
   id: string;

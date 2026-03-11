@@ -6,6 +6,13 @@ import { StatsCard } from '@/components/admin/stats-card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download, Home, Users, Sofa, AlertCircle, X } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Rooming | Admin Eventy',
+  description: 'Attribution et gestion des chambres',
+};
 
 interface Room {
   id: string;

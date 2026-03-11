@@ -7,6 +7,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { GroupCard } from '@/components/groups/group-card';
 import { Button } from '@/components/ui/button';
 import { AlertCircle, Plus } from 'lucide-react';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Groupes | Eventy Life',
+  description: 'Groupes disponibles pour ce voyage',
+};
 
 interface Group {
   id: string;

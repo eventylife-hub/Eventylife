@@ -3,6 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Donner un Avis | Eventy Life',
+  description: 'Partagez votre expérience de voyage',
+};
 
 const C = {
   navy: '#1A1A2E',

@@ -6,6 +6,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { FinanceSummary } from '@/components/finance/finance-summary';
 import { MarginChart } from '@/components/finance/margin-chart';
 import { formatPrice } from '@/lib/utils';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: 'Finance | Eventy Pro',
+  description: 'Suivi financier et revenus',
+};
 
 interface FinanceDashboard {
   totalRevenue?: number;
