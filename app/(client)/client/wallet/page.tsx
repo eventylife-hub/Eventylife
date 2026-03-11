@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Wallet Client — Portefeuille de crédits
  * Gestion du solde et de l'historique des transactions

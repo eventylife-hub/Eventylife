@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page Voyages par ville de départ
  * Listing filtré des voyages selon la ville de départ

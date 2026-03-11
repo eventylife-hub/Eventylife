@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * ÉTAPE 2: Détails des participants
  * Pour chaque personne dans chaque chambre:

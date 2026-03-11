@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * ÉTAPE 1: Sélection des chambres
  * Affiche les types de chambres disponibles

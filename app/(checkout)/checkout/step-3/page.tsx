@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * ÉTAPE 3: Paiement
  * Options de paiement:

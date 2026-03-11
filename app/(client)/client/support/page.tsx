@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page Support Client — Création et suivi de tickets
  * Endpoints : GET /api/support/tickets, POST /api/support/tickets

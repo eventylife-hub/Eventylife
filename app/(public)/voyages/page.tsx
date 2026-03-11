@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page listing des voyages avec filtres — Design Eventy v2
  */

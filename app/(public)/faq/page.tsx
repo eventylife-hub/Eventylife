@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page FAQ Publique
  * Page statique avec FAQ accordéon en français

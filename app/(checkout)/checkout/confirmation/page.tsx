@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page de confirmation
  * Affichée après paiement réussi

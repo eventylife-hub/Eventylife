@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page Pro Publique — page publique d'un pro
  * Accessible via QR code ou lien partagé

@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page de démarrage du checkout
  * Affiche le résumé du voyage et commence la réservation

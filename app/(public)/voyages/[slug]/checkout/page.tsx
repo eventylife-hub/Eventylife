@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Page Checkout - Tunnel de réservation multi-étapes
  * 
