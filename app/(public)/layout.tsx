@@ -13,5 +13,5 @@ export default function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <main id="main-content">{children}</main>;
 }

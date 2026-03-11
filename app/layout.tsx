@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { ClientProviders } from '@/components/layout/client-providers';
+import { SkipToContent } from '@/components/a11y/skip-to-content';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -74,6 +75,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${dmSans.variable} ${playfair.variable} ${dmSans.className}`}>
+        <SkipToContent />
         {children}
         <ClientProviders />
       </body>
