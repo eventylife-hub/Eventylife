@@ -8,16 +8,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { ZodError } from 'zod';
 import { apiClient } from '@/lib/api-client';
 import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  gold: '#D4A853',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
-
 /**
  * Page de connexion — Design Eventy v2
  */
@@ -89,9 +79,9 @@ export default function ConnexionPage() {
     width: '100%',
     padding: '12px 16px',
     borderRadius: '10px',
-    border: `1.5px solid ${hasError ? '#E63946' : C.border}`,
+    border: `1.5px solid ${hasError ? '#E63946' : '#E5E0D8'}`,
     background: '#fff',
-    color: C.navy,
+    color: 'var(--navy, #1A1A2E)',
     fontSize: '14px',
     outline: 'none',
     transition: 'border-color 0.2s, box-shadow 0.2s',
@@ -100,29 +90,29 @@ export default function ConnexionPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 py-12"
-      style={{ background: C.cream }}
+      style={{ background: 'var(--cream, #FAF7F2)' }}
     >
       <div
         className="w-full max-w-md p-8 sm:p-10 animate-fade-up"
         style={{
           background: '#fff',
           borderRadius: '20px',
-          border: `1.5px solid ${C.border}`,
+          border: '1.5px solid #E5E0D8',
           boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
         }}
       >
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-0">
-            <span className="font-display text-2xl font-bold" style={{ color: C.navy }}>Eventy</span>
-            <span className="font-display text-2xl font-bold" style={{ color: C.gold }}>.</span>
-            <span className="font-display text-2xl font-bold" style={{ color: C.navy }}>Life</span>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Eventy</span>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--gold, #D4A853)' }}>.</span>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Life</span>
           </Link>
         </div>
 
         {/* Titre */}
-        <h2 className="font-display text-xl font-bold mb-1" style={{ color: C.navy }}>Connexion</h2>
-        <p className="text-sm mb-6" style={{ color: C.muted }}>
+        <h2 className="font-display text-xl font-bold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>Connexion</h2>
+        <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
           Bienvenue ! Connectez-vous à votre compte
         </p>
 
@@ -139,7 +129,7 @@ export default function ConnexionPage() {
         {/* Formulaire */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1.5" style={{ color: C.navy }}>
+            <label htmlFor="email" className="block text-sm font-medium mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Email
             </label>
             <input
@@ -152,11 +142,11 @@ export default function ConnexionPage() {
               style={inputStyle(!!errors.email)}
               placeholder="votre@email.com"
               onFocus={(e) => {
-                if (!errors.email) e.currentTarget.style.borderColor = C.terra;
-                e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terra}15`;
+                if (!errors.email) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                e.currentTarget.style.boxShadow = `0 0 0 3px var(--terra, #C75B39)15`;
               }}
               onBlur={(e) => {
-                if (!errors.email) e.currentTarget.style.borderColor = C.border;
+                if (!errors.email) e.currentTarget.style.borderColor = '#E5E0D8';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
@@ -165,10 +155,10 @@ export default function ConnexionPage() {
 
           <div>
             <div className="flex justify-between items-center mb-1.5">
-              <label htmlFor="password" className="block text-sm font-medium" style={{ color: C.navy }}>
+              <label htmlFor="password" className="block text-sm font-medium" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Mot de passe
               </label>
-              <Link href="/mot-de-passe-oublie" className="text-xs font-medium" style={{ color: C.terra }}>
+              <Link href="/mot-de-passe-oublie" className="text-xs font-medium" style={{ color: 'var(--terra, #C75B39)' }}>
                 Oublié ?
               </Link>
             </div>
@@ -182,11 +172,11 @@ export default function ConnexionPage() {
               style={inputStyle(!!errors.password)}
               placeholder="••••••••"
               onFocus={(e) => {
-                if (!errors.password) e.currentTarget.style.borderColor = C.terra;
-                e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terra}15`;
+                if (!errors.password) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                e.currentTarget.style.boxShadow = `0 0 0 3px var(--terra, #C75B39)15`;
               }}
               onBlur={(e) => {
-                if (!errors.password) e.currentTarget.style.borderColor = C.border;
+                if (!errors.password) e.currentTarget.style.borderColor = '#E5E0D8';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
@@ -198,19 +188,19 @@ export default function ConnexionPage() {
             disabled={loading}
             className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200"
             style={{
-              background: loading ? C.muted : C.terra,
+              background: loading ? '#6B7280' : 'var(--terra, #C75B39)',
               color: '#fff',
               cursor: loading ? 'not-allowed' : 'pointer',
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                e.currentTarget.style.background = C.terraLight;
-                e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                e.currentTarget.style.background = C.terra;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)';
                 e.currentTarget.style.boxShadow = 'none';
               }
             }}
@@ -222,10 +212,10 @@ export default function ConnexionPage() {
         {/* Divider */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full" style={{ borderTop: `1px solid ${C.border}` }}></div>
+            <div className="w-full" style={{ borderTop: '1px solid #E5E0D8' }}></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-white" style={{ color: C.muted }}>Nouveau client ?</span>
+            <span className="px-3 bg-white" style={{ color: '#6B7280' }}>Nouveau client ?</span>
           </div>
         </div>
 
@@ -235,15 +225,15 @@ export default function ConnexionPage() {
           className="w-full py-3 rounded-xl font-semibold text-sm text-center block transition-all duration-200"
           style={{
             background: 'transparent',
-            color: C.navy,
-            border: `1.5px solid ${C.border}`,
+            color: 'var(--navy, #1A1A2E)',
+            border: '1.5px solid #E5E0D8',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = C.terra;
+            e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
             e.currentTarget.style.background = 'var(--terra-soft)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = C.border;
+            e.currentTarget.style.borderColor = '#E5E0D8';
             e.currentTarget.style.background = 'transparent';
           }}
         >
@@ -251,11 +241,11 @@ export default function ConnexionPage() {
         </Link>
 
         {/* Footer */}
-        <p className="text-center text-xs mt-6" style={{ color: C.muted }}>
+        <p className="text-center text-xs mt-6" style={{ color: '#6B7280' }}>
           En vous connectant, vous acceptez nos{' '}
-          <Link href="/cgv" style={{ color: C.terra }}>CGV</Link>{' '}
+          <Link href="/cgv" style={{ color: 'var(--terra, #C75B39)' }}>CGV</Link>{' '}
           et notre{' '}
-          <Link href="/politique-confidentialite" style={{ color: C.terra }}>politique de confidentialité</Link>
+          <Link href="/politique-confidentialite" style={{ color: 'var(--terra, #C75B39)' }}>politique de confidentialité</Link>
         </p>
       </div>
     </div>

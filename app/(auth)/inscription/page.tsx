@@ -17,20 +17,7 @@ export default function InscriptionPage() {
   const router = useRouter();
 
   // Eventy v2 Color System
-  const C = {
-    navy: '#1A1A2E',
-    cream: '#FAF7F2',
-    terra: '#C75B39',
-    terraLight: '#D97B5E',
-    gold: '#D4A853',
-    border: '#E5E0D8',
-    muted: '#6B7280',
-    white: '#FFFFFF',
-    error: 'var(--terra, #DC2626)',
-    errorBg: 'var(--terra-soft, #FEF2F2)',
-  };
-
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -112,7 +99,7 @@ export default function InscriptionPage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -126,7 +113,7 @@ export default function InscriptionPage() {
           maxWidth: '448px',
           backgroundColor: C.white,
           borderRadius: '20px',
-          border: `1.5px solid ${C.border}`,
+          border: '1.5px solid #E5E0D8',
           boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
           padding: '2rem',
         }}
@@ -142,9 +129,9 @@ export default function InscriptionPage() {
               fontFamily: 'Playfair Display, serif',
             }}
           >
-            <span style={{ color: C.navy }}>Eventy</span>
-            <span style={{ color: C.gold }}>.</span>
-            <span style={{ color: C.navy }}>Life</span>
+            <span style={{ color: 'var(--navy, #1A1A2E)' }}>Eventy</span>
+            <span style={{ color: 'var(--gold, #D4A853)' }}>.</span>
+            <span style={{ color: 'var(--navy, #1A1A2E)' }}>Life</span>
           </h1>
         </div>
 
@@ -153,7 +140,7 @@ export default function InscriptionPage() {
           style={{
             fontSize: '1.25rem',
             fontWeight: '600',
-            color: C.navy,
+            color: 'var(--navy, #1A1A2E)',
             marginBottom: '0.5rem',
           }}
         >
@@ -162,7 +149,7 @@ export default function InscriptionPage() {
         <p
           style={{
             fontSize: '0.875rem',
-            color: C.muted,
+            color: '#6B7280',
             marginBottom: '1.5rem',
           }}
         >
@@ -197,7 +184,7 @@ export default function InscriptionPage() {
                   display: 'block',
                   fontSize: '0.875rem',
                   fontWeight: '500',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                   marginBottom: '0.25rem',
                 }}
               >
@@ -214,20 +201,20 @@ export default function InscriptionPage() {
                   width: '100%',
                   padding: '0.75rem',
                   backgroundColor: C.white,
-                  border: `1.5px solid ${errors.firstName ? C.error : C.border}`,
+                  border: `1.5px solid ${errors.firstName ? C.error : '#E5E0D8'}`,
                   borderRadius: '10px',
                   fontSize: '0.875rem',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                   outline: 'none',
                   transition: 'border-color 0.2s',
                 }}
                 onFocus={(e) => {
                   if (!errors.firstName) {
-                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = errors.firstName ? C.error : C.border;
+                  e.currentTarget.style.borderColor = errors.firstName ? C.error : '#E5E0D8';
                 }}
               />
               {errors.firstName && (
@@ -243,7 +230,7 @@ export default function InscriptionPage() {
                   display: 'block',
                   fontSize: '0.875rem',
                   fontWeight: '500',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                   marginBottom: '0.25rem',
                 }}
               >
@@ -260,20 +247,20 @@ export default function InscriptionPage() {
                   width: '100%',
                   padding: '0.75rem',
                   backgroundColor: C.white,
-                  border: `1.5px solid ${errors.lastName ? C.error : C.border}`,
+                  border: `1.5px solid ${errors.lastName ? C.error : '#E5E0D8'}`,
                   borderRadius: '10px',
                   fontSize: '0.875rem',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                   outline: 'none',
                   transition: 'border-color 0.2s',
                 }}
                 onFocus={(e) => {
                   if (!errors.lastName) {
-                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = errors.lastName ? C.error : C.border;
+                  e.currentTarget.style.borderColor = errors.lastName ? C.error : '#E5E0D8';
                 }}
               />
               {errors.lastName && (
@@ -292,7 +279,7 @@ export default function InscriptionPage() {
                 display: 'block',
                 fontSize: '0.875rem',
                 fontWeight: '500',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.25rem',
               }}
             >
@@ -309,20 +296,20 @@ export default function InscriptionPage() {
                 width: '100%',
                 padding: '0.75rem 1rem',
                 backgroundColor: C.white,
-                border: `1.5px solid ${errors.email ? C.error : C.border}`,
+                border: `1.5px solid ${errors.email ? C.error : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 outline: 'none',
                 transition: 'border-color 0.2s',
               }}
               onFocus={(e) => {
                 if (!errors.email) {
-                  e.currentTarget.style.borderColor = C.terra;
+                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                 }
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.email ? C.error : C.border;
+                e.currentTarget.style.borderColor = errors.email ? C.error : '#E5E0D8';
               }}
             />
             {errors.email && (
@@ -340,7 +327,7 @@ export default function InscriptionPage() {
                 display: 'block',
                 fontSize: '0.875rem',
                 fontWeight: '500',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.25rem',
               }}
             >
@@ -357,18 +344,18 @@ export default function InscriptionPage() {
                 width: '100%',
                 padding: '0.75rem 1rem',
                 backgroundColor: C.white,
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 borderRadius: '10px',
                 fontSize: '0.875rem',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 outline: 'none',
                 transition: 'border-color 0.2s',
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.borderColor = '#E5E0D8';
               }}
             />
           </div>
@@ -381,7 +368,7 @@ export default function InscriptionPage() {
                 display: 'block',
                 fontSize: '0.875rem',
                 fontWeight: '500',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.25rem',
               }}
             >
@@ -396,19 +383,19 @@ export default function InscriptionPage() {
                 width: '100%',
                 padding: '0.75rem 1rem',
                 backgroundColor: C.white,
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 borderRadius: '10px',
                 fontSize: '0.875rem',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 outline: 'none',
                 transition: 'border-color 0.2s',
                 cursor: 'pointer',
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.borderColor = '#E5E0D8';
               }}
             >
               <option value="CLIENT">Client</option>
@@ -424,7 +411,7 @@ export default function InscriptionPage() {
                 display: 'block',
                 fontSize: '0.875rem',
                 fontWeight: '500',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.25rem',
               }}
             >
@@ -442,20 +429,20 @@ export default function InscriptionPage() {
                 width: '100%',
                 padding: '0.75rem 1rem',
                 backgroundColor: C.white,
-                border: `1.5px solid ${errors.password ? C.error : C.border}`,
+                border: `1.5px solid ${errors.password ? C.error : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 outline: 'none',
                 transition: 'border-color 0.2s',
               }}
               onFocus={(e) => {
                 if (!errors.password) {
-                  e.currentTarget.style.borderColor = C.terra;
+                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                 }
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.password ? C.error : C.border;
+                e.currentTarget.style.borderColor = errors.password ? C.error : '#E5E0D8';
               }}
             />
             {errors.password && (
@@ -473,7 +460,7 @@ export default function InscriptionPage() {
                 display: 'block',
                 fontSize: '0.875rem',
                 fontWeight: '500',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.25rem',
               }}
             >
@@ -491,20 +478,20 @@ export default function InscriptionPage() {
                 width: '100%',
                 padding: '0.75rem 1rem',
                 backgroundColor: C.white,
-                border: `1.5px solid ${errors.confirmPassword ? C.error : C.border}`,
+                border: `1.5px solid ${errors.confirmPassword ? C.error : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 outline: 'none',
                 transition: 'border-color 0.2s',
               }}
               onFocus={(e) => {
                 if (!errors.confirmPassword) {
-                  e.currentTarget.style.borderColor = C.terra;
+                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                 }
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.confirmPassword ? C.error : C.border;
+                e.currentTarget.style.borderColor = errors.confirmPassword ? C.error : '#E5E0D8';
               }}
             />
             {errors.confirmPassword && (
@@ -527,15 +514,15 @@ export default function InscriptionPage() {
                   width: '1rem',
                   height: '1rem',
                   cursor: 'pointer',
-                  accentColor: C.terra,
+                  accentColor: 'var(--terra, #C75B39)',
                 }}
               />
-              <span style={{ fontSize: '0.875rem', color: C.navy, lineHeight: '1.5' }}>
+              <span style={{ fontSize: '0.875rem', color: 'var(--navy, #1A1A2E)', lineHeight: '1.5' }}>
                 J'accepte les{' '}
                 <Link
                   href="/cgv"
                   style={{
-                    color: C.terra,
+                    color: 'var(--terra, #C75B39)',
                     textDecoration: 'underline',
                     fontWeight: '500',
                   }}
@@ -556,15 +543,15 @@ export default function InscriptionPage() {
                   width: '1rem',
                   height: '1rem',
                   cursor: 'pointer',
-                  accentColor: C.terra,
+                  accentColor: 'var(--terra, #C75B39)',
                 }}
               />
-              <span style={{ fontSize: '0.875rem', color: C.navy, lineHeight: '1.5' }}>
+              <span style={{ fontSize: '0.875rem', color: 'var(--navy, #1A1A2E)', lineHeight: '1.5' }}>
                 J'accepte la{' '}
                 <Link
                   href="/politique-confidentialite"
                   style={{
-                    color: C.terra,
+                    color: 'var(--terra, #C75B39)',
                     textDecoration: 'underline',
                     fontWeight: '500',
                   }}
@@ -585,7 +572,7 @@ export default function InscriptionPage() {
               width: '100%',
               padding: '0.75rem 1rem',
               marginTop: '0.5rem',
-              backgroundColor: submitButtonHover && !loading ? C.terraLight : C.terra,
+              backgroundColor: submitButtonHover && !loading ? 'var(--terra, #C75B39)'Light : 'var(--terra, #C75B39)',
               color: C.white,
               borderRadius: '10px',
               border: 'none',
@@ -601,12 +588,12 @@ export default function InscriptionPage() {
         </form>
 
         {/* Lien connexion */}
-        <p style={{ textAlign: 'center', fontSize: '0.875rem', color: C.muted, marginTop: '1.5rem' }}>
+        <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6B7280', marginTop: '1.5rem' }}>
           Déjà inscrit ?{' '}
           <Link
             href="/connexion"
             style={{
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               fontWeight: '600',
               textDecoration: 'none',
             }}
