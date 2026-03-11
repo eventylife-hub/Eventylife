@@ -65,6 +65,12 @@ export default function ProLayout({ children }: ProLayoutProps) {
       ? pathname === '/pro'
       : pathname === href || pathname.startsWith(href + '/');
 
+  // Pages sans sidebar (login, forgot-password)
+  const noSidebarPages = ['/pro/login', '/pro/forgot-password'];
+  if (noSidebarPages.some(p => pathname === p || pathname.startsWith(p + '/'))) {
+    return <div className={fraunces.variable}>{children}</div>;
+  }
+
   return (
     <div className={`${fraunces.variable} flex min-h-screen`} style={{ background: 'var(--pro-bg)' }}>
       {/* Skip to content — Accessibilité */}
