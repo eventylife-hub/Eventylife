@@ -8,6 +8,8 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
+  poweredByHeader: false,
+  compress: true,
   images: {
     remotePatterns: [
       {
@@ -23,6 +25,8 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 jours
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
