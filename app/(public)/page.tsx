@@ -88,8 +88,8 @@ export default function HomePage() {
             </p>
             <div className="hero-search">
               <input type="text" placeholder="Votre ville ou code postal…" id="hero-input" />
-              <button className="btn-loc"><LocSvg /> Localiser</button>
-              <button className="btn-go">Trouver →</button>
+              <button type="button" className="btn-loc"><LocSvg /> Localiser</button>
+              <button type="button" className="btn-go">Trouver →</button>
             </div>
             <div className="hero-tags">
               <Link href="/voyages?dest=maroc">🇲🇦 Maroc</Link>
@@ -146,7 +146,7 @@ export default function HomePage() {
                   <div className="tc-meta"><span>📅 15 – 22 mars</span><span>8 jours</span></div>
                   <div className="tc-foot">
                     <div className="tc-price"><small>à partir de</small><strong className="font-display">689<sup>€</sup></strong></div>
-                    <button className="btn-book">Réserver</button>
+                    <button type="button" className="btn-book">Réserver</button>
                   </div>
                 </div>
               </article>
@@ -168,7 +168,7 @@ export default function HomePage() {
                   <div className="tc-meta"><span>📅 5 – 12 avril</span><span>8 jours</span></div>
                   <div className="tc-foot">
                     <div className="tc-price"><small>à partir de</small><strong className="font-display">549<sup>€</sup></strong></div>
-                    <button className="btn-book">Réserver</button>
+                    <button type="button" className="btn-book">Réserver</button>
                   </div>
                 </div>
               </article>
@@ -190,7 +190,7 @@ export default function HomePage() {
                   <div className="tc-meta"><span>📅 20 – 27 avril</span><span>8 jours</span></div>
                   <div className="tc-foot">
                     <div className="tc-price"><small>à partir de</small><strong className="font-display">599<sup>€</sup></strong></div>
-                    <button className="btn-book">Réserver</button>
+                    <button type="button" className="btn-book">Réserver</button>
                   </div>
                 </div>
               </article>
@@ -212,7 +212,7 @@ export default function HomePage() {
                   <div className="tc-meta"><span>📅 10 – 18 mai</span><span>9 jours</span></div>
                   <div className="tc-foot">
                     <div className="tc-price"><small>à partir de</small><strong className="font-display">729<sup>€</sup></strong></div>
-                    <button className="btn-book">Réserver</button>
+                    <button type="button" className="btn-book">Réserver</button>
                   </div>
                 </div>
               </article>
