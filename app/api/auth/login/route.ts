@@ -78,8 +78,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Simuler un token JWT (mode démo)
-    const mockToken = `demo_${found.user.role.toLowerCase()}_${Date.now()}`;
+    // Générer un faux JWT décodable par le middleware (mode démo)
+    const now = Math.floor(Date.now() / 1000);
+    const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
+    const payload = Buffer.from(JSON.stringify({
+      sub: found.user.id,
+      email: found.user.email,
+      role: found.user.role,
+      iat: now,
+      exp: now + 60 * 15, // 15 minutes
+    })).toString('base64url');
+    const mockSignature = Buffer.from('demo-signature').toString('base64url');
+    const mockToken = `${header}.${payload}.${mockSignature}`;
 
     const response = NextResponse.json({
       user: found.user,
@@ -96,7 +106,18 @@ export async function POST(request: NextRequest) {
       maxAge: 60 * 15, // 15 minutes
     });
 
-    response.cookies.set('refresh_token', `refresh_${mockToken}`, {
+    // Refresh token (même format JWT, expiration 7j)
+    const refreshPayload = Buffer.from(JSON.stringify({
+      sub: found.user.id,
+      email: found.user.email,
+      role: found.user.role,
+      iat: now,
+      exp: now + 60 * 60 * 24 * 7,
+      type: 'refresh',
+    })).toString('base64url');
+    const refreshToken = `${header}.${refreshPayload}.${mockSignature}`;
+
+    response.cookies.set('refresh_token', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
