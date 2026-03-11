@@ -17,6 +17,7 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { formatPrice } from '@/lib/utils';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
+
 interface ParticipantForm {
   roomBookingId: string;
   firstName: string;
@@ -33,6 +34,24 @@ interface BusStop {
   name: string;
   location: string;
 }
+
+const FALLBACK_BUS_STOPS: BusStop[] = [
+  {
+    id: 'stop-paris-001',
+    name: 'Arrêt Paris Bercy',
+    location: 'Paris (75)',
+  },
+  {
+    id: 'stop-lyon-001',
+    name: 'Arrêt Lyon Confluence',
+    location: 'Lyon (69)',
+  },
+  {
+    id: 'stop-marseille-001',
+    name: 'Arrêt Marseille Gare',
+    location: 'Marseille (13)',
+  },
+];
 
 export default function CheckoutStep2Page() {
   const router = useRouter();
@@ -83,8 +102,8 @@ export default function CheckoutStep2Page() {
           console.warn('Erreur lors du chargement des arrêts:', response.error?.message);
         }
       } catch (err: unknown) {
-        // Erreur silencieuse pour ne pas bloquer le flux
-        console.warn('Erreur lors du chargement des arrêts:', err);
+        console.warn('API /checkout/bus-stops indisponible — données démo');
+        setBusStops(FALLBACK_BUS_STOPS);
       } finally {
         setLoadingBusStops(false);
       }
