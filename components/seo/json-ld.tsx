@@ -49,6 +49,19 @@ interface BlogPostingProps {
   baseUrl?: string;
 }
 
+interface ItemListProps {
+  name: string;
+  description: string;
+  items: Array<{
+    name: string;
+    url: string;
+    position: number;
+    image?: string;
+    description?: string;
+  }>;
+  baseUrl?: string;
+}
+
 interface TravelOfferProps {
   name: string;
   description: string;
@@ -287,6 +300,42 @@ export function BlogPostingJsonLd({
       name: 'Eventy Life',
       url: baseUrl,
     },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+/**
+ * JSON-LD ItemList — Listes de voyages, blog, etc.
+ * Aide Google à afficher des résultats enrichis (carrousel, liste)
+ */
+export function ItemListJsonLd({
+  name,
+  description,
+  items,
+  baseUrl = BASE_URL,
+}: ItemListProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    description,
+    numberOfItems: items.length,
+    itemListElement: items.map((item) => ({
+      '@type': 'ListItem',
+      position: item.position,
+      name: item.name,
+      url: item.url.startsWith('http') ? item.url : `${baseUrl}${item.url}`,
+      ...(item.image && {
+        image: item.image.startsWith('http') ? item.image : `${baseUrl}${item.image}`,
+      }),
+      ...(item.description && { description: item.description }),
+    })),
   };
 
   return (

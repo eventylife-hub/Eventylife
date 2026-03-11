@@ -129,15 +129,26 @@ export default function BlogArticlePage() {
     year: 'numeric',
   });
 
-  // Convertir le markdown basique en HTML
+  // XSS FIX: Échapper les entités HTML avant insertion dans le DOM
+  const escapeHtml = (text: string): string => {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  };
+
+  // Convertir le markdown basique en HTML (avec échappement XSS)
   const formatContent = (text: string) => {
     return text
       .split('\n\n')
       .map((block) => {
+        const escaped = escapeHtml(block);
         if (block.startsWith('## ')) {
-          return `<h2 style="color:#1A1A2E;font-size:1.5rem;font-weight:700;margin:2rem 0 0.75rem;font-family:Playfair Display,serif">${block.replace('## ', '')}</h2>`;
+          return `<h2 style="color:#1A1A2E;font-size:1.5rem;font-weight:700;margin:2rem 0 0.75rem;font-family:Playfair Display,serif">${escapeHtml(block.replace('## ', ''))}</h2>`;
         }
-        return `<p style="color:#374151;line-height:1.8;margin-bottom:1rem">${block}</p>`;
+        return `<p style="color:#374151;line-height:1.8;margin-bottom:1rem">${escaped}</p>`;
       })
       .join('');
   };

@@ -118,7 +118,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     <div className="flex min-h-screen" style={{ background: 'var(--cream, #FAF7F2)' }}>
       {/* Skip to content — Accessibilité */}
       <a
-        href="#client-main-content"
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-sm focus:font-medium"
         style={{ backgroundColor: 'var(--terra, #C75B39)' }}
       >
@@ -179,7 +179,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       )}
 
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto md:pt-0 pt-14" id="client-main-content" role="main" aria-label="Contenu espace client">
+      <main className="flex-1 overflow-y-auto md:pt-0 pt-14" id="main-content" role="main" aria-label="Contenu espace client">
         <div className="p-6 sm:p-8">
           <PortalErrorBoundary portal="client">
             {children}

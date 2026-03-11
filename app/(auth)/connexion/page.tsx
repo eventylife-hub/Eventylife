@@ -14,7 +14,9 @@ import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 export default function ConnexionPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect') || '/client/dashboard';
+  // SECURITY FIX: Validation du redirect pour empêcher les open redirects
+  const rawRedirect = searchParams.get('redirect') || '/client/dashboard';
+  const redirect = rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/client/dashboard';
 
   const [formData, setFormData] = useState({
     email: '',

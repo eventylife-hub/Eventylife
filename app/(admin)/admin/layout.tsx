@@ -160,7 +160,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </aside>
 
       {/* ═══ MAIN ═══ */}
-      <main className="admin-main" id="admin-main-content" role="main" aria-label="Contenu administration">
+      <main className="admin-main" id="main-content" role="main" aria-label="Contenu administration">
         <div className="admin-content">
           <PortalErrorBoundary portal="admin">
             {children}
