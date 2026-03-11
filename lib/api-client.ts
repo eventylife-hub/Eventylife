@@ -33,7 +33,7 @@ class ApiClient {
   /** Méthodes HTTP considérées comme mutantes (nécessitent le CSRF) */
   private static readonly MUTATING_METHODS = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 
-  constructor(baseUrl: string = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api')) {
+  constructor(baseUrl: string = (process.env.NEXT_PUBLIC_API_URL ?? '/api')) {
     this.baseUrl = baseUrl;
   }
 
