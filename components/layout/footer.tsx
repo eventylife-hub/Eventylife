@@ -9,18 +9,18 @@ import Link from 'next/link';
  */
 export function Footer() {
   return (
-    <footer style={{ background: '#1A1A2E', color: 'rgba(250,247,242,0.7)' }} className="mt-16" role="contentinfo" aria-label="Pied de page">
+    <footer style={{ background: 'var(--navy, #1A1A2E)', color: 'rgba(250,247,242,0.7)' }} className="mt-16" role="contentinfo" aria-label="Pied de page">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         {/* Top — Logo + Tagline */}
         <div className="mb-10">
           <div className="flex items-center gap-0 mb-3">
-            <span className="font-display text-2xl font-bold" style={{ color: '#FAF7F2' }}>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--cream, #FAF7F2)' }}>
               Eventy
             </span>
-            <span className="font-display text-2xl font-bold" style={{ color: '#D4A853' }}>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--gold, #D4A853)' }}>
               .
             </span>
-            <span className="font-display text-2xl font-bold" style={{ color: '#FAF7F2' }}>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--cream, #FAF7F2)' }}>
               Life
             </span>
           </div>
@@ -34,7 +34,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* À propos */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: '#D4A853' }}>
+            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: 'var(--gold, #D4A853)' }}>
               À propos
             </h3>
             <ul className="space-y-3">
@@ -63,7 +63,7 @@ export function Footer() {
 
           {/* Découvrir */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: '#D4A853' }}>
+            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: 'var(--gold, #D4A853)' }}>
               Découvrir
             </h3>
             <ul className="space-y-3">
@@ -73,13 +73,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/inscription" className="text-sm hover:text-white transition-colors duration-200">
-                  Devenir Pro
+                <Link href="/comment-ca-marche" className="text-sm hover:text-white transition-colors duration-200">
+                  Comment ça marche
+                </Link>
+              </li>
+              <li>
+                <Link href="/depart" className="text-sm hover:text-white transition-colors duration-200">
+                  Points de départ
                 </Link>
               </li>
               <li>
                 <Link href="/partenaires" className="text-sm hover:text-white transition-colors duration-200">
-                  Nos partenaires
+                  Devenir partenaire
                 </Link>
               </li>
               <li>
@@ -92,7 +97,7 @@ export function Footer() {
 
           {/* Aide */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: '#D4A853' }}>
+            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: 'var(--gold, #D4A853)' }}>
               Aide
             </h3>
             <ul className="space-y-3">
@@ -116,7 +121,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: '#D4A853' }}>
+            <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider" style={{ color: 'var(--gold, #D4A853)' }}>
               Contact
             </h3>
             <ul className="space-y-3">

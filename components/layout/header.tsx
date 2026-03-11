@@ -64,7 +64,7 @@ export function Header({ user }: HeaderProps) {
     <header
       className="sticky top-0 z-40 transition-shadow duration-300"
       style={{
-        background: '#1A1A2E',
+        background: 'var(--navy, #1A1A2E)',
         boxShadow: scrolled ? '0 4px 20px rgba(26,26,46,0.3)' : 'none',
       }}
       role="banner"
@@ -115,7 +115,7 @@ export function Header({ user }: HeaderProps) {
               Nos voyages
             </Link>
             <Link
-              href="/#how-it-works"
+              href="/comment-ca-marche"
               className="text-sm font-medium transition-colors duration-200"
               style={{ color: 'rgba(250,247,242,0.8)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
@@ -273,7 +273,7 @@ export function Header({ user }: HeaderProps) {
               Nos voyages
             </Link>
             <Link
-              href="/#how-it-works"
+              href="/comment-ca-marche"
               className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
               style={{ color: '#FAF7F2' }}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
