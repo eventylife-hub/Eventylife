@@ -7,18 +7,10 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
-
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  gold: '#D4A853',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
+import { BlogPostingJsonLd } from '@/components/seo/json-ld';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 interface BlogArticle {
   slug: string;
@@ -142,7 +134,7 @@ export default function BlogArticlePage() {
       .split('\n\n')
       .map((block) => {
         if (block.startsWith('## ')) {
-          return `<h2 style="color:${C.navy};font-size:1.5rem;font-weight:700;margin:2rem 0 0.75rem;font-family:Playfair,serif">${block.replace('## ', '')}</h2>`;
+          return `<h2 style="color:#1A1A2E;font-size:1.5rem;font-weight:700;margin:2rem 0 0.75rem;font-family:Playfair Display,serif">${block.replace('## ', '')}</h2>`;
         }
         return `<p style="color:#374151;line-height:1.8;margin-bottom:1rem">${block}</p>`;
       })
@@ -168,19 +160,19 @@ export default function BlogArticlePage() {
               fontSize: '0.75rem',
               fontWeight: 600,
               background: '#FDF6E8',
-              color: C.gold,
+              color: 'var(--gold, #D4A853)',
             }}
           >
             {article.category}
           </span>
-          <span style={{ color: C.muted, fontSize: '0.875rem' }}>
+          <span style={{ color: '#6B7280', fontSize: '0.875rem' }}>
             {article.readingTime} de lecture
           </span>
         </div>
 
         <h1
           style={{
-            color: C.navy,
+            color: 'var(--navy, #1A1A2E)',
             fontFamily: 'Playfair, serif',
             fontSize: '2.5rem',
             fontWeight: 700,
@@ -191,12 +183,12 @@ export default function BlogArticlePage() {
           {article.title}
         </h1>
 
-        <p style={{ color: C.muted, fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '16px' }}>
+        <p style={{ color: '#6B7280', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '16px' }}>
           {article.excerpt}
         </p>
 
-        <div className="flex items-center gap-4" style={{ color: C.muted, fontSize: '0.875rem' }}>
-          <span>Par <strong style={{ color: C.navy }}>{article.author}</strong></span>
+        <div className="flex items-center gap-4" style={{ color: '#6B7280', fontSize: '0.875rem' }}>
+          <span>Par <strong style={{ color: 'var(--navy, #1A1A2E)' }}>{article.author}</strong></span>
           <span>·</span>
           <time dateTime={article.publishedAt}>{formattedDate}</time>
         </div>
@@ -204,7 +196,7 @@ export default function BlogArticlePage() {
 
       {/* Image de couverture */}
       {article.coverImage && (
-        <div className="rounded-2xl overflow-hidden mb-10" style={{ border: `1px solid ${C.border}` }}>
+        <div className="rounded-2xl overflow-hidden mb-10" style={{ border: '1px solid #E5E0D8' }}>
           <Image
             src={article.coverImage}
             alt={article.title}
@@ -223,7 +215,7 @@ export default function BlogArticlePage() {
       />
 
       {/* Tags */}
-      <div className="mt-12 pt-8" style={{ borderTop: `1px solid ${C.border}` }}>
+      <div className="mt-12 pt-8" style={{ borderTop: '1px solid #E5E0D8' }}>
         <div className="flex flex-wrap gap-2">
           {article.tags.map((tag) => (
             <span
@@ -233,9 +225,9 @@ export default function BlogArticlePage() {
                 borderRadius: '999px',
                 fontSize: '0.8rem',
                 fontWeight: 500,
-                background: C.cream,
-                color: C.muted,
-                border: `1px solid ${C.border}`,
+                background: 'var(--cream, #FAF7F2)',
+                color: '#6B7280',
+                border: '1px solid #E5E0D8',
               }}
             >
               #{tag}
@@ -244,35 +236,17 @@ export default function BlogArticlePage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div
-        className="mt-12 text-center py-10 px-8 rounded-2xl"
-        style={{ background: C.cream, border: `1.5px solid ${C.border}` }}
-      >
-        <p style={{ color: C.gold, fontSize: '12px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px' }}>
-          Envie de partir ?
-        </p>
-        <h3 style={{ color: C.navy, fontFamily: 'Playfair, serif', fontSize: '1.5rem', fontWeight: 700, marginBottom: '12px' }}>
-          Découvrez nos prochains voyages
-        </h3>
-        <p style={{ color: C.muted, marginBottom: '24px', maxWidth: '400px', margin: '0 auto 24px' }}>
-          Voyages de groupe accompagnés avec transport porte-à-porte depuis votre ville.
-        </p>
-        <Link
-          href="/voyages"
-          style={{
-            display: 'inline-block',
-            padding: '14px 32px',
-            borderRadius: '14px',
-            background: C.terra,
-            color: 'white',
-            fontWeight: 700,
-            textDecoration: 'none',
-          }}
-        >
-          Voir les voyages →
-        </Link>
-      </div>
+      {/* Newsletter */}
+      <NewsletterCTA variant="terra" className="mt-12" />
+
+      {/* JSON-LD SEO */}
+      <BlogPostingJsonLd
+        title={article.title}
+        description={article.excerpt}
+        slug={article.slug}
+        datePublished={article.publishedAt}
+        image={article.coverImage}
+      />
     </article>
   );
 }

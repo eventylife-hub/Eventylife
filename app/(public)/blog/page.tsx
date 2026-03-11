@@ -126,6 +126,18 @@ export default function BlogPage() {
         }}
       >
         <div className="mx-auto max-w-6xl text-center">
+          <p
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              color: 'var(--gold, #D4A853)',
+              marginBottom: '1rem',
+            }}
+          >
+            Inspirations &amp; Conseils
+          </p>
           <h1
             className="text-3xl sm:text-5xl mb-4"
             style={{
@@ -140,7 +152,7 @@ export default function BlogPage() {
             className="mx-auto"
             style={{
               fontSize: '1.125rem',
-              color: 'rgba(255,255,255,0.8)',
+              color: 'rgba(255,255,255,0.75)',
               maxWidth: '42rem',
             }}
           >
