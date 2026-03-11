@@ -12,7 +12,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
 import { formatDate } from '@/lib/utils';
 interface CoOccupant {
   id: string;
@@ -219,10 +218,12 @@ export default function RoomingPage() {
 
   if (state === 'loading') {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div className="max-w-4xl mx-auto px-4 py-12 space-y-8" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
-        <Skeleton className="h-10 w-48" />
-        <Skeleton className="h-48 w-full rounded-lg" />
-        <Skeleton className="h-80 w-full rounded-lg" />
+        <div style={{ height: 40, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        <div style={{ height: 192, width: '100%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        <div style={{ height: 320, width: '100%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
       </div>
     );
   }

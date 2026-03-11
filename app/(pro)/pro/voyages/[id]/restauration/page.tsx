@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Skeleton } from '@/components/ui/skeleton';
 import { RestaurantCard } from '@/components/restauration/restaurant-card';
 import { AlertCircle, Loader2, FileText } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
@@ -258,12 +257,14 @@ export default function RestauratPage() {
 
   if (loading) {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#0A1628' }}>Gestion de la restauration</h1>
           <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
             {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-48 rounded-lg" />
+              <div key={i} style={{ height: 192, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             ))}
           </div>
         </div>

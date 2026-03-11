@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
@@ -167,6 +166,8 @@ export default function AdminMarketingPage() {
       render: (value: unknown) => {
         const config = statusConfig[value as keyof typeof statusConfig];
         return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
           <span className={`px-3 py-1 rounded-full text-xs font-medium ${config?.color}`}>
             {config?.label}
           </span>
@@ -206,8 +207,8 @@ export default function AdminMarketingPage() {
       <AdminPageHeader title="Marketing" breadcrumb="Marketing" />
 
         <div>
-          <Skeleton className="h-10 w-48" />
-          <Skeleton className="h-5 w-96 mt-2" />
+          <div style={{ height: 40, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 20, width: 384, marginTop: 8, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[...Array(4)].map((_, i) => (
@@ -216,7 +217,7 @@ export default function AdminMarketingPage() {
             </Card>
           ))}
         </div>
-        <Skeleton className="h-96 w-full" />
+        <div style={{ height: 384, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
       </div>
     );
   }

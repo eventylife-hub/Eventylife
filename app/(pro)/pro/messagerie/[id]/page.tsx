@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Send, Paperclip, AlertCircle, RefreshCw, Loader } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
 
 const OCEAN = 'var(--pro-ocean)';
 const SUN = 'var(--pro-sun)';
@@ -254,6 +253,8 @@ export default function MessagerieDetail() {
 
   if (loading) {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px', display: 'flex', flexDirection: 'column' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>
           {/* Header Loading */}
@@ -266,14 +267,14 @@ export default function MessagerieDetail() {
             >
               <ArrowLeft style={{ width: '20px', height: '20px' }} />
             </button>
-            <Skeleton style={{ height: '32px', width: '200px' }} />
+            <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           </div>
 
           {/* Messages Area Loading */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '24px' }}>
             {[1, 2, 3].map((i) => (
               <div key={i} style={{ display: 'flex', justifyContent: i % 2 === 0 ? 'flex-end' : 'flex-start' }}>
-                <Skeleton style={{ height: '60px', width: '60%', borderRadius: '12px' }} />
+                <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
               </div>
             ))}
           </div>

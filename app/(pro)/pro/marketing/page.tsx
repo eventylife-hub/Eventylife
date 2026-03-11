@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 // shadcn components removed - using pro-panel and pro-btn-* classes
-import { Skeleton } from '@/components/ui/skeleton';
 import { CampaignCard } from '@/components/marketing/campaign-card';
 import { AlertCircle, Plus, TrendingUp } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
@@ -69,17 +68,19 @@ export default function MarketingPage() {
   // Loading state
   if (loading) {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Marketing</h1>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '24px' }}>
             {[...Array(3)].map((_, i) => (
-              <Skeleton key={i} className="h-24 rounded-lg" />
+              <div key={i} style={{ height: 96, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             ))}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
             {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-48 rounded-lg" />
+              <div key={i} style={{ height: 192, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             ))}
           </div>
         </div>

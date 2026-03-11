@@ -13,7 +13,6 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface SupportTicket {
   id: string;
@@ -216,6 +215,8 @@ export default function ProSupportPage() {
   ];
 
   return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', paddingTop: '48px', paddingBottom: '48px' }}>
       <div style={{ maxWidth: '1024px', margin: '0 auto', paddingLeft: '16px', paddingRight: '16px' }}>
         {/* En-tête */}
@@ -294,10 +295,10 @@ export default function ProSupportPage() {
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="pro-panel" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
                 <div style={{ flex: 1 }}>
-                  <Skeleton style={{ height: '20px', marginBottom: '8px', width: '60%' }} />
-                  <Skeleton style={{ height: '16px', width: '40%' }} />
+                  <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                  <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
                 </div>
-                <Skeleton style={{ height: '32px', width: '100px' }} />
+                <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
               </div>
             ))}
           </div>

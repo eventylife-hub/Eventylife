@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MessageSquare, Search, AlertCircle, RefreshCw, FileText } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
 
 const OCEAN = 'var(--pro-ocean)';
 const SUN = 'var(--pro-sun)';
@@ -143,6 +142,8 @@ export default function MessagerieInbox() {
   };
 
   return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header */}
@@ -245,11 +246,11 @@ export default function MessagerieInbox() {
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="pro-panel" style={{ padding: '16px', height: '100px' }}>
                     <div style={{ display: 'flex', gap: '16px' }}>
-                      <Skeleton style={{ width: '60px', height: '60px', borderRadius: '12px', flexShrink: 0 }} />
+                      <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
                       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <Skeleton style={{ height: '16px', width: '40%' }} />
-                        <Skeleton style={{ height: '14px', width: '60%' }} />
-                        <Skeleton style={{ height: '12px', width: '30%' }} />
+                        <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                        <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                        <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
                       </div>
                     </div>
                   </div>

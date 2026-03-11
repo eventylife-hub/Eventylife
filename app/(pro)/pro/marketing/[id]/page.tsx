@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Skeleton } from '@/components/ui/skeleton';
 
 const MetricsChart = dynamic(
   () => import('@/components/marketing/metrics-chart').then((m) => m.MetricsChart),
@@ -175,10 +174,12 @@ export default function CampagneDetailPage() {
 
   if (loading) {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <Skeleton className="h-10 w-32 mb-4" />
-          <Skeleton className="h-32 mb-6" />
+          <div style={{ height: 40, width: 128, marginBottom: 16, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 128, marginBottom: 24, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
       </div>
     );

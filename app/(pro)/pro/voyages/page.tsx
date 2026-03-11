@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { Plus, MapPin, Users, Clock, Grid, List, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils';
 const TABS = ['Brouillons', 'En révision', 'Publiés', 'Terminés', 'Annulés'];
@@ -66,6 +65,8 @@ export default function TravelsPage() {
   const filteredTravels = travels.filter((t) => {
     if (search) {
       return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
         (t?.title as string)?.toLowerCase().includes(search.toLowerCase()) ||
         (t?.destinationCity as string)?.toLowerCase().includes(search.toLowerCase())
       );
@@ -232,19 +233,19 @@ export default function TravelsPage() {
         {loading && !error && (
           <>
             <div className="mb-6">
-              <Skeleton className="h-12 rounded-lg mb-4" />
+              <div style={{ height: 48, borderRadius: 8, marginBottom: 16, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             </div>
             {viewMode === 'grid' ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, idx) => (
                   <div key={idx} className="rounded-lg overflow-hidden border border-slate-200">
-                    <Skeleton className="h-48" />
+                    <div style={{ height: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
                     <div className="p-6 space-y-4">
-                      <Skeleton className="h-6 w-3/4" />
-                      <Skeleton className="h-4 w-1/2" />
-                      <Skeleton className="h-4 w-1/2" />
-                      <Skeleton className="h-4 w-1/2" />
-                      <Skeleton className="h-10 w-full" />
+                      <div style={{ height: 24, width: '75%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                      <div style={{ height: 16, width: '50%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                      <div style={{ height: 16, width: '50%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                      <div style={{ height: 16, width: '50%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                      <div style={{ height: 40, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
                     </div>
                   </div>
                 ))}
@@ -253,7 +254,7 @@ export default function TravelsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                 <div className="space-y-2">
                   {[...Array(5)].map((_, idx) => (
-                    <Skeleton key={idx} className="h-12 rounded-none border-b" />
+                    <div key={idx} style={{ height: 48, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
                   ))}
                 </div>
               </div>

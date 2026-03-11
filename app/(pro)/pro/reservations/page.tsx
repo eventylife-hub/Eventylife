@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Filter, Users, Calendar, MapPin, ChevronRight, AlertCircle, RotateCcw } from 'lucide-react';
 // Button import removed - using native buttons with pro-btn-* classes
-import { Skeleton } from '@/components/ui/skeleton';
 interface Reservation {
   id: string;
   voyageTitle: string;
@@ -84,6 +83,8 @@ export default function ProReservationsPage() {
   const filtered = reservations;
 
   return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header */}
@@ -167,7 +168,7 @@ export default function ProReservationsPage() {
         {loading && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[...Array(5)].map((_, i) => (
-              <Skeleton key={i} className="h-20 w-full rounded-lg" />
+              <div key={i} style={{ height: 80, width: '100%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             ))}
           </div>
         )}

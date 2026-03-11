@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
   BarChart3,
@@ -137,6 +136,8 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
   };
 
   return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
     <div className="pro-panel" style={{ marginBottom: '1.5rem' }}>
       <div className="pro-panel-header">
         <h3 className="pro-panel-title">Actions du voyage</h3>
@@ -305,11 +306,11 @@ export default function VoyageDashboardPage() {
     return (
       <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <Skeleton className="h-12 w-96" />
-          <Skeleton className="h-32 w-full" />
+          <div style={{ height: 48, width: 384, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 128, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
             {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-24 w-full" />
+              <div key={i} style={{ height: 96, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             ))}
           </div>
         </div>

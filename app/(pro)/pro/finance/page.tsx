@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 // Remove Card, Button, Alert imports
 import dynamic from 'next/dynamic';
-import { Skeleton } from '@/components/ui/skeleton';
 import { formatPrice } from '@/lib/utils';
 
 const FinanceSummary = dynamic(
@@ -99,14 +98,16 @@ export default function FinanceDashboardPage() {
 
   if (loading) {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          <Skeleton className="h-10 w-64" />
+          <div style={{ height: 40, width: 256, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-            <Skeleton className="h-32" />
-            <Skeleton className="h-32" />
+            <div style={{ height: 128, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+            <div style={{ height: 128, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
           </div>
-          <Skeleton className="h-96" />
+          <div style={{ height: 384, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
       </div>
     );

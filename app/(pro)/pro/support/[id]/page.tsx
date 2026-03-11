@@ -13,7 +13,6 @@ import {
   User,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface Message {
   id: string;
@@ -324,6 +323,8 @@ export default function TicketDetailPage() {
 
   if (loading) {
     return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', paddingTop: '48px', paddingBottom: '48px' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', paddingLeft: '16px', paddingRight: '16px' }}>
           <button
@@ -335,21 +336,21 @@ export default function TicketDetailPage() {
           </button>
 
           <div className="pro-panel" style={{ marginBottom: '24px', paddingBottom: '24px' }}>
-            <Skeleton style={{ height: '28px', marginBottom: '16px', width: '70%' }} />
+            <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-              <Skeleton style={{ height: '20px' }} />
-              <Skeleton style={{ height: '20px' }} />
-              <Skeleton style={{ height: '20px' }} />
-              <Skeleton style={{ height: '20px' }} />
+              <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[1, 2, 3].map((i) => (
               <div key={i} className="pro-panel" style={{ padding: '16px' }}>
-                <Skeleton style={{ height: '16px', marginBottom: '12px', width: '40%' }} />
-                <Skeleton style={{ height: '60px', marginBottom: '12px' }} />
-                <Skeleton style={{ height: '14px', width: '30%' }} />
+                <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
               </div>
             ))}
           </div>
