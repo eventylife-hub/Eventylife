@@ -19,24 +19,52 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Eventy Life - Voyages en Groupe',
-  description: 'Découvrez des voyages en groupe avec accompagnement humain porte-à-porte, prix justes et qualité garantie.',
+  title: {
+    template: '%s | Eventy Life',
+    default: 'Eventy Life — Voyages de Groupe avec Accompagnement',
+  },
+  description:
+    'Découvrez des voyages en groupe avec accompagnement humain porte-à-porte, prix justes et qualité garantie. Bus et avion, départs de toute la France.',
   keywords: [
-    'voyages',
-    'groupe',
-    'agence voyage',
+    'voyages groupe',
+    'agence voyage groupe',
+    'voyage accompagné',
+    'voyage bus',
+    'voyage avion groupe',
     'réservation voyage',
-    'tourisme',
-    'destinations',
+    'tourisme France',
     'porte-à-porte',
+    'eventy life',
   ],
   authors: [{ name: 'Eventy Life' }],
+  creator: 'Eventy Life',
+  publisher: 'Eventy Life',
+  metadataBase: new URL('https://eventy.fr'),
+  icons: {
+    icon: [
+      { url: '/icons/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/icons/favicon.svg',
+  },
   openGraph: {
-    title: 'Eventy Life - Voyages en Groupe',
-    description: 'Découvrez des voyages en groupe avec accompagnement humain porte-à-porte, prix justes et qualité garantie.',
+    title: 'Eventy Life — Voyages de Groupe avec Accompagnement',
+    description:
+      'Voyages en groupe avec accompagnement humain porte-à-porte. Bus et avion, prix justes, qualité garantie.',
     type: 'website',
     locale: 'fr_FR',
+    siteName: 'Eventy Life',
+    url: 'https://eventy.fr',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Eventy Life — Voyages de Groupe',
+    description:
+      'Voyages en groupe avec accompagnement humain porte-à-porte.',
+  },
+  alternates: {
+    canonical: 'https://eventy.fr',
+  },
+  category: 'travel',
 };
 
 export default function RootLayout({
