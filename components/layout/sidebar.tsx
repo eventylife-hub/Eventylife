@@ -80,6 +80,8 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
                           toggleExpand(item.href);
                         }}
                         className="flex-shrink-0"
+                        aria-label={expandedItems[item.href] ? `Réduire ${item.label}` : `Développer ${item.label}`}
+                        aria-expanded={!!expandedItems[item.href]}
                       >
                         <svg
                           className={cn(

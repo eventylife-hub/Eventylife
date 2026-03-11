@@ -150,6 +150,7 @@ export function RoomingTable({
                   <button type="button"
                     onClick={() => handleEditRoom(room)}
                     className="text-blue-600 hover:text-blue-700"
+                    aria-label={`Modifier la chambre ${room.roomNumber || ''}`}
                   >
                     <Pencil className="w-4 h-4" />
                   </button>
