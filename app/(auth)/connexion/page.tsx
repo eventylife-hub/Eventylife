@@ -6,10 +6,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ZodError } from 'zod';
-import { apiClient } from '@/lib/api-client';
 import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 /**
  * Page de connexion — Design Eventy v2
+ * Utilise fetch brut (pas apiClient) pour éviter le refresh token loop sur 401
  */
 export default function ConnexionPage() {
   const router = useRouter();
@@ -41,20 +41,23 @@ export default function ConnexionPage() {
     try {
       loginSchema.parse(formData);
 
-      interface LoginResponse {
-        user: {
-          id: string;
-          email: string;
-          role: 'ADMIN' | 'PRO' | 'CLIENT';
-        };
-      }
-
-      const response = await apiClient.post<LoginResponse>('/auth/login', {
-        email: formData.email,
-        password: formData.password,
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
-      const user = response.user;
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || 'Identifiants invalides');
+        return;
+      }
+
+      const user = data.user;
       if (user?.role === 'ADMIN') {
         router.push('/admin');
       } else if (user?.role === 'PRO') {
