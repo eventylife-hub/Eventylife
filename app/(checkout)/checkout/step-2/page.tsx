@@ -17,20 +17,6 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { formatPrice } from '@/lib/utils';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface ParticipantForm {
   roomBookingId: string;
   firstName: string;
@@ -170,18 +156,18 @@ export default function CheckoutStep2Page() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '2rem 1rem',
           textAlign: 'center',
         }}
       >
-        <p style={{ color: C.muted, marginBottom: '1rem' }}>
+        <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
           Aucune chambre sélectionnée
         </p>
         <button
           onClick={() => router.back()}
           style={{
-            backgroundColor: C.terra,
+            backgroundColor: 'var(--terra, #C75B39)',
             color: 'white',
             padding: '0.75rem 1.5rem',
             borderRadius: '10px',
@@ -201,7 +187,7 @@ export default function CheckoutStep2Page() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         padding: '2rem 1rem',
       }}
     >
@@ -211,7 +197,7 @@ export default function CheckoutStep2Page() {
             style={{
               fontSize: '1.875rem',
               fontWeight: 'bold',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
             }}
           >
             Détails des participants
@@ -223,10 +209,10 @@ export default function CheckoutStep2Page() {
             style={{
               marginBottom: '1.5rem',
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1rem',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
             }}
           >
             {error}
@@ -240,7 +226,7 @@ export default function CheckoutStep2Page() {
                 style={{
                   fontSize: '1.125rem',
                   fontWeight: '600',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                 }}
               >
                 {room.label} — {formatPrice(room.priceTotalTTC)}
@@ -261,7 +247,7 @@ export default function CheckoutStep2Page() {
                     key={`${room.roomTypeId}-${personIndex}`}
                     style={{
                       backgroundColor: 'white',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                       borderRadius: '20px',
                       padding: '1.5rem',
                       display: 'flex',
@@ -273,7 +259,7 @@ export default function CheckoutStep2Page() {
                       style={{
                         fontWeight: '600',
                         fontSize: '1.125rem',
-                        color: C.navy,
+                        color: 'var(--navy, #1A1A2E)',
                       }}
                     >
                       {room.label} — Personne {personIndex + 1}
@@ -295,18 +281,18 @@ export default function CheckoutStep2Page() {
                         }
                         style={{
                           backgroundColor: 'white',
-                          border: `1.5px solid ${C.border}`,
+                          border: '1.5px solid #E5E0D8',
                           borderRadius: '10px',
                           padding: '0.75rem',
                           fontSize: '0.875rem',
-                          color: C.navy,
-                          outlineColor: C.terra,
+                          color: 'var(--navy, #1A1A2E)',
+                          outlineColor: 'var(--terra, #C75B39)',
                         }}
                         onFocus={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                          (e.target as HTMLInputElement).style.borderColor = 'var(--terra, #C75B39)';
                         }}
                         onBlur={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                          (e.target as HTMLInputElement).style.borderColor = '#E5E0D8';
                         }}
                       />
                       <input
@@ -318,18 +304,18 @@ export default function CheckoutStep2Page() {
                         }
                         style={{
                           backgroundColor: 'white',
-                          border: `1.5px solid ${C.border}`,
+                          border: '1.5px solid #E5E0D8',
                           borderRadius: '10px',
                           padding: '0.75rem',
                           fontSize: '0.875rem',
-                          color: C.navy,
-                          outlineColor: C.terra,
+                          color: 'var(--navy, #1A1A2E)',
+                          outlineColor: 'var(--terra, #C75B39)',
                         }}
                         onFocus={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                          (e.target as HTMLInputElement).style.borderColor = 'var(--terra, #C75B39)';
                         }}
                         onBlur={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                          (e.target as HTMLInputElement).style.borderColor = '#E5E0D8';
                         }}
                       />
                     </div>
@@ -350,18 +336,18 @@ export default function CheckoutStep2Page() {
                         }
                         style={{
                           backgroundColor: 'white',
-                          border: `1.5px solid ${C.border}`,
+                          border: '1.5px solid #E5E0D8',
                           borderRadius: '10px',
                           padding: '0.75rem',
                           fontSize: '0.875rem',
-                          color: C.navy,
-                          outlineColor: C.terra,
+                          color: 'var(--navy, #1A1A2E)',
+                          outlineColor: 'var(--terra, #C75B39)',
                         }}
                         onFocus={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                          (e.target as HTMLInputElement).style.borderColor = 'var(--terra, #C75B39)';
                         }}
                         onBlur={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                          (e.target as HTMLInputElement).style.borderColor = '#E5E0D8';
                         }}
                       />
                       <input
@@ -373,18 +359,18 @@ export default function CheckoutStep2Page() {
                         }
                         style={{
                           backgroundColor: 'white',
-                          border: `1.5px solid ${C.border}`,
+                          border: '1.5px solid #E5E0D8',
                           borderRadius: '10px',
                           padding: '0.75rem',
                           fontSize: '0.875rem',
-                          color: C.navy,
-                          outlineColor: C.terra,
+                          color: 'var(--navy, #1A1A2E)',
+                          outlineColor: 'var(--terra, #C75B39)',
                         }}
                         onFocus={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.terra;
+                          (e.target as HTMLInputElement).style.borderColor = 'var(--terra, #C75B39)';
                         }}
                         onBlur={(e) => {
-                          (e.target as HTMLInputElement).style.borderColor = C.border;
+                          (e.target as HTMLInputElement).style.borderColor = '#E5E0D8';
                         }}
                       />
                     </div>
@@ -396,7 +382,7 @@ export default function CheckoutStep2Page() {
                           fontWeight: '500',
                           display: 'block',
                           marginBottom: '0.5rem',
-                          color: C.navy,
+                          color: 'var(--navy, #1A1A2E)',
                         }}
                       >
                         Point d&apos;arrêt
@@ -409,20 +395,20 @@ export default function CheckoutStep2Page() {
                         style={{
                           width: '100%',
                           backgroundColor: 'white',
-                          border: `1.5px solid ${C.border}`,
+                          border: '1.5px solid #E5E0D8',
                           borderRadius: '10px',
                           padding: '0.75rem',
                           fontSize: '0.875rem',
-                          color: C.navy,
+                          color: 'var(--navy, #1A1A2E)',
                           cursor: 'pointer',
                           opacity: loadingBusStops ? 0.5 : 1,
                         }}
                         disabled={loadingBusStops}
                         onFocus={(e) => {
-                          (e.target as HTMLSelectElement).style.borderColor = C.terra;
+                          (e.target as HTMLSelectElement).style.borderColor = 'var(--terra, #C75B39)';
                         }}
                         onBlur={(e) => {
-                          (e.target as HTMLSelectElement).style.borderColor = C.border;
+                          (e.target as HTMLSelectElement).style.borderColor = '#E5E0D8';
                         }}
                       >
                         <option value="">
@@ -452,14 +438,14 @@ export default function CheckoutStep2Page() {
                           width: '20px',
                           height: '20px',
                           cursor: 'pointer',
-                          accentColor: C.terra,
+                          accentColor: 'var(--terra, #C75B39)',
                         }}
                       />
                       <label
                         htmlFor={`insurance-${room.roomTypeId}-${personIndex}`}
                         style={{
                           fontSize: '0.875rem',
-                          color: C.navy,
+                          color: 'var(--navy, #1A1A2E)',
                           cursor: 'pointer',
                         }}
                       >
@@ -482,15 +468,15 @@ export default function CheckoutStep2Page() {
             style={{
               flex: 1,
               backgroundColor: 'transparent',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
               fontWeight: '600',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -503,7 +489,7 @@ export default function CheckoutStep2Page() {
             disabled={loading}
             style={{
               flex: 1,
-              backgroundColor: loading ? C.muted : C.terra,
+              backgroundColor: loading ? '#6B7280' : 'var(--terra, #C75B39)',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
@@ -515,12 +501,12 @@ export default function CheckoutStep2Page() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
               }
             }}
           >

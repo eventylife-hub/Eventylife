@@ -14,20 +14,6 @@ import { Button } from '@/components/ui/button';
 import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface RoomSelection {
   roomTypeId: string;
   label: string;
@@ -148,7 +134,7 @@ export default function CheckoutStep1Page() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         padding: '2rem 1rem',
       }}
     >
@@ -158,7 +144,7 @@ export default function CheckoutStep1Page() {
             style={{
               fontSize: '1.875rem',
               fontWeight: 'bold',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
               marginBottom: '0.5rem',
             }}
           >
@@ -171,10 +157,10 @@ export default function CheckoutStep1Page() {
             style={{
               marginBottom: '1.5rem',
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1rem',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
             }}
           >
             {error}
@@ -186,7 +172,7 @@ export default function CheckoutStep1Page() {
             <div
               style={{
                 backgroundColor: 'white',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 borderRadius: '20px',
                 padding: '1.5rem',
                 opacity: 0.5,
@@ -195,7 +181,7 @@ export default function CheckoutStep1Page() {
               <div
                 style={{
                   height: '1.5rem',
-                  backgroundColor: C.border,
+                  backgroundColor: '#E5E0D8',
                   borderRadius: '8px',
                   marginBottom: '1rem',
                   width: '33%',
@@ -204,7 +190,7 @@ export default function CheckoutStep1Page() {
               <div
                 style={{
                   height: '1rem',
-                  backgroundColor: C.border,
+                  backgroundColor: '#E5E0D8',
                   borderRadius: '8px',
                   marginBottom: '1rem',
                   width: '25%',
@@ -213,7 +199,7 @@ export default function CheckoutStep1Page() {
               <div
                 style={{
                   height: '2.5rem',
-                  backgroundColor: C.border,
+                  backgroundColor: '#E5E0D8',
                   borderRadius: '8px',
                 }}
               ></div>
@@ -224,26 +210,26 @@ export default function CheckoutStep1Page() {
                 textAlign: 'center',
                 padding: '2rem',
                 backgroundColor: 'white',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 borderRadius: '20px',
               }}
             >
-              <p style={{ color: C.muted, marginBottom: '1rem' }}>
+              <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
                 Aucune chambre disponible
               </p>
               <button
                 onClick={() => router.back()}
                 style={{
                   backgroundColor: 'transparent',
-                  color: C.terra,
+                  color: 'var(--terra, #C75B39)',
                   padding: '0.75rem 1.5rem',
                   borderRadius: '10px',
                   fontWeight: '600',
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   cursor: 'pointer',
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+                  (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
                 }}
                 onMouseLeave={(e) => {
                   (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -258,31 +244,31 @@ export default function CheckoutStep1Page() {
                 key={room.roomTypeId}
                 style={{
                   backgroundColor: 'white',
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   borderRadius: '20px',
                   padding: '1.5rem',
                 }}
               >
-                <h3 style={{ fontWeight: '600', marginBottom: '0.5rem', color: C.navy }}>
+                <h3 style={{ fontWeight: '600', marginBottom: '0.5rem', color: 'var(--navy, #1A1A2E)' }}>
                   {room.label}
                 </h3>
-                <p style={{ color: C.muted, fontSize: '0.875rem', marginBottom: '1rem' }}>
+                <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1rem' }}>
                   Capacité: {room.capacity} personne{room.capacity > 1 ? 's' : ''}
                 </p>
 
                 <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ fontSize: '0.875rem', fontWeight: '500', display: 'block', marginBottom: '0.5rem', color: C.navy }}>
+                  <label style={{ fontSize: '0.875rem', fontWeight: '500', display: 'block', marginBottom: '0.5rem', color: 'var(--navy, #1A1A2E)' }}>
                     Nombre de personnes:
                   </label>
                   <select
                     style={{
                       width: '100%',
                       backgroundColor: 'white',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                       borderRadius: '10px',
                       padding: '0.5rem 0.75rem',
                       fontSize: '0.875rem',
-                      color: C.navy,
+                      color: 'var(--navy, #1A1A2E)',
                       cursor: 'pointer',
                     }}
                     value={room.occupancyCount}
@@ -290,10 +276,10 @@ export default function CheckoutStep1Page() {
                       handleOccupancyChange(room.roomTypeId, parseInt((e.target as HTMLInputElement).value) || 0)
                     }
                     onFocus={(e) => {
-                      (e.target as HTMLSelectElement).style.borderColor = C.terra;
+                      (e.target as HTMLSelectElement).style.borderColor = 'var(--terra, #C75B39)';
                     }}
                     onBlur={(e) => {
-                      (e.target as HTMLSelectElement).style.borderColor = C.border;
+                      (e.target as HTMLSelectElement).style.borderColor = '#E5E0D8';
                     }}
                   >
                     <option value="0">Pas cette chambre</option>
@@ -309,11 +295,11 @@ export default function CheckoutStep1Page() {
                   <div
                     style={{
                       fontSize: '0.875rem',
-                      color: C.muted,
+                      color: '#6B7280',
                       padding: '1rem',
-                      backgroundColor: C.goldSoft,
+                      backgroundColor: 'var(--gold, #D4A853)'Soft,
                       borderRadius: '10px',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                     }}
                   >
                     <p style={{ marginBottom: '0.5rem' }}>
@@ -337,15 +323,15 @@ export default function CheckoutStep1Page() {
             style={{
               flex: 1,
               backgroundColor: 'transparent',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
               fontWeight: '600',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -358,7 +344,7 @@ export default function CheckoutStep1Page() {
             disabled={loading}
             style={{
               flex: 1,
-              backgroundColor: loading ? C.muted : C.terra,
+              backgroundColor: loading ? '#6B7280' : 'var(--terra, #C75B39)',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
@@ -370,12 +356,12 @@ export default function CheckoutStep1Page() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
               }
             }}
           >

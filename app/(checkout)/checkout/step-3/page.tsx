@@ -15,20 +15,6 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
 import { formatPrice } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 export default function CheckoutStep3Page() {
   const router = useRouter();
   const params = useParams();
@@ -66,7 +52,7 @@ export default function CheckoutStep3Page() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         padding: '2rem 1rem',
       }}
     >
@@ -76,7 +62,7 @@ export default function CheckoutStep3Page() {
             style={{
               fontSize: '1.875rem',
               fontWeight: 'bold',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
             }}
           >
             Paiement
@@ -88,10 +74,10 @@ export default function CheckoutStep3Page() {
             style={{
               marginBottom: '1.5rem',
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1rem',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
             }}
           >
             {error}
@@ -105,7 +91,7 @@ export default function CheckoutStep3Page() {
             style={{
               fontSize: '1.125rem',
               fontWeight: '600',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
             }}
           >
             Mode de paiement
@@ -118,12 +104,12 @@ export default function CheckoutStep3Page() {
                 alignItems: 'center',
                 padding: '1rem',
                 backgroundColor: 'white',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 borderRadius: '20px',
                 cursor: 'pointer',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLLabelElement).style.backgroundColor = C.goldSoft;
+                (e.currentTarget as HTMLLabelElement).style.backgroundColor = 'var(--gold, #D4A853)'Soft;
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLLabelElement).style.backgroundColor = 'white';
@@ -140,14 +126,14 @@ export default function CheckoutStep3Page() {
                   width: '20px',
                   height: '20px',
                   cursor: 'pointer',
-                  accentColor: C.terra,
+                  accentColor: 'var(--terra, #C75B39)',
                 }}
               />
               <div>
-                <p style={{ fontWeight: '600', color: C.navy, marginBottom: '0.25rem' }}>
+                <p style={{ fontWeight: '600', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>
                   Payer le montant complet
                 </p>
-                <p style={{ fontSize: '0.875rem', color: C.muted }}>
+                <p style={{ fontSize: '0.875rem', color: '#6B7280' }}>
                   {formatPrice(totalAmountTTC)}
                 </p>
               </div>
@@ -159,12 +145,12 @@ export default function CheckoutStep3Page() {
                 alignItems: 'center',
                 padding: '1rem',
                 backgroundColor: 'white',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 borderRadius: '20px',
                 cursor: 'pointer',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLLabelElement).style.backgroundColor = C.forestBg;
+                (e.currentTarget as HTMLLabelElement).style.backgroundColor = '#DCFCE7';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLLabelElement).style.backgroundColor = 'white';
@@ -181,14 +167,14 @@ export default function CheckoutStep3Page() {
                   width: '20px',
                   height: '20px',
                   cursor: 'pointer',
-                  accentColor: C.forest,
+                  accentColor: '#166534',
                 }}
               />
               <div>
-                <p style={{ fontWeight: '600', color: C.navy, marginBottom: '0.25rem' }}>
+                <p style={{ fontWeight: '600', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>
                   Partager le paiement
                 </p>
-                <p style={{ fontSize: '0.875rem', color: C.muted }}>
+                <p style={{ fontSize: '0.875rem', color: '#6B7280' }}>
                   Inviter des co-voyageurs à payer leur part
                 </p>
               </div>
@@ -202,15 +188,15 @@ export default function CheckoutStep3Page() {
             style={{
               flex: 1,
               backgroundColor: 'transparent',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
               fontWeight: '600',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -223,7 +209,7 @@ export default function CheckoutStep3Page() {
             disabled={loading}
             style={{
               flex: 1,
-              backgroundColor: loading ? C.muted : C.terra,
+              backgroundColor: loading ? '#6B7280' : 'var(--terra, #C75B39)',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
@@ -235,12 +221,12 @@ export default function CheckoutStep3Page() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
               }
             }}
           >

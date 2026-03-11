@@ -13,20 +13,6 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 export default function CheckoutStartPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -43,7 +29,7 @@ export default function CheckoutStartPage() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '2rem 1rem',
         }}
       >
@@ -53,7 +39,7 @@ export default function CheckoutStartPage() {
               style={{
                 fontSize: '1.875rem',
                 fontWeight: 'bold',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.5rem',
               }}
             >
@@ -63,22 +49,22 @@ export default function CheckoutStartPage() {
           <div
             style={{
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1.5rem',
             }}
           >
-            <p style={{ color: C.terra, fontWeight: '600', marginBottom: '1rem' }}>
+            <p style={{ color: 'var(--terra, #C75B39)', fontWeight: '600', marginBottom: '1rem' }}>
               Authentification requise
             </p>
-            <p style={{ color: C.muted, marginBottom: '1rem' }}>
+            <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
               Vous devez être connecté pour réserver un voyage
             </p>
             <button
               onClick={() => router.push(ROUTES.AUTH.CONNEXION)}
               style={{
                 width: '100%',
-                backgroundColor: C.terra,
+                backgroundColor: 'var(--terra, #C75B39)',
                 color: 'white',
                 padding: '0.75rem 1.5rem',
                 borderRadius: '10px',
@@ -88,10 +74,10 @@ export default function CheckoutStartPage() {
                 boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
               }}
               onMouseEnter={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
               }}
               onMouseLeave={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
               }}
             >
               Se connecter
@@ -107,7 +93,7 @@ export default function CheckoutStartPage() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '2rem 1rem',
         }}
       >
@@ -117,7 +103,7 @@ export default function CheckoutStartPage() {
               style={{
                 fontSize: '1.875rem',
                 fontWeight: 'bold',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
                 marginBottom: '0.5rem',
               }}
             >
@@ -127,15 +113,15 @@ export default function CheckoutStartPage() {
           <div
             style={{
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1.5rem',
             }}
           >
-            <p style={{ color: C.terra, fontWeight: '600', marginBottom: '1rem' }}>
+            <p style={{ color: 'var(--terra, #C75B39)', fontWeight: '600', marginBottom: '1rem' }}>
               Voyage non trouvé
             </p>
-            <p style={{ color: C.muted, marginBottom: '1rem' }}>
+            <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
               Le voyage demandé n&apos;existe pas ou n&apos;est plus disponible
             </p>
             <button
@@ -143,15 +129,15 @@ export default function CheckoutStartPage() {
               style={{
                 width: '100%',
                 backgroundColor: 'transparent',
-                color: C.terra,
+                color: 'var(--terra, #C75B39)',
                 padding: '0.75rem 1.5rem',
                 borderRadius: '10px',
                 fontWeight: '600',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 cursor: 'pointer',
               }}
               onMouseEnter={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
               }}
               onMouseLeave={(e) => {
                 (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -195,7 +181,7 @@ export default function CheckoutStartPage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         padding: '2rem 1rem',
       }}
     >
@@ -205,13 +191,13 @@ export default function CheckoutStartPage() {
             style={{
               fontSize: '1.875rem',
               fontWeight: 'bold',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
               marginBottom: '0.5rem',
             }}
           >
             Commencer la réservation
           </h1>
-          <p style={{ color: C.muted, fontSize: '0.95rem' }}>
+          <p style={{ color: '#6B7280', fontSize: '0.95rem' }}>
             Confirmez les détails de votre voyage
           </p>
         </div>
@@ -222,9 +208,9 @@ export default function CheckoutStartPage() {
               marginBottom: '1.5rem',
               padding: '1rem',
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
             }}
           >
             <p style={{ fontWeight: '600', marginBottom: '0.5rem' }}>Erreur</p>
@@ -232,7 +218,7 @@ export default function CheckoutStartPage() {
             <button
               onClick={() => setError(null)}
               style={{
-                color: C.terra,
+                color: 'var(--terra, #C75B39)',
                 fontSize: '0.875rem',
                 fontWeight: '600',
                 background: 'none',
@@ -249,7 +235,7 @@ export default function CheckoutStartPage() {
         <div
           style={{
             backgroundColor: 'white',
-            border: `1.5px solid ${C.border}`,
+            border: '1.5px solid #E5E0D8',
             borderRadius: '20px',
             padding: '1.5rem',
             marginBottom: '2rem',
@@ -259,14 +245,14 @@ export default function CheckoutStartPage() {
             style={{
               fontWeight: '600',
               fontSize: '1.125rem',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
               marginBottom: '0.5rem',
             }}
           >
             Voyage sélectionné
           </h2>
-          <p style={{ color: C.muted, fontSize: '0.875rem' }}>ID: {travelId}</p>
-          <p style={{ color: C.muted, fontSize: '0.75rem', marginTop: '0.5rem' }}>
+          <p style={{ color: '#6B7280', fontSize: '0.875rem' }}>ID: {travelId}</p>
+          <p style={{ color: '#6B7280', fontSize: '0.75rem', marginTop: '0.5rem' }}>
             Vous allez configurer votre réservation à l&apos;étape suivante
           </p>
         </div>
@@ -277,15 +263,15 @@ export default function CheckoutStartPage() {
             style={{
               flex: 1,
               backgroundColor: 'transparent',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
               fontWeight: '600',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -298,7 +284,7 @@ export default function CheckoutStartPage() {
             disabled={loading}
             style={{
               flex: 1,
-              backgroundColor: loading ? C.muted : C.terra,
+              backgroundColor: loading ? '#6B7280' : 'var(--terra, #C75B39)',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
@@ -310,12 +296,12 @@ export default function CheckoutStartPage() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
               }
             }}
           >

@@ -14,20 +14,6 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface BookingDetails {
   id: string;
   referenceNumber: string;
@@ -141,7 +127,7 @@ export default function CheckoutConfirmationPage() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '2rem 1rem',
         }}
       >
@@ -150,7 +136,7 @@ export default function CheckoutConfirmationPage() {
             style={{
               width: '80px',
               height: '80px',
-              backgroundColor: C.border,
+              backgroundColor: '#E5E0D8',
               borderRadius: '50%',
               margin: '0 auto 1rem',
               opacity: 0.5,
@@ -159,7 +145,7 @@ export default function CheckoutConfirmationPage() {
           <div
             style={{
               height: '32px',
-              backgroundColor: C.border,
+              backgroundColor: '#E5E0D8',
               borderRadius: '8px',
               width: '50%',
               margin: '0 auto 1rem',
@@ -169,7 +155,7 @@ export default function CheckoutConfirmationPage() {
           <div
             style={{
               height: '16px',
-              backgroundColor: C.border,
+              backgroundColor: '#E5E0D8',
               borderRadius: '8px',
               width: '33%',
               margin: '0 auto',
@@ -187,7 +173,7 @@ export default function CheckoutConfirmationPage() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '2rem 1rem',
         }}
       >
@@ -195,19 +181,19 @@ export default function CheckoutConfirmationPage() {
           <div
             style={{
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1.5rem',
             }}
           >
-            <p style={{ color: C.terra, fontWeight: '600', marginBottom: '1rem' }}>
+            <p style={{ color: 'var(--terra, #C75B39)', fontWeight: '600', marginBottom: '1rem' }}>
               {error || 'Erreur lors du chargement de votre réservation'}
             </p>
             <button
               onClick={() => router.push(ROUTES.HOME)}
               style={{
                 width: '100%',
-                backgroundColor: C.terra,
+                backgroundColor: 'var(--terra, #C75B39)',
                 color: 'white',
                 padding: '0.75rem 1.5rem',
                 borderRadius: '10px',
@@ -229,7 +215,7 @@ export default function CheckoutConfirmationPage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         padding: '2rem 1rem',
       }}
     >
@@ -239,7 +225,7 @@ export default function CheckoutConfirmationPage() {
             style={{
               width: '80px',
               height: '80px',
-              color: C.forest,
+              color: '#166534',
               margin: '0 auto 1rem',
             }}
           />
@@ -247,30 +233,30 @@ export default function CheckoutConfirmationPage() {
             style={{
               fontSize: '1.875rem',
               fontWeight: 'bold',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
               marginBottom: '0.5rem',
             }}
           >
             Réservation confirmée!
           </h1>
-          <p style={{ color: C.muted }}>
+          <p style={{ color: '#6B7280' }}>
             Votre paiement a été reçu avec succès
           </p>
         </div>
 
         <div
           style={{
-            backgroundColor: C.forestBg,
-            border: `1.5px solid ${C.border}`,
+            backgroundColor: '#DCFCE7',
+            border: '1.5px solid #E5E0D8',
             borderRadius: '20px',
             padding: '1.5rem',
             marginBottom: '2rem',
           }}
         >
-          <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '0.5rem' }}>
+          <p style={{ fontSize: '0.875rem', color: '#6B7280', marginBottom: '0.5rem' }}>
             Numéro de confirmation
           </p>
-          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: C.forest }}>
+          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#166534' }}>
             {booking.referenceNumber}
           </p>
         </div>
@@ -278,59 +264,59 @@ export default function CheckoutConfirmationPage() {
         <div
           style={{
             backgroundColor: 'white',
-            border: `1.5px solid ${C.border}`,
+            border: '1.5px solid #E5E0D8',
             borderRadius: '20px',
             padding: '1.5rem',
             marginBottom: '2rem',
           }}
         >
-          <h2 style={{ fontWeight: '600', fontSize: '1.125rem', color: C.navy, marginBottom: '1rem' }}>
+          <h2 style={{ fontWeight: '600', fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)', marginBottom: '1rem' }}>
             Résumé de votre réservation
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.875rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: C.muted }}>Voyage:</span>
-              <span style={{ fontWeight: '600', color: C.navy }}>{booking.travelName}</span>
+              <span style={{ color: '#6B7280' }}>Voyage:</span>
+              <span style={{ fontWeight: '600', color: 'var(--navy, #1A1A2E)' }}>{booking.travelName}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: C.muted }}>Nombre de chambres:</span>
-              <span style={{ fontWeight: '600', color: C.navy }}>{booking.roomCount}</span>
+              <span style={{ color: '#6B7280' }}>Nombre de chambres:</span>
+              <span style={{ fontWeight: '600', color: 'var(--navy, #1A1A2E)' }}>{booking.roomCount}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: C.muted }}>Participants:</span>
-              <span style={{ fontWeight: '600', color: C.navy }}>
+              <span style={{ color: '#6B7280' }}>Participants:</span>
+              <span style={{ fontWeight: '600', color: 'var(--navy, #1A1A2E)' }}>
                 {booking.participants.length}
               </span>
             </div>
             <div
               style={{
-                borderTop: `1.5px solid ${C.border}`,
+                borderTop: '1.5px solid #E5E0D8',
                 paddingTop: '0.75rem',
                 display: 'flex',
                 justifyContent: 'space-between',
                 fontWeight: '600',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
               }}
             >
               <span>Total:</span>
               <span>{formatPrice(booking.totalAmountTTC)}</span>
             </div>
           </div>
-          <p style={{ color: C.muted, fontSize: '0.875rem', marginTop: '1rem' }}>
+          <p style={{ color: '#6B7280', fontSize: '0.875rem', marginTop: '1rem' }}>
             Vous recevrez un email de confirmation avec tous les détails à vos coordonnées.
           </p>
         </div>
 
         <div
           style={{
-            backgroundColor: C.forestBg,
-            border: `1.5px solid ${C.border}`,
+            backgroundColor: '#DCFCE7',
+            border: '1.5px solid #E5E0D8',
             borderRadius: '20px',
             padding: '1.5rem',
             marginBottom: '2rem',
           }}
         >
-          <div style={{ fontSize: '0.875rem', color: C.forest, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ fontSize: '0.875rem', color: '#166534', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <p>✓ Paiement confirmé</p>
             <p>✓ Réservation verrouillée</p>
             <p>✓ Confirmation envoyée par email</p>
@@ -341,9 +327,9 @@ export default function CheckoutConfirmationPage() {
           <div
             style={{
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '1rem',
               fontSize: '0.875rem',
               marginBottom: '2rem',
@@ -360,17 +346,17 @@ export default function CheckoutConfirmationPage() {
             style={{
               width: '100%',
               backgroundColor: 'transparent',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
               fontWeight: '600',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               cursor: downloading ? 'not-allowed' : 'pointer',
               opacity: downloading ? 0.6 : 1,
             }}
             onMouseEnter={(e) => {
               if (!downloading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
               }
             }}
             onMouseLeave={(e) => {
@@ -385,7 +371,7 @@ export default function CheckoutConfirmationPage() {
             onClick={handleViewReservation}
             style={{
               width: '100%',
-              backgroundColor: C.terra,
+              backgroundColor: 'var(--terra, #C75B39)',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
@@ -395,10 +381,10 @@ export default function CheckoutConfirmationPage() {
               boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terraLight;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
             }}
             onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terra;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
             }}
           >
             Voir ma réservation
@@ -408,15 +394,15 @@ export default function CheckoutConfirmationPage() {
             style={{
               width: '100%',
               backgroundColor: 'transparent',
-              color: C.terra,
+              color: 'var(--terra, #C75B39)',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
               fontWeight: '600',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
