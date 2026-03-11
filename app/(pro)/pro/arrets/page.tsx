@@ -4,9 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { Plus, MapPin, Image as ImageIcon, CheckCircle2, Clock, AlertCircle, RotateCcw } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
 const STATUS_COLORS: Record<string, string> = {
   DRAFT: 'bg-slate-100 text-slate-800',
   SUBMITTED: 'bg-blue-100 text-blue-800',

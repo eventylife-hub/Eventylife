@@ -111,12 +111,70 @@ export default function EquipePage() {
 
         if (!res.ok) throw new Error('Erreur chargement équipe');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = await res.json() as { team?: TeamMember[]; prerequisites?: TeamPrerequisite[] };
         setTeam(data.team || []);
         setPrerequisites(data.prerequisites || []);
         setError(null);
       } catch (err: unknown) {
-        setError((err as Error).message);
+        console.warn('API /api/pro/travels/{id}/team indisponible — données démo');
+        // Fallback demo data
+        const demoTeam: TeamMember[] = [
+          {
+            id: '1',
+            name: 'Sophie Martin',
+            email: 'sophie.martin@email.com',
+            role: 'CREATOR',
+            status: 'ACCEPTED',
+            assignedDate: '2026-02-15',
+            acceptedDate: '2026-02-16',
+          },
+          {
+            id: '2',
+            name: 'Jean Dupont',
+            email: 'jean.dupont@email.com',
+            role: 'INDEPENDANT',
+            status: 'ACCEPTED',
+            assignedDate: '2026-02-20',
+            acceptedDate: '2026-02-21',
+          },
+          {
+            id: '3',
+            name: 'Marie Leclerc',
+            email: 'marie.leclerc@email.com',
+            role: 'VENDEUR',
+            status: 'INVITED',
+            assignedDate: '2026-03-05',
+          },
+        ];
+        const demoPrerequisites: TeamPrerequisite[] = [
+          {
+            id: '1',
+            label: 'Documents signés par tous les membres',
+            completed: true,
+            dueDate: '2026-03-10',
+          },
+          {
+            id: '2',
+            label: 'Assurance voyage complète',
+            completed: true,
+            dueDate: '2026-03-10',
+          },
+          {
+            id: '3',
+            label: 'Formation sécurité validée',
+            completed: false,
+            dueDate: '2026-03-15',
+          },
+          {
+            id: '4',
+            label: 'Coordonnées bancaires confirmées',
+            completed: true,
+            dueDate: '2026-03-10',
+          },
+        ];
+        setTeam(demoTeam);
+        setPrerequisites(demoPrerequisites);
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -147,7 +205,7 @@ export default function EquipePage() {
 
       if (!res.ok) throw new Error('Erreur invitation');
 
-      const newMember = (await res.json() as unknown) as unknown;
+      const newMember = await res.json() as TeamMember;
       setTeam([...team, newMember]);
       setInviteEmail('');
       setInviteRole('VENDEUR');

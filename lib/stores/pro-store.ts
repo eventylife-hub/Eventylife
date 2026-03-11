@@ -256,9 +256,9 @@ export const useProStore = create<ProStore>()(
           console.warn('API pro/bus-stops indisponible — données démo');
           set({
             busStops: [
-              { id: 'bs_001', name: 'Gare Saint-Jean', city: 'Bordeaux', address: '1 Rue Charles Domercq, 33800 Bordeaux', lat: 44.8256, lng: -0.5561, type: 'DEPARTURE', status: 'ACTIVE' },
-              { id: 'bs_002', name: 'Gare Matabiau', city: 'Toulouse', address: '64 Bd Pierre Semard, 31500 Toulouse', lat: 43.6115, lng: 1.4538, type: 'DEPARTURE', status: 'ACTIVE' },
-              { id: 'bs_003', name: 'Gare Part-Dieu', city: 'Lyon', address: '5 Pl. Charles Béraudier, 69003 Lyon', lat: 45.7602, lng: 4.8596, type: 'DEPARTURE', status: 'ACTIVE' },
+              { id: 'bs_001', ownerUserId: 'user_demo', type: 'PICKUP_DEPARTURE', status: 'VALIDATED', publicName: 'Gare Saint-Jean', addressLine: '1 Rue Charles Domercq', city: 'Bordeaux', postalCode: '33800', country: 'FR', lat: 44.8256, lng: -0.5561, createdAt: '2025-12-01T10:00:00Z', updatedAt: '2025-12-01T10:00:00Z' },
+              { id: 'bs_002', ownerUserId: 'user_demo', type: 'PICKUP_DEPARTURE', status: 'VALIDATED', publicName: 'Gare Matabiau', addressLine: '64 Bd Pierre Semard', city: 'Toulouse', postalCode: '31500', country: 'FR', lat: 43.6115, lng: 1.4538, createdAt: '2025-12-05T14:00:00Z', updatedAt: '2025-12-05T14:00:00Z' },
+              { id: 'bs_003', ownerUserId: 'user_demo', type: 'PICKUP_DEPARTURE', status: 'DRAFT', publicName: 'Gare Part-Dieu', addressLine: '5 Pl. Charles Béraudier', city: 'Lyon', postalCode: '69003', country: 'FR', lat: 45.7602, lng: 4.8596, createdAt: '2026-01-10T09:00:00Z', updatedAt: '2026-01-10T09:00:00Z' },
             ] as BusStop[],
             error: null,
           });

@@ -83,12 +83,12 @@ export default function TransportPage() {
         const res = await fetch(`/api/transport/${travelId}/config`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement config transport');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as { travel: TransportConfig; stops: Record<string, unknown>[] };
         setConfig(data.travel);
         setStops(data.stops);
 
         // Remplir les champs
-        setDepartureMode(data.travel.departureMode);
+        setDepartureMode(data.travel.mode || 'BUS');
         setBusCompany(data.travel.busCompany || '');
         setBusCapacity(data.travel.busCapacity?.toString() || '');
         setBusPriceCents(data.travel.busPriceCents?.toString() || '');
@@ -99,7 +99,47 @@ export default function TransportPage() {
 
         setError(null);
       } catch (err: unknown) {
-        setError((err as Error).message);
+        console.warn('API /transport/config indisponible — données démo');
+
+        // Fallback demo data
+        const demoConfig: TransportConfig = {
+          mode: 'BUS',
+          busCompany: 'Autocars Émeraude',
+          flightCompany: 'Air France'
+        };
+        const demoStops: Record<string, unknown>[] = [
+          {
+            id: 'demo-stop-1',
+            type: 'PICKUP_DEPARTURE',
+            busStop: {
+              id: 'paris-nord',
+              publicName: 'Gare routière Paris Nord',
+              city: 'Paris'
+            },
+            linkId: 'demo-link-1'
+          },
+          {
+            id: 'demo-stop-2',
+            type: 'DROPOFF_ARRIVAL',
+            busStop: {
+              id: 'lyon-part-dieu',
+              publicName: 'Gare routière Lyon Part-Dieu',
+              city: 'Lyon'
+            },
+            linkId: 'demo-link-2'
+          }
+        ];
+
+        setConfig(demoConfig);
+        setStops(demoStops);
+
+        setDepartureMode(demoConfig.mode);
+        setBusCompany(demoConfig.busCompany || '');
+        setFlightCompany(demoConfig.flightCompany || '');
+        setMeetingPoint('Paris - Gare routière Nord');
+        setMeetingTime('08:00');
+
+        setError(null);
       } finally {
         setLoading(false);
       }

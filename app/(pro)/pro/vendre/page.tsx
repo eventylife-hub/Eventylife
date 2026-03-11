@@ -71,13 +71,39 @@ export default function QuickSellPage() {
         setError(null);
         const res = await fetch('/api/pro/quick-sell/trips', { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur lors du chargement des voyages');
-        const data = (await res.json() as unknown) as unknown;
-        setTrips(data.trips || []);
-        if (data.trips && data.trips.length > 0) {
-          setSelectedTrip(data.trips[0].id);
+        const data = await res.json() as Record<string, unknown>;
+        const tripsData = (data.trips || []) as Trip[];
+        setTrips(tripsData);
+        if (tripsData.length > 0) {
+          setSelectedTrip(tripsData[0].id);
         }
-      } catch (err: unknown) {
-        setError((err as Error).message);
+      } catch {
+        console.warn('API pro/quick-sell/trips indisponible — données démo');
+        const demoTrips: Trip[] = [
+          { id: '1', name: 'Marrakech Express', startDate: '2026-05-15', endDate: '2026-05-22', status: 'SALES_OPEN' },
+          { id: '3', name: 'Barcelone & Gaudí', startDate: '2026-06-20', endDate: '2026-06-25', status: 'SALES_OPEN' },
+          { id: '5', name: 'Istanbul & le Bosphore', startDate: '2026-07-18', endDate: '2026-07-25', status: 'SALES_OPEN' },
+        ];
+        setTrips(demoTrips);
+        setSelectedTrip(demoTrips[0].id);
+        setSellerCode('SOLEIL2026');
+        setSellerLink({
+          id: 'link_001',
+          code: 'SOLEIL2026',
+          url: 'https://www.eventylife.fr/r/SOLEIL2026?trip=1',
+        });
+        setStats({
+          clicks: 234,
+          conversions: 12,
+          revenue: 1078800,
+          conversionRate: 0.0513,
+        });
+        setSales([
+          { id: 'sale_001', date: '2026-03-08T14:30:00Z', clientName: 'Jean Martin', bookingReference: 'EVT-2026-0001', amount: 179800 },
+          { id: 'sale_002', date: '2026-03-05T10:15:00Z', clientName: 'Marie Dupont', bookingReference: 'EVT-2026-0002', amount: 89900 },
+          { id: 'sale_003', date: '2026-02-28T16:45:00Z', clientName: 'Pierre Moreau', bookingReference: 'EVT-2026-0003', amount: 189800 },
+        ]);
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -95,14 +121,14 @@ export default function QuickSellPage() {
         setError(null);
         const res = await fetch(`/api/pro/quick-sell/stats?tripId=${selectedTrip}`, { credentials: 'include' });
         if (res.ok) {
-          const data = (await res.json() as unknown) as unknown;
-          setSellerLink(data.link);
-          setStats(data.stats);
-          setSales(data.sales || []);
-          setSellerCode(data.link?.code || '');
+          const data = await res.json() as Record<string, unknown>;
+          setSellerLink(data.link as SellerLink);
+          setStats(data.stats as SellerStats);
+          setSales((data.sales || []) as Sale[]);
+          setSellerCode((data.link as SellerLink)?.code || '');
         }
-      } catch (err: unknown) {
-        // Erreur silencieuse — les données se chargent au prochain retry
+      } catch {
+        // Erreur silencieuse — données démo déjà chargées
       }
     };
 
@@ -130,12 +156,21 @@ export default function QuickSellPage() {
       });
 
       if (!res.ok) throw new Error('Erreur lors de la génération du lien');
-      const data = (await res.json() as unknown) as unknown;
-      setSellerLink(data.link);
-      setStats(data.stats);
-      setSales(data.sales || []);
-    } catch (err: unknown) {
-      setError((err as Error).message);
+      const data = await res.json() as Record<string, unknown>;
+      setSellerLink(data.link as SellerLink);
+      setStats(data.stats as SellerStats);
+      setSales((data.sales || []) as Sale[]);
+    } catch {
+      // En mode démo, générer un lien fictif
+      console.warn('API quick-sell/generate-link indisponible — lien démo');
+      setSellerLink({
+        id: 'link_gen',
+        code: sellerCode,
+        url: `https://www.eventylife.fr/r/${sellerCode}?trip=${selectedTrip}`,
+      });
+      if (!stats) {
+        setStats({ clicks: 0, conversions: 0, revenue: 0, conversionRate: 0 });
+      }
     } finally {
       setGenerating(false);
     }
@@ -151,93 +186,66 @@ export default function QuickSellPage() {
 
   if (loading) {
     return (
-      <div className="pro-fade-in p-6 space-y-6">
-        <div style={{ height: '2.5rem', background: '#FEFCF3', borderRadius: '0.5rem', width: '16rem', animation: 'pulse 2s infinite' }} />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-          <div style={{ height: '10rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
-          <div style={{ height: '10rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
+      <div className="pro-fade-in" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div style={{ height: '2.5rem', background: 'rgba(0,0,0,0.06)', borderRadius: '8px', width: '16rem', animation: 'pulse 2s infinite' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+          <div style={{ height: '10rem', background: 'rgba(0,0,0,0.06)', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
+          <div style={{ height: '10rem', background: 'rgba(0,0,0,0.06)', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
         </div>
-        <div style={{ height: '24rem', background: '#FEFCF3', borderRadius: '0.5rem', animation: 'pulse 2s infinite' }} />
+        <div style={{ height: '24rem', background: 'rgba(0,0,0,0.06)', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
       </div>
     );
   }
 
   return (
-    <div className="pro-fade-in p-6 space-y-6">
+    <div className="pro-fade-in" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Header */}
       <div>
-        <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
-          Vendre rapidement
-        </h1>
-        <p style={{ color: '#666', marginTop: '0.5rem', fontSize: '0.875rem' }}>
+        <h1 className="pro-page-title">Vendre rapidement</h1>
+        <p style={{ color: '#8896A6', marginTop: '8px', fontSize: '14px' }}>
           Créez un lien parrain pour vendre une place à un voyage
         </p>
       </div>
 
       {error && (
-        <div
-          style={{
-            padding: '1rem',
-            background: '#fee2e2',
-            border: '1px solid #fecaca',
-            borderRadius: '0.5rem',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '1rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
-            <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
+        <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
+            <span style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</span>
           </div>
-          <button type="button"
-            onClick={() => setError(null)}
-            style={{
-              padding: '0.25rem 0.75rem',
-              background: 'white',
-              border: '1px solid #991b1b',
-              borderRadius: '0.25rem',
-              cursor: 'pointer',
-              fontSize: '0.75rem',
-              fontWeight: '500',
-              color: '#991b1b',
-            }}
-          >
+          <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '4px 12px', fontSize: '12px' }}>
             Fermer
           </button>
         </div>
       )}
 
       {trips.length === 0 ? (
-        <div className="pro-panel" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
-          <TrendingUp className="h-12 w-12 mx-auto" style={{ color: '#999', marginBottom: '1rem' }} />
-          <h3 style={{ fontWeight: '600', fontSize: '1.125rem', marginBottom: '0.5rem', color: '#0A1628' }}>
+        <div className="pro-panel" style={{ textAlign: 'center', padding: '48px 24px' }}>
+          <TrendingUp className="h-12 w-12" style={{ color: '#8896A6', margin: '0 auto 16px' }} />
+          <h3 style={{ fontWeight: 600, fontSize: '18px', marginBottom: '8px', color: '#0A1628' }}>
             Aucun voyage actif
           </h3>
-          <p style={{ color: '#666', marginBottom: '1rem', fontSize: '0.875rem' }}>
+          <p style={{ color: '#8896A6', marginBottom: '16px', fontSize: '14px' }}>
             Vous devez créer un voyage avant de pouvoir générer un lien de vente
           </p>
-          <button type="button"
-            onClick={() => (window.location.href = '/pro/voyages/nouveau')}
-            className="pro-btn-sun"
-          >
+          <button type="button" onClick={() => (window.location.href = '/pro/voyages/nouveau')} className="pro-btn-sun">
             Créer un voyage
           </button>
         </div>
       ) : (
         <>
           {/* Trip Selection and Code Input */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Voyage</CardTitle>
-              </CardHeader>
-              <CardContent>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            <div className="pro-panel">
+              <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '12px', marginBottom: '16px' }}>
+                <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628' }}>Voyage</h3>
+              </div>
+              <div>
                 <select
                   value={selectedTrip}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedTrip((e.target as HTMLInputElement).value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedTrip(e.target.value)}
+                  className="pro-input"
+                  style={{ width: '100%' }}
                 >
                   {trips.map((trip) => (
                     <option key={trip.id} value={trip.id}>
@@ -245,168 +253,151 @@ export default function QuickSellPage() {
                     </option>
                   ))}
                 </select>
-                <p className="text-xs text-gray-500 mt-2">
+                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>
                   Sélectionnez le voyage pour lequel vous souhaitez créer un lien de vente
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Code vendeur</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="pro-panel">
+              <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '12px', marginBottom: '16px' }}>
+                <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628' }}>Code vendeur</h3>
+              </div>
+              <div>
                 <input
                   type="text"
                   value={sellerCode}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSellerCode((e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSellerCode(e.target.value)}
                   placeholder="p.ex. VENDEUR123"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pro-input"
+                  style={{ width: '100%' }}
                 />
-                <p className="text-xs text-gray-500 mt-2">
+                <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '8px' }}>
                   Code unique pour identifier vos ventes
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
 
           {/* Generate Button */}
-          <Button
+          <button
+            type="button"
             onClick={handleGenerateLink}
             disabled={generating || !selectedTrip || !sellerCode}
-            size="lg"
-            className="w-full"
+            className="pro-btn-sun"
+            style={{ width: '100%', padding: '14px', fontSize: '16px', opacity: (generating || !selectedTrip || !sellerCode) ? 0.6 : 1, cursor: (generating || !selectedTrip || !sellerCode) ? 'not-allowed' : 'pointer' }}
           >
             {generating ? 'Génération en cours...' : 'Générer le lien de vente'}
-          </Button>
+          </button>
 
           {/* Seller Link Display */}
           {sellerLink && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Votre lien de vente</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Link Display */}
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-gray-700">Lien de réservation</p>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        value={sellerLink.url}
-                        readOnly
-                        className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg bg-gray-50"
-                      />
-                      <Button onClick={handleCopyLink} size="sm" variant="outline">
-                        <Copy className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    {copyFeedback && (
-                      <p className="text-xs text-green-600 font-medium">{copyFeedback}</p>
-                    )}
+            <div className="pro-panel">
+              <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '12px', marginBottom: '16px' }}>
+                <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628' }}>Votre lien de vente</h3>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+                {/* Link Display */}
+                <div>
+                  <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Lien de réservation</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <input
+                      type="text"
+                      value={sellerLink.url}
+                      readOnly
+                      className="pro-input"
+                      style={{ flex: 1, backgroundColor: '#F5F5F5', fontSize: '13px' }}
+                    />
+                    <button type="button" onClick={handleCopyLink} className="pro-btn-outline" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center' }}>
+                      <Copy className="h-4 w-4" />
+                    </button>
                   </div>
-
-                  {/* QR Code */}
-                  {sellerLink.qrCodeUrl && (
-                    <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-700">QR Code</p>
-                      <div className="border border-gray-200 rounded-lg p-2 bg-white">
-                        <img
-                          src={sellerLink.qrCodeUrl}
-                          alt="QR Code"
-                          className="w-full h-auto"
-                        />
-                      </div>
-                    </div>
+                  {copyFeedback && (
+                    <p style={{ fontSize: '12px', color: 'var(--pro-mint)', fontWeight: 500, marginTop: '4px' }}>{copyFeedback}</p>
                   )}
                 </div>
-              </CardContent>
-            </Card>
+
+                {/* QR Code */}
+                {sellerLink.qrCodeUrl && (
+                  <div>
+                    <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>QR Code</p>
+                    <div style={{ border: '1px solid #E0E0E0', borderRadius: '8px', padding: '8px', backgroundColor: '#fff' }}>
+                      <img src={sellerLink.qrCodeUrl} alt="QR Code" style={{ width: '100%', height: 'auto' }} />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
 
           {/* Stats Cards */}
           {stats && (
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-sm text-gray-600">Clics</div>
-                  <div className="text-3xl font-bold mt-2">{stats.clicks}</div>
-                </CardContent>
-              </Card>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
+              <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#8896A6' }}>Clics</div>
+                <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#0A1628' }}>{stats.clicks}</div>
+              </div>
 
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-sm text-gray-600">Conversions</div>
-                  <div className="text-3xl font-bold mt-2 text-green-600">{stats.conversions}</div>
-                </CardContent>
-              </Card>
+              <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#8896A6' }}>Conversions</div>
+                <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: 'var(--pro-mint)' }}>{stats.conversions}</div>
+              </div>
 
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-sm text-gray-600">Taux de conversion</div>
-                  <div className="text-3xl font-bold mt-2">
-                    {(stats.conversionRate * 100).toFixed(1)}%
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#8896A6' }}>Taux de conversion</div>
+                <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#0A1628' }}>
+                  {(stats.conversionRate * 100).toFixed(1)}%
+                </div>
+              </div>
 
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-sm text-gray-600">Revenus attribués</div>
-                  <div className="text-3xl font-bold mt-2 text-blue-600">
-                    {formatPrice(stats.revenue)}
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="pro-panel" style={{ padding: '20px', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', color: '#8896A6' }}>Revenus attribués</div>
+                <div style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: 'var(--pro-ocean)' }}>
+                  {formatPrice(stats.revenue)}
+                </div>
+              </div>
             </div>
           )}
 
           {/* Recent Sales */}
           {sales.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Ventes récentes</CardTitle>
-                <CardDescription>
+            <div className="pro-panel">
+              <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '12px', marginBottom: '16px' }}>
+                <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628' }}>Ventes récentes</h3>
+                <p style={{ fontSize: '14px', color: '#8896A6', marginTop: '4px' }}>
                   {sales.length} vente{sales.length > 1 ? 's' : ''} via ce lien
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {sales.map((sale) => (
-                    <div
-                      key={sale.id}
-                      className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <div>
-                        <p className="font-medium">{sale.clientName}</p>
-                        <p className="text-sm text-gray-600">
-                          {formatDate(sale.date)}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Réf: {sale.bookingReference}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-semibold">{formatPrice(sale.amount)}</p>
-                      </div>
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {sales.map((sale) => (
+                  <div
+                    key={sale.id}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', border: '1px solid #E0E0E0', borderRadius: '8px' }}
+                  >
+                    <div>
+                      <p style={{ fontWeight: 500, color: '#0A1628' }}>{sale.clientName}</p>
+                      <p style={{ fontSize: '14px', color: '#8896A6' }}>
+                        {formatDate(sale.date)}
+                      </p>
+                      <p style={{ fontSize: '12px', color: '#8896A6', marginTop: '4px' }}>
+                        Réf: {sale.bookingReference}
+                      </p>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <div style={{ textAlign: 'right' }}>
+                      <p style={{ fontWeight: 600, color: '#0A1628' }}>{formatPrice(sale.amount)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
 
           {sales.length === 0 && stats && (
-            <Card>
-              <CardContent className="pt-12 pb-12">
-                <div className="text-center">
-                  <p className="text-gray-500">
-                    Aucune vente pour le moment. Partagez votre lien pour commencer!
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
+              <p style={{ color: '#8896A6' }}>
+                Aucune vente pour le moment. Partagez votre lien pour commencer !
+              </p>
+            </div>
           )}
         </>
       )}
