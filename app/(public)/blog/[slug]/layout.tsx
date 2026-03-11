@@ -4,6 +4,26 @@ interface Props {
   params: { slug: string };
 }
 
+/** Pre-generate known blog article slugs at build time */
+export async function generateStaticParams() {
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+    const res = await fetch(`${apiUrl}/blog`, { next: { revalidate: 3600 } });
+    if (res.ok) {
+      const data = (await res.json()) as Array<{ slug: string }>;
+      return data.map((a) => ({ slug: a.slug }));
+    }
+  } catch {
+    // API indisponible au build
+  }
+
+  return [
+    { slug: 'voyager-en-groupe-avantages' },
+    { slug: 'preparer-son-voyage-en-bus' },
+    { slug: 'top-destinations-groupe-2026' },
+  ];
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = decodeURIComponent(params.slug);
   const titleFormatted = slug

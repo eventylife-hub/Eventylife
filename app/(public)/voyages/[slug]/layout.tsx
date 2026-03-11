@@ -1,5 +1,32 @@
 import type { Metadata } from 'next';
 
+/**
+ * Pre-generate known voyage slugs at build time.
+ * Falls back to on-demand ISR for unknown slugs.
+ */
+export async function generateStaticParams() {
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+    const res = await fetch(`${apiUrl}/travels`, { next: { revalidate: 3600 } });
+    if (res.ok) {
+      const data = (await res.json()) as Array<{ slug: string }>;
+      return data.map((t) => ({ slug: t.slug }));
+    }
+  } catch {
+    // API indisponible au build — fallback slugs connus
+  }
+
+  // Slugs de démonstration pour le build sans backend
+  return [
+    { slug: 'marrakech-express' },
+    { slug: 'rome-eternelle' },
+    { slug: 'barcelone-gaudi' },
+    { slug: 'iles-eoliennes-baroque-sicilien' },
+    { slug: 'istanbul-cappadoce' },
+    { slug: 'lisbonne-algarve' },
+  ];
+}
+
 export async function generateMetadata({
   params,
 }: {

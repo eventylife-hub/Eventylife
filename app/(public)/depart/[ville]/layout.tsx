@@ -5,6 +5,22 @@ interface Props {
   children: React.ReactNode;
 }
 
+/** Villes de départ connues — pre-built at compile time */
+export function generateStaticParams() {
+  return [
+    { ville: 'bordeaux' },
+    { ville: 'paris' },
+    { ville: 'lyon' },
+    { ville: 'marseille' },
+    { ville: 'toulouse' },
+    { ville: 'nantes' },
+    { ville: 'lille' },
+    { ville: 'strasbourg' },
+    { ville: 'montpellier' },
+    { ville: 'nice' },
+  ];
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ville = decodeURIComponent(params.ville);
   const villeFormatted = ville.charAt(0).toUpperCase() + ville.slice(1);
