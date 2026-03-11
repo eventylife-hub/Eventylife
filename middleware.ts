@@ -31,6 +31,7 @@ const PUBLIC_ROUTES = [
   '/partenaires',
   '/suivi-commande',
   '/confidentialite',
+  '/depart',
   // Auth — routes principales FR
   '/connexion',
   '/inscription',

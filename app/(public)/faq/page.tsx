@@ -2,15 +2,14 @@
 
 /**
  * Page FAQ Publique
- * Page statique avec FAQ accordéon en français
+ * Page statique avec FAQ accordéon en français + JSON-LD FAQPage
  */
 
-'use client';
-
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { FAQPageJsonLd } from '@/components/seo/json-ld';
 const C = {
   navy: '#1A1A2E',
   cream: '#FAF7F2',
@@ -213,8 +212,18 @@ export default function FAQPage() {
 
   const filteredFaqs = getFilteredFaqs();
 
+  // JSON-LD FAQPage — toutes les questions/réponses pour Google Rich Snippets
+  const allFaqItems = useMemo(() => {
+    const items: Array<{ question: string; answer: string }> = [];
+    Object.values(faqData).forEach((cat) => {
+      cat.items.forEach((item) => items.push({ question: item.q, answer: item.a }));
+    });
+    return items;
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
+      <FAQPageJsonLd items={allFaqItems} />
       <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Questions fréquentes',href:'/faq'}]} />
       {/* Header */}
       <div className="text-center mb-12 animate-fade-up">

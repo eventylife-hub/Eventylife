@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/header';
-import { Footer } from '@/components/layout/footer';
 import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
 /* Couleurs Design System v2 */
@@ -73,8 +71,6 @@ export default function HomePage() {
     <>
       {/* JSON-LD Organization pour Google */}
       <OrganizationJsonLd />
-
-      <Header />
 
       {/* ═══ HERO ═══ */}
       <section
@@ -516,7 +512,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Footer />
     </>
   );
 }
