@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import './homepage.css';
 
 /* ── Reveal on Scroll ── */
@@ -99,9 +100,9 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hero-mosaic">
-            <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=300&h=240&fit=crop" alt="Marrakech" loading="eager" />
-            <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=300&h=240&fit=crop" alt="Andalousie" loading="eager" />
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=280&fit=crop" alt="Plage" loading="eager" />
+            <Image src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=300&h=240&fit=crop" alt="Marrakech" width={300} height={240} priority sizes="(max-width: 768px) 50vw, 300px" />
+            <Image src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=300&h=240&fit=crop" alt="Andalousie" width={300} height={240} priority sizes="(max-width: 768px) 50vw, 300px" />
+            <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=280&fit=crop" alt="Plage" width={600} height={280} priority sizes="(max-width: 768px) 100vw, 600px" />
           </div>
         </div>
       </section>
@@ -133,7 +134,7 @@ export default function HomePage() {
             <Rv>
               <article className="tc">
                 <div className="tc-img">
-                  <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=640&h=440&fit=crop" alt="Marrakech" />
+                  <Image src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=640&h=440&fit=crop" alt="Marrakech" width={640} height={440} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                   <span className="tc-badge confirmed">Départ confirmé</span>
                   <FavBtn />
                   <div className="tc-transport-tag">🚌 + ✈️</div>
@@ -155,7 +156,7 @@ export default function HomePage() {
             <Rv>
               <article className="tc">
                 <div className="tc-img">
-                  <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=640&h=440&fit=crop" alt="Andalousie" />
+                  <Image src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=640&h=440&fit=crop" alt="Andalousie" width={640} height={440} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                   <span className="tc-badge confirmed">Départ confirmé</span>
                   <FavBtn />
                   <div className="tc-transport-tag">🚌 Grand tourisme</div>
@@ -177,7 +178,7 @@ export default function HomePage() {
             <Rv>
               <article className="tc">
                 <div className="tc-img">
-                  <img src="https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=640&h=440&fit=crop" alt="Tunisie" />
+                  <Image src="https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=640&h=440&fit=crop" alt="Tunisie" width={640} height={440} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                   <span className="tc-badge hot">🔥 6 places restantes</span>
                   <FavBtn />
                   <div className="tc-transport-tag">✈️ + 🚌</div>
@@ -199,7 +200,7 @@ export default function HomePage() {
             <Rv>
               <article className="tc">
                 <div className="tc-img">
-                  <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=640&h=440&fit=crop" alt="Italie" />
+                  <Image src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=640&h=440&fit=crop" alt="Italie" width={640} height={440} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                   <span className="tc-badge new">✨ Nouveau</span>
                   <FavBtn />
                   <div className="tc-transport-tag">🚌 Grand tourisme</div>
@@ -223,7 +224,7 @@ export default function HomePage() {
 
       {/* ═══ EMOTION BANNER ═══ */}
       <div className="emotion-strip">
-        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=600&fit=crop&q=80" alt="Route de voyage" loading="lazy" />
+        <Image src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=600&fit=crop&q=80" alt="Route de voyage" width={1920} height={600} loading="lazy" sizes="100vw" quality={80} />
         <div className="emotion-strip-text">
           <h2 className="font-display">Des souvenirs.<br />Pas de la logistique.</h2>
           <p>Garez-vous gratuitement à l&apos;arrêt ou laissez votre voiture au garage. Montez dans le bus et ramenez des étoiles dans les yeux.</p>
@@ -238,7 +239,7 @@ export default function HomePage() {
 
             <Rv><div className="why-card">
               <div className="wc-img">
-                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop" alt="Bus" loading="lazy" />
+                <Image src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop" alt="Bus" width={600} height={400} loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 <div className="wc-num c1 font-display">1</div>
                 <div className="wc-title-overlay font-display">Un arrêt de ramassage tout près de chez vous</div>
               </div>
@@ -247,7 +248,7 @@ export default function HomePage() {
 
             <Rv><div className="why-card">
               <div className="wc-img">
-                <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop" alt="Voiture" loading="lazy" />
+                <Image src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop" alt="Voiture" width={600} height={400} loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 <div className="wc-num c2 font-display">2</div>
                 <div className="wc-title-overlay font-display">Votre voiture reste au garage ou à l&apos;arrêt</div>
               </div>
@@ -256,7 +257,7 @@ export default function HomePage() {
 
             <Rv><div className="why-card">
               <div className="wc-img">
-                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Accompagnateur" loading="lazy" />
+                <Image src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Accompagnateur" width={600} height={400} loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 <div className="wc-num c3 font-display">3</div>
                 <div className="wc-title-overlay font-display">Un humain avec vous, pas un chatbot</div>
               </div>
@@ -265,7 +266,7 @@ export default function HomePage() {
 
             <Rv><div className="why-card">
               <div className="wc-img">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop" alt="Hôtel" loading="lazy" />
+                <Image src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop" alt="Hôtel" width={600} height={400} loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 <div className="wc-num c4 font-display">4</div>
                 <div className="wc-title-overlay font-display">Tout inclus, zéro surprise sur le prix</div>
               </div>
@@ -274,7 +275,7 @@ export default function HomePage() {
 
             <Rv><div className="why-card">
               <div className="wc-img">
-                <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&h=400&fit=crop" alt="Groupe" loading="lazy" />
+                <Image src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&h=400&fit=crop" alt="Groupe" width={600} height={400} loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 <div className="wc-num c5 font-display">5</div>
                 <div className="wc-title-overlay font-display">Le groupe sans la galère logistique</div>
               </div>
@@ -283,7 +284,7 @@ export default function HomePage() {
 
             <Rv><div className="why-card">
               <div className="wc-img">
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop" alt="Pro local" loading="lazy" />
+                <Image src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop" alt="Pro local" width={600} height={400} loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 <div className="wc-num c6 font-display">6</div>
                 <div className="wc-title-overlay font-display">Un pro près de chez vous, joignable</div>
               </div>
@@ -298,7 +299,7 @@ export default function HomePage() {
       <section className="sec-car">
         <div className="car-grid">
           <div className="car-photo">
-            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=960&h=700&fit=crop&q=80" alt="Belle voiture" loading="lazy" />
+            <Image src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=960&h=700&fit=crop&q=80" alt="Belle voiture" width={960} height={700} loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" quality={80} />
             <div className="car-floats">
               <div className="cf"><span className="big font-display">0 km</span><span className="sm">compteur</span></div>
               <div className="cf"><span className="big font-display">0 €</span><span className="sm">parking à l&apos;arrêt</span></div>
@@ -344,7 +345,7 @@ export default function HomePage() {
 
             <Rv><div className="hs">
               <div className="hs-circ" style={{ border: '3px solid var(--sun)', boxShadow: '0 4px 20px rgba(255,107,53,.2)' }}>
-                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=220&h=220&fit=crop" alt="Chercher" />
+                <Image src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=220&h=220&fit=crop" alt="Chercher" width={220} height={220} loading="lazy" sizes="220px" />
                 <div className="num n1 font-display">1</div>
               </div>
               <h4>Entrez votre ville</h4>
@@ -353,7 +354,7 @@ export default function HomePage() {
 
             <Rv><div className="hs">
               <div className="hs-circ" style={{ border: '3px solid var(--ocean)', boxShadow: '0 4px 20px rgba(0,119,182,.2)' }}>
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=220&h=220&fit=crop" alt="Réserver" />
+                <Image src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=220&h=220&fit=crop" alt="Réserver" width={220} height={220} loading="lazy" sizes="220px" />
                 <div className="num n2 font-display">2</div>
               </div>
               <h4>Réservez en 2 min</h4>
@@ -362,7 +363,7 @@ export default function HomePage() {
 
             <Rv><div className="hs">
               <div className="hs-circ" style={{ border: '3px solid var(--mint)', boxShadow: '0 4px 20px rgba(6,214,160,.2)' }}>
-                <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=220&h=220&fit=crop" alt="Bus" />
+                <Image src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=220&h=220&fit=crop" alt="Bus" width={220} height={220} loading="lazy" sizes="220px" />
                 <div className="num n3 font-display">3</div>
               </div>
               <h4>Le bus passe à votre arrêt</h4>
@@ -371,7 +372,7 @@ export default function HomePage() {
 
             <Rv><div className="hs">
               <div className="hs-circ" style={{ border: '3px solid var(--violet)', boxShadow: '0 4px 20px rgba(123,47,247,.2)' }}>
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=220&h=220&fit=crop" alt="Profiter" />
+                <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=220&h=220&fit=crop" alt="Profiter" width={220} height={220} loading="lazy" sizes="220px" />
                 <div className="num n4 font-display">4</div>
               </div>
               <h4>Profitez, c&apos;est tout</h4>
@@ -393,7 +394,7 @@ export default function HomePage() {
               <div className="testi-stars">★★★★★</div>
               <p>Le bus est passé à 5 min de la maison. On a dormi pendant le trajet, et à l&apos;arrivée tout était prêt. Ma voiture n&apos;a pas bougé !</p>
               <div className="testi-who">
-                <div className="testi-av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&h=88&fit=crop&crop=face" alt="Marie" /></div>
+                <div className="testi-av"><Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&h=88&fit=crop&crop=face" alt="Marie" width={88} height={88} loading="lazy" sizes="44px" /></div>
                 <div><div className="testi-name">Marie C.</div><div className="testi-trip">Andalousie — Mars 2025</div></div>
               </div>
             </div></Rv>
@@ -403,7 +404,7 @@ export default function HomePage() {
               <div className="testi-stars">★★★★★</div>
               <p>J&apos;avais peur du groupe. L&apos;accompagnateur était top, l&apos;ambiance géniale. Ne pas conduire 8 jours, c&apos;est un luxe incroyable.</p>
               <div className="testi-who">
-                <div className="testi-av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Karim" /></div>
+                <div className="testi-av"><Image src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Karim" width={88} height={88} loading="lazy" sizes="44px" /></div>
                 <div><div className="testi-name">Karim A.</div><div className="testi-trip">Marrakech — Février 2025</div></div>
               </div>
             </div></Rv>
@@ -413,7 +414,7 @@ export default function HomePage() {
               <div className="testi-stars">★★★★★</div>
               <p>Parking + essence + péages + stress… Eventy revient MOINS cher et je n&apos;ai rien eu à gérer. Pourquoi pas avant ?!</p>
               <div className="testi-who">
-                <div className="testi-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=88&h=88&fit=crop&crop=face" alt="Sophie" /></div>
+                <div className="testi-av"><Image src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=88&h=88&fit=crop&crop=face" alt="Sophie" width={88} height={88} loading="lazy" sizes="44px" /></div>
                 <div><div className="testi-name">Sophie B.</div><div className="testi-trip">Rome &amp; Florence — Avril 2025</div></div>
               </div>
             </div></Rv>
@@ -424,7 +425,7 @@ export default function HomePage() {
 
       {/* ═══ CTA FINAL ═══ */}
       <section className="sec-cta">
-        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&h=700&fit=crop&q=80" alt="Destination" loading="lazy" />
+        <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&h=700&fit=crop&q=80" alt="Destination" width={1920} height={700} loading="lazy" sizes="100vw" quality={80} />
         <div className="cta-box">
           <h2 className="font-display">Prêt à partir sans stress ?</h2>
           <p>Trouvez le voyage qui part près de chez vous. 2 minutes, c&apos;est réservé.</p>
