@@ -361,7 +361,7 @@ export default function EquipePage() {
         <div className="pro-panel-body">
           <div className="space-y-3">
             {PREREQUISITES.map((prereq) => {
-              const completed = prerequisites.find((p) => p.label === prereq.label)?.!!completed;
+              const completed = !!prerequisites.find((p) => p.label === prereq.label)?.completed;
               return (
                 <div key={prereq.label} className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg">
                   <input

@@ -90,7 +90,7 @@ export function MealPlanEditor({
         <div className="flex items-center gap-2">
           <Checkbox
             id="breakfast-enabled"
-            checked={plan.breakfast?.!!enabled}
+            checked={plan.breakfast?.enabled ?? false}
             onCheckedChange={(checked) =>
               handleMealChange(
                 'breakfast',
@@ -130,7 +130,7 @@ export function MealPlanEditor({
         <div className="flex items-center gap-2">
           <Checkbox
             id="lunch-enabled"
-            checked={plan.lunch?.!!enabled}
+            checked={plan.lunch?.enabled ?? false}
             onCheckedChange={(checked) =>
               handleMealChange('lunch', 'enabled', checked === true)
             }
@@ -166,7 +166,7 @@ export function MealPlanEditor({
         <div className="flex items-center gap-2">
           <Checkbox
             id="dinner-enabled"
-            checked={plan.dinner?.!!enabled}
+            checked={plan.dinner?.enabled ?? false}
             onCheckedChange={(checked) =>
               handleMealChange('dinner', 'enabled', checked === true)
             }

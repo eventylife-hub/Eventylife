@@ -527,7 +527,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
             type="checkbox"
-            checked={formData.!!acceptTerms}
+            checked={!!formData.acceptTerms}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptTerms: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
@@ -541,7 +541,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
             type="checkbox"
-            checked={formData.!!acceptCharter}
+            checked={!!formData.acceptCharter}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptCharter: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
@@ -555,7 +555,7 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
             type="checkbox"
-            checked={formData.!!acceptRGPD}
+            checked={!!formData.acceptRGPD}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptRGPD: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />

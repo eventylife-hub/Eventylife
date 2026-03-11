@@ -429,6 +429,7 @@ export default function AdminNotificationsPage() {
             Historique
           </button>
         </div>
+      </div>
 
       {/* Modal Envoi manuel */}
       {showManualSend && (
