@@ -81,8 +81,17 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   return (
     <div className={`${fraunces.variable} flex min-h-screen`} style={{ background: 'var(--admin-bg)' }}>
+      {/* Skip to content — Accessibilité */}
+      <a
+        href="#admin-main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-sm focus:font-medium"
+        style={{ backgroundColor: 'var(--admin-ocean, #0077B6)' }}
+      >
+        Aller au contenu principal
+      </a>
+
       {/* ═══ SIDEBAR ═══ */}
-      <aside className="admin-sidebar">
+      <aside className="admin-sidebar" role="navigation" aria-label="Navigation administration">
         {/* Logo */}
         <div className="admin-sidebar-logo">
           <div className="logo-dot">E</div>
@@ -150,7 +159,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </aside>
 
       {/* ═══ MAIN ═══ */}
-      <main className="admin-main">
+      <main className="admin-main" id="admin-main-content" role="main" aria-label="Contenu administration">
         <div className="admin-content">
           <PortalErrorBoundary portal="admin">
             {children}

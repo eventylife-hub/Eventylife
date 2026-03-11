@@ -67,8 +67,17 @@ export default function ProLayout({ children }: ProLayoutProps) {
 
   return (
     <div className={`${fraunces.variable} flex min-h-screen`} style={{ background: 'var(--pro-bg)' }}>
+      {/* Skip to content — Accessibilité */}
+      <a
+        href="#pro-main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-sm focus:font-medium"
+        style={{ backgroundColor: 'var(--pro-sun, #FF6B35)' }}
+      >
+        Aller au contenu principal
+      </a>
+
       {/* ═══ SIDEBAR ═══ */}
-      <aside className="pro-sidebar">
+      <aside className="pro-sidebar" role="navigation" aria-label="Navigation espace professionnel">
         {/* Logo */}
         <div className="pro-sidebar-logo">
           <div className="logo-dot">E</div>
@@ -133,7 +142,7 @@ export default function ProLayout({ children }: ProLayoutProps) {
       </aside>
 
       {/* ═══ MAIN ═══ */}
-      <main className="pro-main">
+      <main className="pro-main" id="pro-main-content" role="main" aria-label="Contenu espace professionnel">
         <div className="pro-content">
           <PortalErrorBoundary portal="pro">
             {children}

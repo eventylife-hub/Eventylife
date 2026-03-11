@@ -126,10 +126,21 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
   return (
     <div className="flex min-h-screen" style={{ background: C.cream }}>
+      {/* Skip to content — Accessibilité */}
+      <a
+        href="#client-main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-sm focus:font-medium"
+        style={{ backgroundColor: C.terra }}
+      >
+        Aller au contenu principal
+      </a>
+
       {/* Sidebar desktop */}
       <aside
         className="hidden md:flex w-64 flex-col sticky top-0 h-screen"
         style={{ background: C.navy }}
+        role="navigation"
+        aria-label="Navigation espace client"
       >
         <SidebarContent />
       </aside>
@@ -148,6 +159,8 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="p-2 rounded-lg"
           style={{ color: '#FAF7F2' }}
+          aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-expanded={mobileOpen}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {mobileOpen ? (
@@ -176,7 +189,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       )}
 
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto md:pt-0 pt-14">
+      <main className="flex-1 overflow-y-auto md:pt-0 pt-14" id="client-main-content" role="main" aria-label="Contenu espace client">
         <div className="p-6 sm:p-8">
           <PortalErrorBoundary portal="client">
             {children}
