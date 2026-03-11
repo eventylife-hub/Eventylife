@@ -5,11 +5,10 @@
  * Listing filtré des voyages selon la ville de départ
  */
 
-'use client';
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -166,10 +165,16 @@ export default function DepartPage() {
   }
 
   if (state === 'empty' || (state === 'data' && filteredTravels.length === 0)) {
+    const villeUp = ville.charAt(0).toUpperCase() + ville.slice(1);
     return (
       <div className="max-w-7xl mx-auto px-4 py-12">
+        <Breadcrumb items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Nos voyages', href: '/voyages' },
+          { name: `Départ ${villeUp}`, href: `/depart/${ville}` },
+        ]} />
         <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>
-          Voyages au départ de {ville.charAt(0).toUpperCase() + ville.slice(1)}
+          Voyages au départ de {villeUp}
         </h1>
         <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
           <p style={{ color: C.muted, marginBottom: '1rem', fontSize: '1.125rem' }}>
@@ -186,12 +191,21 @@ export default function DepartPage() {
     );
   }
 
+  const villeFormatted = ville.charAt(0).toUpperCase() + ville.slice(1);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
+      {/* Breadcrumb SEO */}
+      <Breadcrumb items={[
+        { name: 'Accueil', href: '/' },
+        { name: 'Nos voyages', href: '/voyages' },
+        { name: `Départ ${villeFormatted}`, href: `/depart/${ville}` },
+      ]} />
+
       {/* Titre */}
       <div className="mb-8">
         <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>
-          Voyages au départ de {ville.charAt(0).toUpperCase() + ville.slice(1)}
+          Voyages au départ de {villeFormatted}
         </h1>
         <p style={{ color: C.muted }}>
           Découvrez {filteredTravels.length} voyage{filteredTravels.length !== 1 ? 's' : ''} disponible{filteredTravels.length !== 1 ? 's' : ''}
