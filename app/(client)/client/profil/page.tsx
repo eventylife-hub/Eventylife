@@ -77,7 +77,7 @@ export default function ProfilePage() {
 
         if (!res.ok) throw new Error('Impossible de charger le profil');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as ProfileData;
         setProfile(data);
         setForm({
           firstName: data.firstName || '',
@@ -136,7 +136,7 @@ export default function ProfilePage() {
 
       if (!res.ok) throw new Error('Erreur lors de la mise à jour');
 
-      const updated = (await res.json() as unknown) as unknown;
+      const updated = (await res.json() as unknown) as ProfileData;
       setProfile(updated);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
@@ -175,7 +175,7 @@ export default function ProfilePage() {
       });
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as Record<string, unknown>;
         throw new Error(data.message || 'Mot de passe actuel incorrect');
       }
 
@@ -203,9 +203,9 @@ export default function ProfilePage() {
 
       if (!res.ok) throw new Error('Erreur lors de la configuration 2FA');
 
-      const data = (await res.json() as unknown) as unknown;
-      setTwoFASecret(data.secret);
-      setTwoFAQrUrl(data.qrCodeUrl);
+      const data = (await res.json() as unknown) as Record<string, unknown>;
+      setTwoFASecret(data.secret as string);
+      setTwoFAQrUrl(data.qrCodeUrl as string);
       setShow2FAModal(true);
     } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur');
@@ -225,7 +225,7 @@ export default function ProfilePage() {
       });
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as Record<string, unknown>;
         throw new Error(data.message || 'Code invalide');
       }
 

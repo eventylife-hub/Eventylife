@@ -55,7 +55,7 @@ export default function ProReservationsPage() {
 
       if (!res.ok) throw new Error('Erreur lors du chargement');
 
-      const data = (await res.json() as unknown) as unknown;
+      const data = (await res.json()) as Record<string, unknown>;
       setReservations(data?.items || data || []);
     } catch {
       console.warn('API pro/reservations indisponible — données démo');

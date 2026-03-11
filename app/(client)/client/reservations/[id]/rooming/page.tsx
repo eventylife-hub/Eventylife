@@ -91,7 +91,7 @@ export default function RoomingPage() {
           throw new Error('Impossible de charger les détails de rooming');
         }
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as RoomingData;
         setRooming(data);
         setPreferences({
           floor: data.preferences?.floor || '',
@@ -163,7 +163,7 @@ export default function RoomingPage() {
         throw new Error('Erreur lors de la sauvegarde des préférences');
       }
 
-      const data = (await res.json() as unknown) as unknown;
+      const data = (await res.json() as unknown) as RoomingData;
       setRooming(data);
       setPreferencesMessage({ type: 'success', text: 'Préférences sauvegardées avec succès !' });
       setTimeout(() => setPreferencesMessage(null), 5000);

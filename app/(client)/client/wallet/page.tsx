@@ -107,11 +107,11 @@ export default function WalletPage() {
       });
 
       if (!res.ok) {
-        const error = (await res.json() as unknown) as unknown;
+        const error = (await res.json() as unknown) as Record<string, unknown>;
         throw new Error(error.message || 'Erreur lors de la validation du voucher');
       }
 
-      const data = (await res.json() as unknown) as unknown;
+      const data = (await res.json() as unknown) as Wallet;
       setWallet(data);
       setVoucherCode('');
       setVoucherMessage({ type: 'success', text: 'Voucher appliqué avec succès !' });

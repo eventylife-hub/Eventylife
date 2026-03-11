@@ -59,7 +59,7 @@ export default function BookingDetailPage() {
 
         if (!res.ok) throw new Error('Impossible de charger la réservation');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as Booking;
         setBooking(data);
       } catch (err: unknown) {
         console.warn('API client/bookings indisponible — données démo');

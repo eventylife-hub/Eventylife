@@ -38,7 +38,7 @@ export default function InviterPage() {
           credentials: 'include',
         });
         if (!res.ok) throw new Error('Groupe non trouvé');
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json()) as Record<string, unknown>;
         setGroupe(data);
       } catch (err: unknown) {
         console.warn('API groups/stats indisponible — données démo');
@@ -88,7 +88,7 @@ export default function InviterPage() {
       });
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json()) as Record<string, unknown>;
         throw new Error(data.message || 'Erreur lors de l\'invitation');
       }
 
@@ -100,7 +100,7 @@ export default function InviterPage() {
         credentials: 'include',
       });
       if (statsRes.ok) {
-        const data = (await statsRes.json() as unknown) as unknown;
+        const data = (await statsRes.json() as unknown) as Record<string, unknown>;
         setGroupe(data);
       }
     } catch (err: unknown) {

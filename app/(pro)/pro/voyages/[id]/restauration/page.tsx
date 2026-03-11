@@ -248,7 +248,7 @@ export default function RestauratPage() {
     try {
       const res = await fetch(`/api/restauration/${travelId}/summary-pdf`, { credentials: 'include' });
       if (res.ok) {
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json()) as Record<string, unknown>;
         window.open(data.downloadUrl, '_blank');
       }
     } catch (err: unknown) {

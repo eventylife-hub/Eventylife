@@ -33,7 +33,7 @@ export default function ManifestPage() {
         const res = await fetch(`/api/transport/${travelId}/manifest`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement manifest');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json()) as Record<string, unknown>[];
         setManifest(data);
         setError(null);
       } catch (err: unknown) {

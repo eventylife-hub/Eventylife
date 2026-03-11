@@ -57,7 +57,7 @@ export default function GroupDetailPage() {
 
         if (!res.ok) throw new Error('Impossible de charger le groupe');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as TravelGroup;
         setGroup(data);
       } catch (err: unknown) {
         console.warn('API client/groups indisponible — données démo');
@@ -141,7 +141,7 @@ export default function GroupDetailPage() {
       const groupRes = await fetch(`/api/client/groups/${params.id}`, {
         credentials: 'include',
       });
-      const updatedGroup = (await groupRes.json() as unknown) as unknown;
+      const updatedGroup = (await groupRes.json() as unknown) as TravelGroup;
       setGroup(updatedGroup);
     } catch (err: unknown) {
       console.warn('API client/groups/messages indisponible — données démo');
@@ -397,7 +397,7 @@ export default function GroupDetailPage() {
                 credentials: 'include',
               });
               if (!res.ok) {
-                const data = (await res.json() as unknown) as unknown;
+                const data = (await res.json() as unknown) as Record<string, unknown>;
                 throw new Error(data.message || 'Erreur lors de la sortie du groupe');
               }
               router.push('/client/groupes');

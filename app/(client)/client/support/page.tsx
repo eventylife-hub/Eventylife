@@ -95,8 +95,8 @@ export default function SupportPage() {
 
       if (!res.ok) throw new Error('Impossible de charger les tickets');
 
-      const data = (await res.json() as unknown) as unknown;
-      setTickets(data?.items || data);
+      const data = (await res.json() as unknown) as Record<string, unknown>;
+      setTickets(data?.items || data as Ticket[]);
       setState('data');
     } catch (err: unknown) {
       console.warn('API indisponible, utilisation des données de démonstration');
@@ -134,7 +134,7 @@ export default function SupportPage() {
       });
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json() as unknown) as Record<string, unknown>;
         throw new Error(data.message || 'Erreur lors de la création du ticket');
       }
 

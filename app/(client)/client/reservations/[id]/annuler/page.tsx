@@ -63,7 +63,7 @@ export default function CancelReservationPage() {
         credentials: 'include',
       });
       if (calcResponse.ok) {
-        const calcData = (await calcResponse.json() as unknown) as unknown;
+        const calcData = (await calcResponse.json()) as Record<string, unknown>;
         setRefundCalc(calcData.data);
       }
 

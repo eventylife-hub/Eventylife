@@ -38,7 +38,7 @@ export default function PreferencesPage() {
       );
 
       if (!res.ok) {
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json()) as Record<string, unknown>;
         throw new Error(data.message || 'Erreur lors de la sauvegarde');
       }
 

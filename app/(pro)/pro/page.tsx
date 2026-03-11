@@ -57,7 +57,7 @@ export default function ProDashboard() {
       if (!res.ok) {
         throw new Error('Erreur lors du chargement des statistiques');
       }
-      const data = (await res.json() as unknown) as unknown;
+      const data = (await res.json() as unknown) as ProDashboardStats;
       setStats({
         activeVoyages: data.activeVoyages ?? 0,
         totalBookings: data.totalBookings ?? 0,

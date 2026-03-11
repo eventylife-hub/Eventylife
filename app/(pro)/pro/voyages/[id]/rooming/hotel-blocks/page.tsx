@@ -43,7 +43,7 @@ export default function HotelBlocksPage() {
         const res = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement blocs hôtel');
 
-        const data = (await res.json() as unknown) as unknown;
+        const data = (await res.json()) as Record<string, unknown>[];
         setBlocks(data);
         setError(null);
       } catch (err: unknown) {
@@ -128,7 +128,7 @@ export default function HotelBlocksPage() {
 
       // Recharger
       const blocRes = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
-      const updated = (await blocRes.json() as unknown) as unknown;
+      const updated = (await blocRes.json()) as Record<string, unknown>[];
       setBlocks(updated);
 
       setEditingBlockId(null);

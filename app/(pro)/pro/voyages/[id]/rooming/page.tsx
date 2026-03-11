@@ -72,8 +72,8 @@ export default function RoomingPage() {
           throw new Error('Erreur chargement rooming');
         }
 
-        const rooms = (await roomRes.json() as unknown) as unknown;
-        const statsData = (await statsRes.json() as unknown) as unknown;
+        const rooms = (await roomRes.json()) as Record<string, unknown>[];
+        const statsData = (await statsRes.json()) as RoomingStats;
 
         setRoomingList(rooms);
         setStats(statsData);
