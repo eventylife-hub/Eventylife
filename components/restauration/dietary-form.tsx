@@ -37,7 +37,7 @@ export function DietaryForm({
   const handleAllergyChange = (allergyId: string) => {
     setAllergies((prev) =>
       prev.includes(allergyId)
-        ? prev.filter((a) => a !== allergyId)
+        ? prev.filter((a: unknown) => a !== allergyId)
         : [...prev, allergyId]
     );
   };
@@ -116,7 +116,7 @@ export function DietaryForm({
           Allergies (optionnel)
         </Label>
         <div className="space-y-2">
-          {allergyOptions.map((option) => (
+          {allergyOptions.map((option: unknown) => (
             <div key={option.id} className="flex items-center gap-2">
               <Checkbox
                 id={option.id}
@@ -138,7 +138,7 @@ export function DietaryForm({
         <Textarea
           id="specialNotes"
           value={specialNotes}
-          onChange={(e) => setSpecialNotes(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpecialNotes((e.target as HTMLInputElement).value)}
           placeholder="Ex: Intolérances, préférences culinaires, etc."
           rows={3}
           disabled={loading}

@@ -37,7 +37,7 @@ export default function VerificationEmailPage() {
         setTimeout(() => {
           router.push('/connexion');
         }, 3000);
-      } catch (error) {
+      } catch (error: unknown) {
         setStatus('error');
         if (error instanceof Error) {
           setMessage(error.message || 'Erreur lors de la vérification');

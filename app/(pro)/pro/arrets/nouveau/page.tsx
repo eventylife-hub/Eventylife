@@ -64,12 +64,12 @@ export default function NouvelArretPage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la creation');
       }
 
       router.push('/pro/arrets');
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -119,7 +119,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.publicName}
-                  onChange={(e) => updateField('publicName', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('publicName', (e.target as HTMLInputElement).value)}
                   placeholder="Ex: Gare routiere de Lyon - Perrache"
                   className="pro-input"
                   required
@@ -136,7 +136,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.internalName}
-                  onChange={(e) => updateField('internalName', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('internalName', (e.target as HTMLInputElement).value)}
                   placeholder="Ex: Lyon-P"
                   className="pro-input"
                 />
@@ -148,7 +148,7 @@ export default function NouvelArretPage() {
                 </label>
                 <select
                   value={form.type}
-                  onChange={(e) => updateField('type', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('type', (e.target as HTMLInputElement).value)}
                   className="pro-input"
                 >
                   <option value="PICKUP_DEPARTURE">Point de depart (ramassage)</option>
@@ -170,7 +170,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.addressLine}
-                  onChange={(e) => updateField('addressLine', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('addressLine', (e.target as HTMLInputElement).value)}
                   placeholder="Numero et rue"
                   className="pro-input"
                   required
@@ -184,7 +184,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.city}
-                  onChange={(e) => updateField('city', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('city', (e.target as HTMLInputElement).value)}
                   placeholder="Lyon"
                   className="pro-input"
                   required
@@ -198,7 +198,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.postalCode}
-                  onChange={(e) => updateField('postalCode', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('postalCode', (e.target as HTMLInputElement).value)}
                   placeholder="69002"
                   className="pro-input"
                   required
@@ -212,7 +212,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.country}
-                  onChange={(e) => updateField('country', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('country', (e.target as HTMLInputElement).value)}
                   className="pro-input"
                 />
               </div>
@@ -224,7 +224,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.latitude}
-                  onChange={(e) => updateField('latitude', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('latitude', (e.target as HTMLInputElement).value)}
                   placeholder="45.7484"
                   className="pro-input"
                 />
@@ -237,7 +237,7 @@ export default function NouvelArretPage() {
                 <input
                   type="text"
                   value={form.longitude}
-                  onChange={(e) => updateField('longitude', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('longitude', (e.target as HTMLInputElement).value)}
                   placeholder="4.8422"
                   className="pro-input"
                 />
@@ -256,7 +256,7 @@ export default function NouvelArretPage() {
                 </label>
                 <textarea
                   value={form.instructions}
-                  onChange={(e) => updateField('instructions', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('instructions', (e.target as HTMLInputElement).value)}
                   rows={3}
                   placeholder="Ex: Rendez-vous sur le parking face a la gare, le bus sera identifie par le logo Eventy Life."
                   className="pro-input"
@@ -270,7 +270,7 @@ export default function NouvelArretPage() {
                 </label>
                 <textarea
                   value={form.parkingInfo}
-                  onChange={(e) => updateField('parkingInfo', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('parkingInfo', (e.target as HTMLInputElement).value)}
                   rows={2}
                   placeholder="Ex: Parking gratuit de 200 places a 50m."
                   className="pro-input"
@@ -284,7 +284,7 @@ export default function NouvelArretPage() {
                 </label>
                 <textarea
                   value={form.accessibilityInfo}
-                  onChange={(e) => updateField('accessibilityInfo', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('accessibilityInfo', (e.target as HTMLInputElement).value)}
                   rows={2}
                   placeholder="Ex: Acces PMR avec rampe pour fauteuil roulant."
                   className="pro-input"

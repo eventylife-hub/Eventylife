@@ -85,10 +85,10 @@ export default function WalletPage() {
           throw new Error('Impossible de charger le portefeuille');
         }
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setWallet(data);
         setState('data');
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
         setState('error');
       }
@@ -114,17 +114,17 @@ export default function WalletPage() {
       });
 
       if (!res.ok) {
-        const error = await res.json();
+        const error = (await res.json() as unknown) as unknown;
         throw new Error(error.message || 'Erreur lors de la validation du voucher');
       }
 
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setWallet(data);
       setVoucherCode('');
       setVoucherMessage({ type: 'success', text: 'Voucher appliqué avec succès !' });
 
       setTimeout(() => setVoucherMessage(null), 5000);
-    } catch (err) {
+    } catch (err: unknown) {
       setVoucherMessage({
         type: 'error',
         text: err instanceof Error ? err.message : 'Erreur lors de l\'application du voucher'
@@ -171,7 +171,7 @@ export default function WalletPage() {
 
         <div className="rounded-2xl border p-6" style={{ background: '#fff', borderColor: C.border }}>
           <div className="h-8 w-32 rounded-2xl skeleton mb-4" />
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 5 }).map((_: unknown, i: number) => (
             <div key={i} className="h-16 rounded-2xl skeleton mb-2" />
           ))}
         </div>
@@ -253,7 +253,7 @@ export default function WalletPage() {
             type="text"
             placeholder="Code voucher"
             value={voucherCode}
-            onChange={(e) => setVoucherCode(e.target.value.toUpperCase())}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVoucherCode((e.target as HTMLInputElement).value.toUpperCase())}
             disabled={voucherLoading}
             className="flex-1 min-w-48 px-4 py-2 rounded-xl text-sm transition-all"
             style={{
@@ -312,7 +312,7 @@ export default function WalletPage() {
             </label>
             <select
               value={typeFilter}
-              onChange={(e) => setTypeFilter(e.target.value as typeof typeFilter)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTypeFilter((e.target as HTMLInputElement).value as typeof typeFilter)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
                 border: `1.5px solid ${C.border}`,
@@ -335,7 +335,7 @@ export default function WalletPage() {
             <input
               type="date"
               value={dateFrom}
-              onChange={(e) => setDateFrom(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateFrom((e.target as HTMLInputElement).value)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
                 border: `1.5px solid ${C.border}`,
@@ -352,7 +352,7 @@ export default function WalletPage() {
             <input
               type="date"
               value={dateTo}
-              onChange={(e) => setDateTo(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateTo((e.target as HTMLInputElement).value)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
                 border: `1.5px solid ${C.border}`,
@@ -402,7 +402,7 @@ export default function WalletPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredTransactions.map((transaction, index) => (
+                {filteredTransactions.map((transaction: unknown, index: number) => (
                   <tr
                     key={transaction.id}
                     style={{

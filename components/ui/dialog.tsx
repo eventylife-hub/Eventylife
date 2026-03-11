@@ -35,7 +35,7 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
     <div
       ref={overlayRef}
       className="fixed inset-0 z-50 flex items-center justify-center"
-      onClick={(e) => {
+      onClick={(e: React.MouseEvent) => {
         if (e.target === overlayRef.current) onOpenChange(false);
       }}
     >

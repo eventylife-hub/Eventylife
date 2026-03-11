@@ -65,19 +65,19 @@ export default function FinancePage() {
         throw new Error('Impossible de charger les données financières');
       }
 
-      const revenueData = await revenueRes.json();
+      const revenueData = (await revenueRes.json() as unknown) as unknown;
       setStats(revenueData);
 
       if (paymentsRes.ok) {
-        const paymentsData = await paymentsRes.json();
+        const paymentsData = (await paymentsRes.json() as unknown) as unknown;
         setPayments(paymentsData.items || paymentsData || []);
       }
 
       if (refundsRes.ok) {
-        const refundsData = await refundsRes.json();
+        const refundsData = (await refundsRes.json() as unknown) as unknown;
         setRefunds(refundsData.items || refundsData || []);
       }
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur lors du chargement des données financières');
     } finally {
       setLoading(false);
@@ -106,7 +106,7 @@ export default function FinancePage() {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
       }
-    } catch (_err) {
+    } catch (_err: unknown) {
       // Export silencieux — erreur non critique
     }
   };
@@ -194,7 +194,7 @@ export default function FinancePage() {
       {/* KPIs */}
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="admin-kpi-card" style={{ background: 'var(--admin-surface-alt)', padding: '16px', borderRadius: '10px', height: '120px', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
           ))}
         </div>
@@ -239,9 +239,9 @@ export default function FinancePage() {
           </div>
           <div className="admin-panel-body">
             <div className="h-64 flex items-end justify-around gap-2">
-              {stats.monthlyData.map((item, index) => {
+              {stats.monthlyData.map((item: unknown, index: number) => {
                 const maxRevenue = Math.max(
-                  ...stats.monthlyData.map((s) => s.revenueCents),
+                  ...stats.monthlyData.map((s: unknown) => s.revenueCents),
                 );
                 return (
                   <div
@@ -293,7 +293,7 @@ export default function FinancePage() {
               </div>
             ) : (
               <div style={{ space: '8px' }}>
-                {payments.map((payment) => (
+                {payments.map((payment: unknown) => (
                   <div
                     key={payment.id}
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid var(--admin-border)' }}
@@ -346,7 +346,7 @@ export default function FinancePage() {
               </div>
             ) : (
               <div style={{ space: '8px' }}>
-                {refunds.map((refund) => (
+                {refunds.map((refund: unknown) => (
                   <div
                     key={refund.id}
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid var(--admin-border)' }}

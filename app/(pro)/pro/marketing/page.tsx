@@ -42,7 +42,7 @@ export default function MarketingPage() {
         setLoading(true);
         const res = await fetch('/api/marketing/dashboard', { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur lors du chargement');
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setDashboard(data);
       } catch (err: unknown) {
         // Gestion d'erreur typée
@@ -66,12 +66,12 @@ export default function MarketingPage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Marketing</h1>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '24px' }}>
-            {[...Array(3)].map((_, i) => (
+            {[...Array(3)].map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-24 rounded-lg" />
             ))}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
-            {[...Array(4)].map((_, i) => (
+            {[...Array(4)].map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-48 rounded-lg" />
             ))}
           </div>
@@ -155,7 +155,7 @@ export default function MarketingPage() {
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
-            {campaigns.map((campaign) => (
+            {campaigns.map((campaign: unknown) => (
               <CampaignCard key={campaign.id} campaign={campaign} />
             ))}
           </div>

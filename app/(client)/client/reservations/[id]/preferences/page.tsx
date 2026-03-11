@@ -53,7 +53,7 @@ export default function PreferencesPage() {
       );
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la sauvegarde');
       }
 

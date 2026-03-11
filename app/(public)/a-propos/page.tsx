@@ -77,7 +77,7 @@ export default function AboutPage() {
               title: 'Durabilité',
               description: 'Nous favorisons le tourisme responsable et durable'
             }
-          ].map((value, i) => (
+          ].map((value: unknown, i: number) => (
             <div key={i} style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px' }} className="p-6 text-center">
               <div className="text-5xl mb-4">{value.icon}</div>
               <h3 style={{ color: C.navy }} className="font-bold text-lg mb-2">{value.title}</h3>

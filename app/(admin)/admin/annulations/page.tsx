@@ -48,10 +48,10 @@ export default function CancellationsPage() {
         throw new Error('Erreur lors du chargement des annulations');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setCancellations(data.data || []);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur lors du chargement des annulations');
       setCancellations([]);
     } finally {
@@ -107,7 +107,7 @@ export default function CancellationsPage() {
         </div>
         <div className="admin-panel-body">
           <div className="flex gap-3 flex-wrap">
-            {['PENDING', 'APPROVED', 'REJECTED', 'REFUNDED'].map((status) => (
+            {['PENDING', 'APPROVED', 'REJECTED', 'REFUNDED'].map((status: unknown) => (
               <button
                 key={status}
                 onClick={() => setFilter(status)}

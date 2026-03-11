@@ -54,7 +54,7 @@ export default function ClientDocumentsPage() {
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
       }
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setDocuments(data);
 
       // Charger les URLs de téléchargement pour les images
@@ -65,18 +65,18 @@ export default function ClientDocumentsPage() {
               credentials: 'include',
             });
             if (urlResponse.ok) {
-              const { downloadUrl } = await urlResponse.json();
+              const { downloadUrl } = await urlResponse.json() as unknown;
               setDownloadingUrls((prev) => ({
                 ...prev,
                 [doc.id]: downloadUrl,
               }));
             }
-          } catch (err) {
+          } catch (err: unknown) {
             // Erreur silencieuse — URL non chargée pour ce document
           }
         }
       }
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     } finally {
@@ -91,7 +91,7 @@ export default function ClientDocumentsPage() {
       voyage: ['DOCUMENT_VOYAGE'],
     };
 
-    return documents.filter((doc) =>
+    return documents.filter((doc: unknown) =>
       typeMap[type].includes(doc.type),
     );
   };
@@ -105,11 +105,11 @@ export default function ClientDocumentsPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const { downloadUrl } = await response.json();
+          const { downloadUrl } = await response.json() as unknown;
           window.open(downloadUrl, '_blank');
         }
       }
-    } catch (err) {
+    } catch (err: unknown) {
       // Erreur silencieuse — téléchargement échoué
     }
   };
@@ -143,7 +143,7 @@ export default function ClientDocumentsPage() {
       {/* Onglets */}
       <div style={{ borderBottom: `1.5px solid ${C.border}` }}>
         <div className="flex gap-6 overflow-x-auto">
-          {tabs.map((tab) => {
+          {tabs.map((tab: unknown) => {
             const isActive = activeTab === tab.id;
             const count = getDocumentsByType(tab.id as DocumentTab).length;
 
@@ -187,7 +187,7 @@ export default function ClientDocumentsPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {currentDocs.map((doc) => (
+          {currentDocs.map((doc: unknown) => (
             <div
               key={doc.id}
               className="rounded-2xl p-6 flex items-center justify-between transition-all duration-300"
@@ -253,7 +253,7 @@ export default function ClientDocumentsPage() {
                   await handleDownload(doc.id);
                   await new Promise((r) => setTimeout(r, 500));
                 }
-              } catch (err) {
+              } catch (err: unknown) {
                 // Erreur silencieuse — téléchargement groupé échoué
               } finally {
                 setDownloadingAll(false);

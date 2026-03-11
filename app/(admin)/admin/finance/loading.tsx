@@ -12,7 +12,7 @@ export default function Loading() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 4 }).map((_, i) => (
+        {Array.from({ length: 4 }).map((_: unknown, i: number) => (
           <Skeleton key={i} className="h-32" />
         ))}
       </div>
@@ -25,7 +25,7 @@ export default function Loading() {
       <div className="space-y-4">
         <Skeleton className="h-10 w-48" />
         <div className="space-y-2">
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 5 }).map((_: unknown, i: number) => (
             <Skeleton key={i} className="h-12 w-full" />
           ))}
         </div>

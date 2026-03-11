@@ -98,7 +98,7 @@ export function LifecycleTimeline({
           {timeline.length === 0 ? (
             <p className="text-gray-600 text-center py-4">Aucun historique</p>
           ) : (
-            timeline.map((event, idx) => (
+            timeline.map((event: unknown, idx: number) => (
               <div key={idx} className="flex gap-4">
                 {/* Point de timeline */}
                 <div className="flex flex-col items-center">
@@ -140,7 +140,7 @@ export function LifecycleTimeline({
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Actions</h2>
           <div className="space-y-3">
-            {availableActions.map((action) => (
+            {availableActions.map((action: unknown) => (
               <div key={action.action}>
                 <button
                   onClick={() => setSelectedAction(action.action)}
@@ -160,7 +160,7 @@ export function LifecycleTimeline({
                   <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
                     <textarea
                       value={actionReason}
-                      onChange={(e) => setActionReason(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setActionReason((e.target as HTMLInputElement).value)}
                       placeholder="Motif / Raison..."
                       className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
                       rows={3}

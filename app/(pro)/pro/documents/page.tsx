@@ -46,9 +46,9 @@ export default function ProDocumentsPage() {
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
       }
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setDocuments(data);
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     } finally {
@@ -80,7 +80,7 @@ export default function ProDocumentsPage() {
       await fetchDocuments();
       setShowUploadModal(false);
       setSelectedDocType('');
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     } finally {
@@ -136,7 +136,7 @@ export default function ProDocumentsPage() {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     }
@@ -149,8 +149,8 @@ export default function ProDocumentsPage() {
   ];
 
   const groupedDocs = {
-    signed: documents.filter((d) => d.type === 'CONTRAT'),
-    admin: documents.filter((d) =>
+    signed: documents.filter((d: unknown) => d.type === 'CONTRAT'),
+    admin: documents.filter((d: unknown) =>
       ['PIECE_IDENTITE', 'KBIS'].includes(d.type),
     ),
   };
@@ -197,7 +197,7 @@ export default function ProDocumentsPage() {
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {groupedDocs.signed.map((doc) => (
+                  {groupedDocs.signed.map((doc: unknown) => (
                     <div
                       key={doc.id}
                       className="pro-panel"
@@ -260,7 +260,7 @@ export default function ProDocumentsPage() {
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {groupedDocs.admin.map((doc) => (
+                  {groupedDocs.admin.map((doc: unknown) => (
                     <div
                       key={doc.id}
                       className="pro-panel"
@@ -308,11 +308,11 @@ export default function ProDocumentsPage() {
               </label>
               <select
                 value={selectedDocType}
-                onChange={(e) => setSelectedDocType(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedDocType((e.target as HTMLInputElement).value)}
                 className="pro-input"
               >
                 <option value="">Sélectionnez un type</option>
-                {documentTypes.map((type) => (
+                {documentTypes.map((type: unknown) => (
                   <option key={type.id} value={type.id}>
                     {type.label}
                   </option>

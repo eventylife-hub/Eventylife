@@ -60,7 +60,7 @@ export function FeedbackForm({
           {label}
         </label>
         <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((star) => (
+          {[1, 2, 3, 4, 5].map((star: unknown) => (
             <button
               key={star}
               type="button"
@@ -124,7 +124,7 @@ export function FeedbackForm({
         </label>
         <textarea
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment((e.target as HTMLInputElement).value)}
           placeholder="Partagez vos impressions, ce que vous avez aimé, ce qui pourrait être amélioré..."
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           rows={6}

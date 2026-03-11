@@ -59,9 +59,9 @@ export default function AdminMarketingPage() {
         credentials: 'include',
       });
       if (!response.ok) throw new Error('Erreur lors du chargement des données marketing');
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setStats(data);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -88,7 +88,7 @@ export default function AdminMarketingPage() {
       } else {
         setError('Erreur lors de la sauvegarde des paramètres d\'attribution');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Attribution settings save error:', err);
       setError('Erreur lors de la sauvegarde des paramètres');
     } finally {
@@ -120,7 +120,7 @@ export default function AdminMarketingPage() {
         setTimeout(() => setActionMessage(null), 3000);
         await fetchStats();
       }
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'action');
     }
   };
@@ -190,7 +190,7 @@ export default function AdminMarketingPage() {
           <Skeleton className="h-5 w-96 mt-2" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <Card key={i}>
               <CardContent className="p-6 h-32 bg-gray-100 animate-pulse rounded" />
             </Card>
@@ -326,7 +326,7 @@ export default function AdminMarketingPage() {
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-3">
-                {stats.leadSources.map((source, index) => (
+                {stats.leadSources.map((source: unknown, index: number) => (
                   <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div className="flex-1">
                       <div className="font-medium text-gray-900">{source.name}</div>
@@ -369,7 +369,7 @@ export default function AdminMarketingPage() {
                       name="attribution"
                       value="first-touch"
                       checked={attributionModel === 'first-touch'}
-                      onChange={(e) => setAttributionModel(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAttributionModel((e.target as HTMLInputElement).value)}
                       className="w-4 h-4"
                     />
                     <div>
@@ -383,7 +383,7 @@ export default function AdminMarketingPage() {
                       name="attribution"
                       value="last-touch"
                       checked={attributionModel === 'last-touch'}
-                      onChange={(e) => setAttributionModel(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAttributionModel((e.target as HTMLInputElement).value)}
                       className="w-4 h-4"
                     />
                     <div>
@@ -397,7 +397,7 @@ export default function AdminMarketingPage() {
                       name="attribution"
                       value="linear"
                       checked={attributionModel === 'linear'}
-                      onChange={(e) => setAttributionModel(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAttributionModel((e.target as HTMLInputElement).value)}
                       className="w-4 h-4"
                     />
                     <div>

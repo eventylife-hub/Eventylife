@@ -55,7 +55,7 @@ export default function TravelsPage() {
           status: (STATUS_MAP[activeTab] || 'DRAFT').split(','),
           search: search || undefined,
         });
-      } catch (_error) {
+      } catch (_error: unknown) {
         setError('Une erreur est survenue lors du chargement des voyages');
       } finally {
         setLoading(false);
@@ -64,7 +64,7 @@ export default function TravelsPage() {
     handleFetch();
   }, [activeTab, search]);
 
-  const filteredTravels = travels.filter((t) => {
+  const filteredTravels = travels.filter((t: unknown) => {
     if (search) {
       return (
         (t?.title as string)?.toLowerCase().includes(search.toLowerCase()) ||
@@ -116,7 +116,7 @@ export default function TravelsPage() {
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
             placeholder="Rechercher un voyage..."
             className="pro-input"
             style={{ width: '100%' }}
@@ -126,7 +126,7 @@ export default function TravelsPage() {
         {/* Tabs and View Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
-            {TABS.map((tab) => (
+            {TABS.map((tab: unknown) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -237,7 +237,7 @@ export default function TravelsPage() {
             </div>
             {viewMode === 'grid' ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[...Array(6)].map((_, idx) => (
+                {[...Array(6)].map((_: unknown, idx: number) => (
                   <div key={idx} className="rounded-lg overflow-hidden border border-slate-200">
                     <Skeleton className="h-48" />
                     <div className="p-6 space-y-4">
@@ -253,7 +253,7 @@ export default function TravelsPage() {
             ) : (
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                 <div className="space-y-2">
-                  {[...Array(5)].map((_, idx) => (
+                  {[...Array(5)].map((_: unknown, idx: number) => (
                     <Skeleton key={idx} className="h-12 rounded-none border-b" />
                   ))}
                 </div>
@@ -267,7 +267,7 @@ export default function TravelsPage() {
           <>
             {viewMode === 'grid' ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                {filteredTravels.map((travel) => (
+                {filteredTravels.map((travel: unknown) => (
                   <Link
                     key={travel.id}
                     href={`/pro/voyages/${travel.id}`}
@@ -342,7 +342,7 @@ export default function TravelsPage() {
                     </tr>
                   </thead>
                   <tbody style={{ borderTop: '1px solid #E8F7FC' }}>
-                    {filteredTravels.map((travel) => (
+                    {filteredTravels.map((travel: unknown) => (
                       <tr key={travel.id} style={{ borderBottom: '1px solid #E8F7FC', transition: 'background-color 0.2s' }}
                         onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F5F5')}
                         onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}

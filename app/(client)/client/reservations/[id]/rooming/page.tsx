@@ -106,7 +106,7 @@ export default function RoomingPage() {
           throw new Error('Impossible de charger les détails de rooming');
         }
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setRooming(data);
         setPreferences({
           floor: data.preferences?.floor || '',
@@ -114,7 +114,7 @@ export default function RoomingPage() {
           specialRequests: data.preferences?.specialRequests || ''
         });
         setState('data');
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
         setState('error');
       }
@@ -139,11 +139,11 @@ export default function RoomingPage() {
         throw new Error('Erreur lors de la sauvegarde des préférences');
       }
 
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setRooming(data);
       setPreferencesMessage({ type: 'success', text: 'Préférences sauvegardées avec succès !' });
       setTimeout(() => setPreferencesMessage(null), 5000);
-    } catch (err) {
+    } catch (err: unknown) {
       setPreferencesMessage({
         type: 'error',
         text: err instanceof Error ? err.message : 'Erreur'
@@ -178,7 +178,7 @@ export default function RoomingPage() {
       setDocuments([]);
       setDocumentsMessage({ type: 'success', text: 'Documents uploadés avec succès !' });
       setTimeout(() => setDocumentsMessage(null), 5000);
-    } catch (err) {
+    } catch (err: unknown) {
       setDocumentsMessage({
         type: 'error',
         text: err instanceof Error ? err.message : 'Erreur'
@@ -272,7 +272,7 @@ export default function RoomingPage() {
 
           {rooming.occupants.length > 0 ? (
             <div className="space-y-3">
-              {rooming.occupants.map((occupant) => (
+              {rooming.occupants.map((occupant: unknown) => (
                 <div
                   key={occupant.id}
                   className="flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg border"
@@ -325,7 +325,7 @@ export default function RoomingPage() {
               <Input
                 placeholder="ex: Rez-de-chaussée, 1er étage..."
                 value={preferences.floor}
-                onChange={(e) => setPreferences({ ...preferences, floor: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, floor: (e.target as HTMLInputElement).value })}
                 disabled={isCutoffPassed}
                 style={{
                   backgroundColor: 'white',
@@ -342,7 +342,7 @@ export default function RoomingPage() {
               </label>
               <select
                 value={preferences.bedType}
-                onChange={(e) => setPreferences({ ...preferences, bedType: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, bedType: (e.target as HTMLInputElement).value })}
                 disabled={isCutoffPassed}
                 style={{
                   width: '100%',
@@ -367,7 +367,7 @@ export default function RoomingPage() {
               <textarea
                 placeholder="ex: Hypoallergénique, lit surélevé, etc."
                 value={preferences.specialRequests}
-                onChange={(e) => setPreferences({ ...preferences, specialRequests: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, specialRequests: (e.target as HTMLInputElement).value })}
                 disabled={isCutoffPassed}
                 rows={3}
                 style={{
@@ -425,7 +425,7 @@ export default function RoomingPage() {
                     type="file"
                     multiple
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => setDocuments(Array.from(e.target.files || []))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDocuments(Array.from(e.target.files || []))}
                     className="hidden"
                   />
                 </label>
@@ -436,7 +436,7 @@ export default function RoomingPage() {
                   <p className="font-medium text-gray-900 text-sm">
                     Fichiers sélectionnés ({documents.length}):
                   </p>
-                  {documents.map((doc, idx) => (
+                  {documents.map((doc: unknown, idx: number) => (
                     <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded">
                       <span className="text-sm text-gray-700">{doc.name}</span>
                       <button

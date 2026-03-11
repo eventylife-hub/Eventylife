@@ -79,10 +79,10 @@ export default function DepartPage() {
           return;
         }
 
-        const data = await res.json();
-        setTravels(data.items || []);
+        const data = (await res.json() as unknown) as unknown;
+        setTravels(data?.items || []);
         setState(data.items?.length > 0 ? 'data' : 'empty');
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
         setState('error');
       }
@@ -146,7 +146,7 @@ export default function DepartPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Skeleton className="h-96 w-full rounded-lg" />
           <div className="col-span-2 grid grid-cols-2 gap-6">
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 4 }).map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-80 w-full rounded-lg" />
             ))}
           </div>
@@ -216,13 +216,13 @@ export default function DepartPage() {
                 <Input
                   type="date"
                   value={minDate}
-                  onChange={(e) => setMinDate(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinDate((e.target as HTMLInputElement).value)}
                   placeholder="De"
                 />
                 <Input
                   type="date"
                   value={maxDate}
-                  onChange={(e) => setMaxDate(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxDate((e.target as HTMLInputElement).value)}
                   placeholder="À"
                 />
               </div>
@@ -237,12 +237,12 @@ export default function DepartPage() {
                 <Input
                   type="number"
                   placeholder="Min"
-                  onChange={(e) => setMinPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
                 />
                 <Input
                   type="number"
                   placeholder="Max"
-                  onChange={(e) => setMaxPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
                 />
               </div>
             </div>
@@ -256,12 +256,12 @@ export default function DepartPage() {
                 <Input
                   type="number"
                   placeholder="Min"
-                  onChange={(e) => setMinDuration(e.target.value ? parseInt(e.target.value) : null)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinDuration((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) : null)}
                 />
                 <Input
                   type="number"
                   placeholder="Max"
-                  onChange={(e) => setMaxDuration(e.target.value ? parseInt(e.target.value) : null)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxDuration((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) : null)}
                 />
               </div>
             </div>
@@ -311,7 +311,7 @@ export default function DepartPage() {
         {/* Results Grid */}
         <div className="lg:col-span-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredTravels.map((voyage) => {
+            {filteredTravels.map((voyage: unknown) => {
               const available = voyage.capacity - voyage.currentBookings;
 
               return (

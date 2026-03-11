@@ -57,13 +57,13 @@ export default function AdminRoomingPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = await response.json();
+          const data = (await response.json() as unknown) as unknown;
           setRooming(data);
           if (!selectedTrip && data.trips.length > 0) {
             setSelectedTrip(data.trips[0].id);
           }
         }
-      } catch (_error) {
+      } catch (_error: unknown) {
         // Erreur silencieuse — les données se chargent au prochain retry
       } finally {
         setLoading(false);
@@ -90,7 +90,7 @@ export default function AdminRoomingPage() {
         a.download = `rooming-${new Date().toISOString().split('T')[0]}.${format}`;
         a.click();
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setExportError('Erreur lors de l\'export. Veuillez réessayer.');
       setTimeout(() => setExportError(null), 5000);
     }
@@ -130,7 +130,7 @@ export default function AdminRoomingPage() {
           <div className="text-sm">
             {guestList.length > 0 ? (
               <ul>
-                {guestList.slice(0, 2).map((guest, i) => (
+                {guestList.slice(0, 2).map((guest: unknown, i: number) => (
                   <li key={i}>{guest}</li>
                 ))}
                 {guestList.length > 2 && <li className="text-gray-500">+{guestList.length - 2} autre(s)</li>}
@@ -172,7 +172,7 @@ export default function AdminRoomingPage() {
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="admin-panel p-6 space-y-4">
               <div className="h-4 bg-gray-200 rounded animate-pulse" />
               <div className="h-8 bg-gray-200 rounded animate-pulse" />
@@ -182,7 +182,7 @@ export default function AdminRoomingPage() {
         </div>
         <div className="admin-panel p-6">
           <div className="space-y-3">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_: unknown, i: number) => (
               <div key={i} className="h-12 bg-gray-200 rounded animate-pulse" />
             ))}
           </div>
@@ -258,7 +258,7 @@ export default function AdminRoomingPage() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {rooming.trips.map((trip) => (
+                  {rooming.trips.map((trip: unknown) => (
                     <SelectItem key={trip.id} value={trip.id}>
                       {trip.name}
                     </SelectItem>
@@ -360,7 +360,7 @@ export default function AdminRoomingPage() {
         </div>
         <div className="admin-panel-body p-6">
           <div className="space-y-3">
-            {rooming.trips.map((trip) => (
+            {rooming.trips.map((trip: unknown) => (
               <div key={trip.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <span className="font-medium text-gray-900">{trip.name}</span>
                 <span className="text-sm text-gray-600">
@@ -411,7 +411,7 @@ export default function AdminRoomingPage() {
                 <div>
                   <label className="text-xs font-medium text-gray-600">Clients logés</label>
                   <ul className="mt-2 space-y-1">
-                    {selectedRoom.guests.map((guest, idx) => (
+                    {selectedRoom.guests.map((guest: unknown, idx: number) => (
                       <li key={idx} className="text-sm text-gray-700">• {guest}</li>
                     ))}
                   </ul>

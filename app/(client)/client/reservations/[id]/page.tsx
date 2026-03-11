@@ -74,9 +74,9 @@ export default function BookingDetailPage() {
 
         if (!res.ok) throw new Error('Impossible de charger la réservation');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setBooking(data);
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
       } finally {
         setLoading(false);
@@ -102,7 +102,7 @@ export default function BookingDetailPage() {
           <h1 className="font-display text-2xl sm:text-3xl font-bold mt-4" style={{ color: C.navy }}>Détails de la réservation</h1>
         </div>
         <div className="space-y-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="h-24 rounded-2xl skeleton" />
           ))}
         </div>
@@ -230,7 +230,7 @@ export default function BookingDetailPage() {
         <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Chambres réservées</h2>
         {booking.rooms && booking.rooms.length > 0 ? (
           <div className="space-y-3">
-            {booking.rooms.map((room) => (
+            {booking.rooms.map((room: unknown) => (
               <div key={room.id} className="rounded-xl p-4" style={{ background: C.cream }}>
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-semibold text-sm" style={{ color: C.navy }}>{room.type}</h3>
@@ -240,7 +240,7 @@ export default function BookingDetailPage() {
                   <p className="text-xs mb-2" style={{ color: C.muted }}>Participants:</p>
                   {room.participants.length > 0 ? (
                     <ul className="space-y-1">
-                      {room.participants.map((p) => (
+                      {room.participants.map((p: unknown) => (
                         <li key={p.id} className="text-xs" style={{ color: C.navy }}>
                           • {p.firstName} {p.lastName} ({p.email})
                         </li>
@@ -263,7 +263,7 @@ export default function BookingDetailPage() {
         <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Historique des paiements</h2>
         {booking.payments && booking.payments.length > 0 ? (
           <div className="space-y-2">
-            {booking.payments.map((payment) => (
+            {booking.payments.map((payment: unknown) => (
               <div key={payment.id} className="flex justify-between items-center py-3 px-3 rounded-lg" style={{ background: C.cream }}>
                 <div>
                   <p className="text-xs" style={{ color: C.navy }}>

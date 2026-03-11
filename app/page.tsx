@@ -170,7 +170,7 @@ function TrustPills() {
   return (
     <div className="max-w-[1360px] mx-auto -mt-5 relative z-10 px-6">
       <div className="flex gap-2.5 overflow-x-auto py-1.5 scrollbar-hide">
-        {pills.map((p, i) => (
+        {pills.map((p: unknown, i: number) => (
           <div key={i} className="flex-shrink-0 flex items-center gap-2 bg-white rounded-full px-5 py-2.5 shadow-[0_4px_24px_rgba(10,22,40,0.08)] text-[13px] font-semibold text-[#1B2940] hover:shadow-[0_8px_32px_rgba(255,107,53,0.2)] hover:-translate-y-0.5 transition-all cursor-default">
             <span className="text-xl">{p.emoji}</span>
             {p.text} <span className="text-[#FF6B35] font-bold">{p.highlight}</span> {p.suffix || ''}
@@ -253,7 +253,7 @@ function TripsSection() {
         </div>
         <p className="text-[15px] text-gray-500 mb-5">Départs confirmés avec ramassage dans votre zone. Réservez en 2 minutes.</p>
         <div className="flex gap-1.5 mb-6 overflow-x-auto pb-1 scrollbar-hide">
-          {chips.map((chip, i) => (
+          {chips.map((chip: unknown, i: number) => (
             <button key={chip} onClick={() => setActiveChip(i)} className={`flex-shrink-0 px-4 py-2 rounded-full text-[13px] font-semibold border-[1.5px] cursor-pointer transition-all ${i === activeChip ? 'text-white border-transparent shadow-[0_4px_16px_rgba(0,119,182,0.25)]' : 'bg-white text-gray-500 border-gray-100 hover:border-[#0077B6] hover:text-[#0077B6]'}`} style={i === activeChip ? { background: 'linear-gradient(135deg, #0077B6, #00B4D8)' } : {}}>
               {chip}
             </button>
@@ -344,7 +344,7 @@ function CarSection() {
           <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=960&h=700&fit=crop&q=80" alt="Belle voiture" className="w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(90deg, transparent 50%, #0A1628)' }} />
           <div className="absolute bottom-6 left-6 z-[3] flex gap-2.5 flex-wrap">
-            {[{ big: '0 km', sm: 'compteur' }, { big: '0 €', sm: "parking" }, { big: '0', sm: 'risque' }].map((s, i) => (
+            {[{ big: '0 km', sm: 'compteur' }, { big: '0 €', sm: "parking" }, { big: '0', sm: 'risque' }].map((s: unknown, i: number) => (
               <div key={i} className="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[14px] px-4 py-3.5 text-center min-w-[90px]">
                 <span className="font-display text-[28px] font-black text-[#FF6B35] block">{s.big}</span>
                 <span className="text-[10px] text-white/50 block mt-0.5">{s.sm}</span>
@@ -361,7 +361,7 @@ function CarSection() {
           </h2>
           <p className="text-[15px] text-white/60 leading-relaxed mb-8">Plus besoin de traverser la France au volant. Zéro fatigue, zéro risque.</p>
           <div className="grid gap-5">
-            {points.map((p, i) => (
+            {points.map((p: unknown, i: number) => (
               <div key={i} className="flex items-start gap-3.5">
                 <div className={`w-11 h-11 flex-shrink-0 rounded-xl flex items-center justify-center text-xl ${p.color}`}>{p.icon}</div>
                 <div>
@@ -432,7 +432,7 @@ function TestimonialsSection() {
           Ils sont <em className="text-[#FF6B35] italic">partis avec nous</em>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8">
-          {testimonials.map((t, i) => (
+          {testimonials.map((t: unknown, i: number) => (
             <div key={i} className={`px-6 py-7 rounded-[20px] relative border hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(10,22,40,0.08)] transition-all ${t.bg}`}>
               <div className={`font-display text-[56px] leading-none opacity-15 absolute top-3.5 right-5 ${t.quoteColor}`}>&ldquo;</div>
               <div className={`text-[15px] mb-3.5 tracking-wider ${t.starColor}`}>★★★★★</div>

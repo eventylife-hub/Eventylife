@@ -58,11 +58,11 @@ export default function CampagneDetailPage() {
 
         if (!campRes.ok) throw new Error('Campagne non trouvée');
 
-        const campData = await campRes.json();
+        const campData = (await campRes.json() as unknown) as unknown;
         setCampaign(campData);
 
         if (metricsRes.ok) {
-          const metricsData = await metricsRes.json();
+          const metricsData = (await metricsRes.json() as unknown) as unknown;
           setMetrics(metricsData);
         }
       } catch (err: unknown) {
@@ -89,7 +89,7 @@ export default function CampagneDetailPage() {
       });
 
       if (!res.ok) throw new Error('Erreur lors du lancement');
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setCampaign(data);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -111,7 +111,7 @@ export default function CampagneDetailPage() {
       });
 
       if (!res.ok) throw new Error('Erreur lors de la duplication');
-      const newCampaign = await res.json();
+      const newCampaign = (await res.json() as unknown) as unknown;
       router.push(`/pro/marketing/${newCampaign.id}`);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -133,7 +133,7 @@ export default function CampagneDetailPage() {
       });
 
       if (!res.ok) throw new Error('Erreur lors de la fermeture');
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setCampaign(data);
     } catch (err: unknown) {
       if (err instanceof Error) {

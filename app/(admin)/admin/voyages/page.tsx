@@ -57,7 +57,7 @@ export default function VoyagesPage() {
 
       const response = await fetch(endpoint, { credentials: 'include' });
       if (response.ok) {
-        let data = await response.json();
+        let data = (await response.json() as unknown) as unknown;
         data = data.data || data;
 
         // Filter by search query if present
@@ -71,7 +71,7 @@ export default function VoyagesPage() {
       } else {
         setError('Erreur lors du chargement des voyages');
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setError('Impossible de charger les voyages');
     } finally {
       setLoading(false);
@@ -146,11 +146,11 @@ export default function VoyagesPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        setTravels(travels.filter((t) => t.id !== selectedTravel.id));
+        setTravels(travels.filter((t: unknown) => t.id !== selectedTravel.id));
         setShowApprovalModal(false);
         setSelectedTravel(null);
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       // Erreur silencieuse — retry au prochain clic
     }
   };
@@ -167,11 +167,11 @@ export default function VoyagesPage() {
       });
 
       if (response.ok) {
-        setTravels(travels.filter((t) => t.id !== selectedTravel.id));
+        setTravels(travels.filter((t: unknown) => t.id !== selectedTravel.id));
         setShowApprovalModal(false);
         setSelectedTravel(null);
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       // Erreur silencieuse — retry au prochain clic
     }
   };
@@ -193,7 +193,7 @@ export default function VoyagesPage() {
             },
           },
         ]
-      : []),
+      : unknown[]),
   ];
 
   return (
@@ -245,7 +245,7 @@ export default function VoyagesPage() {
                 type="text"
                 placeholder="Rechercher un voyage..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery((e.target as HTMLInputElement).value)}
                 className="admin-input pl-10 w-full"
               />
             </div>
@@ -254,18 +254,18 @@ export default function VoyagesPage() {
         <div className="admin-panel-body p-6 pt-0">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
-              {statuses.map((status) => (
+              {statuses.map((status: unknown) => (
                 <TabsTrigger key={status.value} value={status.value}>
                   {status.label}
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            {statuses.map((status) => (
+            {statuses.map((status: unknown) => (
               <TabsContent key={status.value} value={status.value}>
                 {loading ? (
                   <div className="space-y-3">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((_: unknown, i: number) => (
                       <div key={i} className="h-12 bg-gray-100 rounded animate-pulse" />
                     ))}
                   </div>

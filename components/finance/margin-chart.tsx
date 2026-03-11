@@ -28,8 +28,8 @@ export function MarginChart({
   }
 
   // Récupérer les max pour l'échelle
-  const maxMargin = Math.max(...data.map((d) => d.margin), 0);
-  const maxCA = Math.max(...data.map((d) => d.ca), 0);
+  const maxMargin = Math.max(...data.map((d: unknown) => d.margin), 0);
+  const maxCA = Math.max(...data.map((d: unknown) => d.ca), 0);
   const maxValue = Math.max(maxMargin, maxCA);
 
   const chartHeight = 300;
@@ -46,7 +46,7 @@ export function MarginChart({
       <CardContent className="overflow-x-auto pb-4">
         <svg width={chartWidth} height={chartHeight + 60} className="min-w-full">
           {/* Grille */}
-          {[0, 25, 50, 75, 100].map((percent) => (
+          {[0, 25, 50, 75, 100].map((percent: unknown) => (
             <line
               key={percent}
               x1="40"
@@ -60,7 +60,7 @@ export function MarginChart({
           ))}
 
           {/* Barres */}
-          {data.map((item, idx) => {
+          {data.map((item: unknown, idx: number) => {
             const x = 50 + idx * (barWidth + spacing);
             const barHeightMargin =
               maxValue > 0

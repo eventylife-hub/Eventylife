@@ -46,10 +46,10 @@ export default function AssurancePage() {
         });
         if (!res.ok) throw new Error('Erreur chargement assurances');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setInsurances(data.insurances);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -73,7 +73,7 @@ export default function AssurancePage() {
       a.href = url;
       a.download = `certificate-${subscriptionId}.pdf`;
       a.click();
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setDownloadingId(null);
@@ -92,7 +92,7 @@ export default function AssurancePage() {
           </p>
         </div>
         <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
+          {[...Array(3)].map((_: unknown, i: number) => (
             <div key={i} className="h-32 rounded-2xl skeleton" />
           ))}
         </div>
@@ -170,7 +170,7 @@ export default function AssurancePage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {insurances.map((insurance: any) => {
+          {insurances.map((insurance: unknown) => {
             const statusBadgeStyle = {
               background: insurance?.status === 'CONFIRMED' ? C.forestBg : C.goldSoft,
               color: insurance?.status === 'CONFIRMED' ? C.forest : '#92400e',

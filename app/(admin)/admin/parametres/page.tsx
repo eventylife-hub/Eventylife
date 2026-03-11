@@ -31,7 +31,7 @@ export default function ParametresPage() {
         ]);
 
         if (settingsRes.ok) {
-          const data = await settingsRes.json();
+          const data = (await settingsRes.json() as unknown) as unknown;
           const validSettings = (data as Array<{key: string; value: string; description?: string}>).map<Setting>((s) => ({
             key: s.key,
             value: s.value ?? '',
@@ -41,10 +41,10 @@ export default function ParametresPage() {
         }
 
         if (flagsRes.ok) {
-          const data = await flagsRes.json();
+          const data = (await flagsRes.json() as unknown) as unknown;
           setFeatureFlags(data);
         }
-      } catch (_error) {
+      } catch (_error: unknown) {
         // Erreur silencieuse — les données se chargent au prochain retry
       } finally {
         setLoading(false);
@@ -82,7 +82,7 @@ export default function ParametresPage() {
       } else {
         setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde du paramètre' });
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Setting save error:', err);
       setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde' });
     }
@@ -99,7 +99,7 @@ export default function ParametresPage() {
 
       if (response.ok) {
         setFeatureFlags(
-          featureFlags.map((f) =>
+          featureFlags.map((f: unknown) =>
             f.key === key ? { ...f, enabled: editedFlags[key] } : f,
           ),
         );
@@ -108,7 +108,7 @@ export default function ParametresPage() {
       } else {
         setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde du flag' });
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Flag save error:', err);
       setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde du flag' });
     }
@@ -143,7 +143,7 @@ export default function ParametresPage() {
           </h3>
         </div>
         <div className="admin-panel-body space-y-4">
-          {settings.map((setting) => (
+          {settings.map((setting: unknown) => (
             <div key={setting.key} className="flex items-end gap-4">
               <div className="flex-1">
                 <label className="admin-input-label">{setting.key}</label>
@@ -156,8 +156,8 @@ export default function ParametresPage() {
                         : 'url'
                     }
                     value={editedSettings[setting.key] || setting.value}
-                    onChange={(e) =>
-                      handleSettingChange(setting.key, e.target.value)
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleSettingChange(setting.key, (e.target as HTMLInputElement).value)
                     }
                     className="admin-input"
                   />
@@ -166,8 +166,8 @@ export default function ParametresPage() {
                     className="admin-input resize-none"
                     rows={2}
                     value={editedSettings[setting.key] || setting.value}
-                    onChange={(e) =>
-                      handleSettingChange(setting.key, e.target.value)
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleSettingChange(setting.key, (e.target as HTMLInputElement).value)
                     }
                   />
                 )}
@@ -192,7 +192,7 @@ export default function ParametresPage() {
           </h3>
         </div>
         <div className="admin-panel-body space-y-4">
-          {featureFlags.map((flag) => {
+          {featureFlags.map((flag: unknown) => {
             const key = flag.key as string;
             const enabled = flag.enabled as boolean;
             const description = flag.description as string | undefined;
@@ -206,8 +206,8 @@ export default function ParametresPage() {
                   <input
                     type="checkbox"
                     checked={editedFlags[key] !== undefined ? editedFlags[key] : enabled}
-                    onChange={(e) =>
-                      handleFlagToggle(key, e.target.checked)
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleFlagToggle(key, (e.target as HTMLInputElement).checked)
                     }
                     className="w-5 h-5 rounded"
                   />

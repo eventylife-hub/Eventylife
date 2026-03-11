@@ -56,9 +56,9 @@ export default function ProReservationsPage() {
 
       if (!res.ok) throw new Error('Erreur lors du chargement');
 
-      const data = await res.json();
-      setReservations(data.items || data || []);
-    } catch (err) {
+      const data = (await res.json() as unknown) as unknown;
+      setReservations(data?.items || data || []);
+    } catch (err: unknown) {
       setError('Impossible de charger les reservations');
       console.error(err);
     } finally {
@@ -107,7 +107,7 @@ export default function ProReservationsPage() {
                 <input
                   type="text"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
                   placeholder="Rechercher par client, voyage..."
                   className="pro-input"
                   style={{ paddingLeft: '36px' }}
@@ -119,7 +119,7 @@ export default function ProReservationsPage() {
             </form>
 
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {['CONFIRMED', 'PENDING', 'CANCELLED', 'COMPLETED'].map((status) => (
+              {['CONFIRMED', 'PENDING', 'CANCELLED', 'COMPLETED'].map((status: unknown) => (
                 <button
                   key={status}
                   onClick={() =>
@@ -160,7 +160,7 @@ export default function ProReservationsPage() {
         {/* Loading */}
         {loading && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-20 w-full rounded-lg" />
             ))}
           </div>
@@ -179,7 +179,7 @@ export default function ProReservationsPage() {
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {filtered.map((resa) => (
+                {filtered.map((resa: unknown) => (
                   <Link
                     key={resa.id}
                     href={`/pro/voyages/${resa.voyageId}/reservations`}
@@ -240,13 +240,13 @@ export default function ProReservationsPage() {
                   </div>
                   <div>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-mint)' }}>
-                      {filtered.filter((r) => r.status === 'CONFIRMED').length}
+                      {filtered.filter((r: unknown) => r.status === 'CONFIRMED').length}
                     </p>
                     <p style={{ fontSize: '14px', color: '#8896A6' }}>Confirmees</p>
                   </div>
                   <div>
                     <p style={{ fontSize: '24px', fontWeight: 600, color: 'var(--pro-sun)' }}>
-                      {filtered.filter((r) => r.status === 'PENDING').length}
+                      {filtered.filter((r: unknown) => r.status === 'PENDING').length}
                     </p>
                     <p style={{ fontSize: '14px', color: '#8896A6' }}>En attente</p>
                   </div>

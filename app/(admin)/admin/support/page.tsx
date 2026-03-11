@@ -49,7 +49,7 @@ export default function SupportPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         const allData = data.data || [];
         setAllTickets(allData);
 
@@ -64,7 +64,7 @@ export default function SupportPage() {
       } else {
         setError('Erreur lors du chargement des tickets');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Tickets fetch error:', err);
       setError('Impossible de charger les tickets. Vérifiez votre connexion.');
     } finally {
@@ -187,7 +187,7 @@ export default function SupportPage() {
         <div className="admin-panel-body p-6">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
-              {statuses.map((status) => (
+              {statuses.map((status: unknown) => (
                 <TabsTrigger key={status.value} value={status.value}>
                   {status.label}
                   {ticketCounts[status.value] !== undefined && (
@@ -199,7 +199,7 @@ export default function SupportPage() {
               ))}
             </TabsList>
 
-            {statuses.map((status) => (
+            {statuses.map((status: unknown) => (
               <TabsContent key={status.value} value={status.value}>
                 <DataTable
                   columns={columns}

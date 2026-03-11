@@ -117,7 +117,7 @@ export default function CheckoutStep2Page() {
     value: string | boolean,
   ) => {
     setParticipants(
-      participants.map((p, i) => {
+      participants.map((p: unknown, i: number) => {
         if (i === participantIndex) {
           return { ...p, [field]: value };
         }
@@ -132,8 +132,7 @@ export default function CheckoutStep2Page() {
       setError(null);
 
       // Valider les participants
-      const emptyParticipants = participants.filter(
-        (p) => !p.firstName || !p.lastName || !p.email || !p.phone,
+      const emptyParticipants = participants.filter((p: unknown) => !p.firstName || !p.lastName || !p.email || !p.phone,
       );
 
       if (emptyParticipants.length > 0) {
@@ -161,9 +160,8 @@ export default function CheckoutStep2Page() {
   };
 
   // Regrouper les participants par chambre pour l'affichage
-  const participantsByRoom = rooms.map((room) => {
-    const roomParticipants = participants.filter(
-      (p) => p.roomBookingId === room.roomTypeId,
+  const participantsByRoom = rooms.map((room: unknown) => {
+    const roomParticipants = participants.filter((p: unknown) => p.roomBookingId === room.roomTypeId,
     );
     return { room, participants: roomParticipants };
   });
@@ -250,13 +248,13 @@ export default function CheckoutStep2Page() {
                 {room.label} — {formatPrice(room.priceTotalTTC)}
               </h2>
 
-              {roomParticipants.map((participant, personIndex) => {
+              {roomParticipants.map((participant: unknown, personIndex: number) => {
                 // Trouver l'index global du participant
                 const globalIndex = participants.findIndex(
                   (p) =>
                     p.roomBookingId === room.roomTypeId &&
                     participants
-                      .filter((pp) => pp.roomBookingId === room.roomTypeId)
+                      .filter((pp: unknown) => pp.roomBookingId === room.roomTypeId)
                       .indexOf(p) === personIndex,
                 );
 
@@ -295,7 +293,7 @@ export default function CheckoutStep2Page() {
                         placeholder="Prénom"
                         value={participant.firstName}
                         onChange={(e) =>
-                          handleParticipantChange(globalIndex, 'firstName', e.target.value)
+                          handleParticipantChange(globalIndex, 'firstName', (e.target as HTMLInputElement).value)
                         }
                         style={{
                           backgroundColor: 'white',
@@ -318,7 +316,7 @@ export default function CheckoutStep2Page() {
                         placeholder="Nom"
                         value={participant.lastName}
                         onChange={(e) =>
-                          handleParticipantChange(globalIndex, 'lastName', e.target.value)
+                          handleParticipantChange(globalIndex, 'lastName', (e.target as HTMLInputElement).value)
                         }
                         style={{
                           backgroundColor: 'white',
@@ -350,7 +348,7 @@ export default function CheckoutStep2Page() {
                         placeholder="Email"
                         value={participant.email}
                         onChange={(e) =>
-                          handleParticipantChange(globalIndex, 'email', e.target.value)
+                          handleParticipantChange(globalIndex, 'email', (e.target as HTMLInputElement).value)
                         }
                         style={{
                           backgroundColor: 'white',
@@ -373,7 +371,7 @@ export default function CheckoutStep2Page() {
                         placeholder="Téléphone"
                         value={participant.phone}
                         onChange={(e) =>
-                          handleParticipantChange(globalIndex, 'phone', e.target.value)
+                          handleParticipantChange(globalIndex, 'phone', (e.target as HTMLInputElement).value)
                         }
                         style={{
                           backgroundColor: 'white',
@@ -408,7 +406,7 @@ export default function CheckoutStep2Page() {
                       <select
                         value={participant.busStopId || ''}
                         onChange={(e) =>
-                          handleParticipantChange(globalIndex, 'busStopId', e.target.value)
+                          handleParticipantChange(globalIndex, 'busStopId', (e.target as HTMLInputElement).value)
                         }
                         style={{
                           width: '100%',
@@ -432,7 +430,7 @@ export default function CheckoutStep2Page() {
                         <option value="">
                           {loadingBusStops ? 'Chargement...' : 'Sélectionner un point'}
                         </option>
-                        {busStops.map((stop) => (
+                        {busStops.map((stop: unknown) => (
                           <option key={stop.id} value={stop.id}>
                             {stop.name} ({stop.location})
                           </option>
@@ -449,7 +447,7 @@ export default function CheckoutStep2Page() {
                           handleParticipantChange(
                             globalIndex,
                             'insuranceSelected',
-                            e.target.checked,
+                            (e.target as HTMLInputElement).checked,
                           )
                         }
                         style={{

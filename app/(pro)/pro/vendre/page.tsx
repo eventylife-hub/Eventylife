@@ -72,12 +72,12 @@ export default function QuickSellPage() {
         setError(null);
         const res = await fetch('/api/pro/quick-sell/trips', { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur lors du chargement des voyages');
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setTrips(data.trips || []);
         if (data.trips && data.trips.length > 0) {
           setSelectedTrip(data.trips[0].id);
         }
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -96,13 +96,13 @@ export default function QuickSellPage() {
         setError(null);
         const res = await fetch(`/api/pro/quick-sell/stats?tripId=${selectedTrip}`, { credentials: 'include' });
         if (res.ok) {
-          const data = await res.json();
+          const data = (await res.json() as unknown) as unknown;
           setSellerLink(data.link);
           setStats(data.stats);
           setSales(data.sales || []);
           setSellerCode(data.link?.code || '');
         }
-      } catch (err) {
+      } catch (err: unknown) {
         // Erreur silencieuse — les données se chargent au prochain retry
       }
     };
@@ -131,11 +131,11 @@ export default function QuickSellPage() {
       });
 
       if (!res.ok) throw new Error('Erreur lors de la génération du lien');
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setSellerLink(data.link);
       setStats(data.stats);
       setSales(data.sales || []);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setGenerating(false);
@@ -237,10 +237,10 @@ export default function QuickSellPage() {
               <CardContent>
                 <select
                   value={selectedTrip}
-                  onChange={(e) => setSelectedTrip(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedTrip((e.target as HTMLInputElement).value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  {trips.map((trip) => (
+                  {trips.map((trip: unknown) => (
                     <option key={trip.id} value={trip.id}>
                       {trip.name} ({formatDate(trip.startDate)})
                     </option>
@@ -260,7 +260,7 @@ export default function QuickSellPage() {
                 <input
                   type="text"
                   value={sellerCode}
-                  onChange={(e) => setSellerCode(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSellerCode((e.target as HTMLInputElement).value)}
                   placeholder="p.ex. VENDEUR123"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -374,7 +374,7 @@ export default function QuickSellPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {sales.map((sale) => (
+                  {sales.map((sale: unknown) => (
                     <div
                       key={sale.id}
                       className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors"

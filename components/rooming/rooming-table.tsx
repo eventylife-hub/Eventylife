@@ -68,7 +68,7 @@ export function RoomingTable({
       setEditValue('');
       // Recharger le parent
       window.location.reload();
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(err);
     } finally {
       setIsSaving(false);
@@ -88,14 +88,14 @@ export function RoomingTable({
           </tr>
         </thead>
         <tbody className="space-y-1">
-          {rooms.map((room) => (
+          {rooms.map((room: unknown) => (
             <tr key={room.id} className="border-b hover:bg-gray-50">
               <td className="py-2 font-medium">
                 {editingRoomId === room.id ? (
                   <div className="flex gap-2">
                     <Input
                       value={editValue}
-                      onChange={(e) => setEditValue(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditValue((e.target as HTMLInputElement).value)}
                       placeholder="N° chambre"
                       className="h-7 w-24"
                     />

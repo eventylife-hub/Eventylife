@@ -54,7 +54,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
 
         {/* Menu Items */}
         <nav className="flex-1 px-2 py-4 space-y-1">
-          {items.map((item) => (
+          {items.map((item: unknown) => (
             <div key={item.href}>
               <Link
                 href={item.href}
@@ -75,7 +75,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
                     <span className="flex-1">{item.label}</span>
                     {item.children && (
                       <button
-                        onClick={(e) => {
+                        onClick={(e: React.MouseEvent) => {
                           e.preventDefault();
                           toggleExpand(item.href);
                         }}
@@ -106,7 +106,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
               {/* Submenu */}
               {sidebarOpen && item.children && expandedItems[item.href] && (
                 <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-2">
-                  {item.children.map((child) => (
+                  {item.children.map((child: unknown) => (
                     <Link
                       key={child.href}
                       href={child.href}

@@ -233,7 +233,7 @@ export default function FAQPage() {
             type="search"
             placeholder="Rechercher une question..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery((e.target as HTMLInputElement).value)}
             className="text-base"
           />
         </div>
@@ -248,7 +248,7 @@ export default function FAQPage() {
             </h2>
 
             <div className="space-y-3">
-              {category.items.map((item) => {
+              {category.items.map((item: unknown) => {
                 const isOpen = openItems.includes(item.id);
 
                 return (

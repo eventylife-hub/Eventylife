@@ -76,7 +76,7 @@ export default function TransportPage() {
         const res = await fetch(`/api/transport/${travelId}/config`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement config transport');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setConfig(data.travel);
         setStops(data.stops);
 
@@ -91,7 +91,7 @@ export default function TransportPage() {
         setMeetingTime(data.travel.meetingTime || '');
 
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -122,7 +122,7 @@ export default function TransportPage() {
 
       if (!res.ok) throw new Error('Erreur sauvegarde');
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setIsSaving(false);
@@ -181,7 +181,7 @@ export default function TransportPage() {
           <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>Sélectionnez le mode principal</p>
         </div>
         <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <select value={departureMode} onChange={(e) => setDepartureMode(e.target.value)} className="pro-input">
+          <select value={departureMode} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDepartureMode((e.target as HTMLInputElement).value)} className="pro-input">
             <option value="BUS">Bus</option>
             <option value="FLIGHT">Avion</option>
             <option value="MIXED">Mixte (Bus + Avion)</option>
@@ -192,21 +192,21 @@ export default function TransportPage() {
               <input
                 placeholder="Compagnie bus"
                 value={busCompany}
-                onChange={(e) => setBusCompany(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusCompany((e.target as HTMLInputElement).value)}
                 className="pro-input"
               />
               <input
                 type="number"
                 placeholder="Capacité bus"
                 value={busCapacity}
-                onChange={(e) => setBusCapacity(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusCapacity((e.target as HTMLInputElement).value)}
                 className="pro-input"
               />
               <input
                 type="number"
                 placeholder="Prix par personne (€)"
                 value={busPriceCents ? (parseInt(busPriceCents) / 100).toFixed(2) : ''}
-                onChange={(e) => setBusPriceCents((parseFloat(e.target.value) * 100).toString())}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusPriceCents((parseFloat((e.target as HTMLInputElement).value) * 100).toString())}
                 className="pro-input"
               />
             </div>
@@ -217,14 +217,14 @@ export default function TransportPage() {
               <input
                 placeholder="Compagnie aérienne"
                 value={flightCompany}
-                onChange={(e) => setFlightCompany(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFlightCompany((e.target as HTMLInputElement).value)}
                 className="pro-input"
               />
               <input
                 type="number"
                 placeholder="Prix vol (€)"
                 value={flightPriceCents ? (parseInt(flightPriceCents) / 100).toFixed(2) : ''}
-                onChange={(e) => setFlightPriceCents((parseFloat(e.target.value) * 100).toString())}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFlightPriceCents((parseFloat((e.target as HTMLInputElement).value) * 100).toString())}
                 className="pro-input"
               />
             </div>
@@ -234,13 +234,13 @@ export default function TransportPage() {
             <input
               placeholder="Point de rendez-vous"
               value={meetingPoint}
-              onChange={(e) => setMeetingPoint(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMeetingPoint((e.target as HTMLInputElement).value)}
               className="pro-input"
             />
             <input
               type="time"
               value={meetingTime}
-              onChange={(e) => setMeetingTime(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMeetingTime((e.target as HTMLInputElement).value)}
               className="pro-input"
             />
           </div>
@@ -264,14 +264,14 @@ export default function TransportPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <StopMap stops={stops as unknown as TransportStop[]} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {stops.map((stop) => {
+                {stops.map((stop: unknown) => {
                   const stopType = (stop.type as string) === 'DROPOFF_ARRIVAL' ? 'ARRIVAL' : 'PICKUP_DEPARTURE';
                   return (
                     <StopCard
                       key={(stop.linkId as string) || (stop.id as string)}
                       stop={{
                         type: stopType as 'PICKUP_DEPARTURE' | 'ARRIVAL',
-                        busStop: (stop.busStop as any) || { id: '', publicName: '', city: '' }
+                        busStop: (stop.busStop as unknown) || { id: '', publicName: '', city: '' }
                       } as StopCardData}
                     />
                   );

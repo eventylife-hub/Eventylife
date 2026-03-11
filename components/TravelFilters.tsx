@@ -34,7 +34,7 @@ export function TravelFilters({
           <input
             type="text"
             value={destination}
-            onChange={(e) => onDestinationChange(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDestinationChange((e.target as HTMLInputElement).value)}
             placeholder="Chercher..."
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
@@ -48,7 +48,7 @@ export function TravelFilters({
           <input
             type="number"
             value={minPrice ? minPrice / 100 : ''}
-            onChange={(e) => onMinPriceChange(e.target.value ? parseInt(e.target.value) * 100 : null)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onMinPriceChange((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
             placeholder="0"
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
@@ -62,7 +62,7 @@ export function TravelFilters({
           <input
             type="number"
             value={maxPrice ? maxPrice / 100 : ''}
-            onChange={(e) => onMaxPriceChange(e.target.value ? parseInt(e.target.value) * 100 : null)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onMaxPriceChange((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
             placeholder="10000"
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
@@ -76,7 +76,7 @@ export function TravelFilters({
         </label>
         <select
           value={sortBy}
-          onChange={(e) => onSortChange(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onSortChange((e.target as HTMLInputElement).value)}
           className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
           <option value="popular">Plus populaires</option>

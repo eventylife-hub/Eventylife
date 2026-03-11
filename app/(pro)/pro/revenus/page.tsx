@@ -69,16 +69,16 @@ export default function RevenuesDashboardPage() {
         // Fetch revenue summary
         const summaryRes = await fetch(`/api/pro/revenues?period=${period}`, { credentials: 'include' });
         if (!summaryRes.ok) throw new Error('Erreur lors du chargement des revenus');
-        const summaryData = await summaryRes.json();
+        const summaryData = (await summaryRes.json() as unknown) as unknown;
         setSummary(summaryData.summary);
         setTrips(summaryData.trips || []);
 
         // Fetch payouts
         const payoutsRes = await fetch('/api/pro/revenues/payouts', { credentials: 'include' });
         if (!payoutsRes.ok) throw new Error('Erreur lors du chargement des versements');
-        const payoutsData = await payoutsRes.json();
+        const payoutsData = (await payoutsRes.json() as unknown) as unknown;
         setPayouts(payoutsData.payouts || []);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -95,7 +95,7 @@ export default function RevenuesDashboardPage() {
     }
 
     const headers = ['Voyage', 'Dates', 'Réservations', 'CA TTC', 'Commission %', 'Montant Net'];
-    const rows = trips.map((trip) => [
+    const rows = trips.map((trip: unknown) => [
       trip.tripName,
       `${trip.startDate} - ${trip.endDate}`,
       trip.reservationCount.toString(),
@@ -104,7 +104,7 @@ export default function RevenuesDashboardPage() {
       (trip.netAmount / 100).toFixed(2),
     ]);
 
-    const csv = [headers, ...rows].map((row) => row.map((cell) => `"${cell}"`).join(',')).join('\n');
+    const csv = [headers, ...rows].map((row: unknown) => row.map((cell: unknown) => `"${cell}"`).join(',')).join('\n');
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
@@ -145,7 +145,7 @@ export default function RevenuesDashboardPage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <Skeleton className="h-10 w-64" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
-            {Array.from({ length: 3 }).map((_, i) => (
+            {Array.from({ length: 3 }).map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-32" />
             ))}
           </div>
@@ -234,7 +234,7 @@ export default function RevenuesDashboardPage() {
             { value: 'thisMonth', label: 'Ce mois' },
             { value: 'lastQuarter', label: '3 derniers mois' },
             { value: 'thisYear', label: 'Cette année' },
-          ].map((opt) => (
+          ].map((opt: unknown) => (
             <button
               key={opt.value}
               onClick={() => setPeriod(opt.value as PeriodFilter)}
@@ -279,7 +279,7 @@ export default function RevenuesDashboardPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {trips.map((trip) => (
+                  {trips.map((trip: unknown) => (
                     <tr key={trip.tripId} style={{ borderBottom: '1px solid #E0E0E0' }}>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', fontWeight: 500, color: '#0A1628' }}>{trip.tripName}</td>
                       <td style={{ paddingTop: '12px', paddingBottom: '12px', color: '#8896A6', fontSize: '12px' }}>
@@ -312,7 +312,7 @@ export default function RevenuesDashboardPage() {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {payouts.map((payout) => (
+              {payouts.map((payout: unknown) => (
                 <div key={payout.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', border: '1px solid #E0E0E0', borderRadius: '8px' }}>
                   <div>
                     <p style={{ fontWeight: 500, color: '#0A1628' }}>{formatPrice(payout.amount)}</p>

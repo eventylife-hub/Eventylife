@@ -73,7 +73,7 @@ export default function ConnexionPage() {
       } else {
         router.push(redirect);
       }
-    } catch (err) {
+    } catch (err: unknown) {
       if (err instanceof ZodError) {
         setErrors(zodErrorsToRecord(err));
       } else if (err instanceof Error) {

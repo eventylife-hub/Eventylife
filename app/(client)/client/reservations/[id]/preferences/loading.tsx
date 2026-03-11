@@ -7,7 +7,7 @@ export default function Loading() {
       <Skeleton height="2rem" width="48%" />
       <div className="max-w-2xl space-y-4">
         <div className="space-y-3">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_: unknown, i: number) => (
             <div key={i} className="space-y-2">
               <Skeleton height="1rem" width="35%" />
               <Skeleton height="2.5rem" width="100%" />

@@ -90,7 +90,7 @@ export function MealPlanEditor({
         <div className="flex items-center gap-2">
           <Checkbox
             id="breakfast-enabled"
-            checked={plan.breakfast?.enabled || false}
+            checked={plan.breakfast?.!!enabled}
             onCheckedChange={(checked) =>
               handleMealChange(
                 'breakfast',
@@ -114,8 +114,8 @@ export function MealPlanEditor({
               <Input
                 id="breakfast-provider"
                 value={plan.breakfast?.provider || ''}
-                onChange={(e) =>
-                  handleMealChange('breakfast', 'provider', e.target.value)
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleMealChange('breakfast', 'provider', (e.target as HTMLInputElement).value)
                 }
                 placeholder="Nom du restaurant..."
                 disabled={submitting}
@@ -130,7 +130,7 @@ export function MealPlanEditor({
         <div className="flex items-center gap-2">
           <Checkbox
             id="lunch-enabled"
-            checked={plan.lunch?.enabled || false}
+            checked={plan.lunch?.!!enabled}
             onCheckedChange={(checked) =>
               handleMealChange('lunch', 'enabled', checked === true)
             }
@@ -150,8 +150,8 @@ export function MealPlanEditor({
               <Input
                 id="lunch-provider"
                 value={plan.lunch?.provider || ''}
-                onChange={(e) =>
-                  handleMealChange('lunch', 'provider', e.target.value)
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleMealChange('lunch', 'provider', (e.target as HTMLInputElement).value)
                 }
                 placeholder="Nom du restaurant..."
                 disabled={submitting}
@@ -166,7 +166,7 @@ export function MealPlanEditor({
         <div className="flex items-center gap-2">
           <Checkbox
             id="dinner-enabled"
-            checked={plan.dinner?.enabled || false}
+            checked={plan.dinner?.!!enabled}
             onCheckedChange={(checked) =>
               handleMealChange('dinner', 'enabled', checked === true)
             }
@@ -186,8 +186,8 @@ export function MealPlanEditor({
               <Input
                 id="dinner-provider"
                 value={plan.dinner?.provider || ''}
-                onChange={(e) =>
-                  handleMealChange('dinner', 'provider', e.target.value)
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleMealChange('dinner', 'provider', (e.target as HTMLInputElement).value)
                 }
                 placeholder="Nom du restaurant..."
                 disabled={submitting}

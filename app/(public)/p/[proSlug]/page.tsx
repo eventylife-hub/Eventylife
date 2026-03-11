@@ -85,10 +85,10 @@ export default function ProPublicPage() {
           return;
         }
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setPro(data);
         setState(data.travels?.length > 0 ? 'data' : 'empty');
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
         setState('error');
       }
@@ -217,7 +217,7 @@ export default function ProPublicPage() {
         <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, fontFamily: 'Playfair, serif' }}>Voyages au départ de {pro.departureZone}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pro.travels.map((voyage) => (
+          {pro.travels.map((voyage: unknown) => (
             <div key={voyage.id} style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
               <CardContent className="p-6 flex flex-col h-full">
                 <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.goldSoft, color: C.navy, padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>
@@ -265,7 +265,7 @@ export default function ProPublicPage() {
               <Input
                 placeholder="Votre nom"
                 value={leadForm.name}
-                onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, name: (e.target as HTMLInputElement).value })}
                 required
               />
             </div>
@@ -276,7 +276,7 @@ export default function ProPublicPage() {
                 type="tel"
                 placeholder="06 12 34 56 78"
                 value={leadForm.phone}
-                onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, phone: (e.target as HTMLInputElement).value })}
                 required
               />
             </div>
@@ -287,7 +287,7 @@ export default function ProPublicPage() {
                 type="email"
                 placeholder="votre@email.com"
                 value={leadForm.email}
-                onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, email: (e.target as HTMLInputElement).value })}
                 required
               />
             </div>
@@ -299,7 +299,7 @@ export default function ProPublicPage() {
                 placeholder="Votre message..."
                 rows={4}
                 value={leadForm.message}
-                onChange={(e) => setLeadForm({ ...leadForm, message: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, message: (e.target as HTMLInputElement).value })}
                 onFocus={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
                 onBlur={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; }}
               />
@@ -310,7 +310,7 @@ export default function ProPublicPage() {
                 type="checkbox"
                 id="rgpd"
                 checked={rgpdConsent}
-                onChange={(e) => setRgpdConsent(e.target.checked)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRgpdConsent((e.target as HTMLInputElement).checked)}
                 style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: `1.5px solid ${C.border}`, cursor: 'pointer' }}
               />
               <label htmlFor="rgpd" style={{ fontSize: '0.875rem', color: C.muted }}>
@@ -363,7 +363,7 @@ export default function ProPublicPage() {
                   type="email"
                   placeholder="votre@email.com"
                   value={followEmail}
-                  onChange={(e) => setFollowEmail(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFollowEmail((e.target as HTMLInputElement).value)}
                   required
                 />
                 <button

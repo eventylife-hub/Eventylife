@@ -69,10 +69,10 @@ export default function CancellationDetailPage() {
         throw new Error('Erreur lors du chargement');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setCancellation(data.data);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -95,7 +95,7 @@ export default function CancellationDetailPage() {
 
       setToast({ type: 'success', message: 'Annulation approuvée' });
       await fetchDetail();
-    } catch (err) {
+    } catch (err: unknown) {
       setToast({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     } finally {
       setProcessing(false);
@@ -127,7 +127,7 @@ export default function CancellationDetailPage() {
       setToast({ type: 'success', message: 'Annulation refusée' });
       await fetchDetail();
       setShowRejectForm(false);
-    } catch (err) {
+    } catch (err: unknown) {
       setToast({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     } finally {
       setProcessing(false);
@@ -152,7 +152,7 @@ export default function CancellationDetailPage() {
 
       setToast({ type: 'success', message: 'Remboursement traité avec succès' });
       await fetchDetail();
-    } catch (err) {
+    } catch (err: unknown) {
       setToast({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     } finally {
       setProcessing(false);
@@ -362,7 +362,7 @@ export default function CancellationDetailPage() {
               </label>
               <textarea
                 value={rejectionReason}
-                onChange={(e) => setRejectionReason(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRejectionReason((e.target as HTMLInputElement).value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
                 rows={4}
               />

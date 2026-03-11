@@ -104,11 +104,11 @@ export default function CreateTravelPage() {
     destination: '',
     transportMode: 'BUS',
     capacity: 40,
-    rooms: [],
-    program: [],
-    photos: [],
-    busStops: [],
-    pricing: { basePrice: 0, inclusions: [], exclusions: [] },
+    rooms: unknown[],
+    program: unknown[],
+    photos: unknown[],
+    busStops: unknown[],
+    pricing: { basePrice: 0, inclusions: unknown[], exclusions: unknown[] },
   });
 
   const [saving, setSaving] = useState(false);
@@ -133,19 +133,19 @@ export default function CreateTravelPage() {
       });
 
       if (response.ok) {
-        const travel = await response.json();
+        const travel = (await response.json() as unknown) as unknown;
         setSaveMessage('Brouillon sauvegardé avec succès !');
         // Rediriger vers la page d'édition après 1.5s
         setTimeout(() => {
           router.push(`/pro/voyages/${travel.data?.id || travel.id}`);
         }, 1500);
       } else {
-        const error = await response.json().catch(() => null);
+        const error = (await response.json() as unknown) as unknown;.catch(() => null);
         setSaveMessage(
           error?.message || 'Erreur lors de la sauvegarde. Veuillez réessayer.',
         );
       }
-    } catch (error) {
+    } catch (error: unknown) {
       // Erreur réseau silencieuse — message affiché à l'utilisateur
       setSaveMessage('Erreur réseau. Vérifiez votre connexion.');
     } finally {
@@ -165,10 +165,10 @@ export default function CreateTravelPage() {
         });
 
         if (response.ok) {
-          const travel = await response.json();
+          const travel = (await response.json() as unknown) as unknown;
           router.push(`/pro/voyages/${travel.id}`);
         }
-      } catch (error) {
+      } catch (error: unknown) {
         // Erreur silencieuse — gestion future via toast
       }
     } else {
@@ -188,7 +188,7 @@ export default function CreateTravelPage() {
         {/* Step Indicator */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            {WIZARD_STEPS.map((step, idx) => (
+            {WIZARD_STEPS.map((step: unknown, idx: number) => (
               <div key={step.number} className="flex items-center flex-1">
                 <button
                   onClick={() => setCurrentStep(step.number)}
@@ -210,7 +210,7 @@ export default function CreateTravelPage() {
           </div>
 
           <div className="grid grid-cols-7 gap-2">
-            {WIZARD_STEPS.map((step) => (
+            {WIZARD_STEPS.map((step: unknown) => (
               <div key={step.number} className="text-center">
                 <p className="text-xs font-medium text-slate-700">{step.label}</p>
               </div>
@@ -305,7 +305,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           <input
             type="text"
             value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value } as TravelFormData)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, title: (e.target as HTMLInputElement).value } as TravelFormData)}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             placeholder="Ex: Week-end à Paris"
           />
@@ -315,7 +315,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           <label className="block text-sm font-medium text-slate-700 mb-2">Description</label>
           <textarea
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value } as TravelFormData)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, description: (e.target as HTMLInputElement).value } as TravelFormData)}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             placeholder="Décrivez votre voyage..."
             rows={4}
@@ -328,7 +328,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             <input
               type="date"
               value={formData.startDate}
-              onChange={(e) => setFormData({ ...formData, startDate: e.target.value } as TravelFormData)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, startDate: (e.target as HTMLInputElement).value } as TravelFormData)}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             />
           </div>
@@ -337,7 +337,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             <input
               type="date"
               value={formData.endDate}
-              onChange={(e) => setFormData({ ...formData, endDate: e.target.value } as TravelFormData)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, endDate: (e.target as HTMLInputElement).value } as TravelFormData)}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             />
           </div>
@@ -349,7 +349,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             <input
               type="text"
               value={formData.destination}
-              onChange={(e) => setFormData({ ...formData, destination: e.target.value } as TravelFormData)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, destination: (e.target as HTMLInputElement).value } as TravelFormData)}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
               placeholder="Ex: Paris"
             />
@@ -358,7 +358,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             <label className="block text-sm font-medium text-slate-700 mb-2">Mode de transport</label>
             <select
               value={formData.transportMode}
-              onChange={(e) => setFormData({ ...formData, transportMode: e.target.value } as TravelFormData)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, transportMode: (e.target as HTMLInputElement).value } as TravelFormData)}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             >
               <option value="BUS">Bus</option>
@@ -374,7 +374,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           <input
             type="number"
             value={formData.capacity}
-            onChange={(e) => setFormData({ ...formData, capacity: parseInt(e.target.value) } as TravelFormData)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, capacity: parseInt((e.target as HTMLInputElement).value) } as TravelFormData)}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             min="1"
           />
@@ -457,10 +457,10 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 <label className="block text-xs font-medium text-slate-600 mb-1">Type</label>
                 <select
                   value={room.type}
-                  onChange={(e) => updateRoom(idx, 'type', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'type', (e.target as HTMLInputElement).value)}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
                 >
-                  {ROOM_TYPES.map((rt) => (
+                  {ROOM_TYPES.map((rt: unknown) => (
                     <option key={rt.value} value={rt.value}>{rt.label}</option>
                   ))}
                 </select>
@@ -471,7 +471,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 <input
                   type="text"
                   value={room.label}
-                  onChange={(e) => updateRoom(idx, 'label', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'label', (e.target as HTMLInputElement).value)}
                   placeholder="Ex: Vue mer"
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
                 />
@@ -482,7 +482,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 <input
                   type="number"
                   value={room.capacity}
-                  onChange={(e) => updateRoom(idx, 'capacity', parseInt(e.target.value) || 1)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'capacity', parseInt((e.target as HTMLInputElement).value) || 1)}
                   min={1}
                   max={8}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
@@ -494,7 +494,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 <input
                   type="number"
                   value={room.pricePerPersonCents / 100}
-                  onChange={(e) => updateRoom(idx, 'pricePerPersonCents', Math.round(parseFloat(e.target.value) * 100) || 0)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'pricePerPersonCents', Math.round(parseFloat((e.target as HTMLInputElement).value) * 100) || 0)}
                   min={0}
                   step="0.01"
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
@@ -506,7 +506,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 <input
                   type="number"
                   value={room.quantity}
-                  onChange={(e) => updateRoom(idx, 'quantity', parseInt(e.target.value) || 1)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'quantity', parseInt((e.target as HTMLInputElement).value) || 1)}
                   min={1}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
                 />
@@ -550,7 +550,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
           dayNumber: prev.program.length + 1,
           title: `Jour ${prev.program.length + 1}`,
           description: '',
-          activities: [],
+          activities: unknown[],
         },
       ],
     }));
@@ -627,7 +627,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
         dayNumber: i + 1,
         title: `Jour ${i + 1}`,
         description: '',
-        activities: [],
+        activities: unknown[],
       })) as DayProgram[];
       setFormData((prev: TravelFormData) => ({ ...prev, program: days }));
     }
@@ -658,7 +658,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                 <input
                   type="text"
                   value={day.title}
-                  onChange={(e) => updateDay(dIdx, 'title', e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateDay(dIdx, 'title', (e.target as HTMLInputElement).value)}
                   className="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-sm font-medium focus:ring-2 focus:ring-indigo-600"
                   placeholder="Titre du jour"
                 />
@@ -671,7 +671,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
             <div className="p-4 space-y-3">
               <textarea
                 value={day.description}
-                onChange={(e) => updateDay(dIdx, 'description', e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateDay(dIdx, 'description', (e.target as HTMLInputElement).value)}
                 placeholder="Description générale du jour (optionnel)"
                 rows={2}
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
@@ -684,13 +684,13 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                     <input
                       type="time"
                       value={act.time}
-                      onChange={(e) => updateActivity(dIdx, aIdx, 'time', e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateActivity(dIdx, aIdx, 'time', (e.target as HTMLInputElement).value)}
                       className="w-24 px-2 py-1 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-indigo-600"
                     />
                     <input
                       type="text"
                       value={act.label}
-                      onChange={(e) => updateActivity(dIdx, aIdx, 'label', e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateActivity(dIdx, aIdx, 'label', (e.target as HTMLInputElement).value)}
                       placeholder="Activité"
                       className="flex-1 px-2 py-1 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-indigo-600"
                     />
@@ -800,8 +800,8 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
       try {
         const res = await fetch('/api/pro/bus-stops?take=50', { credentials: 'include' });
         if (res.ok) {
-          const data = await res.json();
-          setMyStops(data.items || []);
+          const data = (await res.json() as unknown) as unknown;
+          setMyStops(data?.items || []);
         } else {
           setError('Impossible de charger vos arrêts');
         }
@@ -814,8 +814,8 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
     fetchStops();
   }, []);
 
-  const pickupStops = myStops.filter((s) => s.type === 'PICKUP_DEPARTURE');
-  const dropoffStops = myStops.filter((s) => s.type === 'DROPOFF_ARRIVAL');
+  const pickupStops = myStops.filter((s: unknown) => s.type === 'PICKUP_DEPARTURE');
+  const dropoffStops = myStops.filter((s: unknown) => s.type === 'DROPOFF_ARRIVAL');
 
   const selectedPickupIds = new Set(
     formData.busStops.filter((bs: BusStop) => bs.type === 'PICKUP_DEPARTURE').map((bs: BusStop) => bs.stopId),
@@ -835,8 +835,8 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
   };
 
   const StopList = ({ stops, type, selectedIds }: { stops: BusStopFromAPI[]; type: string; selectedIds: Set<string> }) => {
-    const validated = stops.filter((s) => s.status === 'VALIDATED');
-    const others = stops.filter((s) => s.status !== 'VALIDATED');
+    const validated = stops.filter((s: unknown) => s.status === 'VALIDATED');
+    const others = stops.filter((s: unknown) => s.status !== 'VALIDATED');
 
     if (stops.length === 0) {
       return (
@@ -855,7 +855,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
 
     return (
       <div className="space-y-2">
-        {validated.map((stop) => (
+        {validated.map((stop: unknown) => (
           <label
             key={stop.id}
             className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
@@ -881,7 +881,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
         {others.length > 0 && (
           <div className="pt-2 border-t border-slate-200">
             <p className="text-xs text-slate-400 mb-2">En attente de validation ({others.length})</p>
-            {others.map((stop) => (
+            {others.map((stop: unknown) => (
               <div key={stop.id} className="flex items-center gap-3 p-2 rounded opacity-50">
                 <input type="checkbox" disabled className="w-4 h-4" />
                 <span className="text-xs text-slate-500">{stop.publicName} ({stop.status})</span>
@@ -957,10 +957,10 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
           <input
             type="number"
             value={formData.pricing.basePrice / 100}
-            onChange={(e) =>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData((prev: TravelFormData) => ({
                 ...prev,
-                pricing: { ...prev.pricing, basePrice: parseInt(e.target.value) * 100 },
+                pricing: { ...prev.pricing, basePrice: parseInt((e.target as HTMLInputElement).value) * 100 },
               }))
             }
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
@@ -972,10 +972,10 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
           <label className="block text-sm font-medium text-slate-700 mb-2">Inclusions (une par ligne)</label>
           <textarea
             value={formData.pricing.inclusions.join('\n')}
-            onChange={(e) =>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData((prev: TravelFormData) => ({
                 ...prev,
-                pricing: { ...prev.pricing, inclusions: e.target.value.split('\n') },
+                pricing: { ...prev.pricing, inclusions: (e.target as HTMLInputElement).value.split('\n') },
               }))
             }
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
@@ -988,10 +988,10 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
           <label className="block text-sm font-medium text-slate-700 mb-2">Exclusions (optionnel)</label>
           <textarea
             value={formData.pricing.exclusions.join('\n')}
-            onChange={(e) =>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData((prev: TravelFormData) => ({
                 ...prev,
-                pricing: { ...prev.pricing, exclusions: e.target.value.split('\n') },
+                pricing: { ...prev.pricing, exclusions: (e.target as HTMLInputElement).value.split('\n') },
               }))
             }
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"

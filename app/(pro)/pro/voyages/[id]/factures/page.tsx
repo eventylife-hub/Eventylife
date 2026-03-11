@@ -37,19 +37,19 @@ export default function InvoicesPage() {
       // Récupérer le voyage
       const travelResponse = await fetch(`/api/travels/${travelId}`, { credentials: 'include' });
       if (travelResponse.ok) {
-        const travelData = await travelResponse.json();
+        const travelData = (await travelResponse.json() as unknown) as unknown;
         setTravel(travelData.data);
       }
 
       // Récupérer les groupes de réservation
       const bookingsResponse = await fetch(`/api/travels/${travelId}/bookings`, { credentials: 'include' });
       if (bookingsResponse.ok) {
-        const bookingsData = await bookingsResponse.json();
+        const bookingsData = (await bookingsResponse.json() as unknown) as unknown;
         setBookings(bookingsData.data || []);
       }
 
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -74,7 +74,7 @@ export default function InvoicesPage() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-    } catch (err) {
+    } catch (err: unknown) {
       setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     } finally {
       setDownloading(false);
@@ -98,7 +98,7 @@ export default function InvoicesPage() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-    } catch (err) {
+    } catch (err: unknown) {
       setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     }
   };
@@ -201,10 +201,10 @@ export default function InvoicesPage() {
                     <td style={{ padding: '1rem' }}>
                       <div>
                         <p style={{ fontWeight: '500', color: '#0A1628', margin: 0 }}>
-                          {((booking.createdByUser as any)?.firstName as string) || ''} {((booking.createdByUser as any)?.lastName as string) || ''}
+                          {((booking.createdByUser as unknown)?.firstName as string) || ''} {((booking.createdByUser as unknown)?.lastName as string) || ''}
                         </p>
                         <p style={{ fontSize: '0.875rem', color: '#4A5568', margin: 0 }}>
-                          {((booking.createdByUser as any)?.email as string) || ''}
+                          {((booking.createdByUser as unknown)?.email as string) || ''}
                         </p>
                       </div>
                     </td>

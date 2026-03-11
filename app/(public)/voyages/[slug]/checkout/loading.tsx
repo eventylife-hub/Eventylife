@@ -16,7 +16,7 @@ export default function CheckoutLoading() {
 
         {/* Step Indicator */}
         <div className="flex items-center justify-between mb-8">
-          {Array.from({ length: 4 }).map((_, i) => (
+          {Array.from({ length: 4 }).map((_: unknown, i: number) => (
             <div key={i} className="flex items-center flex-1">
               <Skeleton className="w-10 h-10 rounded-full" />
               {i < 3 && <Skeleton className="h-1 flex-1 mx-2" />}

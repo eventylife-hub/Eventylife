@@ -15,7 +15,7 @@ export default function CreateTripLoading() {
 
       {/* Indicateur de progression skeleton */}
       <div className="flex items-center justify-between">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 5 }).map((_: unknown, i: number) => (
           <div key={i} className="flex items-center flex-1">
             <Skeleton className="w-10 h-10 rounded-full" />
             {i < 4 && <Skeleton className="flex-1 h-1 mx-2" />}
@@ -27,7 +27,7 @@ export default function CreateTripLoading() {
       <div className="bg-white rounded-xl border border-gray-200 p-8 space-y-6">
         <Skeleton className="h-6 w-40" />
         <div className="space-y-4">
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_: unknown, i: number) => (
             <div key={i} className="space-y-2">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-10 w-full rounded-lg" />

@@ -86,9 +86,9 @@ export default function ReleveMensuelPage() {
           throw new Error('Erreur lors du chargement du relevé mensuel');
         }
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setStatement(data);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -121,7 +121,7 @@ export default function ReleveMensuelPage() {
       'Montant Net',
     ];
 
-    const rows = statement.trips.map((trip) => [
+    const rows = statement.trips.map((trip: unknown) => [
       trip.tripName,
       `${trip.startDate} - ${trip.endDate}`,
       trip.reservationCount.toString(),
@@ -142,7 +142,7 @@ export default function ReleveMensuelPage() {
     ];
 
     const csv = [headers, ...rows, totalsRow]
-      .map((row) => row.map((cell) => `"${cell}"`).join(','))
+      .map((row: unknown) => row.map((cell: unknown) => `"${cell}"`).join(','))
       .join('\n');
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -303,7 +303,7 @@ export default function ReleveMensuelPage() {
 
         {/* Month selector */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {availableMonths.map((month) => (
+          {availableMonths.map((month: unknown) => (
             <button
               key={month}
               onClick={() => handleMonthChange(month)}
@@ -417,7 +417,7 @@ export default function ReleveMensuelPage() {
 
       {/* Month selector */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-        {availableMonths.map((month) => (
+        {availableMonths.map((month: unknown) => (
           <button
             key={month}
             onClick={() => handleMonthChange(month)}
@@ -502,7 +502,7 @@ export default function ReleveMensuelPage() {
                 </tr>
               </thead>
               <tbody>
-                {statement.trips.map((trip, idx) => (
+                {statement.trips.map((trip: unknown, idx: number) => (
                   <tr
                     key={idx}
                     style={{

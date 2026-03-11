@@ -100,7 +100,7 @@ export function FileUpload({
   const uploadFile = async (file: File, fileId: string) => {
     try {
       setFiles((prev) =>
-        prev.map((f) =>
+        prev.map((f: unknown) =>
           f.id === fileId ? { ...f, status: 'uploading' as const } : f
         )
       );
@@ -121,7 +121,7 @@ export function FileUpload({
         throw new Error('Erreur lors de la génération de l\'URL de téléchargement');
       }
 
-      const { uploadUrl, assetId } = await presignResponse.json();
+      const { uploadUrl, assetId } = await presignResponse.json() as unknown;
 
       // 2. Télécharger directement en S3
       const uploadResponse = await fetch(uploadUrl, {
@@ -145,17 +145,17 @@ export function FileUpload({
       }
 
       setFiles((prev) =>
-        prev.map((f) =>
+        prev.map((f: unknown) =>
           f.id === fileId ? { ...f, status: 'success' as const, progress: 100 } : f
         )
       );
 
       // Appeler le callback avec l'ID du fichier
       onUpload(assetId);
-    } catch (error) {
+    } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erreur inconnue';
       setFiles((prev) =>
-        prev.map((f) =>
+        prev.map((f: unknown) =>
           f.id === fileId ? { ...f, status: 'error' as const, error: message } : f
         )
       );
@@ -191,7 +191,7 @@ export function FileUpload({
   };
 
   const removeFile = (fileId: string) => {
-    setFiles((prev) => prev.filter((f) => f.id !== fileId));
+    setFiles((prev) => prev.filter((f: unknown) => f.id !== fileId));
   };
 
   return (
@@ -231,7 +231,7 @@ export function FileUpload({
       {/* Liste des fichiers */}
       {files.length > 0 && (
         <div className="space-y-2">
-          {files.map((file) => (
+          {files.map((file: unknown) => (
             <div
               key={file.id}
               className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200"

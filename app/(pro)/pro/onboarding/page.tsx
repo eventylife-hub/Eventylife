@@ -104,7 +104,7 @@ export default function OnboardingPage() {
       });
 
       if (!response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la soumission de l\'étape');
       }
 
@@ -112,7 +112,7 @@ export default function OnboardingPage() {
       setFormData({});
       setError(null);
       fetchOnboardingStatus();
-    } catch (err) {
+    } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue';
       setError(errorMsg);
       console.error('Erreur submission étape:', err);
@@ -132,12 +132,12 @@ export default function OnboardingPage() {
       });
 
       if (!response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la finalisation de l\'inscription');
       }
 
       router.push('/pro');
-    } catch (err) {
+    } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue';
       setError(errorMsg);
       console.error('Erreur completion onboarding:', err);
@@ -168,7 +168,7 @@ export default function OnboardingPage() {
         {/* Step Indicator */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            {STEPS.map((step, idx) => {
+            {STEPS.map((step: unknown, idx: number) => {
               const isCompleted = onboardingStatus && [
                 onboardingStatus.step1_profile,
                 onboardingStatus.step2_legal,
@@ -207,7 +207,7 @@ export default function OnboardingPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
-            {STEPS.map((step) => (
+            {STEPS.map((step: unknown) => (
               <div key={step.number} style={{ textAlign: 'center' }}>
                 <p style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>{step.label}</p>
               </div>
@@ -304,7 +304,7 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           <input
             type="text"
             value={formData.displayName || ''}
-            onChange={(e) => setFormData({ ...formData, displayName: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, displayName: (e.target as HTMLInputElement).value })}
             className="pro-input"
             placeholder="Ex: Voyages Entreprise"
           />
@@ -313,7 +313,7 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Biographie (optionnel)</label>
           <textarea
             value={formData.bio || ''}
-            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, bio: (e.target as HTMLInputElement).value })}
             className="pro-input"
             placeholder="Parlez de votre expérience..."
             rows={4}
@@ -324,7 +324,7 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           <input
             type="url"
             value={formData.website || ''}
-            onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, website: (e.target as HTMLInputElement).value })}
             className="pro-input"
             placeholder="https://exemple.com"
           />
@@ -333,7 +333,7 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type de prestataire</label>
           <select
             value={formData.proType || ''}
-            onChange={(e) => setFormData({ ...formData, proType: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, proType: (e.target as HTMLInputElement).value })}
             className="pro-input"
           >
             <option value="">Sélectionner...</option>
@@ -359,7 +359,7 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           <input
             type="text"
             value={formData.siret || ''}
-            onChange={(e) => setFormData({ ...formData, siret: e.target.value.replace(/\D/g, '') })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, siret: (e.target as HTMLInputElement).value.replace(/\D/g, '') })}
             className="pro-input"
             placeholder="14 chiffres"
             maxLength={14}
@@ -370,7 +370,7 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           <input
             type="text"
             value={formData.companyName || ''}
-            onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, companyName: (e.target as HTMLInputElement).value })}
             className="pro-input"
           />
         </div>
@@ -379,7 +379,7 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           <input
             type="text"
             value={formData.companyAddress || ''}
-            onChange={(e) => setFormData({ ...formData, companyAddress: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, companyAddress: (e.target as HTMLInputElement).value })}
             className="pro-input"
           />
         </div>
@@ -388,7 +388,7 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           <input
             type="text"
             value={formData.entityType || ''}
-            onChange={(e) => setFormData({ ...formData, entityType: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, entityType: (e.target as HTMLInputElement).value })}
             className="pro-input"
             placeholder="Ex: SARL, SAS, Auto-entrepreneur"
           />
@@ -408,7 +408,7 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
           <input
             type="text"
             value={formData.iban || ''}
-            onChange={(e) => setFormData({ ...formData, iban: e.target.value.toUpperCase() })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, iban: (e.target as HTMLInputElement).value.toUpperCase() })}
             className="pro-input"
             placeholder="FR76 3000 6000 0101 0009 7839"
           />
@@ -419,7 +419,7 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
           <input
             type="text"
             value={formData.bic || ''}
-            onChange={(e) => setFormData({ ...formData, bic: e.target.value.toUpperCase() })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, bic: (e.target as HTMLInputElement).value.toUpperCase() })}
             className="pro-input"
             placeholder="SOFRFRPP"
           />
@@ -429,7 +429,7 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
           <input
             type="text"
             value={formData.holderName || ''}
-            onChange={(e) => setFormData({ ...formData, holderName: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, holderName: (e.target as HTMLInputElement).value })}
             className="pro-input"
             placeholder="Votre nom"
           />
@@ -528,8 +528,8 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
             type="checkbox"
-            checked={formData.acceptTerms || false}
-            onChange={(e) => setFormData({ ...formData, acceptTerms: e.target.checked })}
+            checked={formData.!!acceptTerms}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptTerms: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
           <div>
@@ -542,8 +542,8 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
             type="checkbox"
-            checked={formData.acceptCharter || false}
-            onChange={(e) => setFormData({ ...formData, acceptCharter: e.target.checked })}
+            checked={formData.!!acceptCharter}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptCharter: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
           <div>
@@ -556,8 +556,8 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
             type="checkbox"
-            checked={formData.acceptRGPD || false}
-            onChange={(e) => setFormData({ ...formData, acceptRGPD: e.target.checked })}
+            checked={formData.!!acceptRGPD}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptRGPD: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
           <div>
@@ -588,14 +588,14 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 6: Modules de formation</h2>
       <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '16px' }}>Marquez les modules que vous avez complétés :</p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {modules.map((module, idx) => (
+        {modules.map((module: unknown, idx: number) => (
           <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0' }}>
             <input
               type="checkbox"
               checked={(formData.completedModules || []).includes(idx)}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const completed = formData.completedModules || [];
-                if (e.target.checked) {
+                if ((e.target as HTMLInputElement).checked) {
                   setFormData({
                     ...formData,
                     completedModules: [...completed, idx],

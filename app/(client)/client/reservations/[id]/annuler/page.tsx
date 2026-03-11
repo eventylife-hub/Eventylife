@@ -70,7 +70,7 @@ export default function CancelReservationPage() {
         throw new Error('Réservation non trouvée');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setBooking(data.data);
 
       // Appeler l'endpoint pour calculer le remboursement
@@ -78,12 +78,12 @@ export default function CancelReservationPage() {
         credentials: 'include',
       });
       if (calcResponse.ok) {
-        const calcData = await calcResponse.json();
+        const calcData = (await calcResponse.json() as unknown) as unknown;
         setRefundCalc(calcData.data);
       }
 
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -113,7 +113,7 @@ export default function CancelReservationPage() {
 
       alert('Demande d\'annulation créée. Vous serez notifié de la décision par email.');
       router.push(`/client/reservations/${bookingId}`);
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setSubmitting(false);
@@ -236,8 +236,8 @@ export default function CancelReservationPage() {
           </label>
           <select
             value={reason.split('|')[0] || ''}
-            onChange={(e) => {
-              const newReason = e.target.value;
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const newReason = (e.target as HTMLInputElement).value;
               setReason(newReason);
             }}
             className="w-full px-4 py-2 rounded-lg mb-3"
@@ -259,7 +259,7 @@ export default function CancelReservationPage() {
           </label>
           <textarea
             value={reason}
-            onChange={(e) => setReason(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReason((e.target as HTMLInputElement).value)}
             placeholder="Décrivez les raisons de votre annulation..."
             className="w-full px-4 py-2 rounded-lg"
             style={{

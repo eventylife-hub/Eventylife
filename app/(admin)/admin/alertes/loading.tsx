@@ -25,7 +25,7 @@ export default function AlertesLoading() {
 
       {/* Alertes skeleton */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_: unknown, i: number) => (
           <div key={i} className="p-4 border rounded-lg space-y-3">
             <div className="flex items-start gap-4">
               <Skeleton className="h-4 w-4 rounded mt-1" />

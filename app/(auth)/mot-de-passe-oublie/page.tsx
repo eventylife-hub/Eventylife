@@ -32,7 +32,7 @@ export default function MotDePasseOubliePage() {
       await apiClient.post('/auth/forgot-password', { email });
       setSubmitted(true);
       setEmail('');
-    } catch (err) {
+    } catch (err: unknown) {
       if (err instanceof ZodError) {
         setErrors(zodErrorsToRecord(err));
       } else if (err instanceof Error) {
@@ -147,7 +147,7 @@ export default function MotDePasseOubliePage() {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
                 required
                 placeholder="votre@email.com"
                 style={{

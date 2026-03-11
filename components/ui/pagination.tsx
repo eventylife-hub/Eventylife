@@ -51,7 +51,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className = 
       </button>
 
       {/* Numéros */}
-      {getPageNumbers().map((page, idx) =>
+      {getPageNumbers().map((page: unknown, idx: number) =>
         page === '...' ? (
           <span key={`ellipsis-${idx}`} className="px-3 py-2 text-sm text-gray-400">
             …

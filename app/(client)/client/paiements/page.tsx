@@ -63,9 +63,9 @@ export default function PaiementsPage() {
 
         if (!res.ok) throw new Error('Impossible de charger l\'historique');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setPayments(data);
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
       } finally {
         setLoading(false);
@@ -78,7 +78,7 @@ export default function PaiementsPage() {
   const filteredPayments =
     filter === 'all'
       ? payments
-      : payments.filter((p) => {
+      : payments.filter((p: unknown) => {
           if (filter === 'succeeded') return p.status === 'SUCCEEDED';
           if (filter === 'pending') return p.status === 'PENDING';
           if (filter === 'failed') return p.status === 'FAILED';
@@ -93,7 +93,7 @@ export default function PaiementsPage() {
           <p className="text-sm mt-2" style={{ color: C.muted }}>Consultez tous vos paiements</p>
         </div>
         <div className="space-y-4">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(5)].map((_: unknown, i: number) => (
             <div key={i} className="h-16 rounded-2xl skeleton" />
           ))}
         </div>
@@ -123,7 +123,7 @@ export default function PaiementsPage() {
           { value: 'succeeded', label: 'Réussis' },
           { value: 'pending', label: 'En attente' },
           { value: 'failed', label: 'Échoués' },
-        ].map((f) => (
+        ].map((f: unknown) => (
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
@@ -170,7 +170,7 @@ export default function PaiementsPage() {
                 </tr>
               </thead>
               <tbody style={{ borderTop: `1.5px solid ${C.border}` }}>
-                {filteredPayments.map((payment, index) => (
+                {filteredPayments.map((payment: unknown, index: number) => (
                   <tr
                     key={payment.id}
                     style={{

@@ -15,7 +15,7 @@ export default function Loading() {
         </div>
         <Skeleton height="1px" width="100%" />
         <div className="space-y-3">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_: unknown, i: number) => (
             <div key={i} className="flex justify-between">
               <Skeleton height="1rem" width="50%" />
               <Skeleton height="1rem" width="20%" />

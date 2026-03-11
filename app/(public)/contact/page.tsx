@@ -41,7 +41,7 @@ export default function ContactPage() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       toast.success('Message envoyé avec succès!');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
+    } catch (error: unknown) {
       toast.error('Erreur lors de l\'envoi du message');
     } finally {
       setLoading(false);
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   <Input
                     placeholder="Votre nom"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: (e.target as HTMLInputElement).value })}
                     required
                   />
                 </div>
@@ -87,7 +87,7 @@ export default function ContactPage() {
                     type="email"
                     placeholder="votre@email.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, email: (e.target as HTMLInputElement).value })}
                     required
                   />
                 </div>
@@ -99,7 +99,7 @@ export default function ContactPage() {
                   <Input
                     placeholder="Sujet de votre message"
                     value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, subject: (e.target as HTMLInputElement).value })}
                     required
                   />
                 </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
                   <textarea
                     placeholder="Votre message..."
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, message: (e.target as HTMLInputElement).value })}
                     rows={6}
                     required
                     style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${C.border}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}

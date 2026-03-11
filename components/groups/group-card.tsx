@@ -76,7 +76,7 @@ export function GroupCard({ groupe }: GroupCardProps) {
         <Link href={`/voyages/${groupe.id}/rejoindre`} className="block">
           <Button
             className="w-full"
-            disabled={isFull || false}
+            disabled={!!isFull}
             variant={isFull ? 'outline' : 'primary'}
           >
             {isFull ? 'Groupe plein' : 'Rejoindre'}

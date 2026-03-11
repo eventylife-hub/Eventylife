@@ -115,7 +115,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
           setLoadState('error');
           return;
         }
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         setTravel(data);
         setStoreTravel(data);
         setLoadState('data');
@@ -187,7 +187,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
         toast.error('Erreur lors du démarrage du checkout');
         return;
       }
-      const session: CheckoutSession = await response.json();
+      const session: CheckoutSession = await response.json() as unknown;
       setBookingGroupId(session.bookingGroupId);
       setStoreRooms(session.rooms);
       setHoldExpiresAt(new Date(session.holdExpiresAt));
@@ -236,14 +236,14 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
         credentials: 'include',
         body: JSON.stringify({
           bookingGroupId,
-          invites: paymentMode === 'split' ? invites : [],
+          invites: paymentMode === 'split' ? invites : unknown[],
         }),
       });
       if (!response.ok) {
         toast.error('Erreur lors de la redirection paiement');
         return;
       }
-      const { redirectUrl } = await response.json();
+      const { redirectUrl } = await response.json() as unknown;
       window.location.href = redirectUrl;
     } catch {
       // Erreur silencieuse — redirection Stripe échouée
@@ -461,7 +461,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={(e) => {
+                                onClick={(e: React.MouseEvent) => {
                                   e.stopPropagation();
                                   if (occupancy > 1) {
                                     setSelectedRooms(prev =>
@@ -481,7 +481,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={(e) => {
+                                onClick={(e: React.MouseEvent) => {
                                   e.stopPropagation();
                                   if (occupancy < roomType.capacity) {
                                     setSelectedRooms(prev =>
@@ -521,7 +521,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   <input
                     type="checkbox"
                     checked={insuranceSelected}
-                    onChange={e => setInsuranceSelected(e.target.checked)}
+                    onChange={e => setInsuranceSelected((e.target as HTMLInputElement).checked)}
                     className="w-5 h-5 mt-1 rounded border-gray-300 text-blue-600 cursor-pointer"
                   />
                   <div>
@@ -667,7 +667,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   <input
                     type="email"
                     value={newInviteEmail}
-                    onChange={e => setNewInviteEmail(e.target.value)}
+                    onChange={e => setNewInviteEmail((e.target as HTMLInputElement).value)}
                     placeholder="exemple@mail.com"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
                   />
@@ -679,7 +679,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   <input
                     type="tel"
                     value={newInvitePhone}
-                    onChange={e => setNewInvitePhone(e.target.value)}
+                    onChange={e => setNewInvitePhone((e.target as HTMLInputElement).value)}
                     placeholder="+33 6 XX XX XX XX"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
                   />
@@ -700,7 +700,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {invites.map((invite, idx) => (
+                  {invites.map((invite: unknown, idx: number) => (
                     <div
                       key={idx}
                       className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
@@ -752,7 +752,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   <input
                     type="checkbox"
                     checked={cgvAccepted}
-                    onChange={e => setCgvAccepted(e.target.checked)}
+                    onChange={e => setCgvAccepted((e.target as HTMLInputElement).checked)}
                     className="w-5 h-5 mt-1 rounded border-gray-300 text-amber-600 cursor-pointer"
                   />
                   <div>

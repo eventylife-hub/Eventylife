@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       next: { revalidate: 3600 }, // Cache for 1 hour
     });
     if (response.ok) {
-      const travels = await response.json();
+      const travels = await response.json() as unknown;
       travelSlugs = travels.map((t: { slug: string }) => t.slug);
     }
   } catch {
@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic travel pages
-  const travelPages: MetadataRoute.Sitemap = travelSlugs.map((slug) => ({
+  const travelPages: MetadataRoute.Sitemap = travelSlugs.map((slug: unknown) => ({
     url: `${baseUrl}/voyages/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
@@ -78,7 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Travel reviews pages
-  const travelReviewsPages: MetadataRoute.Sitemap = travelSlugs.map((slug) => ({
+  const travelReviewsPages: MetadataRoute.Sitemap = travelSlugs.map((slug: unknown) => ({
     url: `${baseUrl}/voyages/${slug}/avis`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,

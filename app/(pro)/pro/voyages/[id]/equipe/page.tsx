@@ -112,11 +112,11 @@ export default function EquipePage() {
 
         if (!res.ok) throw new Error('Erreur chargement équipe');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setTeam(data.team || []);
         setPrerequisites(data.prerequisites || []);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -148,13 +148,13 @@ export default function EquipePage() {
 
       if (!res.ok) throw new Error('Erreur invitation');
 
-      const newMember = await res.json();
+      const newMember = (await res.json() as unknown) as unknown;
       setTeam([...team, newMember]);
       setInviteEmail('');
       setInviteRole('VENDEUR');
       setShowInviteModal(false);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setInviting(false);
@@ -171,10 +171,10 @@ export default function EquipePage() {
 
       if (!res.ok) throw new Error('Erreur suppression');
 
-      setTeam(team.filter((m) => m.id !== memberId));
+      setTeam(team.filter((m: unknown) => m.id !== memberId));
       setDeleteConfirming(null);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setDeletingId(null);
@@ -228,7 +228,7 @@ export default function EquipePage() {
               <input
                 type="email"
                 value={inviteEmail}
-                onChange={(e) => setInviteEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInviteEmail((e.target as HTMLInputElement).value)}
                 placeholder="pro@example.com"
                 className="pro-input"
                 style={{ width: '100%' }}
@@ -239,7 +239,7 @@ export default function EquipePage() {
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rôle</label>
               <select
                 value={inviteRole}
-                onChange={(e) => setInviteRole(e.target.value as 'CREATOR' | 'INDEPENDANT' | 'VENDEUR')}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInviteRole((e.target as HTMLInputElement).value as 'CREATOR' | 'INDEPENDANT' | 'VENDEUR')}
                 className="pro-input"
                 style={{ width: '100%' }}
               >
@@ -275,7 +275,7 @@ export default function EquipePage() {
         <div className="pro-panel-body">
           {team.length > 0 ? (
             <div className="space-y-2">
-              {team.map((member) => {
+              {team.map((member: unknown) => {
                 const StatusIcon = STATUS_ICONS[member.status];
                 return (
                   <div
@@ -359,8 +359,8 @@ export default function EquipePage() {
         </div>
         <div className="pro-panel-body">
           <div className="space-y-3">
-            {PREREQUISITES.map((prereq) => {
-              const completed = prerequisites.find((p) => p.label === prereq.label)?.completed || false;
+            {PREREQUISITES.map((prereq: unknown) => {
+              const completed = prerequisites.find((p) => p.label === prereq.label)?.!!completed;
               return (
                 <div key={prereq.label} className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg">
                   <input
@@ -386,7 +386,7 @@ export default function EquipePage() {
 
           <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <p className="text-sm text-blue-800">
-              {prerequisites.filter((p) => p.completed).length} / {PREREQUISITES.length} préalables validés
+              {prerequisites.filter((p: unknown) => p.completed).length} / {PREREQUISITES.length} préalables validés
             </p>
           </div>
         </div>

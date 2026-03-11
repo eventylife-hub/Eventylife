@@ -89,7 +89,7 @@ export default function InscriptionPage() {
     email: '',
     phone: '',
     zone: '',
-    skills: [],
+    skills: unknown[],
     description: '',
     acceptCharte: false,
     acceptCGV: false,
@@ -108,7 +108,7 @@ export default function InscriptionPage() {
     setForm({
       ...form,
       skills: form.skills.includes(skill)
-        ? form.skills.filter((s) => s !== skill)
+        ? form.skills.filter((s: unknown) => s !== skill)
         : [...form.skills, skill],
     });
   };
@@ -145,7 +145,7 @@ export default function InscriptionPage() {
       setTimeout(() => {
         router.push('/pro/onboarding');
       }, 2000);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setLoading(false);
@@ -172,7 +172,7 @@ export default function InscriptionPage() {
         {/* Progress Steps */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            {[1, 2, 3, 4].map((s) => (
+            {[1, 2, 3, 4].map((s: unknown) => (
               <div key={s} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                 <div
                   style={{
@@ -224,7 +224,7 @@ export default function InscriptionPage() {
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Quel type de professionnel êtes-vous?</h2>
             <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Sélectionnez le profil qui vous correspond</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {PRO_TYPES.map((type) => {
+              {PRO_TYPES.map((type: unknown) => {
                 const Icon = type.icon;
                 return (
                   <button
@@ -270,7 +270,7 @@ export default function InscriptionPage() {
                 <input
                   type="text"
                   value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, name: (e.target as HTMLInputElement).value })}
                   placeholder="Jean Dupont"
                   className="pro-input"
                 />
@@ -281,7 +281,7 @@ export default function InscriptionPage() {
                 <input
                   type="email"
                   value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, email: (e.target as HTMLInputElement).value })}
                   placeholder="pro@example.com"
                   className="pro-input"
                 />
@@ -292,7 +292,7 @@ export default function InscriptionPage() {
                 <input
                   type="tel"
                   value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
                   placeholder="+33 6 12 34 56 78"
                   className="pro-input"
                 />
@@ -304,7 +304,7 @@ export default function InscriptionPage() {
                   <input
                     type="text"
                     value={form.siret || ''}
-                    onChange={(e) => setForm({ ...form, siret: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, siret: (e.target as HTMLInputElement).value })}
                     placeholder="12345678901234"
                     className="pro-input"
                   />
@@ -324,11 +324,11 @@ export default function InscriptionPage() {
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
                 <select
                   value={form.zone}
-                  onChange={(e) => setForm({ ...form, zone: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, zone: (e.target as HTMLInputElement).value })}
                   className="pro-input"
                 >
                   <option value="">Sélectionnez une zone</option>
-                  {ZONES.map((zone) => (
+                  {ZONES.map((zone: unknown) => (
                     <option key={zone} value={zone}>
                       {zone}
                     </option>
@@ -339,7 +339,7 @@ export default function InscriptionPage() {
               <div>
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>Compétences *</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {SKILLS.map((skill) => (
+                  {SKILLS.map((skill: unknown) => (
                     <button
                       key={skill}
                       onClick={() => toggleSkill(skill)}
@@ -382,7 +382,7 @@ export default function InscriptionPage() {
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>
                 <textarea
                   value={form.description}
-                  onChange={(e) => setForm({ ...form, description: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, description: (e.target as HTMLInputElement).value })}
                   placeholder="Décrivez votre expérience et vos spécialités..."
                   rows={4}
                   className="pro-input"
@@ -423,7 +423,7 @@ export default function InscriptionPage() {
                   <input
                     type="checkbox"
                     checked={form.acceptCharte}
-                    onChange={(e) => setForm({ ...form, acceptCharte: e.target.checked })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, acceptCharte: (e.target as HTMLInputElement).checked })}
                     style={{ marginTop: '4px', flexShrink: 0 }}
                   />
                   <span style={{ fontSize: '14px', color: '#0A1628' }}>
@@ -435,7 +435,7 @@ export default function InscriptionPage() {
                   <input
                     type="checkbox"
                     checked={form.acceptCGV}
-                    onChange={(e) => setForm({ ...form, acceptCGV: e.target.checked })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, acceptCGV: (e.target as HTMLInputElement).checked })}
                     style={{ marginTop: '4px', flexShrink: 0 }}
                   />
                   <span style={{ fontSize: '14px', color: '#0A1628' }}>
@@ -447,7 +447,7 @@ export default function InscriptionPage() {
                   <input
                     type="checkbox"
                     checked={form.acceptRGPD}
-                    onChange={(e) => setForm({ ...form, acceptRGPD: e.target.checked })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, acceptRGPD: (e.target as HTMLInputElement).checked })}
                     style={{ marginTop: '4px', flexShrink: 0 }}
                   />
                   <span style={{ fontSize: '14px', color: '#0A1628' }}>

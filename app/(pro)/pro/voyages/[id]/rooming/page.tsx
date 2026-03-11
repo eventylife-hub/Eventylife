@@ -68,13 +68,13 @@ export default function RoomingPage() {
           throw new Error('Erreur chargement rooming');
         }
 
-        const rooms = await roomRes.json();
-        const statsData = await statsRes.json();
+        const rooms = (await roomRes.json() as unknown) as unknown;
+        const statsData = (await statsRes.json() as unknown) as unknown;
 
         setRoomingList(rooms);
         setStats(statsData);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -98,7 +98,7 @@ export default function RoomingPage() {
       a.href = url;
       a.download = `rooming-${travelId}.pdf`;
       a.click();
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setExporting(false);
@@ -186,7 +186,7 @@ export default function RoomingPage() {
           <div className="pro-panel-body">
             <RoomingTable
               travelId={travelId}
-              rooms={roomingList as unknown as any[]}
+              rooms={roomingList as unknown as unknown[]}
             />
           </div>
         </div>

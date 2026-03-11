@@ -60,12 +60,12 @@ export default function AdminBookingsPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         setBookings(data.data || []);
       } else {
         setError('Erreur lors du chargement des réservations');
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setError('Une erreur est survenue lors du chargement des réservations');
     } finally {
       setLoading(false);
@@ -115,7 +115,7 @@ export default function AdminBookingsPage() {
       } else {
         setToastMessage({ type: 'error', message: 'Erreur lors de l\'exécution de l\'action' });
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setToastMessage({ type: 'error', message: 'Erreur lors de l\'action' });
     }
   };
@@ -209,14 +209,14 @@ export default function AdminBookingsPage() {
                     placeholder="Ex: BK-001234"
                     className="admin-input pl-10"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery((e.target as HTMLInputElement).value)}
                   />
                 </div>
               </div>
 
               <div>
                 <label className="admin-kpi-label block mb-2">Statut</label>
-                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="admin-input">
+                <select value={statusFilter} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)} className="admin-input">
                   <option value="all">Tous les statuts</option>
                   <option value="HOLD">En attente</option>
                   <option value="PARTIALLY_PAID">Partiellement payé</option>
@@ -231,7 +231,7 @@ export default function AdminBookingsPage() {
                 <input
                   type="date"
                   value={dateRangeStart}
-                  onChange={(e) => setDateRangeStart(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRangeStart((e.target as HTMLInputElement).value)}
                   className="admin-input"
                 />
               </div>
@@ -241,7 +241,7 @@ export default function AdminBookingsPage() {
                 <input
                   type="date"
                   value={dateRangeEnd}
-                  onChange={(e) => setDateRangeEnd(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRangeEnd((e.target as HTMLInputElement).value)}
                   className="admin-input"
                 />
               </div>
@@ -393,7 +393,7 @@ export default function AdminBookingsPage() {
                 placeholder="Expliquez la raison de cette action..."
                 rows={4}
                 value={actionReason}
-                onChange={(e) => setActionReason(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setActionReason((e.target as HTMLInputElement).value)}
               />
             </div>
 

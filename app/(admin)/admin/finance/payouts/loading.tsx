@@ -15,14 +15,14 @@ export default function Loading() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Array.from({ length: 3 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_: unknown, i: number) => (
           <Skeleton key={i} className="h-24" />
         ))}
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-x-auto">
         <div className="space-y-2 p-6">
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_: unknown, i: number) => (
             <Skeleton key={i} className="h-12 w-full" />
           ))}
         </div>

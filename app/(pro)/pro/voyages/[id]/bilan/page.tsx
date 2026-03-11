@@ -32,10 +32,10 @@ export default function TravelBilanPage() {
         throw new Error('Erreur lors du chargement');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setDashboard(data.data);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -55,7 +55,7 @@ export default function TravelBilanPage() {
       }
 
       setToastMessage({ type: 'success', message: 'Emails de bilan envoyés à tous les participants' });
-    } catch (err) {
+    } catch (err: unknown) {
       setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     } finally {
       setSending(false);
@@ -79,7 +79,7 @@ export default function TravelBilanPage() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-    } catch (err) {
+    } catch (err: unknown) {
       setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
     }
   };
@@ -106,7 +106,7 @@ export default function TravelBilanPage() {
   return (
     <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
     <div style={{ maxWidth: '60rem', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.5rem' }}>{(dashboard?.travel as any)?.title || 'Voyage'}</h1>
+      <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '0.5rem' }}>{(dashboard?.travel as unknown)?.title || 'Voyage'}</h1>
       <p style={{ color: '#4A5568', marginBottom: '2rem' }}>Bilan de voyage</p>
 
       {error && (
@@ -123,7 +123,7 @@ export default function TravelBilanPage() {
             <div>
               <p className="text-sm text-gray-600">Chiffre d&apos;affaires</p>
               <p className="text-2xl font-bold text-gray-900">
-                {formatPrice(((dashboard?.statistics as any)?.totalRevenueCents as number) || 0)}
+                {formatPrice(((dashboard?.statistics as unknown)?.totalRevenueCents as number) || 0)}
               </p>
             </div>
           </div>
@@ -135,18 +135,18 @@ export default function TravelBilanPage() {
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-gray-600">Total</span>
-              <span className="font-bold text-gray-900">{((dashboard?.statistics as any)?.totalBookings as number) || 0}</span>
+              <span className="font-bold text-gray-900">{((dashboard?.statistics as unknown)?.totalBookings as number) || 0}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Confirmés</span>
               <span className="font-bold text-gray-900">
-                {((dashboard?.statistics as any)?.confirmedBookings as number) || 0}
+                {((dashboard?.statistics as unknown)?.confirmedBookings as number) || 0}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Taux remplissage</span>
               <span className="font-bold text-gray-900">
-                {(((dashboard?.statistics as any)?.occupancyRate as number) || 0).toFixed(0)}%
+                {(((dashboard?.statistics as unknown)?.occupancyRate as number) || 0).toFixed(0)}%
               </span>
             </div>
           </div>
@@ -159,14 +159,14 @@ export default function TravelBilanPage() {
             <div>
               <p className="text-sm text-gray-600">Nombre d&apos;avis</p>
               <p className="text-2xl font-bold text-gray-900">
-                {((dashboard?.feedbacks as any)?.totalFeedbacks as number) || 0}
+                {((dashboard?.feedbacks as unknown)?.totalFeedbacks as number) || 0}
               </p>
             </div>
             <div>
               <p className="text-sm text-gray-600">Note moyenne</p>
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-bold text-yellow-500">
-                  {(((dashboard?.feedbacks as any)?.averageRating as number) || 0).toFixed(1)}
+                  {(((dashboard?.feedbacks as unknown)?.averageRating as number) || 0).toFixed(1)}
                 </span>
                 <span className="text-lg text-yellow-500">★</span>
               </div>
@@ -175,11 +175,11 @@ export default function TravelBilanPage() {
         </div>
 
         {/* Distribution */}
-        {Object.keys(((dashboard?.feedbacks as any)?.ratingDistribution as Record<string, unknown>) || {}).length > 0 && (
+        {Object.keys(((dashboard?.feedbacks as unknown)?.ratingDistribution as Record<string, unknown>) || {}).length > 0 && (
           <div className="pro-panel">
             <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Distribution des Notes</h2>
             <div className="space-y-2">
-              {Object.entries(((dashboard?.feedbacks as any)?.ratingDistribution as Record<string, unknown>) || {}).map(
+              {Object.entries(((dashboard?.feedbacks as unknown)?.ratingDistribution as Record<string, unknown>) || {}).map(
                 ([rating, count]: [string, unknown]) => (
                   <div key={rating} className="flex items-center gap-3">
                     <span className="w-8 text-center font-medium text-gray-700">{rating}/5</span>
@@ -187,7 +187,7 @@ export default function TravelBilanPage() {
                       <div
                         className="bg-yellow-500 h-2 rounded-full"
                         style={{
-                          width: `${(((count as number) || 0) / (((dashboard?.feedbacks as any)?.totalFeedbacks as number) || 1)) * 100}%`,
+                          width: `${(((count as number) || 0) / (((dashboard?.feedbacks as unknown)?.totalFeedbacks as number) || 1)) * 100}%`,
                         }}
                       />
                     </div>
@@ -204,7 +204,7 @@ export default function TravelBilanPage() {
       <div className="pro-panel">
         <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Actions</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-          {((dashboard?.actions as any)?.canGenerateReport as boolean) && (
+          {((dashboard?.actions as unknown)?.canGenerateReport as boolean) && (
             <button
               onClick={handleGenerateReport}
               className="pro-btn-sun"
@@ -213,7 +213,7 @@ export default function TravelBilanPage() {
             </button>
           )}
 
-          {((dashboard?.actions as any)?.canSendBilan as boolean) && (
+          {((dashboard?.actions as unknown)?.canSendBilan as boolean) && (
             <button
               onClick={handleSendBilan}
               disabled={sending}
@@ -224,7 +224,7 @@ export default function TravelBilanPage() {
             </button>
           )}
 
-          {((dashboard?.actions as any)?.canArchive as boolean) && (
+          {((dashboard?.actions as unknown)?.canArchive as boolean) && (
             <button
               onClick={() => {
                 if (confirm('Êtes-vous sûr de vouloir archiver ce voyage ?')) {

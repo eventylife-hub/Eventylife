@@ -41,10 +41,10 @@ export default function VoyageFinancePage() {
         const res = await fetch(`/api/finance/travel/${travelId}`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement finance');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setFinance(data);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -68,7 +68,7 @@ export default function VoyageFinancePage() {
       a.href = url;
       a.download = `finance-${travelId}.${format}`;
       a.click();
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setExporting(false);
@@ -160,7 +160,7 @@ export default function VoyageFinancePage() {
         <div className="pro-panel-body" style={{ padding: '0' }}>
           <CostTable
             travelId={travelId}
-            costs={((finance?.activityCosts as unknown as any[]) || []) as any[]}
+            costs={((finance?.activityCosts as unknown as unknown[]) || []) as unknown[]}
             onUpdate={() => {
               // Recharger
               setLoading(true);

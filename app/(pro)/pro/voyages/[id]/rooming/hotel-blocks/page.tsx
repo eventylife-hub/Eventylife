@@ -44,10 +44,10 @@ export default function HotelBlocksPage() {
         const res = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement blocs hôtel');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setBlocks(data);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -88,13 +88,13 @@ export default function HotelBlocksPage() {
 
       // Recharger
       const blocRes = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
-      const updated = await blocRes.json();
+      const updated = (await blocRes.json() as unknown) as unknown;
       setBlocks(updated);
 
       setEditingBlockId(null);
       setFormData({ roomsRequested: '', pricePerNightTTC: '', notes: '' });
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setIsSaving(false);
@@ -113,7 +113,7 @@ export default function HotelBlocksPage() {
     );
   }
 
-  const expiringBlocks = blocks.filter((b) => ((b.expiresIn as number) || 0) <= 3);
+  const expiringBlocks = blocks.filter((b: unknown) => ((b.expiresIn as number) || 0) <= 3);
 
   return (
     <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
@@ -154,10 +154,10 @@ export default function HotelBlocksPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Cartes blocs */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem' }}>
-            {blocks.map((block) => (
+            {blocks.map((block: unknown) => (
               <div key={block.id as string}>
                 <HotelBlockCard
-                  block={block as unknown as any}
+                  block={block as unknown as unknown}
                   onEdit={() => handleEditBlock(block)}
                 />
               </div>
@@ -177,8 +177,8 @@ export default function HotelBlocksPage() {
                   <input
                     type="number"
                     value={formData.roomsRequested}
-                    onChange={(e) =>
-                      setFormData({ ...formData, roomsRequested: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setFormData({ ...formData, roomsRequested: (e.target as HTMLInputElement).value })
                     }
                     className="pro-input"
                     style={{ width: '100%' }}
@@ -191,8 +191,8 @@ export default function HotelBlocksPage() {
                     type="number"
                     step="0.01"
                     value={formData.pricePerNightTTC}
-                    onChange={(e) =>
-                      setFormData({ ...formData, pricePerNightTTC: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setFormData({ ...formData, pricePerNightTTC: (e.target as HTMLInputElement).value })
                     }
                     className="pro-input"
                     style={{ width: '100%' }}
@@ -203,8 +203,8 @@ export default function HotelBlocksPage() {
                   <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Notes</label>
                   <textarea
                     value={formData.notes}
-                    onChange={(e) =>
-                      setFormData({ ...formData, notes: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setFormData({ ...formData, notes: (e.target as HTMLInputElement).value })
                     }
                     placeholder="Notes de négociation..."
                     className="pro-input"

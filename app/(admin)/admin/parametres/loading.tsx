@@ -17,7 +17,7 @@ export default function Loading() {
       </div>
 
       <div className="space-y-4">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 5 }).map((_: unknown, i: number) => (
           <div key={i} className="bg-white rounded-lg shadow p-6 space-y-3">
             <Skeleton className="h-5 w-48" />
             <Skeleton className="h-10 w-full" />

@@ -69,7 +69,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
       {/* Nav */}
       <nav className="p-3 space-y-1 flex-1 overflow-y-auto">
-        {SIDEBAR_ITEMS.map((item) => {
+        {SIDEBAR_ITEMS.map((item: unknown) => {
           const active = isActive(item.href);
           return (
             <Link

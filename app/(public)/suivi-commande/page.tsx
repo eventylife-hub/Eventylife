@@ -54,7 +54,7 @@ export default function SuiviCommandePage() {
                 id="orderRef"
                 type="text"
                 value={orderRef}
-                onChange={(e) => setOrderRef(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setOrderRef((e.target as HTMLInputElement).value)}
                 placeholder="Ex: EVT-2026-XXXXX"
                 style={{ width: '100%', border: `1.5px solid ${C.border}`, borderRadius: '12px', padding: '0.75rem 1rem', fontSize: '0.875rem', outline: 'none', transition: 'all 0.3s ease' }}
                 onFocus={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
@@ -73,7 +73,7 @@ export default function SuiviCommandePage() {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
                 placeholder="votre@email.com"
                 style={{ width: '100%', border: `1.5px solid ${C.border}`, borderRadius: '12px', padding: '0.75rem 1rem', fontSize: '0.875rem', outline: 'none', transition: 'all 0.3s ease' }}
                 onFocus={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}

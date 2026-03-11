@@ -34,7 +34,7 @@ export function PriceSummary({ rooms }: PriceSummaryProps) {
       <h3 className="font-semibold text-lg text-gray-900">Résumé des prix</h3>
 
       <div className="space-y-3 border-b border-gray-200 pb-4">
-        {rooms.map((room) => (
+        {rooms.map((room: unknown) => (
           <div key={room.roomTypeId} className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-gray-700 font-medium">{room.label}</span>

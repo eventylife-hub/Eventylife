@@ -130,7 +130,7 @@ export function NotificationBell() {
               </div>
             ) : recentNotifications.length > 0 ? (
               <div className="divide-y divide-gray-200">
-                {recentNotifications.map((notification) => (
+                {recentNotifications.map((notification: unknown) => (
                   <NotificationItem
                     key={notification.id}
                     {...notification}

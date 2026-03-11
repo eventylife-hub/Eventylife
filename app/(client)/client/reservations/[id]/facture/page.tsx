@@ -67,10 +67,10 @@ export default function InvoicePage() {
         throw new Error('Réservation non trouvée');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setBooking(data.data);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -97,7 +97,7 @@ export default function InvoicePage() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setDownloading(false);
@@ -109,7 +109,7 @@ export default function InvoicePage() {
       <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
         <h1 className="text-3xl font-bold mb-8" style={{ color: C.navy }}>Ma Facture</h1>
         <div className="space-y-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>

@@ -73,11 +73,11 @@ export default function AdminAlertesPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         setAlerts(data.data || []);
         setUnreadCount(data.data?.filter((a: Alert) => !a.resolved).length || 0);
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       // Erreur silencieuse — les données se chargent au prochain retry
     } finally {
       setLoading(false);
@@ -112,7 +112,7 @@ export default function AdminAlertesPage() {
       setToastMessage({ type: 'success', message: 'Action effectuée' });
       setSelectedAlerts([]);
       fetchAlerts();
-    } catch (_error) {
+    } catch (_error: unknown) {
       setToastMessage({ type: 'error', message: 'Erreur lors de l\'action' });
     }
   };
@@ -120,7 +120,7 @@ export default function AdminAlertesPage() {
   const toggleAlertSelection = (alertId: string) => {
     setSelectedAlerts((prev) =>
       prev.includes(alertId)
-        ? prev.filter((id) => id !== alertId)
+        ? prev.filter((id: unknown) => id !== alertId)
         : [...prev, alertId]
     );
   };
@@ -129,7 +129,7 @@ export default function AdminAlertesPage() {
     setSelectedAlerts(
       selectedAlerts.length === alerts.length
         ? []
-        : alerts.map((a) => a.id)
+        : alerts.map((a: unknown) => a.id)
     );
   };
 
@@ -224,7 +224,7 @@ export default function AdminAlertesPage() {
               <label className="admin-kpi-label block mb-2">Niveau</label>
               <select
                 value={levelFilter}
-                onChange={(e) => setLevelFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLevelFilter((e.target as HTMLInputElement).value)}
                 className="admin-input"
                 style={{ width: '160px' }}
               >
@@ -239,7 +239,7 @@ export default function AdminAlertesPage() {
               <label className="admin-kpi-label block mb-2">Statut</label>
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)}
                 className="admin-input"
                 style={{ width: '160px' }}
               >
@@ -319,7 +319,7 @@ export default function AdminAlertesPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              {alerts.map((alert, idx) => {
+              {alerts.map((alert: unknown, idx: number) => {
                 const config = alertConfig[alert.level];
                 return (
                   <div

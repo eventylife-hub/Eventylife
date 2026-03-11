@@ -75,12 +75,12 @@ export default function CreateTripPage() {
     mode: 'BUS',
     capacity: 0,
     pricePerSeatCentimes: 0,
-    busStops: [],
+    busStops: unknown[],
   });
 
   const [accommodation, setAccommodation] = useState<HotelBlock>({
     hotelName: '',
-    roomTypes: [],
+    roomTypes: unknown[],
     totalRooms: 0,
     checkInDate: '',
     checkOutDate: '',
@@ -88,7 +88,7 @@ export default function CreateTripPage() {
 
   const [pricing, setPricing] = useState<PricingConfig>({
     basePriceTTCCentimes: 0,
-    insuranceOptions: [],
+    insuranceOptions: unknown[],
     paymentModes: ['CARD', 'TRANSFER'],
   });
 
@@ -105,7 +105,7 @@ export default function CreateTripPage() {
     try {
       setIsInitializing(false);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError('Erreur lors de l\'initialisation du formulaire');
       setIsInitializing(false);
     }
@@ -271,9 +271,9 @@ export default function CreateTripPage() {
         throw new Error('Erreur lors de la création du voyage');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       window.location.href = `/admin/voyages/${data.id}`;
-    } catch (err) {
+    } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue lors de la création du voyage';
       setSubmitError(errorMsg);
       setIsSubmitting(false);
@@ -296,7 +296,7 @@ export default function CreateTripPage() {
         <div className="admin-panel">
           <div className="h-6 bg-gray-200 rounded w-1/3 mb-4 animate-pulse" />
           <div className="space-y-3">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_: unknown, i: number) => (
               <div key={i} className="h-10 bg-gray-100 rounded animate-pulse" />
             ))}
           </div>
@@ -347,7 +347,7 @@ export default function CreateTripPage() {
 
       {/* Indicateur de progression */}
       <div className="flex items-center justify-between">
-        {[1, 2, 3, 4, 5].map((step) => (
+        {[1, 2, 3, 4, 5].map((step: unknown) => (
           <div key={step} className="flex items-center flex-1">
             <button
               onClick={() => {
@@ -388,8 +388,8 @@ export default function CreateTripPage() {
                   <input
                     id="title"
                     value={basicInfo.title}
-                    onChange={(e) =>
-                      setBasicInfo((prev) => ({ ...prev, title: e.target.value }))
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setBasicInfo((prev) => ({ ...prev, title: (e.target as HTMLInputElement).value }))
                     }
                     placeholder="Ex: Voyage à Barcelone 2024"
                     className="admin-input mt-1"
@@ -411,10 +411,10 @@ export default function CreateTripPage() {
                   <textarea
                     id="description"
                     value={basicInfo.description}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setBasicInfo((prev) => ({
                         ...prev,
-                        description: e.target.value,
+                        description: (e.target as HTMLInputElement).value,
                       }))
                     }
                     placeholder="Description détaillée du voyage"
@@ -430,10 +430,10 @@ export default function CreateTripPage() {
                       id="startDate"
                       type="date"
                       value={basicInfo.startDate}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setBasicInfo((prev) => ({
                           ...prev,
-                          startDate: e.target.value,
+                          startDate: (e.target as HTMLInputElement).value,
                         }))
                       }
                       className="admin-input mt-1"
@@ -445,10 +445,10 @@ export default function CreateTripPage() {
                       id="endDate"
                       type="date"
                       value={basicInfo.endDate}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setBasicInfo((prev) => ({
                           ...prev,
-                          endDate: e.target.value,
+                          endDate: (e.target as HTMLInputElement).value,
                         }))
                       }
                       className="admin-input mt-1"
@@ -461,10 +461,10 @@ export default function CreateTripPage() {
                   <input
                     id="destination"
                     value={basicInfo.destination}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setBasicInfo((prev) => ({
                         ...prev,
-                        destination: e.target.value,
+                        destination: (e.target as HTMLInputElement).value,
                       }))
                     }
                     placeholder="Ex: Barcelone, Espagne"
@@ -478,8 +478,8 @@ export default function CreateTripPage() {
                     id="imageUrl"
                     type="url"
                     value={basicInfo.imageUrl}
-                    onChange={(e) =>
-                      setBasicInfo((prev) => ({ ...prev, imageUrl: e.target.value }))
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setBasicInfo((prev) => ({ ...prev, imageUrl: (e.target as HTMLInputElement).value }))
                     }
                     placeholder="https://..."
                     className="admin-input mt-1"
@@ -497,7 +497,7 @@ export default function CreateTripPage() {
               <div className="space-y-4">
                 <div>
                   <label htmlFor="transport-mode" className="admin-input-label">Mode de transport</label>
-                  <select id="transport-mode" value={transport.mode} onChange={(e) => setTransport((prev) => ({ ...prev, mode: e.target.value as TransportMode }))} className="admin-input mt-1">
+                  <select id="transport-mode" value={transport.mode} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTransport((prev) => ({ ...prev, mode: (e.target as HTMLInputElement).value as TransportMode }))} className="admin-input mt-1">
                     <option value="BUS">Bus</option>
                     <option value="FLIGHT">Avion</option>
                     <option value="MIXED">Mixte (Bus + Avion)</option>
@@ -510,10 +510,10 @@ export default function CreateTripPage() {
                     <input
                       id="busCompany"
                       value={transport.busCompany || ''}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setTransport((prev) => ({
                           ...prev,
-                          busCompany: e.target.value,
+                          busCompany: (e.target as HTMLInputElement).value,
                         }))
                       }
                       placeholder="Ex: FlixBus"
@@ -528,10 +528,10 @@ export default function CreateTripPage() {
                     <input
                       id="flightCompany"
                       value={transport.flightCompany || ''}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setTransport((prev) => ({
                           ...prev,
-                          flightCompany: e.target.value,
+                          flightCompany: (e.target as HTMLInputElement).value,
                         }))
                       }
                       placeholder="Ex: Ryanair"
@@ -547,10 +547,10 @@ export default function CreateTripPage() {
                       id="capacity"
                       type="number"
                       value={transport.capacity}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setTransport((prev) => ({
                           ...prev,
-                          capacity: parseInt(e.target.value) || 0,
+                          capacity: parseInt((e.target as HTMLInputElement).value) || 0,
                         }))
                       }
                       min="1"
@@ -563,11 +563,11 @@ export default function CreateTripPage() {
                       id="pricePerSeat"
                       type="number"
                       value={transport.pricePerSeatCentimes / 100}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setTransport((prev) => ({
                           ...prev,
                           pricePerSeatCentimes: Math.round(
-                            (parseFloat(e.target.value) || 0) * 100
+                            (parseFloat((e.target as HTMLInputElement).value) || 0) * 100
                           ),
                         }))
                       }
@@ -586,7 +586,7 @@ export default function CreateTripPage() {
                         <input
                           id="busStop"
                           value={newBusStop}
-                          onChange={(e) => setNewBusStop(e.target.value)}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewBusStop((e.target as HTMLInputElement).value)}
                           placeholder="Ajouter un arrêt"
                           className="admin-input"
                         />
@@ -595,7 +595,7 @@ export default function CreateTripPage() {
                         </button>
                       </div>
                       <div className="space-y-2">
-                        {(transport.busStops || []).map((stop, index) => (
+                        {(transport.busStops || []).map((stop: unknown, index: number) => (
                           <div
                             key={index}
                             className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -628,10 +628,10 @@ export default function CreateTripPage() {
                   <input
                     id="hotelName"
                     value={accommodation.hotelName}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setAccommodation((prev) => ({
                         ...prev,
-                        hotelName: e.target.value,
+                        hotelName: (e.target as HTMLInputElement).value,
                       }))
                     }
                     placeholder="Ex: Hotel Barcelona Vista"
@@ -646,10 +646,10 @@ export default function CreateTripPage() {
                       id="checkInDate"
                       type="date"
                       value={accommodation.checkInDate}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setAccommodation((prev) => ({
                           ...prev,
-                          checkInDate: e.target.value,
+                          checkInDate: (e.target as HTMLInputElement).value,
                         }))
                       }
                       className="mt-1"
@@ -661,10 +661,10 @@ export default function CreateTripPage() {
                       id="checkOutDate"
                       type="date"
                       value={accommodation.checkOutDate}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setAccommodation((prev) => ({
                           ...prev,
-                          checkOutDate: e.target.value,
+                          checkOutDate: (e.target as HTMLInputElement).value,
                         }))
                       }
                       className="mt-1"
@@ -676,10 +676,10 @@ export default function CreateTripPage() {
                       id="totalRooms"
                       type="number"
                       value={accommodation.totalRooms}
-                      onChange={(e) =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setAccommodation((prev) => ({
                           ...prev,
-                          totalRooms: parseInt(e.target.value) || 0,
+                          totalRooms: parseInt((e.target as HTMLInputElement).value) || 0,
                         }))
                       }
                       min="1"
@@ -700,10 +700,10 @@ export default function CreateTripPage() {
                           <Input
                             id="roomName"
                             value={newRoomType.name}
-                            onChange={(e) =>
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                               setNewRoomType((prev) => ({
                                 ...prev,
-                                name: e.target.value,
+                                name: (e.target as HTMLInputElement).value,
                               }))
                             }
                             placeholder="Ex: Double Standard"
@@ -718,10 +718,10 @@ export default function CreateTripPage() {
                             id="roomCapacity"
                             type="number"
                             value={newRoomType.capacity}
-                            onChange={(e) =>
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                               setNewRoomType((prev) => ({
                                 ...prev,
-                                capacity: parseInt(e.target.value) || 0,
+                                capacity: parseInt((e.target as HTMLInputElement).value) || 0,
                               }))
                             }
                             min="1"
@@ -736,11 +736,11 @@ export default function CreateTripPage() {
                             id="roomPrice"
                             type="number"
                             value={newRoomType.priceCentimes / 100}
-                            onChange={(e) =>
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                               setNewRoomType((prev) => ({
                                 ...prev,
                                 priceCentimes: Math.round(
-                                  (parseFloat(e.target.value) || 0) * 100
+                                  (parseFloat((e.target as HTMLInputElement).value) || 0) * 100
                                 ),
                               }))
                             }
@@ -755,7 +755,7 @@ export default function CreateTripPage() {
                       </Button>
                     </div>
 
-                    {accommodation.roomTypes.map((room, index) => (
+                    {accommodation.roomTypes.map((room: unknown, index: number) => (
                       <div
                         key={index}
                         className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -793,11 +793,11 @@ export default function CreateTripPage() {
                     id="basePrice"
                     type="number"
                     value={pricing.basePriceTTCCentimes / 100}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setPricing((prev) => ({
                         ...prev,
                         basePriceTTCCentimes: Math.round(
-                          (parseFloat(e.target.value) || 0) * 100
+                          (parseFloat((e.target as HTMLInputElement).value) || 0) * 100
                         ),
                       }))
                     }
@@ -819,10 +819,10 @@ export default function CreateTripPage() {
                           <Input
                             id="insuranceName"
                             value={newInsurance.name}
-                            onChange={(e) =>
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                               setNewInsurance((prev) => ({
                                 ...prev,
-                                name: e.target.value,
+                                name: (e.target as HTMLInputElement).value,
                               }))
                             }
                             placeholder="Ex: Annulation complète"
@@ -837,11 +837,11 @@ export default function CreateTripPage() {
                             id="insurancePrice"
                             type="number"
                             value={newInsurance.priceCentimes / 100}
-                            onChange={(e) =>
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                               setNewInsurance((prev) => ({
                                 ...prev,
                                 priceCentimes: Math.round(
-                                  (parseFloat(e.target.value) || 0) * 100
+                                  (parseFloat((e.target as HTMLInputElement).value) || 0) * 100
                                 ),
                               }))
                             }
@@ -856,7 +856,7 @@ export default function CreateTripPage() {
                       </Button>
                     </div>
 
-                    {pricing.insuranceOptions.map((insurance, index) => (
+                    {pricing.insuranceOptions.map((insurance: unknown, index: number) => (
                       <div
                         key={index}
                         className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -887,13 +887,13 @@ export default function CreateTripPage() {
                       { id: 'TRANSFER', label: 'Virement' },
                       { id: 'CHECK', label: 'Chèque' },
                       { id: 'CASH', label: 'Espèces' },
-                    ].map((mode) => (
+                    ].map((mode: unknown) => (
                       <label key={mode.id} className="flex items-center gap-2">
                         <input
                           type="checkbox"
                           checked={pricing.paymentModes.includes(mode.id)}
-                          onChange={(e) => {
-                            if (e.target.checked) {
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            if ((e.target as HTMLInputElement).checked) {
                               setPricing((prev) => ({
                                 ...prev,
                                 paymentModes: [...prev.paymentModes, mode.id],
@@ -901,8 +901,7 @@ export default function CreateTripPage() {
                             } else {
                               setPricing((prev) => ({
                                 ...prev,
-                                paymentModes: prev.paymentModes.filter(
-                                  (m) => m !== mode.id
+                                paymentModes: prev.paymentModes.filter((m: unknown) => m !== mode.id
                                 ),
                               }));
                             }

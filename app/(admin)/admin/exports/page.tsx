@@ -66,15 +66,15 @@ export default function ExportsPage() {
         ]);
 
         if (exportsRes.ok) {
-          const data = await exportsRes.json();
+          const data = (await exportsRes.json() as unknown) as unknown;
           setExports(data.data || []);
         }
 
         if (tripsRes.ok) {
-          const data = await tripsRes.json();
+          const data = (await tripsRes.json() as unknown) as unknown;
           setTrips(data.data || []);
         }
-      } catch (_error) {
+      } catch (_error: unknown) {
         // Erreur silencieuse — les données se chargent au prochain retry
       } finally {
         setLoading(false);
@@ -113,13 +113,13 @@ export default function ExportsPage() {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         setExports([data, ...exports]);
         setIsDialogOpen(false);
         setMotif('');
         setSelectedTrip('');
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setToastMessage('Erreur lors de la génération de l\'export');
     } finally {
       setIsGenerating(false);
@@ -140,7 +140,7 @@ export default function ExportsPage() {
         a.download = `export-${exportId}.file`;
         a.click();
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setToastMessage('Erreur lors du téléchargement');
     }
   };
@@ -153,10 +153,10 @@ export default function ExportsPage() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setExports(exports.map((e) => (e.id === exportId ? data : e)));
+        const data = (await response.json() as unknown) as unknown;
+        setExports(exports.map((e: unknown) => (e.id === exportId ? data : e)));
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setToastMessage('Erreur lors de la régénération');
     }
   };
@@ -279,7 +279,7 @@ export default function ExportsPage() {
         </div>
         <div className="admin-panel-body">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {exportTypes.map((type) => (
+            {exportTypes.map((type: unknown) => (
               <button
                 key={type.value}
                 onClick={() => handleQuickExport(type.value as ExportType, 'CSV')}
@@ -326,10 +326,10 @@ export default function ExportsPage() {
                 </label>
                 <select
                   value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value as ExportType)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedType((e.target as HTMLInputElement).value as ExportType)}
                   className="admin-input"
                 >
-                  {exportTypes.map((type) => (
+                  {exportTypes.map((type: unknown) => (
                     <option key={type.value} value={type.value}>
                       {type.label}
                     </option>
@@ -343,11 +343,11 @@ export default function ExportsPage() {
                 </label>
                 <select
                   value={selectedTrip}
-                  onChange={(e) => setSelectedTrip(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedTrip((e.target as HTMLInputElement).value)}
                   className="admin-input"
                 >
                   <option value="">Sélectionner un voyage</option>
-                  {trips.map((trip) => (
+                  {trips.map((trip: unknown) => (
                     <option key={trip.id} value={trip.id}>
                       {trip.title}
                     </option>
@@ -361,10 +361,10 @@ export default function ExportsPage() {
                 </label>
                 <select
                   value={selectedFormat}
-                  onChange={(e) => setSelectedFormat(e.target.value as 'CSV' | 'PDF')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedFormat((e.target as HTMLInputElement).value as 'CSV' | 'PDF')}
                   className="admin-input"
                 >
-                  {allowedFormats.map((fmt) => (
+                  {allowedFormats.map((fmt: unknown) => (
                     <option key={fmt} value={fmt}>
                       {fmt}
                     </option>
@@ -380,7 +380,7 @@ export default function ExportsPage() {
                   type="text"
                   placeholder="Raison de cet export (requis)"
                   value={motif}
-                  onChange={(e) => setMotif(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMotif((e.target as HTMLInputElement).value)}
                   className="admin-input"
                 />
                 <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)', marginTop: '6px' }}>

@@ -56,7 +56,7 @@ export default function UtilisateursPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data: PaginatedResponse = await response.json();
+        const data: PaginatedResponse = await response.json() as unknown;
         setUsers(data.data || []);
         setTotalPages(data.totalPages || 1);
         setTotal(data.total || 0);
@@ -66,7 +66,7 @@ export default function UtilisateursPage() {
       } else {
         setError('Erreur lors du chargement des utilisateurs');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Users fetch error:', err);
       setError('Impossible de charger les utilisateurs. Vérifiez votre connexion.');
     } finally {
@@ -184,7 +184,7 @@ export default function UtilisateursPage() {
                 <input
                   placeholder="Nom, email..."
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
                   className="admin-input pl-10"
                   disabled={loading}
                 />
@@ -196,7 +196,7 @@ export default function UtilisateursPage() {
               <label className="admin-input-label">Rôle</label>
               <select
                 value={roleFilter}
-                onChange={(e) => setRoleFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRoleFilter((e.target as HTMLInputElement).value)}
                 className="admin-input"
                 disabled={loading}
               >
@@ -212,7 +212,7 @@ export default function UtilisateursPage() {
               <label className="admin-input-label">Statut</label>
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)}
                 className="admin-input"
                 disabled={loading}
               >

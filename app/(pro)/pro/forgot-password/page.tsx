@@ -23,12 +23,12 @@ export default function ProForgotPasswordPage() {
       });
 
       if (!response.ok) {
-        const data = await response.json();
+        const data = (await response.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de l\'envoi');
       }
 
       setSent(true);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -85,7 +85,7 @@ export default function ProForgotPasswordPage() {
                     type="email"
                     id="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
                     placeholder="pro@eventy.life"
                     className="pro-input"
                     required

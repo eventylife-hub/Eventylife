@@ -62,7 +62,7 @@ export function CostTable({
       setFormData({ title: '', costAmountHT: '', vatRateBps: '2000' });
       setAdding(false);
       onUpdate();
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(err);
     }
   };
@@ -77,7 +77,7 @@ export function CostTable({
 
       if (!res.ok) throw new Error('Erreur suppression');
       onUpdate();
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(err);
     }
   };
@@ -96,7 +96,7 @@ export function CostTable({
             </tr>
           </thead>
           <tbody className="space-y-1">
-            {costs.map((cost) => (
+            {costs.map((cost: unknown) => (
               <tr key={cost.id} className="border-b hover:bg-gray-50">
                 <td className="py-2">{cost.title}</td>
                 <td className="py-2 text-right">
@@ -126,8 +126,8 @@ export function CostTable({
                   <Input
                     placeholder="Titre"
                     value={formData.title}
-                    onChange={(e) =>
-                      setFormData({ ...formData, title: e.target.value })
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setFormData({ ...formData, title: (e.target as HTMLInputElement).value })
                     }
                     className="h-8"
                   />
@@ -138,10 +138,10 @@ export function CostTable({
                     placeholder="0.00"
                     step="0.01"
                     value={formData.costAmountHT}
-                    onChange={(e) =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setFormData({
                         ...formData,
-                        costAmountHT: e.target.value,
+                        costAmountHT: (e.target as HTMLInputElement).value,
                       })
                     }
                     className="h-8 text-right"

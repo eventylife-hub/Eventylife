@@ -74,10 +74,10 @@ export default function AdminNotificationsPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const result = await response.json();
+          const result = (await response.json() as unknown) as unknown;
           setData(result);
         }
-      } catch (_error) {
+      } catch (_error: unknown) {
         // Erreur silencieuse — les données se chargent au prochain retry
       } finally {
         setLoading(false);
@@ -100,11 +100,11 @@ export default function AdminNotificationsPage() {
         // Refresh data
         const res = await fetch('/api/admin/notifications', { credentials: 'include' });
         if (res.ok) {
-          const result = await res.json();
+          const result = (await res.json() as unknown) as unknown;
           setData(result);
         }
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       // Erreur silencieuse — retry au prochain clic
     }
   };
@@ -136,13 +136,13 @@ export default function AdminNotificationsPage() {
         // Refresh data
         const res = await fetch('/api/admin/notifications', { credentials: 'include' });
         if (res.ok) {
-          const result = await res.json();
+          const result = (await res.json() as unknown) as unknown;
           setData(result);
         }
       } else {
         setToastMessage({ type: 'error', message: 'Erreur lors de l\'envoi' });
       }
-    } catch (_error) {
+    } catch (_error: unknown) {
       setToastMessage({ type: 'error', message: 'Erreur lors de l\'envoi' });
     }
   };
@@ -161,7 +161,7 @@ export default function AdminNotificationsPage() {
         // Recharger la liste des templates
         const res = await fetch('/api/admin/notifications', { credentials: 'include' });
         if (res.ok) {
-          const result = await res.json();
+          const result = (await res.json() as unknown) as unknown;
           setData(result);
         }
       } else {
@@ -454,7 +454,7 @@ export default function AdminNotificationsPage() {
                   type="email"
                   placeholder="email@example.com ou +33..."
                   value={manualRecipient}
-                  onChange={(e) => setManualRecipient(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualRecipient((e.target as HTMLInputElement).value)}
                   className="admin-input"
                 />
               </div>
@@ -465,11 +465,11 @@ export default function AdminNotificationsPage() {
                 </label>
                 <select
                   value={manualTemplate}
-                  onChange={(e) => setManualTemplate(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualTemplate((e.target as HTMLInputElement).value)}
                   className="admin-input"
                 >
                   <option value="">Sélectionner un template</option>
-                  {data.templates.map((t) => (
+                  {data.templates.map((t: unknown) => (
                     <option key={t.id} value={t.id}>
                       {t.name}
                     </option>
@@ -483,7 +483,7 @@ export default function AdminNotificationsPage() {
                 </label>
                 <select
                   value={manualChannel}
-                  onChange={(e) => setManualChannel(e.target.value as 'EMAIL' | 'SMS' | 'PUSH')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualChannel((e.target as HTMLInputElement).value as 'EMAIL' | 'SMS' | 'PUSH')}
                   className="admin-input"
                 >
                   <option value="EMAIL">Email</option>

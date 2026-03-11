@@ -56,7 +56,7 @@ export default function TravelLifecyclePage() {
         credentials: 'include',
       });
       if (travelResponse.ok) {
-        const travelData = await travelResponse.json();
+        const travelData = (await travelResponse.json() as unknown) as unknown;
         setTravel(travelData.data);
       }
 
@@ -65,12 +65,12 @@ export default function TravelLifecyclePage() {
         credentials: 'include',
       });
       if (historyResponse.ok) {
-        const historyData = await historyResponse.json();
+        const historyData = (await historyResponse.json() as unknown) as unknown;
         setHistory(historyData.data || []);
       }
 
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -179,7 +179,7 @@ export default function TravelLifecyclePage() {
       setSelectedAction(null);
       setCancelReason('');
       await fetchData();
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setProcessing(false);
@@ -317,7 +317,7 @@ export default function TravelLifecyclePage() {
                 </label>
                 <textarea
                   value={cancelReason}
-                  onChange={(e) => setCancelReason(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCancelReason((e.target as HTMLInputElement).value)}
                   className="admin-input"
                   rows={4}
                   placeholder="Entrez le motif..."
@@ -326,7 +326,7 @@ export default function TravelLifecyclePage() {
             )}
 
             <div className="grid grid-cols-2 gap-4">
-              {availableActions.map((action) => (
+              {availableActions.map((action: unknown) => (
                 <button
                   key={action.action}
                   onClick={() => {

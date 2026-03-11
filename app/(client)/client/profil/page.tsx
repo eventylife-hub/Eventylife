@@ -92,7 +92,7 @@ export default function ProfilePage() {
 
         if (!res.ok) throw new Error('Impossible de charger le profil');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setProfile(data);
         setForm({
           firstName: data.firstName || '',
@@ -113,7 +113,7 @@ export default function ProfilePage() {
         if (data.twoFactorEnabled) {
           setTwoFAEnabled(true);
         }
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
       } finally {
         setLoading(false);
@@ -141,11 +141,11 @@ export default function ProfilePage() {
 
       if (!res.ok) throw new Error('Erreur lors de la mise à jour');
 
-      const updated = await res.json();
+      const updated = (await res.json() as unknown) as unknown;
       setProfile(updated);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur');
     } finally {
       setSaving(false);
@@ -180,7 +180,7 @@ export default function ProfilePage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Mot de passe actuel incorrect');
       }
 
@@ -190,7 +190,7 @@ export default function ProfilePage() {
         setShowPasswordModal(false);
         setPasswordSuccess(false);
       }, 2000);
-    } catch (err) {
+    } catch (err: unknown) {
       setPasswordError(err instanceof Error ? err.message : 'Erreur');
     } finally {
       setChangingPassword(false);
@@ -208,11 +208,11 @@ export default function ProfilePage() {
 
       if (!res.ok) throw new Error('Erreur lors de la configuration 2FA');
 
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setTwoFASecret(data.secret);
       setTwoFAQrUrl(data.qrCodeUrl);
       setShow2FAModal(true);
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur');
     } finally {
       setEnabling2FA(false);
@@ -230,14 +230,14 @@ export default function ProfilePage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Code invalide');
       }
 
       setTwoFAEnabled(true);
       setShow2FAModal(false);
       setTwoFACode('');
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur');
     } finally {
       setEnabling2FA(false);
@@ -253,7 +253,7 @@ export default function ProfilePage() {
       });
       if (!res.ok) throw new Error('Erreur');
       setTwoFAEnabled(false);
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur');
     }
   };
@@ -272,7 +272,7 @@ export default function ProfilePage() {
         body: JSON.stringify(updated),
       });
       if (!res.ok) throw new Error('Erreur de sauvegarde');
-    } catch (err) {
+    } catch (err: unknown) {
       // Rollback
       setPreferences(preferences);
       alert(err instanceof Error ? err.message : 'Erreur');
@@ -286,7 +286,7 @@ export default function ProfilePage() {
       <div className="max-w-2xl mx-auto space-y-6 animate-fade-up">
         <div className="h-8 rounded-xl skeleton" style={{ width: '40%' }} />
         <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
+          {[...Array(3)].map((_: unknown, i: number) => (
             <div key={i} className="h-10 rounded-xl skeleton" />
           ))}
         </div>
@@ -348,7 +348,7 @@ export default function ProfilePage() {
             <input
               type="text"
               value={form.firstName}
-              onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, firstName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
               style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
               placeholder="Votre prénom"
@@ -369,7 +369,7 @@ export default function ProfilePage() {
             <input
               type="text"
               value={form.lastName}
-              onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, lastName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
               style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
               placeholder="Votre nom"
@@ -390,7 +390,7 @@ export default function ProfilePage() {
             <input
               type="tel"
               value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
               style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
               placeholder="+33 6 XX XX XX XX"
@@ -520,7 +520,7 @@ export default function ProfilePage() {
                 <input
                   type="password"
                   value={passwordForm.currentPassword}
-                  onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, currentPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
                   style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
                   onFocus={(e) => {
@@ -537,7 +537,7 @@ export default function ProfilePage() {
                 <input
                   type="password"
                   value={passwordForm.newPassword}
-                  onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, newPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
                   style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
                   onFocus={(e) => {
@@ -555,7 +555,7 @@ export default function ProfilePage() {
                 <input
                   type="password"
                   value={passwordForm.confirmPassword}
-                  onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, confirmPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
                   style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
                   onFocus={(e) => {
@@ -640,7 +640,7 @@ export default function ProfilePage() {
                 <input
                   type="text"
                   value={twoFACode}
-                  onChange={(e) => setTwoFACode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTwoFACode((e.target as HTMLInputElement).value.replace(/\D/g, '').slice(0, 6))}
                   placeholder="123456"
                   className="w-full px-4 py-3 rounded-xl text-sm text-center transition-all"
                   style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy, letterSpacing: '0.1em', fontSize: '1.125rem' }}
@@ -712,7 +712,7 @@ export default function ProfilePage() {
             <input
               type="checkbox"
               checked={preferences.emailNotifications}
-              onChange={(e) => handlePreferenceChange('emailNotifications', e.target.checked)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('emailNotifications', (e.target as HTMLInputElement).checked)}
               className="w-5 h-5 rounded cursor-pointer"
               style={{ accentColor: C.terra }}
             />
@@ -725,7 +725,7 @@ export default function ProfilePage() {
             <input
               type="checkbox"
               checked={preferences.promotionUpdates}
-              onChange={(e) => handlePreferenceChange('promotionUpdates', e.target.checked)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('promotionUpdates', (e.target as HTMLInputElement).checked)}
               className="w-5 h-5 rounded cursor-pointer"
               style={{ accentColor: C.terra }}
             />
@@ -738,7 +738,7 @@ export default function ProfilePage() {
             <input
               type="checkbox"
               checked={preferences.shareDataWithPartners}
-              onChange={(e) => handlePreferenceChange('shareDataWithPartners', e.target.checked)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('shareDataWithPartners', (e.target as HTMLInputElement).checked)}
               className="w-5 h-5 rounded cursor-pointer"
               style={{ accentColor: C.terra }}
             />

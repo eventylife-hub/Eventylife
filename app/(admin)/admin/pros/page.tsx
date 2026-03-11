@@ -45,12 +45,12 @@ export default function ProsPage() {
 
         const response = await fetch(endpoint, { credentials: 'include' });
         if (response.ok) {
-          const data = await response.json();
+          const data = (await response.json() as unknown) as unknown;
           setProfiles(data.data || data);
         } else {
           setError('Erreur lors du chargement des profils Pro');
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Pros fetch error:', err);
         setError('Impossible de charger les profils Pro. Vérifiez votre connexion.');
       } finally {
@@ -97,7 +97,7 @@ export default function ProsPage() {
       });
 
       if (response.ok) {
-        setProfiles(profiles.filter((p) => p.id !== selectedProfile.id));
+        setProfiles(profiles.filter((p: unknown) => p.id !== selectedProfile.id));
         setShowApprovalModal(false);
         setSelectedProfile(null);
         // In production, show toast: "Profil approuvé avec succès"
@@ -108,7 +108,7 @@ export default function ProsPage() {
       } else {
         setError('Erreur lors de l\'approbation du profil');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Pro approval error:', err);
       setError('Impossible d\'approuver le profil. Vérifiez votre connexion.');
     }
@@ -126,7 +126,7 @@ export default function ProsPage() {
       });
 
       if (response.ok) {
-        setProfiles(profiles.filter((p) => p.id !== selectedProfile.id));
+        setProfiles(profiles.filter((p: unknown) => p.id !== selectedProfile.id));
         setShowApprovalModal(false);
         setSelectedProfile(null);
         // In production, show toast: "Profil rejeté avec succès"
@@ -137,7 +137,7 @@ export default function ProsPage() {
       } else {
         setError('Erreur lors du rejet du profil');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Pro rejection error:', err);
       setError('Impossible de rejeter le profil. Vérifiez votre connexion.');
     }
@@ -160,7 +160,7 @@ export default function ProsPage() {
             },
           },
         ]
-      : []),
+      : unknown[]),
   ];
 
   return (
@@ -189,14 +189,14 @@ export default function ProsPage() {
         <div className="admin-panel-body p-6">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
-              {statuses.map((status) => (
+              {statuses.map((status: unknown) => (
                 <TabsTrigger key={status.value} value={status.value}>
                   {status.label}
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            {statuses.map((status) => (
+            {statuses.map((status: unknown) => (
               <TabsContent key={status.value} value={status.value}>
                 <DataTable
                   columns={columns}

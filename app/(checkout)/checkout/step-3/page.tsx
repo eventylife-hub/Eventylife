@@ -136,7 +136,7 @@ export default function CheckoutStep3Page() {
                 name="payment-mode"
                 value="full"
                 checked={paymentMode === 'full'}
-                onChange={(e) => setPaymentMode(e.target.value as 'full' | 'split')}
+                onChange={(e) => setPaymentMode((e.target as HTMLInputElement).value as 'full' | 'split')}
                 style={{
                   marginRight: '1rem',
                   width: '20px',
@@ -177,7 +177,7 @@ export default function CheckoutStep3Page() {
                 name="payment-mode"
                 value="split"
                 checked={paymentMode === 'split'}
-                onChange={(e) => setPaymentMode(e.target.value as 'full' | 'split')}
+                onChange={(e) => setPaymentMode((e.target as HTMLInputElement).value as 'full' | 'split')}
                 style={{
                   marginRight: '1rem',
                   width: '20px',

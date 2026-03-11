@@ -47,10 +47,10 @@ export default function TravelReviewsPage() {
 
         if (!res.ok) throw new Error('Impossible de charger les avis');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setReviews(data.reviews || []);
         setTravel(data.travel);
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
       } finally {
         setLoading(false);
@@ -65,7 +65,7 @@ export default function TravelReviewsPage() {
   const renderStars = (rating: number) => {
     return (
       <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
+        {[1, 2, 3, 4, 5].map((star: unknown) => (
           <span
             key={star}
             className={`text-xl ${
@@ -79,7 +79,7 @@ export default function TravelReviewsPage() {
     );
   };
 
-  const sortedReviews = [...reviews].sort((a, b) => {
+  const sortedReviews = [...(reviews || [])].sort((a, b) => {
     if (sortBy === 'recent') {
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     } else if (sortBy === 'rating-high') {
@@ -95,11 +95,11 @@ export default function TravelReviewsPage() {
       : 0;
 
   const ratingDistribution = {
-    5: reviews.filter((r) => r.rating === 5).length,
-    4: reviews.filter((r) => r.rating === 4).length,
-    3: reviews.filter((r) => r.rating === 3).length,
-    2: reviews.filter((r) => r.rating === 2).length,
-    1: reviews.filter((r) => r.rating === 1).length,
+    5: reviews.filter((r: unknown) => r.rating === 5).length,
+    4: reviews.filter((r: unknown) => r.rating === 4).length,
+    3: reviews.filter((r: unknown) => r.rating === 3).length,
+    2: reviews.filter((r: unknown) => r.rating === 2).length,
+    1: reviews.filter((r: unknown) => r.rating === 1).length,
   };
 
   if (loading) {
@@ -116,7 +116,7 @@ export default function TravelReviewsPage() {
           ← Retour au voyage
         </Link>
         <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
+          {[...Array(3)].map((_: unknown, i: number) => (
             <div
               key={i}
               className="h-24 rounded-lg animate-pulse"
@@ -210,7 +210,7 @@ export default function TravelReviewsPage() {
               </div>
 
               <div className="flex-1 space-y-2 w-full">
-                {[5, 4, 3, 2, 1].map((rating) => (
+                {[5, 4, 3, 2, 1].map((rating: unknown) => (
                   <div key={rating} className="flex items-center gap-3">
                     <span className="text-sm font-medium w-12" style={{ color: C.muted }}>
                       {rating} ★
@@ -242,7 +242,7 @@ export default function TravelReviewsPage() {
             </h2>
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'recent' | 'rating-high' | 'rating-low')}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSortBy((e.target as HTMLInputElement).value as 'recent' | 'rating-high' | 'rating-low')}
               className="px-4 py-2 rounded-lg focus:ring-2"
               style={{
                 borderRadius: '12px',
@@ -259,7 +259,7 @@ export default function TravelReviewsPage() {
 
           {/* Liste des avis */}
           <div className="space-y-4">
-            {sortedReviews.map((review) => (
+            {sortedReviews.map((review: unknown) => (
               <div
                 key={review.id}
                 className="rounded-lg p-6"

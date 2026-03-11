@@ -95,7 +95,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             variant="outline"
             size="sm"
             className="w-full"
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent) => {
               e.preventDefault();
             }}
           >

@@ -61,13 +61,13 @@ export default function ClientDashboardPage() {
 
         if (!profileRes.ok) throw new Error('Impossible de charger le profil');
 
-        const profileData = await profileRes.json();
+        const profileData = (await profileRes.json() as unknown) as unknown;
 
         const bookingsRes = await fetch('/api/client/bookings?limit=1', {
           credentials: 'include',
         });
 
-        const bookingsData = bookingsRes.ok ? await bookingsRes.json() : { items: [] };
+        const bookingsData = bookingsRes.ok ? await bookingsRes.json() as unknown : { items: unknown[] };
 
         const nextTravel = bookingsData.items?.[0];
 
@@ -77,7 +77,7 @@ export default function ClientDashboardPage() {
           stats: profileData.stats,
           nextTravel,
         });
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur de chargement');
       } finally {
         setLoading(false);
@@ -123,7 +123,7 @@ export default function ClientDashboardPage() {
       <div className="space-y-6 animate-fade-in">
         <div className="h-28 rounded-2xl skeleton" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="h-24 rounded-2xl skeleton" />
           ))}
         </div>
@@ -158,7 +158,7 @@ export default function ClientDashboardPage() {
           { label: 'Confirmées', value: data.stats.confirmedBookings || 0, color: C.forest },
           { label: 'En attente', value: data.stats.pendingBookings || 0, color: '#92400e' },
           { label: 'Montant dépensé', value: formatPrice(data.stats.totalAmountSpentCents || 0), color: C.terra },
-        ].map((stat, i) => (
+        ].map((stat: unknown, i: number) => (
           <div
             key={i}
             className="p-5 rounded-2xl transition-all duration-300"
@@ -254,7 +254,7 @@ export default function ClientDashboardPage() {
           { href: '/client/reservations', icon: '📋', title: 'Mes réservations', desc: 'Voir toutes vos réservations', accent: C.terra },
           { href: '/client/groupes', icon: '👥', title: 'Mes groupes', desc: 'Gérez vos groupes de voyage', accent: C.forest },
           { href: '/client/profil', icon: '⚙️', title: 'Mon profil', desc: 'Modifiez vos informations', accent: C.gold },
-        ].map((action, i) => (
+        ].map((action: unknown, i: number) => (
           <Link key={i} href={action.href} className="group">
             <div
               className="p-6 rounded-2xl h-full transition-all duration-300"

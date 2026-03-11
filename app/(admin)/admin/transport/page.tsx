@@ -66,12 +66,12 @@ export default function TransportPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = await response.json();
+          const data = (await response.json() as unknown) as unknown;
           setTrips(data.data || []);
         } else {
           setError('Erreur lors du chargement des transports');
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Transport fetch error:', err);
         setError('Impossible de charger les transports. Vérifiez votre connexion.');
       } finally {
@@ -89,10 +89,10 @@ export default function TransportPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = await response.json();
+          const data = (await response.json() as unknown) as unknown;
           setStats(data);
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Transport stats fetch error:', err);
       }
     };
@@ -173,7 +173,7 @@ export default function TransportPage() {
       } else {
         setError('Erreur lors de la génération du manifeste');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Manifest generation error:', err);
       setError('Impossible de générer le manifeste. Vérifiez votre connexion.');
     } finally {
@@ -299,7 +299,7 @@ export default function TransportPage() {
         </div>
       ) : (
         <div className="admin-kpi-grid">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="admin-kpi-card p-6 h-32 bg-gray-100 animate-pulse rounded" />
           ))}
         </div>
@@ -324,7 +324,7 @@ export default function TransportPage() {
                 Statut du manifeste
               </label>
               <div className="flex gap-2">
-                {statuses.map((s) => (
+                {statuses.map((s: unknown) => (
                   <button
                     key={s.value}
                     onClick={() => setStatusFilter(s.value)}
@@ -345,7 +345,7 @@ export default function TransportPage() {
                 Mode de transport
               </label>
               <div className="flex gap-2">
-                {modes.map((m) => (
+                {modes.map((m: unknown) => (
                   <button
                     key={m.value}
                     onClick={() => setModeFilter(m.value)}

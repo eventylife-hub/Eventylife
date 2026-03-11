@@ -142,7 +142,7 @@ export function InvoicePreview({
             Historique des Paiements
           </h3>
           <div className="space-y-2">
-            {paymentHistory.map((payment, idx) => (
+            {paymentHistory.map((payment: unknown, idx: number) => (
               <div key={idx} className="flex justify-between text-sm">
                 <span className="text-gray-700">
                   Paiement {idx + 1} - {payment.status}

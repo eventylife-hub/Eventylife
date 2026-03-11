@@ -82,7 +82,7 @@ export default function ReservationsPage() {
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
   const [filterRoomType, setFilterRoomType] = useState<string | null>(null);
 
-  const roomTypes = [...new Set(reservations.map((r) => r.roomType))];
+  const roomTypes = [...new Set(reservations.map((r: unknown) => r.roomType))];
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -98,11 +98,11 @@ export default function ReservationsPage() {
 
         if (!res.ok) throw new Error('Erreur chargement réservations');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setReservations(data.reservations || []);
         setStats(data.stats || stats);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -114,7 +114,7 @@ export default function ReservationsPage() {
     }
   }, [travelId, filterStatus, filterRoomType]);
 
-  const filteredReservations = reservations.filter((r) => {
+  const filteredReservations = reservations.filter((r: unknown) => {
     if (search) {
       return (
         r.clientName.toLowerCase().includes(search.toLowerCase()) ||
@@ -141,7 +141,7 @@ export default function ReservationsPage() {
       a.download = `reservations-${travelId}.csv`;
       a.click();
       window.URL.revokeObjectURL(url);
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setExporting(false);
@@ -154,7 +154,7 @@ export default function ReservationsPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <Skeleton className="h-10 w-64" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-            {[...Array(4)].map((_, i) => (
+            {[...Array(4)].map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-20" />
             ))}
           </div>
@@ -224,7 +224,7 @@ export default function ReservationsPage() {
             <input
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
               placeholder="Nom, email ou référence..."
               className="pro-input"
               style={{ width: '100%', paddingLeft: '2.5rem' }}
@@ -236,7 +236,7 @@ export default function ReservationsPage() {
           <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Statut paiement</label>
           <select
             value={filterStatus || ''}
-            onChange={(e) => setFilterStatus(e.target.value || null)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterStatus((e.target as HTMLInputElement).value || null)}
             className="pro-input"
           >
             <option value="">Tous</option>
@@ -251,11 +251,11 @@ export default function ReservationsPage() {
             <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Type chambre</label>
             <select
               value={filterRoomType || ''}
-              onChange={(e) => setFilterRoomType(e.target.value || null)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterRoomType((e.target as HTMLInputElement).value || null)}
               className="pro-input"
             >
               <option value="">Tous</option>
-              {roomTypes.map((type) => (
+              {roomTypes.map((type: unknown) => (
                 <option key={type} value={type}>
                   {type}
                 </option>
@@ -287,7 +287,7 @@ export default function ReservationsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredReservations.map((res) => {
+                  {filteredReservations.map((res: unknown) => {
                     const StatusIcon = PAYMENT_STATUS_ICONS[res.paymentStatus];
                     return (
                       <tr

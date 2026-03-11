@@ -52,7 +52,7 @@ export default function CreerGroupePage() {
           credentials: 'include',
         });
         if (!res.ok) throw new Error('Erreur lors du chargement des voyages');
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setVoyages(data.travels || []);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur inconnue');
@@ -101,11 +101,11 @@ export default function CreerGroupePage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la création');
       }
 
-      const newGroup = await res.json();
+      const newGroup = (await res.json() as unknown) as unknown;
       router.push(`/client/groupes/${newGroup.id}`);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
@@ -134,7 +134,7 @@ export default function CreerGroupePage() {
             <CardContent>
               {loading ? (
                 <div className="space-y-4">
-                  {[...Array(3)].map((_, i) => (
+                  {[...Array(3)].map((_: unknown, i: number) => (
                     <div key={i} className="h-10 rounded animate-pulse" style={{ backgroundColor: C.border }} />
                   ))}
                 </div>
@@ -205,7 +205,7 @@ export default function CreerGroupePage() {
                       required
                     >
                       <option value="">-- Sélectionner --</option>
-                      {voyages.map((v: any) => (
+                      {voyages.map((v: unknown) => (
                         <option key={v?.id as string} value={v?.id as string}>
                           {v?.title as string} ({formatDate(v?.departureDate as string | Date)})
                         </option>

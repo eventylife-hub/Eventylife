@@ -34,10 +34,10 @@ export default function ManifestPage() {
         const res = await fetch(`/api/transport/${travelId}/manifest`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement manifest');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setManifest(data);
         setError(null);
-      } catch (err) {
+      } catch (err: unknown) {
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -61,7 +61,7 @@ export default function ManifestPage() {
       a.href = url;
       a.download = `transport-manifest-${travelId}.pdf`;
       a.click();
-    } catch (err) {
+    } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
       setExporting(false);
@@ -110,14 +110,14 @@ export default function ManifestPage() {
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {manifest.map((stopData) => (
-            <div key={(stopData.stop as any)?.id as string} className="pro-panel">
+          {manifest.map((stopData: unknown) => (
+            <div key={(stopData.stop as unknown)?.id as string} className="pro-panel">
               <div className="pro-panel-header">
                 <h3 className="pro-panel-title" style={{ fontSize: '1.125rem' }}>
-                  {((stopData.stop as any)?.publicName as string) || 'Arrêt'} ({((stopData.stop as any)?.city as string) || ''})
+                  {((stopData.stop as unknown)?.publicName as string) || 'Arrêt'} ({((stopData.stop as unknown)?.city as string) || ''})
                 </h3>
                 <p style={{ fontSize: '0.875rem', color: '#8896A6', margin: 0 }}>
-                  {((stopData.passengers as any) || []).length as number} passager(s)
+                  {((stopData.passengers as unknown) || []).length as number} passager(s)
                 </p>
               </div>
               <div className="pro-panel-body">
@@ -132,7 +132,7 @@ export default function ManifestPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {((stopData.passengers as any) || []).map((p: Record<string, unknown>, idx: number) => (
+                      {((stopData.passengers as unknown) || []).map((p: Record<string, unknown>, idx: number) => (
                         <tr key={idx} style={{ borderBottom: '1px solid #E2E8F0' }} onMouseEnter={(e) => (e.currentTarget.style.background = '#F7FAFC')} onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
                           <td style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', color: '#0A1628' }}>
                             {((p.firstName as string) && (p.lastName as string))

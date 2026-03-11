@@ -72,11 +72,11 @@ export default function ReservationsPage() {
 
       if (!res.ok) throw new Error('Impossible de charger les réservations');
 
-      const data = await res.json();
-      setBookings(cursorValue ? [...bookings, ...data.items] : data.items);
+      const data = (await res.json() as unknown) as unknown;
+      setBookings(cursorValue ? [...bookings, ...data?.items] : data?.items);
       setCursor(data.nextCursor);
       setHasMore(data.hasMore);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur');
     } finally {
       setLoading(false);
@@ -90,7 +90,7 @@ export default function ReservationsPage() {
   const filteredBookings =
     filter === 'all'
       ? bookings
-      : bookings.filter((b) => {
+      : bookings.filter((b: unknown) => {
           if (filter === 'confirmed') return b.status === 'CONFIRMED';
           if (filter === 'pending') return ['HELD', 'PARTIALLY_PAID'].includes(b.status);
           if (filter === 'cancelled') return b.status === 'CANCELED';
@@ -141,7 +141,7 @@ export default function ReservationsPage() {
           { value: 'confirmed', label: 'Confirmées' },
           { value: 'pending', label: 'En attente' },
           { value: 'cancelled', label: 'Annulées' },
-        ].map((f) => (
+        ].map((f: unknown) => (
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
@@ -194,11 +194,11 @@ export default function ReservationsPage() {
           {/* Liste des réservations */}
           <div className="space-y-4">
             {loading && bookings.length === 0 ? (
-              [...Array(3)].map((_, i) => (
+              [...Array(3)].map((_: unknown, i: number) => (
                 <div key={i} className="h-32 rounded-2xl skeleton" />
               ))
             ) : (
-              filteredBookings.map((booking) => (
+              filteredBookings.map((booking: unknown) => (
                 <Link
                   key={booking.id}
                   href={`/client/reservations/${booking.id}`}

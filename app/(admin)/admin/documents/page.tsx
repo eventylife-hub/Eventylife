@@ -58,9 +58,9 @@ export default function AdminDocumentsPage() {
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
       }
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setDocuments(data);
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     } finally {
@@ -82,7 +82,7 @@ export default function AdminDocumentsPage() {
       await fetchDocuments();
       setShowApprovalModal(false);
       setSelectedDocument(null);
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     }
@@ -105,7 +105,7 @@ export default function AdminDocumentsPage() {
       setShowApprovalModal(false);
       setSelectedDocument(null);
       setApprovalReason('');
-    } catch (err) {
+    } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
       setError(message);
     }
@@ -135,7 +135,7 @@ export default function AdminDocumentsPage() {
     }
   };
 
-  const filteredDocuments = documents.filter((doc) => {
+  const filteredDocuments = documents.filter((doc: unknown) => {
     const query = searchQuery.toLowerCase();
     const matchesSearch =
       doc.name.toLowerCase().includes(query) ||
@@ -150,9 +150,9 @@ export default function AdminDocumentsPage() {
 
   const stats = {
     total: documents.length,
-    pending: documents.filter((d) => d.status === 'PENDING').length,
-    approved: documents.filter((d) => d.status === 'CONFIRMED').length,
-    rejected: documents.filter((d) => d.status === 'REJECTED').length,
+    pending: documents.filter((d: unknown) => d.status === 'PENDING').length,
+    approved: documents.filter((d: unknown) => d.status === 'CONFIRMED').length,
+    rejected: documents.filter((d: unknown) => d.status === 'REJECTED').length,
   };
 
   return (
@@ -176,7 +176,7 @@ export default function AdminDocumentsPage() {
           { label: 'En attente', value: stats.pending, bgColor: 'var(--admin-warning-bg, #FEF3C7)' },
           { label: 'Approuvés', value: stats.approved, bgColor: 'var(--admin-mint-soft)' },
           { label: 'Rejetés', value: stats.rejected, bgColor: 'var(--admin-coral-soft)' },
-        ].map((stat) => (
+        ].map((stat: unknown) => (
           <div
             key={stat.label}
             className="admin-kpi-card"
@@ -213,7 +213,7 @@ export default function AdminDocumentsPage() {
                   type="text"
                   placeholder="Par nom, email ou professionnel..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery((e.target as HTMLInputElement).value)}
                   className="admin-input"
                   style={{ paddingLeft: '36px' }}
                 />
@@ -225,7 +225,7 @@ export default function AdminDocumentsPage() {
               </label>
               <select
                 value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)}
                 className="admin-input"
               >
                 <option value="">Tous les statuts</option>
@@ -271,7 +271,7 @@ export default function AdminDocumentsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredDocuments.map((doc) => (
+                  {filteredDocuments.map((doc: unknown) => (
                     <tr key={doc.id}>
                       <td>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -374,7 +374,7 @@ export default function AdminDocumentsPage() {
                   </label>
                   <textarea
                     value={approvalReason}
-                    onChange={(e) => setApprovalReason(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setApprovalReason((e.target as HTMLInputElement).value)}
                     style={{
                       width: '100%',
                       padding: '12px',

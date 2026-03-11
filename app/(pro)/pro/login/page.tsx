@@ -29,12 +29,12 @@ export default function ProLoginPage() {
       })
 
       if (!response.ok) {
-        const data = await response.json()
+        const data = (await response.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la connexion')
       }
 
       router.push('/pro')
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue')
     } finally {
       setLoading(false)
@@ -64,7 +64,7 @@ export default function ProLoginPage() {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
                 placeholder="pro@eventy.life"
                 className="pro-input"
                 required
@@ -80,7 +80,7 @@ export default function ProLoginPage() {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword((e.target as HTMLInputElement).value)}
                 placeholder="••••••••"
                 className="pro-input"
                 required

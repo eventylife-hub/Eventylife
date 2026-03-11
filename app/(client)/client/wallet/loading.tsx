@@ -17,7 +17,7 @@ export default function WalletLoading() {
         <Skeleton className="h-4 w-32" />
         <Skeleton className="h-16 w-48" />
         <div className="grid md:grid-cols-3 gap-4">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_: unknown, i: number) => (
             <Skeleton key={i} className="h-20 w-full" />
           ))}
         </div>
@@ -33,11 +33,11 @@ export default function WalletLoading() {
       <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
         <Skeleton className="h-6 w-48" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_: unknown, i: number) => (
             <Skeleton key={i} className="h-10 w-full" />
           ))}
         </div>
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 5 }).map((_: unknown, i: number) => (
           <Skeleton key={i} className="h-12 w-full" />
         ))}
       </div>

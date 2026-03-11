@@ -64,11 +64,11 @@ export default function NotificationsPage() {
 
   // Filtre les notifications si un type est sélectionné
   const filteredNotifications = filter
-    ? notifications.filter((n) => n.type === filter)
+    ? notifications.filter((n: unknown) => n.type === filter)
     : notifications;
 
   // Types de notifications uniques
-  const types = Array.from(new Set(notifications.map((n) => n.type)));
+  const types = Array.from(new Set(notifications.map((n: unknown) => n.type)));
 
   const handleMarkAsRead = async (id: string) => {
     await markAsRead(id);
@@ -136,7 +136,7 @@ export default function NotificationsPage() {
           >
             Tous
           </button>
-          {types.map((type) => (
+          {types.map((type: unknown) => (
             <button
               key={type}
               onClick={() => setFilter(type)}
@@ -204,7 +204,7 @@ export default function NotificationsPage() {
         ) : (
           <>
             <div style={{ borderTop: `1.5px solid ${C.border}` }}>
-              {filteredNotifications.map((notification, index) => (
+              {filteredNotifications.map((notification: unknown, index: number) => (
                 <div
                   key={notification.id}
                   style={{

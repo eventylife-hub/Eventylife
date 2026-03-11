@@ -105,7 +105,7 @@ export default function ReinitialiserMotDePassePage() {
     // Validation Zod
     try {
       resetPasswordSchema.parse({ password, passwordConfirm });
-    } catch (err) {
+    } catch (err: unknown) {
       if (err instanceof ZodError) {
         setErrors(zodErrorsToRecord(err));
         return;
@@ -120,7 +120,7 @@ export default function ReinitialiserMotDePassePage() {
       setTimeout(() => {
         router.push('/connexion');
       }, 3000);
-    } catch (error) {
+    } catch (error: unknown) {
       setStatus('error');
       if (error instanceof Error) {
         setServerError(error.message || 'Erreur lors de la réinitialisation');
@@ -268,7 +268,7 @@ export default function ReinitialiserMotDePassePage() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
                 placeholder="Min. 8 caractères"
                 style={{
                   width: '100%',
@@ -335,7 +335,7 @@ export default function ReinitialiserMotDePassePage() {
               id="passwordConfirm"
               type={showPassword ? 'text' : 'password'}
               value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
+              onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
               placeholder="Retapez votre mot de passe"
               style={{
                 width: '100%',

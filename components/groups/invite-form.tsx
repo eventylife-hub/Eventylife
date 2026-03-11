@@ -40,7 +40,7 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
 });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur');
       }
 
@@ -76,7 +76,7 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
           id="email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
           placeholder="membre@example.com"
           disabled={loading}
           required
@@ -88,7 +88,7 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
         <Textarea
           id="message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage((e.target as HTMLInputElement).value)}
           placeholder="Bienvenue dans notre groupe..."
           disabled={loading}
           rows={3}

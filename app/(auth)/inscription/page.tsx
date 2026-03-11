@@ -96,7 +96,7 @@ export default function InscriptionPage() {
 
       // Rediriger vers connexion
       router.push('/connexion');
-    } catch (err) {
+    } catch (err: unknown) {
       if (err instanceof ZodError) {
         setErrors(zodErrorsToRecord(err));
       } else if (err instanceof Error) {

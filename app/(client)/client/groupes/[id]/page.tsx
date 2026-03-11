@@ -72,9 +72,9 @@ export default function GroupDetailPage() {
 
         if (!res.ok) throw new Error('Impossible de charger le groupe');
 
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         setGroup(data);
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
       } finally {
         setLoading(false);
@@ -106,9 +106,9 @@ export default function GroupDetailPage() {
       const groupRes = await fetch(`/api/client/groups/${params.id}`, {
         credentials: 'include',
       });
-      const updatedGroup = await groupRes.json();
+      const updatedGroup = (await groupRes.json() as unknown) as unknown;
       setGroup(updatedGroup);
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur');
     } finally {
       setSendingMessage(false);
@@ -125,7 +125,7 @@ export default function GroupDetailPage() {
           <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Détails du groupe</h1>
         </div>
         <div className="space-y-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>
@@ -225,7 +225,7 @@ export default function GroupDetailPage() {
           >
             <h2 className="text-lg font-bold mb-4" style={{ color: C.navy }}>Membres ({group.members.length})</h2>
             <div className="space-y-3">
-              {group.members.map((member) => (
+              {group.members.map((member: unknown) => (
                 <div key={member.id} className="py-2" style={{ borderBottom: `1px solid ${C.border}` }}>
                   <p className="font-semibold text-sm" style={{ color: C.navy }}>
                     {member.firstName} {member.lastName}
@@ -254,7 +254,7 @@ export default function GroupDetailPage() {
             {/* Messages */}
             <div className="flex-1 mb-4 space-y-4 max-h-96 overflow-y-auto">
               {group.messages && group.messages.length > 0 ? (
-                group.messages.map((message) => (
+                group.messages.map((message: unknown) => (
                   <div key={message.id} className="pb-3" style={{ borderBottom: `1px solid ${C.border}` }}>
                     <div className="flex justify-between items-start mb-1">
                       <p className="font-semibold text-sm" style={{ color: C.navy }}>{message.userName}</p>
@@ -272,7 +272,7 @@ export default function GroupDetailPage() {
             <form onSubmit={handleSendMessage} className="flex gap-2">
               <textarea
                 value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewMessage((e.target as HTMLInputElement).value)}
                 placeholder="Écrire un message..."
                 className="flex-1 px-4 py-2 resize-none rounded-lg"
                 style={{
@@ -348,11 +348,11 @@ export default function GroupDetailPage() {
                 credentials: 'include',
               });
               if (!res.ok) {
-                const data = await res.json();
+                const data = (await res.json() as unknown) as unknown;
                 throw new Error(data.message || 'Erreur lors de la sortie du groupe');
               }
               router.push('/client/groupes');
-            } catch (err) {
+            } catch (err: unknown) {
               alert(err instanceof Error ? err.message : 'Erreur');
             } finally {
               setLeavingGroup(false);

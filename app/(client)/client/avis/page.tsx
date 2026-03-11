@@ -61,12 +61,12 @@ export default function AvisPage() {
 
         if (!reviewsRes.ok) throw new Error('Impossible de charger les avis');
 
-        const reviewsData = await reviewsRes.json();
+        const reviewsData = (await reviewsRes.json() as unknown) as unknown;
         setReviews(reviewsData);
 
         // Charger les voyages terminés pour le formulaire
         if (travelsRes.ok) {
-          const travelsData = await travelsRes.json();
+          const travelsData = (await travelsRes.json() as unknown) as unknown;
           // Filtrer les voyages déjà notés
           const reviewedTravelIds = new Set(reviewsData.map((r: Review) => r.travelId));
           const availableTravels = (travelsData.items || travelsData).filter(
@@ -74,7 +74,7 @@ export default function AvisPage() {
           );
           setCompletedTravels(availableTravels);
         }
-      } catch (err) {
+      } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur');
       } finally {
         setLoading(false);
@@ -102,11 +102,11 @@ export default function AvisPage() {
       const resList = await fetch('/api/reviews/mine', {
         credentials: 'include',
       });
-      const data = await resList.json();
+      const data = (await resList.json() as unknown) as unknown;
       setReviews(data);
       setShowForm(false);
       setFormData({ travelId: '', rating: 5, comment: '' });
-    } catch (err) {
+    } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erreur');
     }
   };
@@ -114,7 +114,7 @@ export default function AvisPage() {
   const renderStars = (rating: number, interactive = false, onChange?: (r: number) => void) => {
     return (
       <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
+        {[1, 2, 3, 4, 5].map((star: unknown) => (
           interactive ? (
             <button
               key={star}
@@ -157,7 +157,7 @@ export default function AvisPage() {
           <p className="text-sm mt-2" style={{ color: C.muted }}>Partagez votre expérience des voyages</p>
         </div>
         <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
+          {[...Array(3)].map((_: unknown, i: number) => (
             <div key={i} className="h-24 rounded-2xl skeleton" />
           ))}
         </div>
@@ -203,7 +203,7 @@ export default function AvisPage() {
               </label>
               <select
                 value={formData.travelId}
-                onChange={(e) => setFormData({ ...formData, travelId: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, travelId: (e.target as HTMLInputElement).value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
                   border: `1.5px solid ${C.border}`,
@@ -214,7 +214,7 @@ export default function AvisPage() {
               >
                 <option value="">-- Choisir un voyage --</option>
                 {completedTravels.length > 0 ? (
-                  completedTravels.map((travel) => (
+                  completedTravels.map((travel: unknown) => (
                     <option key={travel.id} value={travel.id}>
                       {travel.title} — {travel.destinationCity}
                     </option>
@@ -240,7 +240,7 @@ export default function AvisPage() {
               </label>
               <textarea
                 value={formData.comment}
-                onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, comment: (e.target as HTMLInputElement).value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
                   border: `1.5px solid ${C.border}`,
@@ -324,7 +324,7 @@ export default function AvisPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {reviews.map((review) => (
+          {reviews.map((review: unknown) => (
             <div key={review.id} className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
               <div className="flex justify-between items-start mb-4">
                 <div>

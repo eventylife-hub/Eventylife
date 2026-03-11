@@ -21,7 +21,7 @@ export default function FormationPage() {
         setLoading(true);
         setError(null);
         await Promise.all([fetchFormationModules(), fetchFormationProgress()]);
-      } catch (_error) {
+      } catch (_error: unknown) {
         setError('Une erreur est survenue lors du chargement de la formation');
       } finally {
         setLoading(false);
@@ -152,7 +152,7 @@ export default function FormationPage() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-              {[...Array(6)].map((_, idx) => (
+              {[...Array(6)].map((_: unknown, idx: number) => (
                 <div key={idx} className="pro-panel" style={{ overflow: 'hidden' }}>
                   <Skeleton className="h-24" />
                   <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -202,7 +202,7 @@ export default function FormationPage() {
         {/* Modules Grid */}
         {!loading && !error && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-          {modules.map((module) => {
+          {modules.map((module: unknown) => {
             const isCompleted = completedModules.includes(module.id);
 
             return (

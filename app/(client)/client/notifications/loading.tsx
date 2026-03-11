@@ -9,7 +9,7 @@ export default function Loading() {
         <Skeleton height="2rem" width="100px" />
       </div>
       <div className="space-y-3">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 5 }).map((_: unknown, i: number) => (
           <div key={i} className="flex items-start gap-4 p-4 border rounded-lg">
             <Skeleton height="2.5rem" width="2.5rem" circle />
             <div className="flex-1 space-y-2">

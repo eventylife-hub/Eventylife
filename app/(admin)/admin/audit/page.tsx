@@ -49,12 +49,12 @@ export default function AuditPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = await response.json();
+          const data = (await response.json() as unknown) as unknown;
           setLogs(data.data || []);
         } else {
           setError('Erreur lors du chargement des logs d\'audit');
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Audit logs fetch error:', err);
         setError('Impossible de charger les logs d\'audit. Vérifiez votre connexion.');
       } finally {
@@ -123,7 +123,7 @@ export default function AuditPage() {
       } else {
         setError('Erreur lors de l\'export des logs');
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Audit export error:', err);
       setError('Impossible d\'exporter les logs. Vérifiez votre connexion.');
     }
@@ -178,7 +178,7 @@ export default function AuditPage() {
                 type="text"
                 placeholder="Ex: USER_CREATED"
                 value={filters.action}
-                onChange={(e) => setFilters({ ...filters, action: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilters({ ...filters, action: (e.target as HTMLInputElement).value })}
                 disabled={loading}
                 className="admin-input"
               />
@@ -190,7 +190,7 @@ export default function AuditPage() {
                 type="text"
                 placeholder="Ex: User"
                 value={filters.entityType}
-                onChange={(e) => setFilters({ ...filters, entityType: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilters({ ...filters, entityType: (e.target as HTMLInputElement).value })}
                 disabled={loading}
                 className="admin-input"
               />
@@ -201,7 +201,7 @@ export default function AuditPage() {
               <input
                 type="date"
                 value={filters.startDate}
-                onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilters({ ...filters, startDate: (e.target as HTMLInputElement).value })}
                 disabled={loading}
                 className="admin-input"
               />
@@ -212,7 +212,7 @@ export default function AuditPage() {
               <input
                 type="date"
                 value={filters.endDate}
-                onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilters({ ...filters, endDate: (e.target as HTMLInputElement).value })}
                 disabled={loading}
                 className="admin-input"
               />

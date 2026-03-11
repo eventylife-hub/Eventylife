@@ -118,7 +118,7 @@ export default function PartenairesPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {avantages.map((a, i) => (
+          {avantages.map((a: unknown, i: number) => (
             <div
               key={i}
               style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '1.5rem', transition: 'all 0.3s ease' }}
@@ -140,7 +140,7 @@ export default function PartenairesPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-20">
-          {typePartenaires.map((t, i) => (
+          {typePartenaires.map((t: unknown, i: number) => (
             <div
               key={i}
               style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '2rem', display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}

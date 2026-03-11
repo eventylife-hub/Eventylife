@@ -37,7 +37,7 @@ export default function RejoindrePage() {
   const [groupePreview, setGroupePreview] = useState<Record<string, unknown> | null>(null);
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCode(e.target.value.toUpperCase());
+    setCode((e.target as HTMLInputElement).value.toUpperCase());
   };
 
   const handleVerifyCode = async (e: React.FormEvent) => {
@@ -58,7 +58,7 @@ export default function RejoindrePage() {
       if (!res.ok) {
         throw new Error('Code d\'invitation invalide');
       }
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setGroupePreview(data);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
@@ -83,7 +83,7 @@ export default function RejoindrePage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de l\'adhésion');
       }
 
@@ -194,11 +194,11 @@ export default function RejoindrePage() {
                   <p className="text-lg font-semibold" style={{ color: C.navy }}>{(groupePreview?.name as string) || 'Groupe'}</p>
                 </div>
 
-                {(groupePreview?.leaderUser as any) && (
+                {(groupePreview?.leaderUser as unknown) && (
                   <div>
                     <label className="text-xs font-semibold uppercase" style={{ color: C.muted }}>Leader</label>
                     <p className="text-sm" style={{ color: C.navy }}>
-                      {(groupePreview?.leaderUser as any)?.firstName} {(groupePreview?.leaderUser as any)?.lastName}
+                      {(groupePreview?.leaderUser as unknown)?.firstName} {(groupePreview?.leaderUser as unknown)?.lastName}
                     </p>
                   </div>
                 )}

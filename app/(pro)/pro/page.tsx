@@ -37,7 +37,7 @@ export default function ProDashboard() {
     occupancyRate: 0,
     averageRating: 0,
     totalRevenue: 0,
-    recentActivity: [],
+    recentActivity: unknown[],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +58,7 @@ export default function ProDashboard() {
       if (!res.ok) {
         throw new Error('Erreur lors du chargement des statistiques');
       }
-      const data = await res.json();
+      const data = (await res.json() as unknown) as unknown;
       setStats({
         activeVoyages: data.activeVoyages ?? 0,
         totalBookings: data.totalBookings ?? 0,
@@ -68,7 +68,7 @@ export default function ProDashboard() {
         totalRevenue: data.totalRevenue ?? 0,
         recentActivity: data.recentActivity ?? [],
       });
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Erreur chargement stats:', error);
       setError('Impossible de charger les statistiques');
     } finally {
@@ -161,7 +161,7 @@ export default function ProDashboard() {
         {/* Stats Cards Grid - with Loading State */}
         {loading ? (
           <div className="pro-kpi-grid" style={{ marginBottom: '32px' }}>
-            {[...Array(4)].map((_, i) => (
+            {[...Array(4)].map((_: unknown, i: number) => (
               <div
                 key={i}
                 className="pro-kpi-card"
@@ -304,13 +304,13 @@ export default function ProDashboard() {
             <div className="pro-panel-body">
               {loading ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {[...Array(4)].map((_, i) => (
+                  {[...Array(4)].map((_: unknown, i: number) => (
                     <div key={i} style={{ height: '48px', backgroundColor: '#f3f4f6', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
                   ))}
                 </div>
               ) : stats.recentActivity && stats.recentActivity.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {stats.recentActivity.slice(0, 5).map((activity: any) => (
+                  {stats.recentActivity.slice(0, 5).map((activity: unknown) => (
                     <div key={activity.id} style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: '12px', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
                       <div style={{ flex: 1 }}>
                         <p style={{ fontSize: '14px', fontWeight: 500, color: DARK }}>{activity.description}</p>
@@ -359,13 +359,13 @@ export default function ProDashboard() {
             <div className="pro-panel-body">
               {loading ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {[...Array(3)].map((_, i) => (
+                  {[...Array(3)].map((_: unknown, i: number) => (
                     <div key={i} style={{ height: '64px', backgroundColor: '#f3f4f6', borderRadius: '8px', animation: 'pulse 2s infinite' }} />
                   ))}
                 </div>
               ) : proProfile?.recentTravels && proProfile.recentTravels.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {proProfile.recentTravels.slice(0, 3).map((travel: any, idx: number) => (
+                  {proProfile.recentTravels.slice(0, 3).map((travel: unknown, idx: number) => (
                     <Link
                       key={idx}
                       href={`/pro/voyages/${travel.id}`}

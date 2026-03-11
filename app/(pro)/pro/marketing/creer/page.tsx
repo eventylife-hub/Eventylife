@@ -52,11 +52,11 @@ export default function CreerCampaignePage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la création');
       }
 
-      const newCampaign = (await res.json()) as NewCampaignResponse;
+      const newCampaign = (await res.json() as unknown) as NewCampaignResponse;
       router.push(`/pro/marketing/${newCampaign.id}`);
     } catch (err: unknown) {
       // Gestion d'erreur typée

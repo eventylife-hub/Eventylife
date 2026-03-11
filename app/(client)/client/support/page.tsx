@@ -111,10 +111,10 @@ export default function SupportPage() {
 
       if (!res.ok) throw new Error('Impossible de charger les tickets');
 
-      const data = await res.json();
-      setTickets(data.items || data);
+      const data = (await res.json() as unknown) as unknown;
+      setTickets(data?.items || data);
       setState('data');
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur');
       setState('error');
     }
@@ -136,7 +136,7 @@ export default function SupportPage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         throw new Error(data.message || 'Erreur lors de la création du ticket');
       }
 
@@ -148,7 +148,7 @@ export default function SupportPage() {
       await fetchTickets();
 
       setTimeout(() => setSubmitMessage(null), 5000);
-    } catch (err) {
+    } catch (err: unknown) {
       setSubmitMessage({
         type: 'error',
         text: err instanceof Error ? err.message : 'Erreur',
@@ -158,7 +158,7 @@ export default function SupportPage() {
     }
   };
 
-  const filteredTickets = tickets.filter((t) => {
+  const filteredTickets = tickets.filter((t: unknown) => {
     if (filter === 'open') return !['RESOLVED', 'CLOSED'].includes(t.status);
     if (filter === 'closed') return ['RESOLVED', 'CLOSED'].includes(t.status);
     return true;
@@ -172,7 +172,7 @@ export default function SupportPage() {
       <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
         <div className="h-8 w-48 rounded-2xl skeleton" />
         <div className="h-12 w-full rounded-2xl skeleton" />
-        {[...Array(3)].map((_, i) => (
+        {[...Array(3)].map((_: unknown, i: number) => (
           <div key={i} className="h-24 rounded-2xl skeleton" />
         ))}
       </div>
@@ -261,7 +261,7 @@ export default function SupportPage() {
               <input
                 type="text"
                 value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, subject: (e.target as HTMLInputElement).value })}
                 placeholder="Décrivez brièvement votre problème"
                 required
                 minLength={5}
@@ -282,7 +282,7 @@ export default function SupportPage() {
                 </label>
                 <select
                   value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                   style={{
                     border: `1.5px solid ${C.border}`,
@@ -304,7 +304,7 @@ export default function SupportPage() {
                 </label>
                 <select
                   value={formData.priority}
-                  onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, priority: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                   style={{
                     border: `1.5px solid ${C.border}`,
@@ -327,7 +327,7 @@ export default function SupportPage() {
               </label>
               <textarea
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, message: (e.target as HTMLInputElement).value })}
                 placeholder="Décrivez votre problème en détail. Plus vous donnez de détails, plus nous pourrons vous aider rapidement."
                 required
                 minLength={20}
@@ -395,9 +395,9 @@ export default function SupportPage() {
       <div className="flex gap-2 flex-wrap" style={{ borderBottom: `1.5px solid ${C.border}`, paddingBottom: '16px' }}>
         {[
           { key: 'all', label: 'Tous', count: tickets.length },
-          { key: 'open', label: 'Ouverts', count: tickets.filter((t) => !['RESOLVED', 'CLOSED'].includes(t.status)).length },
-          { key: 'closed', label: 'Résolus', count: tickets.filter((t) => ['RESOLVED', 'CLOSED'].includes(t.status)).length },
-        ].map((f) => (
+          { key: 'open', label: 'Ouverts', count: tickets.filter((t: unknown) => !['RESOLVED', 'CLOSED'].includes(t.status)).length },
+          { key: 'closed', label: 'Résolus', count: tickets.filter((t: unknown) => ['RESOLVED', 'CLOSED'].includes(t.status)).length },
+        ].map((f: unknown) => (
           <button
             key={f.key}
             onClick={() => setFilter(f.key as typeof filter)}
@@ -455,7 +455,7 @@ export default function SupportPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {filteredTickets.map((ticket) => (
+          {filteredTickets.map((ticket: unknown) => (
             <div
               key={ticket.id}
               className="rounded-2xl p-5 transition-all duration-300"

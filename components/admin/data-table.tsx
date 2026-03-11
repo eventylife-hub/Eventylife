@@ -50,7 +50,7 @@ export function DataTable<T extends { id: string }>({
   if (loading) {
     return (
       <div className="space-y-4">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(5)].map((_: unknown, i: number) => (
           <Skeleton key={i} className="h-12 w-full" />
         ))}
       </div>
@@ -71,9 +71,9 @@ export function DataTable<T extends { id: string }>({
         <Table>
           <TableHeader>
             <TableRow>
-              {columns.map((col) => (
+              {columns.map((col: unknown) => (
                 <TableHead
-                  key={String(col.key)}
+                  key={String(col.key ?? "")}
                   className={col.width ? `w-[${col.width}]` : ''}
                 >
                   {col.label}
@@ -84,26 +84,26 @@ export function DataTable<T extends { id: string }>({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((row) => (
+            {data.map((row: unknown) => (
               <TableRow
                 key={row.id}
                 className={onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}
                 onClick={() => onRowClick?.(row)}
               >
-                {columns.map((col) => (
-                  <TableCell key={String(col.key)}>
-                    {col.render ? col.render(row[col.key], row) : String(row[col.key])}
+                {columns.map((col: unknown) => (
+                  <TableCell key={String(col.key ?? "")}>
+                    {col.render ? col.render(row[col.key], row) : String(row[col.key] ?? "")}
                   </TableCell>
                 ))}
                 {rowActions.length > 0 && (
                   <TableCell>
                     <div className="flex gap-2">
-                      {rowActions.map((action) => (
+                      {rowActions.map((action: unknown) => (
                         <Button
                           key={action.label}
                           size="sm"
                           variant={action.variant || 'outline'}
-                          onClick={(e) => {
+                          onClick={(e: React.MouseEvent) => {
                             e.stopPropagation();
                             action.onClick(row);
                           }}

@@ -53,7 +53,7 @@ export default function GroupesPage() {
         // Récupérer le voyage pour obtenir son ID
         const travelRes = await fetch(`/api/travels/by-slug/${slug}`, { credentials: 'include' });
         if (!travelRes.ok) throw new Error('Voyage non trouvé');
-        const travel = await travelRes.json();
+        const travel = (await travelRes.json() as unknown) as unknown;
 
         // Récupérer les groupes publics
         const groupesRes = await fetch(
@@ -61,7 +61,7 @@ export default function GroupesPage() {
         , { credentials: 'include' });
         if (!groupesRes.ok) throw new Error('Erreur lors du chargement des groupes');
 
-        const data = await groupesRes.json();
+        const data = (await groupesRes.json() as unknown) as unknown;
         setGroupes(data);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : 'Erreur lors du chargement');
@@ -82,7 +82,7 @@ export default function GroupesPage() {
             Groupes de voyage
           </h1>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_, i) => (
+            {[...Array(6)].map((_: unknown, i: number) => (
               <Skeleton
                 key={i}
                 className="h-48 rounded-lg"
@@ -195,7 +195,7 @@ export default function GroupesPage() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {groupes.map((groupe) => (
+          {groupes.map((groupe: unknown) => (
             <GroupCard key={groupe.id} groupe={groupe} />
           ))}
         </div>

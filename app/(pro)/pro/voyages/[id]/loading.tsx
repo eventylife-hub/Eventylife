@@ -12,7 +12,7 @@ export default function VoyageLoading() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(4)].map((_: unknown, i: number) => (
             <Skeleton key={i} className="h-24 w-full" />
           ))}
         </div>
@@ -22,7 +22,7 @@ export default function VoyageLoading() {
         <Skeleton className="h-40 w-full" />
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(8)].map((_: unknown, i: number) => (
             <Skeleton key={i} className="h-20 w-full" />
           ))}
         </div>

@@ -67,7 +67,7 @@ export function PaymentHistoryTable({
   if (loading) {
     return (
       <div className="space-y-4">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(5)].map((_: unknown, i: number) => (
           <div key={i} className="h-16 bg-slate-200 rounded-lg animate-pulse" />
         ))}
       </div>
@@ -98,7 +98,7 @@ export function PaymentHistoryTable({
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200">
-            {payments.map((payment) => (
+            {payments.map((payment: unknown) => (
               <tr key={payment.id} className="hover:bg-slate-50">
                 <td className="px-6 py-4 text-sm text-slate-700">
                   {formatDate(payment.createdAt)}

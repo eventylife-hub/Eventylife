@@ -61,7 +61,7 @@ export default function BrochurePage() {
       <div className="mx-auto max-w-4xl px-4 py-12">
         {/* Brochures disponibles */}
         <div className="space-y-6 mb-16">
-          {brochures.map((b, i) => (
+          {brochures.map((b: unknown, i: number) => (
             <div
               key={i}
               style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}

@@ -69,10 +69,10 @@ export default function FeedbackPage() {
         throw new Error('Réservation non trouvée');
       }
 
-      const data = await response.json();
+      const data = (await response.json() as unknown) as unknown;
       setBooking(data.data);
       setError(null);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
     } finally {
       setLoading(false);
@@ -109,7 +109,7 @@ export default function FeedbackPage() {
       setTimeout(() => {
         router.push(`/client/reservations/${bookingId}`);
       }, 1500);
-    } catch (err) {
+    } catch (err: unknown) {
       setToast({
         type: 'error',
         message: err instanceof Error ? err.message : 'Erreur inconnue',
@@ -133,7 +133,7 @@ export default function FeedbackPage() {
       <div className="mb-6">
         <label className="block text-sm font-medium mb-3" style={{ color: C.navy }}>{label}</label>
         <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((star) => (
+          {[1, 2, 3, 4, 5].map((star: unknown) => (
             <button
               key={star}
               type="button"
@@ -166,7 +166,7 @@ export default function FeedbackPage() {
           <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Laisser un Avis</h1>
         </div>
         <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
+          {[...Array(3)].map((_: unknown, i: number) => (
             <div key={i} className="h-20 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>
@@ -293,7 +293,7 @@ export default function FeedbackPage() {
           </label>
           <textarea
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment((e.target as HTMLInputElement).value)}
             placeholder="Partagez vos impressions, ce que vous avez aimé, ce qui pourrait être amélioré..."
             className="w-full px-4 py-3 rounded-lg"
             style={{

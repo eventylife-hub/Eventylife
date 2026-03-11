@@ -166,7 +166,7 @@ export default function HomePage() {
                 { val: '2 500+', label: 'Voyageurs heureux' },
                 { val: '98%', label: 'Satisfaction' },
                 { val: '50+', label: 'Destinations' },
-              ].map((s, i) => (
+              ].map((s: unknown, i: number) => (
                 <div key={i} className="text-center">
                   <div className="text-2xl sm:text-3xl font-bold" style={{ color: C.terra }}>{s.val}</div>
                   <div className="text-sm mt-1" style={{ color: C.muted }}>{s.label}</div>
@@ -209,7 +209,7 @@ export default function HomePage() {
                 title: 'Partir',
                 desc: "Profitez d'un voyage inoubliable avec notre accompagnement complet.",
               },
-            ].map((item, idx) => (
+            ].map((item: unknown, idx: number) => (
               <RevealDiv key={idx} delay={idx * 120}>
                 <div
                   className="text-center p-8 rounded-2xl transition-all duration-300"
@@ -274,7 +274,7 @@ export default function HomePage() {
                 emoji: '🍝',
                 gradient: `linear-gradient(135deg, #16653440, #06D6A030)`,
               },
-            ].map((travel, idx) => (
+            ].map((travel: unknown, idx: number) => (
               <RevealDiv key={idx} delay={idx * 120}>
                 <Link href="/voyages" className="block group">
                   <div
@@ -361,7 +361,7 @@ export default function HomePage() {
               { icon: '💰', title: 'Prix justes', desc: 'Meilleurs tarifs garantis, sans frais cachés' },
               { icon: '✓', title: 'Qualité', desc: 'Services premium, hôtels sélectionnés avec soin' },
               { icon: '🎯', title: 'Accompagnement', desc: 'Avant, pendant et après votre voyage' },
-            ].map((item, idx) => (
+            ].map((item: unknown, idx: number) => (
               <RevealDiv key={idx} delay={idx * 100}>
                 <div
                   className="text-center p-6 rounded-2xl transition-all duration-300"
@@ -422,7 +422,7 @@ export default function HomePage() {
                 rating: 5,
                 trip: 'Italie — Oct 2025',
               },
-            ].map((review, idx) => (
+            ].map((review: unknown, idx: number) => (
               <RevealDiv key={idx} delay={idx * 120}>
                 <div
                   className="p-6 rounded-2xl h-full flex flex-col"
@@ -432,7 +432,7 @@ export default function HomePage() {
                   }}
                 >
                   <div className="flex gap-0.5 mb-4">
-                    {[...Array(review.rating)].map((_, i) => (
+                    {[...Array(review.rating)].map((_: unknown, i: number) => (
                       <span key={i} style={{ color: C.gold }}>★</span>
                     ))}
                   </div>
@@ -471,7 +471,7 @@ export default function HomePage() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
                 placeholder="Votre email"
                 required
                 className="flex-1 px-5 py-3.5 rounded-xl text-sm focus:outline-none transition-shadow"

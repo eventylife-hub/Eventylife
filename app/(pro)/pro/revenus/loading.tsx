@@ -15,7 +15,7 @@ export default function RevenuesLoading() {
 
       {/* Cartes statistiques skeleton */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {Array.from({ length: 3 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_: unknown, i: number) => (
           <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 space-y-3">
             <Skeleton className="h-4 w-24" />
             <Skeleton className="h-8 w-32" />
@@ -26,7 +26,7 @@ export default function RevenuesLoading() {
 
       {/* Filtres skeleton */}
       <div className="flex gap-2">
-        {Array.from({ length: 3 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_: unknown, i: number) => (
           <Skeleton key={i} className="h-9 w-24 rounded-lg" />
         ))}
       </div>
@@ -37,7 +37,7 @@ export default function RevenuesLoading() {
           <Skeleton className="h-6 w-48" />
           <Skeleton className="h-9 w-32 rounded-lg" />
         </div>
-        {Array.from({ length: 6 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_: unknown, i: number) => (
           <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100 last:border-0">
             <Skeleton className="h-4 w-full max-w-sm" />
             <Skeleton className="h-4 w-20" />
@@ -49,7 +49,7 @@ export default function RevenuesLoading() {
       {/* Payout history skeleton */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
         <Skeleton className="h-6 w-48" />
-        {Array.from({ length: 4 }).map((_, i) => (
+        {Array.from({ length: 4 }).map((_: unknown, i: number) => (
           <div key={i} className="flex items-center justify-between p-4 border border-gray-100 rounded-lg">
             <div className="flex-1 space-y-2">
               <Skeleton className="h-4 w-24" />

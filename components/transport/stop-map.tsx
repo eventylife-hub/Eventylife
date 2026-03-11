@@ -46,7 +46,7 @@ export function StopMap({ stops }: { stops: TransportStop[] }) {
               </div>
 
               {/* Arrêts intermédiaires */}
-              {stops.slice(1, -1).map((stop, idx) => (
+              {stops.slice(1, -1).map((stop: unknown, idx: number) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="flex flex-col items-center">
                     <div className="w-4 h-4 bg-blue-500 rounded-full" />

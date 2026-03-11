@@ -66,7 +66,7 @@ function VoyagesContent() {
         setError(null);
         const response = await apiClient.get<any>('/travels');
         const travelList = Array.isArray(response) ? response : (response.data || []);
-        const mappedTravels = travelList.map((travel: any) => ({
+        const mappedTravels = travelList.map((travel: unknown) => ({
           id: travel.id,
           slug: travel.slug,
           title: travel.title,
@@ -83,7 +83,7 @@ function VoyagesContent() {
         }));
         setTravels(mappedTravels);
         setState(mappedTravels.length > 0 ? 'data' : 'empty');
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Erreur lors du chargement des voyages:', err);
         setError('Erreur lors du chargement des voyages');
         setState('error');
@@ -103,7 +103,7 @@ function VoyagesContent() {
     if (minPrice !== null) result = result.filter(t => t.price >= minPrice);
     if (maxPrice !== null) result = result.filter(t => t.price <= maxPrice);
 
-    const sorted = [...result];
+    const sorted = [...(result || [])];
     if (sortBy === 'price-asc') sorted.sort((a, b) => a.price - b.price);
     else if (sortBy === 'price-desc') sorted.sort((a, b) => b.price - a.price);
     else if (sortBy === 'rating') sorted.sort((a, b) => b.rating - a.rating);
@@ -206,7 +206,7 @@ function VoyagesContent() {
             <input
               placeholder="Chercher..."
               value={destination}
-              onChange={(e) => setDestination(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDestination((e.target as HTMLInputElement).value)}
               style={inputStyle}
               onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
               onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
@@ -217,7 +217,7 @@ function VoyagesContent() {
             <input
               type="number"
               placeholder="0"
-              onChange={(e) => setMinPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
               style={inputStyle}
               onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
               onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
@@ -228,7 +228,7 @@ function VoyagesContent() {
             <input
               type="number"
               placeholder="10 000"
-              onChange={(e) => setMaxPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
               style={inputStyle}
               onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
               onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
@@ -238,7 +238,7 @@ function VoyagesContent() {
             <label className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Trier par</label>
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSortBy((e.target as HTMLInputElement).value)}
               style={selectStyle}
             >
               <option value="popular">Plus populaires</option>
@@ -257,7 +257,7 @@ function VoyagesContent() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTravels.map((voyage) => {
+          {filteredTravels.map((voyage: unknown) => {
             const available = voyage.capacity - voyage.currentBookings;
 
             return (

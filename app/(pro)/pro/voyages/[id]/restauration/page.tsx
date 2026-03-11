@@ -89,22 +89,22 @@ export default function RestauratPage() {
         ]);
 
         if (mealRes.ok) {
-          const data = await mealRes.json();
+          const data = (await mealRes.json() as unknown) as unknown;
           setMealPlan(data);
         }
 
         if (dietRes.ok) {
-          const data = await dietRes.json();
+          const data = (await dietRes.json() as unknown) as unknown;
           setDietary(data);
         }
 
         if (restRes.ok) {
-          const data = await restRes.json();
+          const data = (await restRes.json() as unknown) as unknown;
           setRestaurants(data.restaurants || []);
         }
 
         if (costRes.ok) {
-          const data = await costRes.json();
+          const data = (await costRes.json() as unknown) as unknown;
           setCosts(data);
         }
       } catch (err: unknown) {
@@ -121,7 +121,7 @@ export default function RestauratPage() {
     try {
       const res = await fetch(`/api/restauration/${travelId}/summary-pdf`, { credentials: 'include' });
       if (res.ok) {
-        const data = await res.json();
+        const data = (await res.json() as unknown) as unknown;
         window.open(data.downloadUrl, '_blank');
       }
     } catch (err: unknown) {
@@ -135,7 +135,7 @@ export default function RestauratPage() {
         <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#0A1628' }}>Gestion de la restauration</h1>
           <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-            {[...Array(4)].map((_, i) => (
+            {[...Array(4)].map((_: unknown, i: number) => (
               <Skeleton key={i} className="h-48 rounded-lg" />
             ))}
           </div>
@@ -180,7 +180,7 @@ export default function RestauratPage() {
               <div className="pro-panel-body">
                 <MealPlanEditor
                   travelId={travelId}
-                  initialPlan={mealPlan as unknown as any}
+                  initialPlan={mealPlan as unknown as unknown}
                 />
               </div>
             </div>
@@ -278,7 +278,7 @@ export default function RestauratPage() {
                 </p>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {restaurants.map((rest) => (
+                  {restaurants.map((rest: unknown) => (
                     <RestaurantCard key={rest.id} restaurant={rest} />
                   ))}
                 </div>

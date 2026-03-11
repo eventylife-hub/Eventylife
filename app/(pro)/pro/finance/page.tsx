@@ -50,16 +50,16 @@ export default function FinanceDashboardPage() {
         const res = await fetch('/api/pro/profile', { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur lors du chargement du profil');
 
-        const profile = await res.json();
+        const profile = (await res.json() as unknown) as unknown;
         setProProfileId(profile.id);
 
         // Charger le dashboard finance
         const finRes = await fetch(`/api/finance/dashboard/${profile.id}`, { credentials: 'include' });
         if (!finRes.ok) throw new Error('Erreur lors du chargement du dashboard financier');
 
-        const data = await finRes.json();
+        const data = (await finRes.json() as unknown) as unknown;
         setDashboard(data);
-      } catch (err) {
+      } catch (err: unknown) {
         const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue';
         setError(errorMsg);
         console.error('Erreur finance dashboard:', err);

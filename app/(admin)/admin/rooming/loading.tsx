@@ -15,7 +15,7 @@ export default function RoomingLoading() {
 
       {/* KPIs skeleton */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 4 }).map((_, i) => (
+        {Array.from({ length: 4 }).map((_: unknown, i: number) => (
           <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 space-y-3">
             <div className="flex items-center justify-between">
               <Skeleton className="h-4 w-24" />
@@ -45,7 +45,7 @@ export default function RoomingLoading() {
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <Skeleton className="h-6 w-40 mb-4" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_: unknown, i: number) => (
             <div key={i} className="space-y-2">
               <Skeleton className="h-3 w-20" />
               <Skeleton className="h-5 w-24" />
@@ -57,7 +57,7 @@ export default function RoomingLoading() {
       {/* Table skeleton */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
         <Skeleton className="h-6 w-40" />
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_: unknown, i: number) => (
           <div key={i} className="flex items-center gap-3 py-2 border-t">
             <Skeleton className="h-4 w-12" />
             <Skeleton className="h-4 w-16" />

@@ -63,7 +63,7 @@ export function ApprovalModal({
                 name="action"
                 value="approve"
                 checked={action === 'approve'}
-                onChange={(e) => setAction(e.target.value as 'approve' | 'reject')}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAction((e.target as HTMLInputElement).value as 'approve' | 'reject')}
                 disabled={isSubmitting}
               />
               <span className="text-sm font-medium">Approuver</span>
@@ -75,7 +75,7 @@ export function ApprovalModal({
                 name="action"
                 value="reject"
                 checked={action === 'reject'}
-                onChange={(e) => setAction(e.target.value as 'approve' | 'reject')}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAction((e.target as HTMLInputElement).value as 'approve' | 'reject')}
                 disabled={isSubmitting}
               />
               <span className="text-sm font-medium">Rejeter</span>
@@ -93,7 +93,7 @@ export function ApprovalModal({
                 className="w-full h-24 p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Décrivez la raison du rejet..."
                 value={reason}
-                onChange={(e) => setReason(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReason((e.target as HTMLInputElement).value)}
                 disabled={isSubmitting}
               />
             </div>
