@@ -451,6 +451,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 onClick={() => removeRoom(idx)}
                 className="text-red-500 hover:text-red-700 p-1"
                 title="Supprimer"
+                aria-label="Supprimer la chambre"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -667,7 +668,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                   placeholder="Titre du jour"
                 />
               </div>
-              <button onClick={() => removeDay(dIdx)} className="text-red-500 hover:text-red-700 p-1 ml-2">
+              <button onClick={() => removeDay(dIdx)} className="text-red-500 hover:text-red-700 p-1 ml-2" aria-label="Supprimer le jour">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
@@ -698,7 +699,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                       placeholder="Activité"
                       className="flex-1 px-2 py-1 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-indigo-600"
                     />
-                    <button onClick={() => removeActivity(dIdx, aIdx)} className="text-red-400 hover:text-red-600 p-1">
+                    <button onClick={() => removeActivity(dIdx, aIdx)} className="text-red-400 hover:text-red-600 p-1" aria-label="Supprimer l'activité">
                       <Trash2 className="w-3 h-3" />
                     </button>
                   </div>
@@ -767,6 +768,7 @@ function StepPhotos({ formData, setFormData }: { formData: TravelFormData; setFo
                 onClick={() => removePhoto(idx)}
                 className="text-red-500 hover:text-red-700 p-1"
                 title="Supprimer"
+                aria-label="Supprimer la photo"
               >
                 <Trash2 className="w-4 h-4" />
               </button>

@@ -382,6 +382,7 @@ export default function AdminRoomingPage() {
               <button
                 onClick={() => setSelectedRoom(null)}
                 className="text-gray-400 hover:text-gray-600"
+                aria-label="Fermer le panneau"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -449,6 +450,7 @@ export default function AdminRoomingPage() {
               <button
                 onClick={() => setEditingRoom(null)}
                 className="text-gray-400 hover:text-gray-600"
+                aria-label="Fermer le panneau"
               >
                 <X className="w-5 h-5" />
               </button>

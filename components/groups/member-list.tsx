@@ -99,6 +99,7 @@ export function MemberList({
                     variant="ghost"
                     onClick={() => onPromote(member.id)}
                     title="Promouvoir en leader"
+                    aria-label="Promouvoir en leader"
                   >
                     <Crown className="h-4 w-4" />
                   </Button>
@@ -109,6 +110,7 @@ export function MemberList({
                     variant="ghost"
                     onClick={() => onKick(member.id)}
                     title="Exclure"
+                    aria-label="Exclure le membre"
                   >
                     <Trash2 className="h-4 w-4 text-red-500" />
                   </Button>

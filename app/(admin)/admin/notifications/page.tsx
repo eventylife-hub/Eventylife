@@ -439,6 +439,7 @@ export default function AdminNotificationsPage() {
               <button
                 onClick={() => setShowManualSend(false)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
+                aria-label="Fermer"
               >
                 ✕
               </button>
@@ -542,6 +543,7 @@ export default function AdminNotificationsPage() {
             <button
               onClick={() => setToastMessage(null)}
               style={{ marginLeft: '8px', padding: '4px 8px', borderRadius: '4px', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7, fontSize: '16px' }}
+              aria-label="Fermer"
             >
               ✕
             </button>
@@ -558,6 +560,7 @@ export default function AdminNotificationsPage() {
               <button
                 onClick={() => setSelectedNotification(null)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
+                aria-label="Fermer"
               >
                 ✕
               </button>

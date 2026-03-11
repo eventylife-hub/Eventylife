@@ -65,9 +65,9 @@ export default function AuthLayout({
       </Link>
 
       {/* Contenu auth */}
-      <div className="w-full max-w-md relative z-10">
+      <main className="w-full max-w-md relative z-10" id="main-content" aria-label="Authentification">
         {children}
-      </div>
+      </main>
 
       {/* Lien retour */}
       <p className="mt-8 text-sm relative z-10" style={{ color: 'rgba(250,247,242,0.4)' }}>

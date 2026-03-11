@@ -331,6 +331,7 @@ export default function EquipePage() {
                         size="sm"
                         variant="ghost"
                         className="text-red-600 hover:text-red-700"
+                        aria-label="Supprimer le membre"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>

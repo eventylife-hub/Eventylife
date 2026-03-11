@@ -34,14 +34,14 @@ export default function CheckoutLayout({ children }: CheckoutLayoutProps) {
       </header>
 
       {/* Content */}
-      <div className="max-w-2xl mx-auto px-4 py-12">
+      <main className="max-w-2xl mx-auto px-4 py-12" id="main-content" aria-label="Réservation">
         <Card elevated>
           <CardContent className="p-8">
             <StepIndicator currentStep={currentStep} />
             {children}
           </CardContent>
         </Card>
-      </div>
+      </main>
     </div>
   );
 }

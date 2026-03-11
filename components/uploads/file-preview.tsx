@@ -110,6 +110,7 @@ export function FilePreview({
               onClick={() => onDelete(id)}
               disabled={isDeleting}
               className="flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 rounded hover:bg-red-100 transition-colors disabled:bg-gray-100 disabled:text-gray-400"
+              aria-label="Supprimer le fichier"
             >
               <Trash2 className="h-4 w-4" />
             </button>

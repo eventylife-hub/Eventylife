@@ -113,6 +113,7 @@ export function RoomingTable({
                       onClick={() => setEditingRoomId(null)}
                       variant="ghost"
                       className="h-7 px-2"
+                      aria-label="Annuler la modification"
                     >
                       <X className="w-4 h-4" />
                     </Button>

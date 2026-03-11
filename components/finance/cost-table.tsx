@@ -112,6 +112,7 @@ export function CostTable({
                   <button
                     onClick={() => handleDeleteCost(cost.id)}
                     className="text-red-600 hover:text-red-700"
+                    aria-label="Supprimer le coût"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -161,6 +162,7 @@ export function CostTable({
                       setFormData({ title: '', costAmountHT: '', vatRateBps: '2000' });
                     }}
                     className="text-gray-400"
+                    aria-label="Annuler l'ajout"
                   >
                     ✕
                   </button>
