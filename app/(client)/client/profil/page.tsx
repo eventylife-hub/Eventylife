@@ -623,6 +623,7 @@ export default function ProfilePage() {
 
               {twoFAQrUrl && (
                 <div className="flex justify-center p-4 rounded-xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- QR code is a data URL, next/image incompatible */}
                   <img src={twoFAQrUrl} alt="QR Code 2FA" className="w-48 h-48" />
                 </div>
               )}
