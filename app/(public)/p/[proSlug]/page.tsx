@@ -9,11 +9,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/lib/stores/ui-store';
 import { formatPrice, formatDate } from '@/lib/utils';
 interface Travel {
@@ -166,10 +161,11 @@ export default function ProPublicPage() {
     return (
       <div className="max-w-6xl mx-auto px-4 py-12 space-y-8">
         <div className="space-y-4">
-          <Skeleton className="h-64 w-full rounded-lg" />
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-4 w-96" />
+          <div style={{ height: '16rem', width: '100%', borderRadius: '12px', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: '2rem', width: '16rem', borderRadius: '8px', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: '1rem', width: '24rem', borderRadius: '8px', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
+        <style>{`@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }`}</style>
       </div>
     );
   }
@@ -177,9 +173,12 @@ export default function ProPublicPage() {
   if (state === 'error' || state === 'empty') {
     return (
       <div className="max-w-6xl mx-auto px-4 py-12 text-center">
-        <p style={{ color: '#6B7280' }}>Ce pro n&apos;existe pas ou n&apos;a pas de voyages disponibles.</p>
-        <Link href="/voyages">
-          <Button variant="primary">Voir tous les voyages</Button>
+        <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>Ce pro n&apos;existe pas ou n&apos;a pas de voyages disponibles.</p>
+        <Link
+          href="/voyages"
+          style={{ display: 'inline-block', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 2rem', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', transition: 'all 0.3s ease' }}
+        >
+          Voir tous les voyages
         </Link>
       </div>
     );
@@ -246,7 +245,7 @@ export default function ProPublicPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pro.travels.map((voyage) => (
             <div key={voyage.id} style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-              <CardContent className="p-6 flex flex-col h-full">
+              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: '#FDF6E8', color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>
                   {formatDate(voyage.startDate)}
                 </span>
@@ -271,7 +270,7 @@ export default function ProPublicPage() {
                     </button>
                   </Link>
                 </div>
-              </CardContent>
+              </div>
             </div>
           ))}
         </div>
@@ -289,34 +288,43 @@ export default function ProPublicPage() {
           <form role="search" onSubmit={handleLeadSubmit} className="space-y-4">
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Nom</label>
-              <Input
+              <input
                 placeholder="Votre nom"
                 value={leadForm.name}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, name: (e.target as HTMLInputElement).value })}
+                onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
                 required
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
             </div>
 
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Téléphone</label>
-              <Input
+              <input
                 type="tel"
                 placeholder="06 12 34 56 78"
                 value={leadForm.phone}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, phone: (e.target as HTMLInputElement).value })}
+                onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
                 required
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
             </div>
 
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Email</label>
-              <Input
+              <input
                 type="email"
                 autoComplete="email"
                 placeholder="votre@email.com"
                 value={leadForm.email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, email: (e.target as HTMLInputElement).value })}
+                onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
                 required
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
             </div>
 
@@ -327,7 +335,7 @@ export default function ProPublicPage() {
                 placeholder="Votre message..."
                 rows={4}
                 value={leadForm.message}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, message: (e.target as HTMLInputElement).value })}
+                onChange={(e) => setLeadForm({ ...leadForm, message: e.target.value })}
                 onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
                 onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
@@ -338,7 +346,7 @@ export default function ProPublicPage() {
                 type="checkbox"
                 id="rgpd"
                 checked={rgpdConsent}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRgpdConsent((e.target as HTMLInputElement).checked)}
+                onChange={(e) => setRgpdConsent(e.target.checked)}
                 style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: '1.5px solid #E5E0D8', cursor: 'pointer' }}
               />
               <label htmlFor="rgpd" style={{ fontSize: '0.875rem', color: '#6B7280' }}>
@@ -387,13 +395,16 @@ export default function ProPublicPage() {
             <div style={{ backgroundColor: '#FDF6E8', borderRadius: '12px', padding: '1rem' }}>
               <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>Suivre les voyages</h4>
               <form role="search" onSubmit={handleFollowEmail} className="space-y-2">
-                <Input
+                <input
                   type="email"
-                autoComplete="email"
+                  autoComplete="email"
                   placeholder="votre@email.com"
                   value={followEmail}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFollowEmail((e.target as HTMLInputElement).value)}
+                  onChange={(e) => setFollowEmail(e.target.value)}
                   required
+                  style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
                 />
                 <button
                   type="submit"

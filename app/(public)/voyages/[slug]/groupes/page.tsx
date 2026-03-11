@@ -3,9 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Skeleton } from '@/components/ui/skeleton';
 import { GroupCard } from '@/components/groups/group-card';
-import { Button } from '@/components/ui/button';
 import { AlertCircle, Plus } from 'lucide-react';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 interface Group {
@@ -108,13 +106,13 @@ export default function GroupesPage() {
           </h1>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <Skeleton
+              <div
                 key={i}
-                className="h-48 rounded-lg"
-                style={{ borderRadius: '20px', backgroundColor: '#E5E0D8' }}
+                style={{ height: '12rem', borderRadius: '20px', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }}
               />
             ))}
           </div>
+          <style>{`@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }`}</style>
         </div>
       </div>
     );
@@ -179,17 +177,12 @@ export default function GroupesPage() {
             <p className="mb-4" style={{ color: '#6B7280' }}>
               Aucun groupe ouvert pour ce voyage
             </p>
-            <Link href="/client/groupes/creer">
-              <Button
-                variant="default"
-                style={{
-                  backgroundColor: 'var(--terra, #C75B39)',
-                  color: 'white',
-                }}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Créer un groupe
-              </Button>
+            <Link
+              href="/client/groupes/creer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', transition: 'all 0.3s ease' }}
+            >
+              <Plus className="h-4 w-4" />
+              Créer un groupe
             </Link>
           </div>
         </div>
@@ -213,17 +206,12 @@ export default function GroupesPage() {
           <h1 className="text-2xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Groupes de voyage
           </h1>
-          <Link href="/client/groupes/creer">
-            <Button
-              variant="default"
-              style={{
-                backgroundColor: 'var(--terra, #C75B39)',
-                color: 'white',
-              }}
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Créer un groupe
-            </Button>
+          <Link
+            href="/client/groupes/creer"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', transition: 'all 0.3s ease' }}
+          >
+            <Plus className="h-4 w-4" />
+            Créer un groupe
           </Link>
         </div>
 

@@ -6,7 +6,6 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { SkeletonGrid } from '@/components/ui/skeleton';
 import { apiClient } from '@/lib/api-client';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { TravelCard } from '@/components/TravelCard';
@@ -161,6 +160,8 @@ function VoyagesContent() {
 
   if (state === 'loading') {
     return (
+      <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
       <div className="space-y-6">
         <div
           className="p-6 rounded-2xl"
@@ -168,12 +169,24 @@ function VoyagesContent() {
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[1,2,3,4].map(i => (
-              <div key={i} className="h-10 rounded-lg skeleton" />
+              <div key={i} style={{ height: 40, borderRadius: 10, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             ))}
           </div>
         </div>
-        <SkeletonGrid columns={2} count={4} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[1,2,3,4].map(i => (
+            <div key={i} style={{ border: '1.5px solid #E5E0D8', borderRadius: 20, overflow: 'hidden', background: 'white' }}>
+              <div style={{ height: 192, width: '100%', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              <div style={{ padding: 16 }} className="space-y-3">
+                <div style={{ height: 20, width: '75%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 16, width: '50%', borderRadius: 6, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 32, width: 96, borderRadius: 10, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+      </>
     );
   }
 
@@ -283,7 +296,7 @@ function VoyagesContent() {
               id="filter-destination"
               placeholder="Chercher une destination..."
               value={destination}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDestination((e.target as HTMLInputElement).value)}
+              onChange={(e) => setDestination(e.target.value)}
               style={inputStyle}
               onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
               onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E0D8')}
@@ -296,7 +309,7 @@ function VoyagesContent() {
               type="number"
               min="0"
               placeholder="0"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
+              onChange={(e) => setMinPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
               style={inputStyle}
               onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
               onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E0D8')}
@@ -309,7 +322,7 @@ function VoyagesContent() {
               type="number"
               min="0"
               placeholder="10 000"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
+              onChange={(e) => setMaxPrice(e.target.value ? parseInt(e.target.value) * 100 : null)}
               style={inputStyle}
               onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
               onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E0D8')}
@@ -465,7 +478,19 @@ export default function VoyagesPage() {
           ]}
         />
 
-        <Suspense fallback={<SkeletonGrid columns={2} count={4} />}>
+        <Suspense fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[1,2,3,4].map(i => (
+              <div key={i} style={{ border: '1.5px solid #E5E0D8', borderRadius: 20, overflow: 'hidden', background: 'white' }}>
+                <div style={{ height: 192, width: '100%', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ padding: 16 }} className="space-y-3">
+                  <div style={{ height: 20, width: '75%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                  <div style={{ height: 16, width: '50%', borderRadius: 6, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        }>
           <VoyagesContent />
         </Suspense>
 

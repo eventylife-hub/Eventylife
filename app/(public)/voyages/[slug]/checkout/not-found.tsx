@@ -1,37 +1,66 @@
 /**
- * Page 404 pour le checkout
+ * Page 404 pour le checkout — Design V4
  */
 
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { AlertCircle } from 'lucide-react';
 import { ROUTES } from '@/lib/constants';
 
 export default function CheckoutNotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4">
+    <div style={{ minHeight: '100vh', background: 'var(--cream, #FAF7F2)', padding: 16 }}>
       <div className="max-w-2xl mx-auto py-12 text-center space-y-6">
         <div className="flex justify-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
-            <AlertCircle className="w-8 h-8 text-red-600" />
+          <div
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: '50%',
+              background: 'rgba(199,91,57,0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <AlertCircle style={{ width: 32, height: 32, color: 'var(--terra, #C75B39)' }} />
           </div>
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-gray-900">Oups !</h1>
-          <p className="text-gray-600">
-            La page de checkout n'a pas pu être trouvée.
+          <h1
+            style={{
+              fontSize: '1.875rem',
+              fontWeight: 700,
+              color: 'var(--navy, #1A1A2E)',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Oups !
+          </h1>
+          <p style={{ color: '#6B7280' }}>
+            La page de checkout n&apos;a pas pu être trouvée.
           </p>
         </div>
 
-        <p className="text-sm text-gray-500">
-          Le voyage ou la session de réservation n'existe plus.
+        <p style={{ fontSize: '0.875rem', color: '#9CA3AF' }}>
+          Le voyage ou la session de réservation n&apos;existe plus.
         </p>
 
-        <Link href={ROUTES.VOYAGES}>
-          <Button className="h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium">
-            Retour aux voyages
-          </Button>
+        <Link
+          href={ROUTES.VOYAGES}
+          style={{
+            display: 'inline-block',
+            padding: '12px 28px',
+            borderRadius: 12,
+            background: 'var(--terra, #C75B39)',
+            color: '#FAF7F2',
+            fontWeight: 700,
+            fontSize: '0.875rem',
+            textDecoration: 'none',
+            transition: 'all 0.2s',
+          }}
+        >
+          Retour aux voyages
         </Link>
       </div>
     </div>
