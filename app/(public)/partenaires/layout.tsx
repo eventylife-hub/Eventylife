@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'Rejoignez le réseau de partenaires Eventy Life et développez votre activité.',
   },
-  alternates: { canonical: 'https://eventy.fr/partenaires' },
+  alternates: { canonical: 'https://www.eventylife.fr/partenaires' },
 };
 
 export default function PartenairesLayout({ children }: { children: React.ReactNode }) {

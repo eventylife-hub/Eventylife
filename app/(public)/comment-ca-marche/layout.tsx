@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
   },
   alternates: {
-    canonical: 'https://eventy.fr/comment-ca-marche',
+    canonical: 'https://www.eventylife.fr/comment-ca-marche',
   },
 };
 

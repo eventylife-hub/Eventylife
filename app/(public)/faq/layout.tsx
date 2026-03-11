@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'Trouvez les réponses à vos questions sur les voyages de groupe Eventy Life.',
   },
-  alternates: { canonical: 'https://eventy.fr/faq' },
+  alternates: { canonical: 'https://www.eventylife.fr/faq' },
 };
 
 export default function FaqLayout({ children }: { children: React.ReactNode }) {

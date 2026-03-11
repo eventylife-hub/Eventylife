@@ -68,11 +68,11 @@ export default function MentionsLegales() {
               <p>
                 <strong>Email :</strong>{' '}
                 <a
-                  href="mailto:contact@eventy.life"
+                  href="mailto:contact@eventylife.fr"
                   style={{ color: 'var(--terra, #C75B39)' }}
                   className="hover:underline"
                 >
-                  contact@eventy.life
+                  contact@eventylife.fr
                 </a>
               </p>
               <p>
@@ -339,11 +339,11 @@ export default function MentionsLegales() {
                 <li>
                   <strong>Email :</strong>{' '}
                   <a
-                    href="mailto:legal@eventy.life"
+                    href="mailto:legal@eventylife.fr"
                     style={{ color: 'var(--terra, #C75B39)' }}
                     className="hover:underline"
                   >
-                    legal@eventy.life
+                    legal@eventylife.fr
                   </a>
                 </li>
                 <li>

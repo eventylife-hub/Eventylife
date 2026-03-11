@@ -58,7 +58,7 @@ export default function CGV() {
                 régissent les relations contractuelles entre Eventy Life SAS
                 (ci-après "l&apos;Organisateur") et les personnes physiques
                 qui effectuent une réservation sur le site
-                www.eventy.life (ci-après "le Client").
+                www.eventylife.fr (ci-après "le Client").
               </p>
               <p>
                 Elles s&apos;appliquent de manière exclusive à tous les

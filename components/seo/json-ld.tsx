@@ -63,7 +63,7 @@ interface TravelOfferProps {
 
 // ═══ Composants ═══
 
-const BASE_URL = 'https://eventy.fr';
+const BASE_URL = 'https://www.eventylife.fr';
 
 /**
  * JSON-LD Organization — Page d'accueil
@@ -211,7 +211,7 @@ export function ContactPageJsonLd({ baseUrl = BASE_URL }: ContactPageProps) {
     mainEntity: {
       '@type': 'TravelAgency',
       name: 'Eventy Life',
-      email: 'contact@eventy.life',
+      email: 'contact@eventylife.fr',
       url: baseUrl,
     },
   };

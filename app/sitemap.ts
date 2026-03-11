@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://eventy.fr';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.eventylife.fr';
 
   // Fetch travels from API
   let travelSlugs: string[] = [];

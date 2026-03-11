@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Article blog Eventy Life : ${titleFormatted}`,
     },
     alternates: {
-      canonical: `https://eventy.fr/blog/${params.slug}`,
+      canonical: `https://www.eventylife.fr/blog/${params.slug}`,
     },
   };
 }

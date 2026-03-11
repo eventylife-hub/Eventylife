@@ -23,7 +23,7 @@ const contactInfo = [
   {
     icon: '✉️',
     title: 'Email',
-    lines: ['contact@eventy.life', 'support@eventy.life'],
+    lines: ['contact@eventylife.fr', 'support@eventylife.fr'],
   },
   {
     icon: '🕐',

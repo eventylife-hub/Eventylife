@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Voyages en Groupe | Eventy Life',
   description:
     'Découvrez notre sélection de voyages en groupe accompagnés. Destinations variées, prix justes et qualité garantie pour vos voyages de groupe.',
-  alternates: { canonical: 'https://eventy.fr/voyages' },
+  alternates: { canonical: 'https://www.eventylife.fr/voyages' },
 };
 
 export default function VoyagesLayout({

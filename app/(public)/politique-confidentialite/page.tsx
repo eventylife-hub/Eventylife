@@ -66,7 +66,7 @@ export default function PolitiqueConfidentialite() {
               </p>
               <p>
                 Cette politique s&apos;applique à tous nos services, notamment
-                le site www.eventy.life, l&apos;application mobile, les
+                le site www.eventylife.fr, l&apos;application mobile, les
                 formulaires d&apos;inscription et les communications marketing.
               </p>
             </div>
@@ -96,14 +96,14 @@ export default function PolitiqueConfidentialite() {
                 France
               </p>
               <p>
-                <strong>Email :</strong> contact@eventy.life
+                <strong>Email :</strong> contact@eventylife.fr
               </p>
               <p>
                 <strong>Téléphone :</strong> +33 (0)1 23 45 67 89
               </p>
               <p>
                 <strong>Délégué à la Protection des Données (DPO) :</strong>{' '}
-                dpo@eventy.life
+                dpo@eventylife.fr
               </p>
               <p className="mt-4 text-sm">
                 Le Responsable de traitement est la personne morale ou
@@ -725,7 +725,7 @@ export default function PolitiqueConfidentialite() {
                   la Protection des Données :
                 </p>
                 <p className="mt-2">
-                  <strong>Email :</strong> dpo@eventy.life
+                  <strong>Email :</strong> dpo@eventylife.fr
                   <br />
                   <strong>Adresse :</strong> 15 rue de la Paix, 75002 Paris,
                   France

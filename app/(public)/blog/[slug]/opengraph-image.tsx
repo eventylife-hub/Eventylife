@@ -131,7 +131,7 @@ export default function Image({ params }: { params: { slug: string } }) {
           }}
         >
           <span style={{ fontSize: '14px', color: 'rgba(250,247,242,0.5)' }}>
-            eventy.fr/blog
+            eventylife.fr/blog
           </span>
         </div>
       </div>

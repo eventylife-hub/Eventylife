@@ -625,11 +625,11 @@ export default function CookiesPolicy() {
               <p>
                 <strong>Email :</strong>{' '}
                 <a
-                  href="mailto:dpo@eventy.life"
+                  href="mailto:dpo@eventylife.fr"
                   style={{ color: 'var(--terra, #C75B39)' }}
                   className="hover:underline"
                 >
-                  dpo@eventy.life
+                  dpo@eventylife.fr
                 </a>
               </p>
               <p>

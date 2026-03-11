@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Suivi de Commande | Eventy Life',
   description:
     'Suivez l\'état de votre réservation Eventy Life. Entrez votre référence et votre email pour retrouver votre commande.',
-  alternates: { canonical: 'https://eventy.fr/suivi-commande' },
+  alternates: { canonical: 'https://www.eventylife.fr/suivi-commande' },
 };
 
 export default function SuiviCommandeLayout({

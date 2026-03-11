@@ -65,7 +65,7 @@ export default function ProLoginPage() {
                 id="email"
                 value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
-                placeholder="pro@eventy.life"
+                placeholder="pro@eventylife.fr"
                 className="pro-input"
                 required
                 disabled={loading}

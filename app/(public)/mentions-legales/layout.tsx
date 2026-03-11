@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Mentions Légales | Eventy Life',
   description:
     'Mentions légales d\'Eventy Life. Informations sur l\'éditeur, l\'hébergement, la propriété intellectuelle et les conditions d\'utilisation.',
-  alternates: { canonical: 'https://eventy.fr/mentions-legales' },
+  alternates: { canonical: 'https://www.eventylife.fr/mentions-legales' },
 };
 
 export default function MentionsLegalesLayout({

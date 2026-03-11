@@ -131,7 +131,7 @@ export default async function Image() {
             color: 'rgba(250, 247, 242, 0.4)',
           }}
         >
-          eventy.fr
+          eventylife.fr
         </div>
       </div>
     ),

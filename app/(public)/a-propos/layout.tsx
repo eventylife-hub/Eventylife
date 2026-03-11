@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'À Propos | Eventy Life',
   description:
     'Découvrez Eventy Life, votre agence spécialisée dans les voyages de groupe accompagnés. Notre mission : des voyages de qualité à prix justes.',
-  alternates: { canonical: 'https://eventy.fr/a-propos' },
+  alternates: { canonical: 'https://www.eventylife.fr/a-propos' },
 };
 
 export default function AboutLayout({

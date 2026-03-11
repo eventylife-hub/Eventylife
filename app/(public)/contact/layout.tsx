@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Contact | Eventy Life',
   description:
     'Contactez Eventy Life pour toute question sur nos voyages en groupe. Notre équipe vous répond rapidement pour vos demandes.',
-  alternates: { canonical: 'https://eventy.fr/contact' },
+  alternates: { canonical: 'https://www.eventylife.fr/contact' },
 };
 
 export default function ContactLayout({

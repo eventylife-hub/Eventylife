@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Politique de Confidentialité | Eventy Life',
   description:
     'Politique de confidentialité d\'Eventy Life. Protection de vos données personnelles conformément au RGPD.',
-  alternates: { canonical: 'https://eventy.fr/confidentialite' },
+  alternates: { canonical: 'https://www.eventylife.fr/confidentialite' },
 };
 
 export default function ConfidentialiteLayout({

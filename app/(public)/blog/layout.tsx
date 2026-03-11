@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'Articles, conseils et inspirations pour vos voyages de groupe Eventy Life.',
   },
-  alternates: { canonical: 'https://eventy.fr/blog' },
+  alternates: { canonical: 'https://www.eventylife.fr/blog' },
 };
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {

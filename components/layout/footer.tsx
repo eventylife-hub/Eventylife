@@ -131,8 +131,8 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@eventy.fr" className="text-sm hover:text-white transition-colors duration-200">
-                  contact@eventy.fr
+                <a href="mailto:contact@eventylife.fr" className="text-sm hover:text-white transition-colors duration-200">
+                  contact@eventylife.fr
                 </a>
               </li>
               <li>

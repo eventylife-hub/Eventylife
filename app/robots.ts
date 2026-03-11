@@ -6,7 +6,7 @@ import { MetadataRoute } from 'next';
  * Autorise uniquement les pages publiques pour le SEO
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://eventy.fr';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.eventylife.fr';
 
   return {
     rules: [

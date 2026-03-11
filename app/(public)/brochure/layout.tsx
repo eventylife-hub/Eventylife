@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'Téléchargez notre brochure et découvrez le catalogue complet Eventy Life.',
   },
-  alternates: { canonical: 'https://eventy.fr/brochure' },
+  alternates: { canonical: 'https://www.eventylife.fr/brochure' },
 };
 
 export default function BrochureLayout({

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Eventy Life' }],
   creator: 'Eventy Life',
   publisher: 'Eventy Life',
-  metadataBase: new URL('https://eventy.fr'),
+  metadataBase: new URL('https://www.eventylife.fr'),
   icons: {
     icon: [
       { url: '/icons/favicon.svg', type: 'image/svg+xml' },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     siteName: 'Eventy Life',
-    url: 'https://eventy.fr',
+    url: 'https://www.eventylife.fr',
   },
   twitter: {
     card: 'summary_large_image',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
       'Voyages en groupe avec accompagnement humain porte-à-porte.',
   },
   alternates: {
-    canonical: 'https://eventy.fr',
+    canonical: 'https://www.eventylife.fr',
   },
   category: 'travel',
 };
