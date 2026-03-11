@@ -2,109 +2,164 @@
 
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 const brochures = [
   {
-    title: 'Catalogue Printemps-Ete 2026',
+    title: 'Catalogue Printemps-Été 2026',
     desc: 'Toutes nos destinations pour la saison : Maroc, Andalousie, Tunisie, Italie et bien plus.',
     pages: '48 pages',
-    icon: '\u{2600}',
+    icon: '☀',
   },
   {
-    title: 'Special Week-ends',
-    desc: 'Nos week-ends thematiques : gastronomie, bien-etre, culture, aventure.',
+    title: 'Spécial Week-ends',
+    desc: 'Nos week-ends thématiques : gastronomie, bien-être, culture, aventure.',
     pages: '24 pages',
-    icon: '\u{1F389}',
+    icon: '🎉',
   },
   {
     title: 'Guide du Voyageur',
-    desc: 'Tout ce que vous devez savoir avant de partir : preparation, bagages, documents.',
+    desc: 'Tout ce que vous devez savoir avant de partir : préparation, bagages, documents.',
     pages: '16 pages',
-    icon: '\u{1F4D6}',
+    icon: '📖',
   },
 ];
 
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
-
 export default function BrochurePage() {
   return (
-    <div style={{ backgroundColor: C.cream, minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
       {/* Hero */}
-      <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, color: 'white', paddingTop: '4rem', paddingBottom: '4rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+          color: 'white',
+          padding: '5rem 1rem 4rem',
+        }}
+      >
         <div className="mx-auto max-w-4xl text-center">
-          <h1 style={{ fontSize: '3rem', fontWeight: '700', marginBottom: '1rem', fontFamily: 'Playfair, serif' }} className="sm:text-5xl mb-4">
-            Nos <span style={{ color: C.terra }}>Brochures</span>
+          <p
+            className="mb-4"
+            style={{
+              color: 'var(--gold, #D4A853)',
+              fontSize: '0.75rem',
+              fontWeight: '700',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+            }}
+          >
+            Catalogue
+          </p>
+          <h1
+            className="text-3xl sm:text-5xl mb-4"
+            style={{
+              fontWeight: '700',
+              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
+            }}
+          >
+            Nos <span style={{ color: 'var(--terra, #C75B39)' }}>Brochures</span>
           </h1>
-          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.8)', maxWidth: '42rem' }} className="mx-auto">
-            Decouvrez nos destinations et formules de voyages en groupe.
-            Telechargez nos brochures gratuitement.
+          <p
+            className="mx-auto"
+            style={{
+              fontSize: '1.125rem',
+              color: 'rgba(255,255,255,0.75)',
+              maxWidth: '42rem',
+            }}
+          >
+            Découvrez nos destinations et formules de voyages en groupe.
+            Téléchargez nos brochures gratuitement.
           </p>
         </div>
       </div>
 
       <div className="mx-auto max-w-4xl px-4 py-12">
-        <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Brochure',href:'/brochure'}]} />
+        <Breadcrumb
+          items={[
+            { name: 'Accueil', href: '/' },
+            { name: 'Brochure', href: '/brochure' },
+          ]}
+        />
+
         {/* Brochures disponibles */}
-        <div className="space-y-6 mb-16">
+        <div className="space-y-6 mt-8 mb-16">
           {brochures.map((b, i) => (
             <div
               key={i}
-              style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
-              className="sm:flex-row items-start sm:p-8"
+              className="flex flex-col sm:flex-row items-start gap-5 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid rgba(26,26,46,0.08)',
+                boxShadow: '0 2px 8px rgba(26,26,46,0.04)',
+                padding: '2rem',
+              }}
             >
-              <div style={{ width: '5rem', height: '5rem', background: `linear-gradient(135deg, ${C.terra}, ${C.terraLight})`, borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.875rem', flexShrink: 0 }}>
+              <div
+                className="w-16 h-16 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
+                style={{
+                  background: 'linear-gradient(135deg, var(--terra, #C75B39), var(--terra-light, #D97B5E))',
+                  color: 'white',
+                }}
+              >
                 {b.icon}
               </div>
               <div className="flex-1">
-                <h2 style={{ fontSize: '1.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>{b.title}</h2>
-                <p style={{ color: C.muted, marginBottom: '0.75rem' }}>{b.desc}</p>
-                <span style={{ fontSize: '0.75rem', color: C.muted }}>{b.pages} - PDF</span>
+                <h2
+                  className="text-lg font-bold mb-1"
+                  style={{ color: 'var(--navy, #1A1A2E)' }}
+                >
+                  {b.title}
+                </h2>
+                <p className="text-sm mb-2" style={{ color: '#6B7280' }}>
+                  {b.desc}
+                </p>
+                <span className="text-xs" style={{ color: '#A0AEC0' }}>
+                  {b.pages} — PDF
+                </span>
               </div>
-              <button style={{ backgroundColor: C.terra, color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease', whiteSpace: 'nowrap', alignSelf: 'center', marginTop: '1rem' }} className="sm:mt-0 sm:self-center" onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}>
-                Telecharger
+              <button
+                className="rounded-xl font-bold text-sm transition-all duration-200 sm:self-center"
+                style={{
+                  backgroundColor: 'var(--terra, #C75B39)',
+                  color: 'white',
+                  padding: '0.75rem 1.5rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 4px 12px rgba(199,91,57,0.2)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(199,91,57,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(199,91,57,0.2)';
+                }}
+              >
+                Télécharger
               </button>
             </div>
           ))}
         </div>
 
-        {/* Demande brochure par email */}
-        <div style={{ background: `linear-gradient(135deg, ${C.navy}, #2d2d4e)`, borderRadius: '20px', padding: '2rem', color: 'white', textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }} className="sm:p-12">
-          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', marginBottom: '1rem', fontFamily: 'Playfair, serif' }} className="sm:text-3xl mb-4">
-            Recevez la brochure par email
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', maxWidth: '32rem' }} className="mx-auto">
-            Entrez votre email pour recevoir notre catalogue complet directement
-            dans votre boite mail.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Votre email..."
-              style={{ flex: 1, padding: '0.75rem 1rem', borderRadius: '12px', color: C.navy, border: 'none', outline: 'none' }}
-            />
-            <button style={{ backgroundColor: C.terra, color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}>
-              Envoyer
-            </button>
-          </div>
-        </div>
+        {/* Demande brochure par email — composant réutilisable */}
+        <NewsletterCTA
+          variant="navy"
+          subtitle="Par email"
+          title="Recevez la brochure par email"
+          description="Entrez votre email pour recevoir notre catalogue complet directement dans votre boîte mail."
+          className="mb-12"
+        />
 
-        {/* Back to voyages */}
-        <div className="mt-12 text-center">
+        {/* Retour voyages */}
+        <div className="text-center">
           <Link
             href="/voyages"
-            style={{ color: C.terra, fontWeight: '700', textDecoration: 'none', transition: 'all 0.3s ease' }}
-            onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}
+            className="font-bold text-sm transition-colors duration-200"
+            style={{
+              color: 'var(--terra, #C75B39)',
+              textDecoration: 'none',
+            }}
           >
             ← Voir tous nos voyages
           </Link>
