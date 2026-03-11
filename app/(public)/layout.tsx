@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { BackToTop } from '@/components/ui/back-to-top';
-import { OrganizationJsonLd } from '@/components/seo/json-ld';
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +48,7 @@ export default function PublicLayout({
   return (
     <>
       <OrganizationJsonLd />
+      <WebSiteJsonLd />
       <Header />
       <main id="main-content">{children}</main>
       <Footer />

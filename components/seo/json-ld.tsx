@@ -6,6 +6,10 @@
 
 // ═══ Types ═══
 
+interface WebSiteProps {
+  baseUrl?: string;
+}
+
 interface BreadcrumbItem {
   name: string;
   href: string;
@@ -103,6 +107,37 @@ export function OrganizationJsonLd({ baseUrl = BASE_URL }: OrganizationProps) {
       contactType: 'customer service',
       availableLanguage: 'French',
     },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+/**
+ * JSON-LD WebSite — Active Google Sitelinks Search Box
+ * @see https://developers.google.com/search/docs/appearance/sitelinks-searchbox
+ */
+export function WebSiteJsonLd({ baseUrl = BASE_URL }: WebSiteProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Eventy Life',
+    url: baseUrl,
+    description:
+      'Agence de voyages de groupe avec accompagnement humain porte-à-porte.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${baseUrl}/voyages?destination={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+    inLanguage: 'fr-FR',
   };
 
   return (
