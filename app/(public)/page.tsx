@@ -4,13 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { Metadata } from 'next';
-
-
-export const metadata: Metadata = {
-  title: 'Eventy Life | Voyages de Groupe avec Accompagnement',
-  description: 'Découvrez nos voyages de groupe avec accompagnement humain porte-à-porte. Bus et avion, départs de toute la France.',
-};
+import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
 /* Couleurs Design System v2 */
 const C = {
@@ -77,6 +71,9 @@ export default function HomePage() {
 
   return (
     <>
+      {/* JSON-LD Organization pour Google */}
+      <OrganizationJsonLd />
+
       <Header />
 
       {/* ═══ HERO ═══ */}
