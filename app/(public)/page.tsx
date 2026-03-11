@@ -137,7 +137,7 @@ export default function HomePage() {
                 Découvrir nos voyages →
               </Link>
               <Link
-                href="/#how-it-works"
+                href="/comment-ca-marche"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-200"
                 style={{
                   background: 'transparent',
@@ -437,7 +437,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: '#374151' }}>
-                    "{review.text}"
+                    « {review.text} »
                   </p>
                   <div>
                     <p className="font-semibold text-sm" style={{ color: C.navy }}>{review.name}</p>
@@ -467,7 +467,7 @@ export default function HomePage() {
               Inscrivez-vous pour découvrir nos meilleures destinations avant tout le monde.
             </p>
 
-            <form role="search" onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form aria-label="Inscription à la newsletter" onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
                 type="email"
                 value={email}
