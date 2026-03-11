@@ -2,10 +2,18 @@
 
 import { useState, useEffect } from 'react';
 // Remove Card, Button, Alert imports
+import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
-import { FinanceSummary } from '@/components/finance/finance-summary';
-import { MarginChart } from '@/components/finance/margin-chart';
 import { formatPrice } from '@/lib/utils';
+
+const FinanceSummary = dynamic(
+  () => import('@/components/finance/finance-summary').then((m) => m.FinanceSummary),
+  { loading: () => <div className="animate-pulse rounded-xl h-48" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
+const MarginChart = dynamic(
+  () => import('@/components/finance/margin-chart').then((m) => m.MarginChart),
+  { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 interface FinanceDashboard {
   totalRevenue?: number;
   totalCA?: number;

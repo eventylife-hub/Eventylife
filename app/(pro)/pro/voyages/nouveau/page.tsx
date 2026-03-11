@@ -3,8 +3,13 @@
 import { useState, useCallback, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronRight, ChevronLeft, CheckCircle2, AlertCircle, Save, Plus, Trash2, Image, MapPin, Calendar } from 'lucide-react';
-import { FileUpload } from '@/components/uploads/file-upload';
+import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
+
+const FileUpload = dynamic(
+  () => import('@/components/uploads/file-upload').then((m) => m.FileUpload),
+  { loading: () => <div className="animate-pulse rounded-xl h-32" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 // ============================================================================
 // TYPES & INTERFACES
 // ============================================================================

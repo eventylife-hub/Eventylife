@@ -3,8 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
-import { MetricsChart } from '@/components/marketing/metrics-chart';
+
+const MetricsChart = dynamic(
+  () => import('@/components/marketing/metrics-chart').then((m) => m.MetricsChart),
+  { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 import { AlertCircle, Loader2, Copy, Trash2 } from 'lucide-react';
 import { formatDate, formatPrice } from '@/lib/utils';
 // Interface pour une campagne marketing

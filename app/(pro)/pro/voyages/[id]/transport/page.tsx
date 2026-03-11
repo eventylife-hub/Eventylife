@@ -2,9 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
-import { StopCard } from '@/components/transport/stop-card';
-import { StopMap } from '@/components/transport/stop-map';
+
+const StopCard = dynamic(
+  () => import('@/components/transport/stop-card').then((m) => m.StopCard),
+  { loading: () => <div className="animate-pulse rounded-xl h-32" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
+const StopMap = dynamic(
+  () => import('@/components/transport/stop-map').then((m) => m.StopMap),
+  { loading: () => <div className="animate-pulse rounded-xl h-80" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
+);
 import { AlertCircle } from 'lucide-react';
 interface TransportConfig {
   mode: 'BUS' | 'FLIGHT' | 'MIXED';

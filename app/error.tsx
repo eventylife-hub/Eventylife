@@ -29,34 +29,42 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen text-center px-4"
+      style={{ backgroundColor: '#FAF7F2' }}
+    >
       <div className="text-7xl mb-6">⚠️</div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-3">
-        Une erreur est survenue
+      <h1
+        className="text-3xl font-bold mb-3"
+        style={{ color: '#1A1A2E' }}
+      >
+        Oups, une erreur est survenue
       </h1>
-      <p className="text-gray-600 mb-6 max-w-md">
-        Nous sommes désolés, quelque chose s'est mal passé. Vous pouvez
-        réessayer ou revenir à l'accueil.
+      <p className="mb-8 max-w-md" style={{ color: '#6B7280' }}>
+        Nous sommes désolés, quelque chose s&#39;est mal passé.
+        Vous pouvez réessayer ou revenir à l&#39;accueil.
       </p>
 
       <div className="flex gap-4">
         <button
           onClick={reset}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          className="px-6 py-3 text-white rounded-xl font-semibold transition-opacity hover:opacity-90"
+          style={{ backgroundColor: '#C75B39' }}
         >
           Réessayer
         </button>
         <a
           href="/"
-          className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          className="px-6 py-3 rounded-xl font-semibold transition-colors"
+          style={{ border: '1.5px solid #E5E0D8', color: '#1A1A2E', backgroundColor: 'white' }}
         >
-          Retour à l'accueil
+          Retour à l&#39;accueil
         </a>
       </div>
 
       {/* Digest pour le support technique */}
       {error.digest && (
-        <p className="text-xs text-gray-400 mt-8">
+        <p className="text-xs mt-8" style={{ color: '#9CA3AF' }}>
           Référence erreur : {error.digest}
         </p>
       )}
