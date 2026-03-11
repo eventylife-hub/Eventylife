@@ -7,11 +7,17 @@ jest.mock('next/navigation', () => ({
   useSearchParams: jest.fn(),
 }));
 
-// Mock next/image
+// Mock next/image — rendu réel d'un <img> pour les tests
 jest.mock('next/image', () => ({
   __esModule: true,
+  // eslint-disable-next-line @next/next/no-img-element
   default: (props: Record<string, unknown>) => {
-    return null;
+    const { fill, priority, sizes, ...rest } = props;
+    void fill;
+    void priority;
+    void sizes;
+    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+    return <img {...(rest as React.ImgHTMLAttributes<HTMLImageElement>)} />;
   },
 }));
 
