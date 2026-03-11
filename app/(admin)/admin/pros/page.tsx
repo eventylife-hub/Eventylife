@@ -159,7 +159,7 @@ export default function ProsPage() {
             },
           },
         ]
-      : unknown[]),
+      : []),
   ];
 
   return (

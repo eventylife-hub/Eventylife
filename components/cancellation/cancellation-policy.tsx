@@ -44,7 +44,7 @@ export function CancellationPolicy() {
         Politique d'Annulation
       </h2>
       <div className="space-y-3">
-        {policies.map((policy: unknown, idx: number) => (
+        {policies.map((policy, idx: number) => (
           <div
             key={idx}
             className="flex items-start gap-4 pb-3 border-b border-blue-100 last:border-b-0"

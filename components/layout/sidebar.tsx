@@ -54,7 +54,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
 
         {/* Menu Items */}
         <nav className="flex-1 px-2 py-4 space-y-1">
-          {items.map((item: unknown) => (
+          {items.map((item) => (
             <div key={item.href}>
               <Link
                 href={item.href}
@@ -106,7 +106,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
               {/* Submenu */}
               {sidebarOpen && item.children && expandedItems[item.href] && (
                 <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-2">
-                  {item.children.map((child: unknown) => (
+                  {item.children.map((child) => (
                     <Link
                       key={child.href}
                       href={child.href}

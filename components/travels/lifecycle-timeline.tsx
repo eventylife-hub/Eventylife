@@ -98,7 +98,7 @@ export function LifecycleTimeline({
           {timeline.length === 0 ? (
             <p className="text-gray-600 text-center py-4">Aucun historique</p>
           ) : (
-            timeline.map((event: unknown, idx: number) => (
+            timeline.map((event, idx: number) => (
               <div key={idx} className="flex gap-4">
                 {/* Point de timeline */}
                 <div className="flex flex-col items-center">
@@ -140,7 +140,7 @@ export function LifecycleTimeline({
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Actions</h2>
           <div className="space-y-3">
-            {availableActions.map((action: unknown) => (
+            {availableActions.map((action) => (
               <div key={action.action}>
                 <button
                   onClick={() => setSelectedAction(action.action)}

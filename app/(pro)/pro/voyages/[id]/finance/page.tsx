@@ -164,7 +164,7 @@ export default function VoyageFinancePage() {
         <div className="pro-panel-body" style={{ padding: '0' }}>
           <CostTable
             travelId={travelId}
-            costs={((finance?.activityCosts as unknown as unknown[]) || []) as unknown[]}
+            costs={((finance?.activityCosts as unknown as []) || []) as []}
             onUpdate={() => {
               // Recharger
               setLoading(true);

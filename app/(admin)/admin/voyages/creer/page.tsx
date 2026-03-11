@@ -74,12 +74,12 @@ export default function CreateTripPage() {
     mode: 'BUS',
     capacity: 0,
     pricePerSeatCentimes: 0,
-    busStops: unknown[],
+    busStops: [],
   });
 
   const [accommodation, setAccommodation] = useState<HotelBlock>({
     hotelName: '',
-    roomTypes: unknown[],
+    roomTypes: [],
     totalRooms: 0,
     checkInDate: '',
     checkOutDate: '',
@@ -87,7 +87,7 @@ export default function CreateTripPage() {
 
   const [pricing, setPricing] = useState<PricingConfig>({
     basePriceTTCCentimes: 0,
-    insuranceOptions: unknown[],
+    insuranceOptions: [],
     paymentModes: ['CARD', 'TRANSFER'],
   });
 

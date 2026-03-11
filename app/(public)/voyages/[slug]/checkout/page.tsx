@@ -220,7 +220,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
         credentials: 'include',
         body: JSON.stringify({
           bookingGroupId,
-          invites: paymentMode === 'split' ? invites : unknown[],
+          invites: paymentMode === 'split' ? invites : [],
         }),
       });
       if (!response.ok) {

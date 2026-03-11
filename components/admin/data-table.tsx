@@ -50,7 +50,7 @@ export function DataTable<T extends { id: string }>({
   if (loading) {
     return (
       <div className="space-y-4">
-        {[...Array(5)].map((_: unknown, i: number) => (
+        {[...Array(5)].map((_, i: number) => (
           <Skeleton key={i} className="h-12 w-full" />
         ))}
       </div>
@@ -71,7 +71,7 @@ export function DataTable<T extends { id: string }>({
         <Table>
           <TableHeader>
             <TableRow>
-              {columns.map((col: unknown) => (
+              {columns.map((col) => (
                 <TableHead
                   key={String(col.key ?? "")}
                   className={col.width ? `w-[${col.width}]` : ''}
@@ -84,13 +84,13 @@ export function DataTable<T extends { id: string }>({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((row: unknown) => (
+            {data.map((row) => (
               <TableRow
                 key={row.id}
                 className={onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}
                 onClick={() => onRowClick?.(row)}
               >
-                {columns.map((col: unknown) => (
+                {columns.map((col) => (
                   <TableCell key={String(col.key ?? "")}>
                     {col.render ? col.render(row[col.key], row) : String(row[col.key] ?? "")}
                   </TableCell>
@@ -98,7 +98,7 @@ export function DataTable<T extends { id: string }>({
                 {rowActions.length > 0 && (
                   <TableCell>
                     <div className="flex gap-2">
-                      {rowActions.map((action: unknown) => (
+                      {rowActions.map((action) => (
                         <Button
                           key={action.label}
                           size="sm"

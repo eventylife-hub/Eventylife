@@ -32,7 +32,7 @@ export function LegalAcceptanceModal({
   const handleCheckboxChange = (docId: string) => {
     setSelectedDocs((prev) =>
       prev.includes(docId)
-        ? prev.filter((id: unknown) => id !== docId)
+        ? prev.filter((id) => id !== docId)
         : [...prev, docId]
     );
   };
@@ -98,7 +98,7 @@ export function LegalAcceptanceModal({
 
         {/* Documents */}
         <div className="mb-6 space-y-4">
-          {documents.map((doc: unknown) => (
+          {documents.map((doc) => (
             <div key={doc.id} className="flex items-start gap-3">
               <input
                 type="checkbox"

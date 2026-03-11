@@ -190,7 +190,7 @@ export default function RoomingPage() {
           <div className="pro-panel-body">
             <RoomingTable
               travelId={travelId}
-              rooms={roomingList as unknown as unknown[]}
+              rooms={roomingList as unknown as []}
             />
           </div>
         </div>

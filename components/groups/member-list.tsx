@@ -58,7 +58,7 @@ export function MemberList({
 
   return (
     <div className="space-y-3">
-      {members.map((member: unknown) => (
+      {members.map((member) => (
         <div
           key={member.id}
           className="flex items-center justify-between p-3 border rounded-lg"

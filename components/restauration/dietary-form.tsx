@@ -37,7 +37,7 @@ export function DietaryForm({
   const handleAllergyChange = (allergyId: string) => {
     setAllergies((prev) =>
       prev.includes(allergyId)
-        ? prev.filter((a: unknown) => a !== allergyId)
+        ? prev.filter((a) => a !== allergyId)
         : [...prev, allergyId]
     );
   };
@@ -116,7 +116,7 @@ export function DietaryForm({
           Allergies (optionnel)
         </Label>
         <div className="space-y-2">
-          {allergyOptions.map((option: unknown) => (
+          {allergyOptions.map((option) => (
             <div key={option.id} className="flex items-center gap-2">
               <Checkbox
                 id={option.id}

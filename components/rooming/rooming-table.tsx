@@ -88,7 +88,7 @@ export function RoomingTable({
           </tr>
         </thead>
         <tbody className="space-y-1">
-          {rooms.map((room: unknown) => (
+          {rooms.map((room) => (
             <tr key={room.id} className="border-b hover:bg-gray-50">
               <td className="py-2 font-medium">
                 {editingRoomId === room.id ? (

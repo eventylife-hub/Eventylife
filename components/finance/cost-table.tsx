@@ -96,7 +96,7 @@ export function CostTable({
             </tr>
           </thead>
           <tbody className="space-y-1">
-            {costs.map((cost: unknown) => (
+            {costs.map((cost) => (
               <tr key={cost.id} className="border-b hover:bg-gray-50">
                 <td className="py-2">{cost.title}</td>
                 <td className="py-2 text-right">

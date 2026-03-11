@@ -107,7 +107,7 @@ export function BreadcrumbJsonLd({
 }: {
   items: Array<{ name: string; url: string }>;
 }) {
-  const itemListElement = items.map((item: unknown, index: number) => ({
+  const itemListElement = items.map((item, index: number) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name,

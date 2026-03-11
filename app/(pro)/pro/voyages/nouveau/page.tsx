@@ -108,11 +108,11 @@ export default function CreateTravelPage() {
     destination: '',
     transportMode: 'BUS',
     capacity: 40,
-    rooms: unknown[],
-    program: unknown[],
-    photos: unknown[],
-    busStops: unknown[],
-    pricing: { basePrice: 0, inclusions: unknown[], exclusions: unknown[] },
+    rooms: [],
+    program: [],
+    photos: [],
+    busStops: [],
+    pricing: { basePrice: 0, inclusions: [], exclusions: [] },
   });
 
   const [saving, setSaving] = useState(false);
@@ -555,7 +555,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
           dayNumber: prev.program.length + 1,
           title: `Jour ${prev.program.length + 1}`,
           description: '',
-          activities: unknown[],
+          activities: [],
         },
       ],
     }));
@@ -632,7 +632,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
         dayNumber: i + 1,
         title: `Jour ${i + 1}`,
         description: '',
-        activities: unknown[],
+        activities: [],
       })) as DayProgram[];
       setFormData((prev: TravelFormData) => ({ ...prev, program: days }));
     }

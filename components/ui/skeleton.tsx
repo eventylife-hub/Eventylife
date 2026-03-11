@@ -21,7 +21,7 @@ export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
 
     return (
       <>
-        {skeletons.map((_: unknown, i: number) => (
+        {skeletons.map((_, i: number) => (
           <div
             key={i}
             ref={i === skeletons.length - 1 ? ref : undefined}
@@ -56,7 +56,7 @@ interface SkeletonListProps {
 export function SkeletonList({ count = 3, height = '100px' }: SkeletonListProps) {
   return (
     <div className="space-y-4">
-      {Array.from({ length: count }).map((_: unknown, i: number) => (
+      {Array.from({ length: count }).map((_, i: number) => (
         <div key={i} className="space-y-2">
           <Skeleton height="1rem" width="60%" />
           <Skeleton height={height} />
@@ -97,7 +97,7 @@ export function SkeletonGrid({ columns = 3, count = 6 }: SkeletonGridProps) {
 
   return (
     <div className={`grid ${gridClass} ${mdGridClass} gap-4`}>
-      {Array.from({ length: count }).map((_: unknown, i: number) => (
+      {Array.from({ length: count }).map((_, i: number) => (
         <div key={i} className="space-y-2">
           <Skeleton height="200px" width="100%" />
           <Skeleton height="1rem" width="80%" />

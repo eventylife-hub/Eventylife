@@ -36,7 +36,7 @@ export default function ProDashboard() {
     occupancyRate: 0,
     averageRating: 0,
     totalRevenue: 0,
-    recentActivity: unknown[],
+    recentActivity: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

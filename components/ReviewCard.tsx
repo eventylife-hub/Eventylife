@@ -30,7 +30,7 @@ export function ReviewCard({
   const renderStars = (rating: number) => {
     return (
       <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((star: unknown) => (
+        {[1, 2, 3, 4, 5].map((star) => (
           <span
             key={star}
             className={`text-xl ${

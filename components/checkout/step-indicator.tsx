@@ -19,7 +19,7 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
 
   return (
     <div className="flex items-center justify-between mb-8">
-      {steps.map((step: unknown, i: number) => (
+      {steps.map((step, i: number) => (
         <div key={step.number} className="flex items-center flex-1">
           <div className="flex flex-col items-center">
             <div

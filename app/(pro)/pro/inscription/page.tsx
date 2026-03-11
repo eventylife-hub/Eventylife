@@ -89,7 +89,7 @@ export default function InscriptionPage() {
     email: '',
     phone: '',
     zone: '',
-    skills: unknown[],
+    skills: [],
     description: '',
     acceptCharte: false,
     acceptCGV: false,

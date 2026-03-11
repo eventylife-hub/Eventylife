@@ -100,7 +100,7 @@ export function FileUpload({
   const uploadFile = async (file: File, fileId: string) => {
     try {
       setFiles((prev) =>
-        prev.map((f: unknown) =>
+        prev.map((f) =>
           f.id === fileId ? { ...f, status: 'uploading' as const } : f
         )
       );
@@ -145,7 +145,7 @@ export function FileUpload({
       }
 
       setFiles((prev) =>
-        prev.map((f: unknown) =>
+        prev.map((f) =>
           f.id === fileId ? { ...f, status: 'success' as const, progress: 100 } : f
         )
       );
@@ -155,7 +155,7 @@ export function FileUpload({
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erreur inconnue';
       setFiles((prev) =>
-        prev.map((f: unknown) =>
+        prev.map((f) =>
           f.id === fileId ? { ...f, status: 'error' as const, error: message } : f
         )
       );
@@ -191,7 +191,7 @@ export function FileUpload({
   };
 
   const removeFile = (fileId: string) => {
-    setFiles((prev) => prev.filter((f: unknown) => f.id !== fileId));
+    setFiles((prev) => prev.filter((f) => f.id !== fileId));
   };
 
   return (
@@ -231,7 +231,7 @@ export function FileUpload({
       {/* Liste des fichiers */}
       {files.length > 0 && (
         <div className="space-y-2">
-          {files.map((file: unknown) => (
+          {files.map((file) => (
             <div
               key={file.id}
               className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200"

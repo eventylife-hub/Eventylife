@@ -52,7 +52,7 @@ export default function ClientDashboardPage() {
           credentials: 'include',
         });
 
-        const bookingsData = bookingsRes.ok ? await bookingsRes.json() as unknown : { items: unknown[] };
+        const bookingsData = bookingsRes.ok ? await bookingsRes.json() as unknown : { items: [] };
 
         const nextTravel = bookingsData.items?.[0];
 
