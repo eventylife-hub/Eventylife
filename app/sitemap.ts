@@ -117,5 +117,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]);
 
-  return [...staticPages, ...travelPages, ...travelSubPages];
+  // Blog articles dynamiques
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const response = await fetch(`${baseUrl}/api/blog`, {
+      next: { revalidate: 3600 },
+    });
+    if (response.ok) {
+      const data = (await response.json()) as unknown;
+      const slugs = (data as Array<{ slug: string }>).map((a) => a.slug);
+      blogPages = slugs.map((slug) => ({
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      }));
+    }
+  } catch {
+    // Blog API non disponible
+  }
+
+  return [...staticPages, ...travelPages, ...travelSubPages, ...blogPages];
 }
