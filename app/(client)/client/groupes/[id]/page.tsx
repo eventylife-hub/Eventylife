@@ -124,7 +124,7 @@ export default function GroupDetailPage() {
           <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Détails du groupe</h1>
         </div>
         <div className="space-y-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>
@@ -224,7 +224,7 @@ export default function GroupDetailPage() {
           >
             <h2 className="text-lg font-bold mb-4" style={{ color: C.navy }}>Membres ({group.members.length})</h2>
             <div className="space-y-3">
-              {group.members.map((member: unknown) => (
+              {group.members.map((member) => (
                 <div key={member.id} className="py-2" style={{ borderBottom: `1px solid ${C.border}` }}>
                   <p className="font-semibold text-sm" style={{ color: C.navy }}>
                     {member.firstName} {member.lastName}
@@ -253,7 +253,7 @@ export default function GroupDetailPage() {
             {/* Messages */}
             <div className="flex-1 mb-4 space-y-4 max-h-96 overflow-y-auto">
               {group.messages && group.messages.length > 0 ? (
-                group.messages.map((message: unknown) => (
+                group.messages.map((message) => (
                   <div key={message.id} className="pb-3" style={{ borderBottom: `1px solid ${C.border}` }}>
                     <div className="flex justify-between items-start mb-1">
                       <p className="font-semibold text-sm" style={{ color: C.navy }}>{message.userName}</p>

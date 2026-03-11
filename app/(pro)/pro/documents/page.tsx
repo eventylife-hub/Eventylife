@@ -45,7 +45,7 @@ export default function ProDocumentsPage() {
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
       }
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setDocuments(data);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
@@ -148,8 +148,8 @@ export default function ProDocumentsPage() {
   ];
 
   const groupedDocs = {
-    signed: documents.filter((d: unknown) => d.type === 'CONTRAT'),
-    admin: documents.filter((d: unknown) =>
+    signed: documents.filter((d) => d.type === 'CONTRAT'),
+    admin: documents.filter((d) =>
       ['PIECE_IDENTITE', 'KBIS'].includes(d.type),
     ),
   };
@@ -196,7 +196,7 @@ export default function ProDocumentsPage() {
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {groupedDocs.signed.map((doc: unknown) => (
+                  {groupedDocs.signed.map((doc) => (
                     <div
                       key={doc.id}
                       className="pro-panel"
@@ -259,7 +259,7 @@ export default function ProDocumentsPage() {
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {groupedDocs.admin.map((doc: unknown) => (
+                  {groupedDocs.admin.map((doc) => (
                     <div
                       key={doc.id}
                       className="pro-panel"
@@ -311,7 +311,7 @@ export default function ProDocumentsPage() {
                 className="pro-input"
               >
                 <option value="">Sélectionnez un type</option>
-                {documentTypes.map((type: unknown) => (
+                {documentTypes.map((type) => (
                   <option key={type.id} value={type.id}>
                     {type.label}
                   </option>

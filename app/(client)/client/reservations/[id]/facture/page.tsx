@@ -66,7 +66,7 @@ export default function InvoicePage() {
         throw new Error('Réservation non trouvée');
       }
 
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setBooking(data.data);
       setError(null);
     } catch (err: unknown) {
@@ -108,7 +108,7 @@ export default function InvoicePage() {
       <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
         <h1 className="text-3xl font-bold mb-8" style={{ color: C.navy }}>Ma Facture</h1>
         <div className="space-y-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>

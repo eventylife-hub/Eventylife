@@ -75,7 +75,7 @@ export default function AdminVoyageDetailPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setTravel(data);
       } else {
         setError('Impossible de charger les détails du voyage');
@@ -143,7 +143,7 @@ export default function AdminVoyageDetailPage() {
         </div>
         <div className="h-12 bg-gray-200 rounded animate-pulse" />
         <div className="grid grid-cols-4 gap-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="h-32 bg-gray-100 rounded animate-pulse" />
           ))}
         </div>
@@ -227,7 +227,7 @@ export default function AdminVoyageDetailPage() {
         </div>
         <div className="admin-panel-body p-6">
           <div className="flex items-center justify-between">
-            {phases.map((phase: unknown, index: number) => {
+            {phases.map((phase, index) => {
               const isActive = currentPhaseIndex === index;
               const isCompleted = currentPhaseIndex > index;
               const phaseConfig = statusConfig[phase];
@@ -376,7 +376,7 @@ export default function AdminVoyageDetailPage() {
                       <div>
                         <label className="text-sm font-semibold text-gray-900 mb-3 block">Points d&apos;arrêt</label>
                         <div className="space-y-2">
-                          {travel.transport.stops.map((stop: unknown, idx: number) => (
+                          {travel.transport.stops.map((stop, idx) => (
                             <div key={stop.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
                               <span className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-semibold">
                                 {idx + 1}
@@ -403,7 +403,7 @@ export default function AdminVoyageDetailPage() {
                     <div>
                       <label className="text-sm font-semibold text-gray-900 mb-3 block">Hôtels et logements</label>
                       <div className="space-y-3">
-                        {travel.rooming.hotels.map((hotel: unknown) => (
+                        {travel.rooming.hotels.map((hotel) => (
                           <div key={hotel.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                             <div className="flex items-start justify-between">
                               <div>
@@ -465,7 +465,7 @@ export default function AdminVoyageDetailPage() {
               <div className="space-y-4">
                 {travel?.team && travel.team.length > 0 ? (
                   <div className="space-y-3">
-                    {travel.team.map((member: unknown) => (
+                    {travel.team.map((member) => (
                       <div key={member.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex items-start justify-between">
                         <div className="flex-1">
                           <p className="font-medium text-gray-900">{member.name}</p>
@@ -492,7 +492,7 @@ export default function AdminVoyageDetailPage() {
               <div className="space-y-4">
                 {travel?.auditLog && travel.auditLog.length > 0 ? (
                   <div className="space-y-2">
-                    {travel.auditLog.map((log: unknown, idx: number) => (
+                    {travel.auditLog.map((log, idx) => (
                       <div key={log.id} className="flex gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
                         <div className="flex-shrink-0">
                           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold">

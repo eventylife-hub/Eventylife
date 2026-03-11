@@ -113,7 +113,7 @@ export default function AvisPage() {
   const renderStars = (rating: number, interactive = false, onChange?: (r: number) => void) => {
     return (
       <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((star: unknown) => (
+        {[1, 2, 3, 4, 5].map((star) => (
           interactive ? (
             <button
               key={star}
@@ -156,7 +156,7 @@ export default function AvisPage() {
           <p className="text-sm mt-2" style={{ color: C.muted }}>Partagez votre expérience des voyages</p>
         </div>
         <div className="space-y-4">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="h-24 rounded-2xl skeleton" />
           ))}
         </div>
@@ -213,7 +213,7 @@ export default function AvisPage() {
               >
                 <option value="">-- Choisir un voyage --</option>
                 {completedTravels.length > 0 ? (
-                  completedTravels.map((travel: unknown) => (
+                  completedTravels.map((travel) => (
                     <option key={travel.id} value={travel.id}>
                       {travel.title} — {travel.destinationCity}
                     </option>
@@ -323,7 +323,7 @@ export default function AvisPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {reviews.map((review: unknown) => (
+          {reviews.map((review) => (
             <div key={review.id} className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
               <div className="flex justify-between items-start mb-4">
                 <div>

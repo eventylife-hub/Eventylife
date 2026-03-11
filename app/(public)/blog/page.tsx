@@ -106,7 +106,7 @@ export default function BlogPage() {
         <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Blog',href:'/blog'}]} />
         {/* Categories */}
         <div className="flex flex-wrap gap-2 mb-10 justify-center">
-          {categories.map((cat: unknown) => (
+          {categories.map((cat) => (
             <button
               key={cat}
               style={{
@@ -140,7 +140,7 @@ export default function BlogPage() {
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map((article: unknown) => (
+          {articles.map((article) => (
             <article
               key={article.id}
               style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease' }}

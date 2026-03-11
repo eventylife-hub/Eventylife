@@ -65,7 +65,7 @@ export default function TravelReviewsPage() {
   const renderStars = (rating: number) => {
     return (
       <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((star: unknown) => (
+        {[1, 2, 3, 4, 5].map((star) => (
           <span
             key={star}
             className={`text-xl ${
@@ -95,11 +95,11 @@ export default function TravelReviewsPage() {
       : 0;
 
   const ratingDistribution = {
-    5: reviews.filter((r: unknown) => r.rating === 5).length,
-    4: reviews.filter((r: unknown) => r.rating === 4).length,
-    3: reviews.filter((r: unknown) => r.rating === 3).length,
-    2: reviews.filter((r: unknown) => r.rating === 2).length,
-    1: reviews.filter((r: unknown) => r.rating === 1).length,
+    5: reviews.filter((r) => r.rating === 5).length,
+    4: reviews.filter((r) => r.rating === 4).length,
+    3: reviews.filter((r) => r.rating === 3).length,
+    2: reviews.filter((r) => r.rating === 2).length,
+    1: reviews.filter((r) => r.rating === 1).length,
   };
 
   if (loading) {
@@ -116,7 +116,7 @@ export default function TravelReviewsPage() {
           ← Retour au voyage
         </Link>
         <div className="space-y-4">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div
               key={i}
               className="h-24 rounded-lg animate-pulse"
@@ -211,7 +211,7 @@ export default function TravelReviewsPage() {
               </div>
 
               <div className="flex-1 space-y-2 w-full">
-                {[5, 4, 3, 2, 1].map((rating: unknown) => (
+                {[5, 4, 3, 2, 1].map((rating) => (
                   <div key={rating} className="flex items-center gap-3">
                     <span className="text-sm font-medium w-12" style={{ color: C.muted }}>
                       {rating} ★
@@ -260,7 +260,7 @@ export default function TravelReviewsPage() {
 
           {/* Liste des avis */}
           <div className="space-y-4">
-            {sortedReviews.map((review: unknown) => (
+            {sortedReviews.map((review) => (
               <div
                 key={review.id}
                 className="rounded-lg p-6"

@@ -91,7 +91,7 @@ export default function AssurancePage() {
           </p>
         </div>
         <div className="space-y-4">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="h-32 rounded-2xl skeleton" />
           ))}
         </div>
@@ -169,7 +169,7 @@ export default function AssurancePage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {insurances.map((insurance: unknown) => {
+          {insurances.map((insurance) => {
             const statusBadgeStyle = {
               background: insurance?.status === 'CONFIRMED' ? C.forestBg : C.goldSoft,
               color: insurance?.status === 'CONFIRMED' ? C.forest : '#92400e',

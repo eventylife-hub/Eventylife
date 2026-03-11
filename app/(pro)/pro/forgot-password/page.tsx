@@ -22,7 +22,7 @@ export default function ProForgotPasswordPage() {
       });
 
       if (!response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         throw new Error(data.message || 'Erreur lors de l\'envoi');
       }
 

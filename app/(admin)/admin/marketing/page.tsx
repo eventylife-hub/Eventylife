@@ -58,7 +58,7 @@ export default function AdminMarketingPage() {
         credentials: 'include',
       });
       if (!response.ok) throw new Error('Erreur lors du chargement des données marketing');
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setStats(data);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
@@ -189,7 +189,7 @@ export default function AdminMarketingPage() {
           <Skeleton className="h-5 w-96 mt-2" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <Card key={i}>
               <CardContent className="p-6 h-32 bg-gray-100 animate-pulse rounded" />
             </Card>
@@ -325,7 +325,7 @@ export default function AdminMarketingPage() {
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-3">
-                {stats.leadSources.map((source: unknown, index: number) => (
+                {stats.leadSources.map((source, index) => (
                   <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div className="flex-1">
                       <div className="font-medium text-gray-900">{source.name}</div>

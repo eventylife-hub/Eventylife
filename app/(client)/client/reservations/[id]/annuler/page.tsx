@@ -69,7 +69,7 @@ export default function CancelReservationPage() {
         throw new Error('Réservation non trouvée');
       }
 
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setBooking(data.data);
 
       // Appeler l'endpoint pour calculer le remboursement

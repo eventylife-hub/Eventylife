@@ -9,7 +9,7 @@ export default function CheckoutLoading() {
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Étapes skeleton */}
       <div className="flex items-center justify-between">
-        {Array.from({ length: 4 }).map((_: unknown, i: number) => (
+        {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="flex items-center gap-2">
             <Skeleton className="h-8 w-8 rounded-full" />
             <Skeleton className="h-4 w-20" />

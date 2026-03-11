@@ -85,7 +85,7 @@ export default function CheckoutStep1Page() {
 
   const handleOccupancyChange = (roomTypeId: string, occupancy: number) => {
     setSelections(
-      selections.map((room: unknown) => {
+      selections.map((room) => {
         if (room.roomTypeId === roomTypeId) {
           // Calculer le prix par personne (INVARIANT 2)
           const perPersonTTC = Math.floor(room.priceTotalTTC / occupancy);
@@ -109,7 +109,7 @@ export default function CheckoutStep1Page() {
       setError(null);
 
       // Valider qu'au moins une chambre est sélectionnée
-      const selectedRooms = selections.filter((r: unknown) => r.occupancyCount > 0);
+      const selectedRooms = selections.filter((r) => r.occupancyCount > 0);
       if (selectedRooms.length === 0) {
         setError('Veuillez sélectionner au moins une chambre');
         setLoading(false);
@@ -118,7 +118,7 @@ export default function CheckoutStep1Page() {
 
       // Appeler l'API
       await api.post(`/checkout/${bookingGroupId}/rooms`, {
-        rooms: selectedRooms.map((r: unknown) => ({
+        rooms: selectedRooms.map((r) => ({
           roomTypeId: r.roomTypeId,
           occupancyCount: r.occupancyCount,
         })),
@@ -254,7 +254,7 @@ export default function CheckoutStep1Page() {
               </button>
             </div>
           ) : (
-            selections.map((room: unknown) => (
+            selections.map((room) => (
               <div
                 key={room.roomTypeId}
                 style={{
@@ -298,7 +298,7 @@ export default function CheckoutStep1Page() {
                     }}
                   >
                     <option value="0">Pas cette chambre</option>
-                    {Array.from({ length: room.capacity }, (_, i) => i + 1).map((n: unknown) => (
+                    {Array.from({ length: room.capacity }, (_, i) => i + 1).map((n) => (
                       <option key={n} value={n}>
                         {n} personne{n > 1 ? 's' : ''}
                       </option>

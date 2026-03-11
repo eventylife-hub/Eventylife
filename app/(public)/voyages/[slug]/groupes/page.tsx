@@ -82,7 +82,7 @@ export default function GroupesPage() {
             Groupes de voyage
           </h1>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_: unknown, i: number) => (
+            {[...Array(6)].map((_, i) => (
               <Skeleton
                 key={i}
                 className="h-48 rounded-lg"
@@ -203,7 +203,7 @@ export default function GroupesPage() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {groupes.map((groupe: unknown) => (
+          {groupes.map((groupe) => (
             <GroupCard key={groupe.id} groupe={groupe} />
           ))}
         </div>

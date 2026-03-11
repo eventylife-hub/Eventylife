@@ -65,7 +65,7 @@ export default function TransportPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = (await response.json() as unknown) as unknown;
+          const data = await response.json();
           setTrips(data.data || []);
         } else {
           setError('Erreur lors du chargement des transports');
@@ -88,7 +88,7 @@ export default function TransportPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = (await response.json() as unknown) as unknown;
+          const data = await response.json();
           setStats(data);
         }
       } catch (err: unknown) {
@@ -298,7 +298,7 @@ export default function TransportPage() {
         </div>
       ) : (
         <div className="admin-kpi-grid">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="admin-kpi-card p-6 h-32 bg-gray-100 animate-pulse rounded" />
           ))}
         </div>
@@ -323,7 +323,7 @@ export default function TransportPage() {
                 Statut du manifeste
               </label>
               <div className="flex gap-2">
-                {statuses.map((s: unknown) => (
+                {statuses.map((s) => (
                   <button
                     key={s.value}
                     onClick={() => setStatusFilter(s.value)}
@@ -344,7 +344,7 @@ export default function TransportPage() {
                 Mode de transport
               </label>
               <div className="flex gap-2">
-                {modes.map((m: unknown) => (
+                {modes.map((m) => (
                   <button
                     key={m.value}
                     onClick={() => setModeFilter(m.value)}

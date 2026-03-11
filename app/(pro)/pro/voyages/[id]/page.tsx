@@ -287,7 +287,7 @@ export default function VoyageDashboardPage() {
           <Skeleton className="h-12 w-96" />
           <Skeleton className="h-32 w-full" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-            {[...Array(4)].map((_: unknown, i: number) => (
+            {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-24 w-full" />
             ))}
           </div>
@@ -390,7 +390,7 @@ export default function VoyageDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
-              {PHASES.map((phase: unknown, idx: number) => (
+              {PHASES.map((phase, idx) => (
                 <div key={phase.key} className="flex items-center flex-1">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
@@ -423,7 +423,7 @@ export default function VoyageDashboardPage() {
         <div>
           <h2 className="text-xl font-bold text-slate-900 mb-4">Accès rapide</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {QUICK_LINKS.map((link: unknown) => {
+            {QUICK_LINKS.map((link) => {
               const Icon = link.icon;
               const href = link.href.replace('[id]', travelId);
               return (
@@ -449,7 +449,7 @@ export default function VoyageDashboardPage() {
           <CardContent>
             {dashboard.recentActivity && dashboard.recentActivity.length > 0 ? (
               <div className="space-y-4">
-                {dashboard.recentActivity.slice(0, 5).map((activity: unknown) => (
+                {dashboard.recentActivity.slice(0, 5).map((activity) => (
                   <div key={activity.id} className="flex items-start gap-3 border-l-2 border-indigo-200 pl-4 py-2">
                     <Activity className="w-4 h-4 text-indigo-600 mt-1 flex-shrink-0" />
                     <div className="flex-1">

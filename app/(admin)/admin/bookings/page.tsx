@@ -59,7 +59,7 @@ export default function AdminBookingsPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setBookings(data.data || []);
       } else {
         setError('Erreur lors du chargement des réservations');

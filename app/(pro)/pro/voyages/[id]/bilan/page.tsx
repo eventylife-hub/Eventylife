@@ -31,7 +31,7 @@ export default function TravelBilanPage() {
         throw new Error('Erreur lors du chargement');
       }
 
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setDashboard(data.data);
       setError(null);
     } catch (err: unknown) {

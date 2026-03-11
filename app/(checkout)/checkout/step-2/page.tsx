@@ -116,7 +116,7 @@ export default function CheckoutStep2Page() {
     value: string | boolean,
   ) => {
     setParticipants(
-      participants.map((p: unknown, i: number) => {
+      participants.map((p, i) => {
         if (i === participantIndex) {
           return { ...p, [field]: value };
         }
@@ -131,7 +131,7 @@ export default function CheckoutStep2Page() {
       setError(null);
 
       // Valider les participants
-      const emptyParticipants = participants.filter((p: unknown) => !p.firstName || !p.lastName || !p.email || !p.phone,
+      const emptyParticipants = participants.filter((p) => !p.firstName || !p.lastName || !p.email || !p.phone,
       );
 
       if (emptyParticipants.length > 0) {
@@ -159,8 +159,8 @@ export default function CheckoutStep2Page() {
   };
 
   // Regrouper les participants par chambre pour l'affichage
-  const participantsByRoom = rooms.map((room: unknown) => {
-    const roomParticipants = participants.filter((p: unknown) => p.roomBookingId === room.roomTypeId,
+  const participantsByRoom = rooms.map((room) => {
+    const roomParticipants = participants.filter((p) => p.roomBookingId === room.roomTypeId,
     );
     return { room, participants: roomParticipants };
   });
@@ -247,13 +247,13 @@ export default function CheckoutStep2Page() {
                 {room.label} — {formatPrice(room.priceTotalTTC)}
               </h2>
 
-              {roomParticipants.map((participant: unknown, personIndex: number) => {
+              {roomParticipants.map((participant, personIndex) => {
                 // Trouver l'index global du participant
                 const globalIndex = participants.findIndex(
                   (p) =>
                     p.roomBookingId === room.roomTypeId &&
                     participants
-                      .filter((pp: unknown) => pp.roomBookingId === room.roomTypeId)
+                      .filter((pp) => pp.roomBookingId === room.roomTypeId)
                       .indexOf(p) === personIndex,
                 );
 
@@ -429,7 +429,7 @@ export default function CheckoutStep2Page() {
                         <option value="">
                           {loadingBusStops ? 'Chargement...' : 'Sélectionner un point'}
                         </option>
-                        {busStops.map((stop: unknown) => (
+                        {busStops.map((stop) => (
                           <option key={stop.id} value={stop.id}>
                             {stop.name} ({stop.location})
                           </option>

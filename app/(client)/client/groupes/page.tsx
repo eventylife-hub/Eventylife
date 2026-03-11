@@ -64,7 +64,7 @@ export default function GroupesPage() {
           <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos groupes de voyage</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="h-32 rounded-2xl skeleton" />
           ))}
         </div>
@@ -126,7 +126,7 @@ export default function GroupesPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {groups.map((group: unknown) => (
+          {groups.map((group) => (
             <Link key={group.id} href={`/client/groupes/${group.id}`}>
               <div className="rounded-2xl p-6 h-full transition-all duration-300" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
                 onMouseEnter={(e) => {

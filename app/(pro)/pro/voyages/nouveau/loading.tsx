@@ -6,7 +6,7 @@ export default function Loading() {
     <div className="space-y-6 p-6">
       <Skeleton className="h-10 w-64" />
       <div className="space-y-4">
-        {[...Array(7)].map((_: unknown, i: number) => (
+        {[...Array(7)].map((_, i) => (
           <Skeleton key={i} className="h-12" />
         ))}
         <Skeleton className="h-10 w-40" />

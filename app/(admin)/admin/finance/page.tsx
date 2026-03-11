@@ -193,7 +193,7 @@ export default function FinancePage() {
       {/* KPIs */}
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="admin-kpi-card" style={{ background: 'var(--admin-surface-alt)', padding: '16px', borderRadius: '10px', height: '120px', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
           ))}
         </div>
@@ -238,9 +238,9 @@ export default function FinancePage() {
           </div>
           <div className="admin-panel-body">
             <div className="h-64 flex items-end justify-around gap-2">
-              {stats.monthlyData.map((item: unknown, index: number) => {
+              {stats.monthlyData.map((item, index) => {
                 const maxRevenue = Math.max(
-                  ...stats.monthlyData.map((s: unknown) => s.revenueCents),
+                  ...stats.monthlyData.map((s) => s.revenueCents),
                 );
                 return (
                   <div
@@ -292,7 +292,7 @@ export default function FinancePage() {
               </div>
             ) : (
               <div style={{ space: '8px' }}>
-                {payments.map((payment: unknown) => (
+                {payments.map((payment) => (
                   <div
                     key={payment.id}
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid var(--admin-border)' }}
@@ -345,7 +345,7 @@ export default function FinancePage() {
               </div>
             ) : (
               <div style={{ space: '8px' }}>
-                {refunds.map((refund: unknown) => (
+                {refunds.map((refund) => (
                   <div
                     key={refund.id}
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid var(--admin-border)' }}

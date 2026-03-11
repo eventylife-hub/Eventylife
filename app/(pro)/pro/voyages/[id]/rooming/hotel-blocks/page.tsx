@@ -112,7 +112,7 @@ export default function HotelBlocksPage() {
     );
   }
 
-  const expiringBlocks = blocks.filter((b: unknown) => ((b.expiresIn as number) || 0) <= 3);
+  const expiringBlocks = blocks.filter((b) => ((b.expiresIn as number) || 0) <= 3);
 
   return (
     <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>
@@ -153,7 +153,7 @@ export default function HotelBlocksPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Cartes blocs */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem' }}>
-            {blocks.map((block: unknown) => (
+            {blocks.map((block) => (
               <div key={block.id as string}>
                 <HotelBlockCard
                   block={block as unknown as unknown}

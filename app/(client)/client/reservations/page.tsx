@@ -89,7 +89,7 @@ export default function ReservationsPage() {
   const filteredBookings =
     filter === 'all'
       ? bookings
-      : bookings.filter((b: unknown) => {
+      : bookings.filter((b) => {
           if (filter === 'confirmed') return b.status === 'CONFIRMED';
           if (filter === 'pending') return ['HELD', 'PARTIALLY_PAID'].includes(b.status);
           if (filter === 'cancelled') return b.status === 'CANCELED';
@@ -140,7 +140,7 @@ export default function ReservationsPage() {
           { value: 'confirmed', label: 'Confirmées' },
           { value: 'pending', label: 'En attente' },
           { value: 'cancelled', label: 'Annulées' },
-        ].map((f: unknown) => (
+        ].map((f) => (
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
@@ -193,11 +193,11 @@ export default function ReservationsPage() {
           {/* Liste des réservations */}
           <div className="space-y-4">
             {loading && bookings.length === 0 ? (
-              [...Array(3)].map((_: unknown, i: number) => (
+              [...Array(3)].map((_, i) => (
                 <div key={i} className="h-32 rounded-2xl skeleton" />
               ))
             ) : (
-              filteredBookings.map((booking: unknown) => (
+              filteredBookings.map((booking) => (
                 <Link
                   key={booking.id}
                   href={`/client/reservations/${booking.id}`}

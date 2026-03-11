@@ -56,7 +56,7 @@ export default function VoyagesPage() {
 
       const response = await fetch(endpoint, { credentials: 'include' });
       if (response.ok) {
-        let data = (await response.json() as unknown) as unknown;
+        let data = await response.json();
         data = data.data || data;
 
         // Filter by search query if present
@@ -145,7 +145,7 @@ export default function VoyagesPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        setTravels(travels.filter((t: unknown) => t.id !== selectedTravel.id));
+        setTravels(travels.filter((t) => t.id !== selectedTravel.id));
         setShowApprovalModal(false);
         setSelectedTravel(null);
       }
@@ -166,7 +166,7 @@ export default function VoyagesPage() {
       });
 
       if (response.ok) {
-        setTravels(travels.filter((t: unknown) => t.id !== selectedTravel.id));
+        setTravels(travels.filter((t) => t.id !== selectedTravel.id));
         setShowApprovalModal(false);
         setSelectedTravel(null);
       }
@@ -253,18 +253,18 @@ export default function VoyagesPage() {
         <div className="admin-panel-body p-6 pt-0">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
-              {statuses.map((status: unknown) => (
+              {statuses.map((status) => (
                 <TabsTrigger key={status.value} value={status.value}>
                   {status.label}
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            {statuses.map((status: unknown) => (
+            {statuses.map((status) => (
               <TabsContent key={status.value} value={status.value}>
                 {loading ? (
                   <div className="space-y-3">
-                    {[...Array(5)].map((_: unknown, i: number) => (
+                    {[...Array(5)].map((_, i) => (
                       <div key={i} className="h-12 bg-gray-100 rounded animate-pulse" />
                     ))}
                   </div>

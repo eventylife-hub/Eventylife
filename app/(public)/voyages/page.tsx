@@ -64,7 +64,7 @@ function VoyagesContent() {
         setError(null);
         const response = await apiClient.get<any>('/travels');
         const travelList = Array.isArray(response) ? response : (response.data || []);
-        const mappedTravels = travelList.map((travel: unknown) => ({
+        const mappedTravels = travelList.map((travel) => ({
           id: travel.id,
           slug: travel.slug,
           title: travel.title,
@@ -255,7 +255,7 @@ function VoyagesContent() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTravels.map((voyage: unknown) => {
+          {filteredTravels.map((voyage) => {
             const available = voyage.capacity - voyage.currentBookings;
 
             return (

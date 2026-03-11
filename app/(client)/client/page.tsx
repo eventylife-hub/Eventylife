@@ -122,7 +122,7 @@ export default function ClientDashboardPage() {
       <div className="space-y-6 animate-fade-in">
         <div className="h-28 rounded-2xl skeleton" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="h-24 rounded-2xl skeleton" />
           ))}
         </div>
@@ -157,7 +157,7 @@ export default function ClientDashboardPage() {
           { label: 'Confirmées', value: data.stats.confirmedBookings || 0, color: C.forest },
           { label: 'En attente', value: data.stats.pendingBookings || 0, color: '#92400e' },
           { label: 'Montant dépensé', value: formatPrice(data.stats.totalAmountSpentCents || 0), color: C.terra },
-        ].map((stat: unknown, i: number) => (
+        ].map((stat, i) => (
           <div
             key={i}
             className="p-5 rounded-2xl transition-all duration-300"
@@ -253,7 +253,7 @@ export default function ClientDashboardPage() {
           { href: '/client/reservations', icon: '📋', title: 'Mes réservations', desc: 'Voir toutes vos réservations', accent: C.terra },
           { href: '/client/groupes', icon: '👥', title: 'Mes groupes', desc: 'Gérez vos groupes de voyage', accent: C.forest },
           { href: '/client/profil', icon: '⚙️', title: 'Mon profil', desc: 'Modifiez vos informations', accent: C.gold },
-        ].map((action: unknown, i: number) => (
+        ].map((action, i) => (
           <Link key={i} href={action.href} className="group">
             <div
               className="p-6 rounded-2xl h-full transition-all duration-300"

@@ -46,7 +46,7 @@ export default function BusStopsPage() {
   }, [activeFilter]);
 
   const filteredStops = activeFilter
-    ? busStops.filter((s: unknown) => s.type === activeFilter)
+    ? busStops.filter((s) => s.type === activeFilter)
     : busStops;
 
   const OCEAN = 'var(--pro-ocean)';
@@ -120,7 +120,7 @@ export default function BusStopsPage() {
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_: unknown, idx: number) => (
+              {[...Array(6)].map((_, idx) => (
                 <div key={idx} className="bg-white rounded-lg border border-slate-200 overflow-hidden">
                   <Skeleton className="h-40" />
                   <div className="p-6 space-y-4">
@@ -203,7 +203,7 @@ export default function BusStopsPage() {
                 </Link>
               </div>
             ) : (
-              filteredStops.map((stop: unknown) => (
+              filteredStops.map((stop) => (
                 <Link
                   key={stop.id}
                   href={`/pro/arrets/${stop.id}`}
@@ -295,19 +295,19 @@ export default function BusStopsPage() {
               </div>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
                 <p className="pro-kpi-value" style={{ color: 'var(--pro-mint)' }}>
-                  {filteredStops.filter((s: unknown) => s.status === 'VALIDATED').length}
+                  {filteredStops.filter((s) => s.status === 'VALIDATED').length}
                 </p>
                 <p className="pro-kpi-label">Validés</p>
               </div>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
                 <p className="pro-kpi-value" style={{ color: 'var(--pro-ocean)' }}>
-                  {filteredStops.filter((s: unknown) => s.status === 'DRAFT').length}
+                  {filteredStops.filter((s) => s.status === 'DRAFT').length}
                 </p>
                 <p className="pro-kpi-label">Brouillons</p>
               </div>
               <div className="pro-kpi-card" style={{ textAlign: 'center' }}>
                 <p className="pro-kpi-value" style={{ color: 'var(--pro-sun)' }}>
-                  {filteredStops.filter((s: unknown) => s.status === 'CHANGES_REQUESTED').length}
+                  {filteredStops.filter((s) => s.status === 'CHANGES_REQUESTED').length}
                 </p>
                 <p className="pro-kpi-label">À modifier</p>
               </div>

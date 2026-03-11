@@ -216,7 +216,7 @@ export default function ProPublicPage() {
         <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, fontFamily: 'Playfair, serif' }}>Voyages au départ de {pro.departureZone}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pro.travels.map((voyage: unknown) => (
+          {pro.travels.map((voyage) => (
             <div key={voyage.id} style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
               <CardContent className="p-6 flex flex-col h-full">
                 <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.goldSoft, color: C.navy, padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>

@@ -48,7 +48,7 @@ export default function AuditPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = (await response.json() as unknown) as unknown;
+          const data = await response.json();
           setLogs(data.data || []);
         } else {
           setError('Erreur lors du chargement des logs d\'audit');

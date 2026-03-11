@@ -72,7 +72,7 @@ export default function AdminAlertesPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setAlerts(data.data || []);
         setUnreadCount(data.data?.filter((a: Alert) => !a.resolved).length || 0);
       }
@@ -119,7 +119,7 @@ export default function AdminAlertesPage() {
   const toggleAlertSelection = (alertId: string) => {
     setSelectedAlerts((prev) =>
       prev.includes(alertId)
-        ? prev.filter((id: unknown) => id !== alertId)
+        ? prev.filter((id) => id !== alertId)
         : [...prev, alertId]
     );
   };
@@ -128,7 +128,7 @@ export default function AdminAlertesPage() {
     setSelectedAlerts(
       selectedAlerts.length === alerts.length
         ? []
-        : alerts.map((a: unknown) => a.id)
+        : alerts.map((a) => a.id)
     );
   };
 
@@ -318,7 +318,7 @@ export default function AdminAlertesPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              {alerts.map((alert: unknown, idx: number) => {
+              {alerts.map((alert, idx) => {
                 const config = alertConfig[alert.level];
                 return (
                   <div

@@ -112,7 +112,7 @@ export default function ExportsPage() {
       });
 
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setExports([data, ...exports]);
         setIsDialogOpen(false);
         setMotif('');
@@ -152,8 +152,8 @@ export default function ExportsPage() {
       });
 
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
-        setExports(exports.map((e: unknown) => (e.id === exportId ? data : e)));
+        const data = await response.json();
+        setExports(exports.map((e) => (e.id === exportId ? data : e)));
       }
     } catch (_error: unknown) {
       setToastMessage('Erreur lors de la régénération');
@@ -278,7 +278,7 @@ export default function ExportsPage() {
         </div>
         <div className="admin-panel-body">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {exportTypes.map((type: unknown) => (
+            {exportTypes.map((type) => (
               <button
                 key={type.value}
                 onClick={() => handleQuickExport(type.value as ExportType, 'CSV')}
@@ -328,7 +328,7 @@ export default function ExportsPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedType((e.target as HTMLInputElement).value as ExportType)}
                   className="admin-input"
                 >
-                  {exportTypes.map((type: unknown) => (
+                  {exportTypes.map((type) => (
                     <option key={type.value} value={type.value}>
                       {type.label}
                     </option>
@@ -346,7 +346,7 @@ export default function ExportsPage() {
                   className="admin-input"
                 >
                   <option value="">Sélectionner un voyage</option>
-                  {trips.map((trip: unknown) => (
+                  {trips.map((trip) => (
                     <option key={trip.id} value={trip.id}>
                       {trip.title}
                     </option>
@@ -363,7 +363,7 @@ export default function ExportsPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedFormat((e.target as HTMLInputElement).value as 'CSV' | 'PDF')}
                   className="admin-input"
                 >
-                  {allowedFormats.map((fmt: unknown) => (
+                  {allowedFormats.map((fmt) => (
                     <option key={fmt} value={fmt}>
                       {fmt}
                     </option>

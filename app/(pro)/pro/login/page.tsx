@@ -28,7 +28,7 @@ export default function ProLoginPage() {
       })
 
       if (!response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         throw new Error(data.message || 'Erreur lors de la connexion')
       }
 

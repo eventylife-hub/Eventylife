@@ -16,7 +16,7 @@ export default function BookingsLoading() {
       {/* Formulaire de recherche skeleton */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {Array.from({ length: 4 }).map((_: unknown, i: number) => (
+          {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="space-y-2">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-10 w-full rounded-lg" />
@@ -36,7 +36,7 @@ export default function BookingsLoading() {
           <Skeleton className="h-8 w-20" />
           <Skeleton className="h-8 w-20" />
         </div>
-        {Array.from({ length: 10 }).map((_: unknown, i: number) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="flex items-center gap-3 py-2 border-t">
             <Skeleton className="h-4 w-24" />
             <Skeleton className="h-4 flex-1" />

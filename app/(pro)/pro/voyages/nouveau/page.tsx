@@ -132,14 +132,14 @@ export default function CreateTravelPage() {
       });
 
       if (response.ok) {
-        const travel = (await response.json() as unknown) as unknown;
+        const travel = await response.json();
         setSaveMessage('Brouillon sauvegardé avec succès !');
         // Rediriger vers la page d'édition après 1.5s
         setTimeout(() => {
           router.push(`/pro/voyages/${travel.data?.id || travel.id}`);
         }, 1500);
       } else {
-        const error = (await response.json() as unknown) as unknown;.catch(() => null);
+        const error = await response.json();.catch(() => null);
         setSaveMessage(
           error?.message || 'Erreur lors de la sauvegarde. Veuillez réessayer.',
         );
@@ -164,7 +164,7 @@ export default function CreateTravelPage() {
         });
 
         if (response.ok) {
-          const travel = (await response.json() as unknown) as unknown;
+          const travel = await response.json();
           router.push(`/pro/voyages/${travel.id}`);
         }
       } catch (error: unknown) {
@@ -187,7 +187,7 @@ export default function CreateTravelPage() {
         {/* Step Indicator */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            {WIZARD_STEPS.map((step: unknown, idx: number) => (
+            {WIZARD_STEPS.map((step, idx) => (
               <div key={step.number} className="flex items-center flex-1">
                 <button
                   onClick={() => setCurrentStep(step.number)}
@@ -209,7 +209,7 @@ export default function CreateTravelPage() {
           </div>
 
           <div className="grid grid-cols-7 gap-2">
-            {WIZARD_STEPS.map((step: unknown) => (
+            {WIZARD_STEPS.map((step) => (
               <div key={step.number} className="text-center">
                 <p className="text-xs font-medium text-slate-700">{step.label}</p>
               </div>
@@ -459,7 +459,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'type', (e.target as HTMLInputElement).value)}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
                 >
-                  {ROOM_TYPES.map((rt: unknown) => (
+                  {ROOM_TYPES.map((rt) => (
                     <option key={rt.value} value={rt.value}>{rt.label}</option>
                   ))}
                 </select>
@@ -813,8 +813,8 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
     fetchStops();
   }, []);
 
-  const pickupStops = myStops.filter((s: unknown) => s.type === 'PICKUP_DEPARTURE');
-  const dropoffStops = myStops.filter((s: unknown) => s.type === 'DROPOFF_ARRIVAL');
+  const pickupStops = myStops.filter((s) => s.type === 'PICKUP_DEPARTURE');
+  const dropoffStops = myStops.filter((s) => s.type === 'DROPOFF_ARRIVAL');
 
   const selectedPickupIds = new Set(
     formData.busStops.filter((bs: BusStop) => bs.type === 'PICKUP_DEPARTURE').map((bs: BusStop) => bs.stopId),
@@ -834,8 +834,8 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
   };
 
   const StopList = ({ stops, type, selectedIds }: { stops: BusStopFromAPI[]; type: string; selectedIds: Set<string> }) => {
-    const validated = stops.filter((s: unknown) => s.status === 'VALIDATED');
-    const others = stops.filter((s: unknown) => s.status !== 'VALIDATED');
+    const validated = stops.filter((s) => s.status === 'VALIDATED');
+    const others = stops.filter((s) => s.status !== 'VALIDATED');
 
     if (stops.length === 0) {
       return (
@@ -854,7 +854,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
 
     return (
       <div className="space-y-2">
-        {validated.map((stop: unknown) => (
+        {validated.map((stop) => (
           <label
             key={stop.id}
             className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
@@ -880,7 +880,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
         {others.length > 0 && (
           <div className="pt-2 border-t border-slate-200">
             <p className="text-xs text-slate-400 mb-2">En attente de validation ({others.length})</p>
-            {others.map((stop: unknown) => (
+            {others.map((stop) => (
               <div key={stop.id} className="flex items-center gap-3 p-2 rounded opacity-50">
                 <input type="checkbox" disabled className="w-4 h-4" />
                 <span className="text-xs text-slate-500">{stop.publicName} ({stop.status})</span>

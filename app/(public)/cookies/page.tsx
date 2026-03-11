@@ -301,7 +301,7 @@ export default function CookiesPolicy() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cookies.map((cookie: unknown, index: number) => (
+                  {cookies.map((cookie, index) => (
                     <tr
                       key={index}
                       style={{

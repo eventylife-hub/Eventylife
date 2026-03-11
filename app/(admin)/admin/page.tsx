@@ -113,7 +113,7 @@ export default function AdminDashboardPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setStats(data);
       } else {
         // API pas encore connectée — on affiche le dashboard avec les données mock
@@ -204,7 +204,7 @@ export default function AdminDashboardPage() {
       </div>
 
       <div className="admin-modules-grid">
-        {MODULES.map((mod: unknown, i: number) => (
+        {MODULES.map((mod, i) => (
           <Link
             key={mod.title}
             href={mod.href}
@@ -221,7 +221,7 @@ export default function AdminDashboardPage() {
               <p>{mod.desc}</p>
             </div>
             <div className="admin-module-card-footer">
-              {mod.stats.map((s: unknown, j: number) => (
+              {mod.stats.map((s, j) => (
                 <span key={j} className="admin-module-stat">
                   {s.value && <strong>{s.value}</strong>} {s.label}
                 </span>
@@ -266,7 +266,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="admin-panel-body">
             {(stats?.recentActivity && stats.recentActivity.length > 0
-              ? stats.recentActivity.slice(0, 5).map((a: unknown, i: number) => (
+              ? stats.recentActivity.slice(0, 5).map((a, i) => (
                   <div key={a.id} className="admin-audit-row">
                     <span className={`admin-audit-dot ${a.type}`}></span>
                     <span className="admin-audit-actor">{a.actor}</span>
@@ -276,7 +276,7 @@ export default function AdminDashboardPage() {
                     </span>
                   </div>
                 ))
-              : MOCK_AUDIT.map((a: unknown, i: number) => (
+              : MOCK_AUDIT.map((a, i) => (
                   <div key={i} className="admin-audit-row">
                     <span className={`admin-audit-dot ${a.type}`}></span>
                     <span className="admin-audit-actor">{a.actor}</span>
@@ -294,7 +294,7 @@ export default function AdminDashboardPage() {
             <span className="admin-panel-title">⚡ Accès rapides</span>
           </div>
           <div className="admin-panel-body">
-            {QUICK_LINKS.map((ql: unknown) => (
+            {QUICK_LINKS.map((ql) => (
               <Link key={ql.label} href={ql.href} className="admin-quick-link">
                 <span className="ql-icon">{ql.icon}</span>
                 <div>

@@ -114,7 +114,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
           setLoadState('error');
           return;
         }
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setTravel(data);
         setStoreTravel(data);
         setLoadState('data');
@@ -699,7 +699,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {invites.map((invite: unknown, idx: number) => (
+                  {invites.map((invite, idx) => (
                     <div
                       key={idx}
                       className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"

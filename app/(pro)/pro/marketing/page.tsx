@@ -65,12 +65,12 @@ export default function MarketingPage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <h1 className="pro-page-title" style={{ marginBottom: '24px' }}>Marketing</h1>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '24px' }}>
-            {[...Array(3)].map((_: unknown, i: number) => (
+            {[...Array(3)].map((_, i) => (
               <Skeleton key={i} className="h-24 rounded-lg" />
             ))}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
-            {[...Array(4)].map((_: unknown, i: number) => (
+            {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-48 rounded-lg" />
             ))}
           </div>
@@ -154,7 +154,7 @@ export default function MarketingPage() {
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
-            {campaigns.map((campaign: unknown) => (
+            {campaigns.map((campaign) => (
               <CampaignCard key={campaign.id} campaign={campaign} />
             ))}
           </div>

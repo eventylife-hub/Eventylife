@@ -101,10 +101,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
         {/* Navigation sections */}
         <nav style={{ flex: 1, overflowY: 'auto', paddingBottom: '8px' }}>
-          {SIDEBAR_SECTIONS.map((section: unknown) => (
+          {SIDEBAR_SECTIONS.map((section) => (
             <div key={section.title} className="admin-sidebar-section">
               <div className="admin-sidebar-section-title">{section.title}</div>
-              {section.items.map((item: unknown) => (
+              {section.items.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

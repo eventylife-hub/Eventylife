@@ -263,7 +263,7 @@ export default function TransportPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <StopMap stops={stops as unknown as TransportStop[]} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {stops.map((stop: unknown) => {
+                {stops.map((stop) => {
                   const stopType = (stop.type as string) === 'DROPOFF_ARRIVAL' ? 'ARRIVAL' : 'PICKUP_DEPARTURE';
                   return (
                     <StopCard

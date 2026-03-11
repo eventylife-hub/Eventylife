@@ -139,7 +139,7 @@ export default function RestauratPage() {
         <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#0A1628' }}>Gestion de la restauration</h1>
           <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-            {[...Array(4)].map((_: unknown, i: number) => (
+            {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-48 rounded-lg" />
             ))}
           </div>
@@ -282,7 +282,7 @@ export default function RestauratPage() {
                 </p>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {restaurants.map((rest: unknown) => (
+                  {restaurants.map((rest) => (
                     <RestaurantCard key={rest.id} restaurant={rest} />
                   ))}
                 </div>

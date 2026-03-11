@@ -109,7 +109,7 @@ export default function ManifestPage() {
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {manifest.map((stopData: unknown) => (
+          {manifest.map((stopData) => (
             <div key={(stopData.stop as unknown)?.id as string} className="pro-panel">
               <div className="pro-panel-header">
                 <h3 className="pro-panel-title" style={{ fontSize: '1.125rem' }}>

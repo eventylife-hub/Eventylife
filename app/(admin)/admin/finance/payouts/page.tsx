@@ -38,7 +38,7 @@ export default function PayoutsPage() {
         throw new Error('Erreur lors du chargement des versements');
       }
 
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setPayouts(data?.items || data || []);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erreur inconnue');
@@ -96,7 +96,7 @@ export default function PayoutsPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="admin-panel">
               <div className="admin-panel-body" style={{ height: '100px', background: 'var(--admin-surface-alt)', borderRadius: '8px', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
             </div>
@@ -174,7 +174,7 @@ export default function PayoutsPage() {
       </div>
 
       <div className="space-y-4">
-        {payouts.map((payout: unknown) => (
+        {payouts.map((payout) => (
           <div key={payout.id} className="admin-panel">
             <div className="admin-panel-body">
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px' }}>

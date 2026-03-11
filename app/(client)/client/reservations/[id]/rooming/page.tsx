@@ -271,7 +271,7 @@ export default function RoomingPage() {
 
           {rooming.occupants.length > 0 ? (
             <div className="space-y-3">
-              {rooming.occupants.map((occupant: unknown) => (
+              {rooming.occupants.map((occupant) => (
                 <div
                   key={occupant.id}
                   className="flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg border"
@@ -435,7 +435,7 @@ export default function RoomingPage() {
                   <p className="font-medium text-gray-900 text-sm">
                     Fichiers sélectionnés ({documents.length}):
                   </p>
-                  {documents.map((doc: unknown, idx: number) => (
+                  {documents.map((doc, idx) => (
                     <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded">
                       <span className="text-sm text-gray-700">{doc.name}</span>
                       <button

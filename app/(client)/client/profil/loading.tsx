@@ -12,11 +12,11 @@ export default function Loading() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {Array.from({ length: 2 }).map((_: unknown, i: number) => (
+        {Array.from({ length: 2 }).map((_, i) => (
           <div key={i} className="space-y-4">
             <Skeleton height="1.25rem" width="50%" />
             <div className="space-y-3">
-              {Array.from({ length: 3 }).map((_: unknown, j: number) => (
+              {Array.from({ length: 3 }).map((_, j: number) => (
                 <div key={j} className="space-y-2">
                   <Skeleton height="1rem" width="30%" />
                   <Skeleton height="2.5rem" width="100%" />

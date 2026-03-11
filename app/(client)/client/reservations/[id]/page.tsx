@@ -101,7 +101,7 @@ export default function BookingDetailPage() {
           <h1 className="font-display text-2xl sm:text-3xl font-bold mt-4" style={{ color: C.navy }}>Détails de la réservation</h1>
         </div>
         <div className="space-y-4">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="h-24 rounded-2xl skeleton" />
           ))}
         </div>
@@ -229,7 +229,7 @@ export default function BookingDetailPage() {
         <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Chambres réservées</h2>
         {booking.rooms && booking.rooms.length > 0 ? (
           <div className="space-y-3">
-            {booking.rooms.map((room: unknown) => (
+            {booking.rooms.map((room) => (
               <div key={room.id} className="rounded-xl p-4" style={{ background: C.cream }}>
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-semibold text-sm" style={{ color: C.navy }}>{room.type}</h3>
@@ -239,7 +239,7 @@ export default function BookingDetailPage() {
                   <p className="text-xs mb-2" style={{ color: C.muted }}>Participants:</p>
                   {room.participants.length > 0 ? (
                     <ul className="space-y-1">
-                      {room.participants.map((p: unknown) => (
+                      {room.participants.map((p) => (
                         <li key={p.id} className="text-xs" style={{ color: C.navy }}>
                           • {p.firstName} {p.lastName} ({p.email})
                         </li>
@@ -262,7 +262,7 @@ export default function BookingDetailPage() {
         <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Historique des paiements</h2>
         {booking.payments && booking.payments.length > 0 ? (
           <div className="space-y-2">
-            {booking.payments.map((payment: unknown) => (
+            {booking.payments.map((payment) => (
               <div key={payment.id} className="flex justify-between items-center py-3 px-3 rounded-lg" style={{ background: C.cream }}>
                 <div>
                   <p className="text-xs" style={{ color: C.navy }}>

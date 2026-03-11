@@ -56,7 +56,7 @@ export default function AdminRoomingPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const data = (await response.json() as unknown) as unknown;
+          const data = await response.json();
           setRooming(data);
           if (!selectedTrip && data.trips.length > 0) {
             setSelectedTrip(data.trips[0].id);
@@ -129,7 +129,7 @@ export default function AdminRoomingPage() {
           <div className="text-sm">
             {guestList.length > 0 ? (
               <ul>
-                {guestList.slice(0, 2).map((guest: unknown, i: number) => (
+                {guestList.slice(0, 2).map((guest, i) => (
                   <li key={i}>{guest}</li>
                 ))}
                 {guestList.length > 2 && <li className="text-gray-500">+{guestList.length - 2} autre(s)</li>}
@@ -171,7 +171,7 @@ export default function AdminRoomingPage() {
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[...Array(4)].map((_: unknown, i: number) => (
+          {[...Array(4)].map((_, i) => (
             <div key={i} className="admin-panel p-6 space-y-4">
               <div className="h-4 bg-gray-200 rounded animate-pulse" />
               <div className="h-8 bg-gray-200 rounded animate-pulse" />
@@ -181,7 +181,7 @@ export default function AdminRoomingPage() {
         </div>
         <div className="admin-panel p-6">
           <div className="space-y-3">
-            {[...Array(5)].map((_: unknown, i: number) => (
+            {[...Array(5)].map((_, i) => (
               <div key={i} className="h-12 bg-gray-200 rounded animate-pulse" />
             ))}
           </div>
@@ -257,7 +257,7 @@ export default function AdminRoomingPage() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {rooming.trips.map((trip: unknown) => (
+                  {rooming.trips.map((trip) => (
                     <SelectItem key={trip.id} value={trip.id}>
                       {trip.name}
                     </SelectItem>
@@ -359,7 +359,7 @@ export default function AdminRoomingPage() {
         </div>
         <div className="admin-panel-body p-6">
           <div className="space-y-3">
-            {rooming.trips.map((trip: unknown) => (
+            {rooming.trips.map((trip) => (
               <div key={trip.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <span className="font-medium text-gray-900">{trip.name}</span>
                 <span className="text-sm text-gray-600">
@@ -410,7 +410,7 @@ export default function AdminRoomingPage() {
                 <div>
                   <label className="text-xs font-medium text-gray-600">Clients logés</label>
                   <ul className="mt-2 space-y-1">
-                    {selectedRoom.guests.map((guest: unknown, idx: number) => (
+                    {selectedRoom.guests.map((guest, idx) => (
                       <li key={idx} className="text-sm text-gray-700">• {guest}</li>
                     ))}
                   </ul>

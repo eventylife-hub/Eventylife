@@ -98,7 +98,7 @@ export default function ParametresPage() {
 
       if (response.ok) {
         setFeatureFlags(
-          featureFlags.map((f: unknown) =>
+          featureFlags.map((f) =>
             f.key === key ? { ...f, enabled: editedFlags[key] } : f,
           ),
         );
@@ -142,7 +142,7 @@ export default function ParametresPage() {
           </h3>
         </div>
         <div className="admin-panel-body space-y-4">
-          {settings.map((setting: unknown) => (
+          {settings.map((setting) => (
             <div key={setting.key} className="flex items-end gap-4">
               <div className="flex-1">
                 <label className="admin-input-label">{setting.key}</label>
@@ -191,7 +191,7 @@ export default function ParametresPage() {
           </h3>
         </div>
         <div className="admin-panel-body space-y-4">
-          {featureFlags.map((flag: unknown) => {
+          {featureFlags.map((flag) => {
             const key = flag.key as string;
             const enabled = flag.enabled as boolean;
             const description = flag.description as string | undefined;

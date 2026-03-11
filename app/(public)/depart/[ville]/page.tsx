@@ -145,7 +145,7 @@ export default function DepartPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Skeleton className="h-96 w-full rounded-lg" />
           <div className="col-span-2 grid grid-cols-2 gap-6">
-            {Array.from({ length: 4 }).map((_: unknown, i: number) => (
+            {Array.from({ length: 4 }).map((_, i) => (
               <Skeleton key={i} className="h-80 w-full rounded-lg" />
             ))}
           </div>
@@ -310,7 +310,7 @@ export default function DepartPage() {
         {/* Results Grid */}
         <div className="lg:col-span-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredTravels.map((voyage: unknown) => {
+            {filteredTravels.map((voyage) => {
               const available = voyage.capacity - voyage.currentBookings;
 
               return (

@@ -48,7 +48,7 @@ export default function SupportPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         const allData = data.data || [];
         setAllTickets(allData);
 
@@ -186,7 +186,7 @@ export default function SupportPage() {
         <div className="admin-panel-body p-6">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
-              {statuses.map((status: unknown) => (
+              {statuses.map((status) => (
                 <TabsTrigger key={status.value} value={status.value}>
                   {status.label}
                   {ticketCounts[status.value] !== undefined && (
@@ -198,7 +198,7 @@ export default function SupportPage() {
               ))}
             </TabsList>
 
-            {statuses.map((status: unknown) => (
+            {statuses.map((status) => (
               <TabsContent key={status.value} value={status.value}>
                 <DataTable
                   columns={columns}

@@ -108,7 +108,7 @@ export default function InscriptionPage() {
     setForm({
       ...form,
       skills: form.skills.includes(skill)
-        ? form.skills.filter((s: unknown) => s !== skill)
+        ? form.skills.filter((s) => s !== skill)
         : [...form.skills, skill],
     });
   };
@@ -172,7 +172,7 @@ export default function InscriptionPage() {
         {/* Progress Steps */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            {[1, 2, 3, 4].map((s: unknown) => (
+            {[1, 2, 3, 4].map((s) => (
               <div key={s} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                 <div
                   style={{
@@ -224,7 +224,7 @@ export default function InscriptionPage() {
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Quel type de professionnel êtes-vous?</h2>
             <p style={{ color: '#8896A6', marginBottom: '24px', fontSize: '14px' }}>Sélectionnez le profil qui vous correspond</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {PRO_TYPES.map((type: unknown) => {
+              {PRO_TYPES.map((type) => {
                 const Icon = type.icon;
                 return (
                   <button
@@ -328,7 +328,7 @@ export default function InscriptionPage() {
                   className="pro-input"
                 >
                   <option value="">Sélectionnez une zone</option>
-                  {ZONES.map((zone: unknown) => (
+                  {ZONES.map((zone) => (
                     <option key={zone} value={zone}>
                       {zone}
                     </option>
@@ -339,7 +339,7 @@ export default function InscriptionPage() {
               <div>
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>Compétences *</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {SKILLS.map((skill: unknown) => (
+                  {SKILLS.map((skill) => (
                     <button
                       key={skill}
                       onClick={() => toggleSkill(skill)}

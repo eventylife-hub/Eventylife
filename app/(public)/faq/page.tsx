@@ -249,7 +249,7 @@ export default function FAQPage() {
             </h2>
 
             <div className="space-y-3">
-              {category.items.map((item: unknown) => {
+              {category.items.map((item) => {
                 const isOpen = openItems.includes(item.id);
 
                 return (

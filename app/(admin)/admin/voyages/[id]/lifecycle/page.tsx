@@ -325,7 +325,7 @@ export default function TravelLifecyclePage() {
             )}
 
             <div className="grid grid-cols-2 gap-4">
-              {availableActions.map((action: unknown) => (
+              {availableActions.map((action) => (
                 <button
                   key={action.action}
                   onClick={() => {

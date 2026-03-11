@@ -270,7 +270,7 @@ export default function CreateTripPage() {
         throw new Error('Erreur lors de la création du voyage');
       }
 
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       window.location.href = `/admin/voyages/${data.id}`;
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue lors de la création du voyage';
@@ -295,7 +295,7 @@ export default function CreateTripPage() {
         <div className="admin-panel">
           <div className="h-6 bg-gray-200 rounded w-1/3 mb-4 animate-pulse" />
           <div className="space-y-3">
-            {[...Array(5)].map((_: unknown, i: number) => (
+            {[...Array(5)].map((_, i) => (
               <div key={i} className="h-10 bg-gray-100 rounded animate-pulse" />
             ))}
           </div>
@@ -346,7 +346,7 @@ export default function CreateTripPage() {
 
       {/* Indicateur de progression */}
       <div className="flex items-center justify-between">
-        {[1, 2, 3, 4, 5].map((step: unknown) => (
+        {[1, 2, 3, 4, 5].map((step) => (
           <div key={step} className="flex items-center flex-1">
             <button
               onClick={() => {
@@ -594,7 +594,7 @@ export default function CreateTripPage() {
                         </button>
                       </div>
                       <div className="space-y-2">
-                        {(transport.busStops || []).map((stop: unknown, index: number) => (
+                        {(transport.busStops || []).map((stop, index) => (
                           <div
                             key={index}
                             className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -754,7 +754,7 @@ export default function CreateTripPage() {
                       </Button>
                     </div>
 
-                    {accommodation.roomTypes.map((room: unknown, index: number) => (
+                    {accommodation.roomTypes.map((room, index) => (
                       <div
                         key={index}
                         className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -855,7 +855,7 @@ export default function CreateTripPage() {
                       </Button>
                     </div>
 
-                    {pricing.insuranceOptions.map((insurance: unknown, index: number) => (
+                    {pricing.insuranceOptions.map((insurance, index) => (
                       <div
                         key={index}
                         className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -886,7 +886,7 @@ export default function CreateTripPage() {
                       { id: 'TRANSFER', label: 'Virement' },
                       { id: 'CHECK', label: 'Chèque' },
                       { id: 'CASH', label: 'Espèces' },
-                    ].map((mode: unknown) => (
+                    ].map((mode) => (
                       <label key={mode.id} className="flex items-center gap-2">
                         <input
                           type="checkbox"
@@ -900,7 +900,7 @@ export default function CreateTripPage() {
                             } else {
                               setPricing((prev) => ({
                                 ...prev,
-                                paymentModes: prev.paymentModes.filter((m: unknown) => m !== mode.id
+                                paymentModes: prev.paymentModes.filter((m) => m !== mode.id
                                 ),
                               }));
                             }

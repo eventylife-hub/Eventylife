@@ -157,7 +157,7 @@ export default function SupportPage() {
     }
   };
 
-  const filteredTickets = tickets.filter((t: unknown) => {
+  const filteredTickets = tickets.filter((t) => {
     if (filter === 'open') return !['RESOLVED', 'CLOSED'].includes(t.status);
     if (filter === 'closed') return ['RESOLVED', 'CLOSED'].includes(t.status);
     return true;
@@ -171,7 +171,7 @@ export default function SupportPage() {
       <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
         <div className="h-8 w-48 rounded-2xl skeleton" />
         <div className="h-12 w-full rounded-2xl skeleton" />
-        {[...Array(3)].map((_: unknown, i: number) => (
+        {[...Array(3)].map((_, i) => (
           <div key={i} className="h-24 rounded-2xl skeleton" />
         ))}
       </div>
@@ -394,9 +394,9 @@ export default function SupportPage() {
       <div className="flex gap-2 flex-wrap" style={{ borderBottom: `1.5px solid ${C.border}`, paddingBottom: '16px' }}>
         {[
           { key: 'all', label: 'Tous', count: tickets.length },
-          { key: 'open', label: 'Ouverts', count: tickets.filter((t: unknown) => !['RESOLVED', 'CLOSED'].includes(t.status)).length },
-          { key: 'closed', label: 'Résolus', count: tickets.filter((t: unknown) => ['RESOLVED', 'CLOSED'].includes(t.status)).length },
-        ].map((f: unknown) => (
+          { key: 'open', label: 'Ouverts', count: tickets.filter((t) => !['RESOLVED', 'CLOSED'].includes(t.status)).length },
+          { key: 'closed', label: 'Résolus', count: tickets.filter((t) => ['RESOLVED', 'CLOSED'].includes(t.status)).length },
+        ].map((f) => (
           <button
             key={f.key}
             onClick={() => setFilter(f.key as typeof filter)}
@@ -454,7 +454,7 @@ export default function SupportPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {filteredTickets.map((ticket: unknown) => (
+          {filteredTickets.map((ticket) => (
             <div
               key={ticket.id}
               className="rounded-2xl p-5 transition-all duration-300"

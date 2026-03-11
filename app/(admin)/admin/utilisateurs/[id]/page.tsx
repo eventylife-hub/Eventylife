@@ -51,7 +51,7 @@ export default function UserDetailPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         setUser(data);
       } else if (response.status === 404) {
         setError('Utilisateur non trouvé');
@@ -108,7 +108,7 @@ export default function UserDetailPage() {
         </div>
         <div className="h-12 bg-gray-200 rounded animate-pulse" />
         <div className="space-y-4">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="h-32 bg-gray-200 rounded animate-pulse" />
           ))}
         </div>

@@ -313,7 +313,7 @@ function SectionNav() {
       background: 'white', border: `1.5px solid ${C.border}`, borderRadius: 12, marginBottom: 28,
       overflow: 'hidden', display: 'flex'
     }}>
-      {items.map((item: unknown, i: number) => (
+      {items.map((item, i) => (
         <a
           key={item.id}
           href={`#${item.id}`}
@@ -371,7 +371,7 @@ function RamassageSection() {
 
       <div style={{ fontSize: 13, color: C.muted, marginBottom: 10 }}>Autres arrêts disponibles sur votre parcours :</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {tripData.pickupPoints.map((point: unknown, i: number) => (
+        {tripData.pickupPoints.map((point, i) => (
           <button key={i} onClick={() => setSelected(i)} style={{
             display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
             border: `1.5px solid ${selected === i ? C.terra : C.border}`,
@@ -419,13 +419,13 @@ function ProgrammeSection() {
       {/* Timeline */}
       <div style={{ position: 'relative', paddingLeft: 28 }}>
         <div style={{ position: 'absolute', left: 8, top: 8, bottom: 8, width: 2, background: C.border }} />
-        {tripData.program.map((day: unknown, di: number) => (
+        {tripData.program.map((day, di) => (
           <div key={di} style={{ position: 'relative', marginBottom: 20 }}>
             <div style={{ position: 'absolute', left: -24, top: 3, width: 14, height: 14, background: C.terra, borderRadius: '50%', border: '2px solid white', boxShadow: `0 0 0 2px ${C.terra}` }} />
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.terra, marginBottom: 4 }}>{day.day} — {day.date}</div>
             <div style={{ fontSize: 14.5, fontWeight: 600, color: C.navy, marginBottom: 6 }}>{day.title}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {day.slots.map((slot: unknown, si: number) => (
+              {day.slots.map((slot, si) => (
                 <div key={si} style={{ display: 'flex', gap: 8, fontSize: 13, color: C.muted }}>
                   <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{slot.icon}</span>
                   <span><strong style={{ color: C.navy, fontWeight: 600 }}>{slot.label} :</strong> {slot.text}</span>
@@ -446,7 +446,7 @@ function ProgrammeSection() {
             ☀️ Après-midi · 4 arrêts
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {tripData.onSiteShuttles.afternoon.stops.map((stop: unknown, i: number) => (
+            {tripData.onSiteShuttles.afternoon.stops.map((stop, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '8px 12px', background: C.cream, borderRadius: 8, fontSize: 13, border: `1px solid ${C.border}` }}>
                 <div style={{ width: 22, height: 22, background: C.navy, color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{stop.num}</div>
                 <div style={{ flex: 1, fontWeight: 600, color: C.navy }}>{stop.name}</div>
@@ -462,7 +462,7 @@ function ProgrammeSection() {
             🌙 Soir · 2 arrêts
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {tripData.onSiteShuttles.evening.stops.map((stop: unknown, i: number) => (
+            {tripData.onSiteShuttles.evening.stops.map((stop, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '8px 12px', background: C.cream, borderRadius: 8, fontSize: 13, border: `1px solid ${C.border}` }}>
                 <div style={{ width: 22, height: 22, background: C.navy, color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{stop.num}</div>
                 <div style={{ flex: 1, fontWeight: 600, color: C.navy }}>{stop.name}</div>
@@ -486,7 +486,7 @@ function InclusSection() {
         <div style={{ padding: '4px 0' }}>
           <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.green, marginBottom: 10 }}>✓ Inclus</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {tripData.included.map((item: unknown, i: number) => (
+            {tripData.included.map((item, i) => (
               <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: C.navy }}>
                 <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: C.greenBg, color: C.green }}>✓</div>
                 {item}
@@ -497,7 +497,7 @@ function InclusSection() {
         <div style={{ padding: '4px 0 4px 20px', borderLeft: `1.5px solid ${C.border}` }}>
           <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: 'var(--terra, #EF4444)', marginBottom: 10 }}>✗ Non inclus</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {tripData.notIncluded.map((item: unknown, i: number) => (
+            {tripData.notIncluded.map((item, i) => (
               <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: C.navy }}>
                 <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: '#FEE2E2', color: 'var(--terra, #EF4444)' }}>✗</div>
                 {item}
@@ -525,7 +525,7 @@ function HebergementSection() {
           <div style={{ fontSize: 15, fontWeight: 700, color: C.navy, marginBottom: 3 }}>{tripData.hotel.name} {'★'.repeat(tripData.hotel.stars)}</div>
           <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>{tripData.hotel.address} · {tripData.hotel.description}</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 6 }}>
-            {tripData.hotel.amenities.map((a: unknown, i: number) => (
+            {tripData.hotel.amenities.map((a, i) => (
               <span key={i} style={{ background: C.blueBg, color: C.blue, fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 8 }}>{a}</span>
             ))}
           </div>
@@ -533,7 +533,7 @@ function HebergementSection() {
       </div>
 
       {/* HRA rows */}
-      {tripData.hra.map((item: unknown, i: number) => (
+      {tripData.hra.map((item, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, padding: 12, border: `1.5px solid ${C.border}`, borderRadius: 10, marginBottom: 10, alignItems: 'flex-start' }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, flexShrink: 0, background: hraTypeBg[item.type] || '#f0f0f0' }}>
             {item.icon}
@@ -568,7 +568,7 @@ function OccurrencesSection() {
   return (
     <Section id="departs" icon="📆" title="Choisir votre date de départ">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {tripData.occurrences.map((occ: unknown, i: number) => {
+        {tripData.occurrences.map((occ, i) => {
           const bc = badgeColors[occ.status] || badgeColors.ok;
           const isFull = occ.status === 'full';
           return (
@@ -620,7 +620,7 @@ function EquipeSection() {
   return (
     <Section id="equipe" icon="👤" title="Ton équipe sur ce voyage">
       <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-        {tripData.team.map((m: unknown, i: number) => (
+        {tripData.team.map((m, i) => (
           <div key={i} style={{ background: C.cream, border: `1.5px solid ${C.border}`, borderRadius: 12, padding: 14, flex: 1, minWidth: 200 }}>
             <div style={{ width: 52, height: 52, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, marginBottom: 10, background: avatarBg[m.type] }}>
               {avatarEmoji[m.type]}

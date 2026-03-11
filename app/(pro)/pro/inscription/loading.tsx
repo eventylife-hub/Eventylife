@@ -11,7 +11,7 @@ export default function InscriptionLoading() {
           <Skeleton className="h-4 w-96" />
 
           <div className="space-y-3 mt-6">
-            {[...Array(3)].map((_: unknown, i: number) => (
+            {[...Array(3)].map((_, i) => (
               <Skeleton key={i} className="h-16 w-full" />
             ))}
           </div>

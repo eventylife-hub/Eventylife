@@ -57,7 +57,7 @@ export default function AdminDocumentsPage() {
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
       }
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setDocuments(data);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue';
@@ -134,7 +134,7 @@ export default function AdminDocumentsPage() {
     }
   };
 
-  const filteredDocuments = documents.filter((doc: unknown) => {
+  const filteredDocuments = documents.filter((doc) => {
     const query = searchQuery.toLowerCase();
     const matchesSearch =
       doc.name.toLowerCase().includes(query) ||
@@ -149,9 +149,9 @@ export default function AdminDocumentsPage() {
 
   const stats = {
     total: documents.length,
-    pending: documents.filter((d: unknown) => d.status === 'PENDING').length,
-    approved: documents.filter((d: unknown) => d.status === 'CONFIRMED').length,
-    rejected: documents.filter((d: unknown) => d.status === 'REJECTED').length,
+    pending: documents.filter((d) => d.status === 'PENDING').length,
+    approved: documents.filter((d) => d.status === 'CONFIRMED').length,
+    rejected: documents.filter((d) => d.status === 'REJECTED').length,
   };
 
   return (
@@ -175,7 +175,7 @@ export default function AdminDocumentsPage() {
           { label: 'En attente', value: stats.pending, bgColor: 'var(--admin-warning-bg, #FEF3C7)' },
           { label: 'Approuvés', value: stats.approved, bgColor: 'var(--admin-mint-soft)' },
           { label: 'Rejetés', value: stats.rejected, bgColor: 'var(--admin-coral-soft)' },
-        ].map((stat: unknown) => (
+        ].map((stat) => (
           <div
             key={stat.label}
             className="admin-kpi-card"
@@ -270,7 +270,7 @@ export default function AdminDocumentsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredDocuments.map((doc: unknown) => (
+                  {filteredDocuments.map((doc) => (
                     <tr key={doc.id}>
                       <td>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

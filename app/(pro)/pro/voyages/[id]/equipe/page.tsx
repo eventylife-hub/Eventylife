@@ -170,7 +170,7 @@ export default function EquipePage() {
 
       if (!res.ok) throw new Error('Erreur suppression');
 
-      setTeam(team.filter((m: unknown) => m.id !== memberId));
+      setTeam(team.filter((m) => m.id !== memberId));
       setDeleteConfirming(null);
       setError(null);
     } catch (err: unknown) {
@@ -274,7 +274,7 @@ export default function EquipePage() {
         <div className="pro-panel-body">
           {team.length > 0 ? (
             <div className="space-y-2">
-              {team.map((member: unknown) => {
+              {team.map((member) => {
                 const StatusIcon = STATUS_ICONS[member.status];
                 return (
                   <div
@@ -358,7 +358,7 @@ export default function EquipePage() {
         </div>
         <div className="pro-panel-body">
           <div className="space-y-3">
-            {PREREQUISITES.map((prereq: unknown) => {
+            {PREREQUISITES.map((prereq) => {
               const completed = prerequisites.find((p) => p.label === prereq.label)?.!!completed;
               return (
                 <div key={prereq.label} className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg">
@@ -385,7 +385,7 @@ export default function EquipePage() {
 
           <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <p className="text-sm text-blue-800">
-              {prerequisites.filter((p: unknown) => p.completed).length} / {PREREQUISITES.length} préalables validés
+              {prerequisites.filter((p) => p.completed).length} / {PREREQUISITES.length} préalables validés
             </p>
           </div>
         </div>

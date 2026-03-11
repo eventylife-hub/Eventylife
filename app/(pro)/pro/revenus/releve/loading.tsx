@@ -31,13 +31,13 @@ export default function Loading() {
           {/* Table skeleton */}
           <div className="space-y-3 mt-4">
             <div className="grid grid-cols-6 gap-2">
-              {Array.from({ length: 6 }).map((_: unknown, i: number) => (
+              {Array.from({ length: 6 }).map((_, i) => (
                 <Skeleton key={i} className="h-8" />
               ))}
             </div>
-            {Array.from({ length: 5 }).map((_: unknown, i: number) => (
+            {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="grid grid-cols-6 gap-2">
-                {Array.from({ length: 6 }).map((_: unknown, j: number) => (
+                {Array.from({ length: 6 }).map((_, j: number) => (
                   <Skeleton key={j} className="h-6" />
                 ))}
               </div>

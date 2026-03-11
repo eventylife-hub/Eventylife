@@ -239,7 +239,7 @@ export default function QuickSellPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedTrip((e.target as HTMLInputElement).value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  {trips.map((trip: unknown) => (
+                  {trips.map((trip) => (
                     <option key={trip.id} value={trip.id}>
                       {trip.name} ({formatDate(trip.startDate)})
                     </option>
@@ -373,7 +373,7 @@ export default function QuickSellPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {sales.map((sale: unknown) => (
+                  {sales.map((sale) => (
                     <div
                       key={sale.id}
                       className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors"

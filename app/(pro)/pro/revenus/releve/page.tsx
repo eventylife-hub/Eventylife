@@ -120,7 +120,7 @@ export default function ReleveMensuelPage() {
       'Montant Net',
     ];
 
-    const rows = statement.trips.map((trip: unknown) => [
+    const rows = statement.trips.map((trip) => [
       trip.tripName,
       `${trip.startDate} - ${trip.endDate}`,
       trip.reservationCount.toString(),
@@ -141,7 +141,7 @@ export default function ReleveMensuelPage() {
     ];
 
     const csv = [headers, ...rows, totalsRow]
-      .map((row: unknown) => row.map((cell: unknown) => `"${cell}"`).join(','))
+      .map((row) => row.map((cell) => `"${cell}"`).join(','))
       .join('\n');
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -302,7 +302,7 @@ export default function ReleveMensuelPage() {
 
         {/* Month selector */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {availableMonths.map((month: unknown) => (
+          {availableMonths.map((month) => (
             <button
               key={month}
               onClick={() => handleMonthChange(month)}
@@ -416,7 +416,7 @@ export default function ReleveMensuelPage() {
 
       {/* Month selector */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-        {availableMonths.map((month: unknown) => (
+        {availableMonths.map((month) => (
           <button
             key={month}
             onClick={() => handleMonthChange(month)}
@@ -501,7 +501,7 @@ export default function ReleveMensuelPage() {
                 </tr>
               </thead>
               <tbody>
-                {statement.trips.map((trip: unknown, idx: number) => (
+                {statement.trips.map((trip, idx) => (
                   <tr
                     key={idx}
                     style={{

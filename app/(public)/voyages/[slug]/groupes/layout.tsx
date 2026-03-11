@@ -8,7 +8,7 @@ export const generateMetadata = async ({
   const decodedSlug = decodeURIComponent(params.slug);
   const titleCase = decodedSlug
     .split('-')
-    .map((word: unknown) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
   return {

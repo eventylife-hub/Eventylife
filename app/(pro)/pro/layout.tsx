@@ -87,10 +87,10 @@ export default function ProLayout({ children }: ProLayoutProps) {
 
         {/* Navigation sections */}
         <nav style={{ flex: 1, overflowY: 'auto', paddingBottom: '8px' }}>
-          {SIDEBAR_SECTIONS.map((section: unknown) => (
+          {SIDEBAR_SECTIONS.map((section) => (
             <div key={section.title} className="pro-sidebar-section">
               <div className="pro-sidebar-section-title">{section.title}</div>
-              {section.items.map((item: unknown) => (
+              {section.items.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

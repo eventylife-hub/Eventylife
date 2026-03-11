@@ -63,7 +63,7 @@ export default function TravelsPage() {
     handleFetch();
   }, [activeTab, search]);
 
-  const filteredTravels = travels.filter((t: unknown) => {
+  const filteredTravels = travels.filter((t) => {
     if (search) {
       return (
         (t?.title as string)?.toLowerCase().includes(search.toLowerCase()) ||
@@ -125,7 +125,7 @@ export default function TravelsPage() {
         {/* Tabs and View Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
-            {TABS.map((tab: unknown) => (
+            {TABS.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -236,7 +236,7 @@ export default function TravelsPage() {
             </div>
             {viewMode === 'grid' ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[...Array(6)].map((_: unknown, idx: number) => (
+                {[...Array(6)].map((_, idx) => (
                   <div key={idx} className="rounded-lg overflow-hidden border border-slate-200">
                     <Skeleton className="h-48" />
                     <div className="p-6 space-y-4">
@@ -252,7 +252,7 @@ export default function TravelsPage() {
             ) : (
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                 <div className="space-y-2">
-                  {[...Array(5)].map((_: unknown, idx: number) => (
+                  {[...Array(5)].map((_, idx) => (
                     <Skeleton key={idx} className="h-12 rounded-none border-b" />
                   ))}
                 </div>
@@ -266,7 +266,7 @@ export default function TravelsPage() {
           <>
             {viewMode === 'grid' ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                {filteredTravels.map((travel: unknown) => (
+                {filteredTravels.map((travel) => (
                   <Link
                     key={travel.id}
                     href={`/pro/voyages/${travel.id}`}
@@ -341,7 +341,7 @@ export default function TravelsPage() {
                     </tr>
                   </thead>
                   <tbody style={{ borderTop: '1px solid #E8F7FC' }}>
-                    {filteredTravels.map((travel: unknown) => (
+                    {filteredTravels.map((travel) => (
                       <tr key={travel.id} style={{ borderBottom: '1px solid #E8F7FC', transition: 'background-color 0.2s' }}
                         onMouseEnter={(e) => (e.currentTarget.style.background = '#F5F5F5')}
                         onMouseLeave={(e) => (e.currentTarget.style.background = '#FFFFFF')}

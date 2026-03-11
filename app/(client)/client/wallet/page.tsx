@@ -170,7 +170,7 @@ export default function WalletPage() {
 
         <div className="rounded-2xl border p-6" style={{ background: '#fff', borderColor: C.border }}>
           <div className="h-8 w-32 rounded-2xl skeleton mb-4" />
-          {Array.from({ length: 5 }).map((_: unknown, i: number) => (
+          {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="h-16 rounded-2xl skeleton mb-2" />
           ))}
         </div>
@@ -401,7 +401,7 @@ export default function WalletPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredTransactions.map((transaction: unknown, index: number) => (
+                {filteredTransactions.map((transaction, index) => (
                   <tr
                     key={transaction.id}
                     style={{

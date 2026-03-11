@@ -103,7 +103,7 @@ export default function OnboardingPage() {
       });
 
       if (!response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         throw new Error(data.message || 'Erreur lors de la soumission de l\'étape');
       }
 
@@ -131,7 +131,7 @@ export default function OnboardingPage() {
       });
 
       if (!response.ok) {
-        const data = (await response.json() as unknown) as unknown;
+        const data = await response.json();
         throw new Error(data.message || 'Erreur lors de la finalisation de l\'inscription');
       }
 
@@ -167,7 +167,7 @@ export default function OnboardingPage() {
         {/* Step Indicator */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            {STEPS.map((step: unknown, idx: number) => {
+            {STEPS.map((step, idx) => {
               const isCompleted = onboardingStatus && [
                 onboardingStatus.step1_profile,
                 onboardingStatus.step2_legal,
@@ -206,7 +206,7 @@ export default function OnboardingPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
-            {STEPS.map((step: unknown) => (
+            {STEPS.map((step) => (
               <div key={step.number} style={{ textAlign: 'center' }}>
                 <p style={{ fontSize: '12px', fontWeight: 500, color: '#8896A6' }}>{step.label}</p>
               </div>
@@ -587,7 +587,7 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 6: Modules de formation</h2>
       <p style={{ fontSize: '14px', color: '#8896A6', marginBottom: '16px' }}>Marquez les modules que vous avez complétés :</p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {modules.map((module: unknown, idx: number) => (
+        {modules.map((module, idx) => (
           <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0' }}>
             <input
               type="checkbox"

@@ -56,7 +56,7 @@ export default function BrochurePage() {
         <Breadcrumb items={[{name:'Accueil',href:'/'}, {name:'Brochure',href:'/brochure'}]} />
         {/* Brochures disponibles */}
         <div className="space-y-6 mb-16">
-          {brochures.map((b: unknown, i: number) => (
+          {brochures.map((b, i) => (
             <div
               key={i}
               style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}

@@ -151,7 +151,7 @@ export default function FormationPage() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-              {[...Array(6)].map((_: unknown, idx: number) => (
+              {[...Array(6)].map((_, idx) => (
                 <div key={idx} className="pro-panel" style={{ overflow: 'hidden' }}>
                   <Skeleton className="h-24" />
                   <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -201,7 +201,7 @@ export default function FormationPage() {
         {/* Modules Grid */}
         {!loading && !error && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-          {modules.map((module: unknown) => {
+          {modules.map((module) => {
             const isCompleted = completedModules.includes(module.id);
 
             return (

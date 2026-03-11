@@ -16,7 +16,7 @@ export default function DepartLoading() {
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
             <Skeleton className="h-6 w-32" />
-            {Array.from({ length: 4 }).map((_: unknown, i: number) => (
+            {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="space-y-2">
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-10 w-full" />
@@ -28,7 +28,7 @@ export default function DepartLoading() {
         {/* Results */}
         <div className="lg:col-span-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {Array.from({ length: 4 }).map((_: unknown, i: number) => (
+            {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="border border-gray-200 rounded-lg overflow-hidden">
                 <Skeleton className="h-48 w-full" />
                 <div className="p-4 space-y-3">

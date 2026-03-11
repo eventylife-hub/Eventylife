@@ -82,7 +82,7 @@ export default function ReservationsPage() {
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
   const [filterRoomType, setFilterRoomType] = useState<string | null>(null);
 
-  const roomTypes = [...new Set(reservations.map((r: unknown) => r.roomType))];
+  const roomTypes = [...new Set(reservations.map((r) => r.roomType))];
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -114,7 +114,7 @@ export default function ReservationsPage() {
     }
   }, [travelId, filterStatus, filterRoomType]);
 
-  const filteredReservations = reservations.filter((r: unknown) => {
+  const filteredReservations = reservations.filter((r) => {
     if (search) {
       return (
         r.clientName.toLowerCase().includes(search.toLowerCase()) ||
@@ -154,7 +154,7 @@ export default function ReservationsPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <Skeleton className="h-10 w-64" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-            {[...Array(4)].map((_: unknown, i: number) => (
+            {[...Array(4)].map((_, i) => (
               <Skeleton key={i} className="h-20" />
             ))}
           </div>
@@ -255,7 +255,7 @@ export default function ReservationsPage() {
               className="pro-input"
             >
               <option value="">Tous</option>
-              {roomTypes.map((type: unknown) => (
+              {roomTypes.map((type) => (
                 <option key={type} value={type}>
                   {type}
                 </option>
@@ -287,7 +287,7 @@ export default function ReservationsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredReservations.map((res: unknown) => {
+                  {filteredReservations.map((res) => {
                     const StatusIcon = PAYMENT_STATUS_ICONS[res.paymentStatus];
                     return (
                       <tr

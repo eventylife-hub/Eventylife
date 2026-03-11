@@ -68,7 +68,7 @@ export default function FeedbackPage() {
         throw new Error('Réservation non trouvée');
       }
 
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setBooking(data.data);
       setError(null);
     } catch (err: unknown) {
@@ -132,7 +132,7 @@ export default function FeedbackPage() {
       <div className="mb-6">
         <label className="block text-sm font-medium mb-3" style={{ color: C.navy }}>{label}</label>
         <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((star: unknown) => (
+          {[1, 2, 3, 4, 5].map((star) => (
             <button
               key={star}
               type="button"
@@ -165,7 +165,7 @@ export default function FeedbackPage() {
           <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Laisser un Avis</h1>
         </div>
         <div className="space-y-4">
-          {[...Array(3)].map((_: unknown, i: number) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="h-20 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
           ))}
         </div>

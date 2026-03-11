@@ -44,7 +44,7 @@ export default function ProsPage() {
 
         const response = await fetch(endpoint, { credentials: 'include' });
         if (response.ok) {
-          const data = (await response.json() as unknown) as unknown;
+          const data = await response.json();
           setProfiles(data.data || data);
         } else {
           setError('Erreur lors du chargement des profils Pro');
@@ -96,7 +96,7 @@ export default function ProsPage() {
       });
 
       if (response.ok) {
-        setProfiles(profiles.filter((p: unknown) => p.id !== selectedProfile.id));
+        setProfiles(profiles.filter((p) => p.id !== selectedProfile.id));
         setShowApprovalModal(false);
         setSelectedProfile(null);
         // In production, show toast: "Profil approuvé avec succès"
@@ -125,7 +125,7 @@ export default function ProsPage() {
       });
 
       if (response.ok) {
-        setProfiles(profiles.filter((p: unknown) => p.id !== selectedProfile.id));
+        setProfiles(profiles.filter((p) => p.id !== selectedProfile.id));
         setShowApprovalModal(false);
         setSelectedProfile(null);
         // In production, show toast: "Profil rejeté avec succès"
@@ -188,14 +188,14 @@ export default function ProsPage() {
         <div className="admin-panel-body p-6">
           <Tabs value={statusFilter} onValueChange={setStatusFilter}>
             <TabsList className="mb-6">
-              {statuses.map((status: unknown) => (
+              {statuses.map((status) => (
                 <TabsTrigger key={status.value} value={status.value}>
                   {status.label}
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            {statuses.map((status: unknown) => (
+            {statuses.map((status) => (
               <TabsContent key={status.value} value={status.value}>
                 <DataTable
                   columns={columns}

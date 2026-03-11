@@ -53,7 +53,7 @@ export default function ClientDocumentsPage() {
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
       }
-      const data = (await response.json() as unknown) as unknown;
+      const data = await response.json();
       setDocuments(data);
 
       // Charger les URLs de téléchargement pour les images
@@ -90,7 +90,7 @@ export default function ClientDocumentsPage() {
       voyage: ['DOCUMENT_VOYAGE'],
     };
 
-    return documents.filter((doc: unknown) =>
+    return documents.filter((doc) =>
       typeMap[type].includes(doc.type),
     );
   };
@@ -142,7 +142,7 @@ export default function ClientDocumentsPage() {
       {/* Onglets */}
       <div style={{ borderBottom: `1.5px solid ${C.border}` }}>
         <div className="flex gap-6 overflow-x-auto">
-          {tabs.map((tab: unknown) => {
+          {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             const count = getDocumentsByType(tab.id as DocumentTab).length;
 
@@ -186,7 +186,7 @@ export default function ClientDocumentsPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {currentDocs.map((doc: unknown) => (
+          {currentDocs.map((doc) => (
             <div
               key={doc.id}
               className="rounded-2xl p-6 flex items-center justify-between transition-all duration-300"

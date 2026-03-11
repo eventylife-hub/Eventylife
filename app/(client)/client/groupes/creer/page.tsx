@@ -133,7 +133,7 @@ export default function CreerGroupePage() {
             <CardContent>
               {loading ? (
                 <div className="space-y-4">
-                  {[...Array(3)].map((_: unknown, i: number) => (
+                  {[...Array(3)].map((_, i) => (
                     <div key={i} className="h-10 rounded animate-pulse" style={{ backgroundColor: C.border }} />
                   ))}
                 </div>
@@ -204,7 +204,7 @@ export default function CreerGroupePage() {
                       required
                     >
                       <option value="">-- Sélectionner --</option>
-                      {voyages.map((v: unknown) => (
+                      {voyages.map((v) => (
                         <option key={v?.id as string} value={v?.id as string}>
                           {v?.title as string} ({formatDate(v?.departureDate as string | Date)})
                         </option>

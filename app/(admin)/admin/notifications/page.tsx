@@ -73,7 +73,7 @@ export default function AdminNotificationsPage() {
           credentials: 'include',
         });
         if (response.ok) {
-          const result = (await response.json() as unknown) as unknown;
+          const result = await response.json();
           setData(result);
         }
       } catch (_error: unknown) {
@@ -468,7 +468,7 @@ export default function AdminNotificationsPage() {
                   className="admin-input"
                 >
                   <option value="">Sélectionner un template</option>
-                  {data.templates.map((t: unknown) => (
+                  {data.templates.map((t) => (
                     <option key={t.id} value={t.id}>
                       {t.name}
                     </option>
