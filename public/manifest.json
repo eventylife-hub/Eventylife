@@ -1,0 +1,19 @@
+{
+  "name": "Eventy Life — Voyages de Groupe",
+  "short_name": "Eventy Life",
+  "description": "Réservez votre prochain voyage de groupe organisé avec Eventy Life. Transport inclus, prix tout compris.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FEFCF3",
+  "theme_color": "#FF6B35",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "lifestyle"]
+}

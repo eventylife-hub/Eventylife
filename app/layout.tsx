@@ -1,8 +1,18 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { ClientProviders } from '@/components/layout/client-providers';
 import { SkipToContent } from '@/components/a11y/skip-to-content';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FEFCF3' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A1628' },
+  ],
+};
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -46,6 +56,7 @@ export const metadata: Metadata = {
     ],
     apple: '/icons/favicon.svg',
   },
+  manifest: '/manifest.json',
   openGraph: {
     title: 'Eventy Life — Voyages de Groupe avec Accompagnement',
     description:
@@ -74,6 +85,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
+      <head>
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </head>
       <body className={`${dmSans.variable} ${playfair.variable} ${dmSans.className}`}>
         <SkipToContent />
         {children}
