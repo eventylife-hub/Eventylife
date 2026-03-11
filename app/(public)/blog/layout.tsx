@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
   title: 'Blog — Inspirations Voyage',
@@ -9,8 +10,19 @@ export const metadata: Metadata = {
     description:
       'Articles, conseils et inspirations pour vos voyages de groupe Eventy Life.',
   },
+  alternates: { canonical: 'https://eventy.fr/blog' },
 };
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Blog', href: '/blog' },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

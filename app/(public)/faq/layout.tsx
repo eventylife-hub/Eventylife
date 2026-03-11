@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
   title: 'FAQ — Questions Fréquentes',
@@ -9,8 +10,19 @@ export const metadata: Metadata = {
     description:
       'Trouvez les réponses à vos questions sur les voyages de groupe Eventy Life.',
   },
+  alternates: { canonical: 'https://eventy.fr/faq' },
 };
 
 export default function FaqLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'FAQ', href: '/faq' },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

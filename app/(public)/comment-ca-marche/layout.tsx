@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { WebPageJsonLd, BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
   title: 'Comment ça marche — Eventy Life',
@@ -21,5 +22,20 @@ export default function CommentCaMarcheLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <WebPageJsonLd
+        name="Comment ça marche — Eventy Life"
+        description="Découvrez le processus de réservation Eventy Life en 4 étapes simples."
+        url="/comment-ca-marche"
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Comment ça marche', href: '/comment-ca-marche' },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

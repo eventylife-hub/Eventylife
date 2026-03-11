@@ -29,6 +29,26 @@ interface FAQPageProps {
   items: FAQItem[];
 }
 
+interface ContactPageProps {
+  baseUrl?: string;
+}
+
+interface WebPageProps {
+  name: string;
+  description: string;
+  url: string;
+  baseUrl?: string;
+}
+
+interface BlogPostingProps {
+  title: string;
+  description: string;
+  slug: string;
+  datePublished: string;
+  image?: string;
+  baseUrl?: string;
+}
+
 interface TravelOfferProps {
   name: string;
   description: string;
@@ -167,6 +187,106 @@ export function TravelOfferJsonLd({
         value: destination,
       },
     }),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+/**
+ * JSON-LD ContactPage — Page de contact
+ */
+export function ContactPageJsonLd({ baseUrl = BASE_URL }: ContactPageProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contactez Eventy Life',
+    description:
+      'Contactez notre équipe pour toute question sur nos voyages de groupe.',
+    url: `${baseUrl}/contact`,
+    mainEntity: {
+      '@type': 'TravelAgency',
+      name: 'Eventy Life',
+      email: 'contact@eventy.life',
+      url: baseUrl,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+/**
+ * JSON-LD WebPage — Pages génériques (À propos, Comment ça marche, etc.)
+ */
+export function WebPageJsonLd({
+  name,
+  description,
+  url,
+  baseUrl = BASE_URL,
+}: WebPageProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name,
+    description,
+    url: url.startsWith('http') ? url : `${baseUrl}${url}`,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Eventy Life',
+      url: baseUrl,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+/**
+ * JSON-LD BlogPosting — Articles de blog
+ */
+export function BlogPostingJsonLd({
+  title,
+  description,
+  slug,
+  datePublished,
+  image,
+  baseUrl = BASE_URL,
+}: BlogPostingProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    url: `${baseUrl}/blog/${slug}`,
+    datePublished,
+    image: image
+      ? image.startsWith('http')
+        ? image
+        : `${baseUrl}${image}`
+      : undefined,
+    author: {
+      '@type': 'Organization',
+      name: 'Eventy Life',
+      url: baseUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Eventy Life',
+      url: baseUrl,
+    },
   };
 
   return (

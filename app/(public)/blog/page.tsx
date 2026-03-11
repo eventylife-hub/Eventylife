@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { NewsletterCTA } from '@/components/newsletter-cta';
 
 const articles = [
   {
@@ -312,64 +313,7 @@ export default function BlogPage() {
         )}
 
         {/* Newsletter CTA */}
-        <div
-          className="mt-16 text-center"
-          style={{
-            background: 'linear-gradient(135deg, #C75B39, #D97B5E)',
-            borderRadius: '24px',
-            padding: '3rem 2rem',
-            color: 'white',
-          }}
-        >
-          <h2
-            className="text-2xl sm:text-3xl mb-3"
-            style={{
-              fontWeight: '700',
-              fontFamily: 'var(--font-playfair, Playfair Display, serif)',
-            }}
-          >
-            Ne manquez aucune inspiration
-          </h2>
-          <p
-            className="mx-auto mb-6"
-            style={{
-              color: 'rgba(255,255,255,0.9)',
-              maxWidth: '42rem',
-            }}
-          >
-            Inscrivez-vous à notre newsletter et recevez nos meilleurs conseils
-            voyage et offres exclusives.
-          </p>
-          <form
-            role="search"
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              placeholder="Votre email..."
-              aria-label="Adresse email pour la newsletter"
-              className="flex-1 px-4 py-3 rounded-xl text-sm"
-              style={{
-                color: 'var(--navy, #1A1A2E)',
-                border: 'none',
-                outline: 'none',
-              }}
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 rounded-xl font-bold text-sm transition-opacity hover:opacity-90"
-              style={{
-                backgroundColor: 'var(--navy, #1A1A2E)',
-                color: 'white',
-                border: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              S&apos;inscrire
-            </button>
-          </form>
-        </div>
+        <NewsletterCTA variant="terra" className="mt-16" />
       </div>
     </div>
   );
