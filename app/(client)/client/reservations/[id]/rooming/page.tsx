@@ -45,7 +45,7 @@ interface RoomingData {
 type LoadState = 'loading' | 'error' | 'data';
 
 const paymentStatusBadge = {
-  PENDING: { bg: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+  PENDING: { bg: '#FDF6E8', color: '#92400e' },
   PARTIAL: { bg: '#FEF3C7', color: '#D97706' },
   PAID: { bg: '#DCFCE7', color: '#166534' }
 };

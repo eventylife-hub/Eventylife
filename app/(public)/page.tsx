@@ -78,7 +78,7 @@ export default function HomePage() {
             {/* Trust pill */}
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-up"
-              style={{ background: 'var(--gold, #D4A853)'Soft, color: 'var(--navy, #1A1A2E)', border: `1px solid var(--gold, #D4A853)30` }}
+              style={{ background: '#FDF6E8', color: 'var(--navy, #1A1A2E)', border: `1px solid var(--gold, #D4A853)30` }}
             >
               <span style={{ color: 'var(--gold, #D4A853)' }}>★</span>
               Plateforme n°1 de voyages de groupe en France
@@ -110,7 +110,7 @@ export default function HomePage() {
                   boxShadow: `0 6px 24px var(--terra, #C75B39)30`,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.background = '#D97B5E';
                   e.currentTarget.style.transform = 'translateY(-2px)';
                   e.currentTarget.style.boxShadow = `0 10px 32px var(--terra, #C75B39)40`;
                 }}
@@ -132,7 +132,7 @@ export default function HomePage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                  e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = '#E5E0D8';
@@ -316,7 +316,7 @@ export default function HomePage() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = '#E5E0D8';
@@ -460,6 +460,8 @@ export default function HomePage() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
                 placeholder="Votre email"
                 required
+                autoComplete="email"
+                aria-label="Adresse email pour la newsletter"
                 className="flex-1 px-5 py-3.5 rounded-xl text-sm focus:outline-none transition-shadow"
                 style={{
                   background: 'rgba(250,247,242,0.08)',
@@ -477,7 +479,7 @@ export default function HomePage() {
                   color: '#fff',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.background = '#D97B5E';
                   e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)40`;
                 }}
                 onMouseLeave={(e) => {

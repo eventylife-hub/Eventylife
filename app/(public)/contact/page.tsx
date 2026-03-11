@@ -172,6 +172,7 @@ export default function ContactPage() {
                     <input
                       id="contact-name"
                       placeholder="Votre nom"
+                      autoComplete="name"
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -194,6 +195,7 @@ export default function ContactPage() {
                       id="contact-email"
                       type="email"
                       placeholder="votre@email.com"
+                      autoComplete="email"
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })

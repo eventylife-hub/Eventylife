@@ -107,6 +107,7 @@ export function NewsletterCTA({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Votre email"
               required
+              autoComplete="email"
               aria-label="Adresse email pour la newsletter"
               className="flex-1 px-5 py-3.5 rounded-xl text-sm focus:outline-none transition-shadow"
               style={{
@@ -196,6 +197,7 @@ export function NewsletterCTA({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Votre email..."
           required
+          autoComplete="email"
           aria-label="Adresse email pour la newsletter"
           className="flex-1 px-4 py-3 rounded-xl text-sm"
           style={{

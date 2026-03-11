@@ -120,6 +120,7 @@ export default function SuiviCommandePage() {
               <input
                 id="suivi-email"
                 type="email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="votre@email.com"

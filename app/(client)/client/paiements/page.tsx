@@ -25,7 +25,7 @@ const statusLabels = {
 };
 
 const statusBadgeStyle = {
-  PENDING: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+  PENDING: { background: '#FDF6E8', color: '#92400e' },
   SUCCEEDED: { background: '#DCFCE7', color: '#166534' },
   FAILED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   REFUNDED: { background: '#EFF6FF', color: '#0369A1' },
@@ -120,7 +120,7 @@ export default function PaiementsPage() {
             }}
             onMouseEnter={(e) => {
               if (filter !== f.value) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }
             }}
             onMouseLeave={(e) => {

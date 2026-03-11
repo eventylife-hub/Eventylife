@@ -204,7 +204,7 @@ export default function InvoicePage() {
 
         {/* Paiement */}
         {(booking.paymentContributions?.length ?? 0) > 0 && (
-          <div className="mb-8 rounded-lg p-4" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft }}>
+          <div className="mb-8 rounded-lg p-4" style={{ backgroundColor: '#FDF6E8' }}>
             <h3 className="font-bold mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>Historique des Paiements</h3>
             <div className="space-y-2">
               {(booking.paymentContributions || []).map((contribution: Record<string, unknown>, idx: number) => (
@@ -236,8 +236,8 @@ export default function InvoicePage() {
           }}
           onMouseEnter={(e) => {
             if (!downloading) {
-              e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-              e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+              e.currentTarget.style.backgroundColor = '#D97B5E';
+              e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
             }
           }}
           onMouseLeave={(e) => {

@@ -123,7 +123,7 @@ export default function RejoindrePage() {
                   }}
                   onFocus={(e) => {
                     e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                    e.currentTarget.style.boxShadow = `0 0 0 3px ${'var(--terra, #C75B39)'Soft}`;
+                    e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
                   }}
                   onBlur={(e) => {
                     e.currentTarget.style.borderColor = '#E5E0D8';
@@ -146,8 +146,8 @@ export default function RejoindrePage() {
                 }}
                 onMouseEnter={(e) => {
                   if (!loading && !joining && code.trim()) {
-                    e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-                    e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+                    e.currentTarget.style.backgroundColor = '#D97B5E';
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -206,8 +206,8 @@ export default function RejoindrePage() {
                   }}
                   onMouseEnter={(e) => {
                     if (!joining) {
-                      e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-                      e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+                      e.currentTarget.style.backgroundColor = '#D97B5E';
+                      e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
                     }
                   }}
                   onMouseLeave={(e) => {

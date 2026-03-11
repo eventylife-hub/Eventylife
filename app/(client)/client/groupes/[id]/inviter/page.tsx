@@ -165,6 +165,7 @@ export default function InviterPage() {
                     id="email"
                     name="email"
                     type="email"
+                autoComplete="email"
                     placeholder="membre@example.com"
                     value={formData.email}
                     onChange={handleChange}
@@ -178,7 +179,7 @@ export default function InviterPage() {
                     }}
                     onFocus={(e) => {
                       e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                      e.currentTarget.style.boxShadow = `0 0 0 3px ${'var(--terra, #C75B39)'Soft}`;
+                      e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
                     }}
                     onBlur={(e) => {
                       e.currentTarget.style.borderColor = '#E5E0D8';
@@ -216,8 +217,8 @@ export default function InviterPage() {
                   }}
                   onMouseEnter={(e) => {
                     if (!submitting) {
-                      e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-                      e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+                      e.currentTarget.style.backgroundColor = '#D97B5E';
+                      e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -248,7 +249,7 @@ export default function InviterPage() {
                 Partagez ce code avec vos amis pour qu'ils rejoignent le groupe facilement.
               </p>
 
-              <div className="rounded-lg p-4" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, border: `2px dashed var(--gold, #D4A853)` }}>
+              <div className="rounded-lg p-4" style={{ backgroundColor: '#FDF6E8', border: `2px dashed var(--gold, #D4A853)` }}>
                 <p className="text-center text-3xl font-bold tracking-widest" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   {groupe?.code as string || '-'}
                 </p>
@@ -264,8 +265,8 @@ export default function InviterPage() {
                 }}
                 onMouseEnter={(e) => {
                   if (!codeCopied) {
-                    e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-                    e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+                    e.currentTarget.style.backgroundColor = '#D97B5E';
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
                   }
                 }}
                 onMouseLeave={(e) => {

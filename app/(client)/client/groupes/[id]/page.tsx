@@ -146,7 +146,7 @@ export default function GroupDetailPage() {
           </div>
           <span
             className="px-3 py-1 rounded-full text-sm font-semibold"
-            style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, color: '#92400e' }}
+            style={{ backgroundColor: '#FDF6E8', color: '#92400e' }}
           >
             {group.status}
           </span>
@@ -157,7 +157,7 @@ export default function GroupDetailPage() {
       {group.description && (
         <div
           className="rounded-lg p-4 mb-8"
-          style={{ backgroundColor: 'var(--terra, #C75B39)'Soft, borderLeft: '4px solid var(--terra, #C75B39)' }}
+          style={{ backgroundColor: 'rgba(199,91,57,0.1)', borderLeft: '4px solid var(--terra, #C75B39)' }}
         >
           <p style={{ color: 'var(--navy, #1A1A2E)' }}>{group.description}</p>
         </div>
@@ -268,7 +268,7 @@ export default function GroupDetailPage() {
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                  e.currentTarget.style.boxShadow = `0 0 0 3px ${'var(--terra, #C75B39)'Soft}`;
+                  e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
                 }}
                 onBlur={(e) => {
                   e.currentTarget.style.borderColor = '#E5E0D8';
@@ -283,12 +283,12 @@ export default function GroupDetailPage() {
                 className="px-4 py-2 rounded-lg font-semibold text-white transition-all hover:shadow-lg disabled:opacity-50"
                 style={{
                   backgroundColor: disabled ? '#6B7280' : 'var(--terra, #C75B39)',
-                  backgroundImage: !sendingMessage && !newMessage.trim() ? 'none' : `linear-gradient(135deg, var(--terra, #C75B39), ${'var(--terra, #C75B39)'Light})`,
+                  backgroundImage: !sendingMessage && !newMessage.trim() ? 'none' : `linear-gradient(135deg, var(--terra, #C75B39), ${'#D97B5E'})`,
                 }}
                 onMouseEnter={(e) => {
                   if (!sendingMessage && newMessage.trim()) {
-                    e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-                    e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+                    e.currentTarget.style.backgroundColor = '#D97B5E';
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -310,11 +310,11 @@ export default function GroupDetailPage() {
           className="px-6 py-3 rounded-lg font-semibold text-white text-center transition-all hover:shadow-lg"
           style={{
             backgroundColor: 'var(--terra, #C75B39)',
-            backgroundImage: `linear-gradient(135deg, var(--terra, #C75B39), ${'var(--terra, #C75B39)'Light})`,
+            backgroundImage: `linear-gradient(135deg, var(--terra, #C75B39), ${'#D97B5E'})`,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-            e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+            e.currentTarget.style.backgroundColor = '#D97B5E';
+            e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)';

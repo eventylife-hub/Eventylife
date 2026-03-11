@@ -451,6 +451,7 @@ export default function AdminNotificationsPage() {
                 </label>
                 <input
                   type="email"
+                autoComplete="email"
                   placeholder="email@example.com ou +33..."
                   value={manualRecipient}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualRecipient((e.target as HTMLInputElement).value)}

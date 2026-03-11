@@ -275,6 +275,8 @@ export default function CheckoutStep2Page() {
                       <input
                         type="text"
                         placeholder="Prénom"
+                        aria-label={`Prénom du participant ${personIndex + 1}`}
+                        autoComplete="given-name"
                         value={participant.firstName}
                         onChange={(e) =>
                           handleParticipantChange(globalIndex, 'firstName', (e.target as HTMLInputElement).value)
@@ -298,6 +300,8 @@ export default function CheckoutStep2Page() {
                       <input
                         type="text"
                         placeholder="Nom"
+                        aria-label={`Nom du participant ${personIndex + 1}`}
+                        autoComplete="family-name"
                         value={participant.lastName}
                         onChange={(e) =>
                           handleParticipantChange(globalIndex, 'lastName', (e.target as HTMLInputElement).value)
@@ -330,6 +334,8 @@ export default function CheckoutStep2Page() {
                       <input
                         type="email"
                         placeholder="Email"
+                        aria-label={`Email du participant ${personIndex + 1}`}
+                        autoComplete="email"
                         value={participant.email}
                         onChange={(e) =>
                           handleParticipantChange(globalIndex, 'email', (e.target as HTMLInputElement).value)
@@ -353,6 +359,8 @@ export default function CheckoutStep2Page() {
                       <input
                         type="tel"
                         placeholder="Téléphone"
+                        aria-label={`Téléphone du participant ${personIndex + 1}`}
+                        autoComplete="tel"
                         value={participant.phone}
                         onChange={(e) =>
                           handleParticipantChange(globalIndex, 'phone', (e.target as HTMLInputElement).value)
@@ -476,7 +484,7 @@ export default function CheckoutStep2Page() {
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'rgba(199,91,57,0.1)';
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -501,7 +509,7 @@ export default function CheckoutStep2Page() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
+                (e.target as HTMLButtonElement).style.backgroundColor = '#D97B5E';
               }
             }}
             onMouseLeave={(e) => {

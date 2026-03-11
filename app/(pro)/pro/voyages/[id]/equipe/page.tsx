@@ -226,6 +226,7 @@ export default function EquipePage() {
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Email</label>
               <input
                 type="email"
+                autoComplete="email"
                 value={inviteEmail}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInviteEmail((e.target as HTMLInputElement).value)}
                 placeholder="pro@example.com"

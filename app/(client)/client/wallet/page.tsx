@@ -38,7 +38,7 @@ const typeBadgeStyle: Record<Transaction['type'], { background: string; color: s
   CREDIT: { background: '#DCFCE7', color: '#166534' },
   DEBIT: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   REFUND: { background: '#EFF6FF', color: '#0369A1' },
-  VOUCHER: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' }
+  VOUCHER: { background: '#FDF6E8', color: '#92400e' }
 };
 
 export default function WalletPage() {
@@ -173,7 +173,7 @@ export default function WalletPage() {
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
@@ -201,7 +201,7 @@ export default function WalletPage() {
       </div>
 
       {/* Balance Card */}
-      <div className="rounded-2xl p-8" style={{ background: `linear-gradient(135deg, ${'var(--gold, #D4A853)'Soft}, var(--cream, #FAF7F2))`, border: '1.5px solid #E5E0D8' }}>
+      <div className="rounded-2xl p-8" style={{ background: `linear-gradient(135deg, ${'#FDF6E8'}, var(--cream, #FAF7F2))`, border: '1.5px solid #E5E0D8' }}>
         <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Solde disponible</p>
         <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: 'var(--gold, #D4A853)' }}>
           {formatPrice(wallet.balanceCents)}
@@ -257,7 +257,7 @@ export default function WalletPage() {
             }}
             onMouseEnter={(e) => {
               if (!voucherLoading && voucherCode.trim()) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.background = '#D97B5E';
                 e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
               }
             }}
@@ -362,7 +362,7 @@ export default function WalletPage() {
               setDateTo('');
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+              e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';

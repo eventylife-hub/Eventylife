@@ -161,7 +161,7 @@ export default function CancelReservationPage() {
       </div>
 
       {/* Politique d'annulation */}
-      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, border: '1.5px solid var(--gold, #D4A853)' }}>
+      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: '#FDF6E8', border: '1.5px solid var(--gold, #D4A853)' }}>
         <h2 className="text-xl font-bold mb-4" style={{ color: '#92400e' }}>Politique d&apos;Annulation</h2>
         <div className="space-y-3 text-sm" style={{ color: '#92400e' }}>
           <p>
@@ -260,7 +260,7 @@ export default function CancelReservationPage() {
         </div>
 
         {/* Confirmation */}
-        <div className="mb-6 rounded-lg p-4" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft }}>
+        <div className="mb-6 rounded-lg p-4" style={{ backgroundColor: '#FDF6E8' }}>
           <p className="text-sm mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
             En confirmant, vous acceptez que votre réservation soit annulée et que vous receviez
             un remboursement de <span className="font-bold">{formatCurrency(refundCalc?.refundAmountCents || 0)}</span>.

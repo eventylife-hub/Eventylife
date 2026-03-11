@@ -108,7 +108,7 @@ export default function BookingDetailPage() {
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
@@ -134,8 +134,8 @@ export default function BookingDetailPage() {
 
   const statusBadgeStyle: Record<string, { background: string; color: string }> = {
     CONFIRMED: { background: '#DCFCE7', color: '#166534' },
-    HELD: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
-    PARTIALLY_PAID: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+    HELD: { background: '#FDF6E8', color: '#92400e' },
+    PARTIALLY_PAID: { background: '#FDF6E8', color: '#92400e' },
     DRAFT: { background: '#F3F4F6', color: '#4B5563' },
     EXPIRED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
     CANCELED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
@@ -293,7 +293,7 @@ export default function BookingDetailPage() {
               className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
               style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.background = '#D97B5E';
                 e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
               }}
               onMouseLeave={(e) => {
@@ -308,7 +308,7 @@ export default function BookingDetailPage() {
               className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
               style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = '#fff';
@@ -336,7 +336,7 @@ export default function BookingDetailPage() {
           className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
           style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+            e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = '#fff';
@@ -350,7 +350,7 @@ export default function BookingDetailPage() {
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: '#fff', color: 'var(--gold, #D4A853)', border: '1.5px solid #E5E0D8' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--gold, #D4A853)'Soft;
+              e.currentTarget.style.background = '#FDF6E8';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';

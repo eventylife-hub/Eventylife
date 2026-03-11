@@ -48,7 +48,7 @@ export default function MotDePasseOubliePage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#FAF7F2',
+        backgroundColor: 'var(--cream, #FAF7F2)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -73,12 +73,12 @@ export default function MotDePasseOubliePage() {
             style={{
               fontSize: '1.5rem',
               fontWeight: '700',
-              color: '#1A1A2E',
+              color: 'var(--navy, #1A1A2E)',
               margin: 0,
               letterSpacing: '-0.5px',
             }}
           >
-            Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+            Eventy<span style={{ color: 'var(--gold, #D4A853)' }}>.</span>Life
           </h1>
         </div>
 
@@ -87,7 +87,7 @@ export default function MotDePasseOubliePage() {
           style={{
             fontSize: '1.25rem',
             fontWeight: '600',
-            color: '#1A1A2E',
+            color: 'var(--navy, #1A1A2E)',
             marginBottom: '0.5rem',
           }}
         >
@@ -139,13 +139,14 @@ export default function MotDePasseOubliePage() {
         {!submitted ? (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#1A1A2E', marginBottom: '0.25rem' }}>
+              <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>
                 Email
               </label>
               <input
                 type="email"
                 id="email"
                 value={email}
+                autoComplete="email"
                 onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
                 required
                 placeholder="votre@email.com"
@@ -159,7 +160,7 @@ export default function MotDePasseOubliePage() {
                   outline: 'none',
                   transition: 'all 200ms',
                   boxSizing: 'border-box',
-                  color: '#1A1A2E',
+                  color: 'var(--navy, #1A1A2E)',
                 }}
                 onFocus={(e) => {
                   if (!errors.email) {
@@ -218,7 +219,7 @@ export default function MotDePasseOubliePage() {
               style={{
                 width: '100%',
                 padding: '0.75rem 1rem',
-                backgroundColor: '#C75B39',
+                backgroundColor: 'var(--terra, #C75B39)',
                 color: '#FFFFFF',
                 border: 'none',
                 borderRadius: '10px',
@@ -244,7 +245,7 @@ export default function MotDePasseOubliePage() {
           <Link
             href="/connexion"
             style={{
-              color: '#C75B39',
+              color: 'var(--terra, #C75B39)',
               fontSize: '0.875rem',
               textDecoration: 'none',
               fontWeight: '500',

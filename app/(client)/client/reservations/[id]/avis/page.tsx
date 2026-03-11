@@ -129,7 +129,7 @@ export default function FeedbackPage() {
                 color: star <= rating ? 'white' : '#6B7280',
               }}
               onMouseEnter={(e) => {
-                if (star > rating) e.currentTarget.style.backgroundColor = 'var(--gold, #D4A853)'Soft;
+                if (star > rating) e.currentTarget.style.backgroundColor = '#FDF6E8';
               }}
               onMouseLeave={(e) => {
                 if (star > rating) e.currentTarget.style.backgroundColor = '#E5E0D8';
@@ -288,7 +288,7 @@ export default function FeedbackPage() {
             }}
             onFocus={(e) => {
               e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-              e.currentTarget.style.boxShadow = `0 0 0 3px ${'var(--terra, #C75B39)'Soft}`;
+              e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = '#E5E0D8';
@@ -313,8 +313,8 @@ export default function FeedbackPage() {
             }}
             onMouseEnter={(e) => {
               if (!submitting) {
-                e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
-                e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
+                e.currentTarget.style.backgroundColor = '#D97B5E';
+                e.currentTarget.style.boxShadow = `0 8px 16px ${'rgba(199,91,57,0.1)'}`;
               }
             }}
             onMouseLeave={(e) => {

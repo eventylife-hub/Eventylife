@@ -296,7 +296,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   fontSize: '0.875rem',
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
+                  (e.target as HTMLButtonElement).style.backgroundColor = 'rgba(199,91,57,0.1)';
                 }}
                 onMouseLeave={(e) => {
                   (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -650,6 +650,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                   </label>
                   <input
                     type="email"
+                autoComplete="email"
                     value={newInviteEmail}
                     onChange={e => setNewInviteEmail((e.target as HTMLInputElement).value)}
                     placeholder="exemple@mail.com"

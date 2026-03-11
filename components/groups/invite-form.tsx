@@ -75,6 +75,7 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
         <Input
           id="email"
           type="email"
+          autoComplete="email"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
           placeholder="membre@example.com"

@@ -30,7 +30,7 @@ export default function ReinitialiserMotDePassePage() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: '#FAF7F2',
+          backgroundColor: 'var(--cream, #FAF7F2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -54,12 +54,12 @@ export default function ReinitialiserMotDePassePage() {
             style={{
               fontSize: '1.5rem',
               fontWeight: '700',
-              color: '#1A1A2E',
+              color: 'var(--navy, #1A1A2E)',
               margin: '0 0 1.5rem 0',
               letterSpacing: '-0.5px',
             }}
           >
-            Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+            Eventy<span style={{ color: 'var(--gold, #D4A853)' }}>.</span>Life
           </h1>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
           <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--terra, #DC2626)', marginBottom: '0.5rem' }}>
@@ -73,7 +73,7 @@ export default function ReinitialiserMotDePassePage() {
             style={{
               display: 'inline-block',
               padding: '0.75rem 1.5rem',
-              backgroundColor: '#C75B39',
+              backgroundColor: 'var(--terra, #C75B39)',
               color: '#FFFFFF',
               borderRadius: '10px',
               textDecoration: 'none',
@@ -134,7 +134,7 @@ export default function ReinitialiserMotDePassePage() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: '#FAF7F2',
+          backgroundColor: 'var(--cream, #FAF7F2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -158,15 +158,15 @@ export default function ReinitialiserMotDePassePage() {
             style={{
               fontSize: '1.5rem',
               fontWeight: '700',
-              color: '#1A1A2E',
+              color: 'var(--navy, #1A1A2E)',
               margin: '0 0 1.5rem 0',
               letterSpacing: '-0.5px',
             }}
           >
-            Eventy<span style={{ color: '#D4A853' }}>.</span>Life
+            Eventy<span style={{ color: 'var(--gold, #D4A853)' }}>.</span>Life
           </h1>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✓</div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#1A1A2E', marginBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
             Mot de passe modifié !
           </h2>
           <p style={{ color: '#6B7280', fontSize: '0.875rem', marginBottom: '1rem' }}>
@@ -178,7 +178,7 @@ export default function ReinitialiserMotDePassePage() {
           <Link
             href="/connexion"
             style={{
-              color: '#C75B39',
+              color: 'var(--terra, #C75B39)',
               fontSize: '0.875rem',
               textDecoration: 'none',
               fontWeight: '500',
@@ -202,7 +202,7 @@ export default function ReinitialiserMotDePassePage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#FAF7F2',
+        backgroundColor: 'var(--cream, #FAF7F2)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -227,7 +227,7 @@ export default function ReinitialiserMotDePassePage() {
             style={{
               fontSize: '1.5rem',
               fontWeight: '700',
-              color: '#1A1A2E',
+              color: 'var(--navy, #1A1A2E)',
               margin: '0 0 0.5rem 0',
               letterSpacing: '-0.5px',
             }}
@@ -259,13 +259,14 @@ export default function ReinitialiserMotDePassePage() {
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Nouveau mot de passe */}
           <div>
-            <label htmlFor="password" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#1A1A2E', marginBottom: '0.25rem' }}>
+            <label htmlFor="password" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>
               Nouveau mot de passe
             </label>
             <div style={{ position: 'relative' }}>
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
                 placeholder="Min. 8 caractères"
@@ -280,7 +281,7 @@ export default function ReinitialiserMotDePassePage() {
                   outline: 'none',
                   transition: 'all 200ms',
                   boxSizing: 'border-box',
-                  color: '#1A1A2E',
+                  color: 'var(--navy, #1A1A2E)',
                 }}
                 onFocus={(e) => {
                   if (!errors.password) {
@@ -295,6 +296,7 @@ export default function ReinitialiserMotDePassePage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                 style={{
                   position: 'absolute',
                   right: '0.75rem',
@@ -327,12 +329,13 @@ export default function ReinitialiserMotDePassePage() {
 
           {/* Confirmation */}
           <div>
-            <label htmlFor="passwordConfirm" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#1A1A2E', marginBottom: '0.25rem' }}>
+            <label htmlFor="passwordConfirm" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>
               Confirmer le mot de passe
             </label>
             <input
               id="passwordConfirm"
               type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
               placeholder="Retapez votre mot de passe"
@@ -346,7 +349,7 @@ export default function ReinitialiserMotDePassePage() {
                 outline: 'none',
                 transition: 'all 200ms',
                 boxSizing: 'border-box',
-                color: '#1A1A2E',
+                color: 'var(--navy, #1A1A2E)',
               }}
               onFocus={(e) => {
                 if (!errors.passwordConfirm) {
@@ -401,7 +404,7 @@ export default function ReinitialiserMotDePassePage() {
           <Link
             href="/connexion"
             style={{
-              color: '#C75B39',
+              color: 'var(--terra, #C75B39)',
               textDecoration: 'none',
               fontWeight: '500',
               transition: 'color 200ms',

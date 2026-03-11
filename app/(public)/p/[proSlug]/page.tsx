@@ -151,7 +151,7 @@ export default function ProPublicPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
       {/* Hero Section */}
-      <section style={{ background: `linear-gradient(135deg, ${'var(--terra, #C75B39)'Soft}, ${'var(--gold, #D4A853)'Soft})`, borderRadius: '20px', padding: '2rem' }} className="md:p-12 animate-fade-up">
+      <section style={{ background: `linear-gradient(135deg, ${'rgba(199,91,57,0.1)'}, ${'#FDF6E8'})`, borderRadius: '20px', padding: '2rem' }} className="md:p-12 animate-fade-up">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <div style={{ width: '8rem', height: '8rem', backgroundColor: '#E5E0D8', borderRadius: '9999px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
@@ -167,7 +167,7 @@ export default function ProPublicPage() {
               <button
                 style={{ backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onClick={() => document.getElementById('voyages')?.scrollIntoView({ behavior: 'smooth' })}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}
               >
                 Voir les voyages
@@ -206,7 +206,7 @@ export default function ProPublicPage() {
           {pro.travels.map((voyage) => (
             <div key={voyage.id} style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
               <CardContent className="p-6 flex flex-col h-full">
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'var(--gold, #D4A853)'Soft, color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: '#FDF6E8', color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>
                   {formatDate(voyage.startDate)}
                 </span>
 
@@ -225,7 +225,7 @@ export default function ProPublicPage() {
                     À partir de {formatPrice(voyage.price)}
                   </p>
                   <Link href={`/voyages/${voyage.id}`}>
-                    <button style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
+                    <button style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
                       Réserver
                     </button>
                   </Link>
@@ -271,6 +271,7 @@ export default function ProPublicPage() {
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Email</label>
               <Input
                 type="email"
+                autoComplete="email"
                 placeholder="votre@email.com"
                 value={leadForm.email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, email: (e.target as HTMLInputElement).value })}
@@ -307,7 +308,7 @@ export default function ProPublicPage() {
             <button
               type="submit"
               style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}
             >
               Être rappelé
@@ -342,11 +343,12 @@ export default function ProPublicPage() {
             )}
 
             {/* Follow Email Opt-in */}
-            <div style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, borderRadius: '12px', padding: '1rem' }}>
+            <div style={{ backgroundColor: '#FDF6E8', borderRadius: '12px', padding: '1rem' }}>
               <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>Suivre les voyages</h4>
               <form role="search" onSubmit={handleFollowEmail} className="space-y-2">
                 <Input
                   type="email"
+                autoComplete="email"
                   placeholder="votre@email.com"
                   value={followEmail}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFollowEmail((e.target as HTMLInputElement).value)}
@@ -355,7 +357,7 @@ export default function ProPublicPage() {
                 <button
                   type="submit"
                   style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}
                 >
                   S&apos;abonner
@@ -367,7 +369,7 @@ export default function ProPublicPage() {
       </section>
 
       {/* Share Section */}
-      <section style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, borderRadius: '12px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }} className="md:flex-row md:items-center md:justify-between md:gap-4 animate-fade-up">
+      <section style={{ backgroundColor: '#FDF6E8', borderRadius: '12px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }} className="md:flex-row md:items-center md:justify-between md:gap-4 animate-fade-up">
         <p style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)' }}>Partager ce profil</p>
         <div className="flex gap-2 flex-wrap">
           {shareUrl && (

@@ -136,6 +136,7 @@ export default function ConnexionPage() {
               type="email"
               id="email"
               name="email"
+                autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -143,7 +144,7 @@ export default function ConnexionPage() {
               placeholder="votre@email.com"
               onFocus={(e) => {
                 if (!errors.email) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                e.currentTarget.style.boxShadow = `0 0 0 3px var(--terra, #C75B39)15`;
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.08)';
               }}
               onBlur={(e) => {
                 if (!errors.email) e.currentTarget.style.borderColor = '#E5E0D8';
@@ -166,6 +167,7 @@ export default function ConnexionPage() {
               type="password"
               id="password"
               name="password"
+              autoComplete="current-password"
               value={formData.password}
               onChange={handleChange}
               required
@@ -173,7 +175,7 @@ export default function ConnexionPage() {
               placeholder="••••••••"
               onFocus={(e) => {
                 if (!errors.password) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                e.currentTarget.style.boxShadow = `0 0 0 3px var(--terra, #C75B39)15`;
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.08)';
               }}
               onBlur={(e) => {
                 if (!errors.password) e.currentTarget.style.borderColor = '#E5E0D8';
@@ -194,8 +196,8 @@ export default function ConnexionPage() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
-                e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
+                e.currentTarget.style.background = '#D97B5E';
+                e.currentTarget.style.boxShadow = '0 6px 24px rgba(199,91,57,0.18)';
               }
             }}
             onMouseLeave={(e) => {

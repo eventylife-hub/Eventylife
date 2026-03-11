@@ -356,7 +356,7 @@ export default function CheckoutConfirmationPage() {
             }}
             onMouseEnter={(e) => {
               if (!downloading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
+                (e.target as HTMLButtonElement).style.backgroundColor = 'rgba(199,91,57,0.1)';
               }
             }}
             onMouseLeave={(e) => {
@@ -381,7 +381,7 @@ export default function CheckoutConfirmationPage() {
               boxShadow: `0 10px 25px -5px rgba(199, 91, 57, 0.2)`,
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
+              (e.target as HTMLButtonElement).style.backgroundColor = '#D97B5E';
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)';
@@ -402,7 +402,7 @@ export default function CheckoutConfirmationPage() {
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'rgba(199,91,57,0.1)';
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';

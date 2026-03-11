@@ -291,7 +291,7 @@ export default function DepartPage() {
             {(minDate || maxDate || minPrice || maxPrice || minDuration || maxDuration || selectedThemes.length > 0) && (
               <button
                 style={{ width: '100%', backgroundColor: 'white', color: 'var(--terra, #C75B39)', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', border: '1.5px solid #E5E0D8', fontWeight: '700', cursor: 'pointer', transition: 'all 0.3s ease' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Soft; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.backgroundColor = 'rgba(199,91,57,0.1)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.backgroundColor = 'white'; }}
                 onClick={() => {
                   setMinDate('');
@@ -318,14 +318,14 @@ export default function DepartPage() {
               return (
                 <Link key={voyage.id} href={`/voyages/${voyage.id}`}>
                   <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-                    <div style={{ aspectRatio: '16/9', background: `linear-gradient(135deg, var(--cream, #FAF7F2), ${'var(--gold, #D4A853)'Soft})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
+                    <div style={{ aspectRatio: '16/9', background: `linear-gradient(135deg, var(--cream, #FAF7F2), ${'#FDF6E8'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
                       {voyage.image}
                     </div>
                     <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'var(--gold, #D4A853)'Soft, color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>{voyage.daysCount} jours</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: '#FDF6E8', color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>{voyage.daysCount} jours</span>
                         {available <= 5 && (
-                          <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'var(--terra, #C75B39)'Soft, color: 'var(--terra, #C75B39)', padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>Peu de places</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'rgba(199,91,57,0.1)', color: 'var(--terra, #C75B39)', padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>Peu de places</span>
                         )}
                       </div>
 
@@ -358,7 +358,7 @@ export default function DepartPage() {
                         </span>
                       </div>
 
-                      <button style={{ width: '100%', marginTop: '1rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
+                      <button style={{ width: '100%', marginTop: '1rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
                         Voir détails
                       </button>
                     </div>

@@ -229,7 +229,7 @@ export default function CheckoutStep1Page() {
                   cursor: 'pointer',
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
+                  (e.target as HTMLButtonElement).style.backgroundColor = 'rgba(199,91,57,0.1)';
                 }}
                 onMouseLeave={(e) => {
                   (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -297,7 +297,7 @@ export default function CheckoutStep1Page() {
                       fontSize: '0.875rem',
                       color: '#6B7280',
                       padding: '1rem',
-                      backgroundColor: 'var(--gold, #D4A853)'Soft,
+                      backgroundColor: '#FDF6E8',
                       borderRadius: '10px',
                       border: '1.5px solid #E5E0D8',
                     }}
@@ -331,7 +331,7 @@ export default function CheckoutStep1Page() {
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
+              (e.target as HTMLButtonElement).style.backgroundColor = 'rgba(199,91,57,0.1)';
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -356,7 +356,7 @@ export default function CheckoutStep1Page() {
             }}
             onMouseEnter={(e) => {
               if (!loading) {
-                (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Light;
+                (e.target as HTMLButtonElement).style.backgroundColor = '#D97B5E';
               }
             }}
             onMouseLeave={(e) => {

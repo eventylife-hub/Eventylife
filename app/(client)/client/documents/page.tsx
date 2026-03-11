@@ -208,14 +208,14 @@ export default function ClientDocumentsPage() {
                 <button
                   onClick={() => handleDownload(doc.id)}
                   className="p-2 rounded-xl transition-all"
-                  style={{ background: 'var(--terra, #C75B39)'Soft, color: 'var(--terra, #C75B39)' }}
+                  style={{ background: 'rgba(199,91,57,0.1)', color: 'var(--terra, #C75B39)' }}
                   title="Télécharger"
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = 'var(--terra, #C75B39)';
                     e.currentTarget.style.color = '#fff';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                    e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                     e.currentTarget.style.color = 'var(--terra, #C75B39)';
                   }}
                 >
@@ -254,7 +254,7 @@ export default function ClientDocumentsPage() {
             }}
             onMouseEnter={(e) => {
               if (!downloadingAll) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }
             }}
             onMouseLeave={(e) => {

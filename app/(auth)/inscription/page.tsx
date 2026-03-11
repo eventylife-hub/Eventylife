@@ -111,7 +111,7 @@ export default function InscriptionPage() {
         style={{
           width: '100%',
           maxWidth: '448px',
-          backgroundColor: C.white,
+          backgroundColor: '#FFFFFF',
           borderRadius: '20px',
           border: '1.5px solid #E5E0D8',
           boxShadow: '0 8px 40px rgba(26,26,46,0.08)',
@@ -162,9 +162,9 @@ export default function InscriptionPage() {
             style={{
               marginBottom: '1rem',
               padding: '0.75rem',
-              backgroundColor: C.errorBg,
-              border: `1px solid ${C.error}`,
-              color: C.error,
+              backgroundColor: '#FEF2F2',
+              border: `1px solid ${'#DC2626'}`,
+              color: '#DC2626',
               fontSize: '0.875rem',
               borderRadius: '8px',
             }}
@@ -194,14 +194,15 @@ export default function InscriptionPage() {
                 type="text"
                 id="firstName"
                 name="firstName"
+                autoComplete="given-name"
                 value={formData.firstName}
                 onChange={handleChange}
                 required
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  backgroundColor: C.white,
-                  border: `1.5px solid ${errors.firstName ? C.error : '#E5E0D8'}`,
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${errors.firstName ? '#DC2626' : '#E5E0D8'}`,
                   borderRadius: '10px',
                   fontSize: '0.875rem',
                   color: 'var(--navy, #1A1A2E)',
@@ -214,11 +215,11 @@ export default function InscriptionPage() {
                   }
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = errors.firstName ? C.error : '#E5E0D8';
+                  e.currentTarget.style.borderColor = errors.firstName ? '#DC2626' : '#E5E0D8';
                 }}
               />
               {errors.firstName && (
-                <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                   {errors.firstName}
                 </p>
               )}
@@ -240,14 +241,15 @@ export default function InscriptionPage() {
                 type="text"
                 id="lastName"
                 name="lastName"
+                autoComplete="family-name"
                 value={formData.lastName}
                 onChange={handleChange}
                 required
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  backgroundColor: C.white,
-                  border: `1.5px solid ${errors.lastName ? C.error : '#E5E0D8'}`,
+                  backgroundColor: '#FFFFFF',
+                  border: `1.5px solid ${errors.lastName ? '#DC2626' : '#E5E0D8'}`,
                   borderRadius: '10px',
                   fontSize: '0.875rem',
                   color: 'var(--navy, #1A1A2E)',
@@ -260,11 +262,11 @@ export default function InscriptionPage() {
                   }
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = errors.lastName ? C.error : '#E5E0D8';
+                  e.currentTarget.style.borderColor = errors.lastName ? '#DC2626' : '#E5E0D8';
                 }}
               />
               {errors.lastName && (
-                <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                   {errors.lastName}
                 </p>
               )}
@@ -289,14 +291,15 @@ export default function InscriptionPage() {
               type="email"
               id="email"
               name="email"
+                autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               required
               style={{
                 width: '100%',
                 padding: '0.75rem 1rem',
-                backgroundColor: C.white,
-                border: `1.5px solid ${errors.email ? C.error : '#E5E0D8'}`,
+                backgroundColor: '#FFFFFF',
+                border: `1.5px solid ${errors.email ? '#DC2626' : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
                 color: 'var(--navy, #1A1A2E)',
@@ -309,11 +312,11 @@ export default function InscriptionPage() {
                 }
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.email ? C.error : '#E5E0D8';
+                e.currentTarget.style.borderColor = errors.email ? '#DC2626' : '#E5E0D8';
               }}
             />
             {errors.email && (
-              <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.email}
               </p>
             )}
@@ -337,13 +340,14 @@ export default function InscriptionPage() {
               type="tel"
               id="phone"
               name="phone"
+                autoComplete="tel"
               value={formData.phone}
               onChange={handleChange}
               placeholder="06 12 34 56 78"
               style={{
                 width: '100%',
                 padding: '0.75rem 1rem',
-                backgroundColor: C.white,
+                backgroundColor: '#FFFFFF',
                 border: '1.5px solid #E5E0D8',
                 borderRadius: '10px',
                 fontSize: '0.875rem',
@@ -382,7 +386,7 @@ export default function InscriptionPage() {
               style={{
                 width: '100%',
                 padding: '0.75rem 1rem',
-                backgroundColor: C.white,
+                backgroundColor: '#FFFFFF',
                 border: '1.5px solid #E5E0D8',
                 borderRadius: '10px',
                 fontSize: '0.875rem',
@@ -421,6 +425,7 @@ export default function InscriptionPage() {
               type="password"
               id="password"
               name="password"
+                autoComplete="new-password"
               value={formData.password}
               onChange={handleChange}
               required
@@ -428,8 +433,8 @@ export default function InscriptionPage() {
               style={{
                 width: '100%',
                 padding: '0.75rem 1rem',
-                backgroundColor: C.white,
-                border: `1.5px solid ${errors.password ? C.error : '#E5E0D8'}`,
+                backgroundColor: '#FFFFFF',
+                border: `1.5px solid ${errors.password ? '#DC2626' : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
                 color: 'var(--navy, #1A1A2E)',
@@ -442,11 +447,11 @@ export default function InscriptionPage() {
                 }
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.password ? C.error : '#E5E0D8';
+                e.currentTarget.style.borderColor = errors.password ? '#DC2626' : '#E5E0D8';
               }}
             />
             {errors.password && (
-              <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.password}
               </p>
             )}
@@ -470,6 +475,7 @@ export default function InscriptionPage() {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
+                autoComplete="new-password"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
@@ -477,8 +483,8 @@ export default function InscriptionPage() {
               style={{
                 width: '100%',
                 padding: '0.75rem 1rem',
-                backgroundColor: C.white,
-                border: `1.5px solid ${errors.confirmPassword ? C.error : '#E5E0D8'}`,
+                backgroundColor: '#FFFFFF',
+                border: `1.5px solid ${errors.confirmPassword ? '#DC2626' : '#E5E0D8'}`,
                 borderRadius: '10px',
                 fontSize: '0.875rem',
                 color: 'var(--navy, #1A1A2E)',
@@ -491,11 +497,11 @@ export default function InscriptionPage() {
                 }
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = errors.confirmPassword ? C.error : '#E5E0D8';
+                e.currentTarget.style.borderColor = errors.confirmPassword ? '#DC2626' : '#E5E0D8';
               }}
             />
             {errors.confirmPassword && (
-              <p style={{ color: C.error, fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.confirmPassword}
               </p>
             )}
@@ -572,8 +578,8 @@ export default function InscriptionPage() {
               width: '100%',
               padding: '0.75rem 1rem',
               marginTop: '0.5rem',
-              backgroundColor: submitButtonHover && !loading ? 'var(--terra, #C75B39)'Light : 'var(--terra, #C75B39)',
-              color: C.white,
+              backgroundColor: submitButtonHover && !loading ? '#D97B5E' : 'var(--terra, #C75B39)',
+              color: '#FFFFFF',
               borderRadius: '10px',
               border: 'none',
               fontSize: '0.875rem',

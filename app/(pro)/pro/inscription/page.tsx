@@ -280,6 +280,7 @@ export default function InscriptionPage() {
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Email professionnel *</label>
                 <input
                   type="email"
+                autoComplete="email"
                   value={form.email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, email: (e.target as HTMLInputElement).value })}
                   placeholder="pro@example.com"

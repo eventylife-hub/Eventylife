@@ -82,6 +82,7 @@ export default function ProForgotPasswordPage() {
                   </label>
                   <input
                     type="email"
+                autoComplete="email"
                     id="email"
                     value={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}

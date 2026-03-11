@@ -88,7 +88,7 @@ export default function NotificationsPage() {
               border: '1.5px solid #E5E0D8',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+              e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';
@@ -110,7 +110,7 @@ export default function NotificationsPage() {
             }}
             onMouseEnter={(e) => {
               if (filter !== null) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }
             }}
             onMouseLeave={(e) => {
@@ -133,7 +133,7 @@ export default function NotificationsPage() {
               }}
               onMouseEnter={(e) => {
                 if (filter !== type) {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                  e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                 }
               }}
               onMouseLeave={(e) => {
@@ -176,7 +176,7 @@ export default function NotificationsPage() {
                   border: '1.5px solid #E5E0D8',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                  e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = '#fff';

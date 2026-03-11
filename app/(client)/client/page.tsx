@@ -205,7 +205,7 @@ export default function ClientDashboardPage() {
                   <div
                     className="inline-block px-4 py-2 rounded-xl text-sm font-semibold"
                     style={{
-                      background: days > 0 ? 'var(--gold, #D4A853)'Soft : '#DCFCE7',
+                      background: days > 0 ? '#FDF6E8' : '#DCFCE7',
                       color: days > 0 ? '#92400e' : '#166534',
                     }}
                   >
@@ -218,7 +218,7 @@ export default function ClientDashboardPage() {
                 className="inline-block mt-4 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 w-fit"
                 style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.background = '#D97B5E';
                   e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
                 }}
                 onMouseLeave={(e) => {
@@ -287,7 +287,7 @@ export default function ClientDashboardPage() {
             className="inline-block px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
             }}
             onMouseLeave={(e) => {

@@ -142,7 +142,7 @@ export default function AssurancePage() {
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
             }}
             onMouseLeave={(e) => {
@@ -157,7 +157,7 @@ export default function AssurancePage() {
         <div className="space-y-4">
           {insurances.map((insurance) => {
             const statusBadgeStyle = {
-              background: insurance?.status === 'CONFIRMED' ? '#DCFCE7' : 'var(--gold, #D4A853)'Soft,
+              background: insurance?.status === 'CONFIRMED' ? '#DCFCE7' : '#FDF6E8',
               color: insurance?.status === 'CONFIRMED' ? '#166534' : '#92400e',
             };
 
@@ -216,7 +216,7 @@ export default function AssurancePage() {
                     }}
                     onMouseEnter={(e) => {
                       if (downloadingId !== (insurance?.subscriptionId as string)) {
-                        e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                        e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                       }
                     }}
                     onMouseLeave={(e) => {

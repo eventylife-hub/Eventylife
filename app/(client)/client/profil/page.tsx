@@ -315,6 +315,7 @@ export default function ProfilePage() {
             </label>
             <input
               type="email"
+                autoComplete="email"
               value={profile.email}
               disabled
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -332,6 +333,7 @@ export default function ProfilePage() {
             </label>
             <input
               type="text"
+              autoComplete="given-name"
               value={form.firstName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, firstName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -353,6 +355,7 @@ export default function ProfilePage() {
             </label>
             <input
               type="text"
+              autoComplete="family-name"
               value={form.lastName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, lastName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -374,6 +377,7 @@ export default function ProfilePage() {
             </label>
             <input
               type="tel"
+              autoComplete="tel"
               value={form.phone}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -397,7 +401,7 @@ export default function ProfilePage() {
               style={{ background: 'var(--terra, #C75B39)', color: '#fff', opacity: saving ? 0.6 : 1 }}
               onMouseEnter={(e) => {
                 if (!saving) {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.background = '#D97B5E';
                   e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
                 }
               }}
@@ -424,7 +428,7 @@ export default function ProfilePage() {
               className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
               style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = '#fff';
@@ -446,7 +450,7 @@ export default function ProfilePage() {
             className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
             style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+              e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';
@@ -461,7 +465,7 @@ export default function ProfilePage() {
             style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', opacity: enabling2FA ? 0.6 : 1 }}
             onMouseEnter={(e) => {
               if (!enabling2FA) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }
             }}
             onMouseLeave={(e) => {
@@ -484,9 +488,9 @@ export default function ProfilePage() {
 
       {/* Modal changement mot de passe */}
       {showPasswordModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" role="dialog" aria-modal="true" aria-labelledby="password-modal-title">
           <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
-            <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Changer mon mot de passe</h3>
+            <h3 id="password-modal-title" className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Changer mon mot de passe</h3>
 
             {passwordError && (
               <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5', color: 'var(--terra, #DC2626)' }}>
@@ -504,6 +508,7 @@ export default function ProfilePage() {
                 <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Mot de passe actuel</label>
                 <input
                   type="password"
+                  autoComplete="current-password"
                   value={passwordForm.currentPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, currentPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -521,6 +526,7 @@ export default function ProfilePage() {
                 <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Nouveau mot de passe</label>
                 <input
                   type="password"
+                  autoComplete="new-password"
                   value={passwordForm.newPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, newPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -539,6 +545,7 @@ export default function ProfilePage() {
                 <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Confirmer le mot de passe</label>
                 <input
                   type="password"
+                  autoComplete="new-password"
                   value={passwordForm.confirmPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, confirmPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -561,7 +568,7 @@ export default function ProfilePage() {
                   style={{ background: 'var(--terra, #C75B39)', color: '#fff', opacity: changingPassword ? 0.6 : 1 }}
                   onMouseEnter={(e) => {
                     if (!changingPassword) {
-                      e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                      e.currentTarget.style.background = '#D97B5E';
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -582,7 +589,7 @@ export default function ProfilePage() {
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
                   style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                    e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = '#fff';
@@ -598,9 +605,9 @@ export default function ProfilePage() {
 
       {/* Modal 2FA setup */}
       {show2FAModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" role="dialog" aria-modal="true" aria-labelledby="2fa-modal-title">
           <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
-            <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Configurer la double authentification</h3>
+            <h3 id="2fa-modal-title" className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Configurer la double authentification</h3>
 
             <div className="space-y-4">
               <p className="text-xs" style={{ color: '#6B7280' }}>
@@ -625,6 +632,8 @@ export default function ProfilePage() {
                 <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Code de vérification</label>
                 <input
                   type="text"
+                  autoComplete="one-time-code"
+                  inputMode="numeric"
                   value={twoFACode}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTwoFACode((e.target as HTMLInputElement).value.replace(/\D/g, '').slice(0, 6))}
                   placeholder="123456"
@@ -648,7 +657,7 @@ export default function ProfilePage() {
                   style={{ background: 'var(--terra, #C75B39)', color: '#fff', opacity: enabling2FA || twoFACode.length !== 6 ? 0.6 : 1 }}
                   onMouseEnter={(e) => {
                     if (!enabling2FA && twoFACode.length === 6) {
-                      e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                      e.currentTarget.style.background = '#D97B5E';
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -667,7 +676,7 @@ export default function ProfilePage() {
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
                   style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                    e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = '#fff';

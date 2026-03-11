@@ -164,7 +164,7 @@ export default function AvisPage() {
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
@@ -249,7 +249,7 @@ export default function AvisPage() {
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.background = '#D97B5E';
                   e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
                 }}
                 onMouseLeave={(e) => {
@@ -265,7 +265,7 @@ export default function AvisPage() {
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                  e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = '#fff';
@@ -296,7 +296,7 @@ export default function AvisPage() {
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
             }}
             onMouseLeave={(e) => {
@@ -319,7 +319,7 @@ export default function AvisPage() {
                 <span
                   className="px-3 py-1 rounded-xl text-xs font-semibold"
                   style={{
-                    background: review.status === 'APPROVED' ? '#DCFCE7' : 'var(--gold, #D4A853)'Soft,
+                    background: review.status === 'APPROVED' ? '#DCFCE7' : '#FDF6E8',
                     color: review.status === 'APPROVED' ? '#166534' : '#92400e',
                   }}
                 >

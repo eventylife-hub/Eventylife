@@ -32,7 +32,7 @@ const statusLabels: Record<string, string> = {
 
 const statusBadgeStyle: Record<string, { background: string; color: string }> = {
   OPEN: { background: '#EFF6FF', color: '#0369A1' },
-  IN_PROGRESS: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+  IN_PROGRESS: { background: '#FDF6E8', color: '#92400e' },
   WAITING_CLIENT: { background: '#FEF3C7', color: '#92400e' },
   RESOLVED: { background: '#DCFCE7', color: '#166534' },
   CLOSED: { background: '#F3F4F6', color: '#4B5563' },
@@ -40,7 +40,7 @@ const statusBadgeStyle: Record<string, { background: string; color: string }> = 
 
 const priorityBadgeStyle: Record<string, { background: string; color: string }> = {
   LOW: { background: '#EFF6FF', color: '#0369A1' },
-  MEDIUM: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+  MEDIUM: { background: '#FDF6E8', color: '#92400e' },
   HIGH: { background: '#FEF3C7', color: '#92400e' },
   URGENT: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
 };
@@ -174,7 +174,7 @@ export default function SupportPage() {
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
@@ -205,7 +205,7 @@ export default function SupportPage() {
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
@@ -239,10 +239,11 @@ export default function SupportPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="ticket-subject" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Sujet *
               </label>
               <input
+                id="ticket-subject"
                 type="text"
                 value={formData.subject}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, subject: (e.target as HTMLInputElement).value })}
@@ -261,10 +262,11 @@ export default function SupportPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+                <label htmlFor="ticket-category" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   Catégorie
                 </label>
                 <select
+                  id="ticket-category"
                   value={formData.category}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
@@ -283,10 +285,11 @@ export default function SupportPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+                <label htmlFor="ticket-priority" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   Priorité
                 </label>
                 <select
+                  id="ticket-priority"
                   value={formData.priority}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, priority: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
@@ -306,10 +309,11 @@ export default function SupportPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="ticket-message" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Message *
               </label>
               <textarea
+                id="ticket-message"
                 value={formData.message}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, message: (e.target as HTMLInputElement).value })}
                 placeholder="Décrivez votre problème en détail. Plus vous donnez de détails, plus nous pourrons vous aider rapidement."
@@ -341,7 +345,7 @@ export default function SupportPage() {
                 }}
                 onMouseEnter={(e) => {
                   if (!submitting) {
-                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                    e.currentTarget.style.background = '#D97B5E';
                     e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
                   }
                 }}
@@ -362,7 +366,7 @@ export default function SupportPage() {
                   border: '1.5px solid #E5E0D8',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                  e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = '#fff';
@@ -393,7 +397,7 @@ export default function SupportPage() {
             }}
             onMouseEnter={(e) => {
               if (filter !== f.key) {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
               }
             }}
             onMouseLeave={(e) => {
@@ -425,7 +429,7 @@ export default function SupportPage() {
               className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
               style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.background = '#D97B5E';
                 e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
               }}
               onMouseLeave={(e) => {
