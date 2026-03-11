@@ -136,7 +136,7 @@ function VoyagesContent() {
           style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
         >
           <p className="text-base mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
-          <button
+          <button type="button"
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
@@ -162,7 +162,7 @@ function VoyagesContent() {
               : 'Aucun voyage ne correspond à vos critères.'}
           </p>
           {destination && (
-            <button
+            <button type="button"
               onClick={() => setDestination('')}
               className="mt-4 px-5 py-2 rounded-xl text-sm font-semibold transition-all"
               style={{ border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)', background: 'transparent' }}

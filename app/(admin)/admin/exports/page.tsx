@@ -266,7 +266,7 @@ export default function ExportsPage() {
       {toastMessage && (
         <div className="admin-alert-bar danger">
           <span>{toastMessage}</span>
-          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
             Fermer
           </button>
         </div>
@@ -279,7 +279,7 @@ export default function ExportsPage() {
         <div className="admin-panel-body">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {exportTypes.map((type) => (
-              <button
+              <button type="button"
                 key={type.value}
                 onClick={() => handleQuickExport(type.value as ExportType, 'CSV')}
                 className="admin-btn-secondary"
@@ -296,7 +296,7 @@ export default function ExportsPage() {
       <div className="admin-panel">
         <div className="admin-panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3 className="admin-panel-title">Historique des exports</h3>
-          <button onClick={() => setIsDialogOpen(true)} className="admin-btn-primary" style={{ fontSize: '14px' }}>
+          <button type="button" onClick={() => setIsDialogOpen(true)} className="admin-btn-primary" style={{ fontSize: '14px' }}>
             Générer un export
           </button>
         </div>
@@ -389,14 +389,14 @@ export default function ExportsPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button
+              <button type="button"
                 onClick={() => setIsDialogOpen(false)}
                 className="admin-btn-secondary"
                 style={{ flex: 1 }}
               >
                 Annuler
               </button>
-              <button
+              <button type="button"
                 onClick={handleGenerateExport}
                 disabled={isGenerating || !motif.trim()}
                 className="admin-btn-primary"

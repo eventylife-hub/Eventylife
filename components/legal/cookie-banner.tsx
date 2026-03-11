@@ -49,7 +49,7 @@ export function CookieBanner() {
 
           {/* Boutons */}
           <div className="flex flex-shrink-0 gap-3">
-            <button
+            <button type="button"
               onClick={handleRefuse}
               className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
             >
@@ -63,7 +63,7 @@ export function CookieBanner() {
               Personnaliser
             </Link>
 
-            <button
+            <button type="button"
               onClick={handleAcceptAll}
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
             >

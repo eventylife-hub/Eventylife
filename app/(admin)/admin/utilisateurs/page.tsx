@@ -150,7 +150,7 @@ export default function UtilisateursPage() {
       {/* En-tête */}
       <div className="flex justify-between items-start gap-4 admin-fade-in delay-1">
         {error && (
-          <button
+          <button type="button"
             onClick={() => fetchUsers()}
             className="admin-btn-secondary gap-2 flex items-center text-sm"
           >
@@ -244,7 +244,7 @@ export default function UtilisateursPage() {
             Page {page} sur {totalPages}
           </p>
           <div className="flex gap-2">
-            <button
+            <button type="button"
               onClick={() => setPage(Math.max(1, page - 1))}
               disabled={page === 1 || loading}
               className="admin-btn-secondary gap-2 flex items-center text-sm disabled:opacity-50"
@@ -252,7 +252,7 @@ export default function UtilisateursPage() {
               <ChevronLeft className="w-4 h-4" />
               Précédent
             </button>
-            <button
+            <button type="button"
               onClick={() => setPage(Math.min(totalPages, page + 1))}
               disabled={page === totalPages || loading}
               className="admin-btn-secondary gap-2 flex items-center text-sm disabled:opacity-50"

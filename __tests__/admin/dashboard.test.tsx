@@ -69,7 +69,7 @@ jest.mock('@/components/ui/button', () => ({
     children: React.ReactNode;
     [key: string]: unknown;
   }) => {
-    return <button {...props}>{children}</button>;
+    return <button type="button" {...props}>{children}</button>;
   },
 }));
 

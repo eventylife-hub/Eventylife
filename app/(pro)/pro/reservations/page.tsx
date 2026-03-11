@@ -86,7 +86,7 @@ export default function ProReservationsPage() {
             <p style={{ color: '#8896A6', marginTop: '4px' }}>Gerez les reservations de vos voyages</p>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
-            <button
+            <button type="button"
               onClick={fetchReservations}
               className="pro-btn-outline"
               style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
@@ -119,7 +119,7 @@ export default function ProReservationsPage() {
 
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {['CONFIRMED', 'PENDING', 'CANCELLED', 'COMPLETED'].map((status) => (
-                <button
+                <button type="button"
                   key={status}
                   onClick={() =>
                     setStatusFilter(statusFilter === status ? null : status)
@@ -150,7 +150,7 @@ export default function ProReservationsPage() {
               <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)' }} />
               <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
             </div>
-            <button onClick={fetchReservations} className="pro-btn-outline">
+            <button type="button" onClick={fetchReservations} className="pro-btn-outline">
               Reessayer
             </button>
           </div>

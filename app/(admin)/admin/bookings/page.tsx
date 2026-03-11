@@ -186,7 +186,7 @@ export default function AdminBookingsPage() {
           }}
         >
           <span>{toastMessage.message}</span>
-          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
             Fermer
           </button>
         </div>
@@ -278,7 +278,7 @@ export default function AdminBookingsPage() {
           {error && (
             <div className="admin-alert-bar danger mb-6">
               <span>{error}</span>
-              <button className="ml-4 text-sm font-medium hover:underline" onClick={() => fetchBookings()}>
+              <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => fetchBookings()}>
                 Réessayer
               </button>
             </div>
@@ -296,7 +296,7 @@ export default function AdminBookingsPage() {
                 <div style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--admin-text-secondary)' }}>
                   <AlertCircle className="mx-auto h-12 w-12 mb-4" style={{ color: 'var(--admin-text-muted)' }} />
                   <p style={{ marginBottom: '16px', fontWeight: '500' }}>Aucune réservation trouvée</p>
-                  <button
+                  <button type="button"
                     className="admin-btn-secondary"
                     onClick={() => {
                       setSearchQuery('');
@@ -358,7 +358,7 @@ export default function AdminBookingsPage() {
                   ? 'Prolonger la validité du hold'
                   : 'Marquer en exception manuelle'}
               </h2>
-              <button
+              <button type="button"
                 onClick={() => setShowActionModal(false)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
               >

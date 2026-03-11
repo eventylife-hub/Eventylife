@@ -103,7 +103,7 @@ export default function BookingDetailPage() {
         </Link>
         <div className="p-6 rounded-2xl mt-6" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
-          <button
+          <button type="button"
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}

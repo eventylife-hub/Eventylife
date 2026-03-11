@@ -104,7 +104,7 @@ export default function AssurancePage() {
             <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>
               ⚠️ {error}
             </p>
-            <button
+            <button type="button"
               onClick={() => setError(null)}
               className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
               style={{
@@ -137,7 +137,7 @@ export default function AssurancePage() {
           <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
             Protégez vos voyages avec une assurance annulation
           </p>
-          <button
+          <button type="button"
             onClick={() => (window.location.href = '/client/reservations')}
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
@@ -203,7 +203,7 @@ export default function AssurancePage() {
                     </span>
                   </div>
 
-                  <button
+                  <button type="button"
                     onClick={() => handleDownloadCertificate(insurance?.subscriptionId as string)}
                     disabled={downloadingId === (insurance?.subscriptionId as string)}
                     className="w-full px-6 py-3 rounded-xl font-semibold text-sm transition-all"

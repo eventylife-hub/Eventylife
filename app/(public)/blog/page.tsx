@@ -173,7 +173,7 @@ export default function BlogPage() {
         {/* Catégories filtre */}
         <div className="flex flex-wrap gap-2 mb-10 justify-center mt-6">
           {categories.map((cat) => (
-            <button
+            <button type="button"
               key={cat}
               onClick={() => setActiveCategory(cat)}
               style={{

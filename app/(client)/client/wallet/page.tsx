@@ -168,7 +168,7 @@ export default function WalletPage() {
       <div className="max-w-6xl mx-auto animate-fade-up">
         <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ Erreur : {error}</p>
-          <button
+          <button type="button"
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
@@ -349,7 +349,7 @@ export default function WalletPage() {
 
         {/* Reset Filters */}
         {(typeFilter !== 'all' || dateFrom || dateTo) && (
-          <button
+          <button type="button"
             className="mb-6 px-4 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
               background: '#fff',

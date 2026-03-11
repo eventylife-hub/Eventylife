@@ -109,7 +109,7 @@ export function CostTable({
                   {(cost.costAmountTTC / 100).toFixed(2)}€
                 </td>
                 <td className="py-2 text-center">
-                  <button
+                  <button type="button"
                     onClick={() => handleDeleteCost(cost.id)}
                     className="text-red-600 hover:text-red-700"
                     aria-label="Supprimer le coût"
@@ -156,7 +156,7 @@ export function CostTable({
                   €
                 </td>
                 <td className="py-2 text-center">
-                  <button
+                  <button type="button"
                     onClick={() => {
                       setAdding(false);
                       setFormData({ title: '', costAmountHT: '', vatRateBps: '2000' });

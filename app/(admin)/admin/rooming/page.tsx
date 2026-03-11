@@ -206,7 +206,7 @@ export default function AdminRoomingPage() {
       {exportError && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
           <span>{exportError}</span>
-          <button
+          <button type="button"
             onClick={() => setExportError(null)}
             className="text-red-600 hover:text-red-800 font-medium text-sm"
           >
@@ -267,14 +267,14 @@ export default function AdminRoomingPage() {
             </div>
 
             <div className="flex gap-2">
-              <button
+              <button type="button"
                 onClick={() => handleExport('pdf')}
                 className="admin-btn-secondary gap-2 flex items-center"
               >
                 <Download className="w-4 h-4" />
                 PDF
               </button>
-              <button
+              <button type="button"
                 onClick={() => handleExport('csv')}
                 className="admin-btn-secondary gap-2 flex items-center"
               >
@@ -379,7 +379,7 @@ export default function AdminRoomingPage() {
               <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
                 Détails de la chambre {selectedRoom.number}
               </h2>
-              <button
+              <button type="button"
                 onClick={() => setSelectedRoom(null)}
                 className="text-gray-400 hover:text-gray-600"
                 aria-label="Fermer le panneau"
@@ -447,7 +447,7 @@ export default function AdminRoomingPage() {
               <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
                 Modifier l'assignation - Chambre {editingRoom.number}
               </h2>
-              <button
+              <button type="button"
                 onClick={() => setEditingRoom(null)}
                 className="text-gray-400 hover:text-gray-600"
                 aria-label="Fermer le panneau"

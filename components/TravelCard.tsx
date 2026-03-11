@@ -177,7 +177,7 @@ export function TravelCard({
             </div>
 
             {/* Bouton */}
-            <button
+            <button type="button"
               className="w-full px-4 py-2.5 rounded-xl font-semibold text-white transition-all duration-200"
               style={{
                 background: 'var(--terra, #C75B39)',

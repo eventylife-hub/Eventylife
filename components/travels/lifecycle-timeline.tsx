@@ -142,7 +142,7 @@ export function LifecycleTimeline({
           <div className="space-y-3">
             {availableActions.map((action) => (
               <div key={action.action}>
-                <button
+                <button type="button"
                   onClick={() => setSelectedAction(action.action)}
                   disabled={isLoading || isSubmitting}
                   className="w-full px-4 py-3 text-left bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition disabled:opacity-50"
@@ -166,14 +166,14 @@ export function LifecycleTimeline({
                       rows={3}
                     />
                     <div className="flex gap-2 mt-3">
-                      <button
+                      <button type="button"
                         onClick={() => handleActionSubmit(action.action)}
                         disabled={isSubmitting || !actionReason.trim()}
                         className="flex-1 px-3 py-2 bg-blue-600 text-white rounded font-medium hover:bg-blue-700 disabled:opacity-50"
                       >
                         {isSubmitting ? 'En cours...' : 'Confirmer'}
                       </button>
-                      <button
+                      <button type="button"
                         onClick={() => {
                           setSelectedAction(null);
                           setActionReason('');
@@ -189,14 +189,14 @@ export function LifecycleTimeline({
                 {/* Action sans raison */}
                 {selectedAction === action.action && !action.requiresReason && (
                   <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200 flex gap-2">
-                    <button
+                    <button type="button"
                       onClick={() => handleActionSubmit(action.action)}
                       disabled={isSubmitting}
                       className="flex-1 px-3 py-2 bg-blue-600 text-white rounded font-medium hover:bg-blue-700 disabled:opacity-50"
                     >
                       {isSubmitting ? 'En cours...' : 'Confirmer'}
                     </button>
-                    <button
+                    <button type="button"
                       onClick={() => setSelectedAction(null)}
                       className="px-3 py-2 bg-gray-300 text-gray-900 rounded font-medium hover:bg-gray-400"
                     >

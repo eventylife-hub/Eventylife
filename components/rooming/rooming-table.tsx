@@ -147,7 +147,7 @@ export function RoomingTable({
               </td>
               <td className="py-2 text-center">
                 {!room.isLocked && (
-                  <button
+                  <button type="button"
                     onClick={() => handleEditRoom(room)}
                     className="text-blue-600 hover:text-blue-700"
                   >

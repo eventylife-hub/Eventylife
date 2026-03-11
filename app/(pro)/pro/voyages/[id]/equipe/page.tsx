@@ -201,7 +201,7 @@ export default function EquipePage() {
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Équipe du voyage</h1>
           <p style={{ color: '#4A5568', marginTop: '0.5rem' }}>Gérez les membres et les préalables</p>
         </div>
-        <button onClick={() => setShowInviteModal(true)} className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <button type="button" onClick={() => setShowInviteModal(true)} className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Plus className="w-4 h-4" />
           Inviter un membre
         </button>
@@ -252,10 +252,10 @@ export default function EquipePage() {
             </div>
 
             <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button onClick={handleInvite} disabled={inviting} className="pro-btn-sun">
+              <button type="button" onClick={handleInvite} disabled={inviting} className="pro-btn-sun">
                 {inviting ? 'Invitation...' : 'Inviter'}
               </button>
-              <button onClick={() => setShowInviteModal(false)} className="pro-btn-outline">
+              <button type="button" onClick={() => setShowInviteModal(false)} className="pro-btn-outline">
                 Annuler
               </button>
             </div>

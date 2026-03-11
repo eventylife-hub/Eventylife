@@ -103,7 +103,7 @@ export default function ProDashboard() {
               Tableau de bord de votre espace professionnel
             </p>
           </div>
-          <button
+          <button type="button"
             onClick={fetchStats}
             className="pro-btn-ocean"
             style={{ width: 'fit-content', display: 'flex', alignItems: 'center', gap: '8px' }}
@@ -120,7 +120,7 @@ export default function ProDashboard() {
               <p style={{ fontWeight: 500, color: CORAL }}>{error}</p>
               <p style={{ fontSize: '14px', color: CORAL, marginTop: '4px', opacity: 0.8 }}>Vérifiez votre connexion et réessayez.</p>
             </div>
-            <button
+            <button type="button"
               onClick={fetchStats}
               className="pro-btn-outline"
               style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '16px', flexShrink: 0 }}

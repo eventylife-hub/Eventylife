@@ -113,7 +113,7 @@ export default function ProLayout({ children }: ProLayoutProps) {
               <div className="user-role">Créateur Pro</div>
             </div>
           </div>
-          <button
+          <button type="button"
             onClick={handleLogout}
             style={{
               width: '100%',

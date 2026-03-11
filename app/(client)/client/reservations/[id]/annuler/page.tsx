@@ -127,7 +127,7 @@ export default function CancelReservationPage() {
   return (
     <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)', animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mb-8">
-        <button
+        <button type="button"
           onClick={() => router.back()}
           className="hover:opacity-80 mb-4"
           style={{ color: 'var(--terra, #C75B39)' }}

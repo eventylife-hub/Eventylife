@@ -130,7 +130,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <div className="user-role">FounderAdmin</div>
             </div>
           </div>
-          <button
+          <button type="button"
             onClick={handleLogout}
             style={{
               width: '100%',

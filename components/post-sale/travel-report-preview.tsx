@@ -164,7 +164,7 @@ export function TravelReportPreview({
       {/* Bouton d'action */}
       {onGeneratePDF && (
         <div className="bg-blue-50 rounded-lg p-4">
-          <button
+          <button type="button"
             onClick={onGeneratePDF}
             disabled={isGenerating}
             className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"

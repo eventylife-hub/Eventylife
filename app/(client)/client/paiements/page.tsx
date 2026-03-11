@@ -109,7 +109,7 @@ export default function PaiementsPage() {
           { value: 'pending', label: 'En attente' },
           { value: 'failed', label: 'Échoués' },
         ].map((f) => (
-          <button
+          <button type="button"
             key={f.value}
             onClick={() => setFilter(f.value)}
             className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"

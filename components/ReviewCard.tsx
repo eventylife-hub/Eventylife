@@ -62,7 +62,7 @@ export function ReviewCard({
       </div>
       <p className="text-slate-700 mb-4">{comment}</p>
       {onReport && (
-        <button
+        <button type="button"
           onClick={() => onReport(id)}
           className="text-xs text-red-600 hover:text-red-700 font-semibold"
         >

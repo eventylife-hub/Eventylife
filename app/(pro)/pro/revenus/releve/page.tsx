@@ -179,7 +179,7 @@ export default function ReleveMensuelPage() {
   if (loading) {
     return (
       <div className="pro-fade-in p-6 space-y-6">
-        <button
+        <button type="button"
           onClick={() => router.push('/pro/revenus')}
           style={{
             display: 'flex',
@@ -211,7 +211,7 @@ export default function ReleveMensuelPage() {
   if (error && !statement) {
     return (
       <div className="pro-fade-in p-6 space-y-6">
-        <button
+        <button type="button"
           onClick={() => router.push('/pro/revenus')}
           style={{
             display: 'flex',
@@ -248,7 +248,7 @@ export default function ReleveMensuelPage() {
             <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
             <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
           </div>
-          <button
+          <button type="button"
             onClick={() => window.location.reload()}
             style={{
               padding: '0.5rem 1rem',
@@ -272,7 +272,7 @@ export default function ReleveMensuelPage() {
   if (!statement || !statement.trips.length) {
     return (
       <div className="pro-fade-in p-6 space-y-6">
-        <button
+        <button type="button"
           onClick={() => router.push('/pro/revenus')}
           style={{
             display: 'flex',
@@ -303,7 +303,7 @@ export default function ReleveMensuelPage() {
         {/* Month selector */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           {availableMonths.map((month) => (
-            <button
+            <button type="button"
               key={month}
               onClick={() => handleMonthChange(month)}
               style={{
@@ -348,7 +348,7 @@ export default function ReleveMensuelPage() {
   return (
     <div className="pro-fade-in p-6 space-y-6">
       {/* Back button */}
-      <button
+      <button type="button"
         onClick={() => router.push('/pro/revenus')}
         style={{
           display: 'flex',
@@ -396,7 +396,7 @@ export default function ReleveMensuelPage() {
             <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
             <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
           </div>
-          <button
+          <button type="button"
             onClick={() => setError(null)}
             style={{
               padding: '0.25rem 0.75rem',
@@ -417,7 +417,7 @@ export default function ReleveMensuelPage() {
       {/* Month selector */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
         {availableMonths.map((month) => (
-          <button
+          <button type="button"
             key={month}
             onClick={() => handleMonthChange(month)}
             style={{
@@ -446,7 +446,7 @@ export default function ReleveMensuelPage() {
             </p>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-            <button
+            <button type="button"
               onClick={handleExportCSV}
               disabled={!statement.trips.length}
               className="pro-btn-outline"
@@ -461,7 +461,7 @@ export default function ReleveMensuelPage() {
               <Download className="h-4 w-4" />
               CSV
             </button>
-            <button
+            <button type="button"
               onClick={handleExportPDF}
               disabled={!statement.trips.length}
               className="pro-btn-sun"

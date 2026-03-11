@@ -156,7 +156,7 @@ export default function TransportPage() {
           <div className="pro-panel">
             <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
               <p style={{ color: '#4A5568', marginBottom: '1rem', margin: 0 }}>Aucune configuration transport</p>
-              <button onClick={handleSave} className="pro-btn-sun">Créer configuration</button>
+              <button type="button" onClick={handleSave} className="pro-btn-sun">Créer configuration</button>
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function TransportPage() {
       {error && (
         <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
           <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
-          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+          <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer
           </button>
         </div>
@@ -252,7 +252,7 @@ export default function TransportPage() {
             />
           </div>
 
-          <button onClick={handleSave} disabled={isSaving} className="pro-btn-sun" style={{ width: '100%', opacity: isSaving ? 0.5 : 1 }}>
+          <button type="button" onClick={handleSave} disabled={isSaving} className="pro-btn-sun" style={{ width: '100%', opacity: isSaving ? 0.5 : 1 }}>
             {isSaving ? 'Sauvegarde...' : 'Sauvegarder configuration'}
           </button>
         </div>

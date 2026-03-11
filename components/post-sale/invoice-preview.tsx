@@ -163,7 +163,7 @@ export function InvoicePreview({
 
       {/* Bouton d'action */}
       {onDownload && (
-        <button
+        <button type="button"
           onClick={onDownload}
           disabled={isPreparing}
           className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"

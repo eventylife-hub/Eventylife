@@ -76,7 +76,7 @@ const AdminUsersPage = () => {
               <td>{user.role}</td>
               <td>{user.statut}</td>
               <td>
-                <button
+                <button type="button"
                   onClick={() => toggleStatus(user.id)}
                   data-testid={`toggle-status-${user.id}`}
                 >
@@ -92,11 +92,11 @@ const AdminUsersPage = () => {
       </table>
 
       <div>
-        <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} data-testid="prev-page">
+        <button type="button" onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} data-testid="prev-page">
           Précédent
         </button>
         <span data-testid="page-info">Page {currentPage}</span>
-        <button onClick={() => setCurrentPage(currentPage + 1)} data-testid="next-page">
+        <button type="button" onClick={() => setCurrentPage(currentPage + 1)} data-testid="next-page">
           Suivant
         </button>
       </div>

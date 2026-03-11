@@ -84,7 +84,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps): JSX.Ele
             {/* Boutons d'action */}
             <div className="space-y-3">
               {/* Bouton de rafraîchissement */}
-              <button
+              <button type="button"
                 onClick={(): void => reset()}
                 className="w-full rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >

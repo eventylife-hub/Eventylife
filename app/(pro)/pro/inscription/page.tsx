@@ -227,7 +227,7 @@ export default function InscriptionPage() {
               {PRO_TYPES.map((type) => {
                 const Icon = type.icon;
                 return (
-                  <button
+                  <button type="button"
                     key={type.id}
                     onClick={() => handleProTypeSelect(type.id)}
                     style={{
@@ -341,7 +341,7 @@ export default function InscriptionPage() {
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>Compétences *</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {SKILLS.map((skill) => (
-                    <button
+                    <button type="button"
                       key={skill}
                       onClick={() => toggleSkill(skill)}
                       style={{
@@ -462,7 +462,7 @@ export default function InscriptionPage() {
 
         {/* Navigation Buttons */}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', marginTop: '32px' }}>
-          <button
+          <button type="button"
             onClick={() => setStep(step - 1)}
             disabled={step === 1}
             className="pro-btn-outline"
@@ -472,7 +472,7 @@ export default function InscriptionPage() {
           </button>
 
           {step < 4 ? (
-            <button
+            <button type="button"
               onClick={() => setStep(step + 1)}
               disabled={
                 (step === 1 && !canProceedStep1) ||
@@ -492,7 +492,7 @@ export default function InscriptionPage() {
               Suivant
             </button>
           ) : (
-            <button
+            <button type="button"
               onClick={handleSubmit}
               disabled={!canSubmit || loading}
               className="pro-btn-sun"

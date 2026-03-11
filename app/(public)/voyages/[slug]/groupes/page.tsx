@@ -110,7 +110,7 @@ export default function GroupesPage() {
                 <p className="text-sm mt-1" style={{ color: '#7f1d1d' }}>
                   {error}
                 </p>
-                <button
+                <button type="button"
                   onClick={() => window.location.reload()}
                   className="mt-3 text-sm font-medium underline hover:opacity-80"
                   style={{ color: '#991b1b' }}

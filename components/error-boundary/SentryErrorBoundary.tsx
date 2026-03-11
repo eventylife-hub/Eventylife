@@ -147,7 +147,7 @@ export class SentryErrorBoundary extends React.Component<
           {/* Boutons d'action */}
           <div className="space-y-3">
             {/* Bouton de rafraîchissement */}
-            <button
+            <button type="button"
               onClick={this.handleReset}
               className="w-full rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
@@ -155,7 +155,7 @@ export class SentryErrorBoundary extends React.Component<
             </button>
 
             {/* Bouton de feedback */}
-            <button
+            <button type="button"
               onClick={this.handleReportFeedback}
               className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 font-medium text-gray-700 transition-colors duration-200 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
             >

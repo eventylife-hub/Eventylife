@@ -116,7 +116,7 @@ export default function BrochurePage() {
                   {b.pages} — PDF
                 </span>
               </div>
-              <button
+              <button type="button"
                 className="rounded-xl font-bold text-sm transition-all duration-200 sm:self-center"
                 style={{
                   backgroundColor: 'var(--terra, #C75B39)',

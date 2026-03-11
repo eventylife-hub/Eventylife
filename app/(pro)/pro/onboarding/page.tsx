@@ -239,7 +239,7 @@ export default function OnboardingPage() {
         {/* Navigation Buttons */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           {currentStep > 1 && (
-            <button
+            <button type="button"
               onClick={() => setCurrentStep(currentStep - 1)}
               style={{ padding: '8px 24px', color: 'var(--pro-ocean)', fontWeight: 500, border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}
             >
@@ -248,7 +248,7 @@ export default function OnboardingPage() {
           )}
           <div style={{ flex: 1 }} />
           {currentStep < 6 ? (
-            <button
+            <button type="button"
               onClick={handleStepSubmit}
               disabled={loading}
               className="pro-btn-sun"
@@ -257,7 +257,7 @@ export default function OnboardingPage() {
               Suivant <ChevronRight className="w-4 h-4" />
             </button>
           ) : (
-            <button
+            <button type="button"
               onClick={handleFinalSubmit}
               disabled={loading}
               style={{

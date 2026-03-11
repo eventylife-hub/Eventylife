@@ -157,7 +157,7 @@ export default function RestauratPage() {
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Gestion de la restauration</h1>
-          <button
+          <button type="button"
             onClick={handleGeneratePDF}
             className="pro-btn-outline"
             style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}

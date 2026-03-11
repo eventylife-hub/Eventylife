@@ -164,7 +164,7 @@ export default function ProPublicPage() {
             <p style={{ color: 'var(--navy, #1A1A2E)', marginBottom: '1.5rem', lineHeight: '1.75' }}>{pro.description}</p>
 
             <div className="flex gap-3">
-              <button
+              <button type="button"
                 style={{ backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onClick={() => document.getElementById('voyages')?.scrollIntoView({ behavior: 'smooth' })}
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }}
@@ -174,7 +174,7 @@ export default function ProPublicPage() {
               </button>
               {pro.whatsappNumber && (
                 <a href={`https://wa.me/${pro.whatsappNumber}`} target="_blank" rel="noopener noreferrer">
-                  <button style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
+                  <button type="button" style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
                     WhatsApp
                   </button>
                 </a>
@@ -225,7 +225,7 @@ export default function ProPublicPage() {
                     À partir de {formatPrice(voyage.price)}
                   </p>
                   <Link href={`/voyages/${voyage.id}`}>
-                    <button style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
+                    <button type="button" style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
                       Réserver
                     </button>
                   </Link>
@@ -379,7 +379,7 @@ export default function ProPublicPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
+                <button type="button" style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
                   Facebook
                 </button>
               </a>
@@ -388,11 +388,11 @@ export default function ProPublicPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
+                <button type="button" style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
                   Twitter
                 </button>
               </a>
-              <button
+              <button type="button"
                 style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}

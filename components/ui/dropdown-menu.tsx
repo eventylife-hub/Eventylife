@@ -73,7 +73,7 @@ export function DropdownMenuItem({ children, onClick, variant = 'default', class
     : 'text-gray-700 hover:bg-gray-100';
 
   return (
-    <button onClick={onClick} className={`${baseStyles} ${variantStyles} ${className}`}>
+    <button type="button" onClick={onClick} className={`${baseStyles} ${variantStyles} ${className}`}>
       {children}
     </button>
   );

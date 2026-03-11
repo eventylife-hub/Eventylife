@@ -126,7 +126,7 @@ export default function TravelsPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
             {TABS.map((tab) => (
-              <button
+              <button type="button"
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 style={{
@@ -153,7 +153,7 @@ export default function TravelsPage() {
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button
+            <button type="button"
               onClick={() => setViewMode('grid')}
               style={{
                 padding: '0.5rem',
@@ -170,7 +170,7 @@ export default function TravelsPage() {
             >
               <Grid className="w-5 h-5" />
             </button>
-            <button
+            <button type="button"
               onClick={() => setViewMode('list')}
               style={{
                 padding: '0.5rem',
@@ -198,7 +198,7 @@ export default function TravelsPage() {
               <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
             </div>
             <div style={{ marginTop: '1rem' }}>
-              <button
+              <button type="button"
                 onClick={() => {
                   setError(null);
                   setLoading(true);
@@ -311,7 +311,7 @@ export default function TravelsPage() {
                         </div>
                       </div>
 
-                      <button style={{
+                      <button type="button" style={{
                         width: '100%',
                         padding: '0.5rem',
                         background: '#FFF0E8',

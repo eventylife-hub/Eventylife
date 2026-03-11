@@ -79,7 +79,7 @@ export function NotificationBell() {
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Bouton cloche */}
-      <button
+      <button type="button"
         onClick={handleBellClick}
         className="relative p-2 rounded-lg hover:bg-gray-100 transition"
         aria-label="Notifications"
@@ -113,7 +113,7 @@ export function NotificationBell() {
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <h3 className="font-semibold text-gray-900">Notifications</h3>
             {unreadCount > 0 && (
-              <button
+              <button type="button"
                 onClick={handleMarkAllAsRead}
                 className="text-xs text-blue-600 hover:text-blue-700 font-medium"
               >

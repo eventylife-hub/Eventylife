@@ -145,7 +145,7 @@ export default function AuditPage() {
           <div className="admin-breadcrumb">Accueil › Audit</div>
           <h1 className="admin-page-title">Logs d'Audit</h1>
         </div>
-        <button
+        <button type="button"
           onClick={handleExport}
           disabled={loading}
           className="admin-btn-secondary"
@@ -159,7 +159,7 @@ export default function AuditPage() {
       {error && (
         <div className="admin-alert-bar danger">
           <span>{error}</span>
-          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setError(null)}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setError(null)}>
             Fermer
           </button>
         </div>
@@ -220,7 +220,7 @@ export default function AuditPage() {
 
           {(filters.action || filters.entityType || filters.startDate || filters.endDate) && (
             <div className="pt-2 border-t border-gray-200">
-              <button
+              <button type="button"
                 onClick={handleClearFilters}
                 disabled={loading}
                 className="admin-btn-secondary"

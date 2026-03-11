@@ -190,7 +190,7 @@ export default function CancellationDetailPage() {
           <div className="admin-breadcrumb">Annulations › Détail</div>
           <h1 className="admin-page-title">Détail de l'annulation</h1>
         </div>
-        <button
+        <button type="button"
           onClick={() => router.back()}
           className="admin-btn-secondary"
           style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
@@ -216,7 +216,7 @@ export default function CancellationDetailPage() {
           }}
         >
           <span>{toast.message}</span>
-          <button className="ml-4 text-sm font-medium hover:underline" onClick={() => setToast(null)}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToast(null)}>
             Fermer
           </button>
         </div>
@@ -339,14 +339,14 @@ export default function CancellationDetailPage() {
         <div className="mt-8 space-y-4">
           {!showRejectForm ? (
             <div className="flex gap-4">
-              <button
+              <button type="button"
                 onClick={handleApprove}
                 disabled={processing}
                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50"
               >
                 {processing ? 'Traitement...' : 'Approuver'}
               </button>
-              <button
+              <button type="button"
                 onClick={() => setShowRejectForm(true)}
                 disabled={processing}
                 className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50"
@@ -366,14 +366,14 @@ export default function CancellationDetailPage() {
                 rows={4}
               />
               <div className="flex gap-4">
-                <button
+                <button type="button"
                   onClick={handleReject}
                   disabled={processing}
                   className="px-6 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50"
                 >
                   {processing ? 'Traitement...' : 'Confirmer refus'}
                 </button>
-                <button
+                <button type="button"
                   onClick={() => {
                     setShowRejectForm(false);
                     setRejectionReason('');
@@ -391,7 +391,7 @@ export default function CancellationDetailPage() {
 
       {cancellation.status === 'APPROVED' && (
         <div className="mt-8">
-          <button
+          <button type="button"
             onClick={handleProcessRefund}
             disabled={processing}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"

@@ -82,7 +82,7 @@ export function CookieBanner() {
             {/* Actions - Responsive Layout */}
             <div className="flex flex-col gap-3 sm:flex-row md:flex-col lg:flex-row justify-between items-stretch sm:items-center">
               {/* Refuse Button - CNIL requires equal visual prominence */}
-              <button
+              <button type="button"
                 onClick={refuseAll}
                 className="px-4 py-3 sm:py-2 rounded-lg font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 text-center sm:text-base text-sm order-2 sm:order-1 md:order-2 lg:order-1"
                 aria-label="Refuser tous les cookies optionnels"
@@ -91,7 +91,7 @@ export function CookieBanner() {
               </button>
 
               {/* Customize Link */}
-              <button
+              <button type="button"
                 onClick={() => setIsModalOpen(true)}
                 className="px-4 py-3 sm:py-2 rounded-lg font-medium text-blue-600 dark:text-blue-400 bg-transparent border border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 text-center sm:text-base text-sm order-3 sm:order-2 md:order-3 lg:order-2"
                 aria-label="Personnaliser les préférences de cookies"
@@ -100,7 +100,7 @@ export function CookieBanner() {
               </button>
 
               {/* Accept Button - Green for clear acceptance */}
-              <button
+              <button type="button"
                 onClick={acceptAll}
                 className="px-4 py-3 sm:py-2 rounded-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 text-center sm:text-base text-sm order-1 sm:order-3 md:order-1 lg:order-3"
                 aria-label="Accepter tous les cookies"

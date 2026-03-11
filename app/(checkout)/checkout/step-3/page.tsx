@@ -183,7 +183,7 @@ export default function CheckoutStep3Page() {
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button
+          <button type="button"
             onClick={() => router.back()}
             style={{
               flex: 1,
@@ -204,7 +204,7 @@ export default function CheckoutStep3Page() {
           >
             Retour
           </button>
-          <button
+          <button type="button"
             onClick={handlePayment}
             disabled={loading}
             style={{

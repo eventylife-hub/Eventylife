@@ -107,7 +107,7 @@ export default function CancellationsPage() {
         <div className="admin-panel-body">
           <div className="flex gap-3 flex-wrap">
             {['PENDING', 'APPROVED', 'REJECTED', 'REFUNDED'].map((status) => (
-              <button
+              <button type="button"
                 key={status}
                 onClick={() => setFilter(status)}
                 className={filter === status ? 'admin-btn-primary' : 'admin-btn-secondary'}

@@ -212,7 +212,7 @@ export default function TravelLifecyclePage() {
           </h1>
         </div>
         <Link href="/admin/voyages">
-          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+          <button type="button" className="admin-btn-secondary gap-2 flex items-center text-sm">
             <ArrowLeft className="w-4 h-4" />
             Retour
           </button>
@@ -238,7 +238,7 @@ export default function TravelLifecyclePage() {
 
       <div className="admin-fade-in delay-1">
         <Link href="/admin/voyages">
-          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+          <button type="button" className="admin-btn-secondary gap-2 flex items-center text-sm">
             <ArrowLeft className="w-4 h-4" />
             Retour
           </button>
@@ -326,7 +326,7 @@ export default function TravelLifecyclePage() {
 
             <div className="grid grid-cols-2 gap-4">
               {availableActions.map((action) => (
-                <button
+                <button type="button"
                   key={action.action}
                   onClick={() => {
                     if (selectedAction === action.action) {
@@ -350,7 +350,7 @@ export default function TravelLifecyclePage() {
             </div>
 
             {selectedAction && (
-              <button
+              <button type="button"
                 onClick={() => {
                   setSelectedAction(null);
                   setCancelReason('');
@@ -371,7 +371,7 @@ export default function TravelLifecyclePage() {
             <h3 className="admin-panel-title text-red-900">Actions Admin</h3>
           </div>
           <div className="admin-panel-body p-6">
-            <button
+            <button type="button"
               onClick={() => setSelectedAction('cancel')}
               disabled={processing}
               className="admin-btn-destructive gap-2 flex items-center"

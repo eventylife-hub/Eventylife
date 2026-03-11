@@ -93,7 +93,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
       {/* Déconnexion */}
       <div className="p-3" style={{ borderTop: '1px solid rgba(250,247,242,0.08)' }}>
-        <button
+        <button type="button"
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200"
           style={{ color: 'rgba(250,247,242,0.5)' }}
@@ -144,7 +144,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           <span className="font-display text-lg font-bold" style={{ color: 'var(--gold, #D4A853)' }}>.</span>
           <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Life</span>
         </Link>
-        <button
+        <button type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
           className="p-2 rounded-lg"
           style={{ color: '#FAF7F2' }}

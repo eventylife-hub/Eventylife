@@ -196,7 +196,7 @@ export default function CampagneDetailPage() {
           <div style={{ display: 'flex', gap: '12px' }}>
             {campaign.status === 'DRAFT' && (
               <>
-                <button
+                <button type="button"
                   onClick={handleLaunch}
                   disabled={actionLoading}
                   className="pro-btn-sun"
@@ -208,7 +208,7 @@ export default function CampagneDetailPage() {
                     'Lancer'
                   )}
                 </button>
-                <button
+                <button type="button"
                   onClick={handleDuplicate}
                   disabled={actionLoading}
                   className="pro-btn-outline"
@@ -220,7 +220,7 @@ export default function CampagneDetailPage() {
             )}
 
             {campaign.status === 'LIVE' && (
-              <button
+              <button type="button"
                 onClick={handleEnd}
                 disabled={actionLoading}
                 style={{

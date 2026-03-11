@@ -189,7 +189,7 @@ export default function CheckoutConfirmationPage() {
             <p style={{ color: 'var(--terra, #C75B39)', fontWeight: '600', marginBottom: '1rem' }}>
               {error || 'Erreur lors du chargement de votre réservation'}
             </p>
-            <button
+            <button type="button"
               onClick={() => router.push(ROUTES.HOME)}
               style={{
                 width: '100%',
@@ -340,7 +340,7 @@ export default function CheckoutConfirmationPage() {
         )}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <button
+          <button type="button"
             onClick={handleDownloadPDF}
             disabled={downloading}
             style={{
@@ -367,7 +367,7 @@ export default function CheckoutConfirmationPage() {
           >
             {downloading ? 'Téléchargement...' : 'Télécharger la confirmation (PDF)'}
           </button>
-          <button
+          <button type="button"
             onClick={handleViewReservation}
             style={{
               width: '100%',
@@ -389,7 +389,7 @@ export default function CheckoutConfirmationPage() {
           >
             Voir ma réservation
           </button>
-          <button
+          <button type="button"
             onClick={handleBackHome}
             style={{
               width: '100%',

@@ -48,7 +48,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props
   }, ref) => {
     return (
-      <button
+      <button type="button"
         ref={ref}
         disabled={disabled || isLoading}
         className={cn(

@@ -248,7 +248,7 @@ export default function AdminAlertesPage() {
               </select>
             </div>
 
-            <button
+            <button type="button"
               className="admin-btn-secondary"
               style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
             >
@@ -272,14 +272,14 @@ export default function AdminAlertesPage() {
             {selectedAlerts.length} alerte(s) sélectionnée(s)
           </span>
           <div className="alert-action flex gap-2 ml-auto">
-            <button
+            <button type="button"
               className="admin-btn-secondary"
               onClick={() => handleBulkAction('acknowledge')}
             >
               <CheckCircle className="w-4 h-4 mr-2" />
               Reconnaître
             </button>
-            <button
+            <button type="button"
               className="admin-btn-secondary"
               onClick={() => handleBulkAction('dismiss')}
             >
@@ -381,7 +381,7 @@ export default function AdminAlertesPage() {
 
                     {!alert.resolved && (
                       <div className="flex gap-2 flex-shrink-0">
-                        <button
+                        <button type="button"
                           className="admin-btn-secondary"
                           style={{ fontSize: '0.875rem', padding: '6px 12px' }}
                           onClick={() => handleBulkAction('acknowledge')}
@@ -424,7 +424,7 @@ export default function AdminAlertesPage() {
               <XCircle className="w-5 h-5 flex-shrink-0" />
             )}
             <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button
+            <button type="button"
               onClick={() => setToastMessage(null)}
               className="ml-2 p-1 rounded hover:bg-black/5"
               aria-label="Fermer"

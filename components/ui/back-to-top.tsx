@@ -21,7 +21,7 @@ export function BackToTop() {
   if (!visible) return null;
 
   return (
-    <button
+    <button type="button"
       onClick={scrollToTop}
       aria-label="Retour en haut de la page"
       className="fixed z-50 transition-all duration-300"

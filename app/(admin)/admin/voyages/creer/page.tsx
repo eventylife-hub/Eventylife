@@ -318,7 +318,7 @@ export default function CreateTripPage() {
           <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">{error}</p>
-            <button
+            <button type="button"
               onClick={() => setError(null)}
               className="text-sm text-red-700 hover:text-red-900 underline mt-1"
             >
@@ -334,7 +334,7 @@ export default function CreateTripPage() {
           <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">{submitError}</p>
-            <button
+            <button type="button"
               onClick={() => setSubmitError(null)}
               className="text-sm text-red-700 hover:text-red-900 underline mt-1"
             >
@@ -348,7 +348,7 @@ export default function CreateTripPage() {
       <div className="flex items-center justify-between">
         {[1, 2, 3, 4, 5].map((step) => (
           <div key={step} className="flex items-center flex-1">
-            <button
+            <button type="button"
               onClick={() => {
                 if (step < currentStep) setCurrentStep(step as Step);
               }}
@@ -589,7 +589,7 @@ export default function CreateTripPage() {
                           placeholder="Ajouter un arrêt"
                           className="admin-input"
                         />
-                        <button onClick={handleAddBusStop} className="admin-btn-secondary">
+                        <button type="button" onClick={handleAddBusStop} className="admin-btn-secondary">
                           Ajouter
                         </button>
                       </div>
@@ -600,7 +600,7 @@ export default function CreateTripPage() {
                             className="flex items-center justify-between bg-gray-50 p-3 rounded"
                           >
                             <span>{stop}</span>
-                            <button
+                            <button type="button"
                               onClick={() => handleRemoveBusStop(index)}
                               className="admin-btn-destructive text-sm"
                             >
@@ -1020,7 +1020,7 @@ export default function CreateTripPage() {
 
       {/* Boutons de navigation */}
       <div className="flex items-center justify-between admin-fade-in delay-3">
-        <button
+        <button type="button"
           onClick={() => setCurrentStep((prev) => (Math.max(1, prev - 1) as Step))}
           disabled={currentStep === 1}
           className="admin-btn-secondary gap-2 flex items-center"
@@ -1034,7 +1034,7 @@ export default function CreateTripPage() {
         </div>
 
         {currentStep < 5 ? (
-          <button
+          <button type="button"
             onClick={() => {
               if (currentStep === 1 && !isStep1Valid()) {
                 alert('Veuillez remplir tous les champs de cette étape');
@@ -1060,7 +1060,7 @@ export default function CreateTripPage() {
             <ChevronRight className="w-4 h-4" />
           </button>
         ) : (
-          <button
+          <button type="button"
             onClick={handleCreateTrip}
             disabled={isSubmitting}
             className="admin-btn-primary gap-2 flex items-center bg-green-600 hover:bg-green-700"

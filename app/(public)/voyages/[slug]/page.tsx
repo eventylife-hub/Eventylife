@@ -174,7 +174,7 @@ function Topbar() {
         <span>{tripData.title}</span>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-        <button style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+        <button type="button" style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
           📤 Partager
         </button>
       </div>
@@ -231,12 +231,12 @@ function HeroSection({ paxCount, setPaxCount }: { paxCount: number; setPaxCount:
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 10, justifyContent: 'flex-end' }}>
             <span style={{ fontSize: 12, color: 'rgba(255,255,255,.6)' }}>Voyageurs :</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <button onClick={() => setPaxCount(Math.max(1, paxCount - 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>−</button>
+              <button type="button" onClick={() => setPaxCount(Math.max(1, paxCount - 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>−</button>
               <span style={{ fontSize: 15, fontWeight: 700, color: 'white', minWidth: 20, textAlign: 'center' }}>{paxCount}</span>
-              <button onClick={() => setPaxCount(Math.min(available, paxCount + 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
+              <button type="button" onClick={() => setPaxCount(Math.min(available, paxCount + 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
             </div>
           </div>
-          <button style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 24px', fontWeight: 700, fontSize: 15, cursor: 'pointer', marginTop: 12, width: '100%' }}>
+          <button type="button" style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 24px', fontWeight: 700, fontSize: 15, cursor: 'pointer', marginTop: 12, width: '100%' }}>
             Réserver ce voyage →
           </button>
         </div>
@@ -269,7 +269,7 @@ function StickyCTA() {
         </div>
         <div style={{ fontSize: 12, color: '#166534', fontWeight: 600 }}>✓ Départ confirmé · {available} places restantes</div>
       </div>
-      <button style={{ background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>
+      <button type="button" style={{ background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>
         Réserver →
       </button>
     </div>
@@ -353,7 +353,7 @@ function RamassageSection() {
       <div style={{ fontSize: 13, color: '#6B7280', marginBottom: 10 }}>Autres arrêts disponibles sur votre parcours :</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {tripData.pickupPoints.map((point, i) => (
-          <button key={i} onClick={() => setSelected(i)} style={{
+          <button type="button" key={i} onClick={() => setSelected(i)} style={{
             display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
             border: `1.5px solid ${selected === i ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
             borderRadius: 10, cursor: 'pointer', transition: 'all .15s',
@@ -553,7 +553,7 @@ function OccurrencesSection() {
           const bc = badgeColors[occ.status] || badgeColors.ok;
           const isFull = occ.status === 'full';
           return (
-            <button
+            <button type="button"
               key={i}
               onClick={() => !isFull && setSelectedOcc(i)}
               style={{
@@ -610,8 +610,8 @@ function EquipeSection() {
             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 2 }}>{m.name}</div>
             <div style={{ fontSize: 12.5, color: '#6B7280', marginBottom: 10 }}>{m.bio}</div>
             <div style={{ display: 'flex', gap: 6 }}>
-              <button style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>💬 Message</button>
-              <button style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>📞 Appeler</button>
+              <button type="button" style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>💬 Message</button>
+              <button type="button" style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>📞 Appeler</button>
             </div>
           </div>
         ))}
@@ -620,9 +620,9 @@ function EquipeSection() {
         Ils suivent la préparation du voyage et gèrent le séjour sur place. Vous pouvez les contacter à tout moment avant, pendant et après le voyage.
       </div>
       <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-        <button style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>📘 Facebook</button>
-        <button style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>💬 WhatsApp</button>
-        <button style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>🔗 Copier le lien</button>
+        <button type="button" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>📘 Facebook</button>
+        <button type="button" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>💬 WhatsApp</button>
+        <button type="button" style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>🔗 Copier le lien</button>
       </div>
     </Section>
   );
@@ -691,13 +691,13 @@ function AsideCard({ paxCount }: { paxCount: number }) {
           Pour {paxCount} voyageur{paxCount > 1 ? 's' : ''} · chambre double · sans assurance renforcée
         </div>
 
-        <button style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer', width: '100%', marginTop: 16 }}>
+        <button type="button" style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer', width: '100%', marginTop: 16 }}>
           Réserver ce voyage →
         </button>
-        <button style={{ display: 'block', background: 'white', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 12, fontWeight: 600, fontSize: 14, cursor: 'pointer', width: '100%', marginTop: 8, textAlign: 'center' }}>
+        <button type="button" style={{ display: 'block', background: 'white', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 12, fontWeight: 600, fontSize: 14, cursor: 'pointer', width: '100%', marginTop: 8, textAlign: 'center' }}>
           📄 Recevoir le programme
         </button>
-        <button style={{ display: 'block', background: 'white', color: '#6B7280', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 6, textAlign: 'center' }}>
+        <button type="button" style={{ display: 'block', background: 'white', color: '#6B7280', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 6, textAlign: 'center' }}>
           📞 Être rappelé par Marie-Claire
         </button>
 
@@ -714,7 +714,7 @@ function AsideCard({ paxCount }: { paxCount: number }) {
       {/* Contact card */}
       <div style={{ background: 'white', border: '1.5px solid #E5E0D8', borderRadius: 14, padding: 22, boxShadow: '0 4px 20px rgba(0,0,0,.06)' }}>
         <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#6B7280', marginBottom: 14 }}>Une question ?</div>
-        <button style={{ width: '100%', border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>
+        <button type="button" style={{ width: '100%', border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>
           💬 Écrire à Marie-Claire
         </button>
         <div style={{ fontSize: 12, color: '#6B7280', marginTop: 8, textAlign: 'center' }}>

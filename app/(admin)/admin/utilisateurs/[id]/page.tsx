@@ -125,7 +125,7 @@ export default function UserDetailPage() {
           </h1>
         </div>
         <Link href="/admin/utilisateurs">
-          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+          <button type="button" className="admin-btn-secondary gap-2 flex items-center text-sm">
             <ArrowLeft className="w-4 h-4" />
             Retour
           </button>
@@ -133,7 +133,7 @@ export default function UserDetailPage() {
         <div className="admin-panel">
           <div className="admin-panel-body p-8 text-center">
             <p className="text-gray-600 font-medium mb-4">{error}</p>
-            <button onClick={fetchUser} className="admin-btn-secondary">
+            <button type="button" onClick={fetchUser} className="admin-btn-secondary">
               Réessayer
             </button>
           </div>
@@ -151,7 +151,7 @@ export default function UserDetailPage() {
           </h1>
         </div>
         <Link href="/admin/utilisateurs">
-          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+          <button type="button" className="admin-btn-secondary gap-2 flex items-center text-sm">
             <ArrowLeft className="w-4 h-4" />
             Retour
           </button>
@@ -174,7 +174,7 @@ export default function UserDetailPage() {
       {/* Bouton retour */}
       <div className="admin-fade-in delay-1">
         <Link href="/admin/utilisateurs">
-          <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+          <button type="button" className="admin-btn-secondary gap-2 flex items-center text-sm">
             <ArrowLeft className="w-4 h-4" />
             Retour
           </button>
@@ -251,7 +251,7 @@ export default function UserDetailPage() {
           <h3 className="admin-panel-title">Actions</h3>
         </div>
         <div className="admin-panel-body flex gap-4">
-          <button
+          <button type="button"
             onClick={handleToggleStatus}
             disabled={toggling}
             className={`${user.isActive ? 'admin-btn-destructive' : 'admin-btn-primary'} gap-2 flex items-center`}

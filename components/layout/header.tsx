@@ -139,7 +139,7 @@ export function Header({ user }: HeaderProps) {
             {user ? (
               // Utilisateur connecté
               <div className="relative" ref={dropdownRef}>
-                <button
+                <button type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors duration-200"
                   style={{ color: '#FAF7F2' }}
@@ -186,7 +186,7 @@ export function Header({ user }: HeaderProps) {
                       >
                         Mon espace
                       </Link>
-                      <button
+                      <button type="button"
                         onClick={handleLogout}
                         className="w-full text-left px-3 py-2 text-sm rounded-lg transition-colors"
                         style={{ color: '#E63946' }}
@@ -237,7 +237,7 @@ export function Header({ user }: HeaderProps) {
             )}
 
             {/* Menu mobile */}
-            <button
+            <button type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-lg transition-colors"
               style={{ color: '#FAF7F2' }}

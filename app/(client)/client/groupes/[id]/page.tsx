@@ -323,7 +323,7 @@ export default function GroupDetailPage() {
         >
           Inviter des membres
         </Link>
-        <button
+        <button type="button"
           onClick={async () => {
             if (!confirm('Êtes-vous sûr de vouloir quitter ce groupe ? Cette action est irréversible.')) return;
             try {

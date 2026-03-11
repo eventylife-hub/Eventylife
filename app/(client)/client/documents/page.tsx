@@ -133,7 +133,7 @@ export default function ClientDocumentsPage() {
             const count = getDocumentsByType(tab.id as DocumentTab).length;
 
             return (
-              <button
+              <button type="button"
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as DocumentTab)}
                 className="pb-4 font-medium transition-colors relative text-sm whitespace-nowrap"
@@ -205,7 +205,7 @@ export default function ClientDocumentsPage() {
                 <span className="px-3 py-1 rounded-xl text-xs font-semibold" style={{ background: '#DCFCE7', color: '#166534' }}>
                   {doc.status === 'CONFIRMED' ? 'Validé' : 'En attente'}
                 </span>
-                <button
+                <button type="button"
                   onClick={() => handleDownload(doc.id)}
                   className="p-2 rounded-xl transition-all"
                   style={{ background: 'rgba(199,91,57,0.1)', color: 'var(--terra, #C75B39)' }}
@@ -230,7 +230,7 @@ export default function ClientDocumentsPage() {
       {/* Bouton Télécharger tout */}
       {currentDocs.length > 1 && (
         <div className="flex justify-end mt-6">
-          <button
+          <button type="button"
             onClick={async () => {
               try {
                 setDownloadingAll(true);

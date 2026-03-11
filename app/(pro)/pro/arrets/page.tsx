@@ -84,7 +84,7 @@ export default function BusStopsPage() {
               </p>
             </div>
             <div style={{ marginTop: '16px' }}>
-              <button
+              <button type="button"
                 onClick={() => {
                   setError(null);
                   setLoading(true);
@@ -140,19 +140,19 @@ export default function BusStopsPage() {
         {!loading && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px' }}>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button
+              <button type="button"
                 onClick={() => setActiveFilter(null)}
                 className={activeFilter === null ? 'pro-btn-ocean' : 'pro-btn-outline'}
               >
                 Tous
               </button>
-              <button
+              <button type="button"
                 onClick={() => setActiveFilter('PICKUP_DEPARTURE')}
                 className={activeFilter === 'PICKUP_DEPARTURE' ? 'pro-btn-ocean' : 'pro-btn-outline'}
               >
                 Départs
               </button>
-              <button
+              <button type="button"
                 onClick={() => setActiveFilter('DROPOFF_ARRIVAL')}
                 className={activeFilter === 'DROPOFF_ARRIVAL' ? 'pro-btn-ocean' : 'pro-btn-outline'}
               >
@@ -161,13 +161,13 @@ export default function BusStopsPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button
+              <button type="button"
                 onClick={() => setViewMode('cards')}
                 className={viewMode === 'cards' ? 'pro-btn-sun' : 'pro-btn-outline'}
               >
                 Cartes
               </button>
-              <button
+              <button type="button"
                 onClick={() => setViewMode('map')}
                 className={viewMode === 'map' ? 'pro-btn-sun' : 'pro-btn-outline'}
               >
@@ -274,7 +274,7 @@ export default function BusStopsPage() {
                       </div>
                     )}
 
-                    <button style={{ width: '100%', padding: '8px 12px', backgroundColor: '#FFF0E8', color: 'var(--pro-sun)', borderRadius: '4px', border: 'none', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }}>
+                    <button type="button" style={{ width: '100%', padding: '8px 12px', backgroundColor: '#FFF0E8', color: 'var(--pro-sun)', borderRadius: '4px', border: 'none', fontWeight: 500, fontSize: '14px', cursor: 'pointer' }}>
                       Voir les détails →
                     </button>
                   </div>

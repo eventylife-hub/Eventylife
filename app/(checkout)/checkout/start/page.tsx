@@ -60,7 +60,7 @@ export default function CheckoutStartPage() {
             <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
               Vous devez être connecté pour réserver un voyage
             </p>
-            <button
+            <button type="button"
               onClick={() => router.push(ROUTES.AUTH.CONNEXION)}
               style={{
                 width: '100%',
@@ -124,7 +124,7 @@ export default function CheckoutStartPage() {
             <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
               Le voyage demandé n&apos;existe pas ou n&apos;est plus disponible
             </p>
-            <button
+            <button type="button"
               onClick={() => router.push(ROUTES.HOME)}
               style={{
                 width: '100%',
@@ -215,7 +215,7 @@ export default function CheckoutStartPage() {
           >
             <p style={{ fontWeight: '600', marginBottom: '0.5rem' }}>Erreur</p>
             <p style={{ fontSize: '0.875rem', marginBottom: '1rem' }}>{error}</p>
-            <button
+            <button type="button"
               onClick={() => setError(null)}
               style={{
                 color: 'var(--terra, #C75B39)',
@@ -258,7 +258,7 @@ export default function CheckoutStartPage() {
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button
+          <button type="button"
             onClick={() => router.push(ROUTES.HOME)}
             style={{
               flex: 1,
@@ -279,7 +279,7 @@ export default function CheckoutStartPage() {
           >
             Annuler
           </button>
-          <button
+          <button type="button"
             onClick={handleStartCheckout}
             disabled={loading}
             style={{

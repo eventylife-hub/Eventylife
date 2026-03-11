@@ -125,7 +125,7 @@ export default function HotelBlocksPage() {
       {error && (
         <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
           <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
-          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+          <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer
           </button>
         </div>
@@ -144,7 +144,7 @@ export default function HotelBlocksPage() {
         <div className="pro-panel">
           <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
             <p style={{ color: '#4A5568', marginBottom: '1rem', margin: 0 }}>Aucun bloc hôtel</p>
-            <button onClick={() => (window.location.href = `/pro/voyages/${travelId}`)} className="pro-btn-sun">
+            <button type="button" onClick={() => (window.location.href = `/pro/voyages/${travelId}`)} className="pro-btn-sun">
               Ajouter bloc
             </button>
           </div>
@@ -212,7 +212,7 @@ export default function HotelBlocksPage() {
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button
+                  <button type="button"
                     onClick={handleSaveBlock}
                     disabled={isSaving}
                     className="pro-btn-sun"
@@ -220,7 +220,7 @@ export default function HotelBlocksPage() {
                   >
                     {isSaving ? 'Sauvegarde...' : 'Sauvegarder'}
                   </button>
-                  <button
+                  <button type="button"
                     onClick={() => setEditingBlockId(null)}
                     className="pro-btn-outline"
                     style={{ flex: 1 }}

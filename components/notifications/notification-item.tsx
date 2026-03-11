@@ -114,7 +114,7 @@ export function NotificationItem({
       </div>
 
       {/* Action delete */}
-      <button
+      <button type="button"
         onClick={handleDelete}
         className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 transition"
         aria-label="Supprimer"

@@ -445,7 +445,7 @@ export default function ProfilePage() {
         <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Sécurité</h2>
 
         <div className="space-y-3">
-          <button
+          <button type="button"
             onClick={() => setShowPasswordModal(true)}
             className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
             style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
@@ -458,7 +458,7 @@ export default function ProfilePage() {
           >
             Changer mon mot de passe
           </button>
-          <button
+          <button type="button"
             onClick={twoFAEnabled ? handleDisable2FA : handleInit2FA}
             disabled={enabling2FA}
             className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
@@ -650,7 +650,7 @@ export default function ProfilePage() {
               </div>
 
               <div className="flex gap-2">
-                <button
+                <button type="button"
                   onClick={handleVerify2FA}
                   disabled={enabling2FA || twoFACode.length !== 6}
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
@@ -668,7 +668,7 @@ export default function ProfilePage() {
                 >
                   {enabling2FA ? 'Vérification...' : 'Activer'}
                 </button>
-                <button
+                <button type="button"
                   onClick={() => {
                     setShow2FAModal(false);
                     setTwoFACode('');

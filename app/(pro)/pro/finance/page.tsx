@@ -100,7 +100,7 @@ export default function FinanceDashboardPage() {
           <h1 className="pro-page-title">Finance</h1>
           <div className="pro-panel" style={{ textAlign: 'center', padding: '32px 24px' }}>
             <p style={{ color: '#8896A6', marginBottom: '16px' }}>Aucun voyage créé</p>
-            <button onClick={() => (window.location.href = '/pro/voyages/new')} className="pro-btn-sun">
+            <button type="button" onClick={() => (window.location.href = '/pro/voyages/new')} className="pro-btn-sun">
               Créer un voyage
             </button>
           </div>
@@ -120,7 +120,7 @@ export default function FinanceDashboardPage() {
         {error && (
           <div style={{ padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', border: '1px solid #FFE0E3', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
             <span style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</span>
-            <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
               Fermer
             </button>
           </div>

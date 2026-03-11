@@ -122,7 +122,7 @@ export default function PayoutsPage() {
 
         <div className="admin-alert-bar danger">
           <span>{error}</span>
-          <button className="ml-4 text-sm font-medium hover:underline" onClick={fetchPayouts}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={fetchPayouts}>
             Réessayer
           </button>
         </div>

@@ -289,7 +289,7 @@ export default function DepartPage() {
 
             {/* Reset Filters */}
             {(minDate || maxDate || minPrice || maxPrice || minDuration || maxDuration || selectedThemes.length > 0) && (
-              <button
+              <button type="button"
                 style={{ width: '100%', backgroundColor: 'white', color: 'var(--terra, #C75B39)', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', border: '1.5px solid #E5E0D8', fontWeight: '700', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.backgroundColor = 'rgba(199,91,57,0.1)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.backgroundColor = 'white'; }}
@@ -358,7 +358,7 @@ export default function DepartPage() {
                         </span>
                       </div>
 
-                      <button style={{ width: '100%', marginTop: '1rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
+                      <button type="button" style={{ width: '100%', marginTop: '1rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#D97B5E'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
                         Voir détails
                       </button>
                     </div>

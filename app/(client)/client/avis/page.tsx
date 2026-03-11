@@ -159,7 +159,7 @@ export default function AvisPage() {
           <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Partagez votre expérience des voyages</p>
         </div>
         {!showForm && (
-          <button
+          <button type="button"
             onClick={() => setShowForm(true)}
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
@@ -291,7 +291,7 @@ export default function AvisPage() {
           <div className="text-5xl mb-4">⭐</div>
           <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun avis</h2>
           <p className="text-sm mb-6" style={{ color: '#6B7280' }}>Vous n&apos;avez pas encore laissé d&apos;avis</p>
-          <button
+          <button type="button"
             onClick={() => setShowForm(true)}
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}

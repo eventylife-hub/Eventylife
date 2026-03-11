@@ -174,7 +174,7 @@ export default function ProsPage() {
       {error && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center">
           <p className="font-medium">{error}</p>
-          <button
+          <button type="button"
             onClick={() => setError(null)}
             className="text-sm font-medium hover:underline"
           >

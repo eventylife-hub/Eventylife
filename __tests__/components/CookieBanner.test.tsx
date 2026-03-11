@@ -27,16 +27,16 @@ jest.mock('@/components/cookie-banner/CookiePreferencesModal', () => ({
     return (
       <div data-testid="preferences-modal">
         <h2>Préférences de cookies</h2>
-        <button onClick={() => onAcceptAll()} data-testid="modal-accept-all">
+        <button type="button" onClick={() => onAcceptAll()} data-testid="modal-accept-all">
           Accepter tout
         </button>
-        <button onClick={() => onRefuseAll()} data-testid="modal-refuse-all">
+        <button type="button" onClick={() => onRefuseAll()} data-testid="modal-refuse-all">
           Refuser tout
         </button>
-        <button onClick={() => onSave({})} data-testid="modal-save">
+        <button type="button" onClick={() => onSave({})} data-testid="modal-save">
           Enregistrer
         </button>
-        <button onClick={() => onClose()} data-testid="modal-close">
+        <button type="button" onClick={() => onClose()} data-testid="modal-close">
           Fermer
         </button>
       </div>

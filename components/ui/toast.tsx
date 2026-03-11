@@ -49,7 +49,7 @@ const ToastItem = ({ id, type, message, onClose }: ToastItemProps) => {
     >
       <span className="text-lg font-bold">{icons[type]}</span>
       <span className="flex-1">{message}</span>
-      <button
+      <button type="button"
         onClick={onClose}
         className="text-current opacity-70 hover:opacity-100 font-bold text-lg"
         aria-label="Fermer"

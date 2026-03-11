@@ -220,7 +220,7 @@ export default function ProDocumentsPage() {
                             {getStatusLabel(doc.status)}
                           </span>
                         </div>
-                        <button
+                        <button type="button"
                           onClick={() => handleDownload(doc)}
                           style={{ padding: '8px', color: 'var(--pro-ocean)', backgroundColor: 'transparent', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
                           title="Télécharger le document"
@@ -240,7 +240,7 @@ export default function ProDocumentsPage() {
                 <h2 className="pro-section-title">
                   Documents administratifs
                 </h2>
-                <button
+                <button type="button"
                   onClick={() => setShowUploadModal(true)}
                   className="pro-btn-sun"
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
@@ -329,7 +329,7 @@ export default function ProDocumentsPage() {
             )}
 
             <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
-              <button
+              <button type="button"
                 onClick={() => {
                   setShowUploadModal(false);
                   setSelectedDocType('');

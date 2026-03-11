@@ -179,7 +179,7 @@ export default function RevenuesDashboardPage() {
             <p style={{ color: '#8896A6', marginTop: '8px' }}>Vue d&apos;ensemble de vos revenus et versements</p>
           </div>
           <Link href="/pro/revenus/releve" style={{ width: 'fit-content' }}>
-            <button className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button type="button" className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <FileText className="h-4 w-4" />
               Voir relevé mensuel
             </button>
@@ -192,7 +192,7 @@ export default function RevenuesDashboardPage() {
               <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
               <span style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</span>
             </div>
-            <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
               Fermer
             </button>
           </div>
@@ -234,7 +234,7 @@ export default function RevenuesDashboardPage() {
             { value: 'lastQuarter', label: '3 derniers mois' },
             { value: 'thisYear', label: 'Cette année' },
           ].map((opt) => (
-            <button
+            <button type="button"
               key={opt.value}
               onClick={() => setPeriod(opt.value as PeriodFilter)}
               className={period === opt.value ? 'pro-btn-sun' : 'pro-btn-outline'}
@@ -254,7 +254,7 @@ export default function RevenuesDashboardPage() {
                 {trips.length > 0 ? `${trips.length} voyage${trips.length > 1 ? 's' : ''}` : 'Aucun voyage'}
               </p>
             </div>
-            <button onClick={handleExportCSV} disabled={trips.length === 0} className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: trips.length === 0 ? 0.5 : 1, cursor: trips.length === 0 ? 'not-allowed' : 'pointer' }}>
+            <button type="button" onClick={handleExportCSV} disabled={trips.length === 0} className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px', opacity: trips.length === 0 ? 0.5 : 1, cursor: trips.length === 0 ? 'not-allowed' : 'pointer' }}>
               <Download className="h-4 w-4" />
               Export CSV
             </button>

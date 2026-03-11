@@ -74,7 +74,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
                   <>
                     <span className="flex-1">{item.label}</span>
                     {item.children && (
-                      <button
+                      <button type="button"
                         onClick={(e: React.MouseEvent) => {
                           e.preventDefault();
                           toggleExpand(item.href);

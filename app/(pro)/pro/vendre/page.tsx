@@ -191,7 +191,7 @@ export default function QuickSellPage() {
             <AlertCircle className="h-4 w-4" style={{ color: '#dc2626' }} />
             <span style={{ color: '#b91c1c', fontSize: '0.875rem' }}>{error}</span>
           </div>
-          <button
+          <button type="button"
             onClick={() => setError(null)}
             style={{
               padding: '0.25rem 0.75rem',
@@ -218,7 +218,7 @@ export default function QuickSellPage() {
           <p style={{ color: '#666', marginBottom: '1rem', fontSize: '0.875rem' }}>
             Vous devez créer un voyage avant de pouvoir générer un lien de vente
           </p>
-          <button
+          <button type="button"
             onClick={() => (window.location.href = '/pro/voyages/nouveau')}
             className="pro-btn-sun"
           >

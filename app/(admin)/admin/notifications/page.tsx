@@ -306,7 +306,7 @@ export default function AdminNotificationsPage() {
           <div className="admin-breadcrumb">Accueil › Notifications</div>
           <h1 className="admin-page-title">Monitoring</h1>
         </div>
-        <button onClick={() => setShowManualSend(true)} className="admin-btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <button type="button" onClick={() => setShowManualSend(true)} className="admin-btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <Send className="w-4 h-4" />
           Envoyer manuellement
         </button>
@@ -396,7 +396,7 @@ export default function AdminNotificationsPage() {
 
         {/* Tab switcher */}
         <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--admin-border)', marginBottom: '16px' }}>
-          <button
+          <button type="button"
             onClick={() => setActiveTab('templates')}
             style={{
               padding: '12px 16px',
@@ -412,7 +412,7 @@ export default function AdminNotificationsPage() {
           >
             Templates ({data.templates.length})
           </button>
-          <button
+          <button type="button"
             onClick={() => setActiveTab('history')}
             style={{
               padding: '12px 16px',
@@ -436,7 +436,7 @@ export default function AdminNotificationsPage() {
           <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>Envoyer une notification</h2>
-              <button
+              <button type="button"
                 onClick={() => setShowManualSend(false)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
                 aria-label="Fermer"
@@ -495,14 +495,14 @@ export default function AdminNotificationsPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-              <button
+              <button type="button"
                 onClick={() => setShowManualSend(false)}
                 className="admin-btn-secondary"
                 style={{ padding: '10px 16px' }}
               >
                 Annuler
               </button>
-              <button
+              <button type="button"
                 onClick={handleSendManual}
                 className="admin-btn-primary"
                 style={{ padding: '10px 16px' }}
@@ -540,7 +540,7 @@ export default function AdminNotificationsPage() {
               <XCircleIcon className="w-5 h-5" style={{ flexShrink: 0 }} />
             )}
             <span style={{ fontSize: '14px', fontWeight: '500' }}>{toastMessage.message}</span>
-            <button
+            <button type="button"
               onClick={() => setToastMessage(null)}
               style={{ marginLeft: '8px', padding: '4px 8px', borderRadius: '4px', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7, fontSize: '16px' }}
               aria-label="Fermer"
@@ -557,7 +557,7 @@ export default function AdminNotificationsPage() {
           <div style={{ background: 'white', width: '100%', maxWidth: '448px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.15)' }}>
             <div style={{ position: 'sticky', top: 0, background: 'white', borderBottom: '1px solid var(--admin-border)', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 10 }}>
               <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>Détails de la notification</h2>
-              <button
+              <button type="button"
                 onClick={() => setSelectedNotification(null)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
                 aria-label="Fermer"
@@ -641,7 +641,7 @@ export default function AdminNotificationsPage() {
               )}
 
               <div style={{ paddingTop: '16px', borderTop: '1px solid var(--admin-border)' }}>
-                <button
+                <button type="button"
                   className="admin-btn-secondary"
                   onClick={() => setSelectedNotification(null)}
                   style={{ width: '100%', padding: '10px 16px' }}

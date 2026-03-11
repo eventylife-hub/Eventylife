@@ -269,7 +269,7 @@ export function FileUpload({
               )}
 
               {file.status !== 'uploading' && (
-                <button
+                <button type="button"
                   onClick={() => removeFile(file.id)}
                   className="p-1 text-gray-400 hover:text-gray-600 flex-shrink-0"
                   aria-label="Supprimer le fichier"

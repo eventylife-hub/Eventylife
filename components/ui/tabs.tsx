@@ -67,7 +67,7 @@ export function TabsTrigger({ value, children }: TabsTriggerProps) {
   const isActive = context.value === value;
 
   return (
-    <button
+    <button type="button"
       onClick={() => context.onValueChange(value)}
       className={`px-4 py-2 font-medium transition-colors ${
         isActive

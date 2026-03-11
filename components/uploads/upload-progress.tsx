@@ -71,7 +71,7 @@ export function UploadProgress({
         </div>
 
         {!isComplete && onCancel && (
-          <button
+          <button type="button"
             onClick={onCancel}
             className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="Annuler"

@@ -162,7 +162,7 @@ export default function AdminVoyageDetailPage() {
         <div className="p-6 bg-red-50 border border-red-200 rounded-lg text-red-800">
           <p className="font-medium">{error || 'Voyage non trouvé'}</p>
           <p className="text-sm text-red-700 mt-2">Vérifiez que l&apos;ID du voyage est correct.</p>
-          <button
+          <button type="button"
             onClick={fetchTravel}
             className="admin-btn-secondary gap-2 flex items-center text-sm mt-4"
           >
@@ -234,7 +234,7 @@ export default function AdminVoyageDetailPage() {
 
               return (
                 <React.Fragment key={phase}>
-                  <button
+                  <button type="button"
                     onClick={() => handleStatusTransition(phase)}
                     className={`flex flex-col items-center gap-2 flex-1 ${
                       isCompleted ? 'opacity-100' : isActive ? 'opacity-100' : 'opacity-50'
@@ -265,7 +265,7 @@ export default function AdminVoyageDetailPage() {
 
           <div className="mt-6 flex gap-2 flex-wrap">
             {currentPhaseIndex < phases.length - 1 && (
-              <button
+              <button type="button"
                 onClick={() => {
                   const nextPhase = phases[currentPhaseIndex + 1];
                   if (nextPhase) handleStatusTransition(nextPhase);
@@ -277,7 +277,7 @@ export default function AdminVoyageDetailPage() {
               </button>
             )}
             <Link href={`/admin/voyages/${travelId}/lifecycle`}>
-              <button className="admin-btn-secondary gap-2 flex items-center text-sm">
+              <button type="button" className="admin-btn-secondary gap-2 flex items-center text-sm">
                 <LinkIcon className="w-4 h-4" />
                 Voir page lifecycle
               </button>
@@ -538,7 +538,7 @@ export default function AdminVoyageDetailPage() {
               <AlertCircle className="w-5 h-5 flex-shrink-0" />
             )}
             <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button
+            <button type="button"
               onClick={() => setToastMessage(null)}
               className="ml-2 p-1 rounded hover:bg-black/5"
               aria-label="Fermer"

@@ -116,7 +116,7 @@ export default function FormationPage() {
               <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)', marginTop: '2px', flexShrink: 0 }} />
               <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
             </div>
-            <button
+            <button type="button"
               onClick={() => {
                 setError(null);
                 setLoading(true);

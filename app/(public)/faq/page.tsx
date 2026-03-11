@@ -292,7 +292,7 @@ export default function FAQPage() {
 
         {/* Filtres par catégorie */}
         <div className="flex flex-wrap gap-2 mt-8 mb-8 justify-center">
-          <button
+          <button type="button"
             onClick={() => setActiveCategory('all')}
             style={{
               backgroundColor:
@@ -312,7 +312,7 @@ export default function FAQPage() {
             Toutes
           </button>
           {faqCategories.map((cat) => (
-            <button
+            <button type="button"
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
               style={{
@@ -388,7 +388,7 @@ export default function FAQPage() {
                           : '0 2px 8px rgba(26,26,46,0.04)',
                       }}
                     >
-                      <button
+                      <button type="button"
                         onClick={() => toggleItem(item.id)}
                         aria-expanded={isOpen}
                         aria-controls={`faq-answer-${item.id}`}
@@ -470,7 +470,7 @@ export default function FAQPage() {
             <p className="mb-4" style={{ color: '#718096' }}>
               Essayez avec d&apos;autres termes ou réinitialisez les filtres.
             </p>
-            <button
+            <button type="button"
               onClick={() => {
                 setSearchQuery('');
                 setActiveCategory('all');
@@ -518,7 +518,7 @@ export default function FAQPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/contact">
-              <button
+              <button type="button"
                 className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   backgroundColor: 'white',
@@ -532,7 +532,7 @@ export default function FAQPage() {
               </button>
             </Link>
             <Link href="/comment-ca-marche">
-              <button
+              <button type="button"
                 className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   backgroundColor: 'transparent',

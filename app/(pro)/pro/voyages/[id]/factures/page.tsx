@@ -153,7 +153,7 @@ export default function InvoicesPage() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleDownloadProInvoice}
           disabled={downloading}
           className="pro-btn-ocean"
@@ -225,7 +225,7 @@ export default function InvoicesPage() {
                       </span>
                     </td>
                     <td style={{ padding: '1rem', textAlign: 'right' }}>
-                      <button
+                      <button type="button"
                         onClick={() => handleDownloadClientInvoice(booking.id as string)}
                         style={{ color: 'var(--pro-ocean)', textDecoration: 'none', fontWeight: '500', fontSize: '0.875rem', background: 'none', border: 'none', cursor: 'pointer' }}
                       >
@@ -256,7 +256,7 @@ export default function InvoicesPage() {
               <XCircle className="w-5 h-5 flex-shrink-0" />
             )}
             <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button
+            <button type="button"
               onClick={() => setToastMessage(null)}
               className="ml-2 p-1 rounded hover:bg-black/5"
               aria-label="Fermer"

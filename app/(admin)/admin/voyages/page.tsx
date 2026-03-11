@@ -206,7 +206,7 @@ export default function VoyagesPage() {
       {/* En-tête */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 admin-fade-in delay-1">
         <div className="flex items-center gap-2">
-          <button
+          <button type="button"
             onClick={fetchTravels}
             className="admin-btn-secondary gap-2 flex items-center text-sm"
           >
@@ -224,7 +224,7 @@ export default function VoyagesPage() {
             <p className="font-medium">{error}</p>
             <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>
           </div>
-          <button
+          <button type="button"
             onClick={fetchTravels}
             className="admin-btn-secondary gap-2 flex items-center text-sm ml-4 flex-shrink-0"
           >
@@ -272,7 +272,7 @@ export default function VoyagesPage() {
                   <div className="text-center py-12">
                     <p className="text-gray-500 mb-4">Aucun voyage trouvé</p>
                     {searchQuery && (
-                      <button
+                      <button type="button"
                         onClick={() => setSearchQuery('')}
                         className="admin-btn-secondary text-sm"
                       >

@@ -55,7 +55,7 @@ export default function GlobalNotFound() {
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-3">
         <Link href="/">
-          <button
+          <button type="button"
             className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
             style={{
               background: 'var(--terra, #C75B39)',
@@ -69,7 +69,7 @@ export default function GlobalNotFound() {
           </button>
         </Link>
         <Link href="/voyages">
-          <button
+          <button type="button"
             className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
             style={{
               background: 'transparent',

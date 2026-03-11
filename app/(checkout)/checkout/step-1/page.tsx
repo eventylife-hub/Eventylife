@@ -217,7 +217,7 @@ export default function CheckoutStep1Page() {
               <p style={{ color: '#6B7280', marginBottom: '1rem' }}>
                 Aucune chambre disponible
               </p>
-              <button
+              <button type="button"
                 onClick={() => router.back()}
                 style={{
                   backgroundColor: 'transparent',
@@ -318,7 +318,7 @@ export default function CheckoutStep1Page() {
         <PriceSummary rooms={selections} />
 
         <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
-          <button
+          <button type="button"
             onClick={() => router.back()}
             style={{
               flex: 1,
@@ -339,7 +339,7 @@ export default function CheckoutStep1Page() {
           >
             Retour
           </button>
-          <button
+          <button type="button"
             onClick={handleContinue}
             disabled={loading}
             style={{

@@ -39,7 +39,7 @@ export default function AuthError({
       </p>
 
       <div className="flex gap-3">
-        <button
+        <button type="button"
           onClick={reset}
           className="px-5 py-2.5 rounded-lg font-medium text-white text-sm"
           style={{ backgroundColor: 'var(--navy, #1A1A2E)' }}

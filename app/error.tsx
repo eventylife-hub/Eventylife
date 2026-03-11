@@ -46,7 +46,7 @@ export default function GlobalError({
       </p>
 
       <div className="flex gap-4">
-        <button
+        <button type="button"
           onClick={reset}
           className="px-6 py-3 text-white rounded-xl font-semibold transition-opacity hover:opacity-90"
           style={{ backgroundColor: '#C75B39' }}

@@ -163,7 +163,7 @@ export default function FeedbackPage() {
     return (
       <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mb-8">
-          <button
+          <button type="button"
             onClick={() => router.back()}
             className="hover:opacity-80 mb-4"
             style={{ color: 'var(--terra, #C75B39)' }}
@@ -174,7 +174,7 @@ export default function FeedbackPage() {
         </div>
         <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
-          <button
+          <button type="button"
             onClick={() => fetchBooking()}
             className="px-4 py-2 text-white rounded transition-all hover:opacity-80"
             style={{ backgroundColor: 'var(--terra, #DC2626)' }}
@@ -189,7 +189,7 @@ export default function FeedbackPage() {
   return (
     <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)', animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mb-8">
-        <button
+        <button type="button"
           onClick={() => router.back()}
           className="hover:opacity-80 mb-4"
           style={{ color: 'var(--terra, #C75B39)' }}

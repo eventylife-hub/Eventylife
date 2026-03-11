@@ -283,7 +283,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
               <p style={{ fontSize: '0.875rem', color: '#6B7280', marginBottom: '1rem' }}>
                 Impossible de charger les données du voyage. Veuillez réessayer.
               </p>
-              <button
+              <button type="button"
                 onClick={() => window.location.reload()}
                 style={{
                   backgroundColor: 'transparent',
@@ -327,7 +327,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
           <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
             Le voyage demandé n&apos;existe pas ou a été supprimé.
           </p>
-          <button
+          <button type="button"
             onClick={() => router.push(ROUTES.VOYAGES)}
             style={{
               backgroundColor: 'var(--terra, #C75B39)',

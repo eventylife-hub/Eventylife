@@ -171,7 +171,7 @@ export default function ParametresPage() {
                   />
                 )}
               </div>
-              <button
+              <button type="button"
                 onClick={() => handleSaveSetting(setting.key)}
                 className="admin-btn-primary gap-2 flex items-center"
               >
@@ -221,7 +221,7 @@ export default function ParametresPage() {
                   </span>
                 </label>
                 {editedFlags[key] !== undefined && (
-                  <button
+                  <button type="button"
                     onClick={() => handleSaveFlag(key)}
                     className="admin-btn-primary gap-2 flex items-center text-sm"
                   >
@@ -249,7 +249,7 @@ export default function ParametresPage() {
               <XCircle className="w-5 h-5 flex-shrink-0" />
             )}
             <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button
+            <button type="button"
               onClick={() => setToastMessage(null)}
               className="ml-2 p-1 rounded hover:bg-black/5"
               aria-label="Fermer"

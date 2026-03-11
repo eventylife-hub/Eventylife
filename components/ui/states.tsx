@@ -94,7 +94,7 @@ export function ErrorState({
         {message}
       </p>
       {onRetry && (
-        <button
+        <button type="button"
           onClick={onRetry}
           className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
           style={{ background: '#C75B39' }}

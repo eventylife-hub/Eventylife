@@ -129,7 +129,7 @@ export default function RoomingPage() {
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Rooming List</h1>
           <p style={{ color: '#4A5568', marginTop: '0.5rem', margin: 0 }}>Gestion des chambres d&apos;hôtel</p>
         </div>
-        <button onClick={handleExportPDF} disabled={exporting} className="pro-btn-ocean" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: exporting ? 0.5 : 1 }}>
+        <button type="button" onClick={handleExportPDF} disabled={exporting} className="pro-btn-ocean" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: exporting ? 0.5 : 1 }}>
           <Download style={{ width: '1rem', height: '1rem' }} />
           {exporting ? 'Export...' : 'Exporter PDF'}
         </button>
@@ -141,7 +141,7 @@ export default function RoomingPage() {
             <AlertCircle style={{ width: '1.25rem', height: '1.25rem', color: 'var(--pro-coral)', flexShrink: 0 }} />
             <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
           </div>
-          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+          <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer
           </button>
         </div>

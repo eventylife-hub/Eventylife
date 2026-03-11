@@ -91,7 +91,7 @@ export default function ReservationsPage() {
         </div>
         <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
-          <button
+          <button type="button"
             onClick={() => fetchBookings()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
@@ -127,7 +127,7 @@ export default function ReservationsPage() {
           { value: 'pending', label: 'En attente' },
           { value: 'cancelled', label: 'Annulées' },
         ].map((f) => (
-          <button
+          <button type="button"
             key={f.value}
             onClick={() => setFilter(f.value)}
             className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
@@ -258,7 +258,7 @@ export default function ReservationsPage() {
 
           {/* Bouton charger plus */}
           {hasMore && !loading && (
-            <button
+            <button type="button"
               onClick={() => fetchBookings(cursor || undefined)}
               className="w-full px-6 py-3 rounded-xl font-semibold text-sm transition-all"
               style={{

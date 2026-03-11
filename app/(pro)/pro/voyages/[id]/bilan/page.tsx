@@ -204,7 +204,7 @@ export default function TravelBilanPage() {
         <h2 style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1rem', margin: 0 }}>Actions</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
           {((dashboard?.actions as unknown)?.canGenerateReport as boolean) && (
-            <button
+            <button type="button"
               onClick={handleGenerateReport}
               className="pro-btn-sun"
             >
@@ -213,7 +213,7 @@ export default function TravelBilanPage() {
           )}
 
           {((dashboard?.actions as unknown)?.canSendBilan as boolean) && (
-            <button
+            <button type="button"
               onClick={handleSendBilan}
               disabled={sending}
               className="pro-btn-ocean"
@@ -224,7 +224,7 @@ export default function TravelBilanPage() {
           )}
 
           {((dashboard?.actions as unknown)?.canArchive as boolean) && (
-            <button
+            <button type="button"
               onClick={() => {
                 if (confirm('Êtes-vous sûr de vouloir archiver ce voyage ?')) {
                   // Appel pour archiver
@@ -252,7 +252,7 @@ export default function TravelBilanPage() {
               <XCircle className="w-5 h-5 flex-shrink-0" />
             )}
             <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button
+            <button type="button"
               onClick={() => setToastMessage(null)}
               className="ml-2 p-1 rounded hover:bg-black/5"
               aria-label="Fermer"

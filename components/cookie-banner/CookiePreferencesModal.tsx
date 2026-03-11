@@ -247,7 +247,7 @@ export function CookiePreferencesModal({
           <div className="bg-gray-50 dark:bg-gray-800 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex flex-col-reverse sm:flex-row gap-3">
               {/* Secondary Actions */}
-              <button
+              <button type="button"
                 ref={firstFocusableRef}
                 onClick={onRefuseAll}
                 className="flex-1 px-4 py-2 rounded-lg font-medium text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
@@ -257,7 +257,7 @@ export function CookiePreferencesModal({
               </button>
 
               {/* Primary Actions */}
-              <button
+              <button type="button"
                 onClick={handleSave}
                 className="flex-1 px-4 py-2 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                 aria-label="Enregistrer mes choix"
@@ -265,7 +265,7 @@ export function CookiePreferencesModal({
                 Enregistrer mes choix
               </button>
 
-              <button
+              <button type="button"
                 onClick={onAcceptAll}
                 className="flex-1 px-4 py-2 rounded-lg font-medium bg-green-600 hover:bg-green-700 text-white transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                 aria-label="Accepter tous les cookies"

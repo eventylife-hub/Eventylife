@@ -158,7 +158,7 @@ export default function SupportPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 admin-fade-in delay-1">
         <div className="flex gap-2">
           {error && (
-            <button
+            <button type="button"
               onClick={fetchAllTickets}
               className="admin-btn-secondary gap-2 flex items-center text-sm"
             >

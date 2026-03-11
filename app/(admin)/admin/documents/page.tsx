@@ -305,7 +305,7 @@ export default function AdminDocumentsPage() {
                         {formatDate(doc.createdAt)}
                       </td>
                       <td style={{ textAlign: 'right' }}>
-                        <button
+                        <button type="button"
                           onClick={() => {
                             setSelectedDocument(doc);
                             setShowApprovalModal(true);
@@ -388,7 +388,7 @@ export default function AdminDocumentsPage() {
                 </div>
 
                 <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
-                  <button
+                  <button type="button"
                     onClick={() => handleApprove(selectedDocument.id)}
                     style={{
                       flex: 1,
@@ -404,7 +404,7 @@ export default function AdminDocumentsPage() {
                   >
                     Approuver
                   </button>
-                  <button
+                  <button type="button"
                     onClick={() => handleReject(selectedDocument.id)}
                     style={{
                       flex: 1,
@@ -424,7 +424,7 @@ export default function AdminDocumentsPage() {
               </>
             )}
 
-            <button
+            <button type="button"
               onClick={() => {
                 setShowApprovalModal(false);
                 setSelectedDocument(null);

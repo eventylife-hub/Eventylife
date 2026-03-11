@@ -86,7 +86,7 @@ export default function ManifestPage() {
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628', margin: 0 }}>Manifest Passagers</h1>
           <p style={{ color: '#4A5568', marginTop: '0.5rem', margin: 0 }}>Liste détaillée des passagers par arrêt</p>
         </div>
-        <button onClick={handleExportPDF} disabled={exporting} className="pro-btn-ocean" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: exporting ? 0.5 : 1 }}>
+        <button type="button" onClick={handleExportPDF} disabled={exporting} className="pro-btn-ocean" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: exporting ? 0.5 : 1 }}>
           <Download style={{ width: '1rem', height: '1rem' }} />
           {exporting ? 'Export...' : 'Exporter PDF'}
         </button>
@@ -95,7 +95,7 @@ export default function ManifestPage() {
       {error && (
         <div style={{ padding: '1.5rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
           <p style={{ color: 'var(--pro-coral)', margin: 0 }}>{error}</p>
-          <button onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+          <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer
           </button>
         </div>

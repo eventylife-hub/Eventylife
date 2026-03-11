@@ -79,7 +79,7 @@ export default function NotificationsPage() {
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between flex-wrap">
         {unreadCount > 0 && (
-          <button
+          <button type="button"
             onClick={markAllAsRead}
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{
@@ -100,7 +100,7 @@ export default function NotificationsPage() {
 
         {/* Filtres */}
         <div className="flex gap-2 flex-wrap">
-          <button
+          <button type="button"
             onClick={() => setFilter(null)}
             className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
@@ -122,7 +122,7 @@ export default function NotificationsPage() {
             Tous
           </button>
           {types.map((type) => (
-            <button
+            <button type="button"
               key={type}
               onClick={() => setFilter(type)}
               className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
@@ -168,7 +168,7 @@ export default function NotificationsPage() {
                 : 'Vous recevrez des notifications quand des actions importantes auront lieu'}
             </p>
             <Link href="/client">
-              <button
+              <button type="button"
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{
                   background: '#fff',

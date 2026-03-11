@@ -42,7 +42,7 @@ export default function CheckoutError({
       </p>
 
       <div className="flex gap-3">
-        <button
+        <button type="button"
           onClick={reset}
           className="px-5 py-2.5 rounded-lg font-medium text-white"
           style={{ backgroundColor: 'var(--terra, #C75B39)' }}

@@ -67,7 +67,7 @@ export default function GroupesPage() {
           <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Gérez vos groupes de voyage</p>
         </div>
         <Link href="/client/groupes/creer">
-          <button className="px-6 py-3 rounded-xl font-semibold text-sm transition-all" style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
+          <button type="button" className="px-6 py-3 rounded-xl font-semibold text-sm transition-all" style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#D97B5E';
               e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
@@ -96,7 +96,7 @@ export default function GroupesPage() {
           <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun groupe</h2>
           <p className="text-sm mb-6" style={{ color: '#6B7280' }}>Créez un groupe pour organiser vos voyages en commun</p>
           <Link href="/client/groupes/creer">
-            <button className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all" style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
+            <button type="button" className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all" style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = '#D97B5E';
                 e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
@@ -140,7 +140,7 @@ export default function GroupesPage() {
                   <p>👥 {group.memberCount} membre{group.memberCount > 1 ? 's' : ''}</p>
                 </div>
 
-                <button className="w-full px-4 py-3 rounded-xl font-semibold text-sm transition-all" style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
+                <button type="button" className="w-full px-4 py-3 rounded-xl font-semibold text-sm transition-all" style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
                   }}

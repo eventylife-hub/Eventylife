@@ -336,7 +336,7 @@ export default function CommentCaMarchePage() {
             organiser le reste.
           </p>
           <Link href="/voyages">
-            <button
+            <button type="button"
               className="px-8 py-3 rounded-xl font-bold text-base transition-all duration-200 hover:-translate-y-0.5"
               style={{
                 backgroundColor: 'white',

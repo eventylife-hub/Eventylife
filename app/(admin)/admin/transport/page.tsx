@@ -263,7 +263,7 @@ export default function TransportPage() {
             <p className="font-medium">{error}</p>
             <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>
           </div>
-          <button
+          <button type="button"
             onClick={() => setError(null)}
             className="text-sm font-medium hover:underline flex-shrink-0"
           >
@@ -306,7 +306,7 @@ export default function TransportPage() {
 
       {/* Lien vers gestion des arrêts bus */}
       <div className="flex gap-2 admin-fade-in delay-2">
-        <button
+        <button type="button"
           onClick={() => (window.location.href = '/admin/transport/stops')}
           className="admin-btn-secondary"
         >
@@ -324,7 +324,7 @@ export default function TransportPage() {
               </label>
               <div className="flex gap-2">
                 {statuses.map((s) => (
-                  <button
+                  <button type="button"
                     key={s.value}
                     onClick={() => setStatusFilter(s.value)}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
@@ -345,7 +345,7 @@ export default function TransportPage() {
               </label>
               <div className="flex gap-2">
                 {modes.map((m) => (
-                  <button
+                  <button type="button"
                     key={m.value}
                     onClick={() => setModeFilter(m.value)}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition ${

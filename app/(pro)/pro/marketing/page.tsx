@@ -108,7 +108,7 @@ export default function MarketingPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
           <h1 className="pro-page-title">Marketing</h1>
           <Link href="/pro/marketing/creer">
-            <button className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button type="button" className="pro-btn-sun" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Plus className="h-4 w-4" />
               Nouvelle campagne
             </button>
@@ -146,7 +146,7 @@ export default function MarketingPage() {
               Créez votre première campagne marketing pour promouvoir vos voyages
             </p>
             <Link href="/pro/marketing/creer">
-              <button className="pro-btn-sun" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              <button type="button" className="pro-btn-sun" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                 <Plus className="h-4 w-4" />
                 Créer une campagne
               </button>

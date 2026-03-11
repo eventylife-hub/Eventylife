@@ -147,7 +147,7 @@ export default function AdminDashboardPage() {
             FounderAdmin · Niveau N1
           </div>
           <div className="admin-preset-badge">✓ Mode MAX</div>
-          <button className="admin-btn-lockdown">🔒 LOCKDOWN</button>
+          <button type="button" className="admin-btn-lockdown">🔒 LOCKDOWN</button>
         </div>
       </div>
 

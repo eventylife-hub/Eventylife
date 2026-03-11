@@ -74,7 +74,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 {this.state.error.message}
               </pre>
             )}
-            <button
+            <button type="button"
               onClick={this.handleRetry}
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
             >
@@ -134,7 +134,7 @@ export function PortalErrorBoundary({ children, portal, onError }: PortalErrorBo
           Une erreur inattendue s'est produite.
           Veuillez rafraîchir la page ou contacter notre support.
         </p>
-        <button
+        <button type="button"
           onClick={() => window.location.reload()}
           className={`inline-flex items-center gap-2 px-6 py-2.5 text-white rounded-lg transition-colors font-medium text-sm ${colors.button}`}
         >

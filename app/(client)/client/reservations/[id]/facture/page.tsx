@@ -108,7 +108,7 @@ export default function InvoicePage() {
         <h1 className="text-3xl font-bold mb-8" style={{ color: 'var(--navy, #1A1A2E)' }}>Ma Facture</h1>
         <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
-          <button
+          <button type="button"
             onClick={() => fetchBooking()}
             className="px-4 py-2 text-white rounded transition-all hover:opacity-80"
             style={{ backgroundColor: 'var(--terra, #DC2626)' }}
@@ -227,7 +227,7 @@ export default function InvoicePage() {
 
       {/* Actions */}
       <div className="flex gap-4">
-        <button
+        <button type="button"
           onClick={handleDownloadPDF}
           disabled={downloading}
           className="flex-1 px-6 py-3 text-white rounded-lg font-medium disabled:opacity-50 transition-all hover:shadow-lg"
@@ -247,7 +247,7 @@ export default function InvoicePage() {
         >
           {downloading ? 'Téléchargement...' : '📥 Télécharger PDF'}
         </button>
-        <button
+        <button type="button"
           onClick={() => window.print()}
           className="flex-1 px-6 py-3 rounded-lg font-medium transition-all hover:opacity-80"
           style={{

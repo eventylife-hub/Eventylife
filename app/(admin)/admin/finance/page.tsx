@@ -122,7 +122,7 @@ export default function FinancePage() {
         </div>
         <div className="admin-alert-bar danger">
           <span>{error}</span>
-          <button className="ml-4 text-sm font-medium hover:underline" onClick={fetchAll}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={fetchAll}>
             Réessayer
           </button>
         </div>
@@ -138,7 +138,7 @@ export default function FinancePage() {
           <div className="admin-breadcrumb">Accueil › Finance</div>
           <h1 className="admin-page-title">Finance & Paiements</h1>
         </div>
-        <button onClick={handleExport} className="admin-btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <button type="button" onClick={handleExport} className="admin-btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <Download className="w-4 h-4" />
           Exporter
         </button>
