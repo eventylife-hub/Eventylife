@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useToast } from '@/lib/stores/ui-store';
 
 /**
  * NewsletterCTA — Bloc d'inscription newsletter réutilisable.
@@ -33,15 +34,24 @@ export function NewsletterCTA({
   className = '',
 }: NewsletterCTAProps) {
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const toast = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
       // TODO: brancher API newsletter (Brevo/Resend)
-      setSubscribed(true);
+      // Simule un appel réseau
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      toast.success('Inscription confirmée ! Vérifiez votre boîte mail.');
       setEmail('');
-      setTimeout(() => setSubscribed(false), 3000);
+    } catch {
+      toast.error('Une erreur est survenue. Réessayez plus tard.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -124,36 +134,30 @@ export function NewsletterCTA({
             />
             <button
               type="submit"
+              disabled={isSubmitting}
               className="px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
               style={{
                 background: 'var(--terra, #C75B39)',
                 color: '#fff',
                 border: 'none',
-                cursor: 'pointer',
+                cursor: isSubmitting ? 'wait' : 'pointer',
+                opacity: isSubmitting ? 0.7 : 1,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--terra-light, #D97B5E)';
-                e.currentTarget.style.boxShadow =
-                  '0 6px 24px rgba(199,91,57,0.25)';
+                if (!isSubmitting) {
+                  e.currentTarget.style.background = 'var(--terra-light, #D97B5E)';
+                  e.currentTarget.style.boxShadow =
+                    '0 6px 24px rgba(199,91,57,0.25)';
+                }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = 'var(--terra, #C75B39)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              S&apos;inscrire
+              {isSubmitting ? 'Envoi…' : "S'inscrire"}
             </button>
           </form>
-
-          {subscribed && (
-            <p
-              className="mt-4 text-sm"
-              style={{ color: '#DCFCE7' }}
-              role="status"
-            >
-              Merci ! Vérifiez votre boîte mail.
-            </p>
-          )}
         </div>
       </div>
     );
@@ -209,23 +213,19 @@ export function NewsletterCTA({
         />
         <button
           type="submit"
+          disabled={isSubmitting}
           className="px-6 py-3 rounded-xl font-bold text-sm transition-opacity hover:opacity-90"
           style={{
             backgroundColor: 'var(--navy, #1A1A2E)',
             color: 'white',
             border: 'none',
-            cursor: 'pointer',
+            cursor: isSubmitting ? 'wait' : 'pointer',
+            opacity: isSubmitting ? 0.7 : 1,
           }}
         >
-          S&apos;inscrire
+          {isSubmitting ? 'Envoi…' : "S'inscrire"}
         </button>
       </form>
-
-      {subscribed && (
-        <p className="mt-4 text-sm" style={{ color: '#DCFCE7' }}>
-          Merci ! Vérifiez votre boîte mail.
-        </p>
-      )}
     </div>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import './homepage.css';
 
 /* ── Reveal on Scroll ── */
@@ -70,6 +71,50 @@ const LocSvg = () => (
    PAGE D'ACCUEIL — EVENTY LIFE
    ══════════════════════════════════════════ */
 export default function HomePage() {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isLocating, setIsLocating] = useState(false);
+
+  const handleSearch = useCallback(() => {
+    const q = searchQuery.trim();
+    if (q) {
+      router.push(`/voyages?destination=${encodeURIComponent(q)}`);
+    } else {
+      router.push('/voyages');
+    }
+  }, [searchQuery, router]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') handleSearch();
+  }, [handleSearch]);
+
+  const handleGeolocate = useCallback(() => {
+    if (!navigator.geolocation) return;
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=fr`,
+            { headers: { 'User-Agent': 'EventyLife/1.0' } }
+          );
+          const data = await res.json();
+          const city = data.address?.city || data.address?.town || data.address?.village || data.address?.municipality || '';
+          if (city) {
+            setSearchQuery(city);
+          }
+        } catch {
+          /* silently fail */
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      () => setIsLocating(false),
+      { timeout: 8000 }
+    );
+  }, []);
+
   return (
     <>
       {/* ═══ HERO ═══ */}
@@ -86,16 +131,26 @@ export default function HomePage() {
               Un arrêt de ramassage au plus près de chez vous, avec parking gratuit.
               Votre voiture reste tranquille, vos vacances commencent tout de suite.
             </p>
-            <div className="hero-search">
-              <input type="text" placeholder="Votre ville ou code postal…" id="hero-input" />
-              <button type="button" className="btn-loc"><LocSvg /> Localiser</button>
-              <button type="button" className="btn-go">Trouver →</button>
+            <div className="hero-search" role="search" aria-label="Rechercher un voyage">
+              <input
+                type="text"
+                placeholder="Votre ville ou code postal…"
+                id="hero-input"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                aria-label="Ville ou code postal de départ"
+              />
+              <button type="button" className="btn-loc" onClick={handleGeolocate} disabled={isLocating} aria-label="Me localiser automatiquement">
+                <LocSvg /> {isLocating ? '…' : 'Localiser'}
+              </button>
+              <button type="button" className="btn-go" onClick={handleSearch}>Trouver →</button>
             </div>
             <div className="hero-tags">
-              <Link href="/voyages?dest=maroc">🇲🇦 Maroc</Link>
-              <Link href="/voyages?dest=andalousie">🇪🇸 Andalousie</Link>
-              <Link href="/voyages?dest=tunisie">🇹🇳 Tunisie</Link>
-              <Link href="/voyages?dest=italie">🇮🇹 Italie</Link>
+              <Link href="/voyages?destination=maroc">🇲🇦 Maroc</Link>
+              <Link href="/voyages?destination=andalousie">🇪🇸 Andalousie</Link>
+              <Link href="/voyages?destination=tunisie">🇹🇳 Tunisie</Link>
+              <Link href="/voyages?destination=italie">🇮🇹 Italie</Link>
               <Link href="/voyages?type=weekend">⚡ Week-end</Link>
             </div>
           </div>

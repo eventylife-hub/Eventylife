@@ -44,27 +44,29 @@ export function Pagination({ currentPage, totalPages, onPageChange, className = 
       <button type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="px-3 py-2 text-sm font-medium rounded-xl transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+        style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
         aria-label="Page précédente"
       >
-        ←
+        ‹
       </button>
 
       {/* Numéros */}
       {getPageNumbers().map((page, idx: number) =>
         page === '...' ? (
-          <span key={`ellipsis-${idx}`} className="px-3 py-2 text-sm text-gray-400">
+          <span key={`ellipsis-${idx}`} className="px-3 py-2 text-sm" style={{ color: '#6B7280' }}>
             …
           </span>
         ) : (
           <button type="button"
             key={page}
             onClick={() => onPageChange(page)}
-            className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+            className="px-3 py-2 text-sm font-medium rounded-xl transition-all duration-200"
+            style={
               page === currentPage
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-            }`}
+                ? { background: 'var(--terra, #C75B39)', color: '#fff', border: '1.5px solid var(--terra, #C75B39)' }
+                : { background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }
+            }
             aria-label={`Page ${page}`}
             aria-current={page === currentPage ? 'page' : undefined}
           >
@@ -77,10 +79,11 @@ export function Pagination({ currentPage, totalPages, onPageChange, className = 
       <button type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="px-3 py-2 text-sm font-medium rounded-xl transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+        style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
         aria-label="Page suivante"
       >
-        →
+        ›
       </button>
     </nav>
   );

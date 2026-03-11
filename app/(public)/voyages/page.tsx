@@ -72,9 +72,11 @@ function VoyagesContent() {
   const [filteredTravels, setFilteredTravels] = useState<Travel[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const [destination, setDestination] = useState(searchParams.get('destination') || '');
+  const [destination, setDestination] = useState(searchParams.get('destination') || searchParams.get('dest') || '');
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
+  const [transportFilter, setTransportFilter] = useState<string>(searchParams.get('type') === 'weekend' ? '' : '');
+  const [durationFilter, setDurationFilter] = useState<string>(searchParams.get('type') === 'weekend' ? 'short' : '');
   const [sortBy, setSortBy] = useState('popular');
 
   useEffect(() => {
@@ -120,14 +122,25 @@ function VoyagesContent() {
     }
     if (minPrice !== null) result = result.filter(t => t.price >= minPrice);
     if (maxPrice !== null) result = result.filter(t => t.price <= maxPrice);
+    if (transportFilter) {
+      result = result.filter(t => t.transportType === transportFilter);
+    }
+    if (durationFilter === 'short') {
+      result = result.filter(t => t.daysCount <= 4);
+    } else if (durationFilter === 'week') {
+      result = result.filter(t => t.daysCount >= 5 && t.daysCount <= 7);
+    } else if (durationFilter === 'long') {
+      result = result.filter(t => t.daysCount >= 8);
+    }
 
     const sorted = [...(result || [])];
     if (sortBy === 'price-asc') sorted.sort((a, b) => a.price - b.price);
     else if (sortBy === 'price-desc') sorted.sort((a, b) => b.price - a.price);
     else if (sortBy === 'rating') sorted.sort((a, b) => b.rating - a.rating);
+    else if (sortBy === 'date') sorted.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
 
     setFilteredTravels(sorted);
-  }, [travels, destination, minPrice, maxPrice, sortBy]);
+  }, [travels, destination, minPrice, maxPrice, transportFilter, durationFilter, sortBy]);
 
   const inputStyle = {
     width: '100%',
@@ -213,6 +226,48 @@ function VoyagesContent() {
 
   return (
     <div className="space-y-8">
+      {/* Quick-filter chips */}
+      <div className="flex flex-wrap gap-2 mb-4" role="group" aria-label="Filtres rapides">
+        {[
+          { label: 'Tous', dest: '', transport: '', duration: '' },
+          { label: '🚌 Bus', dest: '', transport: 'BUS', duration: '' },
+          { label: '✈️ Avion', dest: '', transport: 'AVION', duration: '' },
+          { label: '⚡ Week-end', dest: '', transport: '', duration: 'short' },
+          { label: '📅 1 semaine', dest: '', transport: '', duration: 'week' },
+          { label: '🌍 +8 jours', dest: '', transport: '', duration: 'long' },
+          { label: '💰 - de 700€', dest: '', transport: '', duration: '', maxP: 70000 },
+        ].map((chip, i) => {
+          const isActive =
+            (chip.transport === transportFilter || (!chip.transport && !transportFilter)) &&
+            (chip.duration === durationFilter || (!chip.duration && !durationFilter)) &&
+            (!('maxP' in chip) || maxPrice === (chip.maxP ?? null));
+          const isAllChip = !chip.transport && !chip.duration && !('maxP' in chip && chip.maxP);
+          const activeForAll = isAllChip && !transportFilter && !durationFilter && maxPrice === null;
+          const active = isAllChip ? activeForAll : (chip.transport === transportFilter && chip.duration === durationFilter && (('maxP' in chip) ? maxPrice === (chip.maxP ?? null) : true));
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => {
+                setTransportFilter(chip.transport);
+                setDurationFilter(chip.duration);
+                if ('maxP' in chip && chip.maxP) setMaxPrice(chip.maxP);
+                else if (isAllChip) { setMaxPrice(null); setMinPrice(null); setDestination(''); }
+              }}
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+              style={{
+                background: active ? 'var(--terra, #C75B39)' : '#fff',
+                color: active ? '#fff' : 'var(--navy, #1A1A2E)',
+                border: `1.5px solid ${active ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
+                cursor: 'pointer',
+              }}
+            >
+              {chip.label}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Filtres */}
       <form
         role="search"
@@ -221,12 +276,12 @@ function VoyagesContent() {
         style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          <div className="sm:col-span-2">
             <label htmlFor="filter-destination" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Destination</label>
             <input
               id="filter-destination"
-              placeholder="Chercher..."
+              placeholder="Chercher une destination..."
               value={destination}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDestination((e.target as HTMLInputElement).value)}
               style={inputStyle}
@@ -261,6 +316,20 @@ function VoyagesContent() {
             />
           </div>
           <div>
+            <label htmlFor="filter-transport" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Transport</label>
+            <select
+              id="filter-transport"
+              value={transportFilter}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTransportFilter(e.target.value)}
+              style={selectStyle}
+            >
+              <option value="">Tous</option>
+              <option value="BUS">🚌 Bus</option>
+              <option value="AVION">✈️ Avion</option>
+              <option value="MIXTE">🔄 Mixte</option>
+            </select>
+          </div>
+          <div>
             <label htmlFor="filter-sort" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Trier par</label>
             <select
               id="filter-sort"
@@ -272,9 +341,41 @@ function VoyagesContent() {
               <option value="price-asc">Prix croissant</option>
               <option value="price-desc">Prix décroissant</option>
               <option value="rating">Meilleure notation</option>
+              <option value="date">Départ le plus proche</option>
             </select>
           </div>
         </div>
+        {(destination || minPrice !== null || maxPrice !== null || transportFilter || durationFilter) && (
+          <div className="mt-3 flex items-center gap-2">
+            <span className="text-xs" style={{ color: '#6B7280' }}>Filtres actifs :</span>
+            {destination && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{ background: 'rgba(199,91,57,0.1)', color: 'var(--terra, #C75B39)' }}>
+                {destination}
+                <button type="button" onClick={() => setDestination('')} className="ml-0.5 hover:opacity-70" aria-label={`Supprimer filtre ${destination}`}>&times;</button>
+              </span>
+            )}
+            {transportFilter && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{ background: 'rgba(0,119,182,0.1)', color: 'var(--ocean, #0077B6)' }}>
+                {transportFilter === 'BUS' ? '🚌 Bus' : transportFilter === 'AVION' ? '✈️ Avion' : '🔄 Mixte'}
+                <button type="button" onClick={() => setTransportFilter('')} className="ml-0.5 hover:opacity-70" aria-label="Supprimer filtre transport">&times;</button>
+              </span>
+            )}
+            {durationFilter && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{ background: 'rgba(123,47,247,0.1)', color: 'var(--violet, #7B2FF7)' }}>
+                {durationFilter === 'short' ? '⚡ Week-end' : durationFilter === 'week' ? '📅 1 semaine' : '🌍 +8 jours'}
+                <button type="button" onClick={() => setDurationFilter('')} className="ml-0.5 hover:opacity-70" aria-label="Supprimer filtre durée">&times;</button>
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={() => { setDestination(''); setMinPrice(null); setMaxPrice(null); setTransportFilter(''); setDurationFilter(''); }}
+              className="text-xs underline ml-auto"
+              style={{ color: '#6B7280', cursor: 'pointer' }}
+            >
+              Tout effacer
+            </button>
+          </div>
+        )}
       </form>
 
       {/* Résultats */}
