@@ -64,7 +64,7 @@ export function Header({ user }: HeaderProps) {
     <header
       className="sticky top-0 z-40 transition-shadow duration-300"
       style={{
-        background: 'var(--navy, #1A1A2E)',
+        background: 'linear-gradient(to right, #0077B6, #7B2FF7, #FF6B35)',
         boxShadow: scrolled ? '0 4px 20px rgba(26,26,46,0.3)' : 'none',
       }}
       role="banner"

@@ -1,505 +1,444 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { OrganizationJsonLd } from '@/components/seo/json-ld';
+import './homepage.css';
 
-/* Couleurs Design System v2 */
-/**
- * Hook reveal on scroll
- */
+/* ── Reveal on Scroll ── */
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('vis');
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.15 }
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { el.classList.add('vis'); obs.unobserve(el); } },
+      { threshold: 0.07, rootMargin: '0px 0px -20px' }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
   return ref;
 }
 
-function RevealDiv({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+function Rv({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useReveal();
+  return <div ref={ref} className={`rv ${className}`}>{children}</div>;
+}
+
+/* ── Favorite button ── */
+function FavBtn() {
+  const ref = useRef<HTMLButtonElement>(null);
+  const toggle = () => {
+    const b = ref.current;
+    if (!b) return;
+    b.classList.toggle('liked');
+    b.textContent = b.classList.contains('liked') ? '♥' : '♡';
+  };
+  return <button ref={ref} className="tc-fav" aria-label="Favoris" onClick={toggle}>♡</button>;
+}
+
+/* ── Chip filter (visual only) ── */
+function Chips() {
+  const labels = ['📍 Autour de moi', 'Région', 'Ce mois', '- de 500€', 'Week-end', 'Famille', 'Culture'];
+  const [active, setActive] = React.useState(0);
   return (
-    <div ref={ref} className={`rv ${className}`} style={{ transitionDelay: `${delay}ms` }}>
-      {children}
+    <div className="chips">
+      {labels.map((l, i) => (
+        <button key={i} className={i === active ? 'on' : ''} onClick={() => setActive(i)}>{l}</button>
+      ))}
     </div>
   );
 }
 
-/**
- * Landing page Eventy Life — Design v2
- */
+/* ── Pin icon SVG ── */
+const PinSvg = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const LocSvg = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+    <circle cx="12" cy="12" r="10" /><line x1="12" y1="2" x2="12" y2="6" />
+    <line x1="12" y1="18" x2="12" y2="22" /><line x1="2" y1="12" x2="6" y2="12" />
+    <line x1="18" y1="12" x2="22" y2="12" />
+  </svg>
+);
+
+/* ══════════════════════════════════════════
+   PAGE D'ACCUEIL — EVENTY LIFE
+   ══════════════════════════════════════════ */
 export default function HomePage() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail('');
-      setTimeout(() => setSubscribed(false), 3000);
-    }
-  };
-
   return (
     <>
-      {/* JSON-LD Organization pour Google */}
-      <OrganizationJsonLd />
-
       {/* ═══ HERO ═══ */}
-      <section
-        className="relative overflow-hidden"
-        style={{ background: 'var(--cream, #FAF7F2)' }}
-      >
-        {/* Orbe décoratif */}
-        <div
-          className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 animate-float"
-          style={{ background: `radial-gradient(circle, var(--terra, #C75B39)40, transparent 70%)` }}
-        />
-        <div
-          className="absolute bottom-0 -left-20 w-64 h-64 rounded-full opacity-15 animate-float"
-          style={{ background: `radial-gradient(circle, var(--gold, #D4A853)40, transparent 70%)`, animationDelay: '3s' }}
-        />
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28 relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            {/* Trust pill */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-up"
-              style={{ background: '#FDF6E8', color: 'var(--navy, #1A1A2E)', border: `1px solid var(--gold, #D4A853)30` }}
-            >
-              <span style={{ color: 'var(--gold, #D4A853)' }}>★</span>
-              Plateforme n°1 de voyages de groupe en France
+      <section className="hero-home">
+        <div className="hero-inner">
+          <div className="hero-left">
+            <div className="hero-pill">
+              <span className="dot" /> 12 départs confirmés ce mois
             </div>
-
-            <h1
-              className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up"
-              style={{ color: 'var(--navy, #1A1A2E)', animationDelay: '0.1s' }}
-            >
-              Découvrez le monde,<br />
-              <span style={{ color: 'var(--terra, #C75B39)' }}>accompagné</span>
+            <h1 className="font-display">
+              Partez <em>accompagné</em>,<br />on gère tout.
             </h1>
-
-            <p
-              className="text-lg sm:text-xl mb-10 animate-fade-up"
-              style={{ color: '#6B7280', animationDelay: '0.2s' }}
-            >
-              Des voyages en groupe pensés pour vous. Accompagnement humain porte-à-porte,
-              prix justes, qualité garantie.
+            <p className="hero-sub">
+              Un arrêt de ramassage au plus près de chez vous, avec parking gratuit.
+              Votre voiture reste tranquille, vos vacances commencent tout de suite.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <Link
-                href="/voyages"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300"
-                style={{
-                  background: 'var(--terra, #C75B39)',
-                  color: '#fff',
-                  boxShadow: `0 6px 24px var(--terra, #C75B39)30`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#D97B5E';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = `0 10px 32px var(--terra, #C75B39)40`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
-                }}
-              >
-                Découvrir nos voyages →
-              </Link>
-              <Link
-                href="/comment-ca-marche"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-200"
-                style={{
-                  background: 'transparent',
-                  color: 'var(--navy, #1A1A2E)',
-                  border: '1.5px solid #E5E0D8',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                  e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#E5E0D8';
-                  e.currentTarget.style.background = 'transparent';
-                }}
-              >
-                Comment ça marche
-              </Link>
+            <div className="hero-search">
+              <input type="text" placeholder="Votre ville ou code postal…" id="hero-input" />
+              <button className="btn-loc"><LocSvg /> Localiser</button>
+              <button className="btn-go">Trouver →</button>
             </div>
+            <div className="hero-tags">
+              <Link href="/voyages?dest=maroc">🇲🇦 Maroc</Link>
+              <Link href="/voyages?dest=andalousie">🇪🇸 Andalousie</Link>
+              <Link href="/voyages?dest=tunisie">🇹🇳 Tunisie</Link>
+              <Link href="/voyages?dest=italie">🇮🇹 Italie</Link>
+              <Link href="/voyages?type=weekend">⚡ Week-end</Link>
+            </div>
+          </div>
+          <div className="hero-mosaic">
+            <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=300&h=240&fit=crop" alt="Marrakech" loading="eager" />
+            <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=300&h=240&fit=crop" alt="Andalousie" loading="eager" />
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=280&fit=crop" alt="Plage" loading="eager" />
+          </div>
+        </div>
+      </section>
 
-            {/* Stats */}
-            <div
-              className="flex flex-wrap justify-center gap-8 sm:gap-14 mt-14 animate-fade-up"
-              style={{ animationDelay: '0.4s' }}
-            >
-              {[
-                { val: '2 500+', label: 'Voyageurs heureux' },
-                { val: '98%', label: 'Satisfaction' },
-                { val: '50+', label: 'Destinations' },
-              ].map((s, i: number) => (
-                <div key={i} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--terra, #C75B39)' }}>{s.val}</div>
-                  <div className="text-sm mt-1" style={{ color: '#6B7280' }}>{s.label}</div>
+      {/* ═══ TRUST PILLS ═══ */}
+      <div className="trust-row">
+        <div className="trust-pills">
+          <div className="tp"><span className="emoji">🚐</span> Ramassage <span className="highlight">près de chez vous</span></div>
+          <div className="tp"><span className="emoji">🚗</span> Voiture au garage <span className="highlight">ou à l&apos;arrêt</span></div>
+          <div className="tp"><span className="emoji">👤</span> <span className="highlight">Accompagnateur</span> dédié</div>
+          <div className="tp"><span className="emoji">✅</span> Départ <span className="highlight">garanti</span></div>
+          <div className="tp"><span className="emoji">💳</span> Tout inclus, <span className="highlight">prix fixe</span></div>
+          <div className="tp"><span className="emoji">📞</span> Pro <span className="highlight">local</span> joignable</div>
+        </div>
+      </div>
+
+      {/* ═══ VOYAGES ═══ */}
+      <section className="sec-trips" id="voyages">
+        <div className="sec-inner">
+          <div className="sec-top">
+            <h2 className="font-display">Voyages <em>près de chez vous</em></h2>
+            <Link href="/voyages" className="see-all">Voir tout →</Link>
+          </div>
+          <p className="sec-sub">Départs confirmés avec ramassage dans votre zone. Réservez en 2 minutes.</p>
+          <Chips />
+          <div className="trip-grid">
+
+            {/* Card 1 — Marrakech */}
+            <Rv>
+              <article className="tc">
+                <div className="tc-img">
+                  <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=640&h=440&fit=crop" alt="Marrakech" />
+                  <span className="tc-badge confirmed">Départ confirmé</span>
+                  <FavBtn />
+                  <div className="tc-transport-tag">🚌 + ✈️</div>
+                  <div className="tc-emotion font-display">Dépaysement total</div>
                 </div>
-              ))}
+                <div className="tc-body">
+                  <div className="tc-pickup"><PinSvg /> à 12 km — Strasbourg centre</div>
+                  <h3 className="font-display">Marrakech &amp; Essaouira</h3>
+                  <div className="tc-meta"><span>📅 15 – 22 mars</span><span>8 jours</span></div>
+                  <div className="tc-foot">
+                    <div className="tc-price"><small>à partir de</small><strong className="font-display">689<sup>€</sup></strong></div>
+                    <button className="btn-book">Réserver</button>
+                  </div>
+                </div>
+              </article>
+            </Rv>
+
+            {/* Card 2 — Andalousie */}
+            <Rv>
+              <article className="tc">
+                <div className="tc-img">
+                  <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=640&h=440&fit=crop" alt="Andalousie" />
+                  <span className="tc-badge confirmed">Départ confirmé</span>
+                  <FavBtn />
+                  <div className="tc-transport-tag">🚌 Grand tourisme</div>
+                  <div className="tc-emotion font-display">Soleil &amp; flamenco</div>
+                </div>
+                <div className="tc-body">
+                  <div className="tc-pickup"><PinSvg /> à 8 km — Mulhouse gare</div>
+                  <h3 className="font-display">Andalousie — Séville, Grenade, Cordoue</h3>
+                  <div className="tc-meta"><span>📅 5 – 12 avril</span><span>8 jours</span></div>
+                  <div className="tc-foot">
+                    <div className="tc-price"><small>à partir de</small><strong className="font-display">549<sup>€</sup></strong></div>
+                    <button className="btn-book">Réserver</button>
+                  </div>
+                </div>
+              </article>
+            </Rv>
+
+            {/* Card 3 — Tunisie */}
+            <Rv>
+              <article className="tc">
+                <div className="tc-img">
+                  <img src="https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=640&h=440&fit=crop" alt="Tunisie" />
+                  <span className="tc-badge hot">🔥 6 places restantes</span>
+                  <FavBtn />
+                  <div className="tc-transport-tag">✈️ + 🚌</div>
+                  <div className="tc-emotion font-display">Évasion méditerranée</div>
+                </div>
+                <div className="tc-body">
+                  <div className="tc-pickup"><PinSvg /> à 5 km — Colmar centre</div>
+                  <h3 className="font-display">Tunisie — Hammamet &amp; Sidi Bou Saïd</h3>
+                  <div className="tc-meta"><span>📅 20 – 27 avril</span><span>8 jours</span></div>
+                  <div className="tc-foot">
+                    <div className="tc-price"><small>à partir de</small><strong className="font-display">599<sup>€</sup></strong></div>
+                    <button className="btn-book">Réserver</button>
+                  </div>
+                </div>
+              </article>
+            </Rv>
+
+            {/* Card 4 — Italie */}
+            <Rv>
+              <article className="tc">
+                <div className="tc-img">
+                  <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=640&h=440&fit=crop" alt="Italie" />
+                  <span className="tc-badge new">✨ Nouveau</span>
+                  <FavBtn />
+                  <div className="tc-transport-tag">🚌 Grand tourisme</div>
+                  <div className="tc-emotion font-display">La dolce vita</div>
+                </div>
+                <div className="tc-body">
+                  <div className="tc-pickup"><PinSvg /> à 15 km — Haguenau</div>
+                  <h3 className="font-display">Rome, Florence &amp; Venise</h3>
+                  <div className="tc-meta"><span>📅 10 – 18 mai</span><span>9 jours</span></div>
+                  <div className="tc-foot">
+                    <div className="tc-price"><small>à partir de</small><strong className="font-display">729<sup>€</sup></strong></div>
+                    <button className="btn-book">Réserver</button>
+                  </div>
+                </div>
+              </article>
+            </Rv>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ EMOTION BANNER ═══ */}
+      <div className="emotion-strip">
+        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=600&fit=crop&q=80" alt="Route de voyage" loading="lazy" />
+        <div className="emotion-strip-text">
+          <h2 className="font-display">Des souvenirs.<br />Pas de la logistique.</h2>
+          <p>Garez-vous gratuitement à l&apos;arrêt ou laissez votre voiture au garage. Montez dans le bus et ramenez des étoiles dans les yeux.</p>
+        </div>
+      </div>
+
+      {/* ═══ POURQUOI EVENTY ═══ */}
+      <section className="sec-why" id="pourquoi">
+        <div className="sec-inner">
+          <div className="sec-top"><h2 className="font-display">Pourquoi <em>Eventy Life</em> ?</h2></div>
+          <div className="why-grid">
+
+            <Rv><div className="why-card">
+              <div className="wc-img">
+                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop" alt="Bus" loading="lazy" />
+                <div className="wc-num c1 font-display">1</div>
+                <div className="wc-title-overlay font-display">Un arrêt de ramassage tout près de chez vous</div>
+              </div>
+              <div className="wc-body"><p>Nos indépendants placent les arrêts au plus proche. La plupart disposent d&apos;un parking gratuit : garez-vous, montez dans le bus, c&apos;est parti.</p></div>
+            </div></Rv>
+
+            <Rv><div className="why-card">
+              <div className="wc-img">
+                <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop" alt="Voiture" loading="lazy" />
+                <div className="wc-num c2 font-display">2</div>
+                <div className="wc-title-overlay font-display">Votre voiture reste au garage ou à l&apos;arrêt</div>
+              </div>
+              <div className="wc-body"><p>Laissez-la à la maison ou garez-vous gratuitement à l&apos;arrêt de ramassage. Zéro km inutile, zéro risque de vol sur un parking d&apos;aéroport.</p></div>
+            </div></Rv>
+
+            <Rv><div className="why-card">
+              <div className="wc-img">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Accompagnateur" loading="lazy" />
+                <div className="wc-num c3 font-display">3</div>
+                <div className="wc-title-overlay font-display">Un humain avec vous, pas un chatbot</div>
+              </div>
+              <div className="wc-body"><p>Du ramassage au retour, un accompagnateur Eventy est là. Questions, soucis, envies : toujours quelqu&apos;un à qui parler.</p></div>
+            </div></Rv>
+
+            <Rv><div className="why-card">
+              <div className="wc-img">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop" alt="Hôtel" loading="lazy" />
+                <div className="wc-num c4 font-display">4</div>
+                <div className="wc-title-overlay font-display">Tout inclus, zéro surprise sur le prix</div>
+              </div>
+              <div className="wc-body"><p>Transport, hôtel, repas, activités — tout dans le prix. Pas de supplément carburant, pas d&apos;option piège en petits caractères.</p></div>
+            </div></Rv>
+
+            <Rv><div className="why-card">
+              <div className="wc-img">
+                <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&h=400&fit=crop" alt="Groupe" loading="lazy" />
+                <div className="wc-num c5 font-display">5</div>
+                <div className="wc-title-overlay font-display">Le groupe sans la galère logistique</div>
+              </div>
+              <div className="wc-body"><p>Rencontres, bonne ambiance, souvenirs partagés. On gère les chambres, les horaires, les restaurants. Vous, vous profitez.</p></div>
+            </div></Rv>
+
+            <Rv><div className="why-card">
+              <div className="wc-img">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop" alt="Pro local" loading="lazy" />
+                <div className="wc-num c6 font-display">6</div>
+                <div className="wc-title-overlay font-display">Un pro près de chez vous, joignable</div>
+              </div>
+              <div className="wc-body"><p>Votre interlocuteur local connaît votre région. Appelez-le, voyez-le, posez vos questions avant de partir.</p></div>
+            </div></Rv>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ VOITURE AU GARAGE ═══ */}
+      <section className="sec-car">
+        <div className="car-grid">
+          <div className="car-photo">
+            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=960&h=700&fit=crop&q=80" alt="Belle voiture" loading="lazy" />
+            <div className="car-floats">
+              <div className="cf"><span className="big font-display">0 km</span><span className="sm">compteur</span></div>
+              <div className="cf"><span className="big font-display">0 €</span><span className="sm">parking à l&apos;arrêt</span></div>
+              <div className="cf"><span className="big font-display">0</span><span className="sm">risque</span></div>
+            </div>
+          </div>
+          <div className="car-content">
+            <div className="car-tag">💎 Argument n°1 de nos clients</div>
+            <h2 className="font-display">Votre voiture est <em>précieuse</em>.<br />Laissez-la au garage ou à l&apos;arrêt.</h2>
+            <p>Plus besoin de traverser la France au volant. Garez-vous gratuitement à l&apos;arrêt de bus le plus proche, ou laissez votre voiture chez vous. Dans les deux cas : zéro fatigue, zéro risque.</p>
+            <div className="car-pts">
+              <div className="cp">
+                <div className="cp-ico a">⛽</div>
+                <div><h4>Économisez 600€+ par voyage</h4><p>Carburant + péages aller-retour Strasbourg–Barcelone : plus de 600€ restent dans votre poche.</p></div>
+              </div>
+              <div className="cp">
+                <div className="cp-ico b">🅿️</div>
+                <div><h4>Zéro frais de parking</h4><p>Nos arrêts sont choisis avec parking gratuit. Comparez avec 15€/jour en aéroport × 8 jours = 120€ économisés.</p></div>
+              </div>
+              <div className="cp">
+                <div className="cp-ico c">🔧</div>
+                <div><h4>Valeur de revente préservée</h4><p>2 000 km de moins au compteur, c&apos;est de l&apos;argent gardé à la revente.</p></div>
+              </div>
+              <div className="cp">
+                <div className="cp-ico d">😌</div>
+                <div><h4>Vacances dès la première minute</h4><p>Pas de 6h de route épuisante. Montez dans le bus, le voyage commence.</p></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══ COMMENT ÇA MARCHE ═══ */}
-      <section id="how-it-works" style={{ background: '#fff' }} className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
-              Simple comme bonjour
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
-              Comment ça marche
-            </h2>
-          </RevealDiv>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                step: '01',
-                icon: '🔍',
-                title: 'Choisir',
-                desc: 'Parcourez nos voyages en groupe et sélectionnez celui qui vous plaît.',
-              },
-              {
-                step: '02',
-                icon: '📋',
-                title: 'Réserver',
-                desc: 'Réservez facilement et payez en plusieurs fois si vous le souhaitez.',
-              },
-              {
-                step: '03',
-                icon: '✈️',
-                title: 'Partir',
-                desc: "Profitez d'un voyage inoubliable avec notre accompagnement complet.",
-              },
-            ].map((item, idx: number) => (
-              <RevealDiv key={idx} delay={idx * 120}>
-                <div
-                  className="text-center p-8 rounded-2xl transition-all duration-300"
-                  style={{
-                    background: '#fff',
-                    border: '1.5px solid #E5E0D8',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(26,26,46,0.08)';
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <span className="text-xs font-bold tracking-wider" style={{ color: 'var(--gold, #D4A853)' }}>
-                    ÉTAPE {item.step}
-                  </span>
-                  <h3 className="text-xl font-bold mt-2 mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>{item.desc}</p>
-                </div>
-              </RevealDiv>
-            ))}
+      <section className="sec-how" id="comment">
+        <div className="sec-inner">
+          <div className="sec-top" style={{ justifyContent: 'center', textAlign: 'center' }}>
+            <div>
+              <h2 className="font-display">Comment <em>ça marche</em> ?</h2>
+              <p className="sec-sub" style={{ margin: '6px auto 0' }}>4 étapes, 2 minutes. Même sans compte.</p>
+            </div>
           </div>
-        </div>
-      </section>
+          <div className="how-grid">
 
-      {/* ═══ VOYAGES POPULAIRES ═══ */}
-      <section style={{ background: 'var(--cream, #FAF7F2)' }} className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
-              Coups de cœur
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
-              Voyages populaires
-            </h2>
-          </RevealDiv>
+            <Rv><div className="hs">
+              <div className="hs-circ" style={{ border: '3px solid var(--sun)', boxShadow: '0 4px 20px rgba(255,107,53,.2)' }}>
+                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=220&h=220&fit=crop" alt="Chercher" />
+                <div className="num n1 font-display">1</div>
+              </div>
+              <h4>Entrez votre ville</h4>
+              <p>On affiche les voyages avec un arrêt de ramassage à côté, triés par distance.</p>
+            </div></Rv>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Maroc — 8 jours',
-                destination: 'Marrakech & Désert',
-                price: '890 €',
-                emoji: '🏜️',
-                gradient: `linear-gradient(135deg, #C75B3940, #D4A85340)`,
-              },
-              {
-                title: 'Grèce — 10 jours',
-                destination: 'Athènes & Îles',
-                price: '1 290 €',
-                emoji: '🏛️',
-                gradient: `linear-gradient(135deg, #1e40af30, #48CAE430)`,
-              },
-              {
-                title: 'Italie — 7 jours',
-                destination: 'Rome & Côte Amalfitaine',
-                price: '1 090 €',
-                emoji: '🍝',
-                gradient: `linear-gradient(135deg, #16653440, #06D6A030)`,
-              },
-            ].map((travel, idx: number) => (
-              <RevealDiv key={idx} delay={idx * 120}>
-                <Link href="/voyages" className="block group">
-                  <div
-                    className="rounded-2xl overflow-hidden transition-all duration-300"
-                    style={{
-                      background: '#fff',
-                      border: '1.5px solid #E5E0D8',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = '0 12px 40px rgba(26,26,46,0.10)';
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = 'none';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                  >
-                    <div
-                      className="h-48 flex items-center justify-center text-6xl"
-                      style={{ background: travel.gradient }}
-                    >
-                      {travel.emoji}
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-bold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>{travel.title}</h3>
-                      <p className="text-sm mb-4" style={{ color: '#6B7280' }}>📍 {travel.destination}</p>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xl font-bold" style={{ color: 'var(--terra, #C75B39)' }}>
-                          À partir de {travel.price}
-                        </span>
-                        <span
-                          className="text-sm font-semibold transition-colors"
-                          style={{ color: 'var(--terra, #C75B39)' }}
-                        >
-                          Voir →
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </RevealDiv>
-            ))}
-          </div>
+            <Rv><div className="hs">
+              <div className="hs-circ" style={{ border: '3px solid var(--ocean)', boxShadow: '0 4px 20px rgba(0,119,182,.2)' }}>
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=220&h=220&fit=crop" alt="Réserver" />
+                <div className="num n2 font-display">2</div>
+              </div>
+              <h4>Réservez en 2 min</h4>
+              <p>Chambre, voyageurs, paiement sécurisé. Même en invité.</p>
+            </div></Rv>
 
-          <RevealDiv className="text-center mt-10">
-            <Link
-              href="/voyages"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
-              style={{
-                background: 'transparent',
-                color: 'var(--navy, #1A1A2E)',
-                border: '1.5px solid #E5E0D8',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                e.currentTarget.style.background = 'rgba(199,91,57,0.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#E5E0D8';
-                e.currentTarget.style.background = 'transparent';
-              }}
-            >
-              Voir tous les voyages →
-            </Link>
-          </RevealDiv>
-        </div>
-      </section>
+            <Rv><div className="hs">
+              <div className="hs-circ" style={{ border: '3px solid var(--mint)', boxShadow: '0 4px 20px rgba(6,214,160,.2)' }}>
+                <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=220&h=220&fit=crop" alt="Bus" />
+                <div className="num n3 font-display">3</div>
+              </div>
+              <h4>Le bus passe à votre arrêt</h4>
+              <p>Jour J, garez-vous gratuitement à l&apos;arrêt. L&apos;accompagnateur vous accueille et c&apos;est parti.</p>
+            </div></Rv>
 
-      {/* ═══ POURQUOI EVENTY ═══ */}
-      <section style={{ background: '#fff' }} className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
-              Nos engagements
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
-              Pourquoi Eventy Life
-            </h2>
-          </RevealDiv>
+            <Rv><div className="hs">
+              <div className="hs-circ" style={{ border: '3px solid var(--violet)', boxShadow: '0 4px 20px rgba(123,47,247,.2)' }}>
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=220&h=220&fit=crop" alt="Profiter" />
+                <div className="num n4 font-display">4</div>
+              </div>
+              <h4>Profitez, c&apos;est tout</h4>
+              <p>Hôtel, repas, visites : tout est prêt. Vivez le moment.</p>
+            </div></Rv>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: '👥', title: 'Groupes', desc: 'Voyagez en bonne compagnie, rencontrez de nouvelles personnes' },
-              { icon: '💰', title: 'Prix justes', desc: 'Meilleurs tarifs garantis, sans frais cachés' },
-              { icon: '✓', title: 'Qualité', desc: 'Services premium, hôtels sélectionnés avec soin' },
-              { icon: '🎯', title: 'Accompagnement', desc: 'Avant, pendant et après votre voyage' },
-            ].map((item, idx: number) => (
-              <RevealDiv key={idx} delay={idx * 100}>
-                <div
-                  className="text-center p-6 rounded-2xl transition-all duration-300"
-                  style={{
-                    background: 'var(--cream, #FAF7F2)',
-                    border: `1.5px solid transparent`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#E5E0D8';
-                    e.currentTarget.style.background = '#fff';
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(26,26,46,0.06)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'transparent';
-                    e.currentTarget.style.background = 'var(--cream, #FAF7F2)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>{item.desc}</p>
-                </div>
-              </RevealDiv>
-            ))}
           </div>
         </div>
       </section>
 
       {/* ═══ TÉMOIGNAGES ═══ */}
-      <section style={{ background: 'var(--cream, #FAF7F2)' }} className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
-              Ils nous font confiance
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
-              Nos clients témoignent
-            </h2>
-          </RevealDiv>
+      <section className="sec-test" id="avis">
+        <div className="sec-inner">
+          <div className="sec-top"><h2 className="font-display">Ils sont <em>partis avec nous</em></h2></div>
+          <div className="test-grid">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Marie D.',
-                text: 'Un voyage merveilleux ! Équipe au top, pas stressée une seconde.',
-                rating: 5,
-                trip: 'Maroc — Sept 2025',
-              },
-              {
-                name: 'Jean P.',
-                text: 'Prix honnête et service exceptionnel. Je réserve ma prochaine destination !',
-                rating: 5,
-                trip: 'Grèce — Juin 2025',
-              },
-              {
-                name: 'Sophie L.',
-                text: 'Voyage en petit groupe, vraiment sympathique. À recommander !',
-                rating: 5,
-                trip: 'Italie — Oct 2025',
-              },
-            ].map((review, idx: number) => (
-              <RevealDiv key={idx} delay={idx * 120}>
-                <div
-                  className="p-6 rounded-2xl h-full flex flex-col"
-                  style={{
-                    background: '#fff',
-                    border: '1.5px solid #E5E0D8',
-                  }}
-                >
-                  <div className="flex gap-0.5 mb-4">
-                    {[...Array(review.rating)].map((_, i: number) => (
-                      <span key={i} style={{ color: 'var(--gold, #D4A853)' }}>★</span>
-                    ))}
-                  </div>
-                  <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: '#374151' }}>
-                    « {review.text} »
-                  </p>
-                  <div>
-                    <p className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>{review.name}</p>
-                    <p className="text-xs" style={{ color: '#6B7280' }}>{review.trip}</p>
-                  </div>
-                </div>
-              </RevealDiv>
-            ))}
+            <Rv><div className="testi">
+              <div className="testi-q font-display">&ldquo;</div>
+              <div className="testi-stars">★★★★★</div>
+              <p>Le bus est passé à 5 min de la maison. On a dormi pendant le trajet, et à l&apos;arrivée tout était prêt. Ma voiture n&apos;a pas bougé !</p>
+              <div className="testi-who">
+                <div className="testi-av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&h=88&fit=crop&crop=face" alt="Marie" /></div>
+                <div><div className="testi-name">Marie C.</div><div className="testi-trip">Andalousie — Mars 2025</div></div>
+              </div>
+            </div></Rv>
+
+            <Rv><div className="testi">
+              <div className="testi-q font-display">&ldquo;</div>
+              <div className="testi-stars">★★★★★</div>
+              <p>J&apos;avais peur du groupe. L&apos;accompagnateur était top, l&apos;ambiance géniale. Ne pas conduire 8 jours, c&apos;est un luxe incroyable.</p>
+              <div className="testi-who">
+                <div className="testi-av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Karim" /></div>
+                <div><div className="testi-name">Karim A.</div><div className="testi-trip">Marrakech — Février 2025</div></div>
+              </div>
+            </div></Rv>
+
+            <Rv><div className="testi">
+              <div className="testi-q font-display">&ldquo;</div>
+              <div className="testi-stars">★★★★★</div>
+              <p>Parking + essence + péages + stress… Eventy revient MOINS cher et je n&apos;ai rien eu à gérer. Pourquoi pas avant ?!</p>
+              <div className="testi-who">
+                <div className="testi-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=88&h=88&fit=crop&crop=face" alt="Sophie" /></div>
+                <div><div className="testi-name">Sophie B.</div><div className="testi-trip">Rome &amp; Florence — Avril 2025</div></div>
+              </div>
+            </div></Rv>
+
           </div>
         </div>
       </section>
 
-      {/* ═══ NEWSLETTER ═══ */}
-      <section
-        className="py-20 px-4"
-        style={{ background: 'var(--navy, #1A1A2E)' }}
-      >
-        <div className="max-w-2xl mx-auto text-center">
-          <RevealDiv>
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
-              Newsletter
-            </span>
-            <h2 className="font-display text-3xl font-bold mt-3 mb-4" style={{ color: '#FAF7F2' }}>
-              Recevez nos dernières offres
-            </h2>
-            <p className="mb-8 text-sm" style={{ color: 'rgba(250,247,242,0.6)' }}>
-              Inscrivez-vous pour découvrir nos meilleures destinations avant tout le monde.
-            </p>
-
-            <form aria-label="Inscription à la newsletter" onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
-                placeholder="Votre email"
-                required
-                autoComplete="email"
-                aria-label="Adresse email pour la newsletter"
-                className="flex-1 px-5 py-3.5 rounded-xl text-sm focus:outline-none transition-shadow"
-                style={{
-                  background: 'rgba(250,247,242,0.08)',
-                  color: '#FAF7F2',
-                  border: '1.5px solid rgba(250,247,242,0.15)',
-                }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(250,247,242,0.15)')}
-              />
-              <button
-                type="submit"
-                className="px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
-                style={{
-                  background: 'var(--terra, #C75B39)',
-                  color: '#fff',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#D97B5E';
-                  e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)40`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'var(--terra, #C75B39)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                S'inscrire
-              </button>
-            </form>
-
-            {subscribed && (
-              <p className="mt-4 text-sm animate-fade-up" style={{ color: '#DCFCE7' }}>
-                Merci ! Vérifiez votre boîte mail.
-              </p>
-            )}
-          </RevealDiv>
+      {/* ═══ CTA FINAL ═══ */}
+      <section className="sec-cta">
+        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&h=700&fit=crop&q=80" alt="Destination" loading="lazy" />
+        <div className="cta-box">
+          <h2 className="font-display">Prêt à partir sans stress ?</h2>
+          <p>Trouvez le voyage qui part près de chez vous. 2 minutes, c&apos;est réservé.</p>
+          <button
+            className="btn-final"
+            onClick={() => {
+              document.getElementById('hero-input')?.focus();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            Trouver mon voyage →
+          </button>
         </div>
       </section>
-
     </>
   );
 }

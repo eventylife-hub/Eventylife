@@ -3,14 +3,30 @@
 @tailwind utilities;
 
 :root {
-  /* Palette Eventy — Design System v2 */
-  --navy: #1A1A2E;
-  --navy-light: #2D2D44;
-  --cream: #FAF7F2;
+  /* Palette Eventy — Sun/Ocean (dégradé bleu→orange) */
+  --sun: #FF6B35;
+  --sun-light: #FF8F5E;
+  --sun-glow: #FFF0E8;
+  --ocean: #0077B6;
+  --ocean-deep: #005A8C;
+  --ocean-light: #00B4D8;
+  --ocean-pale: #E8F7FC;
+  --sky: #48CAE4;
+  --sand: #FEFCF3;
+  --coral: #E63946;
+  --mint: #06D6A0;
+  --mint-soft: #E0FFF5;
+  --violet: #7B2FF7;
+  --dark: #0A1628;
+
+  /* Aliases pour compatibilité Design System */
+  --navy: #0A1628;
+  --navy-light: #1A2A44;
+  --cream: #FEFCF3;
   --cream-warm: #FFF8ED;
-  --terra: #C75B39;
-  --terra-light: #D97B5E;
-  --terra-soft: #FEF0EB;
+  --terra: #FF6B35;
+  --terra-light: #FF8F5E;
+  --terra-soft: #FFF0E8;
   --gold: #D4A853;
   --gold-light: #E0BE7A;
   --gold-soft: #FDF6E8;
@@ -18,13 +34,13 @@
   --forest-bg: #DCFCE7;
   --border: #E5E0D8;
   --muted: #6B7280;
-  --blue: #1e40af;
-  --blue-bg: #EFF6FF;
-  --orange: #92400e;
-  --orange-bg: #FEF3C7;
+  --blue: #0077B6;
+  --blue-bg: #E8F7FC;
+  --orange: #FF6B35;
+  --orange-bg: #FFF0E8;
 
   /* Texte */
-  --text: #1A1A2E;
+  --text: #0A1628;
   --text-mid: #4A5568;
   --text-light: #6B7280;
   --white: #FFFFFF;
@@ -35,9 +51,9 @@
   --radius-xs: 6px;
 
   /* Ombres */
-  --shadow: 0 2px 12px rgba(26,26,46,0.06);
-  --shadow-lg: 0 8px 32px rgba(26,26,46,0.10);
-  --shadow-terra: 0 6px 24px rgba(199,91,57,0.18);
+  --shadow: 0 2px 12px rgba(10,22,40,0.06);
+  --shadow-lg: 0 8px 32px rgba(10,22,40,0.10);
+  --shadow-sun: 0 6px 24px rgba(255,107,53,0.18);
 }
 
 * {
@@ -51,9 +67,9 @@ html {
 }
 
 body {
-  font-family: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text);
-  background: var(--cream);
+  background: var(--sand);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -91,13 +107,13 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--terra);
+  outline: 2px solid var(--sun);
   outline-offset: 2px;
 }
 
 /* Font display class */
 .font-display {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-fraunces), Georgia, serif;
 }
 
 /* Animations */
@@ -117,8 +133,8 @@ textarea:focus-visible {
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(199,91,57,0.3); }
-  50% { box-shadow: 0 0 0 8px rgba(199,91,57,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(255,107,53,0); }
 }
 
 @keyframes float {
@@ -187,9 +203,10 @@ textarea:focus-visible {
   transform: translateY(-2px);
 }
 
-/* Eventy button styles */
-.btn-terra {
-  background: var(--terra);
+/* Eventy button styles — Sun/Ocean */
+.btn-terra,
+.btn-sun {
+  background: var(--sun);
   color: white;
   border: none;
   border-radius: var(--radius-sm);
@@ -197,13 +214,15 @@ textarea:focus-visible {
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
-.btn-terra:hover {
-  background: var(--terra-light);
-  box-shadow: var(--shadow-terra);
+.btn-terra:hover,
+.btn-sun:hover {
+  background: var(--sun-light);
+  box-shadow: var(--shadow-sun);
 }
 
-.btn-navy {
-  background: var(--navy);
+.btn-navy,
+.btn-ocean {
+  background: var(--ocean);
   color: white;
   border: none;
   border-radius: var(--radius-sm);
@@ -211,13 +230,14 @@ textarea:focus-visible {
   cursor: pointer;
   transition: background 0.2s ease;
 }
-.btn-navy:hover {
-  background: var(--navy-light);
+.btn-navy:hover,
+.btn-ocean:hover {
+  background: var(--ocean-deep);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--navy);
+  color: var(--dark);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   font-weight: 600;
@@ -225,6 +245,6 @@ textarea:focus-visible {
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 .btn-outline:hover {
-  border-color: var(--terra);
-  background: var(--terra-soft);
+  border-color: var(--sun);
+  background: var(--sun-glow);
 }
