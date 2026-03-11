@@ -100,6 +100,7 @@ export default function BlogArticlePage() {
           setState('data');
         }
       } catch {
+        console.warn('API blog indisponible — données démo');
         setArticle({ ...mockArticle, slug: slug || mockArticle.slug });
         setState('data');
       }
