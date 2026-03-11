@@ -32,18 +32,6 @@ interface Travel {
 
 type LoadState = 'loading' | 'empty' | 'error' | 'data';
 
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
-
 export default function DepartPage() {
   const params = useParams();
   const ville = params.ville as string;
@@ -156,7 +144,7 @@ export default function DepartPage() {
   if (state === 'error') {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-        <p style={{ color: C.terra }}>⚠️ {error}</p>
+        <p style={{ color: 'var(--terra, #C75B39)' }}>⚠️ {error}</p>
         <Button variant="primary" onClick={() => window.location.reload()}>
           Réessayer
         </Button>
@@ -173,14 +161,14 @@ export default function DepartPage() {
           { name: 'Nos voyages', href: '/voyages' },
           { name: `Départ ${villeUp}`, href: `/depart/${ville}` },
         ]} />
-        <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>
+        <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
           Voyages au départ de {villeUp}
         </h1>
         <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
-          <p style={{ color: C.muted, marginBottom: '1rem', fontSize: '1.125rem' }}>
+          <p style={{ color: '#6B7280', marginBottom: '1rem', fontSize: '1.125rem' }}>
             Aucun voyage au départ de {ville} pour le moment.
           </p>
-          <p style={{ color: C.muted, marginBottom: '1.5rem' }}>
+          <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
             Découvrez nos autres destinations
           </p>
           <Link href="/voyages">
@@ -204,10 +192,10 @@ export default function DepartPage() {
 
       {/* Titre */}
       <div className="mb-8">
-        <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>
+        <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
           Voyages au départ de {villeFormatted}
         </h1>
-        <p style={{ color: C.muted }}>
+        <p style={{ color: '#6B7280' }}>
           Découvrez {filteredTravels.length} voyage{filteredTravels.length !== 1 ? 's' : ''} disponible{filteredTravels.length !== 1 ? 's' : ''}
         </p>
       </div>
@@ -215,14 +203,14 @@ export default function DepartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Filtres Sidebar */}
         <div className="lg:col-span-1">
-          <div style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '12px', padding: '1.5rem', position: 'sticky', top: '1rem' }} className="space-y-6">
+          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '12px', padding: '1.5rem', position: 'sticky', top: '1rem' }} className="space-y-6">
             <div>
-              <h3 style={{ fontWeight: '700', color: C.navy, marginBottom: '0.75rem' }}>Filtres</h3>
+              <h3 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>Filtres</h3>
             </div>
 
             {/* Date Range */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.5rem' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
                 Date de départ
               </label>
               <div className="space-y-2">
@@ -243,7 +231,7 @@ export default function DepartPage() {
 
             {/* Price Range */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.5rem' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
                 Budget (€)
               </label>
               <div className="space-y-2">
@@ -262,7 +250,7 @@ export default function DepartPage() {
 
             {/* Duration */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.5rem' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
                 Durée (jours)
               </label>
               <div className="space-y-2">
@@ -281,7 +269,7 @@ export default function DepartPage() {
 
             {/* Themes */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: C.navy, marginBottom: '0.75rem' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>
                 Thème
               </label>
               <div className="space-y-2">
@@ -291,9 +279,9 @@ export default function DepartPage() {
                       type="checkbox"
                       checked={selectedThemes.includes(theme)}
                       onChange={() => toggleTheme(theme)}
-                      style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: `1.5px solid ${C.border}`, cursor: 'pointer' }}
+                      style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: '1.5px solid #E5E0D8', cursor: 'pointer' }}
                     />
-                    <span style={{ fontSize: '0.875rem', color: C.navy }}>{theme}</span>
+                    <span style={{ fontSize: '0.875rem', color: 'var(--navy, #1A1A2E)' }}>{theme}</span>
                   </label>
                 ))}
               </div>
@@ -302,9 +290,9 @@ export default function DepartPage() {
             {/* Reset Filters */}
             {(minDate || maxDate || minPrice || maxPrice || minDuration || maxDuration || selectedThemes.length > 0) && (
               <button
-                style={{ width: '100%', backgroundColor: 'white', color: C.terra, padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', border: `1.5px solid ${C.border}`, fontWeight: '700', cursor: 'pointer', transition: 'all 0.3s ease' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.backgroundColor = C.terraSoft; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.backgroundColor = 'white'; }}
+                style={{ width: '100%', backgroundColor: 'white', color: 'var(--terra, #C75B39)', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', border: '1.5px solid #E5E0D8', fontWeight: '700', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Soft; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.backgroundColor = 'white'; }}
                 onClick={() => {
                   setMinDate('');
                   setMaxDate('');
@@ -329,33 +317,33 @@ export default function DepartPage() {
 
               return (
                 <Link key={voyage.id} href={`/voyages/${voyage.id}`}>
-                  <div style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-                    <div style={{ aspectRatio: '16/9', background: `linear-gradient(135deg, ${C.cream}, ${C.goldSoft})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
+                  <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+                    <div style={{ aspectRatio: '16/9', background: `linear-gradient(135deg, var(--cream, #FAF7F2), ${'var(--gold, #D4A853)'Soft})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
                       {voyage.image}
                     </div>
                     <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.goldSoft, color: C.navy, padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>{voyage.daysCount} jours</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'var(--gold, #D4A853)'Soft, color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>{voyage.daysCount} jours</span>
                         {available <= 5 && (
-                          <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.terraSoft, color: C.terra, padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>Peu de places</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'var(--terra, #C75B39)'Soft, color: 'var(--terra, #C75B39)', padding: '0.25rem 0.75rem', borderRadius: '9999px' }}>Peu de places</span>
                         )}
                       </div>
 
-                      <h3 style={{ fontWeight: '700', fontSize: '1.125rem', color: C.navy, marginBottom: '0.25rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      <h3 style={{ fontWeight: '700', fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                         {voyage.title}
                       </h3>
 
-                      <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '0.5rem' }}>
+                      <p style={{ fontSize: '0.875rem', color: '#6B7280', marginBottom: '0.5rem' }}>
                         📍 {voyage.destination}
                       </p>
 
-                      <p style={{ fontSize: '0.75rem', color: C.muted, marginBottom: '0.75rem' }}>
+                      <p style={{ fontSize: '0.75rem', color: '#6B7280', marginBottom: '0.75rem' }}>
                         Du {formatDate(voyage.startDate)} au{' '}
                         {formatDate(voyage.endDate)}
                       </p>
 
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', marginTop: 'auto', paddingTop: '1rem', borderTop: `1.5px solid ${C.border}` }}>
-                        <span style={{ fontSize: '1.25rem', fontWeight: '700', color: C.terra }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1.5px solid #E5E0D8' }}>
+                        <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--terra, #C75B39)' }}>
                           À partir de {formatPrice(voyage.price)}
                         </span>
                       </div>
@@ -363,14 +351,14 @@ export default function DepartPage() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.875rem' }}>
                           <span>⭐ {voyage.rating}</span>
-                          <span style={{ color: C.muted }}>({voyage.reviews})</span>
+                          <span style={{ color: '#6B7280' }}>({voyage.reviews})</span>
                         </span>
-                        <span style={{ fontSize: '0.75rem', color: C.muted }}>
+                        <span style={{ fontSize: '0.75rem', color: '#6B7280' }}>
                           {available} place{available !== 1 ? 's' : ''} restante{available !== 1 ? 's' : ''}
                         </span>
                       </div>
 
-                      <button style={{ width: '100%', marginTop: '1rem', backgroundColor: C.terra, color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}>
+                      <button style={{ width: '100%', marginTop: '1rem', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
                         Voir détails
                       </button>
                     </div>

@@ -27,17 +27,7 @@ interface Group {
  * Affiche les groupes ouverts et permet de les rejoindre
  */
 export default function GroupesPage() {
-  const C = {
-    navy: '#1A1A2E',
-    cream: '#FAF7F2',
-    terra: '#C75B39',
-    terraLight: '#D97B5E',
-    gold: '#D4A853',
-    border: '#E5E0D8',
-    muted: '#6B7280',
-  };
-
-  const params = useParams();
+    const params = useParams();
   const slug = params.slug as string;
 
   const [groupes, setGroupes] = useState<Group[]>([]);
@@ -76,9 +66,9 @@ export default function GroupesPage() {
   // État Loading
   if (loading) {
     return (
-      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
+      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-2xl font-bold mb-6" style={{ color: C.navy }}>
+          <h1 className="text-2xl font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Groupes de voyage
           </h1>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -86,7 +76,7 @@ export default function GroupesPage() {
               <Skeleton
                 key={i}
                 className="h-48 rounded-lg"
-                style={{ borderRadius: '20px', backgroundColor: C.border }}
+                style={{ borderRadius: '20px', backgroundColor: '#E5E0D8' }}
               />
             ))}
           </div>
@@ -98,16 +88,16 @@ export default function GroupesPage() {
   // État Error
   if (error) {
     return (
-      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
+      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-2xl font-bold mb-6" style={{ color: C.navy }}>
+          <h1 className="text-2xl font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Groupes de voyage
           </h1>
           <div
             className="rounded-lg p-6"
             style={{
               backgroundColor: '#fee2e2',
-              border: `1.5px solid #fca5a5`,
+              border: '1.5px solid #fca5a5',
               borderRadius: '20px',
             }}
           >
@@ -138,27 +128,27 @@ export default function GroupesPage() {
   // État Empty
   if (groupes.length === 0) {
     return (
-      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
+      <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mx-auto max-w-6xl">
-          <h1 className="text-2xl font-bold mb-6" style={{ color: C.navy }}>
+          <h1 className="text-2xl font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Groupes de voyage
           </h1>
           <div
             className="rounded-lg p-12 text-center"
             style={{
               backgroundColor: 'white',
-              border: `2px dashed ${C.border}`,
+              border: `2px dashed #E5E0D8`,
               borderRadius: '20px',
             }}
           >
-            <p className="mb-4" style={{ color: C.muted }}>
+            <p className="mb-4" style={{ color: '#6B7280' }}>
               Aucun groupe ouvert pour ce voyage
             </p>
             <Link href="/client/groupes/creer">
               <Button
                 variant="default"
                 style={{
-                  backgroundColor: C.terra,
+                  backgroundColor: 'var(--terra, #C75B39)',
                   color: 'white',
                 }}
               >
@@ -174,7 +164,7 @@ export default function GroupesPage() {
 
   // État Data
   return (
-    <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: C.cream }}>
+    <div className="min-h-screen p-4 animate-fade-up" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
       <div className="mx-auto max-w-6xl">
         <Breadcrumb
           items={[
@@ -185,14 +175,14 @@ export default function GroupesPage() {
           ]}
         />
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold" style={{ color: C.navy }}>
+          <h1 className="text-2xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Groupes de voyage
           </h1>
           <Link href="/client/groupes/creer">
             <Button
               variant="default"
               style={{
-                backgroundColor: C.terra,
+                backgroundColor: 'var(--terra, #C75B39)',
                 color: 'white',
               }}
             >
@@ -209,7 +199,7 @@ export default function GroupesPage() {
         </div>
 
         {groupes.length > 0 && (
-          <div className="mt-8 text-sm text-center" style={{ color: C.muted }}>
+          <div className="mt-8 text-sm text-center" style={{ color: '#6B7280' }}>
             Vous voyez {groupes.length} groupe{groupes.length > 1 ? 's' : ''} ouvert{groupes.length > 1 ? 's' : ''}
           </div>
         )}

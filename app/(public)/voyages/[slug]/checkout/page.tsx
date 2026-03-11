@@ -31,20 +31,6 @@ import { PriceSummary } from '@/components/checkout/price-summary';
 import { HoldTimer } from '@/components/checkout/hold-timer';
 import { ROUTES } from '@/lib/constants';
 import { formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 type LoadState = 'loading' | 'error' | 'empty' | 'data';
 
 interface RoomType {
@@ -254,16 +240,16 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '1rem',
         }}
       >
         <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          <div style={{ height: '32px', backgroundColor: C.border, borderRadius: '8px', width: '160px', opacity: 0.5 }}></div>
-          <div style={{ height: '16px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
-          <div style={{ height: '40px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
-          <div style={{ height: '40px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
-          <div style={{ height: '40px', backgroundColor: C.border, borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '32px', backgroundColor: '#E5E0D8', borderRadius: '8px', width: '160px', opacity: 0.5 }}></div>
+          <div style={{ height: '16px', backgroundColor: '#E5E0D8', borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '40px', backgroundColor: '#E5E0D8', borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '40px', backgroundColor: '#E5E0D8', borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
+          <div style={{ height: '40px', backgroundColor: '#E5E0D8', borderRadius: '8px', width: '100%', opacity: 0.5 }}></div>
         </div>
       </div>
     );
@@ -274,7 +260,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '1rem',
         }}
       >
@@ -282,35 +268,35 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
           <div
             style={{
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
               padding: '1.5rem',
               display: 'flex',
               gap: '1rem',
             }}
           >
-            <AlertCircle style={{ width: '24px', height: '24px', color: C.terra, flexShrink: 0, marginTop: '0.125rem' }} />
+            <AlertCircle style={{ width: '24px', height: '24px', color: 'var(--terra, #C75B39)', flexShrink: 0, marginTop: '0.125rem' }} />
             <div>
-              <h3 style={{ fontWeight: '600', color: C.terra, marginBottom: '0.5rem' }}>
+              <h3 style={{ fontWeight: '600', color: 'var(--terra, #C75B39)', marginBottom: '0.5rem' }}>
                 Erreur lors du chargement
               </h3>
-              <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.875rem', color: '#6B7280', marginBottom: '1rem' }}>
                 Impossible de charger les données du voyage. Veuillez réessayer.
               </p>
               <button
                 onClick={() => window.location.reload()}
                 style={{
                   backgroundColor: 'transparent',
-                  color: C.terra,
+                  color: 'var(--terra, #C75B39)',
                   padding: '0.5rem 1rem',
                   borderRadius: '8px',
                   fontWeight: '600',
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   cursor: 'pointer',
                   fontSize: '0.875rem',
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLButtonElement).style.backgroundColor = C.terraSoft;
+                  (e.target as HTMLButtonElement).style.backgroundColor = 'var(--terra, #C75B39)'Soft;
                 }}
                 onMouseLeave={(e) => {
                   (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
@@ -330,21 +316,21 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: C.cream,
+          backgroundColor: 'var(--cream, #FAF7F2)',
           padding: '1rem',
         }}
       >
         <div style={{ maxWidth: '42rem', margin: '0 auto', paddingTop: '2rem', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: C.navy, marginBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>
             Voyage non trouvé
           </h2>
-          <p style={{ color: C.muted, marginBottom: '1.5rem' }}>
+          <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>
             Le voyage demandé n&apos;existe pas ou a été supprimé.
           </p>
           <button
             onClick={() => router.push(ROUTES.VOYAGES)}
             style={{
-              backgroundColor: C.terra,
+              backgroundColor: 'var(--terra, #C75B39)',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '10px',
@@ -365,7 +351,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: C.cream,
+        backgroundColor: 'var(--cream, #FAF7F2)',
         padding: '1rem',
       }}
     >
@@ -375,13 +361,13 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
             style={{
               fontSize: '1.5rem',
               fontWeight: 'bold',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
               marginBottom: '0.5rem',
             }}
           >
             Réservation: {travel.title}
           </h1>
-          <p style={{ fontSize: '0.875rem', color: C.muted }}>
+          <p style={{ fontSize: '0.875rem', color: '#6B7280' }}>
             Départ: {formatDate(travel.startDate)}
           </p>
         </div>

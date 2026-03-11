@@ -4,25 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 /* ════════════════════════════════════════════
-   PALETTE & DESIGN TOKENS
-   Inspiré du mockup HTML — Navy / Cream / Terra / Gold
-   ════════════════════════════════════════════ */
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  gold: '#D4A853',
-  green: '#166534',
-  greenBg: '#DCFCE7',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  blue: '#1e40af',
-  blueBg: '#EFF6FF',
-  orangeBg: '#FEF3C7',
-  orange: '#92400e',
-};
-
-/* ════════════════════════════════════════════
    MOCK DATA — Îles Éoliennes & Baroque Sicilien
    ════════════════════════════════════════════ */
 const tripData = {
@@ -178,22 +159,22 @@ function Topbar() {
 
   return (
     <nav style={{
-      background: solid ? 'white' : C.navy,
+      background: solid ? 'white' : 'var(--navy, #1A1A2E)',
       height: 52, display: 'flex', alignItems: 'center', padding: '0 24px', gap: 16,
       position: 'sticky', top: 0, zIndex: 200,
       boxShadow: solid ? '0 2px 10px rgba(0,0,0,.08)' : '0 2px 10px rgba(0,0,0,.3)',
       transition: 'all .3s'
     }}>
-      <Link href="/" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, color: solid ? C.navy : C.cream, textDecoration: 'none', fontWeight: 700 }}>
-        Eventy<span style={{ color: C.gold }}>.</span>Life
+      <Link href="/" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, color: solid ? 'var(--navy, #1A1A2E)' : 'var(--cream, #FAF7F2)', textDecoration: 'none', fontWeight: 700 }}>
+        Eventy<span style={{ color: 'var(--gold, #D4A853)' }}>.</span>Life
       </Link>
-      <div style={{ fontSize: 12.5, color: solid ? C.muted : 'rgba(255,255,255,.5)', display: 'flex', gap: 6, alignItems: 'center' }}>
-        <Link href="/voyages" style={{ color: solid ? C.muted : 'rgba(255,255,255,.65)', textDecoration: 'none' }}>Voyages</Link>
+      <div style={{ fontSize: 12.5, color: solid ? '#6B7280' : 'rgba(255,255,255,.5)', display: 'flex', gap: 6, alignItems: 'center' }}>
+        <Link href="/voyages" style={{ color: solid ? '#6B7280' : 'rgba(255,255,255,.65)', textDecoration: 'none' }}>Voyages</Link>
         <span>›</span>
         <span>{tripData.title}</span>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-        <button style={{ background: 'transparent', border: `1.5px solid ${solid ? C.border : 'rgba(255,255,255,.3)'}`, color: solid ? C.navy : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+        <button style={{ background: 'transparent', border: `1.5px solid ${solid ? '#E5E0D8' : 'rgba(255,255,255,.3)'}`, color: solid ? 'var(--navy, #1A1A2E)' : 'white', borderRadius: 8, padding: '6px 14px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
           📤 Partager
         </button>
       </div>
@@ -224,7 +205,7 @@ function HeroSection({ paxCount, setPaxCount }: { paxCount: number; setPaxCount:
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 32px 24px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
         <div>
           <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-            <span style={{ background: C.greenBg, color: C.green, fontSize: 12, fontWeight: 700, padding: '4px 12px', borderRadius: 12 }}>✓ Départ confirmé</span>
+            <span style={{ background: '#DCFCE7', color: '#166534', fontSize: 12, fontWeight: 700, padding: '4px 12px', borderRadius: 12 }}>✓ Départ confirmé</span>
             <span style={{ background: '#FFF8E1', color: '#7B4900', border: '1.5px solid #FFB300', fontSize: 11.5, fontWeight: 700, padding: '4px 12px', borderRadius: 12 }}>⭐ Coup de cœur Eventy</span>
           </div>
           <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(26px,4vw,38px)', color: 'white', lineHeight: 1.2, textShadow: '0 2px 12px rgba(0,0,0,.5)', marginBottom: 6 }}>
@@ -241,7 +222,7 @@ function HeroSection({ paxCount, setPaxCount }: { paxCount: number; setPaxCount:
         {/* Price box */}
         <div style={{ background: 'rgba(26,26,46,.9)', border: '1.5px solid rgba(255,255,255,.2)', backdropFilter: 'blur(10px)', borderRadius: 14, padding: '18px 24px', textAlign: 'right', minWidth: 220 }}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,.55)', letterSpacing: '.8px', textTransform: 'uppercase', marginBottom: 2 }}>À partir de</div>
-          <div id="hero-price" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, color: C.gold, fontWeight: 700 }}>
+          <div id="hero-price" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, color: 'var(--gold, #D4A853)', fontWeight: 700 }}>
             {(tripData.basePrice * paxCount).toLocaleString('fr-FR')} €
           </div>
           <div style={{ fontSize: 11.5, color: 'rgba(255,255,255,.55)', marginTop: 2 }}>
@@ -255,7 +236,7 @@ function HeroSection({ paxCount, setPaxCount }: { paxCount: number; setPaxCount:
               <button onClick={() => setPaxCount(Math.min(available, paxCount + 1))} style={{ background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)', color: 'white', width: 26, height: 26, borderRadius: 6, fontSize: 16, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
             </div>
           </div>
-          <button style={{ display: 'block', background: C.terra, color: 'white', border: 'none', borderRadius: 10, padding: '12px 24px', fontWeight: 700, fontSize: 15, cursor: 'pointer', marginTop: 12, width: '100%' }}>
+          <button style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 24px', fontWeight: 700, fontSize: 15, cursor: 'pointer', marginTop: 12, width: '100%' }}>
             Réserver ce voyage →
           </button>
         </div>
@@ -278,17 +259,17 @@ function StickyCTA() {
 
   return (
     <div style={{
-      position: 'fixed', bottom: 0, left: 0, right: 0, background: 'white', borderTop: `1.5px solid ${C.border}`,
+      position: 'fixed', bottom: 0, left: 0, right: 0, background: 'white', borderTop: '1.5px solid #E5E0D8',
       padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 100,
       boxShadow: '0 -4px 20px rgba(0,0,0,.1)', transform: visible ? 'translateY(0)' : 'translateY(100%)', transition: 'transform .3s'
     }}>
       <div>
-        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700, color: C.navy }}>
-          {tripData.basePrice.toLocaleString('fr-FR')} € <small style={{ fontSize: 12, fontWeight: 400, color: C.muted }}>/ pers.</small>
+        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 700, color: 'var(--navy, #1A1A2E)' }}>
+          {tripData.basePrice.toLocaleString('fr-FR')} € <small style={{ fontSize: 12, fontWeight: 400, color: '#6B7280' }}>/ pers.</small>
         </div>
-        <div style={{ fontSize: 12, color: C.green, fontWeight: 600 }}>✓ Départ confirmé · {available} places restantes</div>
+        <div style={{ fontSize: 12, color: '#166534', fontWeight: 600 }}>✓ Départ confirmé · {available} places restantes</div>
       </div>
-      <button style={{ background: C.terra, color: 'white', border: 'none', borderRadius: 10, padding: '12px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>
+      <button style={{ background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: '12px 28px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>
         Réserver →
       </button>
     </div>
@@ -310,7 +291,7 @@ function SectionNav() {
 
   return (
     <nav style={{
-      background: 'white', border: `1.5px solid ${C.border}`, borderRadius: 12, marginBottom: 28,
+      background: 'white', border: '1.5px solid #E5E0D8', borderRadius: 12, marginBottom: 28,
       overflow: 'hidden', display: 'flex'
     }}>
       {items.map((item, i) => (
@@ -319,10 +300,10 @@ function SectionNav() {
           href={`#${item.id}`}
           onClick={() => setActive(item.id)}
           style={{
-            flex: 1, background: active === item.id ? C.navy : 'transparent', border: 'none',
-            borderRight: i < items.length - 1 ? `1px solid ${C.border}` : 'none',
+            flex: 1, background: active === item.id ? 'var(--navy, #1A1A2E)' : 'transparent', border: 'none',
+            borderRight: i < items.length - 1 ? '1px solid #E5E0D8' : 'none',
             padding: '12px 8px', fontSize: 12.5, fontWeight: 600,
-            color: active === item.id ? 'white' : C.muted,
+            color: active === item.id ? 'white' : '#6B7280',
             cursor: 'pointer', textAlign: 'center', textDecoration: 'none', transition: 'all .15s'
           }}
         >
@@ -338,10 +319,10 @@ function SectionNav() {
    ════════════════════════════════════════════ */
 function Section({ id, icon, title, children }: { id: string; icon: string; title: string; children: React.ReactNode }) {
   return (
-    <div id={id} style={{ background: 'white', border: `1.5px solid ${C.border}`, borderRadius: 14, padding: 24, marginBottom: 20 }}>
+    <div id={id} style={{ background: 'white', border: '1.5px solid #E5E0D8', borderRadius: 14, padding: 24, marginBottom: 20 }}>
       <div style={{
-        fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, color: C.navy,
-        marginBottom: 16, paddingBottom: 12, borderBottom: `1.5px solid ${C.border}`,
+        fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, color: 'var(--navy, #1A1A2E)',
+        marginBottom: 16, paddingBottom: 12, borderBottom: '1.5px solid #E5E0D8',
         display: 'flex', alignItems: 'center', gap: 8
       }}>
         <span style={{ fontSize: 20 }}>{icon}</span> {title}
@@ -362,28 +343,28 @@ function RamassageSection() {
     <Section id="ramassage" icon="🚌" title="Point de ramassage le plus proche">
       {/* Highlight */}
       <div style={{ background: 'linear-gradient(135deg,#F0FDF4,#DCFCE7)', border: '1.5px solid #86EFAC', borderRadius: 12, padding: 16, marginBottom: 16 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.green, marginBottom: 4 }}>📍 Sélectionné automatiquement — le plus proche de vous</div>
-        <div style={{ fontSize: 17, fontWeight: 700, color: C.navy, marginBottom: 2 }}>{p.city}</div>
-        <div style={{ fontSize: 13, color: C.muted }}>{p.address}</div>
-        <div style={{ fontSize: 13, color: C.navy, fontWeight: 600, marginTop: 6 }}>⏰ Départ : <strong>Samedi 14 juin · {p.time}</strong></div>
-        <div style={{ display: 'inline-block', background: C.greenBg, color: C.green, fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 8, marginTop: 4 }}>✓ Horaires confirmés</div>
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#166534', marginBottom: 4 }}>📍 Sélectionné automatiquement — le plus proche de vous</div>
+        <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 2 }}>{p.city}</div>
+        <div style={{ fontSize: 13, color: '#6B7280' }}>{p.address}</div>
+        <div style={{ fontSize: 13, color: 'var(--navy, #1A1A2E)', fontWeight: 600, marginTop: 6 }}>⏰ Départ : <strong>Samedi 14 juin · {p.time}</strong></div>
+        <div style={{ display: 'inline-block', background: '#DCFCE7', color: '#166534', fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 8, marginTop: 4 }}>✓ Horaires confirmés</div>
       </div>
 
-      <div style={{ fontSize: 13, color: C.muted, marginBottom: 10 }}>Autres arrêts disponibles sur votre parcours :</div>
+      <div style={{ fontSize: 13, color: '#6B7280', marginBottom: 10 }}>Autres arrêts disponibles sur votre parcours :</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {tripData.pickupPoints.map((point, i) => (
           <button key={i} onClick={() => setSelected(i)} style={{
             display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
-            border: `1.5px solid ${selected === i ? C.terra : C.border}`,
+            border: `1.5px solid ${selected === i ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
             borderRadius: 10, cursor: 'pointer', transition: 'all .15s',
             background: selected === i ? '#FFF5F2' : 'white', textAlign: 'left', width: '100%'
           }}>
-            <div style={{ width: 10, height: 10, background: selected === i ? C.terra : C.muted, borderRadius: '50%', flexShrink: 0 }} />
+            <div style={{ width: 10, height: 10, background: selected === i ? 'var(--terra, #C75B39)' : '#6B7280', borderRadius: '50%', flexShrink: 0 }} />
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 13.5, fontWeight: 600, color: C.navy }}>{point.city}</div>
-              <div style={{ fontSize: 11.5, color: C.muted }}>{point.distance} de vous · {point.time}</div>
+              <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--navy, #1A1A2E)' }}>{point.city}</div>
+              <div style={{ fontSize: 11.5, color: '#6B7280' }}>{point.distance} de vous · {point.time}</div>
             </div>
-            {selected === i && <span style={{ fontSize: 12, fontWeight: 700, color: C.green }}>✓ Sélectionné</span>}
+            {selected === i && <span style={{ fontSize: 12, fontWeight: 700, color: '#166534' }}>✓ Sélectionné</span>}
           </button>
         ))}
       </div>
@@ -391,11 +372,11 @@ function RamassageSection() {
       {/* Map */}
       <div style={{ background: 'linear-gradient(135deg,#E0F2FE,#BAE6FD)', borderRadius: 10, height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40, color: '#0369A1', marginTop: 12, border: '1.5px solid #BAE6FD', position: 'relative' }}>
         🗺️
-        <div style={{ position: 'absolute', bottom: 8, right: 8, background: 'white', borderRadius: 6, padding: '4px 10px', fontSize: 11, fontWeight: 600, color: C.blue, cursor: 'pointer' }}>
+        <div style={{ position: 'absolute', bottom: 8, right: 8, background: 'white', borderRadius: 6, padding: '4px 10px', fontSize: 11, fontWeight: 600, color: '#1e40af', cursor: 'pointer' }}>
           Ouvrir dans Google Maps →
         </div>
       </div>
-      <div style={{ fontSize: 12, color: C.muted, marginTop: 8 }}>
+      <div style={{ fontSize: 12, color: '#6B7280', marginTop: 8 }}>
         À faire autour : Cafés ouverts tôt le matin · Parking sécurisé à 5 min · Consigne bagages
       </div>
     </Section>
@@ -410,25 +391,25 @@ function ProgrammeSection() {
     <Section id="programme" icon="📅" title="Programme jour par jour">
       {/* Tags */}
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
-        <span style={{ background: C.blueBg, color: C.blue, fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 10 }}>⭐ EXCLUSIF EVENTY</span>
+        <span style={{ background: '#EFF6FF', color: '#1e40af', fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 10 }}>⭐ EXCLUSIF EVENTY</span>
         <span style={{ background: '#FFF3E0', color: '#E65100', fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 10 }}>🌋 Îles Éoliennes</span>
-        <span style={{ background: C.greenBg, color: C.green, fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 10 }}>🏛️ Baroque sicilien</span>
+        <span style={{ background: '#DCFCE7', color: '#166534', fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 10 }}>🏛️ Baroque sicilien</span>
         <span style={{ background: '#F3E5F5', color: '#7B1FA2', fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 10 }}>🔮 INSOLITE</span>
       </div>
 
       {/* Timeline */}
       <div style={{ position: 'relative', paddingLeft: 28 }}>
-        <div style={{ position: 'absolute', left: 8, top: 8, bottom: 8, width: 2, background: C.border }} />
+        <div style={{ position: 'absolute', left: 8, top: 8, bottom: 8, width: 2, background: '#E5E0D8' }} />
         {tripData.program.map((day, di) => (
           <div key={di} style={{ position: 'relative', marginBottom: 20 }}>
-            <div style={{ position: 'absolute', left: -24, top: 3, width: 14, height: 14, background: C.terra, borderRadius: '50%', border: '2px solid white', boxShadow: `0 0 0 2px ${C.terra}` }} />
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.terra, marginBottom: 4 }}>{day.day} — {day.date}</div>
-            <div style={{ fontSize: 14.5, fontWeight: 600, color: C.navy, marginBottom: 6 }}>{day.title}</div>
+            <div style={{ position: 'absolute', left: -24, top: 3, width: 14, height: 14, background: 'var(--terra, #C75B39)', borderRadius: '50%', border: '2px solid white', boxShadow: `0 0 0 2px var(--terra, #C75B39)` }} />
+            <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: 'var(--terra, #C75B39)', marginBottom: 4 }}>{day.day} — {day.date}</div>
+            <div style={{ fontSize: 14.5, fontWeight: 600, color: 'var(--navy, #1A1A2E)', marginBottom: 6 }}>{day.title}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {day.slots.map((slot, si) => (
-                <div key={si} style={{ display: 'flex', gap: 8, fontSize: 13, color: C.muted }}>
+                <div key={si} style={{ display: 'flex', gap: 8, fontSize: 13, color: '#6B7280' }}>
                   <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{slot.icon}</span>
-                  <span><strong style={{ color: C.navy, fontWeight: 600 }}>{slot.label} :</strong> {slot.text}</span>
+                  <span><strong style={{ color: 'var(--navy, #1A1A2E)', fontWeight: 600 }}>{slot.label} :</strong> {slot.text}</span>
                 </div>
               ))}
             </div>
@@ -437,20 +418,20 @@ function ProgrammeSection() {
       </div>
 
       {/* Tournées sur place */}
-      <div style={{ background: C.cream, borderRadius: 12, padding: 16, marginTop: 16 }}>
-        <div style={{ fontSize: 13.5, fontWeight: 700, color: C.navy, marginBottom: 12 }}>🚌 Tournées bus sur place (Palerme)</div>
+      <div style={{ background: 'var(--cream, #FAF7F2)', borderRadius: 12, padding: 16, marginTop: 16 }}>
+        <div style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 12 }}>🚌 Tournées bus sur place (Palerme)</div>
 
         {/* Après-midi */}
         <div style={{ marginBottom: 14 }}>
-          <div style={{ fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.muted, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#6B7280', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
             ☀️ Après-midi · 4 arrêts
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {tripData.onSiteShuttles.afternoon.stops.map((stop, i) => (
-              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '8px 12px', background: C.cream, borderRadius: 8, fontSize: 13, border: `1px solid ${C.border}` }}>
-                <div style={{ width: 22, height: 22, background: C.navy, color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{stop.num}</div>
-                <div style={{ flex: 1, fontWeight: 600, color: C.navy }}>{stop.name}</div>
-                <div style={{ fontSize: 11.5, color: C.muted }}>{stop.note}</div>
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '8px 12px', background: 'var(--cream, #FAF7F2)', borderRadius: 8, fontSize: 13, border: '1px solid #E5E0D8' }}>
+                <div style={{ width: 22, height: 22, background: 'var(--navy, #1A1A2E)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{stop.num}</div>
+                <div style={{ flex: 1, fontWeight: 600, color: 'var(--navy, #1A1A2E)' }}>{stop.name}</div>
+                <div style={{ fontSize: 11.5, color: '#6B7280' }}>{stop.note}</div>
               </div>
             ))}
           </div>
@@ -458,15 +439,15 @@ function ProgrammeSection() {
 
         {/* Soirée */}
         <div>
-          <div style={{ fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.muted, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#6B7280', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
             🌙 Soir · 2 arrêts
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {tripData.onSiteShuttles.evening.stops.map((stop, i) => (
-              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '8px 12px', background: C.cream, borderRadius: 8, fontSize: 13, border: `1px solid ${C.border}` }}>
-                <div style={{ width: 22, height: 22, background: C.navy, color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{stop.num}</div>
-                <div style={{ flex: 1, fontWeight: 600, color: C.navy }}>{stop.name}</div>
-                <div style={{ fontSize: 11.5, color: C.muted }}>{stop.note}</div>
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '8px 12px', background: 'var(--cream, #FAF7F2)', borderRadius: 8, fontSize: 13, border: '1px solid #E5E0D8' }}>
+                <div style={{ width: 22, height: 22, background: 'var(--navy, #1A1A2E)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{stop.num}</div>
+                <div style={{ flex: 1, fontWeight: 600, color: 'var(--navy, #1A1A2E)' }}>{stop.name}</div>
+                <div style={{ fontSize: 11.5, color: '#6B7280' }}>{stop.note}</div>
               </div>
             ))}
           </div>
@@ -484,21 +465,21 @@ function InclusSection() {
     <Section id="inclus" icon="✅" title="Inclus / Non inclus">
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
         <div style={{ padding: '4px 0' }}>
-          <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.green, marginBottom: 10 }}>✓ Inclus</h4>
+          <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#166534', marginBottom: 10 }}>✓ Inclus</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {tripData.included.map((item, i) => (
-              <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: C.navy }}>
-                <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: C.greenBg, color: C.green }}>✓</div>
+              <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: 'var(--navy, #1A1A2E)' }}>
+                <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: '#DCFCE7', color: '#166534' }}>✓</div>
                 {item}
               </div>
             ))}
           </div>
         </div>
-        <div style={{ padding: '4px 0 4px 20px', borderLeft: `1.5px solid ${C.border}` }}>
+        <div style={{ padding: '4px 0 4px 20px', borderLeft: '1.5px solid #E5E0D8' }}>
           <h4 style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: 'var(--terra, #EF4444)', marginBottom: 10 }}>✗ Non inclus</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {tripData.notIncluded.map((item, i) => (
-              <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: C.navy }}>
+              <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', fontSize: 13, color: 'var(--navy, #1A1A2E)' }}>
                 <div style={{ width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, flexShrink: 0, marginTop: 1, background: '#FEE2E2', color: 'var(--terra, #EF4444)' }}>✗</div>
                 {item}
               </div>
@@ -519,14 +500,14 @@ function HebergementSection() {
   return (
     <Section id="hebergement" icon="🏨" title="Hébergement & Repas">
       {/* Hotel */}
-      <div style={{ display: 'flex', gap: 14, padding: 14, border: `1.5px solid ${C.border}`, borderRadius: 12, marginBottom: 16 }}>
+      <div style={{ display: 'flex', gap: 14, padding: 14, border: '1.5px solid #E5E0D8', borderRadius: 12, marginBottom: 16 }}>
         <div style={{ width: 90, height: 70, background: 'linear-gradient(135deg,#1e3a5c,#3b6a9a)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, flexShrink: 0 }}>🏨</div>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: C.navy, marginBottom: 3 }}>{tripData.hotel.name} {'★'.repeat(tripData.hotel.stars)}</div>
-          <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>{tripData.hotel.address} · {tripData.hotel.description}</div>
+          <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 3 }}>{tripData.hotel.name} {'★'.repeat(tripData.hotel.stars)}</div>
+          <div style={{ fontSize: 13, color: '#6B7280', marginTop: 4 }}>{tripData.hotel.address} · {tripData.hotel.description}</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 6 }}>
             {tripData.hotel.amenities.map((a, i) => (
-              <span key={i} style={{ background: C.blueBg, color: C.blue, fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 8 }}>{a}</span>
+              <span key={i} style={{ background: '#EFF6FF', color: '#1e40af', fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 8 }}>{a}</span>
             ))}
           </div>
         </div>
@@ -534,17 +515,17 @@ function HebergementSection() {
 
       {/* HRA rows */}
       {tripData.hra.map((item, i) => (
-        <div key={i} style={{ display: 'flex', gap: 10, padding: 12, border: `1.5px solid ${C.border}`, borderRadius: 10, marginBottom: 10, alignItems: 'flex-start' }}>
+        <div key={i} style={{ display: 'flex', gap: 10, padding: 12, border: '1.5px solid #E5E0D8', borderRadius: 10, marginBottom: 10, alignItems: 'flex-start' }}>
           <div style={{ width: 44, height: 44, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, flexShrink: 0, background: hraTypeBg[item.type] || '#f0f0f0' }}>
             {item.icon}
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: C.navy }}>{item.name}</div>
-            <div style={{ fontSize: 12.5, color: C.muted, marginTop: 2 }}>{item.detail}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy, #1A1A2E)' }}>{item.name}</div>
+            <div style={{ fontSize: 12.5, color: '#6B7280', marginTop: 2 }}>{item.detail}</div>
             <span style={{
               display: 'inline-block', fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 8, marginTop: 5,
-              background: item.badgeType === 'incl' ? C.greenBg : C.orangeBg,
-              color: item.badgeType === 'incl' ? C.green : C.orange,
+              background: item.badgeType === 'incl' ? '#166534'Bg : '#FEF3C7',
+              color: item.badgeType === 'incl' ? '#166534' : '#92400e',
             }}>{item.badge}</span>
           </div>
         </div>
@@ -560,8 +541,8 @@ function OccurrencesSection() {
   const [selectedOcc, setSelectedOcc] = useState(0);
 
   const badgeColors: Record<string, { bg: string; color: string }> = {
-    ok: { bg: C.greenBg, color: C.green },
-    soon: { bg: C.orangeBg, color: C.orange },
+    ok: { bg: '#166534'Bg, color: '#166534' },
+    soon: { bg: '#FEF3C7', color: '#92400e' },
     full: { bg: '#FEE2E2', color: '#991B1B' },
   };
 
@@ -577,21 +558,21 @@ function OccurrencesSection() {
               onClick={() => !isFull && setSelectedOcc(i)}
               style={{
                 display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px',
-                border: `1.5px solid ${selectedOcc === i && !isFull ? C.terra : C.border}`,
+                border: `1.5px solid ${selectedOcc === i && !isFull ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
                 borderRadius: 10, cursor: isFull ? 'default' : 'pointer', transition: 'all .15s',
                 background: selectedOcc === i && !isFull ? '#FFF5F2' : 'white',
                 opacity: isFull ? 0.6 : 1, textAlign: 'left', width: '100%'
               }}
             >
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 14, fontWeight: 700, color: C.navy }}>{occ.dates}</div>
-                <div style={{ fontSize: 12, color: C.muted }}>Départ Bordeaux · Retour Bordeaux</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--navy, #1A1A2E)' }}>{occ.dates}</div>
+                <div style={{ fontSize: 12, color: '#6B7280' }}>Départ Bordeaux · Retour Bordeaux</div>
                 <div style={{ height: 5, background: '#E5E7EB', borderRadius: 3, marginTop: 5, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', background: isFull ? 'var(--terra, #EF4444)' : C.terra, borderRadius: 3, width: `${occ.fill}%`, transition: 'width .4s' }} />
+                  <div style={{ height: '100%', background: isFull ? 'var(--terra, #EF4444)' : 'var(--terra, #C75B39)', borderRadius: 3, width: `${occ.fill}%`, transition: 'width .4s' }} />
                 </div>
               </div>
-              <div style={{ textAlign: 'right', fontSize: 12, color: C.muted }}>
-                <strong style={{ display: 'block', fontSize: 14, color: C.navy }}>{occ.booked} / {occ.total}</strong>places
+              <div style={{ textAlign: 'right', fontSize: 12, color: '#6B7280' }}>
+                <strong style={{ display: 'block', fontSize: 14, color: 'var(--navy, #1A1A2E)' }}>{occ.booked} / {occ.total}</strong>places
               </div>
               <span style={{ fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 10, whiteSpace: 'nowrap', background: bc.bg, color: bc.color }}>
                 {occ.label}
@@ -600,7 +581,7 @@ function OccurrencesSection() {
           );
         })}
       </div>
-      <div style={{ fontSize: 12, color: C.muted, marginTop: 10 }}>
+      <div style={{ fontSize: 12, color: '#6B7280', marginTop: 10 }}>
         Départ confirmé = nombre minimum de voyageurs atteint · Prix par personne en chambre double
       </div>
     </Section>
@@ -621,27 +602,27 @@ function EquipeSection() {
     <Section id="equipe" icon="👤" title="Ton équipe sur ce voyage">
       <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
         {tripData.team.map((m, i) => (
-          <div key={i} style={{ background: C.cream, border: `1.5px solid ${C.border}`, borderRadius: 12, padding: 14, flex: 1, minWidth: 200 }}>
+          <div key={i} style={{ background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 12, padding: 14, flex: 1, minWidth: 200 }}>
             <div style={{ width: 52, height: 52, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, marginBottom: 10, background: avatarBg[m.type] }}>
               {avatarEmoji[m.type]}
             </div>
-            <div style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.muted, marginBottom: 2 }}>{m.role}</div>
-            <div style={{ fontSize: 15, fontWeight: 700, color: C.navy, marginBottom: 2 }}>{m.name}</div>
-            <div style={{ fontSize: 12.5, color: C.muted, marginBottom: 10 }}>{m.bio}</div>
+            <div style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#6B7280', marginBottom: 2 }}>{m.role}</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 2 }}>{m.name}</div>
+            <div style={{ fontSize: 12.5, color: '#6B7280', marginBottom: 10 }}>{m.bio}</div>
             <div style={{ display: 'flex', gap: 6 }}>
-              <button style={{ flex: 1, border: `1.5px solid ${C.border}`, background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: C.navy, textAlign: 'center' }}>💬 Message</button>
-              <button style={{ flex: 1, border: `1.5px solid ${C.border}`, background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: C.navy, textAlign: 'center' }}>📞 Appeler</button>
+              <button style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>💬 Message</button>
+              <button style={{ flex: 1, border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '7px 0', fontSize: 12, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>📞 Appeler</button>
             </div>
           </div>
         ))}
       </div>
-      <div style={{ fontSize: 13, color: C.muted, fontStyle: 'italic', marginTop: 12, paddingTop: 12, borderTop: `1.5px solid ${C.border}` }}>
+      <div style={{ fontSize: 13, color: '#6B7280', fontStyle: 'italic', marginTop: 12, paddingTop: 12, borderTop: '1.5px solid #E5E0D8' }}>
         Ils suivent la préparation du voyage et gèrent le séjour sur place. Vous pouvez les contacter à tout moment avant, pendant et après le voyage.
       </div>
       <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-        <button style={{ flex: 1, background: C.cream, border: `1.5px solid ${C.border}`, borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: C.navy }}>📘 Facebook</button>
-        <button style={{ flex: 1, background: C.cream, border: `1.5px solid ${C.border}`, borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: C.navy }}>💬 WhatsApp</button>
-        <button style={{ flex: 1, background: C.cream, border: `1.5px solid ${C.border}`, borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: C.navy }}>🔗 Copier le lien</button>
+        <button style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>📘 Facebook</button>
+        <button style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>💬 WhatsApp</button>
+        <button style={{ flex: 1, background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', borderRadius: 8, padding: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', textAlign: 'center', color: 'var(--navy, #1A1A2E)' }}>🔗 Copier le lien</button>
       </div>
     </Section>
   );
@@ -653,14 +634,14 @@ function EquipeSection() {
 function ConditionsSection() {
   return (
     <Section id="conditions" icon="📋" title="Conditions & Informations légales">
-      <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.7 }}>
-        <p style={{ marginBottom: 10 }}><strong style={{ color: C.navy }}>Annulation :</strong> Selon barème Eventy Life. Annulation voyage Eventy → avoir crédit 100% valable 18 mois.</p>
-        <p style={{ marginBottom: 10 }}><strong style={{ color: C.navy }}>Paiement :</strong> Intégral ou acompte de 30% selon la date de départ. Solde dû J-60. Paiement sécurisé Stripe.</p>
-        <p style={{ marginBottom: 10 }}><strong style={{ color: C.navy }}>Documents voyageurs :</strong> Passeport ou CNI valide obligatoire. À fournir au minimum J-14 avant départ.</p>
-        <p style={{ marginBottom: 10 }}><strong style={{ color: C.navy }}>Assurance :</strong> Assurance de base incluse. Assurance renforcée annulation/rapatriement disponible en option (+89 €/pers).</p>
-        <p><strong style={{ color: C.navy }}>Transport :</strong> Bus porte-à-porte + vols inclus. Horaires confirmés J-7 avant départ.</p>
+      <div style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.7 }}>
+        <p style={{ marginBottom: 10 }}><strong style={{ color: 'var(--navy, #1A1A2E)' }}>Annulation :</strong> Selon barème Eventy Life. Annulation voyage Eventy → avoir crédit 100% valable 18 mois.</p>
+        <p style={{ marginBottom: 10 }}><strong style={{ color: 'var(--navy, #1A1A2E)' }}>Paiement :</strong> Intégral ou acompte de 30% selon la date de départ. Solde dû J-60. Paiement sécurisé Stripe.</p>
+        <p style={{ marginBottom: 10 }}><strong style={{ color: 'var(--navy, #1A1A2E)' }}>Documents voyageurs :</strong> Passeport ou CNI valide obligatoire. À fournir au minimum J-14 avant départ.</p>
+        <p style={{ marginBottom: 10 }}><strong style={{ color: 'var(--navy, #1A1A2E)' }}>Assurance :</strong> Assurance de base incluse. Assurance renforcée annulation/rapatriement disponible en option (+89 €/pers).</p>
+        <p><strong style={{ color: 'var(--navy, #1A1A2E)' }}>Transport :</strong> Bus porte-à-porte + vols inclus. Horaires confirmés J-7 avant départ.</p>
       </div>
-      <div style={{ background: C.orangeBg, border: '1.5px solid #F59E0B', borderRadius: 10, padding: '12px 16px', fontSize: 12.5, color: C.orange, marginTop: 12 }}>
+      <div style={{ background: '#FEF3C7', border: '1.5px solid #F59E0B', borderRadius: 10, padding: '12px 16px', fontSize: 12.5, color: '#92400e', marginTop: 12 }}>
         <strong>⚖️ Information précontractuelle obligatoire (L211-8 Code Tourisme)</strong><br />
         Conformément à l&apos;arrêté du 1er mars 2018, vous recevez cette information avant tout paiement.<br />
         <strong>Absence de droit de rétractation</strong> (art. L221-28 12° Code de la consommation).<br />
@@ -680,63 +661,63 @@ function AsideCard({ paxCount }: { paxCount: number }) {
   return (
     <div style={{ position: 'sticky', top: 68 }}>
       {/* Price card */}
-      <div style={{ background: 'white', border: `1.5px solid ${C.border}`, borderRadius: 14, padding: 22, marginBottom: 16, boxShadow: '0 4px 20px rgba(0,0,0,.06)' }}>
-        <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.muted, marginBottom: 14 }}>Votre sélection</div>
-        <div style={{ fontSize: 13.5, fontWeight: 700, color: C.navy, marginBottom: 12 }}>📅 14–21 juin 2025</div>
+      <div style={{ background: 'white', border: '1.5px solid #E5E0D8', borderRadius: 14, padding: 22, marginBottom: 16, boxShadow: '0 4px 20px rgba(0,0,0,.06)' }}>
+        <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#6B7280', marginBottom: 14 }}>Votre sélection</div>
+        <div style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--navy, #1A1A2E)', marginBottom: 12 }}>📅 14–21 juin 2025</div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
-          <span style={{ fontSize: 13.5, color: C.navy }}>Chambre double ({paxCount} pers.)</span>
-          <span style={{ fontSize: 18, fontWeight: 700, color: C.navy, fontFamily: "'Playfair Display', Georgia, serif" }}>
+          <span style={{ fontSize: 13.5, color: 'var(--navy, #1A1A2E)' }}>Chambre double ({paxCount} pers.)</span>
+          <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--navy, #1A1A2E)', fontFamily: "'Playfair Display', Georgia, serif" }}>
             {total.toLocaleString('fr-FR')} €
           </span>
         </div>
         {paxCount > 1 && (
-          <div style={{ fontSize: 12.5, color: C.muted, marginTop: 4 }}>
+          <div style={{ fontSize: 12.5, color: '#6B7280', marginTop: 4 }}>
             soit {perPerson.toLocaleString('fr-FR')} € / pers.
           </div>
         )}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8 }}>
-          <span style={{ fontSize: 13, color: C.navy }}>Option assurance renforcée</span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: C.navy }}>+ {(89 * paxCount)} €</span>
+          <span style={{ fontSize: 13, color: 'var(--navy, #1A1A2E)' }}>Option assurance renforcée</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--navy, #1A1A2E)' }}>+ {(89 * paxCount)} €</span>
         </div>
 
-        <div style={{ borderTop: `1.5px solid ${C.border}`, paddingTop: 12, marginTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <span style={{ fontWeight: 700, fontSize: 15, color: C.navy }}>Total TTC</span>
-          <span style={{ fontSize: 24, fontWeight: 700, color: C.terra, fontFamily: "'Playfair Display', Georgia, serif" }}>
+        <div style={{ borderTop: '1.5px solid #E5E0D8', paddingTop: 12, marginTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--navy, #1A1A2E)' }}>Total TTC</span>
+          <span style={{ fontSize: 24, fontWeight: 700, color: 'var(--terra, #C75B39)', fontFamily: "'Playfair Display', Georgia, serif" }}>
             {total.toLocaleString('fr-FR')} €
           </span>
         </div>
-        <div style={{ fontSize: 12, color: C.muted, marginTop: 4 }}>
+        <div style={{ fontSize: 12, color: '#6B7280', marginTop: 4 }}>
           Pour {paxCount} voyageur{paxCount > 1 ? 's' : ''} · chambre double · sans assurance renforcée
         </div>
 
-        <button style={{ display: 'block', background: C.terra, color: 'white', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer', width: '100%', marginTop: 16 }}>
+        <button style={{ display: 'block', background: 'var(--terra, #C75B39)', color: 'white', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer', width: '100%', marginTop: 16 }}>
           Réserver ce voyage →
         </button>
-        <button style={{ display: 'block', background: 'white', color: C.navy, border: `1.5px solid ${C.border}`, borderRadius: 10, padding: 12, fontWeight: 600, fontSize: 14, cursor: 'pointer', width: '100%', marginTop: 8, textAlign: 'center' }}>
+        <button style={{ display: 'block', background: 'white', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 12, fontWeight: 600, fontSize: 14, cursor: 'pointer', width: '100%', marginTop: 8, textAlign: 'center' }}>
           📄 Recevoir le programme
         </button>
-        <button style={{ display: 'block', background: 'white', color: C.muted, border: `1.5px solid ${C.border}`, borderRadius: 10, padding: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 6, textAlign: 'center' }}>
+        <button style={{ display: 'block', background: 'white', color: '#6B7280', border: '1.5px solid #E5E0D8', borderRadius: 10, padding: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 6, textAlign: 'center' }}>
           📞 Être rappelé par Marie-Claire
         </button>
 
-        <div style={{ background: C.orangeBg, borderRadius: 8, padding: '8px 12px', fontSize: 12, color: C.orange, marginTop: 12, display: 'flex', gap: 6, alignItems: 'flex-start' }}>
+        <div style={{ background: '#FEF3C7', borderRadius: 8, padding: '8px 12px', fontSize: 12, color: '#92400e', marginTop: 12, display: 'flex', gap: 6, alignItems: 'flex-start' }}>
           <span>⏰</span>
           <span>Votre place est réservée 24h après initiation du paiement (HOLD). Passé ce délai, la place est libérée.</span>
         </div>
 
-        <div style={{ fontSize: 11, color: C.muted, marginTop: 12, lineHeight: 1.5 }}>
-          Prix = forfait tout compris (transport + vol + hôtel + repas inclus) · Pas de droit de rétractation · <a href="/cgv" style={{ color: C.terra }}>CGV</a> · <a href="/mentions-legales" style={{ color: C.terra }}>Mentions légales</a>
+        <div style={{ fontSize: 11, color: '#6B7280', marginTop: 12, lineHeight: 1.5 }}>
+          Prix = forfait tout compris (transport + vol + hôtel + repas inclus) · Pas de droit de rétractation · <a href="/cgv" style={{ color: 'var(--terra, #C75B39)' }}>CGV</a> · <a href="/mentions-legales" style={{ color: 'var(--terra, #C75B39)' }}>Mentions légales</a>
         </div>
       </div>
 
       {/* Contact card */}
-      <div style={{ background: 'white', border: `1.5px solid ${C.border}`, borderRadius: 14, padding: 22, boxShadow: '0 4px 20px rgba(0,0,0,.06)' }}>
-        <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: C.muted, marginBottom: 14 }}>Une question ?</div>
-        <button style={{ width: '100%', border: `1.5px solid ${C.border}`, background: 'white', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 600, cursor: 'pointer', color: C.navy, textAlign: 'center' }}>
+      <div style={{ background: 'white', border: '1.5px solid #E5E0D8', borderRadius: 14, padding: 22, boxShadow: '0 4px 20px rgba(0,0,0,.06)' }}>
+        <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#6B7280', marginBottom: 14 }}>Une question ?</div>
+        <button style={{ width: '100%', border: '1.5px solid #E5E0D8', background: 'white', borderRadius: 8, padding: '10px 0', fontSize: 13, fontWeight: 600, cursor: 'pointer', color: 'var(--navy, #1A1A2E)', textAlign: 'center' }}>
           💬 Écrire à Marie-Claire
         </button>
-        <div style={{ fontSize: 12, color: C.muted, marginTop: 8, textAlign: 'center' }}>
+        <div style={{ fontSize: 12, color: '#6B7280', marginTop: 8, textAlign: 'center' }}>
           Répond en général en moins de 2h · Disponible 7j/7
         </div>
       </div>
@@ -751,7 +732,7 @@ export default function VoyageDetailPage() {
   const [paxCount, setPaxCount] = useState(2);
 
   return (
-    <div style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif", background: C.cream, color: C.navy, fontSize: 15, lineHeight: 1.6 }}>
+    <div style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif", background: 'var(--cream, #FAF7F2)', color: 'var(--navy, #1A1A2E)', fontSize: 15, lineHeight: 1.6 }}>
       <Topbar />
       <div style={{ maxWidth: 1180, margin: '0 auto', padding: '16px 24px 0' }}>
         <Breadcrumb

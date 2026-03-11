@@ -40,18 +40,6 @@ interface Pro {
 
 type LoadState = 'loading' | 'empty' | 'error' | 'data';
 
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
-
 export default function ProPublicPage() {
   const params = useParams();
   const proSlug = params.proSlug as string;
@@ -148,7 +136,7 @@ export default function ProPublicPage() {
   if (state === 'error' || state === 'empty') {
     return (
       <div className="max-w-6xl mx-auto px-4 py-12 text-center">
-        <p style={{ color: C.muted }}>Ce pro n&apos;existe pas ou n&apos;a pas de voyages disponibles.</p>
+        <p style={{ color: '#6B7280' }}>Ce pro n&apos;existe pas ou n&apos;a pas de voyages disponibles.</p>
         <Link href="/voyages">
           <Button variant="primary">Voir tous les voyages</Button>
         </Link>
@@ -163,30 +151,30 @@ export default function ProPublicPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
       {/* Hero Section */}
-      <section style={{ background: `linear-gradient(135deg, ${C.terraSoft}, ${C.goldSoft})`, borderRadius: '20px', padding: '2rem' }} className="md:p-12 animate-fade-up">
+      <section style={{ background: `linear-gradient(135deg, ${'var(--terra, #C75B39)'Soft}, ${'var(--gold, #D4A853)'Soft})`, borderRadius: '20px', padding: '2rem' }} className="md:p-12 animate-fade-up">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <div style={{ width: '8rem', height: '8rem', backgroundColor: C.border, borderRadius: '9999px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
+            <div style={{ width: '8rem', height: '8rem', backgroundColor: '#E5E0D8', borderRadius: '9999px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.75rem' }}>
               {pro.photo || '👤'}
             </div>
-            <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem', fontFamily: 'Playfair, serif' }}>{pro.name}</h1>
-            <p style={{ fontSize: '1.125rem', color: C.terra, fontWeight: '700', marginBottom: '1rem' }}>
+            <h1 style={{ fontSize: '2.25rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem', fontFamily: 'Playfair, serif' }}>{pro.name}</h1>
+            <p style={{ fontSize: '1.125rem', color: 'var(--terra, #C75B39)', fontWeight: '700', marginBottom: '1rem' }}>
               📍 {pro.departureZone}
             </p>
-            <p style={{ color: C.navy, marginBottom: '1.5rem', lineHeight: '1.75' }}>{pro.description}</p>
+            <p style={{ color: 'var(--navy, #1A1A2E)', marginBottom: '1.5rem', lineHeight: '1.75' }}>{pro.description}</p>
 
             <div className="flex gap-3">
               <button
-                style={{ backgroundColor: C.terra, color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                style={{ backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
                 onClick={() => document.getElementById('voyages')?.scrollIntoView({ behavior: 'smooth' })}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}
               >
                 Voir les voyages
               </button>
               {pro.whatsappNumber && (
                 <a href={`https://wa.me/${pro.whatsappNumber}`} target="_blank" rel="noopener noreferrer">
-                  <button style={{ backgroundColor: 'white', color: C.navy, padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: `1.5px solid ${C.border}`, cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.color = C.terra; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.navy; }}>
+                  <button style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.75rem 1.5rem', borderRadius: '12px', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
                     WhatsApp
                   </button>
                 </a>
@@ -196,7 +184,7 @@ export default function ProPublicPage() {
 
           {/* Video Embed */}
           {pro.videoUrl && (
-            <div style={{ aspectRatio: '16/9', backgroundColor: C.navy, borderRadius: '12px', overflow: 'hidden' }}>
+            <div style={{ aspectRatio: '16/9', backgroundColor: 'var(--navy, #1A1A2E)', borderRadius: '12px', overflow: 'hidden' }}>
               <iframe
                 width="100%"
                 height="100%"
@@ -212,32 +200,32 @@ export default function ProPublicPage() {
 
       {/* Voyages Section */}
       <section id="voyages" className="space-y-6 animate-fade-up">
-        <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, fontFamily: 'Playfair, serif' }}>Voyages au départ de {pro.departureZone}</h2>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', fontFamily: 'Playfair, serif' }}>Voyages au départ de {pro.departureZone}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pro.travels.map((voyage) => (
-            <div key={voyage.id} style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+            <div key={voyage.id} style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}>
               <CardContent className="p-6 flex flex-col h-full">
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: C.goldSoft, color: C.navy, padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'var(--gold, #D4A853)'Soft, color: 'var(--navy, #1A1A2E)', padding: '0.25rem 0.75rem', borderRadius: '9999px', width: 'fit-content', marginBottom: '0.75rem' }}>
                   {formatDate(voyage.startDate)}
                 </span>
 
-                <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>{voyage.title}</h3>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>{voyage.title}</h3>
 
-                <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '0.25rem' }}>
+                <p style={{ fontSize: '0.875rem', color: '#6B7280', marginBottom: '0.25rem' }}>
                   📍 {voyage.destination}
                 </p>
 
-                <p style={{ fontSize: '0.875rem', color: C.muted, marginBottom: '1rem' }}>
+                <p style={{ fontSize: '0.875rem', color: '#6B7280', marginBottom: '1rem' }}>
                   🚌 Départ: {voyage.pickupPoint}
                 </p>
 
-                <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: `1.5px solid ${C.border}` }}>
-                  <p style={{ fontSize: '1.5rem', fontWeight: '700', color: C.terra, marginBottom: '1rem' }}>
+                <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1.5px solid #E5E0D8' }}>
+                  <p style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--terra, #C75B39)', marginBottom: '1rem' }}>
                     À partir de {formatPrice(voyage.price)}
                   </p>
                   <Link href={`/voyages/${voyage.id}`}>
-                    <button style={{ width: '100%', backgroundColor: C.terra, color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}>
+                    <button style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}>
                       Réserver
                     </button>
                   </Link>
@@ -249,17 +237,17 @@ export default function ProPublicPage() {
       </section>
 
       {/* Contact Section */}
-      <section style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}`, borderRadius: '20px', padding: '2rem' }} className="md:p-12 space-y-8 animate-fade-up">
+      <section style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', padding: '2rem' }} className="md:p-12 space-y-8 animate-fade-up">
         <div>
-          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: C.navy, marginBottom: '0.5rem', fontFamily: 'Playfair, serif' }}>Nous contacter</h2>
-          <p style={{ color: C.muted }}>Vous avez des questions ? Nous sommes là pour vous aider.</p>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem', fontFamily: 'Playfair, serif' }}>Nous contacter</h2>
+          <p style={{ color: '#6B7280' }}>Vous avez des questions ? Nous sommes là pour vous aider.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form */}
           <form role="search" onSubmit={handleLeadSubmit} className="space-y-4">
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: C.navy, marginBottom: '0.25rem' }}>Nom</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Nom</label>
               <Input
                 placeholder="Votre nom"
                 value={leadForm.name}
@@ -269,7 +257,7 @@ export default function ProPublicPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: C.navy, marginBottom: '0.25rem' }}>Téléphone</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Téléphone</label>
               <Input
                 type="tel"
                 placeholder="06 12 34 56 78"
@@ -280,7 +268,7 @@ export default function ProPublicPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: C.navy, marginBottom: '0.25rem' }}>Email</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Email</label>
               <Input
                 type="email"
                 placeholder="votre@email.com"
@@ -291,15 +279,15 @@ export default function ProPublicPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: C.navy, marginBottom: '0.25rem' }}>Message</label>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Message</label>
               <textarea
-                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${C.border}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
                 placeholder="Votre message..."
                 rows={4}
                 value={leadForm.message}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLeadForm({ ...leadForm, message: (e.target as HTMLInputElement).value })}
-                onFocus={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = 'none'; }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
             </div>
 
@@ -309,18 +297,18 @@ export default function ProPublicPage() {
                 id="rgpd"
                 checked={rgpdConsent}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRgpdConsent((e.target as HTMLInputElement).checked)}
-                style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: `1.5px solid ${C.border}`, cursor: 'pointer' }}
+                style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: '1.5px solid #E5E0D8', cursor: 'pointer' }}
               />
-              <label htmlFor="rgpd" style={{ fontSize: '0.875rem', color: C.muted }}>
+              <label htmlFor="rgpd" style={{ fontSize: '0.875rem', color: '#6B7280' }}>
                 J&apos;accepte que mes données soient utilisées pour me recontacter
               </label>
             </div>
 
             <button
               type="submit"
-              style={{ width: '100%', backgroundColor: C.terra, color: 'white', padding: '0.75rem 1rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}
+              style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.75rem 1rem', borderRadius: '12px', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}
             >
               Être rappelé
             </button>
@@ -330,8 +318,8 @@ export default function ProPublicPage() {
           <div className="space-y-6">
             {pro.phone && (
               <div>
-                <h4 style={{ fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>Appeler</h4>
-                <a href={`tel:${pro.phone}`} style={{ color: C.terra, textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }} onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}>
+                <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>Appeler</h4>
+                <a href={`tel:${pro.phone}`} style={{ color: 'var(--terra, #C75B39)', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }} onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}>
                   {pro.phone}
                 </a>
               </div>
@@ -339,12 +327,12 @@ export default function ProPublicPage() {
 
             {pro.whatsappNumber && (
               <div>
-                <h4 style={{ fontWeight: '700', color: C.navy, marginBottom: '0.5rem' }}>WhatsApp</h4>
+                <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>WhatsApp</h4>
                 <a
                   href={`https://wa.me/${pro.whatsappNumber}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: C.terra, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'all 0.3s ease' }}
+                  style={{ color: 'var(--terra, #C75B39)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'all 0.3s ease' }}
                   onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none'; }}
                 >
@@ -354,8 +342,8 @@ export default function ProPublicPage() {
             )}
 
             {/* Follow Email Opt-in */}
-            <div style={{ backgroundColor: C.goldSoft, borderRadius: '12px', padding: '1rem' }}>
-              <h4 style={{ fontWeight: '700', color: C.navy, marginBottom: '0.75rem' }}>Suivre les voyages</h4>
+            <div style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, borderRadius: '12px', padding: '1rem' }}>
+              <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>Suivre les voyages</h4>
               <form role="search" onSubmit={handleFollowEmail} className="space-y-2">
                 <Input
                   type="email"
@@ -366,9 +354,9 @@ export default function ProPublicPage() {
                 />
                 <button
                   type="submit"
-                  style={{ width: '100%', backgroundColor: C.terra, color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.terraLight; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.terra; }}
+                  style={{ width: '100%', backgroundColor: 'var(--terra, #C75B39)', color: 'white', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: 'none', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'; }}
                 >
                   S&apos;abonner
                 </button>
@@ -379,8 +367,8 @@ export default function ProPublicPage() {
       </section>
 
       {/* Share Section */}
-      <section style={{ backgroundColor: C.goldSoft, borderRadius: '12px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }} className="md:flex-row md:items-center md:justify-between md:gap-4 animate-fade-up">
-        <p style={{ fontWeight: '700', color: C.navy }}>Partager ce profil</p>
+      <section style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, borderRadius: '12px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }} className="md:flex-row md:items-center md:justify-between md:gap-4 animate-fade-up">
+        <p style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)' }}>Partager ce profil</p>
         <div className="flex gap-2 flex-wrap">
           {shareUrl && (
             <>
@@ -389,7 +377,7 @@ export default function ProPublicPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button style={{ backgroundColor: 'white', color: C.navy, padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: `1.5px solid ${C.border}`, cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.color = C.terra; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.navy; }}>
+                <button style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
                   Facebook
                 </button>
               </a>
@@ -398,14 +386,14 @@ export default function ProPublicPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button style={{ backgroundColor: 'white', color: C.navy, padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: `1.5px solid ${C.border}`, cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.color = C.terra; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.navy; }}>
+                <button style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}>
                   Twitter
                 </button>
               </a>
               <button
-                style={{ backgroundColor: 'white', color: C.navy, padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: `1.5px solid ${C.border}`, cursor: 'pointer', transition: 'all 0.3s ease' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.terra; e.currentTarget.style.color = C.terra; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.navy; }}
+                style={{ backgroundColor: 'white', color: 'var(--navy, #1A1A2E)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '700', border: '1.5px solid #E5E0D8', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.color = 'var(--terra, #C75B39)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.color = 'var(--navy, #1A1A2E)'; }}
                 onClick={() => {
                   navigator.clipboard.writeText(shareUrl);
                   toast.success('Lien copié !');

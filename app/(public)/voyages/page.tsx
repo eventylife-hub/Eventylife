@@ -11,20 +11,6 @@ import { apiClient } from '@/lib/api-client';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { TravelCard } from '@/components/TravelCard';
 import { NewsletterCTA } from '@/components/newsletter-cta';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Travel {
   id: string;
   slug: string;
@@ -111,9 +97,9 @@ function VoyagesContent() {
     width: '100%',
     padding: '10px 14px',
     borderRadius: '10px',
-    border: `1.5px solid ${C.border}`,
+    border: '1.5px solid #E5E0D8',
     background: '#fff',
-    color: C.navy,
+    color: 'var(--navy, #1A1A2E)',
     fontSize: '14px',
     outline: 'none',
     transition: 'border-color 0.2s',
@@ -129,7 +115,7 @@ function VoyagesContent() {
       <div className="space-y-6">
         <div
           className="p-6 rounded-2xl"
-          style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+          style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[1,2,3,4].map(i => (
@@ -147,13 +133,13 @@ function VoyagesContent() {
       <div className="text-center py-16">
         <div
           className="inline-block p-8 rounded-2xl"
-          style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+          style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
         >
           <p className="text-base mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
           >
             Réessayer
           </button>
@@ -167,10 +153,10 @@ function VoyagesContent() {
       <div className="text-center py-16">
         <div
           className="inline-block p-8 rounded-2xl"
-          style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+          style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
         >
           <p className="text-4xl mb-4">🔍</p>
-          <p style={{ color: C.muted }}>
+          <p style={{ color: '#6B7280' }}>
             {travels.length === 0
               ? 'Aucun voyage disponible pour le moment.'
               : 'Aucun voyage ne correspond à vos critères.'}
@@ -179,7 +165,7 @@ function VoyagesContent() {
             <button
               onClick={() => setDestination('')}
               className="mt-4 px-5 py-2 rounded-xl text-sm font-semibold transition-all"
-              style={{ border: `1.5px solid ${C.border}`, color: C.navy, background: 'transparent' }}
+              style={{ border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)', background: 'transparent' }}
             >
               Réinitialiser
             </button>
@@ -196,24 +182,24 @@ function VoyagesContent() {
         role="search"
         aria-label="Filtrer les voyages"
         className="p-6 rounded-2xl"
-        style={{ background: '#fff', border: `1.5px solid ${C.border}` }}
+        style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label htmlFor="filter-destination" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Destination</label>
+            <label htmlFor="filter-destination" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Destination</label>
             <input
               id="filter-destination"
               placeholder="Chercher..."
               value={destination}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDestination((e.target as HTMLInputElement).value)}
               style={inputStyle}
-              onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
-              onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
+              onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E0D8')}
             />
           </div>
           <div>
-            <label htmlFor="filter-min-price" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix min (€)</label>
+            <label htmlFor="filter-min-price" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Prix min (€)</label>
             <input
               id="filter-min-price"
               type="number"
@@ -221,12 +207,12 @@ function VoyagesContent() {
               placeholder="0"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
               style={inputStyle}
-              onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
-              onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
+              onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E0D8')}
             />
           </div>
           <div>
-            <label htmlFor="filter-max-price" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Prix max (€)</label>
+            <label htmlFor="filter-max-price" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Prix max (€)</label>
             <input
               id="filter-max-price"
               type="number"
@@ -234,12 +220,12 @@ function VoyagesContent() {
               placeholder="10 000"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice((e.target as HTMLInputElement).value ? parseInt((e.target as HTMLInputElement).value) * 100 : null)}
               style={inputStyle}
-              onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
-              onBlur={(e) => (e.currentTarget.style.borderColor = C.border)}
+              onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E0D8')}
             />
           </div>
           <div>
-            <label htmlFor="filter-sort" className="block text-xs font-semibold mb-1.5" style={{ color: C.navy }}>Trier par</label>
+            <label htmlFor="filter-sort" className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--navy, #1A1A2E)' }}>Trier par</label>
             <select
               id="filter-sort"
               value={sortBy}
@@ -257,7 +243,7 @@ function VoyagesContent() {
 
       {/* Résultats */}
       <div>
-        <p className="text-sm mb-4" style={{ color: C.muted }}>
+        <p className="text-sm mb-4" style={{ color: '#6B7280' }}>
           {filteredTravels.length} voyage{filteredTravels.length !== 1 ? 's' : ''} trouvé{filteredTravels.length !== 1 ? 's' : ''}
         </p>
 

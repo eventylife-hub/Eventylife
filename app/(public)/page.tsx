@@ -5,20 +5,6 @@ import Link from 'next/link';
 import { OrganizationJsonLd } from '@/components/seo/json-ld';
 
 /* Couleurs Design System v2 */
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 /**
  * Hook reveal on scroll
  */
@@ -75,16 +61,16 @@ export default function HomePage() {
       {/* ═══ HERO ═══ */}
       <section
         className="relative overflow-hidden"
-        style={{ background: C.cream }}
+        style={{ background: 'var(--cream, #FAF7F2)' }}
       >
         {/* Orbe décoratif */}
         <div
           className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 animate-float"
-          style={{ background: `radial-gradient(circle, ${C.terra}40, transparent 70%)` }}
+          style={{ background: `radial-gradient(circle, var(--terra, #C75B39)40, transparent 70%)` }}
         />
         <div
           className="absolute bottom-0 -left-20 w-64 h-64 rounded-full opacity-15 animate-float"
-          style={{ background: `radial-gradient(circle, ${C.gold}40, transparent 70%)`, animationDelay: '3s' }}
+          style={{ background: `radial-gradient(circle, var(--gold, #D4A853)40, transparent 70%)`, animationDelay: '3s' }}
         />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28 relative z-10">
@@ -92,23 +78,23 @@ export default function HomePage() {
             {/* Trust pill */}
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-up"
-              style={{ background: C.goldSoft, color: C.navy, border: `1px solid ${C.gold}30` }}
+              style={{ background: 'var(--gold, #D4A853)'Soft, color: 'var(--navy, #1A1A2E)', border: `1px solid var(--gold, #D4A853)30` }}
             >
-              <span style={{ color: C.gold }}>★</span>
+              <span style={{ color: 'var(--gold, #D4A853)' }}>★</span>
               Plateforme n°1 de voyages de groupe en France
             </div>
 
             <h1
               className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up"
-              style={{ color: C.navy, animationDelay: '0.1s' }}
+              style={{ color: 'var(--navy, #1A1A2E)', animationDelay: '0.1s' }}
             >
               Découvrez le monde,<br />
-              <span style={{ color: C.terra }}>accompagné</span>
+              <span style={{ color: 'var(--terra, #C75B39)' }}>accompagné</span>
             </h1>
 
             <p
               className="text-lg sm:text-xl mb-10 animate-fade-up"
-              style={{ color: C.muted, animationDelay: '0.2s' }}
+              style={{ color: '#6B7280', animationDelay: '0.2s' }}
             >
               Des voyages en groupe pensés pour vous. Accompagnement humain porte-à-porte,
               prix justes, qualité garantie.
@@ -119,19 +105,19 @@ export default function HomePage() {
                 href="/voyages"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300"
                 style={{
-                  background: C.terra,
+                  background: 'var(--terra, #C75B39)',
                   color: '#fff',
-                  boxShadow: `0 6px 24px ${C.terra}30`,
+                  boxShadow: `0 6px 24px var(--terra, #C75B39)30`,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = C.terraLight;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
                   e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = `0 10px 32px ${C.terra}40`;
+                  e.currentTarget.style.boxShadow = `0 10px 32px var(--terra, #C75B39)40`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = C.terra;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)';
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+                  e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
                 }}
               >
                 Découvrir nos voyages →
@@ -141,15 +127,15 @@ export default function HomePage() {
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-200"
                 style={{
                   background: 'transparent',
-                  color: C.navy,
-                  border: `1.5px solid ${C.border}`,
+                  color: 'var(--navy, #1A1A2E)',
+                  border: '1.5px solid #E5E0D8',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = C.terra;
-                  e.currentTarget.style.background = C.terraSoft;
+                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.borderColor = '#E5E0D8';
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
@@ -168,8 +154,8 @@ export default function HomePage() {
                 { val: '50+', label: 'Destinations' },
               ].map((s, i: number) => (
                 <div key={i} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold" style={{ color: C.terra }}>{s.val}</div>
-                  <div className="text-sm mt-1" style={{ color: C.muted }}>{s.label}</div>
+                  <div className="text-2xl sm:text-3xl font-bold" style={{ color: 'var(--terra, #C75B39)' }}>{s.val}</div>
+                  <div className="text-sm mt-1" style={{ color: '#6B7280' }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -181,10 +167,10 @@ export default function HomePage() {
       <section id="how-it-works" style={{ background: '#fff' }} className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
               Simple comme bonjour
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: C.navy }}>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Comment ça marche
             </h2>
           </RevealDiv>
@@ -215,7 +201,7 @@ export default function HomePage() {
                   className="text-center p-8 rounded-2xl transition-all duration-300"
                   style={{
                     background: '#fff',
-                    border: `1.5px solid ${C.border}`,
+                    border: '1.5px solid #E5E0D8',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.boxShadow = '0 8px 32px rgba(26,26,46,0.08)';
@@ -227,11 +213,11 @@ export default function HomePage() {
                   }}
                 >
                   <div className="text-4xl mb-4">{item.icon}</div>
-                  <span className="text-xs font-bold tracking-wider" style={{ color: C.gold }}>
+                  <span className="text-xs font-bold tracking-wider" style={{ color: 'var(--gold, #D4A853)' }}>
                     ÉTAPE {item.step}
                   </span>
-                  <h3 className="text-xl font-bold mt-2 mb-3" style={{ color: C.navy }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{item.desc}</p>
+                  <h3 className="text-xl font-bold mt-2 mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>{item.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>{item.desc}</p>
                 </div>
               </RevealDiv>
             ))}
@@ -240,13 +226,13 @@ export default function HomePage() {
       </section>
 
       {/* ═══ VOYAGES POPULAIRES ═══ */}
-      <section style={{ background: C.cream }} className="py-20 px-4">
+      <section style={{ background: 'var(--cream, #FAF7F2)' }} className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
               Coups de cœur
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: C.navy }}>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Voyages populaires
             </h2>
           </RevealDiv>
@@ -281,7 +267,7 @@ export default function HomePage() {
                     className="rounded-2xl overflow-hidden transition-all duration-300"
                     style={{
                       background: '#fff',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.boxShadow = '0 12px 40px rgba(26,26,46,0.10)';
@@ -299,15 +285,15 @@ export default function HomePage() {
                       {travel.emoji}
                     </div>
                     <div className="p-6">
-                      <h3 className="text-lg font-bold mb-1" style={{ color: C.navy }}>{travel.title}</h3>
-                      <p className="text-sm mb-4" style={{ color: C.muted }}>📍 {travel.destination}</p>
+                      <h3 className="text-lg font-bold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>{travel.title}</h3>
+                      <p className="text-sm mb-4" style={{ color: '#6B7280' }}>📍 {travel.destination}</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-xl font-bold" style={{ color: C.terra }}>
+                        <span className="text-xl font-bold" style={{ color: 'var(--terra, #C75B39)' }}>
                           À partir de {travel.price}
                         </span>
                         <span
                           className="text-sm font-semibold transition-colors"
-                          style={{ color: C.terra }}
+                          style={{ color: 'var(--terra, #C75B39)' }}
                         >
                           Voir →
                         </span>
@@ -325,15 +311,15 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
               style={{
                 background: 'transparent',
-                color: C.navy,
-                border: `1.5px solid ${C.border}`,
+                color: 'var(--navy, #1A1A2E)',
+                border: '1.5px solid #E5E0D8',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = C.terra;
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.borderColor = '#E5E0D8';
                 e.currentTarget.style.background = 'transparent';
               }}
             >
@@ -347,10 +333,10 @@ export default function HomePage() {
       <section style={{ background: '#fff' }} className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
               Nos engagements
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: C.navy }}>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Pourquoi Eventy Life
             </h2>
           </RevealDiv>
@@ -366,23 +352,23 @@ export default function HomePage() {
                 <div
                   className="text-center p-6 rounded-2xl transition-all duration-300"
                   style={{
-                    background: C.cream,
+                    background: 'var(--cream, #FAF7F2)',
                     border: `1.5px solid transparent`,
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.borderColor = '#E5E0D8';
                     e.currentTarget.style.background = '#fff';
                     e.currentTarget.style.boxShadow = '0 4px 20px rgba(26,26,46,0.06)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = 'transparent';
-                    e.currentTarget.style.background = C.cream;
+                    e.currentTarget.style.background = 'var(--cream, #FAF7F2)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="font-bold mb-2" style={{ color: C.navy }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: C.muted }}>{item.desc}</p>
+                  <h3 className="font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>{item.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>{item.desc}</p>
                 </div>
               </RevealDiv>
             ))}
@@ -391,13 +377,13 @@ export default function HomePage() {
       </section>
 
       {/* ═══ TÉMOIGNAGES ═══ */}
-      <section style={{ background: C.cream }} className="py-20 px-4">
+      <section style={{ background: 'var(--cream, #FAF7F2)' }} className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <RevealDiv className="text-center mb-14">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
               Ils nous font confiance
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: C.navy }}>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Nos clients témoignent
             </h2>
           </RevealDiv>
@@ -428,20 +414,20 @@ export default function HomePage() {
                   className="p-6 rounded-2xl h-full flex flex-col"
                   style={{
                     background: '#fff',
-                    border: `1.5px solid ${C.border}`,
+                    border: '1.5px solid #E5E0D8',
                   }}
                 >
                   <div className="flex gap-0.5 mb-4">
                     {[...Array(review.rating)].map((_, i: number) => (
-                      <span key={i} style={{ color: C.gold }}>★</span>
+                      <span key={i} style={{ color: 'var(--gold, #D4A853)' }}>★</span>
                     ))}
                   </div>
                   <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: '#374151' }}>
                     « {review.text} »
                   </p>
                   <div>
-                    <p className="font-semibold text-sm" style={{ color: C.navy }}>{review.name}</p>
-                    <p className="text-xs" style={{ color: C.muted }}>{review.trip}</p>
+                    <p className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>{review.name}</p>
+                    <p className="text-xs" style={{ color: '#6B7280' }}>{review.trip}</p>
                   </div>
                 </div>
               </RevealDiv>
@@ -453,11 +439,11 @@ export default function HomePage() {
       {/* ═══ NEWSLETTER ═══ */}
       <section
         className="py-20 px-4"
-        style={{ background: C.navy }}
+        style={{ background: 'var(--navy, #1A1A2E)' }}
       >
         <div className="max-w-2xl mx-auto text-center">
           <RevealDiv>
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: C.gold }}>
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: 'var(--gold, #D4A853)' }}>
               Newsletter
             </span>
             <h2 className="font-display text-3xl font-bold mt-3 mb-4" style={{ color: '#FAF7F2' }}>
@@ -480,22 +466,22 @@ export default function HomePage() {
                   color: '#FAF7F2',
                   border: '1.5px solid rgba(250,247,242,0.15)',
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = C.terra)}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--terra, #C75B39)')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(250,247,242,0.15)')}
               />
               <button
                 type="submit"
                 className="px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
                 style={{
-                  background: C.terra,
+                  background: 'var(--terra, #C75B39)',
                   color: '#fff',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = C.terraLight;
-                  e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}40`;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)40`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = C.terra;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >

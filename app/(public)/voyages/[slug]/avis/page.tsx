@@ -22,17 +22,7 @@ interface Travel {
 }
 
 export default function TravelReviewsPage() {
-  const C = {
-    navy: '#1A1A2E',
-    cream: '#FAF7F2',
-    terra: '#C75B39',
-    terraLight: '#D97B5E',
-    gold: '#D4A853',
-    border: '#E5E0D8',
-    muted: '#6B7280',
-  };
-
-  const params = useParams();
+    const params = useParams();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [travel, setTravel] = useState<Travel | null>(null);
   const [loading, setLoading] = useState(true);
@@ -106,11 +96,11 @@ export default function TravelReviewsPage() {
     return (
       <div
         className="max-w-4xl mx-auto px-4 py-12 animate-fade-up"
-        style={{ backgroundColor: C.cream }}
+        style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}
       >
         <Link
           href={`/voyages/${params.slug}`}
-          style={{ color: C.terra }}
+          style={{ color: 'var(--terra, #C75B39)' }}
           className="hover:underline mb-4 inline-block"
         >
           ← Retour au voyage
@@ -121,7 +111,7 @@ export default function TravelReviewsPage() {
               key={i}
               className="h-24 rounded-lg animate-pulse"
               style={{
-                backgroundColor: C.border,
+                backgroundColor: '#E5E0D8',
                 borderRadius: '20px',
               }}
             />
@@ -134,7 +124,7 @@ export default function TravelReviewsPage() {
   return (
     <div
       className="max-w-4xl mx-auto px-4 py-12 animate-fade-up"
-      style={{ backgroundColor: C.cream }}
+      style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}
     >
       <Breadcrumb
         items={[
@@ -149,11 +139,11 @@ export default function TravelReviewsPage() {
       <div className="mb-8">
         <h1
           className="text-3xl font-bold mb-2"
-          style={{ color: C.navy, fontFamily: 'Playfair Display' }}
+          style={{ color: 'var(--navy, #1A1A2E)', fontFamily: 'Playfair Display' }}
         >
           Avis sur {travel?.title || 'ce voyage'}
         </h1>
-        <p style={{ color: C.muted }}>
+        <p style={{ color: '#6B7280' }}>
           {reviews.length} avis vérifiés
         </p>
       </div>
@@ -163,7 +153,7 @@ export default function TravelReviewsPage() {
           className="p-6 rounded-lg"
           style={{
             backgroundColor: '#fee2e2',
-            border: `1.5px solid #fca5a5`,
+            border: '1.5px solid #fca5a5',
             borderRadius: '20px',
             color: '#991b1b',
           }}
@@ -175,13 +165,13 @@ export default function TravelReviewsPage() {
           className="text-center py-16 rounded-lg"
           style={{
             backgroundColor: 'white',
-            border: `1.5px solid ${C.border}`,
+            border: '1.5px solid #E5E0D8',
             borderRadius: '20px',
           }}
         >
           <div className="text-6xl mb-4">⭐</div>
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Aucun avis</h2>
-          <p style={{ color: C.muted }}>Soyez le premier à laisser un avis sur ce voyage</p>
+          <p style={{ color: '#6B7280' }}>Soyez le premier à laisser un avis sur ce voyage</p>
         </div>
       ) : (
         <>
@@ -190,22 +180,22 @@ export default function TravelReviewsPage() {
             className="rounded-lg p-8 mb-8"
             style={{
               backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               borderRadius: '20px',
             }}
           >
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="text-center md:text-left">
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-bold" style={{ color: C.navy }}>
+                  <span className="text-5xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                     {averageRating}
                   </span>
-                  <span className="text-2xl" style={{ color: C.muted }}>
+                  <span className="text-2xl" style={{ color: '#6B7280' }}>
                     /5
                   </span>
                 </div>
                 <div className="mb-3">{renderStars(Math.round(Number(averageRating)))}</div>
-                <p className="text-sm" style={{ color: C.muted }}>
+                <p className="text-sm" style={{ color: '#6B7280' }}>
                   Basé sur {reviews.length} avis
                 </p>
               </div>
@@ -213,12 +203,12 @@ export default function TravelReviewsPage() {
               <div className="flex-1 space-y-2 w-full">
                 {[5, 4, 3, 2, 1].map((rating) => (
                   <div key={rating} className="flex items-center gap-3">
-                    <span className="text-sm font-medium w-12" style={{ color: C.muted }}>
+                    <span className="text-sm font-medium w-12" style={{ color: '#6B7280' }}>
                       {rating} ★
                     </span>
                     <div
                       className="flex-1 h-2 rounded-full overflow-hidden"
-                      style={{ backgroundColor: C.border }}
+                      style={{ backgroundColor: '#E5E0D8' }}
                     >
                       <div
                         className="h-full bg-yellow-400"
@@ -227,7 +217,7 @@ export default function TravelReviewsPage() {
                         }}
                       />
                     </div>
-                    <span className="text-sm w-8 text-right" style={{ color: C.muted }}>
+                    <span className="text-sm w-8 text-right" style={{ color: '#6B7280' }}>
                       {ratingDistribution[rating as keyof typeof ratingDistribution]}
                     </span>
                   </div>
@@ -238,7 +228,7 @@ export default function TravelReviewsPage() {
 
           {/* Tri */}
           <div className="mb-6 flex justify-between items-center">
-            <h2 className="text-lg font-bold" style={{ color: C.navy }}>
+            <h2 className="text-lg font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Tous les avis
             </h2>
             <select
@@ -247,8 +237,8 @@ export default function TravelReviewsPage() {
               className="px-4 py-2 rounded-lg focus:ring-2"
               style={{
                 borderRadius: '12px',
-                border: `1.5px solid ${C.border}`,
-                color: C.navy,
+                border: '1.5px solid #E5E0D8',
+                color: 'var(--navy, #1A1A2E)',
                 backgroundColor: 'white',
               }}
             >
@@ -266,19 +256,19 @@ export default function TravelReviewsPage() {
                 className="rounded-lg p-6"
                 style={{
                   backgroundColor: 'white',
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   borderRadius: '20px',
                 }}
               >
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h3 className="font-bold" style={{ color: C.navy }}>
+                    <h3 className="font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {review.userName}
                     </h3>
                     <div className="mt-1">{renderStars(review.rating)}</div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs" style={{ color: C.muted }}>
+                    <p className="text-xs" style={{ color: '#6B7280' }}>
                       {formatDate(review.createdAt)}
                     </p>
                     {review.status !== 'APPROVED' && (
@@ -295,7 +285,7 @@ export default function TravelReviewsPage() {
                     )}
                   </div>
                 </div>
-                <p style={{ color: C.navy }}>{review.comment}</p>
+                <p style={{ color: 'var(--navy, #1A1A2E)' }}>{review.comment}</p>
               </div>
             ))}
           </div>
