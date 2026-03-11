@@ -182,7 +182,7 @@ export default function CookiesPolicy() {
                   l&apos;authentification et la mémorisation de vos choix.
                 </p>
                 <p className="text-sm">
-                  <strong>Status :</strong> Activés par défaut, ne peuvent pas
+                  <strong>Statut :</strong> Activés par défaut, ne peuvent pas
                   être désactivés
                 </p>
               </div>
@@ -197,7 +197,7 @@ export default function CookiesPolicy() {
                   Nous utilisons Google Analytics pour l&apos;analyse.
                 </p>
                 <p className="text-sm">
-                  <strong>Status :</strong> Activés avec votre consentement
+                  <strong>Statut :</strong> Activés avec votre consentement
                 </p>
               </div>
 
@@ -211,7 +211,7 @@ export default function CookiesPolicy() {
                   pour améliorer votre expérience lors de futures visites.
                 </p>
                 <p className="text-sm">
-                  <strong>Status :</strong> Activés avec votre consentement
+                  <strong>Statut :</strong> Activés avec votre consentement
                 </p>
               </div>
 
@@ -226,7 +226,7 @@ export default function CookiesPolicy() {
                   navigation.
                 </p>
                 <p className="text-sm">
-                  <strong>Status :</strong> Activés avec votre consentement
+                  <strong>Statut :</strong> Activés avec votre consentement
                 </p>
               </div>
             </div>
@@ -389,9 +389,9 @@ export default function CookiesPolicy() {
             </h2>
             <div className="space-y-4" style={{ color: C.navy }}>
               <div>
-                <p className="font-semibold">Option 1 : Banneau de consentement</p>
+                <p className="font-semibold">Option 1 : Bandeau de consentement</p>
                 <p className="mt-2">
-                  À votre première visite, un banneau de consentement s&apos;affiche
+                  À votre première visite, un bandeau de consentement s&apos;affiche
                   en bas du site. Vous pouvez :
                 </p>
                 <ul className="mt-2 list-inside space-y-1">
