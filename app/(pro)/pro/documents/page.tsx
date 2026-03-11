@@ -10,7 +10,8 @@ import {
   Loader,
   Download,
 } from 'lucide-react';
-import { FileUpload } from '@/components/uploads/file-upload';
+import dynamic from 'next/dynamic';
+const FileUpload = dynamic(() => import('@/components/uploads/file-upload').then(m => ({ default: m.FileUpload })), { ssr: false });
 import { formatDate } from '@/lib/utils';
 interface ProDocument {
   id: string;

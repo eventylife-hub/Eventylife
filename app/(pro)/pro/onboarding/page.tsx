@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProStore } from '@/lib/stores/pro-store';
 import { ChevronRight, CheckCircle2, Clock, Shield, FileText, AlertCircle } from 'lucide-react';
-import { FileUpload } from '@/components/uploads/file-upload';
+import dynamic from 'next/dynamic';
+const FileUpload = dynamic(() => import('@/components/uploads/file-upload').then(m => ({ default: m.FileUpload })), { ssr: false });
 const STEPS = [
   { number: 1, label: 'Profil', description: 'Informations personnelles' },
   { number: 2, label: 'Légal', description: 'Informations légales' },
