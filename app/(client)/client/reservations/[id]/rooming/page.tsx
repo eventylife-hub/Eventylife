@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
 interface CoOccupant {
@@ -260,8 +259,8 @@ export default function RoomingPage() {
       </div>
 
       {/* Room Info Card */}
-      <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-        <CardContent className="p-6 space-y-4">
+      <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+        <div style={{ padding: '1.5rem' }} className="space-y-4">
           <h2 className="text-2xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Informations de la chambre</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -291,12 +290,12 @@ export default function RoomingPage() {
               </p>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Co-occupants */}
-      <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-        <CardContent className="p-6 space-y-4">
+      <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+        <div style={{ padding: '1.5rem' }} className="space-y-4">
           <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Co-occupants</h2>
 
           {rooming.occupants.length > 0 ? (
@@ -331,12 +330,12 @@ export default function RoomingPage() {
           ) : (
             <p style={{ color: '#6B7280' }}>Aucun co-occupant pour le moment.</p>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Room Preferences */}
-      <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-        <CardContent className="p-6 space-y-6">
+      <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+        <div style={{ padding: '1.5rem' }} className="space-y-6">
           <div>
             <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Préférences de chambre</h2>
             {isCutoffPassed && (
@@ -439,13 +438,13 @@ export default function RoomingPage() {
               </div>
             )}
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Documents Upload */}
       {rooming.documentsRequired && (
-        <Card elevated>
-          <CardContent className="p-6 space-y-6">
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '1.5rem' }} className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Documents requis</h2>
               <p className="text-sm text-gray-600">
@@ -518,8 +517,8 @@ export default function RoomingPage() {
                 </div>
               )}
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
     </div>
   );

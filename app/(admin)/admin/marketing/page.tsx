@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
@@ -211,9 +210,9 @@ export default function AdminMarketingPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[...Array(4)].map((_, i) => (
-            <Card key={i}>
-              <CardContent className="p-6 h-32 bg-gray-100 animate-pulse rounded" />
-            </Card>
+            <div key={i} style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+              <div className="p-6 h-32 bg-gray-100 animate-pulse rounded" />
+            </div>
           ))}
         </div>
         <div style={{ height: 384, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
@@ -308,8 +307,8 @@ export default function AdminMarketingPage() {
 
         {/* Onglet Campagnes */}
         <TabsContent value="campaigns">
-          <Card>
-            <CardContent className="p-6">
+          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+            <div style={{ padding: '1.5rem' }}>
               <DataTable
                 columns={campaignColumns}
                 data={stats.campaigns}
@@ -334,17 +333,17 @@ export default function AdminMarketingPage() {
                   },
                 ]}
               />
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </TabsContent>
 
         {/* Onglet Sources de leads */}
         <TabsContent value="sources">
-          <Card>
-            <CardHeader className="pb-3">
-              <h3 className="font-semibold text-gray-900">Détails des sources de leads</h3>
-            </CardHeader>
-            <CardContent className="p-6">
+          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Détails des sources de leads</h3>
+            </div>
+            <div style={{ padding: '1.5rem' }}>
               <div className="space-y-3">
                 {stats.leadSources.map((source, index) => (
                   <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
@@ -366,17 +365,17 @@ export default function AdminMarketingPage() {
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </TabsContent>
 
         {/* Onglet Paramètres */}
         <TabsContent value="settings">
-          <Card>
-            <CardHeader>
-              <h3 className="font-semibold text-gray-900">Paramètres d&apos;attribution</h3>
-            </CardHeader>
-            <CardContent className="space-y-6">
+          <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Paramètres d&apos;attribution</h3>
+            </div>
+            <div style={{ padding: '1.5rem' }} className="space-y-6">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-medium text-blue-900 mb-2">Modèles d&apos;attribution</h4>
                 <p className="text-sm text-blue-800 mb-4">
@@ -446,8 +445,8 @@ export default function AdminMarketingPage() {
                   {savingAttribution ? 'Enregistrement...' : 'Enregistrer les paramètres'}
                 </button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

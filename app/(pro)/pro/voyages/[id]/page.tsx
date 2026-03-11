@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
   BarChart3,
@@ -411,11 +410,11 @@ export default function VoyageDashboardPage() {
         </div>
 
         {/* Timeline */}
-        <Card className="bg-white border-slate-200">
-          <CardHeader>
-            <CardTitle>Phases du voyage</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Phases du voyage</h3>
+          </div>
+          <div style={{ padding: '1.5rem' }}>
             <div className="flex items-center justify-between">
               {PHASES.map((phase, idx) => (
                 <div key={phase.key} className="flex items-center flex-1">
@@ -443,8 +442,8 @@ export default function VoyageDashboardPage() {
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Quick Links Grid */}
         <div>
@@ -468,12 +467,12 @@ export default function VoyageDashboardPage() {
         </div>
 
         {/* Recent Activity */}
-        <Card className="bg-white border-slate-200">
-          <CardHeader>
-            <CardTitle>Activité récente</CardTitle>
-            <CardDescription>Dernières 5 actions</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem' }}>Activité récente</h3>
+          </div>
+          <div style={{ padding: '1.5rem' }}>
+            <p style={{ color: '#64748B', fontSize: '0.875rem' }}>Dernières 5 actions</p>
             {dashboard.recentActivity && dashboard.recentActivity.length > 0 ? (
               <div className="space-y-4">
                 {dashboard.recentActivity.slice(0, 5).map((activity) => (
@@ -491,8 +490,8 @@ export default function VoyageDashboardPage() {
             ) : (
               <p className="text-slate-500 text-center py-8">Aucune activité récente</p>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

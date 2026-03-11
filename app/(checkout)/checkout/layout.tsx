@@ -6,7 +6,6 @@
 'use client';
 
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
 import { ROUTES } from '@/lib/constants';
 import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { HoldTimer } from '@/components/checkout/hold-timer';
@@ -35,12 +34,12 @@ export default function CheckoutLayout({ children }: CheckoutLayoutProps) {
 
       {/* Content */}
       <main className="max-w-2xl mx-auto px-4 py-12" id="main-content" aria-label="Réservation">
-        <Card elevated>
-          <CardContent className="p-8">
+        <div style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8', borderRadius: '20px', overflow: 'hidden' }}>
+          <div style={{ padding: '2rem' }}>
             <StepIndicator currentStep={currentStep} />
             {children}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </main>
     </div>
   );

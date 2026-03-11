@@ -5,7 +5,6 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
 /**
@@ -154,11 +153,11 @@ export default function InviterPage() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Formulaire d'invitation */}
-          <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-            <CardHeader>
-              <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Inviter par email</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Inviter par email</h3>
+            </div>
+            <div style={{ padding: '1.5rem' }}>
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
                   <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
@@ -258,15 +257,15 @@ export default function InviterPage() {
                   )}
                 </button>
               </form>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Code d&apos;invitation */}
-          <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-            <CardHeader>
-              <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <div style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</h3>
+            </div>
+            <div style={{ padding: '1.5rem' }} className="space-y-4">
               <p className="text-sm" style={{ color: '#6B7280' }}>
                 Partagez ce code avec vos amis pour qu'ils rejoignent le groupe facilement.
               </p>
@@ -327,8 +326,8 @@ export default function InviterPage() {
                   <p className="text-sm" style={{ color: '#6B7280' }}>Aucune invitation en attente</p>
                 )}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

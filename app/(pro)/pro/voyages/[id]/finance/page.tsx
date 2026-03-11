@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { FinanceSummary } from '@/components/finance/finance-summary';
 import { Download } from 'lucide-react';
 

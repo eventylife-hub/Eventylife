@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 /**
  * Page pour rejoindre un groupe via code d'invitation
@@ -102,11 +101,11 @@ export default function RejoindrePage() {
 
         <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Rejoindre un groupe</h1>
 
-        <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-          <CardHeader>
-            <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
+          <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</h3>
+          </div>
+          <div style={{ padding: '1.5rem' }} className="space-y-4">
             <form onSubmit={handleVerifyCode} className="space-y-4">
               {error && (
                 <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
@@ -253,8 +252,8 @@ export default function RejoindrePage() {
                 </button>
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

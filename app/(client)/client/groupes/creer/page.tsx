@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
@@ -139,11 +138,11 @@ export default function CreerGroupePage() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Formulaire */}
-          <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-            <CardHeader>
-              <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Informations du groupe</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Informations du groupe</h3>
+            </div>
+            <div style={{ padding: '1.5rem' }}>
               {loading ? (
                 <div className="space-y-4">
                   {[...Array(3)].map((_, i) => (
@@ -304,15 +303,15 @@ export default function CreerGroupePage() {
                   </button>
                 </form>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Prévisualisation */}
-          <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-            <CardHeader>
-              <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Prévisualisation</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <div style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Prévisualisation</h3>
+            </div>
+            <div style={{ padding: '1.5rem' }} className="space-y-4">
               <div>
                 <label className="text-xs font-semibold uppercase" style={{ color: '#6B7280' }}>Nom</label>
                 <p className="text-lg font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
@@ -349,8 +348,8 @@ export default function CreerGroupePage() {
                   Un code d'invitation sera généré automatiquement pour partager votre groupe avec d'autres membres.
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

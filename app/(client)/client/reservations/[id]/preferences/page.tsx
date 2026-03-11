@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
@@ -84,18 +83,18 @@ export default function PreferencesPage() {
           </div>
         )}
 
-        <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
-          <CardHeader>
-            <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Configuration de vos préférences</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
+          <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Configuration de vos préférences</h3>
+          </div>
+          <div style={{ padding: '1.5rem' }}>
             <DietaryForm
               bookingId={bookingId}
               onSubmit={handleSubmit}
               loading={submitting}
             />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
