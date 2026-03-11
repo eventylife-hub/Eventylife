@@ -17,32 +17,32 @@ const FALLBACK_TRAVELS: Travel[] = [
   {
     id: '1', slug: 'marrakech-express', title: 'Marrakech Express',
     destination: 'Marrakech, Maroc', startDate: '2026-05-15', endDate: '2026-05-22',
-    price: 89900, image: '', rating: 4.8, reviews: 124, daysCount: 7, capacity: 50, currentBookings: 38,
+    price: 89900, image: '', rating: 4.8, reviews: 124, daysCount: 7, capacity: 50, currentBookings: 38, transportType: 'BUS',
   },
   {
     id: '2', slug: 'rome-eternelle', title: 'Rome Éternelle',
     destination: 'Rome, Italie', startDate: '2026-06-10', endDate: '2026-06-15',
-    price: 74900, image: '', rating: 4.7, reviews: 89, daysCount: 5, capacity: 45, currentBookings: 32,
+    price: 74900, image: '', rating: 4.7, reviews: 89, daysCount: 5, capacity: 45, currentBookings: 32, transportType: 'AVION',
   },
   {
     id: '3', slug: 'barcelone-gaudi', title: 'Barcelone & Gaudí',
     destination: 'Barcelone, Espagne', startDate: '2026-06-20', endDate: '2026-06-25',
-    price: 69900, image: '', rating: 4.9, reviews: 156, daysCount: 5, capacity: 50, currentBookings: 44,
+    price: 69900, image: '', rating: 4.9, reviews: 156, daysCount: 5, capacity: 50, currentBookings: 44, transportType: 'BUS',
   },
   {
     id: '4', slug: 'lisbonne-fado', title: 'Lisbonne & Fado',
     destination: 'Lisbonne, Portugal', startDate: '2026-07-05', endDate: '2026-07-11',
-    price: 79900, image: '', rating: 4.6, reviews: 67, daysCount: 6, capacity: 40, currentBookings: 28,
+    price: 79900, image: '', rating: 4.6, reviews: 67, daysCount: 6, capacity: 40, currentBookings: 28, transportType: 'BUS',
   },
   {
     id: '5', slug: 'istanbul-bosphore', title: 'Istanbul & le Bosphore',
     destination: 'Istanbul, Turquie', startDate: '2026-07-18', endDate: '2026-07-25',
-    price: 94900, image: '', rating: 4.8, reviews: 98, daysCount: 7, capacity: 45, currentBookings: 36,
+    price: 94900, image: '', rating: 4.8, reviews: 98, daysCount: 7, capacity: 45, currentBookings: 36, transportType: 'AVION',
   },
   {
     id: '6', slug: 'dubrovnik-perle-adriatique', title: 'Dubrovnik, Perle de l\'Adriatique',
     destination: 'Dubrovnik, Croatie', startDate: '2026-08-02', endDate: '2026-08-08',
-    price: 84900, image: '', rating: 4.7, reviews: 73, daysCount: 6, capacity: 40, currentBookings: 22,
+    price: 84900, image: '', rating: 4.7, reviews: 73, daysCount: 6, capacity: 40, currentBookings: 22, transportType: 'MIXTE',
   },
 ];
 
@@ -60,6 +60,7 @@ interface Travel {
   daysCount: number;
   capacity: number;
   currentBookings: number;
+  transportType?: 'BUS' | 'AVION' | 'MIXTE';
 }
 
 type LoadState = 'loading' | 'empty' | 'error' | 'data';
@@ -298,6 +299,7 @@ function VoyagesContent() {
                 capacity={voyage.capacity}
                 currentBookings={voyage.currentBookings}
                 slug={voyage.slug}
+                transportType={voyage.transportType}
               />
             </div>
           ))}

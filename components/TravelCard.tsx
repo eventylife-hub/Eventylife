@@ -1,7 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+
+const TRANSPORT_LABELS: Record<string, { icon: string; label: string }> = {
+  BUS: { icon: '🚌', label: 'Bus' },
+  AVION: { icon: '✈️', label: 'Avion' },
+  MIXTE: { icon: '🚌✈️', label: 'Mixte' },
+};
 
 interface TravelCardProps {
   id: string;
@@ -16,6 +23,7 @@ interface TravelCardProps {
   capacity?: number;
   currentBookings?: number;
   slug: string;
+  transportType?: 'BUS' | 'AVION' | 'MIXTE';
 }
 
 export function TravelCard({
@@ -31,6 +39,7 @@ export function TravelCard({
   capacity = 0,
   currentBookings = 0,
   slug,
+  transportType,
 }: TravelCardProps) {
   // Supprime le warning unused — id est requis pour les clés de liste
   void id;
@@ -53,8 +62,10 @@ export function TravelCard({
     return Math.max(diff, 1); // Minimum 1 jour
   };
 
+  const [imgError, setImgError] = useState(false);
   const available = capacity - currentBookings;
   const days = getDays(startDate, endDate);
+  const transport = transportType ? TRANSPORT_LABELS[transportType] : null;
 
   return (
     <Link href={`/voyages/${slug}`} className="block h-full group">
@@ -77,13 +88,14 @@ export function TravelCard({
       >
         {/* Image */}
         <div className="relative aspect-[4/3] overflow-hidden">
-          {imageUrl ? (
+          {imageUrl && !imgError ? (
             <Image
               src={imageUrl}
               alt={title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              onError={() => setImgError(true)}
             />
           ) : (
             <div
@@ -130,6 +142,19 @@ export function TravelCard({
               </span>
             )}
           </div>
+          {transport && (
+            <div className="absolute top-3 right-3">
+              <span
+                className="px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm"
+                style={{
+                  background: 'rgba(0,119,182,0.9)',
+                  color: '#FFFFFF',
+                }}
+              >
+                {transport.icon} {transport.label}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Contenu */}
