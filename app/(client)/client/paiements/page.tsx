@@ -2,20 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDateTime, formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Payment {
   id: string;
   amount: number;
@@ -39,8 +25,8 @@ const statusLabels = {
 };
 
 const statusBadgeStyle = {
-  PENDING: { background: C.goldSoft, color: '#92400e' },
-  SUCCEEDED: { background: C.forestBg, color: C.forest },
+  PENDING: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+  SUCCEEDED: { background: '#DCFCE7', color: '#166534' },
   FAILED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   REFUNDED: { background: '#EFF6FF', color: '#0369A1' },
   CANCELED: { background: '#F3F4F6', color: '#4B5563' },
@@ -88,8 +74,8 @@ export default function PaiementsPage() {
     return (
       <div className="max-w-6xl mx-auto animate-fade-up">
         <div className="mb-8">
-          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Historique des paiements</h1>
-          <p className="text-sm mt-2" style={{ color: C.muted }}>Consultez tous vos paiements</p>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Historique des paiements</h1>
+          <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Consultez tous vos paiements</p>
         </div>
         <div className="space-y-4">
           {[...Array(5)].map((_, i) => (
@@ -104,13 +90,13 @@ export default function PaiementsPage() {
     <div className="max-w-6xl mx-auto space-y-6 animate-fade-up">
       {/* En-tête */}
       <div>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Historique des paiements</h1>
-        <p className="text-sm mt-2" style={{ color: C.muted }}>Consultez tous vos paiements</p>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Historique des paiements</h1>
+        <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Consultez tous vos paiements</p>
       </div>
 
       {/* Messages d'erreur */}
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
         </div>
       )}
@@ -128,13 +114,13 @@ export default function PaiementsPage() {
             onClick={() => setFilter(f.value)}
             className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
-              background: filter === f.value ? C.terra : '#fff',
-              color: filter === f.value ? '#fff' : C.navy,
-              border: `1.5px solid ${filter === f.value ? C.terra : C.border}`,
+              background: filter === f.value ? 'var(--terra, #C75B39)' : '#fff',
+              color: filter === f.value ? '#fff' : 'var(--navy, #1A1A2E)',
+              border: `1.5px solid ${filter === f.value ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
             }}
             onMouseEnter={(e) => {
               if (filter !== f.value) {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }
             }}
             onMouseLeave={(e) => {
@@ -150,50 +136,50 @@ export default function PaiementsPage() {
 
       {/* État vide */}
       {filteredPayments.length === 0 ? (
-        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">💰</div>
-          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>Aucun paiement</h2>
-          <p className="text-sm" style={{ color: C.muted }}>Vos paiements apparaîtront ici</p>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun paiement</h2>
+          <p className="text-sm" style={{ color: '#6B7280' }}>Vos paiements apparaîtront ici</p>
         </div>
       ) : (
-        <div className="rounded-2xl overflow-hidden" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="rounded-2xl overflow-hidden" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead style={{ background: C.cream, borderBottom: `1.5px solid ${C.border}` }}>
+              <thead style={{ background: 'var(--cream, #FAF7F2)', borderBottom: '1.5px solid #E5E0D8' }}>
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Date</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Voyage</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold" style={{ color: C.navy }}>Montant</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Statut</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: C.navy }}>Méthode</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Voyage</th>
+                  <th className="px-6 py-4 text-right text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Statut</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Méthode</th>
                 </tr>
               </thead>
-              <tbody style={{ borderTop: `1.5px solid ${C.border}` }}>
+              <tbody style={{ borderTop: '1.5px solid #E5E0D8' }}>
                 {filteredPayments.map((payment, index) => (
                   <tr
                     key={payment.id}
                     style={{
-                      borderBottom: index < filteredPayments.length - 1 ? `1px solid ${C.border}` : 'none',
+                      borderBottom: index < filteredPayments.length - 1 ? '1px solid #E5E0D8' : 'none',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = C.cream;
+                      e.currentTarget.style.background = 'var(--cream, #FAF7F2)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background = '#fff';
                     }}
                   >
-                    <td className="px-6 py-4 text-sm" style={{ color: C.navy }}>
+                    <td className="px-6 py-4 text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {formatDateTime(payment.createdAt)}
                     </td>
                     <td className="px-6 py-4 text-sm">
                       <div>
-                        <p className="font-semibold" style={{ color: C.navy }}>{payment.travelTitle}</p>
-                        <p className="text-xs mt-1" style={{ color: C.muted }}>
+                        <p className="font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>{payment.travelTitle}</p>
+                        <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
                           Départ: {formatDate(payment.travelDepartureDate)}
                         </p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right font-bold" style={{ color: C.navy }}>
+                    <td className="px-6 py-4 text-right font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {formatPrice(payment.amount)}
                     </td>
                     <td className="px-6 py-4">
@@ -204,7 +190,7 @@ export default function PaiementsPage() {
                         {statusLabels[payment.status as keyof typeof statusLabels]}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm capitalize" style={{ color: C.muted }}>
+                    <td className="px-6 py-4 text-sm capitalize" style={{ color: '#6B7280' }}>
                       {payment.provider}
                     </td>
                   </tr>

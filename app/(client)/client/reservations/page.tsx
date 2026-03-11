@@ -3,20 +3,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Booking {
   id: string;
   status: string;
@@ -32,9 +18,9 @@ interface Booking {
 }
 
 const statusBadgeStyle = {
-  CONFIRMED: { background: C.forestBg, color: C.forest },
-  HELD: { background: C.goldSoft, color: '#92400e' },
-  PARTIALLY_PAID: { background: C.goldSoft, color: '#92400e' },
+  CONFIRMED: { background: '#DCFCE7', color: '#166534' },
+  HELD: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
+  PARTIALLY_PAID: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
   DRAFT: { background: '#F3F4F6', color: '#4B5563' },
   EXPIRED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   CANCELED: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
@@ -100,21 +86,21 @@ export default function ReservationsPage() {
     return (
       <div className="max-w-6xl mx-auto animate-fade-up">
         <div className="mb-8">
-          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes réservations</h1>
-          <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos réservations de voyages</p>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Mes réservations</h1>
+          <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Gérez vos réservations de voyages</p>
         </div>
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={() => fetchBookings()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -129,8 +115,8 @@ export default function ReservationsPage() {
     <div className="max-w-6xl mx-auto space-y-6 animate-fade-up">
       {/* En-tête */}
       <div>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes réservations</h1>
-        <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos réservations de voyages</p>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Mes réservations</h1>
+        <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Gérez vos réservations de voyages</p>
       </div>
 
       {/* Filtres */}
@@ -146,13 +132,13 @@ export default function ReservationsPage() {
             onClick={() => setFilter(f.value)}
             className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
-              background: filter === f.value ? C.terra : '#fff',
-              color: filter === f.value ? '#fff' : C.navy,
-              border: `1.5px solid ${filter === f.value ? C.terra : C.border}`,
+              background: filter === f.value ? 'var(--terra, #C75B39)' : '#fff',
+              color: filter === f.value ? '#fff' : 'var(--navy, #1A1A2E)',
+              border: `1.5px solid ${filter === f.value ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
             }}
             onMouseEnter={(e) => {
               if (filter !== f.value) {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }
             }}
             onMouseLeave={(e) => {
@@ -168,20 +154,20 @@ export default function ReservationsPage() {
 
       {/* État vide */}
       {filteredBookings.length === 0 && !loading ? (
-        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">📭</div>
-          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>Aucune réservation</h2>
-          <p className="text-sm mb-6" style={{ color: C.muted }}>Vous n&apos;avez pas encore réservé de voyage</p>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucune réservation</h2>
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>Vous n&apos;avez pas encore réservé de voyage</p>
           <Link
             href="/voyages"
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -207,7 +193,7 @@ export default function ReservationsPage() {
                     className="rounded-2xl overflow-hidden transition-all duration-300"
                     style={{
                       background: '#fff',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
@@ -221,7 +207,7 @@ export default function ReservationsPage() {
                     <div className="flex flex-col md:flex-row">
                       {/* Image */}
                       {booking.travelCoverImageUrl && (
-                        <div className="md:w-1/4 h-32 md:h-auto flex-shrink-0" style={{ background: C.cream }}>
+                        <div className="md:w-1/4 h-32 md:h-auto flex-shrink-0" style={{ background: 'var(--cream, #FAF7F2)' }}>
                           <img
                             src={booking.travelCoverImageUrl}
                             alt={booking.travelTitle}
@@ -233,28 +219,28 @@ export default function ReservationsPage() {
                       {/* Contenu */}
                       <div className="flex-1 p-6 flex flex-col justify-between">
                         <div>
-                          <h3 className="font-bold text-base mb-2" style={{ color: C.navy }}>
+                          <h3 className="font-bold text-base mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                             {booking.travelTitle}
                           </h3>
-                          <p className="text-xs mb-1" style={{ color: C.muted }}>
+                          <p className="text-xs mb-1" style={{ color: '#6B7280' }}>
                             📍 {booking.destinationCity}
                           </p>
-                          <p className="text-xs mb-2" style={{ color: C.muted }}>
+                          <p className="text-xs mb-2" style={{ color: '#6B7280' }}>
                             📅 {formatDate(booking.departureDate)} - {formatDate(booking.returnDate)}
                           </p>
-                          <p className="text-xs" style={{ color: C.muted }}>
+                          <p className="text-xs" style={{ color: '#6B7280' }}>
                             👥 {booking.participantCount} participant{booking.participantCount > 1 ? 's' : ''}
                           </p>
                         </div>
                       </div>
 
                       {/* Infos de droite */}
-                      <div className="p-6 md:border-l border-t md:border-t-0 flex flex-col justify-between items-start md:items-end" style={{ borderColor: C.border }}>
+                      <div className="p-6 md:border-l border-t md:border-t-0 flex flex-col justify-between items-start md:items-end" style={{ borderColor: '#E5E0D8' }}>
                         <div className="text-right w-full md:w-auto mb-4 md:mb-0">
-                          <p className="text-lg font-bold" style={{ color: C.navy }}>
+                          <p className="text-lg font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                             {formatPrice(booking.totalAmountTTC)}
                           </p>
-                          <p className="text-xs" style={{ color: C.muted }}>Total</p>
+                          <p className="text-xs" style={{ color: '#6B7280' }}>Total</p>
                         </div>
                         <span
                           className="px-3 py-1 rounded-xl text-xs font-semibold"
@@ -277,11 +263,11 @@ export default function ReservationsPage() {
               className="w-full px-6 py-3 rounded-xl font-semibold text-sm transition-all"
               style={{
                 background: '#fff',
-                color: C.navy,
-                border: `1.5px solid ${C.border}`,
+                color: 'var(--navy, #1A1A2E)',
+                border: '1.5px solid #E5E0D8',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = '#fff';

@@ -3,20 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Invoice {
   id: string;
   reference: string;
@@ -105,11 +91,11 @@ export default function InvoicePage() {
 
   if (loading) {
     return (
-      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
-        <h1 className="text-3xl font-bold mb-8" style={{ color: C.navy }}>Ma Facture</h1>
+      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
+        <h1 className="text-3xl font-bold mb-8" style={{ color: 'var(--navy, #1A1A2E)' }}>Ma Facture</h1>
         <div className="space-y-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
+            <div key={i} className="h-24 rounded-lg animate-pulse" style={{ backgroundColor: '#E5E0D8' }} />
           ))}
         </div>
       </div>
@@ -118,9 +104,9 @@ export default function InvoicePage() {
 
   if (error || !booking) {
     return (
-      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
-        <h1 className="text-3xl font-bold mb-8" style={{ color: C.navy }}>Ma Facture</h1>
-        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
+        <h1 className="text-3xl font-bold mb-8" style={{ color: 'var(--navy, #1A1A2E)' }}>Ma Facture</h1>
+        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
           <button
             onClick={() => fetchBooking()}
@@ -144,18 +130,18 @@ export default function InvoicePage() {
   const totalHT = totalTTC - totalTVAMarge;
 
   return (
-    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
-      <h1 className="text-3xl font-bold mb-8" style={{ color: C.navy }}>Ma Facture</h1>
+    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)', animation: 'fadeUp 0.6s ease-out' }}>
+      <h1 className="text-3xl font-bold mb-8" style={{ color: 'var(--navy, #1A1A2E)' }}>Ma Facture</h1>
 
       {/* Facture */}
-      <div className="rounded-xl p-8 mb-8" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
+      <div className="rounded-xl p-8 mb-8" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
         {/* En-tête */}
-        <div className="mb-8 pb-8" style={{ borderBottom: `1px solid ${C.border}` }}>
-          <div className="text-2xl font-bold mb-2" style={{ color: C.navy }}>FACTURE</div>
-          <p style={{ color: C.muted }}>
+        <div className="mb-8 pb-8" style={{ borderBottom: '1px solid #E5E0D8' }}>
+          <div className="text-2xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>FACTURE</div>
+          <p style={{ color: '#6B7280' }}>
             Référence: <span className="font-medium">{bookingId.substring(0, 8)}</span>
           </p>
-          <p style={{ color: C.muted }}>
+          <p style={{ color: '#6B7280' }}>
             Date: <span className="font-medium">{formatDate(new Date().toISOString())}</span>
           </p>
         </div>
@@ -163,9 +149,9 @@ export default function InvoicePage() {
         {/* Client */}
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
-            <h3 className="font-bold mb-2" style={{ color: C.navy }}>Facturer à:</h3>
-            <p style={{ color: C.navy }}>{booking.createdByUser?.firstName} {booking.createdByUser?.lastName}</p>
-            <p className="text-sm" style={{ color: C.muted }}>{booking.createdByUser?.email}</p>
+            <h3 className="font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Facturer à:</h3>
+            <p style={{ color: 'var(--navy, #1A1A2E)' }}>{booking.createdByUser?.firstName} {booking.createdByUser?.lastName}</p>
+            <p className="text-sm" style={{ color: '#6B7280' }}>{booking.createdByUser?.email}</p>
           </div>
         </div>
 
@@ -173,23 +159,23 @@ export default function InvoicePage() {
         <div className="mb-8">
           <table className="w-full">
             <thead>
-              <tr style={{ borderBottom: `1px solid ${C.border}` }}>
-                <th className="text-left py-3 font-semibold" style={{ color: C.navy }}>Description</th>
-                <th className="text-right py-3 font-semibold" style={{ color: C.navy }}>Montant HT</th>
-                <th className="text-right py-3 font-semibold" style={{ color: C.navy }}>TVA sur marge</th>
-                <th className="text-right py-3 font-semibold" style={{ color: C.navy }}>Montant TTC</th>
+              <tr style={{ borderBottom: '1px solid #E5E0D8' }}>
+                <th className="text-left py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>
+                <th className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant HT</th>
+                <th className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>TVA sur marge</th>
+                <th className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant TTC</th>
               </tr>
             </thead>
             <tbody>
-              <tr style={{ borderBottom: `1px solid ${C.border}` }}>
-                <td className="py-4" style={{ color: C.navy }}>{booking.travel?.title}</td>
-                <td className="text-right py-4" style={{ color: C.navy }}>
+              <tr style={{ borderBottom: '1px solid #E5E0D8' }}>
+                <td className="py-4" style={{ color: 'var(--navy, #1A1A2E)' }}>{booking.travel?.title}</td>
+                <td className="text-right py-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   {hasCostsData ? formatCurrency(totalHT) : '—'}
                 </td>
-                <td className="text-right py-4" style={{ color: C.navy }}>
+                <td className="text-right py-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   {hasCostsData ? formatCurrency(totalTVAMarge) : '—'}
                 </td>
-                <td className="text-right py-4 font-semibold" style={{ color: C.navy }}>
+                <td className="text-right py-4 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   {formatCurrency(totalTTC)}
                 </td>
               </tr>
@@ -197,7 +183,7 @@ export default function InvoicePage() {
             {!hasCostsData && (
               <tfoot>
                 <tr>
-                  <td colSpan={4} className="py-2 text-xs italic" style={{ color: C.muted }}>
+                  <td colSpan={4} className="py-2 text-xs italic" style={{ color: '#6B7280' }}>
                     TVA sur marge : le détail HT/TVA sera disponible après validation comptable.
                   </td>
                 </tr>
@@ -209,24 +195,24 @@ export default function InvoicePage() {
         {/* Total */}
         <div className="flex justify-end mb-8">
           <div className="w-64">
-            <div className="flex justify-between py-2" style={{ borderTop: `2px solid ${C.navy}` }}>
-              <span className="font-bold" style={{ color: C.navy }}>TOTAL TTC</span>
-              <span className="font-bold text-lg" style={{ color: C.navy }}>{formatCurrency(totalTTC)}</span>
+            <div className="flex justify-between py-2" style={{ borderTop: '2px solid var(--navy, #1A1A2E)' }}>
+              <span className="font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>TOTAL TTC</span>
+              <span className="font-bold text-lg" style={{ color: 'var(--navy, #1A1A2E)' }}>{formatCurrency(totalTTC)}</span>
             </div>
           </div>
         </div>
 
         {/* Paiement */}
         {(booking.paymentContributions?.length ?? 0) > 0 && (
-          <div className="mb-8 rounded-lg p-4" style={{ backgroundColor: C.goldSoft }}>
-            <h3 className="font-bold mb-3" style={{ color: C.navy }}>Historique des Paiements</h3>
+          <div className="mb-8 rounded-lg p-4" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft }}>
+            <h3 className="font-bold mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>Historique des Paiements</h3>
             <div className="space-y-2">
               {(booking.paymentContributions || []).map((contribution: Record<string, unknown>, idx: number) => (
                 <div key={contribution.id as string} className="flex justify-between text-sm">
-                  <span style={{ color: C.navy }}>
+                  <span style={{ color: 'var(--navy, #1A1A2E)' }}>
                     Paiement {idx + 1} ({contribution.status as string})
                   </span>
-                  <span style={{ color: C.navy }}>{formatCurrency((contribution.amountTTC as number) || 0)}</span>
+                  <span style={{ color: 'var(--navy, #1A1A2E)' }}>{formatCurrency((contribution.amountTTC as number) || 0)}</span>
                 </div>
               ))}
             </div>
@@ -234,7 +220,7 @@ export default function InvoicePage() {
         )}
 
         {/* Notes */}
-        <div className="text-xs pt-4" style={{ borderTop: `1px solid ${C.border}`, color: C.muted }}>
+        <div className="text-xs pt-4" style={{ borderTop: '1px solid #E5E0D8', color: '#6B7280' }}>
           <p>Merci pour votre réservation!</p>
         </div>
       </div>
@@ -246,16 +232,16 @@ export default function InvoicePage() {
           disabled={downloading}
           className="flex-1 px-6 py-3 text-white rounded-lg font-medium disabled:opacity-50 transition-all hover:shadow-lg"
           style={{
-            backgroundColor: C.terra,
+            backgroundColor: 'var(--terra, #C75B39)',
           }}
           onMouseEnter={(e) => {
             if (!downloading) {
-              e.currentTarget.style.backgroundColor = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+              e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
             }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = C.terra;
+            e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)';
             e.currentTarget.style.boxShadow = 'none';
           }}
         >
@@ -265,8 +251,8 @@ export default function InvoicePage() {
           onClick={() => window.print()}
           className="flex-1 px-6 py-3 rounded-lg font-medium transition-all hover:opacity-80"
           style={{
-            backgroundColor: C.border,
-            color: C.navy,
+            backgroundColor: '#E5E0D8',
+            color: 'var(--navy, #1A1A2E)',
           }}
         >
           🖨️ Imprimer

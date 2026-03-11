@@ -3,20 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Booking {
   id: string;
   reference: string;
@@ -121,10 +107,10 @@ export default function CancelReservationPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: C.cream }}>
+      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 rounded-full animate-spin" style={{ borderColor: C.border, borderTopColor: C.terra }}></div>
-          <p style={{ color: C.muted }}>Chargement...</p>
+          <div className="w-12 h-12 border-4 rounded-full animate-spin" style={{ borderColor: '#E5E0D8', borderTopColor: 'var(--terra, #C75B39)' }}></div>
+          <p style={{ color: '#6B7280' }}>Chargement...</p>
         </div>
       </div>
     );
@@ -132,42 +118,42 @@ export default function CancelReservationPage() {
 
   if (!booking) {
     return (
-      <div className="p-8" style={{ backgroundColor: C.cream }}>
-        <p style={{ color: C.muted }}>Réservation non trouvée</p>
+      <div className="p-8" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
+        <p style={{ color: '#6B7280' }}>Réservation non trouvée</p>
       </div>
     );
   }
 
   return (
-    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
+    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)', animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mb-8">
         <button
           onClick={() => router.back()}
           className="hover:opacity-80 mb-4"
-          style={{ color: C.terra }}
+          style={{ color: 'var(--terra, #C75B39)' }}
         >
           ← Retour
         </button>
-        <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Annuler ma réservation</h1>
+        <h1 className="text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Annuler ma réservation</h1>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p style={{ color: 'var(--terra, #DC2626)' }}>{error}</p>
         </div>
       )}
 
       {/* Infos réservation */}
-      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
-        <h2 className="text-xl font-bold mb-4" style={{ color: C.navy }}>Votre Réservation</h2>
+      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Votre Réservation</h2>
         <div className="space-y-3">
-          <p style={{ color: C.navy }}>
+          <p style={{ color: 'var(--navy, #1A1A2E)' }}>
             <span className="font-medium">Voyage:</span> {booking.travel?.title}
           </p>
-          <p style={{ color: C.navy }}>
+          <p style={{ color: 'var(--navy, #1A1A2E)' }}>
             <span className="font-medium">Départ:</span> {formatDate(booking.travel?.departureDate || '')}
           </p>
-          <p style={{ color: C.navy }}>
+          <p style={{ color: 'var(--navy, #1A1A2E)' }}>
             <span className="font-medium">Montant payé:</span>{' '}
             <span className="font-bold text-lg">{formatCurrency(booking.totalAmountCents || 0)}</span>
           </p>
@@ -175,7 +161,7 @@ export default function CancelReservationPage() {
       </div>
 
       {/* Politique d'annulation */}
-      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: C.goldSoft, border: `1.5px solid ${C.gold}` }}>
+      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, border: '1.5px solid var(--gold, #D4A853)' }}>
         <h2 className="text-xl font-bold mb-4" style={{ color: '#92400e' }}>Politique d&apos;Annulation</h2>
         <div className="space-y-3 text-sm" style={{ color: '#92400e' }}>
           <p>
@@ -199,12 +185,12 @@ export default function CancelReservationPage() {
 
       {/* Calcul remboursement */}
       {refundCalc && (
-        <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: C.forestBg, border: `1.5px solid ${C.forest}` }}>
-          <h2 className="text-xl font-bold mb-4" style={{ color: C.forest }}>Calcul de votre Remboursement</h2>
+        <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: '#DCFCE7', border: `1.5px solid ${'#166534'}` }}>
+          <h2 className="text-xl font-bold mb-4" style={{ color: '#166534' }}>Calcul de votre Remboursement</h2>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span style={{ color: C.navy }}>Montant payé:</span>
-              <span className="font-bold" style={{ color: C.navy }}>{formatCurrency(booking.totalAmountCents || 0)}</span>
+              <span style={{ color: 'var(--navy, #1A1A2E)' }}>Montant payé:</span>
+              <span className="font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>{formatCurrency(booking.totalAmountCents || 0)}</span>
             </div>
             <div className="flex justify-between items-center" style={{ color: 'var(--terra, #DC2626)' }}>
               <span>Frais d&apos;annulation:</span>
@@ -212,13 +198,13 @@ export default function CancelReservationPage() {
                 -{formatCurrency(refundCalc.cancellationFeeCents || 0)}
               </span>
             </div>
-            <div className="pt-3 flex justify-between items-center" style={{ borderTop: `2px solid ${C.forest}` }}>
-              <span className="text-lg font-bold" style={{ color: C.forest }}>Montant remboursé:</span>
-              <span className="text-2xl font-bold" style={{ color: C.forest }}>
+            <div className="pt-3 flex justify-between items-center" style={{ borderTop: `2px solid ${'#166534'}` }}>
+              <span className="text-lg font-bold" style={{ color: '#166534' }}>Montant remboursé:</span>
+              <span className="text-2xl font-bold" style={{ color: '#166534' }}>
                 {formatCurrency(refundCalc.refundAmountCents || 0)}
               </span>
             </div>
-            <p className="text-sm mt-4" style={{ color: C.forest }}>
+            <p className="text-sm mt-4" style={{ color: '#166534' }}>
               Politique appliquée: <span className="font-medium">{refundCalc.policyApplied || 'N/A'}</span>
             </p>
           </div>
@@ -226,11 +212,11 @@ export default function CancelReservationPage() {
       )}
 
       {/* Formulaire */}
-      <form onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
-        <h2 className="text-xl font-bold mb-4" style={{ color: C.navy }}>Demander l&apos;Annulation</h2>
+      <form onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Demander l&apos;Annulation</h2>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium mb-2" style={{ color: C.navy }}>
+          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Motif d&apos;annulation
           </label>
           <select
@@ -242,8 +228,8 @@ export default function CancelReservationPage() {
             className="w-full px-4 py-2 rounded-lg mb-3"
             style={{
               backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
-              color: C.navy,
+              border: '1.5px solid #E5E0D8',
+              color: 'var(--navy, #1A1A2E)',
             }}
           >
             <option value="">Sélectionner un motif...</option>
@@ -253,7 +239,7 @@ export default function CancelReservationPage() {
             <option value="autre">Autre</option>
           </select>
 
-          <label className="block text-sm font-medium mb-2 mt-4" style={{ color: C.navy }}>
+          <label className="block text-sm font-medium mb-2 mt-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Commentaire (optionnel)
           </label>
           <textarea
@@ -263,19 +249,19 @@ export default function CancelReservationPage() {
             className="w-full px-4 py-2 rounded-lg"
             style={{
               backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
-              color: C.navy,
+              border: '1.5px solid #E5E0D8',
+              color: 'var(--navy, #1A1A2E)',
             }}
             rows={4}
           />
-          <p className="text-xs mt-1" style={{ color: C.muted }}>
+          <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
             {reason.length}/500 caractères
           </p>
         </div>
 
         {/* Confirmation */}
-        <div className="mb-6 rounded-lg p-4" style={{ backgroundColor: C.goldSoft }}>
-          <p className="text-sm mb-3" style={{ color: C.navy }}>
+        <div className="mb-6 rounded-lg p-4" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft }}>
+          <p className="text-sm mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>
             En confirmant, vous acceptez que votre réservation soit annulée et que vous receviez
             un remboursement de <span className="font-bold">{formatCurrency(refundCalc?.refundAmountCents || 0)}</span>.
           </p>
@@ -285,9 +271,9 @@ export default function CancelReservationPage() {
               id="accept"
               required
               className="w-4 h-4 rounded"
-              style={{ borderColor: C.border, accentColor: C.terra }}
+              style={{ borderColor: '#E5E0D8', accentColor: 'var(--terra, #C75B39)' }}
             />
-            <span className="text-sm" style={{ color: C.navy }}>
+            <span className="text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Je confirme que je veux annuler ma réservation
             </span>
           </label>
@@ -319,8 +305,8 @@ export default function CancelReservationPage() {
             onClick={() => router.back()}
             className="px-6 py-3 rounded-lg font-medium transition-all hover:opacity-80"
             style={{
-              backgroundColor: C.border,
-              color: C.navy,
+              backgroundColor: '#E5E0D8',
+              color: 'var(--navy, #1A1A2E)',
             }}
           >
             Retour

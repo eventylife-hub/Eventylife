@@ -9,20 +9,6 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 /**
  * Page d'invitation des membres au groupe
  * Formulaire d'invitation et affichage des invitations en attente
@@ -124,9 +110,9 @@ export default function InviterPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-4" style={{ backgroundColor: C.cream }}>
+      <div className="min-h-screen p-4" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mx-auto max-w-2xl">
-          <Loader2 className="h-6 w-6 animate-spin" style={{ color: C.terra }} />
+          <Loader2 className="h-6 w-6 animate-spin" style={{ color: 'var(--terra, #C75B39)' }} />
         </div>
       </div>
     );
@@ -134,7 +120,7 @@ export default function InviterPage() {
 
   if (!groupe) {
     return (
-      <div className="min-h-screen p-4" style={{ backgroundColor: C.cream }}>
+      <div className="min-h-screen p-4" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mx-auto max-w-2xl">
           <p style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Groupe non trouvé'}</p>
         </div>
@@ -143,38 +129,38 @@ export default function InviterPage() {
   }
 
   return (
-    <div className="min-h-screen p-4" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
+    <div className="min-h-screen p-4" style={{ backgroundColor: 'var(--cream, #FAF7F2)', animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mx-auto max-w-2xl">
-        <Link href={`/client/groupes/${groupId}`} className="text-sm hover:opacity-80 mb-4 inline-block" style={{ color: C.terra }}>
+        <Link href={`/client/groupes/${groupId}`} className="text-sm hover:opacity-80 mb-4 inline-block" style={{ color: 'var(--terra, #C75B39)' }}>
           ← Retour au groupe
         </Link>
 
-        <h1 className="text-3xl font-bold mb-6" style={{ color: C.navy }}>Inviter des membres</h1>
+        <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Inviter des membres</h1>
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Formulaire d'invitation */}
-          <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
+          <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
             <CardHeader>
-              <CardTitle style={{ color: C.navy }}>Inviter par email</CardTitle>
+              <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Inviter par email</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
-                  <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+                  <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
                     <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--terra, #DC2626)' }} />
                     <p className="text-sm" style={{ color: 'var(--terra, #DC2626)' }}>{error}</p>
                   </div>
                 )}
 
                 {success && (
-                  <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: C.forestBg, border: `1.5px solid ${C.forest}` }}>
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: C.forest }} />
-                    <p className="text-sm" style={{ color: C.forest }}>{success}</p>
+                  <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#DCFCE7', border: `1.5px solid ${'#166534'}` }}>
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#166534' }} />
+                    <p className="text-sm" style={{ color: '#166534' }}>{success}</p>
                   </div>
                 )}
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" style={{ color: C.navy }}>Email</Label>
+                  <Label htmlFor="email" style={{ color: 'var(--navy, #1A1A2E)' }}>Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -186,23 +172,23 @@ export default function InviterPage() {
                     required
                     style={{
                       backgroundColor: 'white',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                       borderRadius: '10px',
-                      color: C.navy,
+                      color: 'var(--navy, #1A1A2E)',
                     }}
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = C.terra;
-                      e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terraSoft}`;
+                      e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                      e.currentTarget.style.boxShadow = `0 0 0 3px ${'var(--terra, #C75B39)'Soft}`;
                     }}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.borderColor = '#E5E0D8';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" style={{ color: C.navy }}>Message personnalisé (optionnel)</Label>
+                  <Label htmlFor="message" style={{ color: 'var(--navy, #1A1A2E)' }}>Message personnalisé (optionnel)</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -213,9 +199,9 @@ export default function InviterPage() {
                     rows={3}
                     style={{
                       backgroundColor: 'white',
-                      border: `1.5px solid ${C.border}`,
+                      border: '1.5px solid #E5E0D8',
                       borderRadius: '10px',
-                      color: C.navy,
+                      color: 'var(--navy, #1A1A2E)',
                     }}
                   />
                 </div>
@@ -225,17 +211,17 @@ export default function InviterPage() {
                   disabled={submitting}
                   className="w-full text-white font-semibold transition-all hover:shadow-lg"
                   style={{
-                    backgroundColor: C.terra,
+                    backgroundColor: 'var(--terra, #C75B39)',
                     borderRadius: '10px',
                   }}
                   onMouseEnter={(e) => {
                     if (!submitting) {
-                      e.currentTarget.style.backgroundColor = C.terraLight;
-                      e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                      e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
+                      e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
                     }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = C.terra;
+                    e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
@@ -253,17 +239,17 @@ export default function InviterPage() {
           </Card>
 
           {/* Code d&apos;invitation */}
-          <Card style={{ border: `1.5px solid ${C.border}`, borderRadius: '20px', backgroundColor: 'white' }}>
+          <Card style={{ border: '1.5px solid #E5E0D8', borderRadius: '20px', backgroundColor: 'white' }}>
             <CardHeader>
-              <CardTitle style={{ color: C.navy }}>Code d&apos;invitation</CardTitle>
+              <CardTitle style={{ color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm" style={{ color: C.muted }}>
+              <p className="text-sm" style={{ color: '#6B7280' }}>
                 Partagez ce code avec vos amis pour qu'ils rejoignent le groupe facilement.
               </p>
 
-              <div className="rounded-lg p-4" style={{ backgroundColor: C.goldSoft, border: `2px dashed ${C.gold}` }}>
-                <p className="text-center text-3xl font-bold tracking-widest" style={{ color: C.navy }}>
+              <div className="rounded-lg p-4" style={{ backgroundColor: 'var(--gold, #D4A853)'Soft, border: `2px dashed var(--gold, #D4A853)` }}>
+                <p className="text-center text-3xl font-bold tracking-widest" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   {groupe?.code as string || '-'}
                 </p>
               </div>
@@ -272,19 +258,19 @@ export default function InviterPage() {
                 onClick={handleCopyCode}
                 className="w-full text-white font-semibold transition-all hover:shadow-lg"
                 style={{
-                  backgroundColor: codeCopied ? C.forest : C.terra,
+                  backgroundColor: codeCopied ? '#166534' : 'var(--terra, #C75B39)',
                   borderRadius: '10px',
                   border: 'none',
                 }}
                 onMouseEnter={(e) => {
                   if (!codeCopied) {
-                    e.currentTarget.style.backgroundColor = C.terraLight;
-                    e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                    e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!codeCopied) {
-                    e.currentTarget.style.backgroundColor = C.terra;
+                    e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)';
                     e.currentTarget.style.boxShadow = 'none';
                   }
                 }}
@@ -302,14 +288,14 @@ export default function InviterPage() {
                 )}
               </Button>
 
-              <div className="pt-4" style={{ borderTop: `1px solid ${C.border}` }}>
-                <h3 className="font-semibold text-sm mb-2" style={{ color: C.navy }}>Invitations en attente</h3>
+              <div className="pt-4" style={{ borderTop: '1px solid #E5E0D8' }}>
+                <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Invitations en attente</h3>
                 {(groupe?.pendingInvites as number) > 0 ? (
-                  <p className="text-sm" style={{ color: C.navy }}>
+                  <p className="text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
                     {groupe?.pendingInvites as number} invitation{(groupe?.pendingInvites as number) > 1 ? 's' : ''} en cours
                   </p>
                 ) : (
-                  <p className="text-sm" style={{ color: C.muted }}>Aucune invitation en attente</p>
+                  <p className="text-sm" style={{ color: '#6B7280' }}>Aucune invitation en attente</p>
                 )}
               </div>
             </CardContent>

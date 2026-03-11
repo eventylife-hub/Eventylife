@@ -2,20 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface CompletedTravel {
   id: string;
   title: string;
@@ -152,8 +138,8 @@ export default function AvisPage() {
     return (
       <div className="max-w-4xl mx-auto animate-fade-up">
         <div className="mb-8">
-          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes avis</h1>
-          <p className="text-sm mt-2" style={{ color: C.muted }}>Partagez votre expérience des voyages</p>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Mes avis</h1>
+          <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Partagez votre expérience des voyages</p>
         </div>
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
@@ -169,20 +155,20 @@ export default function AvisPage() {
       {/* En-tête */}
       <div className="flex justify-between items-start gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mes avis</h1>
-          <p className="text-sm mt-2" style={{ color: C.muted }}>Partagez votre expérience des voyages</p>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Mes avis</h1>
+          <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Partagez votre expérience des voyages</p>
         </div>
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -193,11 +179,11 @@ export default function AvisPage() {
 
       {/* Formulaire */}
       {showForm && (
-        <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-          <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Laisser un avis</h2>
+        <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+          <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Laisser un avis</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold mb-2" style={{ color: C.navy }}>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Sélectionnez un voyage
               </label>
               <select
@@ -205,9 +191,9 @@ export default function AvisPage() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, travelId: (e.target as HTMLInputElement).value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   background: '#fff',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                 }}
                 required
               >
@@ -227,14 +213,14 @@ export default function AvisPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2" style={{ color: C.navy }}>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Note
               </label>
               {renderStars(formData.rating, true, (r) => setFormData({ ...formData, rating: r }))}
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2" style={{ color: C.navy }}>
+              <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Commentaire
               </label>
               <textarea
@@ -242,9 +228,9 @@ export default function AvisPage() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, comment: (e.target as HTMLInputElement).value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   background: '#fff',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                   minHeight: '100px',
                 }}
                 placeholder="Partagez votre expérience..."
@@ -252,7 +238,7 @@ export default function AvisPage() {
                 minLength={10}
                 maxLength={2000}
               />
-              <p className="text-xs mt-1" style={{ color: C.muted }}>
+              <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
                 {formData.comment.length}/2000 caractères
               </p>
             </div>
@@ -261,13 +247,13 @@ export default function AvisPage() {
               <button
                 type="submit"
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-                style={{ background: C.terra, color: '#fff' }}
+                style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = C.terraLight;
-                  e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = C.terra;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
@@ -277,9 +263,9 @@ export default function AvisPage() {
                 type="button"
                 onClick={() => setShowForm(false)}
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-                style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+                style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = C.terraSoft;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = '#fff';
@@ -294,27 +280,27 @@ export default function AvisPage() {
 
       {/* Messages d'erreur */}
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
         </div>
       )}
 
       {/* État vide */}
       {reviews.length === 0 ? (
-        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">⭐</div>
-          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>Aucun avis</h2>
-          <p className="text-sm mb-6" style={{ color: C.muted }}>Vous n&apos;avez pas encore laissé d&apos;avis</p>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun avis</h2>
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>Vous n&apos;avez pas encore laissé d&apos;avis</p>
           <button
             onClick={() => setShowForm(true)}
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -324,26 +310,26 @@ export default function AvisPage() {
       ) : (
         <div className="space-y-4">
           {reviews.map((review) => (
-            <div key={review.id} className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+            <div key={review.id} className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="font-bold text-base" style={{ color: C.navy }}>{review.travelTitle}</h3>
+                  <h3 className="font-bold text-base" style={{ color: 'var(--navy, #1A1A2E)' }}>{review.travelTitle}</h3>
                   <div className="mt-2">{renderStars(review.rating)}</div>
                 </div>
                 <span
                   className="px-3 py-1 rounded-xl text-xs font-semibold"
                   style={{
-                    background: review.status === 'APPROVED' ? C.forestBg : C.goldSoft,
-                    color: review.status === 'APPROVED' ? C.forest : '#92400e',
+                    background: review.status === 'APPROVED' ? '#DCFCE7' : 'var(--gold, #D4A853)'Soft,
+                    color: review.status === 'APPROVED' ? '#166534' : '#92400e',
                   }}
                 >
                   {review.status === 'APPROVED' ? 'Publié' : 'En modération'}
                 </span>
               </div>
 
-              <p className="text-sm mb-4" style={{ color: C.navy }}>{review.comment}</p>
+              <p className="text-sm mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>{review.comment}</p>
 
-              <p className="text-xs" style={{ color: C.muted }}>
+              <p className="text-xs" style={{ color: '#6B7280' }}>
                 Publié le {formatDate(review.createdAt)}
               </p>
             </div>

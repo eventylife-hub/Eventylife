@@ -2,20 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Document {
   id: string;
   name: string;
@@ -125,22 +111,22 @@ export default function ClientDocumentsPage() {
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
       {/* En-tête */}
       <div>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
           Mes documents
         </h1>
-        <p className="text-sm mt-2" style={{ color: C.muted }}>
+        <p className="text-sm mt-2" style={{ color: '#6B7280' }}>
           Consultez et téléchargez vos confirmations, factures et documents de voyage
         </p>
       </div>
 
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
         </div>
       )}
 
       {/* Onglets */}
-      <div style={{ borderBottom: `1.5px solid ${C.border}` }}>
+      <div style={{ borderBottom: '1.5px solid #E5E0D8' }}>
         <div className="flex gap-6 overflow-x-auto">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -152,14 +138,14 @@ export default function ClientDocumentsPage() {
                 onClick={() => setActiveTab(tab.id as DocumentTab)}
                 className="pb-4 font-medium transition-colors relative text-sm whitespace-nowrap"
                 style={{
-                  color: isActive ? C.terra : C.muted,
-                  borderBottom: isActive ? `2px solid ${C.terra}` : 'none',
+                  color: isActive ? 'var(--terra, #C75B39)' : '#6B7280',
+                  borderBottom: isActive ? '2px solid var(--terra, #C75B39)' : 'none',
                   paddingBottom: '16px',
                 }}
               >
                 {tab.label}
                 {count > 0 && (
-                  <span className="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full" style={{ background: C.terra, color: '#fff' }}>
+                  <span className="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full" style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}>
                     {count}
                   </span>
                 )}
@@ -172,15 +158,15 @@ export default function ClientDocumentsPage() {
       {/* Contenu */}
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <div className="h-8 w-8 border-4 rounded-full" style={{ borderColor: C.border, borderTopColor: C.terra, animation: 'spin 1s linear infinite' }} />
+          <div className="h-8 w-8 border-4 rounded-full" style={{ borderColor: '#E5E0D8', borderTopColor: 'var(--terra, #C75B39)', animation: 'spin 1s linear infinite' }} />
         </div>
       ) : currentDocs.length === 0 ? (
-        <div className="text-center py-12 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="text-center py-12 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">📄</div>
-          <h3 className="font-bold text-base mb-2" style={{ color: C.navy }}>
+          <h3 className="font-bold text-base mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Aucun document
           </h3>
-          <p className="text-sm" style={{ color: C.muted }}>
+          <p className="text-sm" style={{ color: '#6B7280' }}>
             Vous n'avez pas encore de documents pour cette catégorie
           </p>
         </div>
@@ -192,7 +178,7 @@ export default function ClientDocumentsPage() {
               className="rounded-2xl p-6 flex items-center justify-between transition-all duration-300"
               style={{
                 background: '#fff',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
@@ -206,31 +192,31 @@ export default function ClientDocumentsPage() {
               <div className="flex items-center gap-4 flex-1 min-w-0">
                 <div className="text-2xl flex-shrink-0">📋</div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-sm font-medium truncate" style={{ color: C.navy }}>
+                  <h3 className="text-sm font-medium truncate" style={{ color: 'var(--navy, #1A1A2E)' }}>
                     {doc.name}
                   </h3>
-                  <p className="text-xs mt-1" style={{ color: C.muted }}>
+                  <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
                     {formatDate(doc.createdAt)}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 ml-4 flex-shrink-0">
-                <span className="px-3 py-1 rounded-xl text-xs font-semibold" style={{ background: C.forestBg, color: C.forest }}>
+                <span className="px-3 py-1 rounded-xl text-xs font-semibold" style={{ background: '#DCFCE7', color: '#166534' }}>
                   {doc.status === 'CONFIRMED' ? 'Validé' : 'En attente'}
                 </span>
                 <button
                   onClick={() => handleDownload(doc.id)}
                   className="p-2 rounded-xl transition-all"
-                  style={{ background: C.terraSoft, color: C.terra }}
+                  style={{ background: 'var(--terra, #C75B39)'Soft, color: 'var(--terra, #C75B39)' }}
                   title="Télécharger"
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = C.terra;
+                    e.currentTarget.style.background = 'var(--terra, #C75B39)';
                     e.currentTarget.style.color = '#fff';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = C.terraSoft;
-                    e.currentTarget.style.color = C.terra;
+                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
+                    e.currentTarget.style.color = 'var(--terra, #C75B39)';
                   }}
                 >
                   ⬇️
@@ -262,13 +248,13 @@ export default function ClientDocumentsPage() {
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all flex items-center gap-2"
             style={{
               background: '#fff',
-              color: C.navy,
-              border: `1.5px solid ${C.border}`,
+              color: 'var(--navy, #1A1A2E)',
+              border: '1.5px solid #E5E0D8',
               opacity: downloadingAll ? 0.6 : 1,
             }}
             onMouseEnter={(e) => {
               if (!downloadingAll) {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }
             }}
             onMouseLeave={(e) => {

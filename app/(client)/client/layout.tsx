@@ -6,17 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { PortalErrorBoundary } from '@/components/error-boundary';
 
-const C = {
-  navy: '#1A1A2E',
-  navyLight: '#2D2D44',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-};
-
 interface ClientLayoutProps {
   children: React.ReactNode;
 }
@@ -61,7 +50,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <div className="p-6" style={{ borderBottom: `1px solid rgba(250,247,242,0.08)` }}>
         <Link href="/" className="flex items-center gap-0">
           <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Eventy</span>
-          <span className="font-display text-lg font-bold" style={{ color: C.gold }}>.</span>
+          <span className="font-display text-lg font-bold" style={{ color: 'var(--gold, #D4A853)' }}>.</span>
           <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Life</span>
         </Link>
         <p className="text-xs mt-2" style={{ color: 'rgba(250,247,242,0.4)' }}>Espace Client</p>
@@ -94,7 +83,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               {active && (
                 <span
                   className="ml-auto w-1.5 h-1.5 rounded-full"
-                  style={{ background: C.terra }}
+                  style={{ background: 'var(--terra, #C75B39)' }}
                 />
               )}
             </Link>
@@ -125,12 +114,12 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   );
 
   return (
-    <div className="flex min-h-screen" style={{ background: C.cream }}>
+    <div className="flex min-h-screen" style={{ background: 'var(--cream, #FAF7F2)' }}>
       {/* Skip to content — Accessibilité */}
       <a
         href="#client-main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-sm focus:font-medium"
-        style={{ backgroundColor: C.terra }}
+        style={{ backgroundColor: 'var(--terra, #C75B39)' }}
       >
         Aller au contenu principal
       </a>
@@ -138,7 +127,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       {/* Sidebar desktop */}
       <aside
         className="hidden md:flex w-64 flex-col sticky top-0 h-screen"
-        style={{ background: C.navy }}
+        style={{ background: 'var(--navy, #1A1A2E)' }}
         role="navigation"
         aria-label="Navigation espace client"
       >
@@ -148,11 +137,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       {/* Mobile header */}
       <div
         className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
-        style={{ background: C.navy }}
+        style={{ background: 'var(--navy, #1A1A2E)' }}
       >
         <Link href="/" className="flex items-center gap-0">
           <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Eventy</span>
-          <span className="font-display text-lg font-bold" style={{ color: C.gold }}>.</span>
+          <span className="font-display text-lg font-bold" style={{ color: 'var(--gold, #D4A853)' }}>.</span>
           <span className="font-display text-lg font-bold" style={{ color: '#FAF7F2' }}>Life</span>
         </Link>
         <button
@@ -181,7 +170,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           />
           <aside
             className="md:hidden fixed top-0 left-0 w-72 h-full z-50 flex flex-col animate-slide-in-right"
-            style={{ background: C.navy }}
+            style={{ background: 'var(--navy, #1A1A2E)' }}
           >
             <SidebarContent />
           </aside>

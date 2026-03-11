@@ -3,20 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface BookingFeedback {
   id: string;
   reference: string;
@@ -130,7 +116,7 @@ export default function FeedbackPage() {
   }) => {
     return (
       <div className="mb-6">
-        <label className="block text-sm font-medium mb-3" style={{ color: C.navy }}>{label}</label>
+        <label className="block text-sm font-medium mb-3" style={{ color: 'var(--navy, #1A1A2E)' }}>{label}</label>
         <div className="flex gap-2">
           {[1, 2, 3, 4, 5].map((star) => (
             <button
@@ -139,20 +125,20 @@ export default function FeedbackPage() {
               onClick={() => onChange(star)}
               className="w-10 h-10 rounded-lg font-bold transition"
               style={{
-                backgroundColor: star <= rating ? C.gold : C.border,
-                color: star <= rating ? 'white' : C.muted,
+                backgroundColor: star <= rating ? 'var(--gold, #D4A853)' : '#E5E0D8',
+                color: star <= rating ? 'white' : '#6B7280',
               }}
               onMouseEnter={(e) => {
-                if (star > rating) e.currentTarget.style.backgroundColor = C.goldSoft;
+                if (star > rating) e.currentTarget.style.backgroundColor = 'var(--gold, #D4A853)'Soft;
               }}
               onMouseLeave={(e) => {
-                if (star > rating) e.currentTarget.style.backgroundColor = C.border;
+                if (star > rating) e.currentTarget.style.backgroundColor = '#E5E0D8';
               }}
             >
               ★
             </button>
           ))}
-          <span className="ml-3 font-medium" style={{ color: C.navy }}>{rating}/5</span>
+          <span className="ml-3 font-medium" style={{ color: 'var(--navy, #1A1A2E)' }}>{rating}/5</span>
         </div>
       </div>
     );
@@ -160,13 +146,13 @@ export default function FeedbackPage() {
 
   if (loading) {
     return (
-      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
+      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mb-8">
-          <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Laisser un Avis</h1>
+          <h1 className="text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Laisser un Avis</h1>
         </div>
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-20 rounded-lg animate-pulse" style={{ backgroundColor: C.border }} />
+            <div key={i} className="h-20 rounded-lg animate-pulse" style={{ backgroundColor: '#E5E0D8' }} />
           ))}
         </div>
       </div>
@@ -175,18 +161,18 @@ export default function FeedbackPage() {
 
   if (error || !booking) {
     return (
-      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream }}>
+      <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
         <div className="mb-8">
           <button
             onClick={() => router.back()}
             className="hover:opacity-80 mb-4"
-            style={{ color: C.terra }}
+            style={{ color: 'var(--terra, #C75B39)' }}
           >
             ← Retour
           </button>
-          <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Laisser un Avis</h1>
+          <h1 className="text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Laisser un Avis</h1>
         </div>
-        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626` }}>
+        <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p className="font-semibold mb-4" style={{ color: 'var(--terra, #DC2626)' }}>{error || 'Réservation non trouvée'}</p>
           <button
             onClick={() => fetchBooking()}
@@ -201,17 +187,17 @@ export default function FeedbackPage() {
   }
 
   return (
-    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: C.cream, animation: 'fadeUp 0.6s ease-out' }}>
+    <div className="p-8 max-w-3xl mx-auto" style={{ backgroundColor: 'var(--cream, #FAF7F2)', animation: 'fadeUp 0.6s ease-out' }}>
       <div className="mb-8">
         <button
           onClick={() => router.back()}
           className="hover:opacity-80 mb-4"
-          style={{ color: C.terra }}
+          style={{ color: 'var(--terra, #C75B39)' }}
         >
           ← Retour
         </button>
-        <h1 className="text-3xl font-bold" style={{ color: C.navy }}>Laisser un Avis</h1>
-        <p className="mt-2" style={{ color: C.muted }}>
+        <h1 className="text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Laisser un Avis</h1>
+        <p className="mt-2" style={{ color: '#6B7280' }}>
           Aidez-nous à améliorer nos services en partageant votre expérience
         </p>
       </div>
@@ -221,9 +207,9 @@ export default function FeedbackPage() {
         <div
           className="mb-6 p-4 rounded-lg border"
           style={{
-            backgroundColor: toast.type === 'success' ? C.forestBg : 'var(--terra-soft, #FEF2F2)',
-            borderColor: toast.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
-            color: toast.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
+            backgroundColor: toast.type === 'success' ? '#DCFCE7' : 'var(--terra-soft, #FEF2F2)',
+            borderColor: toast.type === 'success' ? '#166534' : 'var(--terra, #DC2626)',
+            color: toast.type === 'success' ? '#166534' : 'var(--terra, #DC2626)',
           }}
         >
           {toast.message}
@@ -231,15 +217,15 @@ export default function FeedbackPage() {
       )}
 
       {error && (
-        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #DC2626`, color: 'var(--terra, #DC2626)' }}>
+        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626', color: 'var(--terra, #DC2626)' }}>
           {error}
         </div>
       )}
 
       {/* Infos voyage */}
-      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
-        <h2 className="text-lg font-bold mb-4" style={{ color: C.navy }}>Votre Voyage</h2>
-        <div className="space-y-2" style={{ color: C.navy }}>
+      <div className="mb-8 rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Votre Voyage</h2>
+        <div className="space-y-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
           <p>
             <span className="font-medium">Titre:</span> {booking?.travel?.title}
           </p>
@@ -253,15 +239,15 @@ export default function FeedbackPage() {
       </div>
 
       {/* Formulaire */}
-      <form onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: `1.5px solid ${C.border}` }}>
-        <h2 className="text-lg font-bold mb-6" style={{ color: C.navy }}>Vos Impressions</h2>
+      <form onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="text-lg font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Vos Impressions</h2>
 
         {/* Note globale */}
         <RatingStars rating={overallRating} onChange={setOverallRating} label="Note Globale" />
 
         {/* Notes par catégorie */}
-        <div className="pt-6 mt-6" style={{ borderTop: `1px solid ${C.border}` }}>
-          <h3 className="font-bold mb-6" style={{ color: C.navy }}>Détails par Catégorie</h3>
+        <div className="pt-6 mt-6" style={{ borderTop: '1px solid #E5E0D8' }}>
+          <h3 className="font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Détails par Catégorie</h3>
 
           <RatingStars
             rating={transportRating}
@@ -287,7 +273,7 @@ export default function FeedbackPage() {
 
         {/* Commentaire */}
         <div className="mt-6">
-          <label className="block text-sm font-medium mb-2" style={{ color: C.navy }}>
+          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Votre Commentaire
           </label>
           <textarea
@@ -297,21 +283,21 @@ export default function FeedbackPage() {
             className="w-full px-4 py-3 rounded-lg"
             style={{
               backgroundColor: 'white',
-              border: `1.5px solid ${C.border}`,
-              color: C.navy,
+              border: '1.5px solid #E5E0D8',
+              color: 'var(--navy, #1A1A2E)',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = C.terra;
-              e.currentTarget.style.boxShadow = `0 0 0 3px ${C.terraSoft}`;
+              e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+              e.currentTarget.style.boxShadow = `0 0 0 3px ${'var(--terra, #C75B39)'Soft}`;
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = C.border;
+              e.currentTarget.style.borderColor = '#E5E0D8';
               e.currentTarget.style.boxShadow = 'none';
             }}
             rows={6}
             maxLength={1000}
           />
-          <p className="text-xs mt-1" style={{ color: C.muted }}>
+          <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
             {comment.length}/1000 caractères
           </p>
         </div>
@@ -323,16 +309,16 @@ export default function FeedbackPage() {
             disabled={submitting}
             className="flex-1 px-6 py-3 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg"
             style={{
-              backgroundColor: C.terra,
+              backgroundColor: 'var(--terra, #C75B39)',
             }}
             onMouseEnter={(e) => {
               if (!submitting) {
-                e.currentTarget.style.backgroundColor = C.terraLight;
-                e.currentTarget.style.boxShadow = `0 8px 16px ${C.terraSoft}`;
+                e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.boxShadow = `0 8px 16px ${'var(--terra, #C75B39)'Soft}`;
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = C.terra;
+              e.currentTarget.style.backgroundColor = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -343,8 +329,8 @@ export default function FeedbackPage() {
             onClick={() => router.back()}
             className="px-6 py-3 rounded-lg font-medium transition-all hover:opacity-80"
             style={{
-              backgroundColor: C.border,
-              color: C.navy,
+              backgroundColor: '#E5E0D8',
+              color: 'var(--navy, #1A1A2E)',
             }}
           >
             Annuler
@@ -353,7 +339,7 @@ export default function FeedbackPage() {
       </form>
 
       {/* Note */}
-      <p className="text-xs mt-6 text-center" style={{ color: C.muted }}>
+      <p className="text-xs mt-6 text-center" style={{ color: '#6B7280' }}>
         Vos avis nous aident à offrir une meilleure expérience à tous nos clients.
         Merci de votre retour!
       </p>

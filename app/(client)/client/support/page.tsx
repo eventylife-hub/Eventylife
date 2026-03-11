@@ -8,20 +8,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Ticket {
   id: string;
   subject: string;
@@ -46,15 +32,15 @@ const statusLabels: Record<string, string> = {
 
 const statusBadgeStyle: Record<string, { background: string; color: string }> = {
   OPEN: { background: '#EFF6FF', color: '#0369A1' },
-  IN_PROGRESS: { background: C.goldSoft, color: '#92400e' },
+  IN_PROGRESS: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
   WAITING_CLIENT: { background: '#FEF3C7', color: '#92400e' },
-  RESOLVED: { background: C.forestBg, color: C.forest },
+  RESOLVED: { background: '#DCFCE7', color: '#166534' },
   CLOSED: { background: '#F3F4F6', color: '#4B5563' },
 };
 
 const priorityBadgeStyle: Record<string, { background: string; color: string }> = {
   LOW: { background: '#EFF6FF', color: '#0369A1' },
-  MEDIUM: { background: C.goldSoft, color: '#92400e' },
+  MEDIUM: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' },
   HIGH: { background: '#FEF3C7', color: '#92400e' },
   URGENT: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
 };
@@ -181,18 +167,18 @@ export default function SupportPage() {
   if (state === 'error') {
     return (
       <div className="max-w-4xl mx-auto animate-fade-up">
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
           <button
             onClick={fetchTickets}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -208,8 +194,8 @@ export default function SupportPage() {
       {/* En-tête */}
       <div className="flex justify-between items-start gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Support</h1>
-          <p className="text-sm mt-2" style={{ color: C.muted }}>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Support</h1>
+          <p className="text-sm mt-2" style={{ color: '#6B7280' }}>
             Besoin d&apos;aide ? Créez un ticket et notre équipe vous répondra rapidement.
           </p>
         </div>
@@ -217,13 +203,13 @@ export default function SupportPage() {
           <button
             onClick={() => setShowForm(true)}
             className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -237,9 +223,9 @@ export default function SupportPage() {
         <div
           className="p-6 rounded-2xl text-sm"
           style={{
-            background: submitMessage.type === 'success' ? C.forestBg : 'var(--terra-soft, #FEF2F2)',
-            border: `1.5px solid ${submitMessage.type === 'success' ? C.forest : '#FCA5A5'}`,
-            color: submitMessage.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
+            background: submitMessage.type === 'success' ? '#DCFCE7' : 'var(--terra-soft, #FEF2F2)',
+            border: `1.5px solid ${submitMessage.type === 'success' ? '#166534' : '#FCA5A5'}`,
+            color: submitMessage.type === 'success' ? '#166534' : 'var(--terra, #DC2626)',
           }}
         >
           {submitMessage.text}
@@ -248,12 +234,12 @@ export default function SupportPage() {
 
       {/* Formulaire de création */}
       {showForm && (
-        <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-          <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Créer un ticket</h2>
+        <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+          <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Créer un ticket</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+              <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Sujet *
               </label>
               <input
@@ -266,16 +252,16 @@ export default function SupportPage() {
                 maxLength={200}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   background: '#fff',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                 }}
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   Catégorie
                 </label>
                 <select
@@ -283,9 +269,9 @@ export default function SupportPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                   style={{
-                    border: `1.5px solid ${C.border}`,
+                    border: '1.5px solid #E5E0D8',
                     background: '#fff',
-                    color: C.navy,
+                    color: 'var(--navy, #1A1A2E)',
                   }}
                 >
                   {Object.entries(categoryLabels).map(([value, label]) => (
@@ -297,7 +283,7 @@ export default function SupportPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                   Priorité
                 </label>
                 <select
@@ -305,9 +291,9 @@ export default function SupportPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, priority: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                   style={{
-                    border: `1.5px solid ${C.border}`,
+                    border: '1.5px solid #E5E0D8',
                     background: '#fff',
-                    color: C.navy,
+                    color: 'var(--navy, #1A1A2E)',
                   }}
                 >
                   {Object.entries(priorityLabels).map(([value, label]) => (
@@ -320,7 +306,7 @@ export default function SupportPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+              <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Message *
               </label>
               <textarea
@@ -333,12 +319,12 @@ export default function SupportPage() {
                 rows={5}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                   background: '#fff',
-                  color: C.navy,
+                  color: 'var(--navy, #1A1A2E)',
                 }}
               />
-              <p className="text-xs mt-1" style={{ color: C.muted }}>
+              <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
                 {formData.message.length}/5000 caractères
               </p>
             </div>
@@ -349,18 +335,18 @@ export default function SupportPage() {
                 disabled={submitting}
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{
-                  background: submitting ? C.muted : C.terra,
+                  background: submitting ? '#6B7280' : 'var(--terra, #C75B39)',
                   color: '#fff',
                   opacity: submitting ? 0.6 : 1,
                 }}
                 onMouseEnter={(e) => {
                   if (!submitting) {
-                    e.currentTarget.style.background = C.terraLight;
-                    e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                    e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = submitting ? C.muted : C.terra;
+                  e.currentTarget.style.background = submitting ? '#6B7280' : 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
@@ -372,11 +358,11 @@ export default function SupportPage() {
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{
                   background: '#fff',
-                  color: C.navy,
-                  border: `1.5px solid ${C.border}`,
+                  color: 'var(--navy, #1A1A2E)',
+                  border: '1.5px solid #E5E0D8',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = C.terraSoft;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = '#fff';
@@ -390,7 +376,7 @@ export default function SupportPage() {
       )}
 
       {/* Filtres */}
-      <div className="flex gap-2 flex-wrap" style={{ borderBottom: `1.5px solid ${C.border}`, paddingBottom: '16px' }}>
+      <div className="flex gap-2 flex-wrap" style={{ borderBottom: '1.5px solid #E5E0D8', paddingBottom: '16px' }}>
         {[
           { key: 'all', label: 'Tous', count: tickets.length },
           { key: 'open', label: 'Ouverts', count: tickets.filter((t) => !['RESOLVED', 'CLOSED'].includes(t.status)).length },
@@ -401,13 +387,13 @@ export default function SupportPage() {
             onClick={() => setFilter(f.key as typeof filter)}
             className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
-              background: filter === f.key ? C.terra : '#fff',
-              color: filter === f.key ? '#fff' : C.navy,
-              border: `1.5px solid ${filter === f.key ? C.terra : C.border}`,
+              background: filter === f.key ? 'var(--terra, #C75B39)' : '#fff',
+              color: filter === f.key ? '#fff' : 'var(--navy, #1A1A2E)',
+              border: `1.5px solid ${filter === f.key ? 'var(--terra, #C75B39)' : '#E5E0D8'}`,
             }}
             onMouseEnter={(e) => {
               if (filter !== f.key) {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }
             }}
             onMouseLeave={(e) => {
@@ -423,12 +409,12 @@ export default function SupportPage() {
 
       {/* Liste des tickets */}
       {filteredTickets.length === 0 ? (
-        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">💬</div>
-          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             {filter === 'all' ? 'Aucun ticket' : filter === 'open' ? 'Aucun ticket ouvert' : 'Aucun ticket résolu'}
           </h2>
-          <p className="text-sm mb-6" style={{ color: C.muted }}>
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
             {filter === 'all'
               ? 'Vous n\'avez pas encore créé de ticket'
               : 'Aucun ticket dans cette catégorie'}
@@ -437,13 +423,13 @@ export default function SupportPage() {
             <button
               onClick={() => setShowForm(true)}
               className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: C.terra, color: '#fff' }}
+              style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = C.terraLight;
-                e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = C.terra;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
@@ -459,7 +445,7 @@ export default function SupportPage() {
               className="rounded-2xl p-5 transition-all duration-300"
               style={{
                 background: '#fff',
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
@@ -473,11 +459,11 @@ export default function SupportPage() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold truncate" style={{ color: C.navy }}>
+                    <h3 className="font-semibold truncate" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {ticket.subject}
                     </h3>
                   </div>
-                  <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: C.muted }}>
+                  <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: '#6B7280' }}>
                     <span>{categoryLabels[ticket.category] || ticket.category}</span>
                     <span>·</span>
                     <span>Créé le {formatDateTime(ticket.createdAt)}</span>
@@ -513,7 +499,7 @@ export default function SupportPage() {
       )}
 
       {/* Info d'aide */}
-      <div className="rounded-2xl p-6" style={{ background: '#EFF6FF', border: `1.5px solid #DBEAFE` }}>
+      <div className="rounded-2xl p-6" style={{ background: '#EFF6FF', border: '1.5px solid #DBEAFE' }}>
         <h3 className="font-bold text-base mb-2" style={{ color: '#0369A1' }}>Besoin d&apos;aide urgente ?</h3>
         <p className="text-sm" style={{ color: '#0369A1' }}>
           Pour les urgences liées à un voyage en cours, contactez-nous directement au{' '}

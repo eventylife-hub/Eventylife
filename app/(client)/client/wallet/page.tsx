@@ -8,20 +8,6 @@
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface Transaction {
   id: string;
   type: 'CREDIT' | 'DEBIT' | 'REFUND' | 'VOUCHER';
@@ -49,10 +35,10 @@ const typeLabels: Record<Transaction['type'], string> = {
 };
 
 const typeBadgeStyle: Record<Transaction['type'], { background: string; color: string }> = {
-  CREDIT: { background: C.forestBg, color: C.forest },
+  CREDIT: { background: '#DCFCE7', color: '#166534' },
   DEBIT: { background: 'var(--terra-soft, #FEF2F2)', color: 'var(--terra, #DC2626)' },
   REFUND: { background: '#EFF6FF', color: '#0369A1' },
-  VOUCHER: { background: C.goldSoft, color: '#92400e' }
+  VOUCHER: { background: 'var(--gold, #D4A853)'Soft, color: '#92400e' }
 };
 
 export default function WalletPage() {
@@ -167,7 +153,7 @@ export default function WalletPage() {
           <div className="h-48 rounded-2xl skeleton" />
         </div>
 
-        <div className="rounded-2xl border p-6" style={{ background: '#fff', borderColor: C.border }}>
+        <div className="rounded-2xl border p-6" style={{ background: '#fff', borderColor: '#E5E0D8' }}>
           <div className="h-8 w-32 rounded-2xl skeleton mb-4" />
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="h-16 rounded-2xl skeleton mb-2" />
@@ -180,18 +166,18 @@ export default function WalletPage() {
   if (state === 'error') {
     return (
       <div className="max-w-6xl mx-auto animate-fade-up">
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium mb-4" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ Erreur : {error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2.5 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -210,32 +196,32 @@ export default function WalletPage() {
     <div className="max-w-6xl mx-auto space-y-6 animate-fade-up">
       {/* Header */}
       <div>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mon portefeuille</h1>
-        <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos crédits et historique de transactions</p>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Mon portefeuille</h1>
+        <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Gérez vos crédits et historique de transactions</p>
       </div>
 
       {/* Balance Card */}
-      <div className="rounded-2xl p-8" style={{ background: `linear-gradient(135deg, ${C.goldSoft}, ${C.cream})`, border: `1.5px solid ${C.border}` }}>
-        <p className="text-sm mb-2" style={{ color: C.muted }}>Solde disponible</p>
-        <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: C.gold }}>
+      <div className="rounded-2xl p-8" style={{ background: `linear-gradient(135deg, ${'var(--gold, #D4A853)'Soft}, var(--cream, #FAF7F2))`, border: '1.5px solid #E5E0D8' }}>
+        <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Solde disponible</p>
+        <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: 'var(--gold, #D4A853)' }}>
           {formatPrice(wallet.balanceCents)}
         </h2>
 
         <div className="grid md:grid-cols-3 gap-4">
           <div>
-            <p className="text-xs mb-1" style={{ color: C.muted }}>Total crédité</p>
-            <p className="text-xl font-bold" style={{ color: C.forest }}>
+            <p className="text-xs mb-1" style={{ color: '#6B7280' }}>Total crédité</p>
+            <p className="text-xl font-bold" style={{ color: '#166534' }}>
               {formatPrice(wallet.totalCreditsCents)}
             </p>
           </div>
           <div>
-            <p className="text-xs mb-1" style={{ color: C.muted }}>Total dépensé</p>
+            <p className="text-xs mb-1" style={{ color: '#6B7280' }}>Total dépensé</p>
             <p className="text-xl font-bold" style={{ color: 'var(--terra, #DC2626)' }}>
               {formatPrice(wallet.totalDebitsCents)}
             </p>
           </div>
           <div>
-            <p className="text-xs mb-1" style={{ color: C.muted }}>Total remboursé</p>
+            <p className="text-xs mb-1" style={{ color: '#6B7280' }}>Total remboursé</p>
             <p className="text-xl font-bold" style={{ color: '#0369A1' }}>
               {formatPrice(wallet.totalRefundsCents)}
             </p>
@@ -244,8 +230,8 @@ export default function WalletPage() {
       </div>
 
       {/* Voucher Input */}
-      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-        <h3 className="font-bold text-base mb-4" style={{ color: C.navy }}>Appliquer un voucher</h3>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+        <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Appliquer un voucher</h3>
         <form onSubmit={handleRedeemVoucher} className="flex gap-3 flex-wrap">
           <input
             type="text"
@@ -255,9 +241,9 @@ export default function WalletPage() {
             disabled={voucherLoading}
             className="flex-1 min-w-48 px-4 py-2 rounded-xl text-sm transition-all"
             style={{
-              border: `1.5px solid ${C.border}`,
+              border: '1.5px solid #E5E0D8',
               background: '#fff',
-              color: C.navy,
+              color: 'var(--navy, #1A1A2E)',
             }}
           />
           <button
@@ -265,18 +251,18 @@ export default function WalletPage() {
             disabled={voucherLoading || !voucherCode.trim()}
             className="px-6 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
-              background: voucherLoading || !voucherCode.trim() ? C.muted : C.terra,
+              background: voucherLoading || !voucherCode.trim() ? '#6B7280' : 'var(--terra, #C75B39)',
               color: '#fff',
               opacity: voucherLoading || !voucherCode.trim() ? 0.6 : 1,
             }}
             onMouseEnter={(e) => {
               if (!voucherLoading && voucherCode.trim()) {
-                e.currentTarget.style.background = C.terraLight;
-                e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = voucherLoading || !voucherCode.trim() ? C.muted : C.terra;
+              e.currentTarget.style.background = voucherLoading || !voucherCode.trim() ? '#6B7280' : 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -288,9 +274,9 @@ export default function WalletPage() {
           <div
             className="mt-3 p-3 rounded-xl text-sm"
             style={{
-              background: voucherMessage.type === 'success' ? C.forestBg : 'var(--terra-soft, #FEF2F2)',
-              border: `1.5px solid ${voucherMessage.type === 'success' ? C.forest : '#FCA5A5'}`,
-              color: voucherMessage.type === 'success' ? C.forest : 'var(--terra, #DC2626)',
+              background: voucherMessage.type === 'success' ? '#DCFCE7' : 'var(--terra-soft, #FEF2F2)',
+              border: `1.5px solid ${voucherMessage.type === 'success' ? '#166534' : '#FCA5A5'}`,
+              color: voucherMessage.type === 'success' ? '#166534' : 'var(--terra, #DC2626)',
             }}
           >
             {voucherMessage.text}
@@ -299,13 +285,13 @@ export default function WalletPage() {
       </div>
 
       {/* Transactions Filters & List */}
-      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-        <h3 className="font-bold text-base mb-4" style={{ color: C.navy }}>Historique des transactions</h3>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+        <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Historique des transactions</h3>
 
         {/* Filters */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+            <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Type de transaction
             </label>
             <select
@@ -313,9 +299,9 @@ export default function WalletPage() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTypeFilter((e.target as HTMLInputElement).value as typeof typeFilter)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 background: '#fff',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
               }}
             >
               <option value="all">Toutes</option>
@@ -327,7 +313,7 @@ export default function WalletPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+            <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
               À partir du
             </label>
             <input
@@ -336,15 +322,15 @@ export default function WalletPage() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateFrom((e.target as HTMLInputElement).value)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 background: '#fff',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
               }}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ color: C.navy }}>
+            <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Jusqu'au
             </label>
             <input
@@ -353,9 +339,9 @@ export default function WalletPage() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateTo((e.target as HTMLInputElement).value)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
-                border: `1.5px solid ${C.border}`,
+                border: '1.5px solid #E5E0D8',
                 background: '#fff',
-                color: C.navy,
+                color: 'var(--navy, #1A1A2E)',
               }}
             />
           </div>
@@ -367,8 +353,8 @@ export default function WalletPage() {
             className="mb-6 px-4 py-2 rounded-xl font-semibold text-sm transition-all"
             style={{
               background: '#fff',
-              color: C.navy,
-              border: `1.5px solid ${C.border}`,
+              color: 'var(--navy, #1A1A2E)',
+              border: '1.5px solid #E5E0D8',
             }}
             onClick={() => {
               setTypeFilter('all');
@@ -376,7 +362,7 @@ export default function WalletPage() {
               setDateTo('');
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraSoft;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';
@@ -390,13 +376,13 @@ export default function WalletPage() {
         <div className="overflow-x-auto">
           {filteredTransactions.length > 0 ? (
             <table className="w-full text-sm">
-              <thead style={{ background: C.cream, borderBottom: `1.5px solid ${C.border}` }}>
+              <thead style={{ background: 'var(--cream, #FAF7F2)', borderBottom: '1.5px solid #E5E0D8' }}>
                 <tr>
-                  <th className="text-left py-4 px-4 font-bold" style={{ color: C.navy }}>Date</th>
-                  <th className="text-left py-4 px-4 font-bold" style={{ color: C.navy }}>Type</th>
-                  <th className="text-left py-4 px-4 font-bold" style={{ color: C.navy }}>Description</th>
-                  <th className="text-right py-4 px-4 font-bold" style={{ color: C.navy }}>Montant</th>
-                  <th className="text-right py-4 px-4 font-bold" style={{ color: C.navy }}>Solde après</th>
+                  <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>
+                  <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Type</th>
+                  <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>
+                  <th className="text-right py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant</th>
+                  <th className="text-right py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Solde après</th>
                 </tr>
               </thead>
               <tbody>
@@ -404,16 +390,16 @@ export default function WalletPage() {
                   <tr
                     key={transaction.id}
                     style={{
-                      borderBottom: index < filteredTransactions.length - 1 ? `1px solid ${C.border}` : 'none',
+                      borderBottom: index < filteredTransactions.length - 1 ? '1px solid #E5E0D8' : 'none',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = C.cream;
+                      e.currentTarget.style.background = 'var(--cream, #FAF7F2)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background = '#fff';
                     }}
                   >
-                    <td className="py-4 px-4" style={{ color: C.navy }}>
+                    <td className="py-4 px-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {formatDate(transaction.createdAt)}
                     </td>
                     <td className="py-4 px-4">
@@ -424,19 +410,19 @@ export default function WalletPage() {
                         {typeLabels[transaction.type]}
                       </span>
                     </td>
-                    <td className="py-4 px-4" style={{ color: C.navy }}>
+                    <td className="py-4 px-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {transaction.description}
                     </td>
                     <td
                       className="py-4 px-4 text-right font-semibold"
                       style={{
-                        color: transaction.type === 'DEBIT' ? 'var(--terra, #DC2626)' : C.forest,
+                        color: transaction.type === 'DEBIT' ? 'var(--terra, #DC2626)' : '#166534',
                       }}
                     >
                       {transaction.type === 'DEBIT' ? '-' : '+'}
                       {formatPrice(Math.abs(transaction.amountCents))}
                     </td>
-                    <td className="py-4 px-4 text-right" style={{ color: C.navy }}>
+                    <td className="py-4 px-4 text-right" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {formatPrice(transaction.balanceAfterCents)}
                     </td>
                   </tr>
@@ -445,7 +431,7 @@ export default function WalletPage() {
             </table>
           ) : (
             <div className="text-center py-8">
-              <p style={{ color: C.muted }}>Aucune transaction pour ces critères.</p>
+              <p style={{ color: '#6B7280' }}>Aucune transaction pour ces critères.</p>
             </div>
           )}
         </div>

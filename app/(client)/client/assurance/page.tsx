@@ -2,20 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 /**
  * Page Mes Assurances - Vue client
  *
@@ -83,10 +69,10 @@ export default function AssurancePage() {
     return (
       <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
         <div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Mes assurances
           </h1>
-          <p className="text-sm mt-2" style={{ color: C.muted }}>
+          <p className="text-sm mt-2" style={{ color: '#6B7280' }}>
             Gestion de vos assurances voyages
           </p>
         </div>
@@ -103,10 +89,10 @@ export default function AssurancePage() {
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
       {/* En-tête */}
       <div>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>
           Mes assurances
         </h1>
-        <p className="text-sm mt-2" style={{ color: C.muted }}>
+        <p className="text-sm mt-2" style={{ color: '#6B7280' }}>
           Gestion de vos assurances voyages
         </p>
       </div>
@@ -143,24 +129,24 @@ export default function AssurancePage() {
 
       {/* État vide */}
       {insurances.length === 0 ? (
-        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+        <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">🛡️</div>
-          <h2 className="font-display text-xl font-bold mb-2" style={{ color: C.navy }}>
+          <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Aucune assurance souscrite
           </h2>
-          <p className="text-sm mb-6" style={{ color: C.muted }}>
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
             Protégez vos voyages avec une assurance annulation
           </p>
           <button
             onClick={() => (window.location.href = '/client/reservations')}
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-            style={{ background: C.terra, color: '#fff' }}
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraLight;
-              e.currentTarget.style.boxShadow = `0 6px 24px ${C.terra}30`;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+              e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = C.terra;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -171,8 +157,8 @@ export default function AssurancePage() {
         <div className="space-y-4">
           {insurances.map((insurance) => {
             const statusBadgeStyle = {
-              background: insurance?.status === 'CONFIRMED' ? C.forestBg : C.goldSoft,
-              color: insurance?.status === 'CONFIRMED' ? C.forest : '#92400e',
+              background: insurance?.status === 'CONFIRMED' ? '#DCFCE7' : 'var(--gold, #D4A853)'Soft,
+              color: insurance?.status === 'CONFIRMED' ? '#166534' : '#92400e',
             };
 
             return (
@@ -181,7 +167,7 @@ export default function AssurancePage() {
                 className="rounded-2xl p-6 transition-all duration-300"
                 style={{
                   background: '#fff',
-                  border: `1.5px solid ${C.border}`,
+                  border: '1.5px solid #E5E0D8',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow = '0 8px 28px rgba(26,26,46,0.08)';
@@ -194,10 +180,10 @@ export default function AssurancePage() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="font-bold text-base" style={{ color: C.navy }}>
+                    <h3 className="font-bold text-base" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       Assurance #{(insurance?.subscriptionId as string)?.slice(-8)}
                     </h3>
-                    <p className="text-sm mt-1" style={{ color: C.muted }}>
+                    <p className="text-sm mt-1" style={{ color: '#6B7280' }}>
                       Souscrite le {formatDate(insurance?.subscribedAt as string | Date)}
                     </p>
                   </div>
@@ -209,10 +195,10 @@ export default function AssurancePage() {
                   </span>
                 </div>
 
-                <div className="space-y-4 border-t" style={{ borderColor: C.border, paddingTop: '16px' }}>
+                <div className="space-y-4 border-t" style={{ borderColor: '#E5E0D8', paddingTop: '16px' }}>
                   <div className="flex justify-between items-center">
-                    <span style={{ color: C.muted }}>Montant</span>
-                    <span className="font-semibold" style={{ color: C.navy }}>
+                    <span style={{ color: '#6B7280' }}>Montant</span>
+                    <span className="font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>
                       {formatPrice(insurance?.insuranceAmountTTC as number)}
                     </span>
                   </div>
@@ -223,14 +209,14 @@ export default function AssurancePage() {
                     className="w-full px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                     style={{
                       background: '#fff',
-                      color: C.terra,
-                      border: `1.5px solid ${C.border}`,
+                      color: 'var(--terra, #C75B39)',
+                      border: '1.5px solid #E5E0D8',
                       opacity: downloadingId === (insurance?.subscriptionId as string) ? 0.6 : 1,
                       cursor: downloadingId === (insurance?.subscriptionId as string) ? 'not-allowed' : 'pointer',
                     }}
                     onMouseEnter={(e) => {
                       if (downloadingId !== (insurance?.subscriptionId as string)) {
-                        e.currentTarget.style.background = C.terraSoft;
+                        e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
                       }
                     }}
                     onMouseLeave={(e) => {

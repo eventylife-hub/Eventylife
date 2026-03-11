@@ -1,20 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-const C = {
-  navy: '#1A1A2E',
-  cream: '#FAF7F2',
-  terra: '#C75B39',
-  terraLight: '#D97B5E',
-  terraSoft: 'var(--terra-soft)',
-  gold: '#D4A853',
-  goldSoft: '#FDF6E8',
-  border: '#E5E0D8',
-  muted: '#6B7280',
-  forest: '#166534',
-  forestBg: '#DCFCE7',
-};
-
 interface ProfileData {
   id: string;
   email: string;
@@ -301,30 +287,30 @@ export default function ProfilePage() {
     <div className="max-w-2xl mx-auto space-y-8 animate-fade-up">
       {/* En-tête */}
       <div>
-        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: C.navy }}>Mon Profil</h1>
-        <p className="text-sm mt-2" style={{ color: C.muted }}>Gérez vos informations personnelles</p>
+        <h1 className="font-display text-2xl sm:text-3xl font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Mon Profil</h1>
+        <p className="text-sm mt-2" style={{ color: '#6B7280' }}>Gérez vos informations personnelles</p>
       </div>
 
       {/* Messages */}
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5` }}>
+        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
           <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
         </div>
       )}
       {success && (
-        <div className="p-6 rounded-2xl" style={{ background: C.forestBg, border: `1.5px solid ${C.forest}` }}>
-          <p className="text-sm font-medium" style={{ color: C.forest }}>✓ Profil mis à jour avec succès!</p>
+        <div className="p-6 rounded-2xl" style={{ background: '#DCFCE7', border: `1.5px solid ${'#166534'}` }}>
+          <p className="text-sm font-medium" style={{ color: '#166534' }}>✓ Profil mis à jour avec succès!</p>
         </div>
       )}
 
       {/* Formulaire principal */}
-      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-        <h2 className="font-bold text-base mb-6" style={{ color: C.navy }}>Informations personnelles</h2>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="font-bold text-base mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Informations personnelles</h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email (lecture seule) */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
+            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Adresse email
             </label>
             <input
@@ -332,16 +318,16 @@ export default function ProfilePage() {
               value={profile.email}
               disabled
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: C.cream, border: `1.5px solid ${C.border}`, color: C.muted }}
+              style={{ background: 'var(--cream, #FAF7F2)', border: '1.5px solid #E5E0D8', color: '#6B7280' }}
             />
-            <p className="text-xs mt-2" style={{ color: C.muted }}>
+            <p className="text-xs mt-2" style={{ color: '#6B7280' }}>
               Votre email ne peut pas être modifié
             </p>
           </div>
 
           {/* Prénom */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
+            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Prénom
             </label>
             <input
@@ -349,20 +335,20 @@ export default function ProfilePage() {
               value={form.firstName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, firstName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+              style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
               placeholder="Votre prénom"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.borderColor = '#E5E0D8';
               }}
             />
           </div>
 
           {/* Nom */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
+            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Nom
             </label>
             <input
@@ -370,20 +356,20 @@ export default function ProfilePage() {
               value={form.lastName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, lastName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+              style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
               placeholder="Votre nom"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.borderColor = '#E5E0D8';
               }}
             />
           </div>
 
           {/* Téléphone */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>
+            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Téléphone
             </label>
             <input
@@ -391,13 +377,13 @@ export default function ProfilePage() {
               value={form.phone}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+              style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
               placeholder="+33 6 XX XX XX XX"
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = C.terra;
+                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.borderColor = '#E5E0D8';
               }}
             />
           </div>
@@ -408,16 +394,16 @@ export default function ProfilePage() {
               type="submit"
               disabled={saving}
               className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: C.terra, color: '#fff', opacity: saving ? 0.6 : 1 }}
+              style={{ background: 'var(--terra, #C75B39)', color: '#fff', opacity: saving ? 0.6 : 1 }}
               onMouseEnter={(e) => {
                 if (!saving) {
-                  e.currentTarget.style.background = C.terraLight;
-                  e.currentTarget.style.boxShadow = `0 4px 12px ${C.terra}40`;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
+                  e.currentTarget.style.boxShadow = `0 4px 12px var(--terra, #C75B39)40`;
                 }
               }}
               onMouseLeave={(e) => {
                 if (!saving) {
-                  e.currentTarget.style.background = C.terra;
+                  e.currentTarget.style.background = 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = 'none';
                 }
               }}
@@ -436,9 +422,9 @@ export default function ProfilePage() {
                 }
               }}
               className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
-              style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+              style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = '#fff';
@@ -451,16 +437,16 @@ export default function ProfilePage() {
       </div>
 
       {/* Section sécurité */}
-      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-        <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>Sécurité</h2>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Sécurité</h2>
 
         <div className="space-y-3">
           <button
             onClick={() => setShowPasswordModal(true)}
             className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
-            style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+            style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = C.terraSoft;
+              e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';
@@ -472,10 +458,10 @@ export default function ProfilePage() {
             onClick={twoFAEnabled ? handleDisable2FA : handleInit2FA}
             disabled={enabling2FA}
             className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
-            style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}`, opacity: enabling2FA ? 0.6 : 1 }}
+            style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', opacity: enabling2FA ? 0.6 : 1 }}
             onMouseEnter={(e) => {
               if (!enabling2FA) {
-                e.currentTarget.style.background = C.terraSoft;
+                e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
               }
             }}
             onMouseLeave={(e) => {
@@ -491,7 +477,7 @@ export default function ProfilePage() {
                 : 'Activer l\'authentification à deux facteurs'}
           </button>
           {twoFAEnabled && (
-            <p className="text-xs font-medium" style={{ color: C.forest }}>✓ 2FA activé</p>
+            <p className="text-xs font-medium" style={{ color: '#166534' }}>✓ 2FA activé</p>
           )}
         </div>
       </div>
@@ -500,68 +486,68 @@ export default function ProfilePage() {
       {showPasswordModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
-            <h3 className="font-bold text-base mb-4" style={{ color: C.navy }}>Changer mon mot de passe</h3>
+            <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Changer mon mot de passe</h3>
 
             {passwordError && (
-              <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: 'var(--terra-soft, #FEF2F2)', border: `1.5px solid #FCA5A5`, color: 'var(--terra, #DC2626)' }}>
+              <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5', color: 'var(--terra, #DC2626)' }}>
                 {passwordError}
               </div>
             )}
             {passwordSuccess && (
-              <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: C.forestBg, border: `1.5px solid ${C.forest}`, color: C.forest }}>
+              <div className="mb-4 p-3 rounded-xl text-xs" style={{ background: '#DCFCE7', border: `1.5px solid ${'#166534'}`, color: '#166534' }}>
                 Mot de passe modifié avec succès !
               </div>
             )}
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Mot de passe actuel</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Mot de passe actuel</label>
                 <input
                   type="password"
                   value={passwordForm.currentPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, currentPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.borderColor = '#E5E0D8';
                   }}
                   required
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Nouveau mot de passe</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Nouveau mot de passe</label>
                 <input
                   type="password"
                   value={passwordForm.newPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, newPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.borderColor = '#E5E0D8';
                   }}
                   required
                   minLength={8}
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Confirmer le mot de passe</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Confirmer le mot de passe</label>
                 <input
                   type="password"
                   value={passwordForm.confirmPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, confirmPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy }}
+                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.borderColor = '#E5E0D8';
                   }}
                   required
                   minLength={8}
@@ -572,15 +558,15 @@ export default function ProfilePage() {
                   type="submit"
                   disabled={changingPassword}
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
-                  style={{ background: C.terra, color: '#fff', opacity: changingPassword ? 0.6 : 1 }}
+                  style={{ background: 'var(--terra, #C75B39)', color: '#fff', opacity: changingPassword ? 0.6 : 1 }}
                   onMouseEnter={(e) => {
                     if (!changingPassword) {
-                      e.currentTarget.style.background = C.terraLight;
+                      e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!changingPassword) {
-                      e.currentTarget.style.background = C.terra;
+                      e.currentTarget.style.background = 'var(--terra, #C75B39)';
                     }
                   }}
                 >
@@ -594,9 +580,9 @@ export default function ProfilePage() {
                     setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
                   }}
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
-                  style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+                  style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = C.terraSoft;
+                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = '#fff';
@@ -614,41 +600,41 @@ export default function ProfilePage() {
       {show2FAModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
-            <h3 className="font-bold text-base mb-4" style={{ color: C.navy }}>Configurer la double authentification</h3>
+            <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Configurer la double authentification</h3>
 
             <div className="space-y-4">
-              <p className="text-xs" style={{ color: C.muted }}>
+              <p className="text-xs" style={{ color: '#6B7280' }}>
                 Scannez ce QR code avec votre application d'authentification (Google Authenticator, Authy, etc.)
               </p>
 
               {twoFAQrUrl && (
-                <div className="flex justify-center p-4 rounded-xl" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
+                <div className="flex justify-center p-4 rounded-xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element -- QR code is a data URL, next/image incompatible */}
                   <img src={twoFAQrUrl} alt="QR Code 2FA" className="w-48 h-48" />
                 </div>
               )}
 
               {twoFASecret && (
-                <div className="p-3 rounded-xl" style={{ background: C.cream }}>
-                  <p className="text-xs mb-1" style={{ color: C.muted }}>Clé secrète (saisie manuelle) :</p>
-                  <p className="text-xs font-mono font-bold" style={{ color: C.navy, wordBreak: 'break-all' }}>{twoFASecret}</p>
+                <div className="p-3 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
+                  <p className="text-xs mb-1" style={{ color: '#6B7280' }}>Clé secrète (saisie manuelle) :</p>
+                  <p className="text-xs font-mono font-bold" style={{ color: 'var(--navy, #1A1A2E)', wordBreak: 'break-all' }}>{twoFASecret}</p>
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: C.navy }}>Code de vérification</label>
+                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Code de vérification</label>
                 <input
                   type="text"
                   value={twoFACode}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTwoFACode((e.target as HTMLInputElement).value.replace(/\D/g, '').slice(0, 6))}
                   placeholder="123456"
                   className="w-full px-4 py-3 rounded-xl text-sm text-center transition-all"
-                  style={{ background: '#fff', border: `1.5px solid ${C.border}`, color: C.navy, letterSpacing: '0.1em', fontSize: '1.125rem' }}
+                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)', letterSpacing: '0.1em', fontSize: '1.125rem' }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = C.terra;
+                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.borderColor = '#E5E0D8';
                   }}
                   maxLength={6}
                 />
@@ -659,15 +645,15 @@ export default function ProfilePage() {
                   onClick={handleVerify2FA}
                   disabled={enabling2FA || twoFACode.length !== 6}
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
-                  style={{ background: C.terra, color: '#fff', opacity: enabling2FA || twoFACode.length !== 6 ? 0.6 : 1 }}
+                  style={{ background: 'var(--terra, #C75B39)', color: '#fff', opacity: enabling2FA || twoFACode.length !== 6 ? 0.6 : 1 }}
                   onMouseEnter={(e) => {
                     if (!enabling2FA && twoFACode.length === 6) {
-                      e.currentTarget.style.background = C.terraLight;
+                      e.currentTarget.style.background = 'var(--terra, #C75B39)'Light;
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!enabling2FA && twoFACode.length === 6) {
-                      e.currentTarget.style.background = C.terra;
+                      e.currentTarget.style.background = 'var(--terra, #C75B39)';
                     }
                   }}
                 >
@@ -679,9 +665,9 @@ export default function ProfilePage() {
                     setTwoFACode('');
                   }}
                   className="flex-1 px-4 py-3 rounded-xl font-semibold text-sm transition-all"
-                  style={{ background: '#fff', color: C.navy, border: `1.5px solid ${C.border}` }}
+                  style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = C.terraSoft;
+                    e.currentTarget.style.background = 'var(--terra, #C75B39)'Soft;
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = '#fff';
@@ -696,17 +682,17 @@ export default function ProfilePage() {
       )}
 
       {/* Section préférences */}
-      <div className="rounded-2xl p-6" style={{ background: '#fff', border: `1.5px solid ${C.border}` }}>
-        <h2 className="font-bold text-base mb-4" style={{ color: C.navy }}>
+      <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
+        <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
           Préférences
           {savingPreferences && (
-            <span className="ml-2 text-xs font-normal" style={{ color: C.muted }}>Sauvegarde...</span>
+            <span className="ml-2 text-xs font-normal" style={{ color: '#6B7280' }}>Sauvegarde...</span>
           )}
         </h2>
 
         <div className="space-y-3">
-          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: C.cream }}>
-            <label className="font-semibold text-sm" style={{ color: C.navy }}>
+          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
+            <label className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Notifications par email
             </label>
             <input
@@ -714,12 +700,12 @@ export default function ProfilePage() {
               checked={preferences.emailNotifications}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('emailNotifications', (e.target as HTMLInputElement).checked)}
               className="w-5 h-5 rounded cursor-pointer"
-              style={{ accentColor: C.terra }}
+              style={{ accentColor: 'var(--terra, #C75B39)' }}
             />
           </div>
 
-          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: C.cream }}>
-            <label className="font-semibold text-sm" style={{ color: C.navy }}>
+          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
+            <label className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Mises à jour sur les promotions
             </label>
             <input
@@ -727,12 +713,12 @@ export default function ProfilePage() {
               checked={preferences.promotionUpdates}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('promotionUpdates', (e.target as HTMLInputElement).checked)}
               className="w-5 h-5 rounded cursor-pointer"
-              style={{ accentColor: C.terra }}
+              style={{ accentColor: 'var(--terra, #C75B39)' }}
             />
           </div>
 
-          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: C.cream }}>
-            <label className="font-semibold text-sm" style={{ color: C.navy }}>
+          <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
+            <label className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Partager mes données avec les partenaires
             </label>
             <input
@@ -740,7 +726,7 @@ export default function ProfilePage() {
               checked={preferences.shareDataWithPartners}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('shareDataWithPartners', (e.target as HTMLInputElement).checked)}
               className="w-5 h-5 rounded cursor-pointer"
-              style={{ accentColor: C.terra }}
+              style={{ accentColor: 'var(--terra, #C75B39)' }}
             />
           </div>
         </div>
