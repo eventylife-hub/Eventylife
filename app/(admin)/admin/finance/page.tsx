@@ -331,9 +331,10 @@ export default function FinancePage() {
             {loading ? (
               <div style={{ height: '200px', background: 'var(--admin-surface-alt)', borderRadius: '8px', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
             ) : payments.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '32px 16px', color: 'var(--admin-text-secondary)' }}>
+              <div style={{ textAlign: 'center', padding: '32px 16px' }}>
                 <CreditCard className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--admin-text-muted)' }} />
-                <p style={{ fontSize: '14px' }}>Aucun paiement récent</p>
+                <p style={{ fontSize: '14px', fontWeight: 500, color: 'var(--admin-text-primary)', marginBottom: '4px' }}>Aucun paiement récent</p>
+                <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)' }}>Les paiements reçus apparaîtront ici</p>
               </div>
             ) : (
               <div style={{ space: '8px' }}>
@@ -384,9 +385,10 @@ export default function FinancePage() {
             {loading ? (
               <div style={{ height: '200px', background: 'var(--admin-surface-alt)', borderRadius: '8px', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
             ) : refunds.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '32px 16px', color: 'var(--admin-text-secondary)' }}>
+              <div style={{ textAlign: 'center', padding: '32px 16px' }}>
                 <RotateCcw className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--admin-text-muted)' }} />
-                <p style={{ fontSize: '14px' }}>Aucun remboursement en attente</p>
+                <p style={{ fontSize: '14px', fontWeight: 500, color: 'var(--admin-text-primary)', marginBottom: '4px' }}>Aucun remboursement en attente</p>
+                <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)' }}>Les demandes de remboursement apparaîtront ici</p>
               </div>
             ) : (
               <div style={{ space: '8px' }}>

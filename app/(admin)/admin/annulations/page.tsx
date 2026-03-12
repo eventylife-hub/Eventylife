@@ -227,8 +227,10 @@ export default function CancellationsPage() {
       <div className="admin-panel">
         <div className="admin-panel-body">
           {cancellations.length === 0 ? (
-            <div className="text-center py-12" style={{ color: 'var(--admin-text-secondary)' }}>
-              Aucune annulation pour ce filtre
+            <div className="text-center py-12">
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🚫</div>
+              <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucune annulation pour ce filtre</p>
+              <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>Modifiez les filtres pour voir d'autres résultats</p>
             </div>
           ) : (
             <div className="overflow-x-auto">

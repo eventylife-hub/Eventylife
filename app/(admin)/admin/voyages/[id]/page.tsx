@@ -427,8 +427,10 @@ export default function AdminVoyageDetailPage() {
                     )}
                   </>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <p className="text-sm">Aucune configuration de transport</p>
+                  <div className="text-center py-8">
+                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🚌</div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucune configuration de transport</p>
+                    <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>Le transport sera configuré par l'organisateur</p>
                   </div>
                 )}
               </div>
@@ -463,8 +465,10 @@ export default function AdminVoyageDetailPage() {
                     </div>
                   </>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <p className="text-sm">Aucun logement configuré</p>
+                  <div className="text-center py-8">
+                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🏨</div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucun logement configuré</p>
+                    <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>L'hébergement sera configuré par l'organisateur</p>
                   </div>
                 )}
               </div>
@@ -519,8 +523,10 @@ export default function AdminVoyageDetailPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <p className="text-sm">Aucun membre d&apos;équipe assigné</p>
+                  <div className="text-center py-8">
+                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>👥</div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucun membre d&apos;équipe assigné</p>
+                    <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>Les accompagnateurs seront assignés par l'organisateur</p>
                   </div>
                 )}
               </div>
@@ -552,8 +558,10 @@ export default function AdminVoyageDetailPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <p className="text-sm">Aucune modification enregistrée</p>
+                  <div className="text-center py-8">
+                    <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>📝</div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucune modification enregistrée</p>
+                    <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>L'historique des modifications apparaîtra ici</p>
                   </div>
                 )}
               </div>

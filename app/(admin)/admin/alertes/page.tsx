@@ -355,8 +355,10 @@ export default function AdminAlertesPage() {
               </div>
             </>
           ) : alerts.length === 0 ? (
-            <div className="text-center py-8" style={{ color: 'var(--admin-text-muted)' }}>
-              Aucune alerte trouvée
+            <div className="text-center py-8">
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>✅</div>
+              <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucune alerte</p>
+              <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>Tout est en ordre, aucune alerte ne correspond aux filtres</p>
             </div>
           ) : (
             <div className="space-y-3">

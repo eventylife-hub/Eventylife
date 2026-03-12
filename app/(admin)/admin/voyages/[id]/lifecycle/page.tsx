@@ -326,7 +326,11 @@ export default function TravelLifecyclePage() {
         </div>
         <div className="admin-panel-body p-6">
           {history.length === 0 ? (
-            <p className="text-gray-600">Aucune transition enregistrée</p>
+            <div style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🔄</div>
+              <p className="text-sm font-medium" style={{ color: 'var(--admin-text-primary)' }}>Aucune transition enregistrée</p>
+              <p className="text-xs mt-1" style={{ color: 'var(--admin-text-secondary)' }}>Les changements d'état du voyage apparaîtront ici</p>
+            </div>
           ) : (
             <div className="space-y-4">
               {history.map((entry: HistoryEntry, index: number) => (
