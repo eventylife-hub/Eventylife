@@ -43,6 +43,7 @@ export default function ComptesPage() {
   const [loading, setLoading] = useState(true);
   const [security, setSecurity] = useState<SecuritySettings | null>(null);
   const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSecuritySettings = async () => {
@@ -61,8 +62,10 @@ export default function ComptesPage() {
 
         setSecurity(secData);
         setApiKeys(Array.isArray(keysData) ? keysData as ApiKey[] : []);
+        setError(null);
       } catch {
         logger.warn('API sécurité indisponible — données démo');
+        setError('Erreur lors du chargement');
         setSecurity({
           id: 'sec_001',
           proId: 'pro_001',
@@ -120,6 +123,15 @@ export default function ComptesPage() {
           <h1 className="pro-page-title">Comptes & Sécurité</h1>
           <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez votre authentification et l&apos;accès à votre compte</p>
         </div>
+
+        {error && (
+          <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: 'var(--pro-coral)' }}>{error}</span>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Fermer
+            </button>
+          </div>
+        )}
 
         {/* Sécurité */}
         <div className="pro-panel">

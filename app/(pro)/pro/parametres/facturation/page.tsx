@@ -43,6 +43,7 @@ export default function FacturationPage() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<BillingSettings | null>(null);
   const [editable, setEditable] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -53,8 +54,10 @@ export default function FacturationPage() {
 
         const data = await res.json() as BillingSettings;
         setSettings(data);
+        setError(null);
       } catch {
         logger.warn('API facturation indisponible — données démo');
+        setError('Erreur lors du chargement');
         setSettings({
           id: 'bill_001',
           proId: 'pro_001',
@@ -103,6 +106,15 @@ export default function FacturationPage() {
           <h1 className="pro-page-title">Facturation</h1>
           <p style={{ color: '#64748B', marginTop: '8px' }}>Paramètres et coordonnées bancaires</p>
         </div>
+
+        {error && (
+          <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: 'var(--pro-coral)' }}>{error}</span>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Fermer
+            </button>
+          </div>
+        )}
 
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

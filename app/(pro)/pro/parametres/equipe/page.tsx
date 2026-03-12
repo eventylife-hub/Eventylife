@@ -44,6 +44,7 @@ export default function EquipePage() {
   const [team, setTeam] = useState<TeamSettings | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [newMemberEmail, setNewMemberEmail] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTeamSettings = async () => {
@@ -54,8 +55,10 @@ export default function EquipePage() {
 
         const data = await res.json() as TeamSettings;
         setTeam(data);
+        setError(null);
       } catch {
         logger.warn('API équipe indisponible — données démo');
+        setError('Erreur lors du chargement');
         setTeam({
           id: 'team_001',
           proId: 'pro_001',
@@ -157,6 +160,15 @@ export default function EquipePage() {
           <h1 className="pro-page-title">Équipe</h1>
           <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez les membres de votre équipe et leurs permissions</p>
         </div>
+
+        {error && (
+          <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: 'var(--pro-coral)' }}>{error}</span>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Fermer
+            </button>
+          </div>
+        )}
 
         {/* Résumé */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>

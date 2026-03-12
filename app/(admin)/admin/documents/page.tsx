@@ -254,9 +254,15 @@ export default function AdminDocumentsPage() {
         </div>
         <div className="admin-panel-body">
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '24px', color: 'var(--admin-text-secondary)' }}>
-              Chargement...
-            </div>
+            <>
+              <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ height: 40, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 60, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 60, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 60, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              </div>
+            </>
           ) : filteredDocuments.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '48px 24px', color: 'var(--admin-text-secondary)' }}>
               <FileText className="mx-auto h-12 w-12 mb-4" style={{ color: 'var(--admin-text-muted)' }} />

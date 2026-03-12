@@ -38,6 +38,7 @@ export default function ParametresPage() {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<ProProfile | null>(null);
   const [editable, setEditable] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -48,8 +49,10 @@ export default function ParametresPage() {
 
         const data = await res.json() as ProProfile;
         setProfile(data);
+        setError(null);
       } catch {
         logger.warn('API profil indisponible — données démo');
+        setError('Erreur lors du chargement');
         setProfile({
           id: 'pro_001',
           name: 'Agence Voyages Méditerranée',
@@ -93,6 +96,15 @@ export default function ParametresPage() {
           <h1 className="pro-page-title">Paramètres généraux</h1>
           <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez les informations de votre agence</p>
         </div>
+
+        {error && (
+          <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: 'var(--pro-coral)' }}>{error}</span>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Fermer
+            </button>
+          </div>
+        )}
 
         <div className="pro-panel">
           <div style={{ borderBottom: '1px solid #E0E0E0', paddingBottom: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

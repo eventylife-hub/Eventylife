@@ -41,6 +41,7 @@ interface NotificationPreferences {
 export default function NotificationsPage() {
   const [loading, setLoading] = useState(true);
   const [prefs, setPrefs] = useState<NotificationPreferences | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchNotificationPrefs = async () => {
@@ -51,8 +52,10 @@ export default function NotificationsPage() {
 
         const data = await res.json() as NotificationPreferences;
         setPrefs(data);
+        setError(null);
       } catch {
         logger.warn('API notifications indisponible — données démo');
+        setError('Erreur lors du chargement');
         setPrefs({
           id: 'notif_001',
           proId: 'pro_001',
@@ -109,6 +112,15 @@ export default function NotificationsPage() {
           <h1 className="pro-page-title">Notifications</h1>
           <p style={{ color: '#64748B', marginTop: '8px' }}>Gérez vos préférences de notifications</p>
         </div>
+
+        {error && (
+          <div style={{ padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: 'var(--pro-coral)' }}>{error}</span>
+            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Fermer
+            </button>
+          </div>
+        )}
 
         {/* Fréquence */}
         <div className="pro-panel">
