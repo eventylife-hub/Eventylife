@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { PortalErrorBoundary } from '@/components/error-boundary';
 import BackToTop from '@/components/ui/back-to-top';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -164,18 +165,24 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
       {/* Mobile sidebar overlay */}
       {mobileOpen && (
-        <>
+        <FocusTrap
+          onEscape={() => setMobileOpen(false)}
+          className="md:hidden"
+        >
           <div
-            className="md:hidden fixed inset-0 z-40 bg-black/40"
+            className="fixed inset-0 z-40 bg-black/40"
             onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
           />
           <aside
-            className="md:hidden fixed top-0 left-0 w-72 h-full z-50 flex flex-col animate-slide-in-right"
+            className="fixed top-0 left-0 w-72 h-full z-50 flex flex-col animate-slide-in-right"
             style={{ background: 'var(--navy, #1A1A2E)' }}
+            role="navigation"
+            aria-label="Menu mobile espace client"
           >
             <SidebarContent />
           </aside>
-        </>
+        </FocusTrap>
       )}
 
       {/* Main content */}
