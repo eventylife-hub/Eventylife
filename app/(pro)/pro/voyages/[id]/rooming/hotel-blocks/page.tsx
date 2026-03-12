@@ -201,7 +201,9 @@ export default function HotelBlocksPage() {
       {blocks.length === 0 ? (
         <div className="pro-panel">
           <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <p style={{ color: '#4A5568', marginBottom: '1rem', margin: 0 }}>Aucun bloc hôtel</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏢</div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun bloc hôtel</h3>
+            <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem', marginBottom: '1rem' }}>Ajoutez des blocs hôtel pour gérer l'hébergement</p>
             <button type="button" onClick={() => (window.location.href = `/pro/voyages/${travelId}`)} className="pro-btn-sun">
               Ajouter bloc
             </button>

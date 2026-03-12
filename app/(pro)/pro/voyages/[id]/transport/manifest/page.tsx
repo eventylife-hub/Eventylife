@@ -204,7 +204,9 @@ export default function ManifestPage() {
       {manifest.length === 0 ? (
         <div className="pro-panel">
           <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <p style={{ color: '#4A5568', margin: 0 }}>Aucun passager enregistré</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧳</div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun passager enregistré</h3>
+            <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Le manifeste des passagers apparaîtra ici une fois les réservations confirmées</p>
           </div>
         </div>
       ) : (

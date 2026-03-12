@@ -202,7 +202,9 @@ export default function TransportPage() {
           <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#0A1628' }}>Configuration Transport</h1>
           <div className="pro-panel">
             <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
-              <p style={{ color: '#4A5568', marginBottom: '1rem', margin: 0 }}>Aucune configuration transport</p>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🚌</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune configuration transport</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem', marginBottom: '1rem' }}>Configurez le mode de transport et les arrêts pour ce voyage</p>
               <button type="button" onClick={handleSave} className="pro-btn-sun">Créer configuration</button>
             </div>
           </div>
@@ -313,7 +315,11 @@ export default function TransportPage() {
         </div>
         <div className="pro-panel-body">
           {stops.length === 0 ? (
-            <p style={{ color: '#4A5568', textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem', margin: 0 }}>Aucun arrêt configuré</p>
+            <div style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>📍</div>
+              <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.25rem' }}>Aucun arrêt configuré</h4>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Les arrêts de route apparaîtront ici</p>
+            </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <StopMap stops={stops} />

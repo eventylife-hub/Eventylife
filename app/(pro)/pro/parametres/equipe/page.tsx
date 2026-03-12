@@ -307,7 +307,9 @@ export default function EquipePage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#64748B' }}>Aucun membre dans l&apos;équipe</p>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👥</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun membre dans l&apos;équipe</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Invitez des collaborateurs pour gérer vos voyages ensemble</p>
             </div>
           )}
         </div>

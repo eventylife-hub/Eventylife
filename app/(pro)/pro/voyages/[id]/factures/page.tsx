@@ -241,7 +241,11 @@ export default function InvoicesPage() {
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0A1628', marginBottom: '1.5rem', margin: 0 }}>Factures Clients</h2>
 
         {bookings.length === 0 ? (
-          <p style={{ color: '#4A5568' }}>Aucune réservation pour ce voyage</p>
+          <div style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧾</div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune réservation pour ce voyage</h3>
+            <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Les factures seront générées à partir des réservations</p>
+          </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table className="pro-table" style={{ width: '100%' }}>

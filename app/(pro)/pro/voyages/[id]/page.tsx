@@ -489,7 +489,11 @@ export default function VoyageDashboardPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-slate-500 text-center py-8">Aucune activité récente</p>
+              <div style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>📊</div>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.25rem' }}>Aucune activité récente</h4>
+                <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Les actions sur ce voyage apparaîtront ici</p>
+              </div>
             )}
           </div>
         </div>

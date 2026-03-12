@@ -264,7 +264,9 @@ export default function ComptesPage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#64748B', marginBottom: '16px' }}>Aucune clé API créée</p>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔑</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune clé API</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem', marginBottom: '1rem' }}>Créez des clés API pour intégrer vos outils externes</p>
               <button type="button" className="pro-btn-sun">
                 Créer votre première clé
               </button>

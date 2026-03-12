@@ -225,7 +225,8 @@ export default function AccountPage() {
           {billingMethods.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
               <CreditCard className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
-              <p style={{ color: '#64748B' }}>Aucune carte bancaire sauvegardée</p>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune carte bancaire</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Ajoutez un moyen de paiement pour vos abonnements</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -264,7 +265,9 @@ export default function AccountPage() {
           </div>
           {invoices.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#64748B' }}>Aucune facture pour le moment</p>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧾</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune facture</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Vos factures apparaîtront ici après vos premiers paiements</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

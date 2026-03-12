@@ -239,7 +239,9 @@ export default function RoomingPage() {
       {roomingList.length === 0 ? (
         <div className="pro-panel">
           <div className="pro-panel-body" style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
-            <p style={{ color: '#4A5568', margin: 0 }}>Aucune chambre réservée</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏨</div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune chambre réservée</h3>
+            <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Les chambres assignées aux voyageurs apparaîtront ici</p>
           </div>
         </div>
       ) : (

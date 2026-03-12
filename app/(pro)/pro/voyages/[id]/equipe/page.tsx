@@ -398,9 +398,10 @@ export default function EquipePage() {
               })}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <Users className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-              <p className="text-slate-500">Aucun membre invité pour le moment</p>
+            <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👥</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun membre invité</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Invitez des accompagnateurs et des guides pour ce voyage</p>
             </div>
           )}
         </div>

@@ -150,8 +150,8 @@ export default function MarketingPage() {
         {/* Liste des campagnes */}
         {campaigns.length === 0 ? (
           <div className="pro-panel" style={{ padding: '48px 24px', textAlign: 'center' }}>
-            <TrendingUp className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
-            <h3 style={{ fontWeight: 600, fontSize: '16px', color: '#0A1628', marginBottom: '8px' }}>Pas de campagne</h3>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📣</div>
+            <h3 style={{ fontWeight: 600, fontSize: '1.125rem', color: '#0A1628', marginBottom: '8px' }}>Aucune campagne</h3>
             <p style={{ color: '#64748B', marginBottom: '16px' }}>
               Créez votre première campagne marketing pour promouvoir vos voyages
             </p>

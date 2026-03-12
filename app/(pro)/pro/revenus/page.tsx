@@ -319,7 +319,8 @@ export default function RevenuesDashboardPage() {
           {trips.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
               <TrendingUp className="h-12 w-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
-              <p style={{ color: '#64748B' }}>Aucun voyage pour cette période</p>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun voyage pour cette période</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Changez la période pour voir vos revenus</p>
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
@@ -364,7 +365,9 @@ export default function RevenuesDashboardPage() {
           </div>
           {payouts.length === 0 ? (
             <div style={{ textAlign: 'center', paddingTop: '32px', paddingBottom: '32px' }}>
-              <p style={{ color: '#64748B' }}>Aucun versement pour le moment</p>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💳</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun versement</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Vos versements apparaîtront ici après vos premières ventes</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

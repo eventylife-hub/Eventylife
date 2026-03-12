@@ -403,9 +403,11 @@ export default function RestauratPage() {
             </div>
             <div className="pro-panel-body">
               {restaurants.length === 0 ? (
-                <p style={{ color: '#4A5568', textAlign: 'center', paddingTop: '1rem', paddingBottom: '1rem', margin: 0 }}>
-                  Aucun restaurant partenaire ajouté
-                </p>
+                <div style={{ textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem' }}>
+                  <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🍽️</div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.25rem' }}>Aucun restaurant partenaire</h4>
+                  <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Ajoutez des restaurants pour la restauration du voyage</p>
+                </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {restaurants.map((rest) => (

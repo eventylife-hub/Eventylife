@@ -354,8 +354,9 @@ export default function ProDashboard() {
                   ))}
                 </div>
               ) : (
-                <div style={{ textAlign: 'center', paddingY: '32px', color: DARK, opacity: 0.5 }}>
-                  <p style={{ fontSize: '14px' }}>Aucune activité pour le moment</p>
+                <div style={{ textAlign: 'center', paddingTop: '24px', paddingBottom: '24px' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📊</div>
+                  <p style={{ fontSize: '14px', color: '#64748B', margin: 0 }}>Aucune activité pour le moment</p>
                 </div>
               )}
             </div>
@@ -420,8 +421,9 @@ export default function ProDashboard() {
                   </Link>
                 </div>
               ) : (
-                <div style={{ textAlign: 'center', paddingY: '32px', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
-                  <p style={{ fontSize: '14px', color: DARK, opacity: 0.6 }}>Aucun voyage pour le moment</p>
+                <div style={{ textAlign: 'center', paddingTop: '24px', paddingBottom: '24px', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>✈️</div>
+                  <p style={{ fontSize: '14px', color: '#64748B', margin: 0, marginBottom: '4px' }}>Aucun voyage pour le moment</p>
                   <Link
                     href="/pro/voyages/nouveau"
                     style={{ marginTop: '8px', display: 'inline-block', fontSize: '14px', color: OCEAN, textDecoration: 'underline', fontWeight: 500, cursor: 'pointer' }}
