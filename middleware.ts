@@ -83,6 +83,18 @@ const PUBLIC_ROUTES = [
   '/robots.txt',
 ];
 
+// Routes pro accessibles sans authentification (auth pro)
+const PRO_PUBLIC_ROUTES = [
+  '/pro/login',
+  '/pro/inscription',
+  '/pro/forgot-password',
+];
+
+// Routes admin accessibles sans authentification (auth admin)
+const ADMIN_PUBLIC_ROUTES = [
+  '/admin-login',
+];
+
 // Pattern pour les routes avec paramètres dynamiques
 const DYNAMIC_PUBLIC_PATTERNS = [
   /^\/voyages\/[^/]+$/,       // /voyages/:slug
@@ -111,6 +123,11 @@ export function middleware(request: NextRequest) {
 
   // Vérifier si c'est une route publique
   if (PUBLIC_ROUTES.includes(pathname)) {
+    return NextResponse.next();
+  }
+
+  // Vérifier les routes pro/admin publiques (pages d'auth des portails)
+  if (PRO_PUBLIC_ROUTES.includes(pathname) || ADMIN_PUBLIC_ROUTES.includes(pathname)) {
     return NextResponse.next();
   }
 
