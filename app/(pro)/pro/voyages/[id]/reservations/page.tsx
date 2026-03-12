@@ -408,8 +408,9 @@ export default function ReservationsPage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
-              <AlertCircle style={{ width: '3rem', height: '3rem', color: '#CBD5E0', margin: '0 auto 1rem' }} />
-              <p style={{ color: '#64748B', margin: 0 }}>Aucune réservation trouvée</p>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📋</div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucune réservation trouvée</h3>
+              <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem' }}>Les réservations correspondant à vos filtres apparaîtront ici</p>
             </div>
           )}
         </div>
