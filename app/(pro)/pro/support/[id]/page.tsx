@@ -12,9 +12,12 @@ import {
   RotateCcw,
   User,
 } from 'lucide-react';
+import { ZodError } from 'zod';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
+import { messageSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 
 interface Message {
   id: string;
@@ -296,7 +299,16 @@ export default function TicketDetailPage() {
 
   const handleSendReply = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!replyText.trim()) return;
+
+    try {
+      messageSchema.parse({ content: replyText });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
+    }
 
     try {
       setSubmittingReply(true);

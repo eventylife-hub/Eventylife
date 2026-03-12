@@ -15,9 +15,12 @@ import {
   XCircle as XCircleIcon
 } from 'lucide-react';
 import { formatDate, formatDateTime } from '@/lib/utils';
+import { ZodError } from 'zod';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
 import { extractErrorMessage } from '@/lib/api-error';
+import { manualNotificationSchema } from '@/lib/validations/admin';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface NotificationTemplate {
   id: string;
   name: string;
@@ -156,9 +159,18 @@ export default function AdminNotificationsPage() {
   };
 
   const handleSendManual = async () => {
-    if (!manualRecipient.trim() || !manualTemplate) {
-      setToastMessage({ type: 'error', message: 'Veuillez remplir tous les champs' });
-      return;
+    try {
+      manualNotificationSchema.parse({
+        recipient: manualRecipient,
+        templateId: manualTemplate,
+        channel: manualChannel,
+      });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setToastMessage({ type: 'error', message: Object.values(fieldErrors).join('. ') });
+        return;
+      }
     }
 
     try {

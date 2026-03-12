@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ZodError } from 'zod';
 import { extractErrorMessage } from '@/lib/api-error';
+import { proInscriptionSchema } from '@/lib/validations/pro';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 import {
   Briefcase,
   User,
@@ -124,6 +127,29 @@ export default function InscriptionPage() {
 
   const handleSubmit = async () => {
     if (!canSubmit || !canProceedStep2 || !canProceedStep3) return;
+    setError(null);
+
+    try {
+      proInscriptionSchema.parse({
+        proType: form.proType,
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        siret: form.proType === 'MAGASIN' ? form.siret?.replace(/\s/g, '') : undefined,
+        zone: form.zone,
+        skills: form.skills,
+        description: form.description,
+        acceptCharte: form.acceptCharte,
+        acceptCGV: form.acceptCGV,
+        acceptRGPD: form.acceptRGPD,
+      });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
+    }
 
     try {
       setLoading(true);
@@ -150,7 +176,7 @@ export default function InscriptionPage() {
         router.push('/pro/onboarding');
       }, 2000);
     } catch (err: unknown) {
-      setError((err as Error).message);
+      setError(extractErrorMessage(err));
     } finally {
       setLoading(false);
     }

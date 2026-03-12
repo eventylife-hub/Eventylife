@@ -8,8 +8,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { ZodError } from 'zod';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { roomingPreferencesSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface CoOccupant {
   id: string;
   firstName: string;
@@ -145,6 +148,17 @@ export default function RoomingPage() {
 
   const handlePreferencesSave = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    try {
+      roomingPreferencesSchema.parse(preferences);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setPreferencesMessage({ type: 'error', text: Object.values(fieldErrors).join('. ') });
+        return;
+      }
+    }
+
     setPreferencesLoading(true);
 
     try {
