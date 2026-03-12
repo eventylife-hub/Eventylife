@@ -337,6 +337,7 @@ export default function AdminAlertesPage() {
           <div className="flex items-center gap-3 mb-4 pb-4 border-b">
             <input
               type="checkbox"
+              aria-label="Sélectionner toutes les alertes"
               checked={selectedAlerts.length === alerts.length && alerts.length > 0}
               onChange={toggleAllAlerts}
               className="w-4 h-4 rounded cursor-pointer"
@@ -378,6 +379,7 @@ export default function AdminAlertesPage() {
                   >
                     <input
                       type="checkbox"
+                      aria-label="Sélectionner cette alerte"
                       checked={selectedAlerts.includes(alert.id)}
                       onChange={() => toggleAlertSelection(alert.id)}
                       className="w-4 h-4 rounded cursor-pointer mt-1 flex-shrink-0"
