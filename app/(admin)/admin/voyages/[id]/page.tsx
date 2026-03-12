@@ -563,7 +563,7 @@ export default function AdminVoyageDetailPage() {
 
       {/* Toast notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
+        <div role="alert" aria-live="polite" className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
           <div className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border ${
             toastMessage.type === 'success'
               ? 'bg-green-50 border-green-200 text-green-800'

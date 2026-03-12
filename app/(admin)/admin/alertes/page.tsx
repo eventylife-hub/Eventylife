@@ -434,7 +434,7 @@ export default function AdminAlertesPage() {
 
       {/* Toast de notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
+        <div role="alert" aria-live="polite" className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
           <div
             className="admin-alert-bar"
             style={{
