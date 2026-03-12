@@ -114,6 +114,32 @@ export async function withRetry<T>(
 }
 
 /**
+ * Extrait un message d'erreur lisible depuis une erreur inconnue.
+ * Remplace le pattern répétitif :
+ *   error instanceof Error ? error.message : 'Erreur inconnue'
+ *
+ * @param error L'erreur capturée (unknown)
+ * @param fallback Message par défaut si l'erreur n'est pas identifiable
+ * @returns Message d'erreur en français
+ */
+export function extractErrorMessage(
+  error: unknown,
+  fallback = 'Erreur inconnue',
+): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === 'string') return error;
+  if (
+    error &&
+    typeof error === 'object' &&
+    'message' in error &&
+    typeof (error as { message: unknown }).message === 'string'
+  ) {
+    return (error as { message: string }).message;
+  }
+  return fallback;
+}
+
+/**
  * Fetch helper avec gestion d'erreur normalisée.
  * Lance une ApiError si la réponse n'est pas ok.
  */

@@ -2,7 +2,7 @@
  * Tests unitaires — lib/api-error.ts
  * Normalisation des erreurs API et utilitaire de retry
  */
-import { normalizeApiError, withRetry, type ApiError } from '@/lib/api-error';
+import { normalizeApiError, withRetry, extractErrorMessage, type ApiError } from '@/lib/api-error';
 
 describe('normalizeApiError', () => {
   it('normalise une erreur réseau (TypeError)', () => {
@@ -76,6 +76,34 @@ describe('normalizeApiError', () => {
 
     expect(result.message).toContain('inattendue');
     expect(result.retryable).toBe(false);
+  });
+});
+
+describe('extractErrorMessage', () => {
+  it('extrait le message d\'une instance Error', () => {
+    expect(extractErrorMessage(new Error('échec réseau'))).toBe('échec réseau');
+  });
+
+  it('retourne une string directement', () => {
+    expect(extractErrorMessage('erreur brute')).toBe('erreur brute');
+  });
+
+  it('extrait le message d\'un objet avec propriété message', () => {
+    expect(extractErrorMessage({ message: 'objet erreur' })).toBe('objet erreur');
+  });
+
+  it('retourne le fallback par défaut pour une valeur inconnue', () => {
+    expect(extractErrorMessage(42)).toBe('Erreur inconnue');
+    expect(extractErrorMessage(null)).toBe('Erreur inconnue');
+    expect(extractErrorMessage(undefined)).toBe('Erreur inconnue');
+  });
+
+  it('retourne le fallback personnalisé', () => {
+    expect(extractErrorMessage(42, 'Erreur inattendue')).toBe('Erreur inattendue');
+  });
+
+  it('ignore un objet avec message non-string', () => {
+    expect(extractErrorMessage({ message: 123 })).toBe('Erreur inconnue');
   });
 });
 

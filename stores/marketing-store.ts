@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface Campaign {
   id: string;
@@ -94,7 +95,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
         const data = await res.json();
         set({ dashboardData: data, loading: false });
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur lors du chargement du tableau de bord';
+        const message = extractErrorMessage(err, 'Erreur lors du chargement du tableau de bord');
         set({ error: message, loading: false });
       }
     },
@@ -107,7 +108,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
         const data = await res.json();
         set({ campaigns: data, loading: false });
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur lors du chargement des campagnes';
+        const message = extractErrorMessage(err, 'Erreur lors du chargement des campagnes');
         set({ error: message, loading: false });
       }
     },
@@ -120,7 +121,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
         const data = await res.json();
         set({ selectedCampaign: data, loading: false });
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Campagne non trouvée';
+        const message = extractErrorMessage(err, 'Campagne non trouvée');
         set({ error: message, loading: false });
       }
     },
@@ -142,7 +143,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
         }));
         return campaign;
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -170,7 +171,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
         }));
         return campaign;
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -195,7 +196,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
               : state.selectedCampaign,
         }));
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -220,7 +221,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
               : state.selectedCampaign,
         }));
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -245,7 +246,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
               : state.selectedCampaign,
         }));
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -270,7 +271,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
               : state.selectedCampaign,
         }));
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -291,7 +292,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
         }));
         return campaign;
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }
@@ -318,7 +319,7 @@ export const useMarketingStore = create<MarketingState>((set, get) => (
               : state.selectedCampaign,
         }));
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Erreur inattendue';
+        const message = extractErrorMessage(err, 'Erreur inattendue');
         set({ error: message });
         throw err;
       }

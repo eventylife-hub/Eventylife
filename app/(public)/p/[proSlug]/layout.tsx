@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export function generateMetadata({ params }: { params: { proSlug: string } }): Metadata {
   const name = params.proSlug
@@ -33,8 +34,25 @@ export function generateMetadata({ params }: { params: { proSlug: string } }): M
 
 export default function ProSlugLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { proSlug: string };
 }) {
-  return <>{children}</>;
+  const name = params.proSlug
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Partenaires', href: '/partenaires' },
+          { name, href: `/p/${params.proSlug}` },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

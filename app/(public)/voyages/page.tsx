@@ -84,7 +84,7 @@ function VoyagesContent() {
       try {
         setState('loading');
         setError(null);
-        const response = await apiClient.get<any>('/travels');
+        const response = await apiClient.get<Travel[] | { data: Travel[] }>('/travels');
         const travelList = Array.isArray(response) ? response : (response.data || []);
         const mappedTravels = travelList.map((travel) => ({
           id: travel.id,

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { extractErrorMessage } from '@/lib/api-error';
 
 /**
  * Store Zustand - Gestion de l'état post-vente
@@ -94,7 +95,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
       } finally {
         set({ isLoading: false });
@@ -122,7 +123,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -145,7 +146,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
       } finally {
         set({ isLoading: false });
@@ -175,7 +176,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -206,7 +207,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -237,7 +238,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -261,7 +262,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -288,7 +289,7 @@ export const usePostSaleStore = create<PostSaleStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {

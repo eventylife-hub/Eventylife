@@ -28,7 +28,7 @@ interface SupportTicket {
   unreadMessages?: number;
 }
 
-const STATUS_CONFIG: Record<string, { label: string; icon: React.ComponentType<any>; color: string; bgColor: string }> = {
+const STATUS_CONFIG: Record<string, { label: string; icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; color: string; bgColor: string }> = {
   OPEN: {
     label: 'Ouvert',
     icon: AlertCircle,

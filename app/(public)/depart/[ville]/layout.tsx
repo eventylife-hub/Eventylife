@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 interface Props {
   params: { ville: string };
@@ -47,6 +48,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function DepartVilleLayout({ children }: Props) {
-  return children;
+export default function DepartVilleLayout({ children, params }: Props) {
+  const villeFormatted = params.ville.charAt(0).toUpperCase() + params.ville.slice(1);
+
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Villes de départ', href: '/depart' },
+          { name: villeFormatted, href: `/depart/${params.ville}` },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

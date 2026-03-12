@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
   title: 'Avis voyageurs | Eventy Life',
@@ -25,5 +26,15 @@ export const metadata: Metadata = {
 };
 
 export default function AvisLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', href: '/' },
+          { name: 'Avis voyageurs', href: '/avis' },
+        ]}
+      />
+      {children}
+    </>
+  );
 }

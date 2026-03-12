@@ -6,6 +6,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User, LoginFormData, RegisterFormData } from '../types/index';
 import { api } from '../api';
+import { extractErrorMessage } from '../api-error';
 
 /**
  * État du store
@@ -69,7 +70,7 @@ export const useAuthStore = create<AuthStore>()(
             throw new Error(response.error?.message || 'Erreur de connexion');
           }
         } catch (error) {
-          const message = error instanceof Error ? error.message : 'Erreur inconnue';
+          const message = extractErrorMessage(error);
           set({
             isLoading: false,
             error: message,
@@ -108,7 +109,7 @@ export const useAuthStore = create<AuthStore>()(
             throw new Error(response.error?.message || 'Erreur d\'inscription');
           }
         } catch (error) {
-          const message = error instanceof Error ? error.message : 'Erreur inconnue';
+          const message = extractErrorMessage(error);
           set({
             isLoading: false,
             error: message,

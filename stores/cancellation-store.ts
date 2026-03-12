@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { extractErrorMessage } from '@/lib/api-error';
 
 /**
  * Store Zustand - Gestion de l'état des annulations
@@ -86,7 +87,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
       } finally {
         set({ isLoading: false });
@@ -114,7 +115,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
       } finally {
         set({ isLoading: false });
@@ -142,7 +143,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -166,7 +167,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -195,7 +196,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -230,7 +231,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {
@@ -257,7 +258,7 @@ export const useCancellationStore = create<CancellationStoreState>(
       } catch (error) {
         set({
           error:
-            error instanceof Error ? error.message : 'Erreur inconnue',
+            extractErrorMessage(error),
         });
         throw error;
       } finally {

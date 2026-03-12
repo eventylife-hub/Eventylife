@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface GroupMessage {
   id: string;
@@ -79,7 +80,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
       const data = await res.json();
       set({ groups: data, loading: false });
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message, loading: false });
     }
   },
@@ -92,7 +93,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
       const data = await res.json();
       set({ selectedGroup: data, loading: false });
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message, loading: false });
     }
   },
@@ -114,7 +115,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
       }));
       return group;
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message });
       throw err;
     }
@@ -135,7 +136,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
         ),
       }));
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message });
       throw err;
     }
@@ -155,7 +156,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
           state.selectedGroup?.id === groupId ? null : state.selectedGroup,
       }));
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message });
       throw err;
     }
@@ -172,7 +173,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
       });
       if (!res.ok) throw new Error('Erreur lors de l\'invitation');
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message });
       throw err;
     }
@@ -189,7 +190,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
       });
       if (!res.ok) throw new Error('Erreur');
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message });
       throw err;
     }
@@ -209,7 +210,7 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
         ),
       }));
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inattendue';
+      const message = extractErrorMessage(err, 'Erreur inattendue');
       set({ error: message });
       throw err;
     }
