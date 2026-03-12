@@ -300,8 +300,9 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 1: Votre profil</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom d&apos;affichage</label>
+          <label htmlFor="onboard-displayName" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom d&apos;affichage</label>
           <input
+            id="onboard-displayName"
             type="text"
             value={formData.displayName || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, displayName: (e.target as HTMLInputElement).value })}
@@ -310,8 +311,9 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Biographie (optionnel)</label>
+          <label htmlFor="onboard-bio" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Biographie (optionnel)</label>
           <textarea
+            id="onboard-bio"
             value={formData.bio || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, bio: (e.target as HTMLInputElement).value })}
             className="pro-input"
@@ -320,8 +322,9 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Site web (optionnel)</label>
+          <label htmlFor="onboard-website" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Site web (optionnel)</label>
           <input
+            id="onboard-website"
             type="url"
             value={formData.website || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, website: (e.target as HTMLInputElement).value })}
@@ -330,8 +333,9 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type de prestataire</label>
+          <label htmlFor="onboard-proType" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type de prestataire</label>
           <select
+            id="onboard-proType"
             value={formData.proType || ''}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, proType: e.target.value })}
             className="pro-input"
@@ -355,8 +359,9 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 2: Informations légales</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>SIRET (optionnel)</label>
+          <label htmlFor="onboard-siret" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>SIRET (optionnel)</label>
           <input
+            id="onboard-siret"
             type="text"
             value={formData.siret || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, siret: (e.target as HTMLInputElement).value.replace(/\D/g, '') })}
@@ -366,8 +371,9 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom de la société (optionnel)</label>
+          <label htmlFor="onboard-companyName" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom de la société (optionnel)</label>
           <input
+            id="onboard-companyName"
             type="text"
             value={formData.companyName || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, companyName: (e.target as HTMLInputElement).value })}
@@ -375,8 +381,9 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Adresse de la société (optionnel)</label>
+          <label htmlFor="onboard-companyAddress" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Adresse de la société (optionnel)</label>
           <input
+            id="onboard-companyAddress"
             type="text"
             value={formData.companyAddress || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, companyAddress: (e.target as HTMLInputElement).value })}
@@ -384,8 +391,9 @@ function StepLegal({ formData, setFormData }: { formData: OnboardingFormData; se
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type d&apos;entité (optionnel)</label>
+          <label htmlFor="onboard-entityType" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type d&apos;entité (optionnel)</label>
           <input
+            id="onboard-entityType"
             type="text"
             value={formData.entityType || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, entityType: (e.target as HTMLInputElement).value })}
@@ -404,8 +412,9 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 3: Configuration des paiements</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>IBAN français</label>
+          <label htmlFor="onboard-iban" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>IBAN français</label>
           <input
+            id="onboard-iban"
             type="text"
             value={formData.iban || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, iban: (e.target as HTMLInputElement).value.toUpperCase() })}
@@ -415,8 +424,9 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
           <p style={{ fontSize: '12px', color: '#64748B', marginTop: '8px' }}>Format: FR + 2 chiffres + 23 caractères alphanumériques</p>
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>BIC (optionnel)</label>
+          <label htmlFor="onboard-bic" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>BIC (optionnel)</label>
           <input
+            id="onboard-bic"
             type="text"
             value={formData.bic || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, bic: (e.target as HTMLInputElement).value.toUpperCase() })}
@@ -425,8 +435,9 @@ function StepPayout({ formData, setFormData }: { formData: OnboardingFormData; s
           />
         </div>
         <div>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom du titulaire</label>
+          <label htmlFor="onboard-holderName" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom du titulaire</label>
           <input
+            id="onboard-holderName"
             type="text"
             value={formData.holderName || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, holderName: (e.target as HTMLInputElement).value })}
@@ -527,13 +538,14 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
+            id="onboard-acceptTerms"
             type="checkbox"
             checked={!!formData.acceptTerms}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptTerms: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
           <div>
-            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Contrat prestataire indépendant</label>
+            <label htmlFor="onboard-acceptTerms" style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Contrat prestataire indépendant</label>
             <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
               Je confirme avoir lu et accepté les conditions d&apos;utilisation.
             </p>
@@ -541,13 +553,14 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         </div>
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
+            id="onboard-acceptCharter"
             type="checkbox"
             checked={!!formData.acceptCharter}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptCharter: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
           <div>
-            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Charte de prestataire</label>
+            <label htmlFor="onboard-acceptCharter" style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Charte de prestataire</label>
             <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
               J&apos;accepte les règles d&apos;utilisation et d&apos;éthique.
             </p>
@@ -555,13 +568,14 @@ function StepContracts({ formData, setFormData }: { formData: OnboardingFormData
         </div>
         <div style={{ padding: '16px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
           <input
+            id="onboard-acceptRGPD"
             type="checkbox"
             checked={!!formData.acceptRGPD}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, acceptRGPD: (e.target as HTMLInputElement).checked })}
             style={{ marginTop: '4px', flexShrink: 0 }}
           />
           <div>
-            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Politique RGPD</label>
+            <label htmlFor="onboard-acceptRGPD" style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628' }}>Politique RGPD</label>
             <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
               J&apos;accepte le traitement de mes données selon la politique RGPD.
             </p>
@@ -591,6 +605,7 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
         {modules.map((module, idx) => (
           <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0' }}>
             <input
+              id={`onboard-module-${idx}`}
               type="checkbox"
               checked={(formData.completedModules || []).includes(idx)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -608,7 +623,7 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
                 }
               }}
             />
-            <label style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', cursor: 'pointer' }}>{module}</label>
+            <label htmlFor={`onboard-module-${idx}`} style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', cursor: 'pointer' }}>{module}</label>
           </div>
         ))}
       </div>
