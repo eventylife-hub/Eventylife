@@ -27,7 +27,7 @@ export const AdminPageHeader = React.memo(function AdminPageHeader({ title, brea
             </>
           )}
         </div>
-        <h2 className="admin-page-title">{title}</h2>
+        <h1 className="admin-page-title">{title}</h1>
       </div>
       {children && (
         <div className="admin-header-actions">

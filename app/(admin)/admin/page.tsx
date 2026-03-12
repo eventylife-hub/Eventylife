@@ -226,7 +226,7 @@ export default function AdminDashboardPage() {
       <div className="page-enter">
         <div className="admin-page-header admin-fade-in">
           <div>
-            <h2 className="admin-page-title">Tableau de bord</h2>
+            <h1 className="admin-page-title">Tableau de bord</h1>
           </div>
         </div>
         <div className="admin-panel admin-fade-in delay-1" style={{ padding: '48px', textAlign: 'center' }}>
@@ -256,7 +256,7 @@ export default function AdminDashboardPage() {
           <div className="admin-breadcrumb">
             <Link href="/admin">Admin</Link> <span style={{ margin: '0 4px' }}>›</span> <span>Accueil</span>
           </div>
-          <h2 className="admin-page-title">Tableau de bord</h2>
+          <h1 className="admin-page-title">Tableau de bord</h1>
         </div>
         <div className="admin-header-actions">
           <div className="admin-header-meta">

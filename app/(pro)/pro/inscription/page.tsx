@@ -201,6 +201,11 @@ export default function InscriptionPage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '16px' }}>
       <div style={{ maxWidth: '896px', margin: '0 auto' }}>
+        {/* Titre page */}
+        <h1 style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)', fontSize: '28px', fontWeight: 600, color: '#0A1628', marginBottom: '24px', textAlign: 'center', letterSpacing: '-0.5px' }}>
+          Inscription Professionnel
+        </h1>
+
         {/* Progress Steps */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
@@ -469,19 +474,19 @@ export default function InscriptionPage() {
             <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Acceptez nos conditions pour continuer</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ backgroundColor: '#F5F5F5', padding: '16px', borderRadius: '8px', maxHeight: '256px', overflowY: 'auto', border: '1px solid #E0E0E0' }}>
-                <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Charte Eventy Life</h4>
+                <h3 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px', fontSize: '14px' }}>Charte Eventy Life</h3>
                 <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '16px' }}>
                   En tant que professionnel partenaire, vous vous engagez à respecter nos valeurs
                   d'excellence, de transparence et de responsabilité envers nos clients...
                 </p>
 
-                <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>Conditions Générales de Vente Pro</h4>
+                <h3 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px', fontSize: '14px' }}>Conditions Générales de Vente Pro</h3>
                 <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '16px' }}>
                   Vous acceptez les conditions de commission, les délais de paiement et les
                   responsabilités contractuelles définies dans nos CGV...
                 </p>
 
-                <h4 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px' }}>RGPD & Confidentialité</h4>
+                <h3 style={{ fontWeight: 600, color: '#0A1628', marginBottom: '8px', fontSize: '14px' }}>RGPD & Confidentialité</h3>
                 <p style={{ fontSize: '12px', color: '#64748B' }}>
                   Vos données seront traitées conformément à la réglementation RGPD. Nous nous
                   engageons à protéger vos informations personnelles...
