@@ -9,6 +9,7 @@
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { supportTicketSchema, zodErrorsToRecord } from '@/lib/validations';
 interface Ticket {
   id: string;
   subject: string;
@@ -121,7 +122,13 @@ export default function SupportPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.subject.trim() || !formData.message.trim()) return;
+    const validation = supportTicketSchema.safeParse(formData);
+    if (!validation.success) {
+      const fieldErrors = zodErrorsToRecord(validation.error);
+      const firstError = Object.values(fieldErrors)[0] || 'Veuillez corriger les erreurs';
+      setSubmitMessage({ type: 'error', text: firstError });
+      return;
+    }
 
     try {
       setSubmitting(true);

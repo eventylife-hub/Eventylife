@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { supportTicketSchema, zodErrorsToRecord } from '@/lib/validations';
 
 interface SupportTicket {
   id: string;
@@ -164,8 +165,14 @@ export default function ProSupportPage() {
 
   const handleCreateTicket = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newTicketData.subject || !newTicketData.category) {
-      setError('Veuillez remplir tous les champs');
+    const validation = supportTicketSchema.safeParse({
+      ...newTicketData,
+      message: newTicketData.description || '',
+      priority: 'MEDIUM',
+    });
+    if (!validation.success) {
+      const fieldErrors = zodErrorsToRecord(validation.error);
+      setError(Object.values(fieldErrors)[0] || 'Veuillez remplir tous les champs');
       return;
     }
 

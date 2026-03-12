@@ -9,6 +9,7 @@
 import { useState, useCallback } from 'react';
 import { useToast } from '@/lib/stores/ui-store';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { contactSchema, zodErrorsToRecord } from '@/lib/validations';
 
 const contactInfo = [
   {
@@ -89,33 +90,9 @@ export default function ContactPage() {
   });
 
   const validate = useCallback((): FormErrors => {
-    const err: FormErrors = {};
-    const name = formData.name.trim();
-    const email = formData.email.trim();
-    const phone = formData.phone.trim();
-    const message = formData.message.trim();
-
-    if (!name) err.name = 'Le nom est requis';
-    else if (name.length < 2) err.name = 'Le nom doit contenir au moins 2 caractères';
-
-    if (!email) err.email = "L'email est requis";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      err.email = 'Adresse email invalide';
-
-    if (phone && !/^[+]?[\d\s()-]{6,20}$/.test(phone))
-      err.phone = 'Numéro de téléphone invalide';
-
-    if (!formData.subject) err.subject = 'Veuillez choisir un sujet';
-
-    if (!message) err.message = 'Le message est requis';
-    else if (message.length < MESSAGE_MIN)
-      err.message = `Le message doit contenir au moins ${MESSAGE_MIN} caractères`;
-    else if (message.length > MESSAGE_MAX)
-      err.message = `Le message ne peut pas dépasser ${MESSAGE_MAX} caractères`;
-
-    if (!consent) err.consent = 'Vous devez accepter la politique de confidentialité';
-
-    return err;
+    const result = contactSchema.safeParse({ ...formData, consent });
+    if (result.success) return {};
+    return zodErrorsToRecord(result.error) as FormErrors;
   }, [formData, consent]);
 
   const handleSubmit = async (e: React.FormEvent) => {
