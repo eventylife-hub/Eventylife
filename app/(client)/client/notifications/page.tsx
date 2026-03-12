@@ -151,8 +151,21 @@ export default function NotificationsPage() {
       {/* Contenu principal */}
       <div className="rounded-2xl overflow-hidden" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
         {error && (
-          <div className="p-6" style={{ background: 'var(--terra-soft, #FEF2F2)', borderBottom: '1.5px solid #FCA5A5', color: 'var(--terra, #DC2626)' }}>
-            <p className="text-sm font-medium">⚠️ Une erreur s'est produite: {error}</p>
+          <div className="p-6" style={{ background: 'var(--terra-soft, #FEF2F2)', borderBottom: '1.5px solid #FCA5A5', color: 'var(--terra, #DC2626)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <p className="text-sm font-medium">⚠️ Une erreur s&apos;est produite: {error}</p>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button type="button" onClick={() => fetchNotifications(50)} style={{
+                padding: '0.25rem 0.75rem',
+                fontSize: '0.875rem',
+                color: 'var(--terra, #C75B39)',
+                border: '1px solid var(--terra, #C75B39)',
+                borderRadius: '8px',
+                background: 'transparent',
+                cursor: 'pointer',
+              }}>
+                Réessayer
+              </button>
+            </div>
           </div>
         )}
 

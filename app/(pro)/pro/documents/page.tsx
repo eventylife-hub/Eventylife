@@ -206,8 +206,16 @@ export default function ProDocumentsPage() {
         </div>
 
         {error && (
-          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', color: 'var(--pro-coral)', border: '1px solid #FFE0E3' }}>
-            {error}
+          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', color: 'var(--pro-coral)', border: '1px solid #FFE0E3', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>{error}</span>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button type="button" onClick={() => fetchDocuments()} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+                Réessayer
+              </button>
+              <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+                Fermer
+              </button>
+            </div>
           </div>
         )}
 

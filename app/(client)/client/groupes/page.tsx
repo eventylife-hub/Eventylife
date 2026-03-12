@@ -20,6 +20,7 @@ export default function GroupesPage() {
   const [groups, setGroups] = useState<TravelGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -56,7 +57,7 @@ export default function GroupesPage() {
     };
 
     fetchGroups();
-  }, []);
+  }, [retryKey]);
 
   if (loading) {
     return (
@@ -110,17 +111,30 @@ export default function GroupesPage() {
           alignItems: 'center',
         }}>
           <span style={{ color: 'var(--terra, #C75B39)', fontWeight: 500 }}>{error}</span>
-          <button type="button" onClick={() => setError(null)} style={{
-            padding: '0.25rem 0.75rem',
-            fontSize: '0.875rem',
-            color: 'var(--terra, #C75B39)',
-            border: '1px solid var(--terra, #C75B39)',
-            borderRadius: '8px',
-            background: 'transparent',
-            cursor: 'pointer',
-          }}>
-            Fermer
-          </button>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button type="button" onClick={() => setRetryKey((k) => k + 1)} style={{
+              padding: '0.25rem 0.75rem',
+              fontSize: '0.875rem',
+              color: 'var(--terra, #C75B39)',
+              border: '1px solid var(--terra, #C75B39)',
+              borderRadius: '8px',
+              background: 'transparent',
+              cursor: 'pointer',
+            }}>
+              Réessayer
+            </button>
+            <button type="button" onClick={() => setError(null)} style={{
+              padding: '0.25rem 0.75rem',
+              fontSize: '0.875rem',
+              color: 'var(--terra, #C75B39)',
+              border: '1px solid var(--terra, #C75B39)',
+              borderRadius: '8px',
+              background: 'transparent',
+              cursor: 'pointer',
+            }}>
+              Fermer
+            </button>
+          </div>
         </div>
       )}
 

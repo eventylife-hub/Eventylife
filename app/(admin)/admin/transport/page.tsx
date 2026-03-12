@@ -75,6 +75,7 @@ export default function TransportPage() {
   const [statusFilter, setStatusFilter] = useState<'PENDING' | 'CONFIRMED' | 'COMPLETED'>('PENDING');
   const [modeFilter, setModeFilter] = useState<'ALL' | 'BUS' | 'FLIGHT' | 'MIXED'>('ALL');
   const [generatingManifest, setGeneratingManifest] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
 
   const statuses = [
     { value: 'PENDING' as const, label: 'En attente' },
@@ -119,7 +120,7 @@ export default function TransportPage() {
     };
 
     fetchData();
-  }, [statusFilter, modeFilter]);
+  }, [statusFilter, modeFilter, retryKey]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -304,12 +305,20 @@ export default function TransportPage() {
             <p className="font-medium">{error}</p>
             <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>
           </div>
-          <button type="button"
-            onClick={() => setError(null)}
-            className="text-sm font-medium hover:underline flex-shrink-0"
-          >
-            Fermer
-          </button>
+          <div className="flex gap-2 flex-shrink-0">
+            <button type="button"
+              onClick={() => setRetryKey((k) => k + 1)}
+              className="text-sm font-medium hover:underline"
+            >
+              Réessayer
+            </button>
+            <button type="button"
+              onClick={() => setError(null)}
+              className="text-sm font-medium hover:underline"
+            >
+              Fermer
+            </button>
+          </div>
         </div>
       )}
 

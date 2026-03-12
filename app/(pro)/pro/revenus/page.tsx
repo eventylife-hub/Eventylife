@@ -58,6 +58,7 @@ export default function RevenuesDashboardPage() {
   const [trips, setTrips] = useState<RevenueTrip[]>([]);
   const [payouts, setPayouts] = useState<Payout[]>([]);
   const [period, setPeriod] = useState<PeriodFilter>('thisMonth');
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
     const fetchRevenues = async () => {
@@ -129,7 +130,7 @@ export default function RevenuesDashboardPage() {
     };
 
     fetchRevenues();
-  }, [period]);
+  }, [period, retryKey]);
 
   const handleExportCSV = () => {
     if (!trips.length) {
@@ -206,9 +207,14 @@ export default function RevenuesDashboardPage() {
       <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h1 className="pro-page-title">Revenus</h1>
-          <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
-            <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
+          <div style={{ padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
+              <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
+            </div>
+            <button type="button" onClick={() => setRetryKey((k) => k + 1)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+              Réessayer
+            </button>
           </div>
         </div>
       </div>
@@ -238,9 +244,14 @@ export default function RevenuesDashboardPage() {
               <AlertCircle className="h-4 w-4" style={{ color: 'var(--pro-coral)' }} />
               <span style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</span>
             </div>
-            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
-              Fermer
-            </button>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button type="button" onClick={() => setRetryKey((k) => k + 1)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+                Réessayer
+              </button>
+              <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
+                Fermer
+              </button>
+            </div>
           </div>
         )}
 

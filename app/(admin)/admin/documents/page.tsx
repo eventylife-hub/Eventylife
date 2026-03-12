@@ -177,6 +177,14 @@ export default function AdminDocumentsPage() {
       {error && (
         <div className="admin-alert-bar danger">
           <span>{error}</span>
+          <div className="flex gap-2">
+            <button type="button" onClick={() => fetchDocuments()} className="admin-btn-secondary" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Réessayer
+            </button>
+            <button type="button" onClick={() => setError(null)} className="admin-btn-secondary" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
+              Fermer
+            </button>
+          </div>
         </div>
       )}
 

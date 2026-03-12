@@ -37,6 +37,7 @@ export default function PaiementsPage() {
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
   const [filter, setFilter] = useState<string>('all');
 
   useEffect(() => {
@@ -99,7 +100,7 @@ export default function PaiementsPage() {
     };
 
     fetchPayments();
-  }, []);
+  }, [retryKey]);
 
   const filteredPayments =
     filter === 'all'
@@ -147,17 +148,30 @@ export default function PaiementsPage() {
           alignItems: 'center',
         }}>
           <span style={{ color: 'var(--terra, #C75B39)', fontWeight: 500 }}>{error}</span>
-          <button type="button" onClick={() => setError(null)} style={{
-            padding: '0.25rem 0.75rem',
-            fontSize: '0.875rem',
-            color: 'var(--terra, #C75B39)',
-            border: '1px solid var(--terra, #C75B39)',
-            borderRadius: '8px',
-            background: 'transparent',
-            cursor: 'pointer',
-          }}>
-            Fermer
-          </button>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button type="button" onClick={() => setRetryKey((k) => k + 1)} style={{
+              padding: '0.25rem 0.75rem',
+              fontSize: '0.875rem',
+              color: 'var(--terra, #C75B39)',
+              border: '1px solid var(--terra, #C75B39)',
+              borderRadius: '8px',
+              background: 'transparent',
+              cursor: 'pointer',
+            }}>
+              Réessayer
+            </button>
+            <button type="button" onClick={() => setError(null)} style={{
+              padding: '0.25rem 0.75rem',
+              fontSize: '0.875rem',
+              color: 'var(--terra, #C75B39)',
+              border: '1px solid var(--terra, #C75B39)',
+              borderRadius: '8px',
+              background: 'transparent',
+              cursor: 'pointer',
+            }}>
+              Fermer
+            </button>
+          </div>
         </div>
       )}
 

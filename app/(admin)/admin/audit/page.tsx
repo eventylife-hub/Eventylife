@@ -26,6 +26,7 @@ export default function AuditPage() {
   const [logs, setLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
   const [filters, setFilters] = useState({
     action: '',
     entityType: '',
@@ -91,7 +92,7 @@ export default function AuditPage() {
 
     const timer = setTimeout(fetchLogs, 300);
     return () => clearTimeout(timer);
-  }, [filters]);
+  }, [filters, retryKey]);
 
   const columns: DataTableColumn<AuditLog>[] = [
     {
@@ -187,9 +188,14 @@ export default function AuditPage() {
       {error && (
         <div className="admin-alert-bar danger">
           <span>{error}</span>
-          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setError(null)}>
-            Fermer
-          </button>
+          <div className="flex gap-2 ml-4">
+            <button type="button" className="text-sm font-medium hover:underline" onClick={() => setRetryKey((k) => k + 1)}>
+              Réessayer
+            </button>
+            <button type="button" className="text-sm font-medium hover:underline" onClick={() => setError(null)}>
+              Fermer
+            </button>
+          </div>
         </div>
       )}
 
