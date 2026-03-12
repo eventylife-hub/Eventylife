@@ -68,6 +68,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               href={item.href}
               onClick={() => setMobileOpen(false)}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200"
+              aria-current={active ? 'page' : undefined}
               style={{
                 background: active ? 'rgba(199,91,57,0.15)' : 'transparent',
                 color: active ? '#FAF7F2' : 'rgba(250,247,242,0.6)',

@@ -68,7 +68,6 @@ export function Header({ user }: HeaderProps) {
         background: 'linear-gradient(to right, #0077B6, #7B2FF7, #FF6B35)',
         boxShadow: scrolled ? '0 4px 20px rgba(26,26,46,0.3)' : 'none',
       }}
-      role="banner"
     >
       {/* Skip to content — Accessibilité */}
       <a
@@ -110,6 +109,7 @@ export function Header({ user }: HeaderProps) {
               style={{
                 color: pathname === '/voyages' ? '#D4A853' : 'rgba(250,247,242,0.8)',
               }}
+              aria-current={pathname === '/voyages' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
               onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/voyages' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
             >
@@ -121,6 +121,7 @@ export function Header({ user }: HeaderProps) {
               style={{
                 color: pathname === '/comment-ca-marche' ? '#D4A853' : 'rgba(250,247,242,0.8)',
               }}
+              aria-current={pathname === '/comment-ca-marche' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
               onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/comment-ca-marche' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
             >
@@ -132,6 +133,7 @@ export function Header({ user }: HeaderProps) {
               style={{
                 color: pathname === '/avis' ? '#D4A853' : 'rgba(250,247,242,0.8)',
               }}
+              aria-current={pathname === '/avis' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
               onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/avis' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
             >
@@ -143,6 +145,7 @@ export function Header({ user }: HeaderProps) {
               style={{
                 color: pathname === '/contact' ? '#D4A853' : 'rgba(250,247,242,0.8)',
               }}
+              aria-current={pathname === '/contact' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A853')}
               onMouseLeave={(e) => (e.currentTarget.style.color = pathname === '/contact' ? '#D4A853' : 'rgba(250,247,242,0.8)')}
             >
@@ -279,12 +282,12 @@ export function Header({ user }: HeaderProps) {
             aria-label="Menu mobile"
             className="md:hidden pb-4 space-y-1 animate-fade-up transition-all duration-300"
             style={{ borderTop: '1px solid rgba(250,247,242,0.1)' }}
-            aria-label="Menu mobile"
           >
             <Link
               href={ROUTES.VOYAGES}
               className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
               style={{ color: '#FAF7F2' }}
+              aria-current={pathname === '/voyages' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >
@@ -294,6 +297,7 @@ export function Header({ user }: HeaderProps) {
               href="/comment-ca-marche"
               className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
               style={{ color: '#FAF7F2' }}
+              aria-current={pathname === '/comment-ca-marche' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >
@@ -303,6 +307,7 @@ export function Header({ user }: HeaderProps) {
               href="/avis"
               className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
               style={{ color: '#FAF7F2' }}
+              aria-current={pathname === '/avis' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >
@@ -312,6 +317,7 @@ export function Header({ user }: HeaderProps) {
               href="/contact"
               className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors"
               style={{ color: '#FAF7F2' }}
+              aria-current={pathname === '/contact' ? 'page' : undefined}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.08)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >

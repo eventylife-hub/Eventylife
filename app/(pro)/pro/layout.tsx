@@ -94,6 +94,7 @@ export default function ProLayout({ children }: ProLayoutProps) {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`pro-nav-item ${isActive(item.href) ? 'active' : ''}`}
+                aria-current={isActive(item.href) ? 'page' : undefined}
               >
                 <span className="nav-icon">{item.icon}</span>
                 <span>{item.label}</span>

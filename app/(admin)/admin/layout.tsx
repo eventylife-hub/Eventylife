@@ -102,6 +102,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`admin-nav-item ${isActive(item.href) ? 'active' : ''}`}
+                aria-current={isActive(item.href) ? 'page' : undefined}
               >
                 <span className="nav-icon">{item.icon}</span>
                 <span>{item.label}</span>
