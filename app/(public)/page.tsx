@@ -117,6 +117,44 @@ export default function HomePage() {
 
   return (
     <>
+      {/* JSON-LD Organization + WebSite */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'Organization',
+                '@id': 'https://www.eventy.life/#organization',
+                name: 'Eventy Life',
+                url: 'https://www.eventy.life',
+                logo: 'https://www.eventy.life/images/logo.png',
+                description: 'Plateforme française de voyages de groupe avec accompagnement humain porte-à-porte.',
+                sameAs: [],
+                contactPoint: {
+                  '@type': 'ContactPoint',
+                  contactType: 'Service client',
+                  availableLanguage: 'French',
+                },
+              },
+              {
+                '@type': 'WebSite',
+                '@id': 'https://www.eventy.life/#website',
+                url: 'https://www.eventy.life',
+                name: 'Eventy Life',
+                publisher: { '@id': 'https://www.eventy.life/#organization' },
+                inLanguage: 'fr-FR',
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: 'https://www.eventy.life/voyages?q={search_term_string}',
+                  'query-input': 'required name=search_term_string',
+                },
+              },
+            ],
+          }),
+        }}
+      />
       {/* ═══ HERO ═══ */}
       <section className="hero-home">
         <div className="hero-inner">

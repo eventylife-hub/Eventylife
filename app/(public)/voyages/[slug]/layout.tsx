@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { API_URL_SERVER } from '@/lib/config';
+import { TravelOfferJsonLd, BreadcrumbJsonLd } from '@/components/seo/json-ld';
 
 /** Données SEO enrichies par voyage (fallback statique si API indisponible) */
 const VOYAGE_SEO: Record<string, { title: string; dest: string; desc: string }> = {
@@ -95,10 +96,43 @@ export async function generateMetadata({
   };
 }
 
-export default function VoyageDetailLayout({
+export default async function VoyageDetailLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ slug: string }>;
 }) {
-  return children;
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  const seo = VOYAGE_SEO[decodedSlug];
+
+  const titleCase = seo?.title ?? decodedSlug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  const description = seo?.desc
+    ?? `Découvrez le voyage ${titleCase} avec Eventy Life.`;
+
+  return (
+    <>
+      <TravelOfferJsonLd
+        name={titleCase}
+        description={description}
+        destination={seo?.dest}
+        price={0}
+        startDate=""
+        endDate=""
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', url: '/' },
+          { name: 'Voyages', url: '/voyages' },
+          { name: titleCase, url: `/voyages/${slug}` },
+        ]}
+      />
+      {children}
+    </>
+  );
 }
