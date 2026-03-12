@@ -135,8 +135,9 @@ export default function FacturationPage() {
             {/* Numérotation */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Préfixe factures</label>
+                <label htmlFor="billing-invoicePrefix" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Préfixe factures</label>
                 <input
+                  id="billing-invoicePrefix"
                   type="text"
                   value={settings?.invoicePrefix || ''}
                   disabled={!editable}
@@ -146,8 +147,9 @@ export default function FacturationPage() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Prochain numéro</label>
+                <label htmlFor="billing-invoiceNextNumber" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Prochain numéro</label>
                 <input
+                  id="billing-invoiceNextNumber"
                   type="number"
                   value={settings?.invoiceNextNumber || 0}
                   disabled={!editable}
@@ -170,8 +172,9 @@ export default function FacturationPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 {/* Banque */}
                 <div>
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Nom de la banque</label>
+                  <label htmlFor="billing-bankName" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Nom de la banque</label>
                   <input
+                    id="billing-bankName"
                     type="text"
                     value={settings?.bankName || ''}
                     disabled={!editable}
@@ -182,8 +185,9 @@ export default function FacturationPage() {
 
                 {/* Titulaire */}
                 <div>
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Titulaire du compte</label>
+                  <label htmlFor="billing-bankAccountName" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Titulaire du compte</label>
                   <input
+                    id="billing-bankAccountName"
                     type="text"
                     value={settings?.bankAccountName || ''}
                     disabled={!editable}
@@ -194,8 +198,9 @@ export default function FacturationPage() {
 
                 {/* IBAN */}
                 <div>
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>IBAN</label>
+                  <label htmlFor="billing-iban" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>IBAN</label>
                   <input
+                    id="billing-iban"
                     type="text"
                     value={settings?.iban || ''}
                     disabled={!editable}
@@ -207,8 +212,9 @@ export default function FacturationPage() {
 
                 {/* BIC */}
                 <div>
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>BIC</label>
+                  <label htmlFor="billing-bic" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>BIC</label>
                   <input
+                    id="billing-bic"
                     type="text"
                     value={settings?.bic || ''}
                     disabled={!editable}
@@ -222,8 +228,9 @@ export default function FacturationPage() {
                   <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '12px' }}>RIB (optionnel)</p>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '8px' }}>
                     <div>
-                      <label style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Code banque</label>
+                      <label htmlFor="billing-bankCode" style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Code banque</label>
                       <input
+                        id="billing-bankCode"
                         type="text"
                         value={settings?.bankCode || ''}
                         disabled={!editable}
@@ -233,8 +240,9 @@ export default function FacturationPage() {
                       />
                     </div>
                     <div>
-                      <label style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Code guichet</label>
+                      <label htmlFor="billing-branchCode" style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Code guichet</label>
                       <input
+                        id="billing-branchCode"
                         type="text"
                         value={settings?.branchCode || ''}
                         disabled={!editable}
@@ -244,8 +252,9 @@ export default function FacturationPage() {
                       />
                     </div>
                     <div>
-                      <label style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>N° compte</label>
+                      <label htmlFor="billing-accountNumber" style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>N° compte</label>
                       <input
+                        id="billing-accountNumber"
                         type="text"
                         value={settings?.accountNumber || ''}
                         disabled={!editable}
@@ -255,8 +264,9 @@ export default function FacturationPage() {
                       />
                     </div>
                     <div>
-                      <label style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Clé</label>
+                      <label htmlFor="billing-key" style={{ fontSize: '12px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '4px' }}>Clé</label>
                       <input
+                        id="billing-key"
                         type="text"
                         value={settings?.key || ''}
                         disabled={!editable}
@@ -276,9 +286,10 @@ export default function FacturationPage() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Taux TVA (%)</label>
+                  <label htmlFor="billing-vatRate" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Taux TVA (%)</label>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <input
+                      id="billing-vatRate"
                       type="number"
                       value={(settings?.vatRate || 0) / 100}
                       disabled={!editable}
@@ -290,9 +301,10 @@ export default function FacturationPage() {
                   </div>
                 </div>
                 <div>
-                  <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Taux marge (%)</label>
+                  <label htmlFor="billing-marginRate" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Taux marge (%)</label>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <input
+                      id="billing-marginRate"
                       type="number"
                       value={(settings?.marginRate || 0) / 100}
                       disabled={!editable}
@@ -306,8 +318,9 @@ export default function FacturationPage() {
               </div>
 
               <div style={{ marginTop: '16px' }}>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Délai de paiement par défaut (jours)</label>
+                <label htmlFor="billing-paymentTerms" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Délai de paiement par défaut (jours)</label>
                 <input
+                  id="billing-paymentTerms"
                   type="number"
                   value={(settings?.defaultPaymentTerms || 0) / 100}
                   disabled={!editable}

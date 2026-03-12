@@ -124,7 +124,7 @@ export default function ParametresPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Logo */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Logo</label>
+              <label htmlFor="settings-logo" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Logo</label>
               {profile?.logo && (
                 <div style={{ width: '120px', height: '120px', backgroundColor: '#F5F5F5', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
                   {/* SECURITY: URL validated against XSS injection via sanitizeImageUrl */}
@@ -133,6 +133,7 @@ export default function ParametresPage() {
               )}
               {editable && (
                 <input
+                  id="settings-logo"
                   type="file"
                   accept="image/*"
                   disabled={!editable}
@@ -143,8 +144,9 @@ export default function ParametresPage() {
 
             {/* Nom */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Nom de l&apos;agence</label>
+              <label htmlFor="settings-name" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Nom de l&apos;agence</label>
               <input
+                id="settings-name"
                 type="text"
                 value={profile?.name || ''}
                 disabled={!editable}
@@ -155,8 +157,9 @@ export default function ParametresPage() {
 
             {/* Nom entreprise */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Raison sociale</label>
+              <label htmlFor="settings-businessName" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Raison sociale</label>
               <input
+                id="settings-businessName"
                 type="text"
                 value={profile?.businessName || ''}
                 disabled={!editable}
@@ -167,8 +170,9 @@ export default function ParametresPage() {
 
             {/* Email */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Email</label>
+              <label htmlFor="settings-email" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Email</label>
               <input
+                id="settings-email"
                 type="email"
                 value={profile?.email || ''}
                 disabled={!editable}
@@ -179,8 +183,9 @@ export default function ParametresPage() {
 
             {/* Téléphone */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Téléphone</label>
+              <label htmlFor="settings-phone" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Téléphone</label>
               <input
+                id="settings-phone"
                 type="tel"
                 value={profile?.phone || ''}
                 disabled={!editable}
@@ -191,8 +196,9 @@ export default function ParametresPage() {
 
             {/* SIRET */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>SIRET</label>
+              <label htmlFor="settings-siret" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>SIRET</label>
               <input
+                id="settings-siret"
                 type="text"
                 value={profile?.siret || ''}
                 disabled={!editable}
@@ -203,8 +209,9 @@ export default function ParametresPage() {
 
             {/* Adresse */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Adresse</label>
+              <label htmlFor="settings-address" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Adresse</label>
               <input
+                id="settings-address"
                 type="text"
                 value={profile?.address || ''}
                 disabled={!editable}
@@ -216,8 +223,9 @@ export default function ParametresPage() {
             {/* Localité */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Code postal</label>
+                <label htmlFor="settings-zipCode" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Code postal</label>
                 <input
+                  id="settings-zipCode"
                   type="text"
                   value={profile?.zipCode || ''}
                   disabled={!editable}
@@ -226,8 +234,9 @@ export default function ParametresPage() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Ville</label>
+                <label htmlFor="settings-city" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Ville</label>
                 <input
+                  id="settings-city"
                   type="text"
                   value={profile?.city || ''}
                   disabled={!editable}
@@ -239,8 +248,9 @@ export default function ParametresPage() {
 
             {/* Pays */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Pays</label>
+              <label htmlFor="settings-country" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Pays</label>
               <input
+                id="settings-country"
                 type="text"
                 value={profile?.country || ''}
                 disabled={!editable}
@@ -251,8 +261,9 @@ export default function ParametresPage() {
 
             {/* Site web */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Site web</label>
+              <label htmlFor="settings-website" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Site web</label>
               <input
+                id="settings-website"
                 type="url"
                 value={profile?.website || ''}
                 disabled={!editable}
@@ -263,8 +274,9 @@ export default function ParametresPage() {
 
             {/* Description */}
             <div>
-              <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Description</label>
+              <label htmlFor="settings-description" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Description</label>
               <textarea
+                id="settings-description"
                 value={profile?.description || ''}
                 disabled={!editable}
                 readOnly={!editable}
