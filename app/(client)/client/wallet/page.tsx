@@ -305,7 +305,7 @@ export default function WalletPage() {
             </label>
             <select
               value={typeFilter}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTypeFilter((e.target as HTMLInputElement).value as typeof typeFilter)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTypeFilter(e.target.value as typeof typeFilter)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
               style={{
                 border: '1.5px solid #E5E0D8',

@@ -241,8 +241,8 @@ export default function CancelReservationPage() {
           </label>
           <select
             value={reason.split('|')[0] || ''}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              const newReason = (e.target as HTMLInputElement).value;
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              const newReason = e.target.value;
               setReason(newReason);
             }}
             className="w-full px-4 py-2 rounded-lg mb-3"

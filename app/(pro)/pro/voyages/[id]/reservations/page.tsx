@@ -312,7 +312,7 @@ export default function ReservationsPage() {
           <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Statut paiement</label>
           <select
             value={filterStatus || ''}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterStatus((e.target as HTMLInputElement).value || null)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilterStatus(e.target.value || null)}
             className="pro-input"
           >
             <option value="">Tous</option>
@@ -327,7 +327,7 @@ export default function ReservationsPage() {
             <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Type chambre</label>
             <select
               value={filterRoomType || ''}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterRoomType((e.target as HTMLInputElement).value || null)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilterRoomType(e.target.value || null)}
               className="pro-input"
             >
               <option value="">Tous</option>

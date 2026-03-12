@@ -511,7 +511,7 @@ export default function AdminNotificationsPage() {
                 </label>
                 <select
                   value={manualTemplate}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualTemplate((e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualTemplate(e.target.value)}
                   className="admin-input"
                 >
                   <option value="">Sélectionner un template</option>
@@ -529,7 +529,7 @@ export default function AdminNotificationsPage() {
                 </label>
                 <select
                   value={manualChannel}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualChannel((e.target as HTMLInputElement).value as 'EMAIL' | 'SMS' | 'PUSH')}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualChannel(e.target.value as 'EMAIL' | 'SMS' | 'PUSH')}
                   className="admin-input"
                 >
                   <option value="EMAIL">Email</option>

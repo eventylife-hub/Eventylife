@@ -282,7 +282,7 @@ export default function SupportPage() {
                 <select
                   id="ticket-category"
                   value={formData.category}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: (e.target as HTMLInputElement).value })}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, category: e.target.value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                   style={{
                     border: '1.5px solid #E5E0D8',
@@ -305,7 +305,7 @@ export default function SupportPage() {
                 <select
                   id="ticket-priority"
                   value={formData.priority}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, priority: (e.target as HTMLInputElement).value })}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, priority: e.target.value })}
                   className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                   style={{
                     border: '1.5px solid #E5E0D8',

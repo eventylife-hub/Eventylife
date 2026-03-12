@@ -418,8 +418,8 @@ export default function CheckoutStep2Page() {
                       </label>
                       <select
                         value={participant.busStopId || ''}
-                        onChange={(e) =>
-                          handleParticipantChange(globalIndex, 'busStopId', (e.target as HTMLInputElement).value)
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          handleParticipantChange(globalIndex, 'busStopId', e.target.value)
                         }
                         style={{
                           width: '100%',

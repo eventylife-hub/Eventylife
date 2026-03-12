@@ -369,7 +369,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             <label className="block text-sm font-medium text-slate-700 mb-2">Mode de transport</label>
             <select
               value={formData.transportMode}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, transportMode: (e.target as HTMLInputElement).value } as TravelFormData)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, transportMode: e.target.value } as TravelFormData)}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             >
               <option value="BUS">Bus</option>
@@ -469,7 +469,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
                 <label className="block text-xs font-medium text-slate-600 mb-1">Type</label>
                 <select
                   value={room.type}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'type', (e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateRoom(idx, 'type', e.target.value)}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
                 >
                   {ROOM_TYPES.map((rt) => (

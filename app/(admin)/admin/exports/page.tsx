@@ -339,7 +339,7 @@ export default function ExportsPage() {
                 </label>
                 <select
                   value={selectedType}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedType((e.target as HTMLInputElement).value as ExportType)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedType(e.target.value as ExportType)}
                   className="admin-input"
                 >
                   {exportTypes.map((type) => (
@@ -356,7 +356,7 @@ export default function ExportsPage() {
                 </label>
                 <select
                   value={selectedTrip}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedTrip((e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedTrip(e.target.value)}
                   className="admin-input"
                 >
                   <option value="">Sélectionner un voyage</option>
@@ -374,7 +374,7 @@ export default function ExportsPage() {
                 </label>
                 <select
                   value={selectedFormat}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedFormat((e.target as HTMLInputElement).value as 'CSV' | 'PDF')}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedFormat(e.target.value as 'CSV' | 'PDF')}
                   className="admin-input"
                 >
                   {allowedFormats.map((fmt) => (

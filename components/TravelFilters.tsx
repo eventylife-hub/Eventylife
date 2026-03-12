@@ -76,7 +76,7 @@ export function TravelFilters({
         </label>
         <select
           value={sortBy}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onSortChange((e.target as HTMLInputElement).value)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onSortChange(e.target.value)}
           className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
           <option value="popular">Plus populaires</option>

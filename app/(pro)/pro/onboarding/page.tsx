@@ -333,7 +333,7 @@ function StepProfile({ formData, setFormData }: { formData: OnboardingFormData; 
           <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Type de prestataire</label>
           <select
             value={formData.proType || ''}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, proType: (e.target as HTMLInputElement).value })}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, proType: e.target.value })}
             className="pro-input"
           >
             <option value="">Sélectionner...</option>

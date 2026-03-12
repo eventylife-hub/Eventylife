@@ -342,7 +342,7 @@ export default function ProDocumentsPage() {
               </label>
               <select
                 value={selectedDocType}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedDocType((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedDocType(e.target.value)}
                 className="pro-input"
               >
                 <option value="">Sélectionnez un type</option>

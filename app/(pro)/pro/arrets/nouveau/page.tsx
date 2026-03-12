@@ -151,7 +151,7 @@ export default function NouvelArretPage() {
                 </label>
                 <select
                   value={form.type}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('type', (e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateField('type', e.target.value)}
                   className="pro-input"
                 >
                   <option value="PICKUP_DEPARTURE">Point de depart (ramassage)</option>

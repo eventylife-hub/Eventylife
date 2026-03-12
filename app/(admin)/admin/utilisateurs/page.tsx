@@ -55,7 +55,7 @@ export default function UtilisateursPage() {
         credentials: 'include',
       });
       if (response.ok) {
-        const data: PaginatedResponse = await response.json() as unknown;
+        const data = (await response.json()) as PaginatedResponse;
         setUsers(data.data || []);
         setTotalPages(data.totalPages || 1);
         setTotal(data.total || 0);
@@ -252,7 +252,7 @@ export default function UtilisateursPage() {
               <label className="admin-input-label">Rôle</label>
               <select
                 value={roleFilter}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRoleFilter((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRoleFilter(e.target.value)}
                 className="admin-input"
                 disabled={loading}
               >
@@ -268,7 +268,7 @@ export default function UtilisateursPage() {
               <label className="admin-input-label">Statut</label>
               <select
                 value={statusFilter}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
                 className="admin-input"
                 disabled={loading}
               >

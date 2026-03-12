@@ -296,7 +296,7 @@ export default function EquipePage() {
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rôle</label>
               <select
                 value={inviteRole}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInviteRole((e.target as HTMLInputElement).value as 'CREATOR' | 'INDEPENDANT' | 'VENDEUR')}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setInviteRole(e.target.value as 'CREATOR' | 'INDEPENDANT' | 'VENDEUR')}
                 className="pro-input"
                 style={{ width: '100%' }}
               >

@@ -325,7 +325,7 @@ export default function InscriptionPage() {
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
                 <select
                   value={form.zone}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, zone: (e.target as HTMLInputElement).value })}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setForm({ ...form, zone: e.target.value })}
                   className="pro-input"
                 >
                   <option value="">Sélectionnez une zone</option>

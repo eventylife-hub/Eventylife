@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Copy, QrCode, TrendingUp } from 'lucide-react';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
+
 interface Trip {
   id: string;
   name: string;
@@ -322,7 +324,8 @@ export default function QuickSellPage() {
                   <div>
                     <p style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>QR Code</p>
                     <div style={{ border: '1px solid #E0E0E0', borderRadius: '8px', padding: '8px', backgroundColor: '#fff' }}>
-                      <img src={sellerLink.qrCodeUrl} alt="QR Code" style={{ width: '100%', height: 'auto' }} />
+                      {/* SECURITY: URL validated against XSS injection via sanitizeImageUrl */}
+                      <img src={sanitizeImageUrl(sellerLink.qrCodeUrl)} alt="QR Code" style={{ width: '100%', height: 'auto' }} />
                     </div>
                   </div>
                 )}

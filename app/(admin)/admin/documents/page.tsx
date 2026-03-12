@@ -233,7 +233,7 @@ export default function AdminDocumentsPage() {
               </label>
               <select
                 value={statusFilter}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
                 className="admin-input"
               >
                 <option value="">Tous les statuts</option>

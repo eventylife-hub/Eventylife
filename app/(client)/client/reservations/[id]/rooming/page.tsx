@@ -1,9 +1,9 @@
+'use client';
+
 /**
  * Rooming détails — Gestion de la chambre et co-occupants
  * Page pour détails de rooming, préférences, et documents
  */
-
-'use client';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -356,7 +356,7 @@ export default function RoomingPage() {
               </label>
               <select
                 value={preferences.bedType}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, bedType: (e.target as HTMLInputElement).value })}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setPreferences({ ...preferences, bedType: e.target.value })}
                 disabled={isCutoffPassed}
                 style={{
                   width: '100%',

@@ -289,7 +289,7 @@ export default function TravelReviewsPage() {
             </h2>
             <select
               value={sortBy}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSortBy((e.target as HTMLInputElement).value as 'recent' | 'rating-high' | 'rating-low')}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value as 'recent' | 'rating-high' | 'rating-low')}
               className="px-4 py-2 rounded-lg focus:ring-2"
               style={{
                 borderRadius: '12px',

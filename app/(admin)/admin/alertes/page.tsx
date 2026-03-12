@@ -257,7 +257,7 @@ export default function AdminAlertesPage() {
               <label className="admin-kpi-label block mb-2">Niveau</label>
               <select
                 value={levelFilter}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLevelFilter((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setLevelFilter(e.target.value)}
                 className="admin-input"
                 style={{ width: '160px' }}
               >
@@ -272,7 +272,7 @@ export default function AdminAlertesPage() {
               <label className="admin-kpi-label block mb-2">Statut</label>
               <select
                 value={statusFilter}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
                 className="admin-input"
                 style={{ width: '160px' }}
               >

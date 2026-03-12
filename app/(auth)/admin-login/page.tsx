@@ -1,9 +1,10 @@
+'use client';
+
 /**
  * Portail de connexion Administration — Design Admin V4 (Sun/Ocean)
  * Route : /admin-login
  * Séparé du layout admin (pas de sidebar)
  */
-'use client';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

@@ -498,7 +498,7 @@ export default function CreateTripPage() {
               <div className="space-y-4">
                 <div>
                   <label htmlFor="transport-mode" className="admin-input-label">Mode de transport</label>
-                  <select id="transport-mode" value={transport.mode} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTransport((prev) => ({ ...prev, mode: (e.target as HTMLInputElement).value as TransportMode }))} className="admin-input mt-1">
+                  <select id="transport-mode" value={transport.mode} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTransport((prev) => ({ ...prev, mode: e.target.value as TransportMode }))} className="admin-input mt-1">
                     <option value="BUS">Bus</option>
                     <option value="FLIGHT">Avion</option>
                     <option value="MIXED">Mixte (Bus + Avion)</option>

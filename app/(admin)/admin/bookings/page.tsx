@@ -267,7 +267,7 @@ export default function AdminBookingsPage() {
 
               <div>
                 <label className="admin-kpi-label block mb-2">Statut</label>
-                <select value={statusFilter} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStatusFilter((e.target as HTMLInputElement).value)} className="admin-input">
+                <select value={statusFilter} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)} className="admin-input">
                   <option value="all">Tous les statuts</option>
                   <option value="HOLD">En attente</option>
                   <option value="PARTIALLY_PAID">Partiellement payé</option>

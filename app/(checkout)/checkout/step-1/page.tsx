@@ -312,8 +312,8 @@ export default function CheckoutStep1Page() {
                       cursor: 'pointer',
                     }}
                     value={room.occupancyCount}
-                    onChange={(e) =>
-                      handleOccupancyChange(room.roomTypeId, parseInt((e.target as HTMLInputElement).value) || 0)
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      handleOccupancyChange(room.roomTypeId, parseInt(e.target.value) || 0)
                     }
                     onFocus={(e) => {
                       (e.target as HTMLSelectElement).style.borderColor = 'var(--terra, #C75B39)';

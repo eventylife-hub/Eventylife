@@ -217,7 +217,7 @@ export default function AvisPage() {
               </label>
               <select
                 value={formData.travelId}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, travelId: (e.target as HTMLInputElement).value })}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, travelId: e.target.value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
                   border: '1.5px solid #E5E0D8',
