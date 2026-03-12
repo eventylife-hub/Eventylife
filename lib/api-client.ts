@@ -33,6 +33,16 @@ class ApiClient {
   /** Méthodes HTTP considérées comme mutantes (nécessitent le CSRF) */
   private static readonly MUTATING_METHODS = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 
+  /** Verrou pour éviter les race conditions lors du refresh token */
+  private isRefreshing = false;
+  private refreshQueue: Array<{
+    resolve: (value: boolean) => void;
+    reject: (reason: unknown) => void;
+  }> = [];
+
+  /** Compteur de retries pour éviter les boucles infinies */
+  private static readonly MAX_RETRY_COUNT = 1;
+
   constructor(baseUrl: string = (process.env.NEXT_PUBLIC_API_URL ?? '/api')) {
     this.baseUrl = baseUrl;
   }
@@ -149,18 +159,32 @@ class ApiClient {
         headers: requestHeaders,
       });
 
-      // Gestion du 401 - Token expiré
+      // Gestion du 401 - Token expiré (avec protection anti-boucle)
       if (response.status === 401) {
-        const refreshed = await this.refreshAccessToken();
-        if (refreshed) {
-          // Réessayer la requête avec le nouveau token
-          return this.request<T>(endpoint, options);
-        } else {
-          // Rediriger vers connexion
+        // Extraire le retry count pour éviter les boucles infinies
+        const retryCount = (options as Record<string, unknown>).__retryCount as number || 0;
+
+        if (retryCount >= ApiClient.MAX_RETRY_COUNT) {
+          // Max retries atteint — forcer la déconnexion
           if (typeof window !== 'undefined') {
-            window.location.href = '/connexion';
+            window.location.href = '/connexion?reason=session-expired';
           }
-          throw new Error('Session expirée');
+          throw new Error('Session expirée — veuillez vous reconnecter');
+        }
+
+        const refreshed = await this.refreshAccessTokenSafe();
+        if (refreshed) {
+          // Réessayer la requête avec le nouveau token (incrémenter le compteur)
+          return this.request<T>(endpoint, {
+            ...options,
+            __retryCount: retryCount + 1,
+          } as RequestInit);
+        } else {
+          // Refresh échoué — rediriger vers connexion
+          if (typeof window !== 'undefined') {
+            window.location.href = '/connexion?reason=session-expired';
+          }
+          throw new Error('Session expirée — veuillez vous reconnecter');
         }
       }
 
@@ -186,7 +210,40 @@ class ApiClient {
   }
 
   /**
-   * Rafraîchit le token d'accès
+   * Rafraîchit le token d'accès avec verrou anti-race-condition
+   * Si un refresh est déjà en cours, les appels suivants attendent le résultat
+   */
+  private async refreshAccessTokenSafe(): Promise<boolean> {
+    // Si un refresh est déjà en cours, attendre son résultat
+    if (this.isRefreshing) {
+      return new Promise<boolean>((resolve, reject) => {
+        this.refreshQueue.push({ resolve, reject });
+      });
+    }
+
+    this.isRefreshing = true;
+
+    try {
+      const result = await this.refreshAccessToken();
+
+      // Résoudre toutes les requêtes en attente
+      this.refreshQueue.forEach(({ resolve }) => resolve(result));
+      this.refreshQueue = [];
+
+      return result;
+    } catch (error) {
+      // Rejeter toutes les requêtes en attente
+      this.refreshQueue.forEach(({ reject }) => reject(error));
+      this.refreshQueue = [];
+
+      return false;
+    } finally {
+      this.isRefreshing = false;
+    }
+  }
+
+  /**
+   * Rafraîchit le token d'accès (appel HTTP brut)
    */
   private async refreshAccessToken(): Promise<boolean> {
     try {

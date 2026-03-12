@@ -20,8 +20,8 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Installer dumb-init pour la gestion des signaux
-RUN apk add --no-cache dumb-init
+# Installer dumb-init et curl pour les health checks
+RUN apk add --no-cache dumb-init curl
 
 # Copier les fichiers package
 COPY package*.json ./
@@ -40,6 +40,10 @@ RUN adduser -S nextjs -u 1001
 USER nextjs
 
 EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+    CMD curl -f http://localhost:3000/api/health || curl -f http://localhost:3000 || exit 1
 
 # Utiliser dumb-init pour un arrêt gracieux
 ENTRYPOINT ["dumb-init", "--"]

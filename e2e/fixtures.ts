@@ -123,6 +123,8 @@ async function setAuthToken(page: Page, token: string): Promise<void> {
 
 /**
  * Fixture: Page authentifiée en tant que client
+ * SECURITY (LOT 166): Les fallbacks .local sont pour le dev local uniquement.
+ * En CI, définir TEST_EMAIL et TEST_PASSWORD via les variables d'environnement.
  */
 async function clientPage({ page }: any, use: any): Promise<void> {
   const email = process.env.TEST_EMAIL || 'testuser@eventy.local';
@@ -146,6 +148,7 @@ async function clientPage({ page }: any, use: any): Promise<void> {
 
 /**
  * Fixture: Page authentifiée en tant que professionnel (Pro)
+ * SECURITY (LOT 166): Fallbacks .local pour dev uniquement — définir les env vars en CI.
  */
 async function proPage({ page }: any, use: any): Promise<void> {
   const email = process.env.TEST_PRO_EMAIL || 'pro@eventy.local';
@@ -169,6 +172,7 @@ async function proPage({ page }: any, use: any): Promise<void> {
 
 /**
  * Fixture: Page authentifiée en tant qu'administrateur
+ * SECURITY (LOT 166): Fallbacks .local pour dev uniquement — définir les env vars en CI.
  */
 async function adminPage({ page }: any, use: any): Promise<void> {
   const email = process.env.TEST_ADMIN_EMAIL || 'admin@eventy.local';
