@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useNotificationStore } from '@/lib/stores/notification-store';
 import { NotificationItem } from './notification-item';
+import { logger } from '@/lib/logger';
 
 /**
  * Composant cloche de notifications dans le header
@@ -13,6 +14,7 @@ import { NotificationItem } from './notification-item';
 export function NotificationBell() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -54,23 +56,43 @@ export function NotificationBell() {
 
   const handleBellClick = async () => {
     setIsOpen(!isOpen);
+    setError(null);
     if (!isOpen && notifications.length === 0) {
       setIsLoading(true);
-      await fetchNotifications();
-      setIsLoading(false);
+      try {
+        await fetchNotifications();
+      } catch (err: unknown) {
+        setError('Impossible de charger les notifications.');
+        logger.error(err);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const handleMarkAsRead = async (id: string) => {
-    await markAsRead(id);
+    try {
+      await markAsRead(id);
+    } catch (err: unknown) {
+      logger.error(err);
+    }
   };
 
   const handleMarkAllAsRead = async () => {
-    await markAllAsRead();
+    try {
+      await markAllAsRead();
+    } catch (err: unknown) {
+      setError('Erreur lors du marquage des notifications.');
+      logger.error(err);
+    }
   };
 
   const handleDelete = async (id: string) => {
-    await deleteNotification(id);
+    try {
+      await deleteNotification(id);
+    } catch (err: unknown) {
+      logger.error(err);
+    }
   };
 
   const recentNotifications = notifications.slice(0, 5);
@@ -120,6 +142,13 @@ export function NotificationBell() {
               </button>
             )}
           </div>
+
+          {/* Erreur */}
+          {error && (
+            <div className="px-4 py-2 bg-red-50 border-b border-red-100">
+              <p className="text-xs text-red-700">{error}</p>
+            </div>
+          )}
 
           {/* Contenu */}
           <div className="max-h-96 overflow-y-auto">

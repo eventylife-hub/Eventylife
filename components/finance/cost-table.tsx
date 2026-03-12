@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Trash2, Plus } from 'lucide-react';
+import { Trash2, Plus, AlertCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
 
 interface Cost {
@@ -34,6 +34,8 @@ export function CostTable({
   onUpdate,
 }: CostTableProps) {
   const [adding, setAdding] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     costAmountHT: '',
@@ -42,6 +44,9 @@ export function CostTable({
 
   const handleAddCost = async () => {
     if (!formData.title || !formData.costAmountHT) return;
+
+    setError(null);
+    setIsSubmitting(true);
 
     try {
       // Ajouter un coût
@@ -56,17 +61,23 @@ export function CostTable({
         }),
       });
 
-      if (!res.ok) throw new Error('Erreur ajout coût');
+      if (!res.ok) throw new Error('Erreur lors de l\'ajout du coût. Veuillez réessayer.');
 
       setFormData({ title: '', costAmountHT: '', vatRateBps: '2000' });
       setAdding(false);
       onUpdate();
     } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Une erreur est survenue lors de l\'ajout du coût.';
+      setError(message);
       logger.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleDeleteCost = async (costId: string) => {
+    setError(null);
+
     try {
       // Supprimer un coût
       const res = await fetch(`/api/finance/costs/${costId}`, {
@@ -74,15 +85,23 @@ export function CostTable({
         credentials: 'include',
       });
 
-      if (!res.ok) throw new Error('Erreur suppression');
+      if (!res.ok) throw new Error('Erreur lors de la suppression du coût.');
       onUpdate();
     } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Une erreur est survenue lors de la suppression.';
+      setError(message);
       logger.error(err);
     }
   };
 
   return (
     <div className="space-y-4">
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-3 flex items-start gap-3" role="alert">
+          <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-red-700">{error}</p>
+        </div>
+      )}
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="border-b">
@@ -188,9 +207,10 @@ export function CostTable({
         {adding && (
           <button type="button"
             onClick={handleAddCost}
+            disabled={isSubmitting}
             className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center rounded-lg"
           >
-            Ajouter
+            {isSubmitting ? 'Ajout...' : 'Ajouter'}
           </button>
         )}
       </div>

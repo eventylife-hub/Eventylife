@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Pencil, Check, X } from 'lucide-react';
+import { Pencil, Check, X, AlertCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
 
 interface Room {
@@ -36,6 +36,7 @@ export function RoomingTable({
   const [editingRoomId, setEditingRoomId] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleEditRoom = (room: Room) => {
     setEditingRoomId(room.id);
@@ -46,6 +47,8 @@ export function RoomingTable({
 
   const handleSaveRoom = async () => {
     if (!editingRoomId) return;
+
+    setError(null);
 
     try {
       setIsSaving(true);
@@ -61,13 +64,15 @@ export function RoomingTable({
         }
       );
 
-      if (!res.ok) throw new Error('Erreur sauvegarde');
+      if (!res.ok) throw new Error('Erreur lors de l\'attribution de la chambre. Veuillez réessayer.');
 
       setEditingRoomId(null);
       setEditValue('');
       // Recharger le parent
       window.location.reload();
     } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Une erreur est survenue lors de la sauvegarde.';
+      setError(message);
       logger.error(err);
     } finally {
       setIsSaving(false);
@@ -75,7 +80,14 @@ export function RoomingTable({
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="space-y-4">
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-3 flex items-start gap-3" role="alert">
+          <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-red-700">{error}</p>
+        </div>
+      )}
+      <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead className="border-b">
           <tr className="text-left">
@@ -157,6 +169,7 @@ export function RoomingTable({
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
