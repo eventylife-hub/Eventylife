@@ -383,7 +383,7 @@ export default function InscriptionPage() {
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>
                 <textarea
                   value={form.description}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, description: (e.target as HTMLInputElement).value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, description: e.target.value })}
                   placeholder="Décrivez votre expérience et vos spécialités..."
                   rows={4}
                   className="pro-input"

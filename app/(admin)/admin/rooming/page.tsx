@@ -402,10 +402,10 @@ export default function AdminRoomingPage() {
 
       {/* Modal détail chambre */}
       {selectedRoom && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="room-detail-title">
           <div className="admin-panel w-full max-w-md">
             <div className="admin-panel-header flex flex-row items-center justify-between">
-              <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+              <h2 id="room-detail-title" className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
                 Détails de la chambre {selectedRoom.number}
               </h2>
               <button type="button"
@@ -470,10 +470,10 @@ export default function AdminRoomingPage() {
 
       {/* Modal édition assignation chambre */}
       {editingRoom && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="room-edit-title">
           <div className="admin-panel w-full max-w-md">
             <div className="admin-panel-header flex flex-row items-center justify-between">
-              <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
+              <h2 id="room-edit-title" className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
                 Modifier l'assignation - Chambre {editingRoom.number}
               </h2>
               <button type="button"

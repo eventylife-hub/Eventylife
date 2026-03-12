@@ -254,7 +254,7 @@ export default function AvisPage() {
               </label>
               <textarea
                 value={formData.comment}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, comment: (e.target as HTMLInputElement).value })}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: e.target.value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
                 style={{
                   border: '1.5px solid #E5E0D8',

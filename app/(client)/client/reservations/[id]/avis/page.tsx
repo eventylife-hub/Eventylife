@@ -293,7 +293,7 @@ export default function FeedbackPage() {
           </label>
           <textarea
             value={comment}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment((e.target as HTMLInputElement).value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value)}
             placeholder="Partagez vos impressions, ce que vous avez aimé, ce qui pourrait être amélioré..."
             className="w-full px-4 py-3 rounded-lg"
             style={{

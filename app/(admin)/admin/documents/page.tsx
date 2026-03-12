@@ -345,9 +345,9 @@ export default function AdminDocumentsPage() {
       </div>
 
       {showApprovalModal && selectedDocument && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="doc-review-title">
           <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
+            <h3 id="doc-review-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
               Examiner le document
             </h3>
 
@@ -382,7 +382,7 @@ export default function AdminDocumentsPage() {
                   </label>
                   <textarea
                     value={approvalReason}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setApprovalReason((e.target as HTMLInputElement).value)}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setApprovalReason(e.target.value)}
                     style={{
                       width: '100%',
                       padding: '12px',

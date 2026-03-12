@@ -396,9 +396,9 @@ export default function ProSupportPage() {
 
       {/* Modal nouveau ticket */}
       {showNewTicketModal && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
+        <div role="dialog" aria-modal="true" aria-labelledby="new-ticket-title" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
           <div className="pro-panel" style={{ maxWidth: '512px', width: '100%', maxHeight: '90vh', overflowY: 'auto' }}>
-            <h2 className="pro-section-title" style={{ marginBottom: '24px' }}>
+            <h2 id="new-ticket-title" className="pro-section-title" style={{ marginBottom: '24px' }}>
               Créer un nouveau ticket
             </h2>
 

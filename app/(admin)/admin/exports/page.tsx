@@ -326,9 +326,9 @@ export default function ExportsPage() {
       </div>
 
       {isDialogOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="export-dialog-title">
           <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
-            <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
+            <h2 id="export-dialog-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
               Générer un export
             </h2>
 
@@ -393,7 +393,7 @@ export default function ExportsPage() {
                   type="text"
                   placeholder="Raison de cet export (requis)"
                   value={motif}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMotif((e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMotif(e.target.value)}
                   className="admin-input"
                 />
                 <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)', marginTop: '6px' }}>

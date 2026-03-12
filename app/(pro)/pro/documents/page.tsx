@@ -330,9 +330,9 @@ export default function ProDocumentsPage() {
 
       {/* Modal de téléchargement */}
       {showUploadModal && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
+        <div role="dialog" aria-modal="true" aria-labelledby="upload-modal-title" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
           <div className="pro-panel" style={{ maxWidth: '448px', width: '100%' }}>
-            <h3 className="pro-panel-title" style={{ marginBottom: '16px' }}>
+            <h3 id="upload-modal-title" className="pro-panel-title" style={{ marginBottom: '16px' }}>
               Ajouter un document administratif
             </h3>
 

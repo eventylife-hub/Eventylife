@@ -329,7 +329,7 @@ export default function SupportPage() {
               <textarea
                 id="ticket-message"
                 value={formData.message}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, message: (e.target as HTMLInputElement).value })}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Décrivez votre problème en détail. Plus vous donnez de détails, plus nous pourrons vous aider rapidement."
                 required
                 minLength={20}

@@ -160,7 +160,7 @@ export function LifecycleTimeline({
                   <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
                     <textarea
                       value={actionReason}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setActionReason((e.target as HTMLInputElement).value)}
+                      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setActionReason(e.target.value)}
                       placeholder="Motif / Raison..."
                       className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
                       rows={3}

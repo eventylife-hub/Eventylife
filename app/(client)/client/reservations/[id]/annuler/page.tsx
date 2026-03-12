@@ -264,7 +264,7 @@ export default function CancelReservationPage() {
           </label>
           <textarea
             value={reason}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReason((e.target as HTMLInputElement).value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReason(e.target.value)}
             placeholder="Décrivez les raisons de votre annulation..."
             className="w-full px-4 py-2 rounded-lg"
             style={{

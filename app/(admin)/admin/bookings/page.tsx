@@ -230,6 +230,8 @@ export default function AdminBookingsPage() {
 
       {toastMessage && (
         <div
+          role="alert"
+          aria-live="polite"
           className="admin-alert-bar"
           style={{
             background: toastMessage.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
@@ -238,7 +240,7 @@ export default function AdminBookingsPage() {
           }}
         >
           <span>{toastMessage.message}</span>
-          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
+          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)} aria-label="Fermer la notification">
             Fermer
           </button>
         </div>
@@ -400,10 +402,10 @@ export default function AdminBookingsPage() {
       </div>
 
       {showActionModal && selectedBooking && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="booking-action-title">
           <div style={{ background: 'white', borderRadius: '16px', width: '100%', maxWidth: '448px', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>
+              <h2 id="booking-action-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>
                 {actionType === 'cancel'
                   ? 'Annuler et Rembourser'
                   : actionType === 'extend'
@@ -413,6 +415,7 @@ export default function AdminBookingsPage() {
               <button type="button"
                 onClick={() => setShowActionModal(false)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text-secondary)', fontSize: '18px' }}
+                aria-label="Fermer"
               >
                 ×
               </button>
@@ -444,7 +447,7 @@ export default function AdminBookingsPage() {
                 placeholder="Expliquez la raison de cette action..."
                 rows={4}
                 value={actionReason}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setActionReason((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setActionReason(e.target.value)}
               />
             </div>
 

@@ -124,7 +124,7 @@ export function FeedbackForm({
         </label>
         <textarea
           value={comment}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setComment((e.target as HTMLInputElement).value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value)}
           placeholder="Partagez vos impressions, ce que vous avez aimé, ce qui pourrait être amélioré..."
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           rows={6}

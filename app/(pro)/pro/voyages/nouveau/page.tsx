@@ -326,7 +326,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           <label className="block text-sm font-medium text-slate-700 mb-2">Description</label>
           <textarea
             value={formData.description}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, description: (e.target as HTMLInputElement).value } as TravelFormData)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, description: e.target.value } as TravelFormData)}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             placeholder="Décrivez votre voyage..."
             rows={4}
@@ -683,7 +683,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
             <div className="p-4 space-y-3">
               <textarea
                 value={day.description}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateDay(dIdx, 'description', (e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => updateDay(dIdx, 'description', e.target.value)}
                 placeholder="Description générale du jour (optionnel)"
                 rows={2}
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"

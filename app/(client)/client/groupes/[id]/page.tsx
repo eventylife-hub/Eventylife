@@ -321,7 +321,7 @@ export default function GroupDetailPage() {
             <form onSubmit={handleSendMessage} className="flex gap-2">
               <textarea
                 value={newMessage}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewMessage((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewMessage(e.target.value)}
                 placeholder="Écrire un message..."
                 className="flex-1 px-4 py-2 resize-none rounded-lg"
                 style={{

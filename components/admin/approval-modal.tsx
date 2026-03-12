@@ -47,10 +47,10 @@ export function ApprovalModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="approval-modal-title">
       <div className="w-full max-w-md bg-white rounded-xl border shadow-sm">
         <div className="p-6 pb-0">
-          <h2 className="text-lg font-semibold">Décision pour {entityName}</h2>
+          <h2 id="approval-modal-title" className="text-lg font-semibold">Décision pour {entityName}</h2>
         </div>
         <div className="p-6 space-y-6">
           {/* Action Selection */}
@@ -91,7 +91,7 @@ export function ApprovalModal({
                 className="w-full h-24 p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Décrivez la raison du rejet..."
                 value={reason}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReason((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReason(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>

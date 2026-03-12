@@ -394,7 +394,7 @@ export default function CancellationDetailPage() {
               </label>
               <textarea
                 value={rejectionReason}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRejectionReason((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setRejectionReason(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"
                 rows={4}
               />

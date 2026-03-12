@@ -86,9 +86,9 @@ export function LegalAcceptanceModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
-        <h2 className="mb-6 text-2xl font-bold text-gray-900">
+        <h2 id="legal-modal-title" className="mb-6 text-2xl font-bold text-gray-900">
           Acceptation des documents légaux
         </h2>
 

@@ -356,7 +356,7 @@ export default function TravelLifecyclePage() {
                 </label>
                 <textarea
                   value={cancelReason}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCancelReason((e.target as HTMLInputElement).value)}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCancelReason(e.target.value)}
                   className="admin-input"
                   rows={4}
                   placeholder="Entrez le motif..."
