@@ -155,8 +155,27 @@ export default function ClientDocumentsPage() {
       </div>
 
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
-          <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>⚠️ {error}</p>
+        <div style={{
+          padding: '1rem 1.5rem',
+          backgroundColor: 'var(--terra-soft, #FEF2F2)',
+          border: '1.5px solid #E5E0D8',
+          borderRadius: '14px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+          <span style={{ color: 'var(--terra, #C75B39)', fontWeight: 500 }}>{error}</span>
+          <button type="button" onClick={() => setError(null)} style={{
+            padding: '0.25rem 0.75rem',
+            fontSize: '0.875rem',
+            color: 'var(--terra, #C75B39)',
+            border: '1px solid var(--terra, #C75B39)',
+            borderRadius: '8px',
+            background: 'transparent',
+            cursor: 'pointer',
+          }}>
+            Fermer
+          </button>
         </div>
       )}
 
