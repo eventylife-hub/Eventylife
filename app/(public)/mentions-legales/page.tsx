@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Mentions Légales | Eventy Life',
+  description: 'Mentions légales d\'Eventy Life : informations sur l\'éditeur, l\'hébergeur, la propriété intellectuelle et les conditions d\'utilisation du site.',
+};
 
 export default function MentionsLegales() {
   return (

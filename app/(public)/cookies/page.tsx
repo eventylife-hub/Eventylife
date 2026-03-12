@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Politique de Cookies | Eventy Life',
+  description: 'Informations sur l\'utilisation des cookies par Eventy Life : cookies essentiels, analytiques et préférences. Gérez vos choix de consentement.',
+};
 
 export default function CookiesPolicy() {
   const cookies = [

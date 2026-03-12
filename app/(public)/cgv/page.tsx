@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Conditions Générales de Vente | Eventy Life',
+  description: 'Consultez les conditions générales de vente d\'Eventy Life : réservations, paiements, annulations, assurances et responsabilités pour vos voyages de groupe.',
+};
 
 export default function CGV() {
   return (
