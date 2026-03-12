@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download, FileText, Users, Phone, Truck, Plane, FileStack } from 'lucide-react';
 import { formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface ExportLog {
   id: string;
   createdAt: string;
@@ -279,12 +280,11 @@ export default function ExportsPage() {
       </div>
 
       {toastMessage && (
-        <div className="admin-alert-bar danger">
-          <span>{toastMessage}</span>
-          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)}>
-            Fermer
-          </button>
-        </div>
+        <ToastNotification
+          type="error"
+          message={toastMessage}
+          onClose={() => setToastMessage(null)}
+        />
       )}
 
       <div className="admin-panel">

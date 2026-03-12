@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { AlertCircle, Search, X, Clock, XCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface Booking {
   id: string;
   reference: string;
@@ -230,21 +231,11 @@ export default function AdminBookingsPage() {
       </div>
 
       {toastMessage && (
-        <div
-          role="alert"
-          aria-live="polite"
-          className="admin-alert-bar"
-          style={{
-            background: toastMessage.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
-            borderColor: toastMessage.type === 'success' ? 'var(--admin-mint)' : 'var(--admin-coral)',
-            color: toastMessage.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)',
-          }}
-        >
-          <span>{toastMessage.message}</span>
-          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToastMessage(null)} aria-label="Fermer la notification">
-            Fermer
-          </button>
-        </div>
+        <ToastNotification
+          type={toastMessage.type}
+          message={toastMessage.message}
+          onClose={() => setToastMessage(null)}
+        />
       )}
 
       <div className="admin-panel">

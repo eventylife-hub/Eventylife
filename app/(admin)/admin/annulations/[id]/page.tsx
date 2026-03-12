@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface CancellationDetail {
   id: string;
   bookingRef: string;
@@ -241,19 +242,11 @@ export default function CancellationDetailPage() {
 
       {/* Toast notification */}
       {toast && (
-        <div
-          className="admin-alert-bar"
-          style={{
-            background: toast.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
-            borderColor: toast.type === 'success' ? 'var(--admin-mint)' : 'var(--admin-coral)',
-            color: toast.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)',
-          }}
-        >
-          <span>{toast.message}</span>
-          <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => setToast(null)}>
-            Fermer
-          </button>
-        </div>
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

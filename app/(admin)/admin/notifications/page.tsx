@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { formatDate, formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface NotificationTemplate {
   id: string;
   name: string;
@@ -562,39 +563,11 @@ export default function AdminNotificationsPage() {
 
       {/* Toast de notification */}
       {toastMessage && (
-        <div role="alert" aria-live="assertive" style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          zIndex: 50,
-          animation: 'fadeInSlide 0.3s ease-out',
-        }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            padding: '12px 16px',
-            borderRadius: '8px',
-            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
-            border: `1px solid ${toastMessage.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)'}`,
-            background: toastMessage.type === 'success' ? 'var(--admin-mint-soft)' : 'var(--admin-coral-soft)',
-            color: toastMessage.type === 'success' ? 'var(--admin-success)' : 'var(--admin-coral)',
-          }}>
-            {toastMessage.type === 'success' ? (
-              <CheckCircle className="w-5 h-5" style={{ flexShrink: 0 }} />
-            ) : (
-              <XCircleIcon className="w-5 h-5" style={{ flexShrink: 0 }} />
-            )}
-            <span style={{ fontSize: '14px', fontWeight: '500' }}>{toastMessage.message}</span>
-            <button type="button"
-              onClick={() => setToastMessage(null)}
-              style={{ marginLeft: '8px', padding: '4px 8px', borderRadius: '4px', background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7, fontSize: '16px' }}
-              aria-label="Fermer"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
+        <ToastNotification
+          type={toastMessage.type}
+          message={toastMessage.message}
+          onClose={() => setToastMessage(null)}
+        />
       )}
 
       {/* Panel latéral - Détails de la notification */}

@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { formatDate } from '@/lib/utils';
 import { AlertCircle, AlertTriangle, Info, CheckCircle, XCircle, Clock, Filter, X } from 'lucide-react';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 type DataTableColumn<T> = { key: keyof T; label: string; render?: (value: unknown) => React.ReactNode };
 interface Alert {
   id: string;
@@ -435,39 +436,11 @@ export default function AdminAlertesPage() {
 
       {/* Toast de notification */}
       {toastMessage && (
-        <div role="alert" aria-live="polite" className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
-          <div
-            className="admin-alert-bar"
-            style={{
-              background:
-                toastMessage.type === 'success'
-                  ? 'var(--admin-mint-soft)'
-                  : 'var(--admin-coral-soft)',
-              borderColor:
-                toastMessage.type === 'success'
-                  ? 'var(--admin-mint)'
-                  : 'var(--admin-coral)',
-              color:
-                toastMessage.type === 'success'
-                  ? 'var(--admin-success)'
-                  : 'var(--admin-coral)',
-            }}
-          >
-            {toastMessage.type === 'success' ? (
-              <CheckCircle className="w-5 h-5 flex-shrink-0" />
-            ) : (
-              <XCircle className="w-5 h-5 flex-shrink-0" />
-            )}
-            <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button type="button"
-              onClick={() => setToastMessage(null)}
-              className="ml-2 p-1 rounded hover:bg-black/5"
-              aria-label="Fermer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+        <ToastNotification
+          type={toastMessage.type}
+          message={toastMessage.message}
+          onClose={() => setToastMessage(null)}
+        />
       )}
     </div>
   );
