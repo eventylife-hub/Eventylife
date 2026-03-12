@@ -325,6 +325,7 @@ export default function ProPublicPage() {
               <input
                 id="lead-phone"
                 type="tel"
+                autoComplete="tel"
                 placeholder="06 12 34 56 78"
                 value={leadForm.phone}
                 onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}

@@ -411,6 +411,7 @@ export default function ProfilePage() {
                   type="email"
                   id="email"
                   name="email"
+                  autoComplete="email"
                   value={formData?.email || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.email}
@@ -435,6 +436,7 @@ export default function ProfilePage() {
                   type="tel"
                   id="phone"
                   name="phone"
+                  autoComplete="tel"
                   value={formData?.phone || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.phone}

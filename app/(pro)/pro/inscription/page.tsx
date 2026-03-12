@@ -335,6 +335,7 @@ export default function InscriptionPage() {
                 <input
                   id="reg-phone"
                   type="tel"
+                  autoComplete="tel"
                   value={form.phone}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
                   placeholder="+33 6 12 34 56 78"

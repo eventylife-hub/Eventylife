@@ -174,6 +174,7 @@ export default function ParametresPage() {
               <input
                 id="settings-email"
                 type="email"
+                autoComplete="email"
                 value={profile?.email || ''}
                 disabled={!editable}
                 className="pro-input"
@@ -187,6 +188,7 @@ export default function ParametresPage() {
               <input
                 id="settings-phone"
                 type="tel"
+                autoComplete="tel"
                 value={profile?.phone || ''}
                 disabled={!editable}
                 className="pro-input"

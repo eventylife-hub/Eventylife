@@ -212,6 +212,7 @@ export default function EquipePage() {
                 <input
                   id="team-email"
                   type="email"
+                  autoComplete="email"
                   className="pro-input"
                   placeholder="membre@example.com"
                   value={newMemberEmail}

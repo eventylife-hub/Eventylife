@@ -520,7 +520,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
                 </div>
                 <div>
                   <label htmlFor="ckout-invitePhone" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--navy, #1A1A2E)', marginBottom: '0.5rem' }}>Téléphone (optionnel)</label>
-                  <input id="ckout-invitePhone" type="tel" value={newInvitePhone} onChange={e => setNewInvitePhone(e.target.value)} placeholder="+33 6 XX XX XX XX" style={inputStyle}
+                  <input id="ckout-invitePhone" type="tel" autoComplete="tel" value={newInvitePhone} onChange={e => setNewInvitePhone(e.target.value)} placeholder="+33 6 XX XX XX XX" style={inputStyle}
                     onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
                     onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }} />
                 </div>
