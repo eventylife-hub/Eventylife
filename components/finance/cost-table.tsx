@@ -129,7 +129,7 @@ export function CostTable({
                 <td className="py-2 text-center">
                   <button type="button"
                     onClick={() => handleDeleteCost(cost.id)}
-                    className="text-red-600 hover:text-red-700"
+                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-red-600 hover:text-red-700"
                     aria-label="Supprimer le coût"
                   >
                     <Trash2 className="w-4 h-4" />

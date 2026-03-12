@@ -258,7 +258,7 @@ export function Header({ user }: HeaderProps) {
             {/* Menu mobile */}
             <button type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg transition-colors"
+              className="md:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors"
               style={{ color: '#FAF7F2' }}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(250,247,242,0.1)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}

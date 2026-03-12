@@ -272,7 +272,7 @@ export function FileUpload({
               {file.status !== 'uploading' && (
                 <button type="button"
                   onClick={() => removeFile(file.id)}
-                  className="p-1 text-gray-400 hover:text-gray-600 flex-shrink-0"
+                  className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-600 flex-shrink-0"
                   aria-label="Supprimer le fichier"
                 >
                   <X className="w-4 h-4" />

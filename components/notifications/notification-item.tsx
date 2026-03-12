@@ -116,7 +116,7 @@ export const NotificationItem = React.memo(function NotificationItem({
       {/* Action delete */}
       <button type="button"
         onClick={handleDelete}
-        className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 transition"
+        className="flex-shrink-0 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-600 transition"
         aria-label="Supprimer"
       >
         <svg

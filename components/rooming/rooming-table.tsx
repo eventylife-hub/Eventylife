@@ -114,14 +114,14 @@ export function RoomingTable({
                     <button type="button"
                       onClick={handleSaveRoom}
                       disabled={isSaving}
-                      className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] h-7 px-2 bg-white"
+                      className="px-2 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] flex items-center justify-center bg-white"
                       aria-label="Enregistrer le numéro de chambre"
                     >
                       <Check className="w-4 h-4" />
                     </button>
                     <button type="button"
                       onClick={() => setEditingRoomId(null)}
-                      className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] h-7 px-2 bg-white"
+                      className="px-2 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] flex items-center justify-center bg-white"
                       aria-label="Annuler la modification"
                     >
                       <X className="w-4 h-4" />
@@ -158,7 +158,7 @@ export function RoomingTable({
                 {!room.isLocked && (
                   <button type="button"
                     onClick={() => handleEditRoom(room)}
-                    className="text-blue-600 hover:text-blue-700"
+                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-blue-600 hover:text-blue-700"
                     aria-label={`Modifier la chambre ${room.roomNumber || ''}`}
                   >
                     <Pencil className="w-4 h-4" />

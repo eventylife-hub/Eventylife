@@ -73,7 +73,7 @@ export function UploadProgress({
         {!isComplete && onCancel && (
           <button type="button"
             onClick={onCancel}
-            className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 transition-colors"
+            className="flex-shrink-0 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="Annuler"
           >
             <X className="h-5 w-5" />
