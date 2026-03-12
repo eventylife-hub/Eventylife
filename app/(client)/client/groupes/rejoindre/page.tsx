@@ -3,8 +3,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { ZodError } from 'zod';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
+import { joinGroupSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 /**
  * Page pour rejoindre un groupe via code d'invitation
  * Affiche les détails du groupe avant confirmation
@@ -26,9 +29,14 @@ export default function RejoindrePage() {
     e.preventDefault();
     setError(null);
 
-    if (!code.trim()) {
-      setError('Veuillez entrer un code');
-      return;
+    try {
+      joinGroupSchema.parse({ invitationCode: code });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {

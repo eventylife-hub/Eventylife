@@ -9,9 +9,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { ZodError } from 'zod';
 import { useToast } from '@/lib/stores/ui-store';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { leadFormSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface Travel {
   id: string;
   title: string;
@@ -127,9 +130,15 @@ export default function ProPublicPage() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!rgpdConsent) {
-      toast.warning('Veuillez accepter les conditions RGPD');
-      return;
+
+    try {
+      leadFormSchema.parse({ ...leadForm, consent: rgpdConsent });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        toast.warning(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {

@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ZodError } from 'zod';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
+import { reviewSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface CompletedTravel {
   id: string;
   title: string;
@@ -104,17 +107,14 @@ export default function AvisPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.travelId) {
-      alert('Veuillez sélectionner un voyage.');
-      return;
-    }
-    if (formData.comment.trim().length < 10) {
-      alert('Votre commentaire doit contenir au moins 10 caractères.');
-      return;
-    }
-    if (formData.rating < 1 || formData.rating > 5) {
-      alert('La note doit être comprise entre 1 et 5.');
-      return;
+    try {
+      reviewSchema.parse(formData);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     setSubmitting(true);

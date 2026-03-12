@@ -3,9 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { ZodError } from 'zod';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { createGroupSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 /**
  * Page de création d'un groupe de voyage
  * Formulaire avec prévisualisation du groupe créé
@@ -82,14 +85,19 @@ export default function CreerGroupePage() {
     e.preventDefault();
     setError(null);
 
-    if (!formData.name.trim()) {
-      setError('Le nom du groupe est requis');
-      return;
-    }
-
-    if (!formData.travelId) {
-      setError('Veuillez sélectionner un voyage');
-      return;
+    try {
+      createGroupSchema.parse({
+        name: formData.name,
+        travelId: formData.travelId,
+        maxMembers: parseInt(formData.maxMembers) || 10,
+        isPrivate: formData.isPrivate,
+      });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {

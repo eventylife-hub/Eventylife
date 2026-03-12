@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { ZodError } from 'zod';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { detailedReviewSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface BookingFeedback {
   id: string;
   reference: string;
@@ -84,13 +87,21 @@ export default function FeedbackPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (comment.trim().length < 10) {
-      setToast({ type: 'error', message: 'Votre commentaire doit contenir au moins 10 caractères.' });
-      return;
-    }
-    if (overallRating < 1 || overallRating > 5) {
-      setToast({ type: 'error', message: 'La note globale doit être comprise entre 1 et 5.' });
-      return;
+    try {
+      detailedReviewSchema.parse({
+        overallRating,
+        transportRating,
+        accommodationRating,
+        organizationRating,
+        guidanceRating,
+        comment,
+      });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setToast({ type: 'error', message: Object.values(fieldErrors).join('. ') });
+        return;
+      }
     }
 
     try {

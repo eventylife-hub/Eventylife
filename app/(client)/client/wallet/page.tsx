@@ -7,9 +7,12 @@
 
 
 import { useEffect, useState } from 'react';
+import { ZodError } from 'zod';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
+import { voucherCodeSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface Transaction {
   id: string;
   type: 'CREDIT' | 'DEBIT' | 'REFUND' | 'VOUCHER';
@@ -94,9 +97,14 @@ export default function WalletPage() {
 
   const handleRedeemVoucher = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!voucherCode.trim()) {
-      setVoucherMessage({ type: 'error', text: 'Veuillez entrer un code voucher' });
-      return;
+    try {
+      voucherCodeSchema.parse({ code: voucherCode });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setVoucherMessage({ type: 'error', text: Object.values(fieldErrors).join('. ') });
+        return;
+      }
     }
 
     setVoucherLoading(true);

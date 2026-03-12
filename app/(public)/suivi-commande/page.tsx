@@ -2,15 +2,31 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { ZodError } from 'zod';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { orderTrackingSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 
 export default function SuiviCommandePage() {
   const [orderRef, setOrderRef] = useState('');
   const [email, setEmail] = useState('');
   const [searched, setSearched] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    try {
+      orderTrackingSchema.parse({ orderRef, email });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
+    }
+
     setSearched(true);
   };
 

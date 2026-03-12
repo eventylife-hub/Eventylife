@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ZodError } from 'zod';
 import { ArrowLeft, MapPin, Save, Loader, AlertCircle, Upload } from 'lucide-react';
 import { logger } from '@/lib/logger';
+import { busStopSchema } from '@/lib/validations/bus-stop';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface BusStopForm {
   publicName: string;
   internalName: string;
@@ -46,15 +49,26 @@ export default function NouvelArretPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    const payload = {
+      ...form,
+      latitude: form.latitude ? parseFloat(form.latitude) : undefined,
+      longitude: form.longitude ? parseFloat(form.longitude) : undefined,
+    };
+
+    try {
+      busStopSchema.parse(payload);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
+    }
+
     setLoading(true);
 
     try {
-      const payload = {
-        ...form,
-        latitude: form.latitude ? parseFloat(form.latitude) : undefined,
-        longitude: form.longitude ? parseFloat(form.longitude) : undefined,
-      };
-
       const res = await fetch('/api/pro/bus-stops', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

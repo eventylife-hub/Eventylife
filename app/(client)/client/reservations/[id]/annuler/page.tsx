@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { ZodError } from 'zod';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { cancellationSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 interface Booking {
   id: string;
   reference: string;
@@ -97,9 +100,14 @@ export default function CancelReservationPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!reason.trim()) {
-      alert('Veuillez entrer un motif d\'annulation');
-      return;
+    try {
+      cancellationSchema.parse({ reason });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {

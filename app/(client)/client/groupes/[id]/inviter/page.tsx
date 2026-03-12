@@ -3,8 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ZodError } from 'zod';
 import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
+import { groupInviteSchema } from '@/lib/validations/client';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 /**
  * Page d'invitation des membres au groupe
  * Formulaire d'invitation et affichage des invitations en attente
@@ -66,9 +69,14 @@ export default function InviterPage() {
     setError(null);
     setSuccess(null);
 
-    if (!formData.email.trim()) {
-      setError('Veuillez entrer une adresse email');
-      return;
+    try {
+      groupInviteSchema.parse(formData);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {
