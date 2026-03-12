@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { Plus, MapPin, Image as ImageIcon, CheckCircle2, Clock, AlertCircle, RotateCcw } from 'lucide-react';
+import { ProEmptyState } from '@/components/pro';
 const STATUS_COLORS: Record<string, string> = {
   DRAFT: 'bg-slate-100 text-slate-800',
   SUBMITTED: 'bg-blue-100 text-blue-800',
@@ -191,15 +192,14 @@ export default function BusStopsPage() {
         {!loading && viewMode === 'cards' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
             {filteredStops.length === 0 ? (
-              <div className="pro-panel" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '48px 24px' }}>
-                <MapPin className="w-12 h-12" style={{ color: '#64748B', margin: '0 auto 16px' }} />
-                <p style={{ color: '#0A1628', fontWeight: 500 }}>Aucun arrêt créé</p>
-                <Link
-                  href="/pro/arrets/nouveau"
-                  style={{ color: 'var(--pro-ocean)', fontWeight: 500, fontSize: '14px', marginTop: '8px', display: 'inline-block' }}
-                >
-                  Créer votre premier arrêt →
-                </Link>
+              <div style={{ gridColumn: '1 / -1' }}>
+                <ProEmptyState
+                  icon={<MapPin className="w-12 h-12" style={{ color: '#64748B' }} />}
+                  title="Aucun arrêt créé"
+                  description="Définissez vos points d'arrêt pour organiser vos itinéraires"
+                  ctaLabel="Créer votre premier arrêt →"
+                  ctaHref="/pro/arrets/nouveau"
+                />
               </div>
             ) : (
               filteredStops.map((stop) => (

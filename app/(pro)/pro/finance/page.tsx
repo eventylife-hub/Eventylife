@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { ProEmptyState, ProPageHeader } from '@/components/pro';
 
 const FinanceSummary = dynamic(
   () => import('@/components/finance/finance-summary').then((m) => m.FinanceSummary),
@@ -118,13 +119,14 @@ export default function FinanceDashboardPage() {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', padding: '24px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          <h1 className="pro-page-title">Finance</h1>
-          <div className="pro-panel" style={{ textAlign: 'center', padding: '32px 24px' }}>
-            <p style={{ color: '#64748B', marginBottom: '16px' }}>Aucun voyage créé</p>
-            <button type="button" onClick={() => (window.location.href = '/pro/voyages/new')} className="pro-btn-sun">
-              Créer un voyage
-            </button>
-          </div>
+          <ProPageHeader title="Finance" />
+          <ProEmptyState
+            icon="📊"
+            title="Aucun voyage créé"
+            description="Créez votre premier voyage pour voir vos statistiques financières"
+            ctaLabel="Créer un voyage →"
+            ctaHref="/pro/voyages/nouveau"
+          />
         </div>
       </div>
     );
