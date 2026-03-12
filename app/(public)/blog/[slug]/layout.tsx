@@ -7,7 +7,7 @@ interface Props {
 /** Pre-generate known blog article slugs at build time */
 export async function generateStaticParams() {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
     const res = await fetch(`${apiUrl}/blog`, { next: { revalidate: 3600 } });
     if (res.ok) {
       const data = (await res.json()) as Array<{ slug: string }>;

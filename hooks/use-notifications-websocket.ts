@@ -22,7 +22,7 @@ export function useNotificationsWebSocket() {
         const wsUrl = process.env.NEXT_PUBLIC_WS_URL ||
           (typeof window !== 'undefined'
             ? `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}`
-            : 'ws://localhost:3001');
+            : 'ws://localhost:4000');
 
         // Les cookies httpOnly sont envoyés automatiquement avec le handshake WS
         const socket = new WebSocket(`${wsUrl}/notifications`);

@@ -188,6 +188,66 @@ export default function AdminDashboardPage() {
     fetchStats();
   }, []);
 
+  /* ═══════ LOADING STATE ═══════ */
+  if (loading) {
+    return (
+      <div className="page-enter">
+        <div className="admin-page-header admin-fade-in">
+          <div>
+            <div className="h-4 w-32 bg-gray-200 rounded animate-pulse mb-2" />
+            <div className="h-8 w-64 bg-gray-200 rounded animate-pulse" />
+          </div>
+        </div>
+        <div className="admin-kpi-grid stagger-children">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="admin-kpi-card admin-fade-in">
+              <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-3" />
+              <div className="h-10 w-16 bg-gray-200 rounded animate-pulse mb-2" />
+              <div className="h-3 w-32 bg-gray-200 rounded animate-pulse" />
+            </div>
+          ))}
+        </div>
+        <div className="admin-modules-grid" style={{ marginTop: '2rem' }}>
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="admin-panel" style={{ padding: '24px' }}>
+              <div className="h-6 w-40 bg-gray-200 rounded animate-pulse mb-3" />
+              <div className="h-4 w-full bg-gray-200 rounded animate-pulse mb-2" />
+              <div className="h-4 w-3/4 bg-gray-200 rounded animate-pulse" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  /* ═══════ ERROR STATE ═══════ */
+  if (error) {
+    return (
+      <div className="page-enter">
+        <div className="admin-page-header admin-fade-in">
+          <div>
+            <h2 className="admin-page-title">Tableau de bord</h2>
+          </div>
+        </div>
+        <div className="admin-panel admin-fade-in delay-1" style={{ padding: '48px', textAlign: 'center' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>⚠️</div>
+          <p style={{ fontSize: '18px', fontWeight: 600, color: '#1A1A2E', marginBottom: '8px' }}>
+            Impossible de charger le tableau de bord
+          </p>
+          <p style={{ color: '#64748B', marginBottom: '24px' }}>{error}</p>
+          <button
+            type="button"
+            onClick={fetchStats}
+            className="admin-btn-secondary"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+          >
+            🔄 Réessayer
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="page-enter">
       {/* ═══════ PAGE HEADER ═══════ */}

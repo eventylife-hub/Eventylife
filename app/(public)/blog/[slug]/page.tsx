@@ -89,7 +89,7 @@ export default function BlogArticlePage() {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
         const res = await fetch(`${apiUrl}/api/blog/${slug}`);
         if (res.ok) {
           const data = await res.json();

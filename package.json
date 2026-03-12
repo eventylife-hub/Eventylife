@@ -22,7 +22,7 @@
     "e2e:report": "playwright show-report"
   },
   "dependencies": {
-    "next": "^14.0.4",
+    "next": "^14.2.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.4.7",
@@ -43,7 +43,7 @@
     "autoprefixer": "^10.4.16",
     "prettier": "^3.1.1",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.0.4",
+    "eslint-config-next": "^14.2.35",
     "@testing-library/react": "^14.1.2",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/user-event": "^14.5.1",

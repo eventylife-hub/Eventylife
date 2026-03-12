@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Output standalone pour Docker — réduit l'image de ~1GB à ~150MB
+  output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -29,7 +31,7 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 jours
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || '',
   },
   async headers() {
@@ -54,10 +56,10 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // NOTE: unsafe-inline and unsafe-eval removed for better security
-              // Stripe and Google Maps require specific domains - using https:// only
+              // Next.js requiert 'unsafe-inline' pour style-src (injection de styles inline)
+              // TODO: Implémenter nonce-based CSP via middleware pour supprimer 'unsafe-inline'
               "script-src 'self' https://js.stripe.com https://maps.googleapis.com",
-              "style-src 'self' https://fonts.googleapis.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://*.amazonaws.com https://images.unsplash.com https://maps.gstatic.com",
               "connect-src 'self' https://api.stripe.com https://*.sentry.io",
@@ -86,7 +88,7 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
     return [
       {
         source: '/api/:path*',

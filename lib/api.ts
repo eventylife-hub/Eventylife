@@ -51,7 +51,7 @@ async function request<T>(
   endpoint: string,
   options: FetchOptions = {}
 ): Promise<ApiResponse<T>> {
-  const baseUrl = API_CONFIG.BASE_URL ?? 'http://localhost:3001/api';
+  const baseUrl = API_CONFIG.BASE_URL ?? 'http://localhost:4000/api';
   const url = `${baseUrl}${endpoint}`;
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

@@ -190,7 +190,16 @@ class ApiClient {
 
       // Autres erreurs HTTP
       if (!response.ok) {
-        const errorData: ApiError = await response.json();
+        let errorData: ApiError;
+        try {
+          errorData = await response.json();
+        } catch {
+          // Réponse non-JSON (HTML error page, timeout, etc.)
+          errorData = {
+            message: `Erreur serveur (${response.status})`,
+            statusCode: response.status,
+          } as ApiError;
+        }
         throw new ApiClientError(
           errorData.message || 'Erreur API',
           response.status,
