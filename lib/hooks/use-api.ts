@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { apiClient } from '@/lib/api-client';
+import { extractErrorMessage } from '@/lib/api-error';
 
 /**
  * 4 états UI conformes aux specs Eventy :
@@ -65,31 +66,26 @@ export function useApi<T>(
     setError(null);
 
     try {
-      const response = await apiClient.get(endpoint);
+      // apiClient.get() retourne directement les données (T), pas { success, data }
+      // Il lance une exception en cas d'erreur (4xx, 5xx, réseau)
+      const result = await apiClient.get<T>(endpoint);
 
       // Ignorer si une requête plus récente est en cours
       if (currentRequest !== requestRef.current) return;
 
-      if (response.success && response.data !== undefined) {
-        const result = response.data as T;
+      // Déterminer si les données sont vides
+      const isEmpty = Array.isArray(result)
+        ? result.length === 0
+        : result === null || result === undefined;
 
-        // Déterminer si les données sont vides
-        const isEmpty = Array.isArray(result)
-          ? result.length === 0
-          : result === null || result === undefined;
-
-        setData(result);
-        setState(isEmpty ? 'empty' : 'data');
-        onSuccess?.(result);
-      } else {
-        setData(null);
-        setState('empty');
-      }
+      setData(result);
+      setState(isEmpty ? 'empty' : 'data');
+      onSuccess?.(result);
     } catch (err) {
       if (currentRequest !== requestRef.current) return;
 
       const message =
-        err instanceof Error ? err.message : 'Une erreur est survenue';
+        extractErrorMessage(err);
 
       setError(message);
       setState('error');
@@ -144,30 +140,27 @@ export function useMutation<T>(
       setError(null);
 
       try {
-        let response;
+        // apiClient retourne directement T (lance une exception en cas d'erreur)
+        let result: T | undefined;
         switch (method) {
           case 'POST':
-            response = await apiClient.post(endpoint, body);
+            result = await apiClient.post<T>(endpoint, body as Record<string, unknown>);
             break;
           case 'PUT':
-            response = await apiClient.put(endpoint, body);
+            result = await apiClient.put<T>(endpoint, body as Record<string, unknown>);
             break;
           case 'PATCH':
-            response = await apiClient.patch(endpoint, body);
+            result = await apiClient.patch<T>(endpoint, body as Record<string, unknown>);
             break;
           case 'DELETE':
-            response = await apiClient.delete(endpoint);
+            result = await apiClient.delete<T>(endpoint);
             break;
         }
 
-        if (response.success) {
-          return (response.data as T) ?? null;
-        }
-
-        throw new Error(response.message || 'Erreur serveur');
+        return result ?? null;
       } catch (err) {
         const message =
-          err instanceof Error ? err.message : 'Une erreur est survenue';
+          extractErrorMessage(err);
         setError(message);
         return null;
       } finally {

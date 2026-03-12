@@ -110,6 +110,17 @@ class ApiClient {
   }
 
   /**
+   * Effectue une requête PUT
+   */
+  async put<T>(endpoint: string, body?: Record<string, unknown>, options?: RequestInit): Promise<T> {
+    return this.request<T>(endpoint, {
+      ...options,
+      method: 'PUT',
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  }
+
+  /**
    * Effectue une requête PATCH
    */
   async patch<T>(endpoint: string, body?: Record<string, unknown>, options?: RequestInit): Promise<T> {

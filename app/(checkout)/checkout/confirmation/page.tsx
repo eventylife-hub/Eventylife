@@ -15,6 +15,7 @@ import { ROUTES } from '@/lib/constants';
 import { formatPrice } from '@/lib/utils';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface BookingDetails {
   id: string;
@@ -128,8 +129,7 @@ export default function CheckoutConfirmationPage() {
         setError(response.error?.message || 'Erreur lors du téléchargement du PDF');
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur lors du téléchargement';
-      setError(message);
+      setError(extractErrorMessage(err, 'Erreur lors du téléchargement'));
     } finally {
       setDownloading(false);
     }

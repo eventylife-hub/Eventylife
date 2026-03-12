@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface InviteFormProps {
   groupId: string;
@@ -45,7 +46,7 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
       setMessage('');
       onSuccess?.();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de l\'envoi de l\'invitation');
+      setError(extractErrorMessage(err, 'Erreur lors de l\'envoi de l\'invitation'));
     } finally {
       setLoading(false);
     }

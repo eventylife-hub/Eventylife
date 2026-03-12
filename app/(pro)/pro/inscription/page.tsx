@@ -114,12 +114,15 @@ export default function InscriptionPage() {
   };
 
   const canProceedStep1 = form.proType !== null;
-  const canProceedStep2 = form.name && form.email && form.phone && (form.proType !== 'MAGASIN' || form.siret);
-  const canProceedStep3 = form.zone && form.skills.length > 0 && form.description;
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
+  const isValidPhone = /^[\d\s+()-]{8,20}$/.test(form.phone);
+  const isValidSiret = form.proType !== 'MAGASIN' || /^\d{14}$/.test(form.siret.replace(/\s/g, ''));
+  const canProceedStep2 = form.name.trim() && isValidEmail && isValidPhone && isValidSiret;
+  const canProceedStep3 = form.zone && form.skills.length > 0 && form.description.trim().length >= 20;
   const canSubmit = form.acceptCharte && form.acceptCGV && form.acceptRGPD;
 
   const handleSubmit = async () => {
-    if (!canSubmit) return;
+    if (!canSubmit || !canProceedStep2 || !canProceedStep3) return;
 
     try {
       setLoading(true);

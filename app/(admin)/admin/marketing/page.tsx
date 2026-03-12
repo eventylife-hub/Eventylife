@@ -7,6 +7,7 @@ import { TrendingUp, Users, Target, DollarSign, CheckCircle, XCircle, Pause, Ale
 import { formatPrice } from '@/lib/utils';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface Campaign {
   id: string;
   name: string;
@@ -138,7 +139,7 @@ export default function AdminMarketingPage() {
         await fetchStats();
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de l\'action');
+      setError(extractErrorMessage(err, 'Erreur lors de l\'action'));
     }
   };
 

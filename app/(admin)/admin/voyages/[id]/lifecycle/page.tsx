@@ -6,6 +6,7 @@ import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface Travel {
   id: string;
   title: string;
@@ -220,7 +221,7 @@ export default function TravelLifecyclePage() {
       setCancelReason('');
       await fetchData();
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Erreur inconnue');
+      alert(extractErrorMessage(err, 'Erreur inconnue'));
     } finally {
       setProcessing(false);
     }

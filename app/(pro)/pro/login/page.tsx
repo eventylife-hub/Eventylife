@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { AlertCircle, Loader } from 'lucide-react'
+import { extractErrorMessage } from '@/lib/api-error'
 export default function ProLoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -18,6 +19,16 @@ export default function ProLoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
+
+    if (!email.trim() || !password) {
+      setError('Veuillez remplir tous les champs.')
+      return
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Veuillez saisir une adresse email valide.')
+      return
+    }
+
     setLoading(true)
 
     try {
@@ -35,7 +46,7 @@ export default function ProLoginPage() {
 
       router.push('/pro')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue')
+      setError(extractErrorMessage(err))
     } finally {
       setLoading(false)
     }

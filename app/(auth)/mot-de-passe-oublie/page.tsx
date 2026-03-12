@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ZodError } from 'zod';
 import { apiClient } from '@/lib/api-client';
 import { forgotPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
+import { extractErrorMessage } from '@/lib/api-error';
 /**
  * Page de réinitialisation de mot de passe
  * Demande d'email
@@ -34,10 +35,8 @@ export default function MotDePasseOubliePage() {
     } catch (err: unknown) {
       if (err instanceof ZodError) {
         setErrors(zodErrorsToRecord(err));
-      } else if (err instanceof Error) {
-        setError(err.message);
       } else {
-        setError('Erreur lors de la demande');
+        setError(extractErrorMessage(err, 'Erreur lors de la demande'));
       }
     } finally {
       setLoading(false);

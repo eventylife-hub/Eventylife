@@ -17,6 +17,7 @@ import {
 import { formatDate, formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { extractErrorMessage } from '@/lib/api-error';
 interface NotificationTemplate {
   id: string;
   name: string;
@@ -213,7 +214,7 @@ export default function AdminNotificationsPage() {
         setToastMessage({ type: 'error', message: 'Erreur lors de la duplication' });
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur lors de la duplication';
+      const message = extractErrorMessage(err, 'Erreur lors de la duplication');
       setToastMessage({ type: 'error', message });
     }
   };

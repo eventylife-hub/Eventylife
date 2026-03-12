@@ -15,6 +15,7 @@ import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface RoomSelection {
   roomTypeId: string;
@@ -155,8 +156,7 @@ export default function CheckoutStep1Page() {
       // Rediriger vers l'étape 2
       router.push(`/checkout/${bookingGroupId}/step-2`);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur lors de la sauvegarde';
-      setError(message);
+      setError(extractErrorMessage(err, 'Erreur lors de la sauvegarde'));
     } finally {
       setLoading(false);
     }

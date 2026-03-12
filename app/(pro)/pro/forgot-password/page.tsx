@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { AlertCircle, Loader, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { extractErrorMessage } from '@/lib/api-error';
 export default function ProForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -12,6 +13,17 @@ export default function ProForgotPasswordPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    const trimmed = email.trim();
+    if (!trimmed) {
+      setError('Veuillez saisir votre adresse email.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setError('Veuillez saisir une adresse email valide.');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -28,7 +40,7 @@ export default function ProForgotPasswordPage() {
 
       setSent(true);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
+      setError(extractErrorMessage(err));
     } finally {
       setLoading(false);
     }

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface AdminDocument {
   id: string;
   name: string;
@@ -92,7 +93,7 @@ export default function AdminDocumentsPage() {
       setShowApprovalModal(false);
       setSelectedDocument(null);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      const message = extractErrorMessage(err, 'Erreur inconnue');
       setError(message);
     }
   };
@@ -115,7 +116,7 @@ export default function AdminDocumentsPage() {
       setSelectedDocument(null);
       setApprovalReason('');
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      const message = extractErrorMessage(err, 'Erreur inconnue');
       setError(message);
     }
   };

@@ -219,6 +219,7 @@ export default function BlogArticlePage() {
             width={800}
             height={450}
             className="w-full h-auto"
+            sizes="(max-width: 768px) 100vw, 800px"
             priority
           />
         </div>

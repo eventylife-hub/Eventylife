@@ -9,6 +9,7 @@
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface Transaction {
   id: string;
   type: 'CREDIT' | 'DEBIT' | 'REFUND' | 'VOUCHER';
@@ -121,7 +122,7 @@ export default function WalletPage() {
     } catch (err: unknown) {
       setVoucherMessage({
         type: 'error',
-        text: err instanceof Error ? err.message : 'Erreur lors de l\'application du voucher'
+        text: extractErrorMessage(err, 'Erreur lors de l\'application du voucher')
       });
     } finally {
       setVoucherLoading(false);

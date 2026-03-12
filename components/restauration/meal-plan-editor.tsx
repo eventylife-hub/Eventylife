@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface MealPlan {
   [key: string]: {
@@ -58,7 +59,7 @@ export function MealPlanEditor({
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la sauvegarde');
+      setError(extractErrorMessage(err, 'Erreur lors de la sauvegarde'));
     } finally {
       setSubmitting(false);
     }

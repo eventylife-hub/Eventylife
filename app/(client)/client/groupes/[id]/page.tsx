@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate, formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface Message {
   id: string;
   userId: string;
@@ -403,7 +404,7 @@ export default function GroupDetailPage() {
               }
               router.push('/client/groupes');
             } catch (err: unknown) {
-              alert(err instanceof Error ? err.message : 'Erreur');
+              alert(extractErrorMessage(err, 'Erreur'));
             } finally {
               setLeavingGroup(false);
             }

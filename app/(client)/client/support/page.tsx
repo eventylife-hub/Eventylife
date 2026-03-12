@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { supportTicketSchema, zodErrorsToRecord } from '@/lib/validations';
+import { extractErrorMessage } from '@/lib/api-error';
 interface Ticket {
   id: string;
   subject: string;
@@ -157,7 +158,7 @@ export default function SupportPage() {
     } catch (err: unknown) {
       setSubmitMessage({
         type: 'error',
-        text: err instanceof Error ? err.message : 'Erreur',
+        text: extractErrorMessage(err, 'Erreur'),
       });
     } finally {
       setSubmitting(false);

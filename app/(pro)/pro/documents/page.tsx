@@ -15,6 +15,7 @@ const FileUpload = dynamic(() => import('@/components/uploads/file-upload').then
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { FocusTrap } from '@/components/a11y/focus-trap';
+import { extractErrorMessage } from '@/lib/api-error';
 interface ProDocument {
   id: string;
   name: string;
@@ -117,7 +118,7 @@ export default function ProDocumentsPage() {
       setShowUploadModal(false);
       setSelectedDocType('');
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      const message = extractErrorMessage(err, 'Erreur inconnue');
       setError(message);
     } finally {
       setUploading(false);
@@ -173,7 +174,7 @@ export default function ProDocumentsPage() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      const message = extractErrorMessage(err, 'Erreur inconnue');
       setError(message);
     }
   };

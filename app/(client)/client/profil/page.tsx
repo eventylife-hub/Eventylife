@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface ProfileData {
   id: string;
   email: string;
@@ -121,10 +122,20 @@ export default function ProfilePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(false);
+
+    if (!form.firstName.trim() || !form.lastName.trim()) {
+      setError('Veuillez renseigner votre prénom et votre nom.');
+      return;
+    }
+    if (form.phone && !/^[\d\s+()-]{8,20}$/.test(form.phone)) {
+      setError('Veuillez saisir un numéro de téléphone valide.');
+      return;
+    }
+
     try {
       setSaving(true);
-      setError(null);
-      setSuccess(false);
 
       const res = await fetch('/api/client/profile', {
         method: 'PATCH',
@@ -142,7 +153,7 @@ export default function ProfilePage() {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur');
+      setError(extractErrorMessage(err));
     } finally {
       setSaving(false);
     }
@@ -187,7 +198,7 @@ export default function ProfilePage() {
         setPasswordSuccess(false);
       }, 2000);
     } catch (err: unknown) {
-      setPasswordError(err instanceof Error ? err.message : 'Erreur');
+      setPasswordError(extractErrorMessage(err));
     } finally {
       setChangingPassword(false);
     }
@@ -209,7 +220,7 @@ export default function ProfilePage() {
       setTwoFAQrUrl(data.qrCodeUrl as string);
       setShow2FAModal(true);
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Erreur');
+      alert(extractErrorMessage(err));
     } finally {
       setEnabling2FA(false);
     }
@@ -234,7 +245,7 @@ export default function ProfilePage() {
       setShow2FAModal(false);
       setTwoFACode('');
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Erreur');
+      alert(extractErrorMessage(err));
     } finally {
       setEnabling2FA(false);
     }
@@ -250,7 +261,7 @@ export default function ProfilePage() {
       if (!res.ok) throw new Error('Erreur');
       setTwoFAEnabled(false);
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Erreur');
+      alert(extractErrorMessage(err));
     }
   };
 
@@ -271,7 +282,7 @@ export default function ProfilePage() {
     } catch (err: unknown) {
       // Rollback
       setPreferences(preferences);
-      alert(err instanceof Error ? err.message : 'Erreur');
+      alert(extractErrorMessage(err));
     } finally {
       setSavingPreferences(false);
     }

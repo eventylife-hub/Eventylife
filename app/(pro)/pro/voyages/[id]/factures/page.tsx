@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { ToastNotification } from '@/components/ui/toast-notification';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface Travel {
   id: string;
   title: string;
@@ -142,7 +143,7 @@ export default function InvoicesPage() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err: unknown) {
-      setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToastMessage({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     } finally {
       setDownloading(false);
     }
@@ -166,7 +167,7 @@ export default function InvoicesPage() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err: unknown) {
-      setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToastMessage({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     }
   };
 

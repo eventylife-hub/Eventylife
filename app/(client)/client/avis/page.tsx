@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 interface CompletedTravel {
   id: string;
   title: string;
@@ -98,8 +99,25 @@ export default function AvisPage() {
     fetchData();
   }, []);
 
+  const [submitting, setSubmitting] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.travelId) {
+      alert('Veuillez sélectionner un voyage.');
+      return;
+    }
+    if (formData.comment.trim().length < 10) {
+      alert('Votre commentaire doit contenir au moins 10 caractères.');
+      return;
+    }
+    if (formData.rating < 1 || formData.rating > 5) {
+      alert('La note doit être comprise entre 1 et 5.');
+      return;
+    }
+
+    setSubmitting(true);
     try {
       const res = await fetch('/api/reviews', {
         method: 'POST',
@@ -122,7 +140,9 @@ export default function AvisPage() {
       setShowForm(false);
       setFormData({ travelId: '', rating: 5, comment: '' });
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Erreur');
+      alert(extractErrorMessage(err));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -276,7 +296,8 @@ export default function AvisPage() {
             <div className="flex gap-3">
               <button
                 type="submit"
-                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+                disabled={submitting}
+                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all disabled:opacity-50"
                 style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#D97B5E';
@@ -287,7 +308,7 @@ export default function AvisPage() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                Publier l&apos;avis
+                {submitting ? 'Publication...' : 'Publier l\'avis'}
               </button>
               <button
                 type="button"

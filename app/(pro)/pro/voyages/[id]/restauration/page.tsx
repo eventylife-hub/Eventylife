@@ -8,6 +8,7 @@ import { RestaurantCard } from '@/components/restauration/restaurant-card';
 import { AlertCircle, Loader2, FileText } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 
 const MealPlanEditor = dynamic(
   () => import('@/components/restauration/meal-plan-editor').then((m) => m.MealPlanEditor),
@@ -252,7 +253,7 @@ export default function RestauratPage() {
         window.open(data.downloadUrl, '_blank');
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
+      setError(extractErrorMessage(err, 'Erreur inconnue'));
     }
   };
 

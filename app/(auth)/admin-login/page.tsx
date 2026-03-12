@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { AlertCircle, Loader, Shield } from 'lucide-react';
+import { extractErrorMessage } from '@/lib/api-error';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -21,6 +22,16 @@ export default function AdminLoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    if (!email.trim() || !password) {
+      setError('Veuillez remplir tous les champs.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Veuillez saisir une adresse email valide.');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -46,7 +57,7 @@ export default function AdminLoginPage() {
 
       router.push('/admin');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erreur de connexion');
+      setError(extractErrorMessage(err, 'Erreur de connexion'));
     } finally {
       setLoading(false);
     }

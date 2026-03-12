@@ -16,6 +16,7 @@ import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { supportTicketSchema, zodErrorsToRecord } from '@/lib/validations';
 import { FocusTrap } from '@/components/a11y/focus-trap';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface SupportTicket {
   id: string;
@@ -196,7 +197,7 @@ export default function ProSupportPage() {
       setShowNewTicketModal(false);
       setNewTicketData({ subject: '', category: '', description: '' });
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      const message = extractErrorMessage(err, 'Erreur inconnue');
       setError(message);
     } finally {
       setSubmittingTicket(false);

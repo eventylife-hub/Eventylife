@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface Message {
   id: string;
@@ -315,7 +316,7 @@ export default function TicketDetailPage() {
       await fetchTicket();
       setReplyText('');
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur inconnue';
+      const message = extractErrorMessage(err, 'Erreur inconnue');
       setError(message);
     } finally {
       setSubmittingReply(false);

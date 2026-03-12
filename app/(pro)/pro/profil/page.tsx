@@ -89,6 +89,18 @@ export default function ProfilePage() {
     e.preventDefault();
     if (!formData) return;
 
+    // Validation côté client
+    const required: (keyof ProProfile)[] = ['firstName', 'lastName', 'companyName', 'email', 'phone'];
+    const missing = required.filter((k) => !formData[k]?.toString().trim());
+    if (missing.length > 0) {
+      setError('Veuillez remplir tous les champs obligatoires (nom, prénom, entreprise, email, téléphone).');
+      return;
+    }
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setError('Veuillez saisir une adresse email valide.');
+      return;
+    }
+
     try {
       setSaving(true);
       setError(null);

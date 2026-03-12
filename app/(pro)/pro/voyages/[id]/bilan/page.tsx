@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { formatPrice } from '@/lib/utils';
 import { ToastNotification } from '@/components/ui/toast-notification';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 /**
  * Page Pro - Bilan du voyage post-voyage
  * Résumé financier, stats, avis, actions
@@ -88,7 +89,7 @@ export default function TravelBilanPage() {
 
       setToastMessage({ type: 'success', message: 'Emails de bilan envoyés à tous les participants' });
     } catch (err: unknown) {
-      setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToastMessage({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     } finally {
       setSending(false);
     }
@@ -112,7 +113,7 @@ export default function TravelBilanPage() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err: unknown) {
-      setToastMessage({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToastMessage({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     }
   };
 

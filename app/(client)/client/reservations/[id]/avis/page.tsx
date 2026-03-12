@@ -84,6 +84,15 @@ export default function FeedbackPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (comment.trim().length < 10) {
+      setToast({ type: 'error', message: 'Votre commentaire doit contenir au moins 10 caractères.' });
+      return;
+    }
+    if (overallRating < 1 || overallRating > 5) {
+      setToast({ type: 'error', message: 'La note globale doit être comprise entre 1 et 5.' });
+      return;
+    }
+
     try {
       setSubmitting(true);
       const response = await fetch(

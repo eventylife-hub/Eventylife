@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { apiClient } from '@/lib/api-client';
 import { resetPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 import { ZodError } from 'zod';
+import { extractErrorMessage } from '@/lib/api-error';
 /**
  * Page de réinitialisation du mot de passe
  * Le token est passé via les paramètres d'URL
@@ -121,11 +122,7 @@ export default function ReinitialiserMotDePassePage() {
       }, 3000);
     } catch (error: unknown) {
       setStatus('error');
-      if (error instanceof Error) {
-        setServerError(error.message || 'Erreur lors de la réinitialisation');
-      } else {
-        setServerError('Erreur lors de la réinitialisation. Veuillez réessayer.');
-      }
+      setServerError(extractErrorMessage(error, 'Erreur lors de la réinitialisation. Veuillez réessayer.'));
     }
   };
 

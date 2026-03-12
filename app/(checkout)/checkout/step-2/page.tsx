@@ -18,6 +18,7 @@ import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
 import { logger } from '@/lib/logger';
+import { extractErrorMessage } from '@/lib/api-error';
 
 interface ParticipantForm {
   roomBookingId: string;
@@ -156,8 +157,7 @@ export default function CheckoutStep2Page() {
       setCurrentStep(3);
       router.push(ROUTES.CHECKOUT.STEP_3);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Erreur lors de la sauvegarde';
-      setError(message);
+      setError(extractErrorMessage(err, 'Erreur lors de la sauvegarde'));
     } finally {
       setLoading(false);
     }

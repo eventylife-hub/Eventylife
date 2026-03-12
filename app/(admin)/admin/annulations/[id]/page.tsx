@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { extractErrorMessage } from '@/lib/api-error';
 interface CancellationDetail {
   id: string;
   bookingRef: string;
@@ -130,7 +131,7 @@ export default function CancellationDetailPage() {
       setToast({ type: 'success', message: 'Annulation approuvée' });
       await fetchDetail();
     } catch (err: unknown) {
-      setToast({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     } finally {
       setProcessing(false);
     }
@@ -162,7 +163,7 @@ export default function CancellationDetailPage() {
       await fetchDetail();
       setShowRejectForm(false);
     } catch (err: unknown) {
-      setToast({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     } finally {
       setProcessing(false);
     }
@@ -187,7 +188,7 @@ export default function CancellationDetailPage() {
       setToast({ type: 'success', message: 'Remboursement traité avec succès' });
       await fetchDetail();
     } catch (err: unknown) {
-      setToast({ type: 'error', message: err instanceof Error ? err.message : 'Erreur inconnue' });
+      setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     } finally {
       setProcessing(false);
     }
