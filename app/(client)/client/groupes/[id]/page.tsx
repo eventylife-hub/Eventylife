@@ -347,6 +347,7 @@ export default function GroupDetailPage() {
                   value={newMessage}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewMessage(e.target.value)}
                   placeholder="Écrire un message..."
+                  aria-label="Message au groupe"
                   className="w-full px-4 py-2 resize-none rounded-lg"
                   aria-invalid={!!errors.content}
                   aria-describedby={errors.content ? 'content-error' : undefined}

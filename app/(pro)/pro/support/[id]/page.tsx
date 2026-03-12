@@ -646,6 +646,7 @@ export default function TicketDetailPage() {
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 className="pro-input"
+                aria-label="Réponse au ticket"
                 aria-invalid={!!errors.content}
                 aria-describedby={errors.content ? 'reply-content-error' : undefined}
                 style={{

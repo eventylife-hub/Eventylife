@@ -751,6 +751,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                 value={day.description}
                 onChange={(e) => updateDay(dIdx, 'description', e.currentTarget.value)}
                 placeholder="Description générale du jour (optionnel)"
+                aria-label={`Description du jour ${dIdx + 1}`}
                 rows={2}
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
               />
