@@ -85,7 +85,7 @@ export default function ConnexionPage() {
     width: '100%',
     padding: '12px 16px',
     borderRadius: '10px',
-    border: `1.5px solid ${hasError ? '#E63946' : '#E5E0D8'}`,
+    border: `1.5px solid ${hasError ? '#DC2626' : '#E5E0D8'}`,
     background: '#fff',
     color: 'var(--navy, #1A1A2E)',
     fontSize: '14px',
