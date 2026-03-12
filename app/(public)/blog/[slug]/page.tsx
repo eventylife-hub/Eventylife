@@ -111,15 +111,18 @@ export default function BlogArticlePage() {
 
   if (state === 'loading' || !article) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-12 space-y-6">
-        <div className="animate-pulse rounded h-4 w-64" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        <div className="animate-pulse rounded-xl h-10 w-full" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        <div className="animate-pulse rounded h-4 w-48" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        <div className="animate-pulse rounded-2xl h-80 w-full" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="animate-pulse rounded h-4 w-full" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        ))}
-      </div>
+      <>
+        <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+        <div className="max-w-3xl mx-auto px-4 py-12 space-y-6">
+          <div style={{ height: 16, width: 240, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 40, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 16, width: 180, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 320, width: '100%', borderRadius: 16, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} style={{ height: 16, width: '100%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          ))}
+        </div>
+      </>
     );
   }
 

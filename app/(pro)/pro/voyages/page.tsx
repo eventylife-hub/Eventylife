@@ -230,6 +230,7 @@ export default function TravelsPage() {
         {/* Chargement */}
         {loading && !error && (
           <>
+            <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
             <div className="mb-6">
               <div style={{ height: 48, borderRadius: 8, marginBottom: 16, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
             </div>

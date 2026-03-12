@@ -129,14 +129,20 @@ export default function ClientDashboardPage() {
   // ── État : Chargement ──
   if (loading || !data) {
     return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="h-28 rounded-2xl skeleton" />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-24 rounded-2xl skeleton" />
-          ))}
+      <>
+        <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+        <div style={{ minHeight: '100vh', backgroundColor: 'var(--cream, #FAF7F2)', padding: '2rem 1rem' }}>
+          <div style={{ maxWidth: '42rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ height: 120, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: '1rem' }}>
+              {[...Array(4)].map((_, i) => (
+                <div key={i} style={{ height: 100, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              ))}
+            </div>
+            <div style={{ height: 200, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

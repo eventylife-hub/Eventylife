@@ -302,14 +302,20 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="max-w-2xl mx-auto space-y-6 animate-fade-up">
-        <div className="h-8 rounded-xl skeleton" style={{ width: '40%' }} />
-        <div className="space-y-4">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-10 rounded-xl skeleton" />
-          ))}
+      <>
+        <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+        <div style={{ minHeight: '100vh', backgroundColor: 'var(--cream, #FAF7F2)', padding: '2rem 1rem' }}>
+          <div style={{ maxWidth: '42rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ height: 32, width: 240, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {[...Array(3)].map((_, i) => (
+                <div key={i} style={{ height: 48, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+              ))}
+            </div>
+            <div style={{ height: 120, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

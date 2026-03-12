@@ -210,41 +210,27 @@ export default function CheckoutStep1Page() {
 
         <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {loading ? (
-            <div
-              style={{
-                backgroundColor: 'white',
-                border: '1.5px solid #E5E0D8',
-                borderRadius: '20px',
-                padding: '1.5rem',
-                opacity: 0.5,
-              }}
-            >
-              <div
-                style={{
-                  height: '1.5rem',
-                  backgroundColor: '#E5E0D8',
-                  borderRadius: '8px',
-                  marginBottom: '1rem',
-                  width: '33%',
-                }}
-              ></div>
-              <div
-                style={{
-                  height: '1rem',
-                  backgroundColor: '#E5E0D8',
-                  borderRadius: '8px',
-                  marginBottom: '1rem',
-                  width: '25%',
-                }}
-              ></div>
-              <div
-                style={{
-                  height: '2.5rem',
-                  backgroundColor: '#E5E0D8',
-                  borderRadius: '8px',
-                }}
-              ></div>
-            </div>
+            <>
+              <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+              {[...Array(3)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    backgroundColor: 'white',
+                    border: '1.5px solid #E5E0D8',
+                    borderRadius: '20px',
+                    padding: '1.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem',
+                  }}
+                >
+                  <div style={{ height: 24, width: '40%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                  <div style={{ height: 16, width: '25%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                  <div style={{ height: 40, width: '100%', borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                </div>
+              ))}
+            </>
           ) : selections.length === 0 ? (
             <div
               style={{
