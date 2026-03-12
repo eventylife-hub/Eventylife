@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
 import { logger } from '@/lib/logger';
+import { FocusTrap } from '@/components/a11y/focus-trap';
   BarChart3,
   Users,
   DollarSign,
@@ -220,7 +221,13 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
 
           {/* Cancel confirmation dialog */}
           {showCancelConfirm && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="cancel-confirm-title">
+            <FocusTrap
+              onEscape={() => setShowCancelConfirm(false)}
+              role="dialog"
+              aria-modal={true}
+              aria-labelledby="cancel-confirm-title"
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            >
               <div className="bg-white rounded-lg shadow-xl p-6 max-w-md">
                 <h3 id="cancel-confirm-title" className="text-lg font-semibold text-slate-900 mb-4">
                   Confirmer l&apos;annulation
@@ -247,7 +254,7 @@ function ActionButtons({ travel, onRefresh }: { travel: TravelDashboard; onRefre
                   </button>
                 </div>
               </div>
-            </div>
+            </FocusTrap>
           )}
         </div>
       </div>

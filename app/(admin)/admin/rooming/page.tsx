@@ -6,6 +6,7 @@ import { StatsCard } from '@/components/admin/stats-card';
 import { Download, Home, Users, Sofa, AlertCircle, X } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface Room {
   id: string;
   number: string;
@@ -404,7 +405,13 @@ export default function AdminRoomingPage() {
 
       {/* Modal détail chambre */}
       {selectedRoom && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="room-detail-title">
+        <FocusTrap
+          onEscape={() => setSelectedRoom(null)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="room-detail-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
           <div className="admin-panel w-full max-w-md">
             <div className="admin-panel-header flex flex-row items-center justify-between">
               <h2 id="room-detail-title" className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
@@ -467,12 +474,18 @@ export default function AdminRoomingPage() {
               </div>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
 
       {/* Modal édition assignation chambre */}
       {editingRoom && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="room-edit-title">
+        <FocusTrap
+          onEscape={() => setEditingRoom(null)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="room-edit-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
           <div className="admin-panel w-full max-w-md">
             <div className="admin-panel-header flex flex-row items-center justify-between">
               <h2 id="room-edit-title" className="text-xl font-bold" style={{ fontFamily: 'var(--font-fraunces, Fraunces, serif)' }}>
@@ -541,7 +554,7 @@ export default function AdminRoomingPage() {
               </div>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );

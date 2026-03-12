@@ -14,6 +14,7 @@ import {
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface AdminDocument {
   id: string;
   name: string;
@@ -363,7 +364,13 @@ export default function AdminDocumentsPage() {
       </div>
 
       {showApprovalModal && selectedDocument && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="doc-review-title">
+        <FocusTrap
+          onEscape={() => { setShowApprovalModal(false); setSelectedDocument(null); }}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="doc-review-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+        >
           <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
             <h3 id="doc-review-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
               Examiner le document
@@ -464,7 +471,7 @@ export default function AdminDocumentsPage() {
               Fermer
             </button>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );

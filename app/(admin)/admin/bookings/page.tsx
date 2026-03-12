@@ -6,6 +6,7 @@ import { AlertCircle, Search, X, Clock, XCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface Booking {
   id: string;
   reference: string;
@@ -404,7 +405,13 @@ export default function AdminBookingsPage() {
       </div>
 
       {showActionModal && selectedBooking && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="booking-action-title">
+        <FocusTrap
+          onEscape={() => setShowActionModal(false)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="booking-action-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
           <div style={{ background: 'white', borderRadius: '16px', width: '100%', maxWidth: '448px', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <h2 id="booking-action-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>
@@ -480,7 +487,7 @@ export default function AdminBookingsPage() {
               </button>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );

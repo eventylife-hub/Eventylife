@@ -22,6 +22,7 @@ import { extractErrorMessage } from '@/lib/api-error';
 import { manualNotificationSchema } from '@/lib/validations/admin';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
 import { FormFieldError } from '@/components/ui/form-field-error';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface NotificationTemplate {
   id: string;
   name: string;
@@ -495,7 +496,13 @@ export default function AdminNotificationsPage() {
 
       {/* Modal Envoi manuel */}
       {showManualSend && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="manual-send-title">
+        <FocusTrap
+          onEscape={() => setShowManualSend(false)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="manual-send-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
           <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <h2 id="manual-send-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>Envoyer une notification</h2>
@@ -592,7 +599,7 @@ export default function AdminNotificationsPage() {
               </button>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
 
       {/* Toast de notification */}
@@ -606,7 +613,13 @@ export default function AdminNotificationsPage() {
 
       {/* Panel latéral - Détails de la notification */}
       {selectedNotification && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50" role="dialog" aria-modal="true" aria-labelledby="notif-detail-title">
+        <FocusTrap
+          onEscape={() => setSelectedNotification(null)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="notif-detail-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50"
+        >
           <div style={{ background: 'white', width: '100%', maxWidth: '448px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.15)' }}>
             <div style={{ position: 'sticky', top: 0, background: 'white', borderBottom: '1px solid var(--admin-border)', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 10 }}>
               <h2 id="notif-detail-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)' }}>Détails de la notification</h2>
@@ -704,7 +717,7 @@ export default function AdminNotificationsPage() {
               </div>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );

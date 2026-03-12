@@ -6,6 +6,7 @@ import { Download, FileText, Users, Phone, Truck, Plane, FileStack } from 'lucid
 import { formatDateTime } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface ExportLog {
   id: string;
   createdAt: string;
@@ -327,7 +328,13 @@ export default function ExportsPage() {
       </div>
 
       {isDialogOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="export-dialog-title">
+        <FocusTrap
+          onEscape={() => setIsDialogOpen(false)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="export-dialog-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
           <div style={{ background: 'white', borderRadius: '16px', maxWidth: '448px', width: '100%', padding: '24px', boxShadow: '0 20px 25px rgba(0, 0, 0, 0.1)' }}>
             <h2 id="export-dialog-title" style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-primary)', marginBottom: '16px' }}>
               Générer un export
@@ -425,7 +432,7 @@ export default function ExportsPage() {
               </button>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );

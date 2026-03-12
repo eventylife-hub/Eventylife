@@ -8,6 +8,7 @@ import { profileSchema } from '@/lib/validations/profile';
 import { changePasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 import { FormFieldError } from '@/components/ui/form-field-error';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface ProfileData {
   id: string;
   email: string;
@@ -563,7 +564,13 @@ export default function ProfilePage() {
 
       {/* Modal changement mot de passe */}
       {showPasswordModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" role="dialog" aria-modal="true" aria-labelledby="password-modal-title">
+        <FocusTrap
+          onEscape={() => setShowPasswordModal(false)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="password-modal-title"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+        >
           <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
             <h3 id="password-modal-title" className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Changer mon mot de passe</h3>
 
@@ -726,12 +733,18 @@ export default function ProfilePage() {
               Annuler
             </button>
           </div>
-        </div>
+        </FocusTrap>
       )}
 
       {/* Modal 2FA setup */}
       {show2FAModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" role="dialog" aria-modal="true" aria-labelledby="2fa-modal-title">
+        <FocusTrap
+          onEscape={() => setShow2FAModal(false)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="2fa-modal-title"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+        >
           <div className="rounded-2xl p-6 w-full max-w-md" style={{ background: '#fff' }}>
             <h3 id="2fa-modal-title" className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Configurer la double authentification</h3>
 
@@ -814,7 +827,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
 
       {/* Section préférences */}
