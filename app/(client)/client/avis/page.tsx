@@ -238,10 +238,11 @@ export default function AvisPage() {
           <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Laisser un avis</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="avis-travelId" className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Sélectionnez un voyage
               </label>
               <select
+                id="avis-travelId"
                 value={formData.travelId}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, travelId: e.target.value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
@@ -278,10 +279,11 @@ export default function AvisPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="avis-comment" className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Commentaire
               </label>
               <textarea
+                id="avis-comment"
                 value={formData.comment}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: e.target.value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"

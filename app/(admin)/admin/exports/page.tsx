@@ -335,10 +335,11 @@ export default function ExportsPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
-                  Type d'export
+                <label htmlFor="export-type" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                  Type d&apos;export
                 </label>
                 <select
+                  id="export-type"
                   value={selectedType}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedType(e.target.value as ExportType)}
                   className="admin-input"
@@ -352,10 +353,11 @@ export default function ExportsPage() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="export-trip" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Voyage (optionnel)
                 </label>
                 <select
+                  id="export-trip"
                   value={selectedTrip}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedTrip(e.target.value)}
                   className="admin-input"
@@ -370,10 +372,11 @@ export default function ExportsPage() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="export-format" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Format
                 </label>
                 <select
+                  id="export-format"
                   value={selectedFormat}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedFormat(e.target.value as 'CSV' | 'PDF')}
                   className="admin-input"
@@ -387,10 +390,11 @@ export default function ExportsPage() {
               </div>
 
               <div>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="export-motif" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Motif <span style={{ color: 'var(--admin-coral)' }}>*</span>
                 </label>
                 <input
+                  id="export-motif"
                   type="text"
                   placeholder="Raison de cet export (requis)"
                   value={motif}

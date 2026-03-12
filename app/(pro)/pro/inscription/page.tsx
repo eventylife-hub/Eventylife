@@ -298,8 +298,9 @@ export default function InscriptionPage() {
             <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Vos coordonnées de contact</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom complet *</label>
+                <label htmlFor="reg-name" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Nom complet *</label>
                 <input
+                  id="reg-name"
                   type="text"
                   value={form.name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, name: (e.target as HTMLInputElement).value })}
@@ -313,8 +314,9 @@ export default function InscriptionPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Email professionnel *</label>
+                <label htmlFor="reg-email" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Email professionnel *</label>
                 <input
+                  id="reg-email"
                   type="email"
                   autoComplete="email"
                   value={form.email}
@@ -329,8 +331,9 @@ export default function InscriptionPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Téléphone *</label>
+                <label htmlFor="reg-phone" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Téléphone *</label>
                 <input
+                  id="reg-phone"
                   type="tel"
                   value={form.phone}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
@@ -345,8 +348,9 @@ export default function InscriptionPage() {
 
               {form.proType === 'MAGASIN' && (
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>SIRET *</label>
+                  <label htmlFor="reg-siret" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>SIRET *</label>
                   <input
+                    id="reg-siret"
                     type="text"
                     value={form.siret || ''}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, siret: (e.target as HTMLInputElement).value })}
@@ -370,8 +374,9 @@ export default function InscriptionPage() {
             <p style={{ color: '#64748B', marginBottom: '24px', fontSize: '14px' }}>Vos compétences et zone d&apos;expertise</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
+                <label htmlFor="reg-zone" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
                 <select
+                  id="reg-zone"
                   value={form.zone}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setForm({ ...form, zone: e.target.value })}
                   className="pro-input"
@@ -432,8 +437,9 @@ export default function InscriptionPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>
+                <label htmlFor="reg-description" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>
                 <textarea
+                  id="reg-description"
                   value={form.description}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, description: e.target.value })}
                   placeholder="Décrivez votre expérience et vos spécialités..."

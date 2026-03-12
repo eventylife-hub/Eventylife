@@ -372,12 +372,13 @@ export default function ProfilePage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email (lecture seule) */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="profile-email" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Adresse email
             </label>
             <input
+              id="profile-email"
               type="email"
-                autoComplete="email"
+              autoComplete="email"
               value={profile.email}
               disabled
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
@@ -390,10 +391,11 @@ export default function ProfilePage() {
 
           {/* Prénom */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="profile-firstName" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Prénom
             </label>
             <input
+              id="profile-firstName"
               type="text"
               autoComplete="given-name"
               value={form.firstName}
@@ -415,10 +417,11 @@ export default function ProfilePage() {
 
           {/* Nom */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="profile-lastName" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Nom
             </label>
             <input
+              id="profile-lastName"
               type="text"
               autoComplete="family-name"
               value={form.lastName}
@@ -440,10 +443,11 @@ export default function ProfilePage() {
 
           {/* Téléphone */}
           <div>
-            <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="profile-phone" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Téléphone
             </label>
             <input
+              id="profile-phone"
               type="tel"
               autoComplete="tel"
               value={form.phone}
@@ -576,8 +580,9 @@ export default function ProfilePage() {
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Mot de passe actuel</label>
+                <label htmlFor="profile-currentPassword" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Mot de passe actuel</label>
                 <input
+                  id="profile-currentPassword"
                   type="password"
                   autoComplete="current-password"
                   value={passwordForm.currentPassword}
@@ -597,8 +602,9 @@ export default function ProfilePage() {
                 <FormFieldError error={passwordErrors.currentPassword} id="currentPassword-error" />
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Nouveau mot de passe</label>
+                <label htmlFor="profile-newPassword" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Nouveau mot de passe</label>
                 <input
+                  id="profile-newPassword"
                   type="password"
                   autoComplete="new-password"
                   value={passwordForm.newPassword}
@@ -619,8 +625,9 @@ export default function ProfilePage() {
                 <FormFieldError error={passwordErrors.newPassword} id="newPassword-error" />
               </div>
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Confirmer le mot de passe</label>
+                <label htmlFor="profile-confirmPassword" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Confirmer le mot de passe</label>
                 <input
+                  id="profile-confirmPassword"
                   type="password"
                   autoComplete="new-password"
                   value={passwordForm.confirmPassword}
@@ -748,8 +755,9 @@ export default function ProfilePage() {
               )}
 
               <div>
-                <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Code de vérification</label>
+                <label htmlFor="profile-2fa-code" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Code de vérification</label>
                 <input
+                  id="profile-2fa-code"
                   type="text"
                   autoComplete="one-time-code"
                   inputMode="numeric"
@@ -820,10 +828,11 @@ export default function ProfilePage() {
 
         <div className="space-y-3">
           <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
-            <label className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="pref-emailNotifications" className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Notifications par email
             </label>
             <input
+              id="pref-emailNotifications"
               type="checkbox"
               checked={preferences.emailNotifications}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('emailNotifications', (e.target as HTMLInputElement).checked)}
@@ -833,10 +842,11 @@ export default function ProfilePage() {
           </div>
 
           <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
-            <label className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="pref-promotionUpdates" className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Mises à jour sur les promotions
             </label>
             <input
+              id="pref-promotionUpdates"
               type="checkbox"
               checked={preferences.promotionUpdates}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('promotionUpdates', (e.target as HTMLInputElement).checked)}
@@ -846,10 +856,11 @@ export default function ProfilePage() {
           </div>
 
           <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
-            <label className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="pref-shareData" className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Partager mes données avec les partenaires
             </label>
             <input
+              id="pref-shareData"
               type="checkbox"
               checked={preferences.shareDataWithPartners}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePreferenceChange('shareDataWithPartners', (e.target as HTMLInputElement).checked)}
