@@ -13,6 +13,16 @@ export function generateMetadata({ params }: { params: { proSlug: string } }): M
       description: `Voyages de groupe proposés par ${name} sur Eventy Life.`,
       type: 'website',
       locale: 'fr_FR',
+      siteName: 'Eventy Life',
+      url: `https://www.eventylife.fr/p/${params.proSlug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${name} — Partenaire Eventy Life`,
+      description: `Voyages de groupe proposés par ${name} sur Eventy Life.`,
+    },
+    alternates: {
+      canonical: `https://www.eventylife.fr/p/${params.proSlug}`,
     },
     robots: {
       index: true,

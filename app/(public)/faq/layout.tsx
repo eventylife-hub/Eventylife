@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description:
       'Trouvez les réponses à vos questions sur les voyages de groupe Eventy Life.',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FAQ — Questions Fréquentes | Eventy Life',
+    description:
+      'Réponses à vos questions sur les voyages de groupe Eventy Life.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/faq' },
 };
 

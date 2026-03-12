@@ -11,6 +11,12 @@ export const metadata: Metadata = {
       'L\'agence de voyages de groupe qui met l\'humain au centre. Accompagnement porte-à-porte, qualité sans compromis.',
     url: 'https://www.eventylife.fr/a-propos',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'À Propos — Eventy Life',
+    description:
+      'L\'agence de voyages de groupe qui met l\'humain au centre.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/a-propos' },
 };
 

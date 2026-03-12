@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description:
       'Voyages de groupe au départ de votre ville avec transport porte-à-porte.',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Villes de départ | Eventy Life',
+    description:
+      'Voyages de groupe au départ de votre ville avec transport porte-à-porte.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/depart' },
 };
 

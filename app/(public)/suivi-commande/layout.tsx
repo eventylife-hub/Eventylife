@@ -5,6 +5,19 @@ export const metadata: Metadata = {
   title: 'Suivi de Commande | Eventy Life',
   description:
     'Suivez l\'état de votre réservation Eventy Life. Entrez votre référence et votre email pour retrouver votre commande.',
+  openGraph: {
+    title: 'Suivi de Commande | Eventy Life',
+    description:
+      'Suivez l\'état de votre réservation. Entrez votre référence pour retrouver votre commande.',
+    url: 'https://www.eventylife.fr/suivi-commande',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Suivi de Commande | Eventy Life',
+    description:
+      'Suivez votre réservation Eventy Life en temps réel.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/suivi-commande' },
 };
 

@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Comment ça marche — Eventy Life',
+    description:
+      'De la réservation au retour, on s\'occupe de tout. 4 étapes simples.',
+  },
   alternates: {
     canonical: 'https://www.eventylife.fr/comment-ca-marche',
   },

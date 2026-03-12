@@ -31,6 +31,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `Voyages au départ de ${villeFormatted} | Eventy Life`,
       description: `Voyages de groupe au départ de ${villeFormatted} avec accompagnement porte-à-porte.`,
+      url: `https://www.eventylife.fr/depart/${ville}`,
+      type: 'website',
+      locale: 'fr_FR',
+      siteName: 'Eventy Life',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Voyages au départ de ${villeFormatted} | Eventy Life`,
+      description: `Voyages de groupe au départ de ${villeFormatted} avec accompagnement porte-à-porte.`,
+    },
+    alternates: {
+      canonical: `https://www.eventylife.fr/depart/${ville}`,
     },
   };
 }

@@ -5,6 +5,19 @@ export const metadata: Metadata = {
   title: 'Mentions Légales | Eventy Life',
   description:
     'Mentions légales d\'Eventy Life. Informations sur l\'éditeur, l\'hébergement, la propriété intellectuelle et les conditions d\'utilisation.',
+  openGraph: {
+    title: 'Mentions Légales | Eventy Life',
+    description:
+      'Informations légales sur l\'éditeur, l\'hébergement et les conditions d\'utilisation.',
+    url: 'https://www.eventylife.fr/mentions-legales',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Mentions Légales | Eventy Life',
+    description:
+      'Mentions légales d\'Eventy Life — éditeur, hébergement, propriété intellectuelle.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/mentions-legales' },
 };
 

@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description:
       'Rejoignez le réseau de partenaires Eventy Life et développez votre activité.',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Devenir Partenaire | Eventy Life',
+    description:
+      'Rejoignez le réseau Eventy Life et développez votre activité.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/partenaires' },
 };
 

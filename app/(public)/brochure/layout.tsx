@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description:
       'Téléchargez notre brochure et découvrez le catalogue complet Eventy Life.',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Brochure Voyages | Eventy Life',
+    description:
+      'Téléchargez notre catalogue complet de voyages de groupe.',
+  },
   alternates: { canonical: 'https://www.eventylife.fr/brochure' },
 };
 

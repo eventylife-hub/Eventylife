@@ -1,11 +1,4 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Politique de Confidentialité | Eventy Life',
-  description:
-    'Politique de confidentialité RGPD d\'Eventy Life - Protection de vos données personnelles',
-};
 
 export default function PolitiqueConfidentialite() {
   return (

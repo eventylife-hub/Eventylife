@@ -1,11 +1,4 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Conditions Générales de Vente | Eventy Life',
-  description:
-    'CGV d\'Eventy Life - Conditions générales de vente pour les voyages organisés',
-};
 
 export default function CGV() {
   return (
