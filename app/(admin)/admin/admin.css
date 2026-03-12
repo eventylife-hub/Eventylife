@@ -906,6 +906,15 @@
 .admin-fade-in.delay-8 { animation-delay: 0.4s; }
 .admin-fade-in.delay-9 { animation-delay: 0.45s; }
 
+/* ═══════════ MOBILE HEADER ═══════════ */
+.admin-mobile-header {
+  display: none;
+}
+
+.admin-mobile-overlay-wrapper {
+  display: none;
+}
+
 /* ═══════════ RESPONSIVE ═══════════ */
 @media (max-width: 1200px) {
   .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -917,6 +926,28 @@
 @media (max-width: 900px) {
   .admin-sidebar { display: none; }
   .admin-content { padding: 20px; }
+
+  .admin-mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: linear-gradient(135deg, #0A1628 0%, #142438 100%);
+  }
+
+  .admin-mobile-overlay-wrapper {
+    display: block;
+  }
+
+  .admin-main {
+    padding-top: 56px;
+  }
 }
 
 @media (max-width: 600px) {
