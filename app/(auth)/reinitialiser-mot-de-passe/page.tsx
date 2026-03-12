@@ -254,7 +254,7 @@ export default function ReinitialiserMotDePassePage() {
           </div>
         )}
 
-        <form aria-label="Nouveau mot de passe" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form aria-label="Nouveau mot de passe" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} noValidate>
           {/* Nouveau mot de passe */}
           <div>
             <label htmlFor="password" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>

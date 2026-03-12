@@ -244,7 +244,7 @@ export default function AdminBookingsPage() {
           <h3 className="admin-panel-title">Filtres</h3>
         </div>
         <div className="admin-panel-body space-y-4">
-          <form aria-label="Rechercher une réservation" onSubmit={handleSearch}>
+          <form aria-label="Rechercher une réservation" onSubmit={handleSearch} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <div>
                 <label htmlFor="bk-search" className="admin-kpi-label block mb-2">Chercher (ref, email, voyage)</label>

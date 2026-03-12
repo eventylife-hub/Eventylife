@@ -93,7 +93,7 @@ export default function SuiviCommandePage() {
             padding: '2rem',
           }}
         >
-          <form role="search" aria-label="Rechercher une réservation" onSubmit={handleSearch} className="space-y-5">
+          <form role="search" aria-label="Rechercher une réservation" onSubmit={handleSearch} className="space-y-5" noValidate>
             <div>
               <label
                 htmlFor="orderRef"

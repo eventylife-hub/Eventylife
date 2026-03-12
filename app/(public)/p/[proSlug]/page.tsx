@@ -303,7 +303,7 @@ export default function ProPublicPage() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form */}
-          <form onSubmit={handleLeadSubmit} className="space-y-4" aria-label="Formulaire de contact">
+          <form onSubmit={handleLeadSubmit} className="space-y-4" aria-label="Formulaire de contact" noValidate>
             <div>
               <label htmlFor="lead-name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Nom</label>
               <input
@@ -434,7 +434,7 @@ export default function ProPublicPage() {
             {/* Follow Email Opt-in */}
             <div style={{ backgroundColor: '#FDF6E8', borderRadius: '12px', padding: '1rem' }}>
               <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>Suivre les voyages</h4>
-              <form onSubmit={handleFollowEmail} className="space-y-2" aria-label="Suivre les voyages par email">
+              <form onSubmit={handleFollowEmail} className="space-y-2" aria-label="Suivre les voyages par email" noValidate>
                 <input
                   type="email"
                   autoComplete="email"

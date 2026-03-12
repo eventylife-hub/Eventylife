@@ -251,7 +251,7 @@ export default function CancelReservationPage() {
       )}
 
       {/* Formulaire */}
-      <form aria-label="Demande d'annulation" onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
+      <form aria-label="Demande d'annulation" onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }} noValidate>
         <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Demander l&apos;Annulation</h2>
 
         <div className="mb-6">

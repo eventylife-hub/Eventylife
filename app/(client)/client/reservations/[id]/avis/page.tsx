@@ -272,7 +272,7 @@ export default function FeedbackPage() {
       </div>
 
       {/* Formulaire */}
-      <form aria-label="Laisser un avis sur la réservation" onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }}>
+      <form aria-label="Laisser un avis sur la réservation" onSubmit={handleSubmit} className="rounded-xl p-6" style={{ backgroundColor: 'white', border: '1.5px solid #E5E0D8' }} noValidate>
         <h2 className="text-lg font-bold mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Vos Impressions</h2>
 
         {/* Note globale */}

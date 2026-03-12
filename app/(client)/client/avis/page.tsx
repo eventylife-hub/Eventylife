@@ -236,7 +236,7 @@ export default function AvisPage() {
       {showForm && (
         <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Laisser un avis</h2>
-          <form aria-label="Laisser un avis" onSubmit={handleSubmit} className="space-y-4">
+          <form aria-label="Laisser un avis" onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div>
               <label htmlFor="avis-travelId" className="block text-sm font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Sélectionnez un voyage

@@ -422,7 +422,7 @@ export default function ProSupportPage() {
               Créer un nouveau ticket
             </h2>
 
-            <form aria-label="Créer un ticket support" onSubmit={handleCreateTicket}>
+            <form aria-label="Créer un ticket support" onSubmit={handleCreateTicket} noValidate>
               <div style={{ marginBottom: '24px' }}>
                 <label htmlFor="ticket-subject" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                   Sujet

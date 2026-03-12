@@ -185,7 +185,7 @@ export default function AdminLoginPage() {
           )}
 
           {/* Formulaire */}
-          <form aria-label="Connexion administrateur" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          <form aria-label="Connexion administrateur" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }} noValidate>
             <div>
               <label
                 htmlFor="admin-email"

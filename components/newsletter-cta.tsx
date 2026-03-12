@@ -110,7 +110,7 @@ export function NewsletterCTA({
           <form aria-label="Inscription newsletter"
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
+           noValidate>
             <input
               type="email"
               value={email}
@@ -195,7 +195,7 @@ export function NewsletterCTA({
       <form aria-label="Inscription newsletter"
         onSubmit={handleSubmit}
         className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-      >
+       noValidate>
         <input
           type="email"
           value={email}

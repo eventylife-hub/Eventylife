@@ -358,7 +358,7 @@ export default function RoomingPage() {
             )}
           </div>
 
-          <form aria-label="Préférences de chambre" onSubmit={handlePreferencesSave} className="space-y-4">
+          <form aria-label="Préférences de chambre" onSubmit={handlePreferencesSave} className="space-y-4" noValidate>
             <div>
               <label htmlFor="room-floor" className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Étage (optionnel)
@@ -472,7 +472,7 @@ export default function RoomingPage() {
               </p>
             </div>
 
-            <form aria-label="Documents de voyage" onSubmit={handleDocumentsUpload} className="space-y-4">
+            <form aria-label="Documents de voyage" onSubmit={handleDocumentsUpload} className="space-y-4" noValidate>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                 <label className="cursor-pointer">
                   <p className="text-gray-600 mb-2">

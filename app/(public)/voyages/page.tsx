@@ -288,7 +288,7 @@ function VoyagesContent() {
         aria-label="Filtrer les voyages"
         className="p-6 rounded-2xl"
         style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) = noValidate> e.preventDefault()}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
           <div className="sm:col-span-2">

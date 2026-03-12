@@ -176,7 +176,7 @@ export default function ProfilePage() {
           </div>
         )}
 
-        <form aria-label="Modifier le profil professionnel" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <form aria-label="Modifier le profil professionnel" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }} noValidate>
           {/* Informations Personnelles */}
           <div className="pro-panel" style={{ padding: '24px' }}>
             <h2 className="pro-panel-title" style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>

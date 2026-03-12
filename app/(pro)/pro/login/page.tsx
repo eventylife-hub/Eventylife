@@ -71,7 +71,7 @@ export default function ProLoginPage() {
             </div>
           )}
 
-          <form aria-label="Connexion professionnel" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <form aria-label="Connexion professionnel" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} noValidate>
             <div>
               <label htmlFor="email" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                 Email professionnel
