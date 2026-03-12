@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 /**
  * Page Mes Assurances - Vue client
  *
@@ -119,34 +120,12 @@ export default function AssurancePage() {
         </p>
       </div>
 
-      {/* Erreur */}
       {error && (
-        <div className="p-6 rounded-2xl" style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #FCA5A5' }}>
-          <div className="flex justify-between items-center">
-            <p className="text-sm font-medium" style={{ color: 'var(--terra, #DC2626)' }}>
-              ⚠️ {error}
-            </p>
-            <button type="button"
-              onClick={() => setError(null)}
-              className="px-4 py-2 rounded-xl font-semibold text-sm transition-all"
-              style={{
-                background: '#fff',
-                color: 'var(--terra, #DC2626)',
-                border: '1.5px solid #FCA5A5',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#FCA5A5';
-                e.currentTarget.style.color = '#fff';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#fff';
-                e.currentTarget.style.color = 'var(--terra, #DC2626)';
-              }}
-            >
-              Fermer
-            </button>
-          </div>
-        </div>
+        <ToastNotification
+          type="error"
+          message={error}
+          onClose={() => setError(null)}
+        />
       )}
 
       {/* État vide */}

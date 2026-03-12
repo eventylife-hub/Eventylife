@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-// Remove Card, Button, Alert imports
 import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 
 const FinanceSummary = dynamic(
   () => import('@/components/finance/finance-summary').then((m) => m.FinanceSummary),
@@ -139,12 +139,11 @@ export default function FinanceDashboardPage() {
         </div>
 
         {error && (
-          <div style={{ padding: '16px', backgroundColor: '#FFE0E3', borderRadius: '8px', border: '1px solid #FFE0E3', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-            <span style={{ fontSize: '14px', color: 'var(--pro-coral)' }}>{error}</span>
-            <button type="button" onClick={() => setError(null)} className="pro-btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }}>
-              Fermer
-            </button>
-          </div>
+          <ToastNotification
+            type="error"
+            message={error}
+            onClose={() => setError(null)}
+          />
         )}
 
       {/* Résumé */}

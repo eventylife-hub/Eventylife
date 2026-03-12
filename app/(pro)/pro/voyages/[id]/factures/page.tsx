@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
-import { CheckCircle, XCircle, X } from 'lucide-react';
+import { ToastNotification } from '@/components/ui/toast-notification';
 import { logger } from '@/lib/logger';
 interface Travel {
   id: string;
@@ -309,29 +309,12 @@ export default function InvoicesPage() {
       </div>
     </div>
 
-      {/* Toast de notification */}
       {toastMessage && (
-        <div role="alert" aria-live="polite" className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border ${
-            toastMessage.type === 'success'
-              ? 'bg-green-50 border-green-200 text-green-800'
-              : 'bg-red-50 border-red-200 text-red-800'
-          }`}>
-            {toastMessage.type === 'success' ? (
-              <CheckCircle className="w-5 h-5 flex-shrink-0" />
-            ) : (
-              <XCircle className="w-5 h-5 flex-shrink-0" />
-            )}
-            <span className="text-sm font-medium">{toastMessage.message}</span>
-            <button type="button"
-              onClick={() => setToastMessage(null)}
-              className="ml-2 p-1 rounded hover:bg-black/5"
-              aria-label="Fermer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+        <ToastNotification
+          type={toastMessage.type}
+          message={toastMessage.message}
+          onClose={() => setToastMessage(null)}
+        />
       )}
     </div>
   );

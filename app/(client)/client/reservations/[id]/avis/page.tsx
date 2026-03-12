@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface BookingFeedback {
   id: string;
   reference: string;
@@ -218,18 +219,12 @@ export default function FeedbackPage() {
         </p>
       </div>
 
-      {/* Toast inline */}
       {toast && (
-        <div
-          className="mb-6 p-4 rounded-lg border"
-          style={{
-            backgroundColor: toast.type === 'success' ? '#DCFCE7' : 'var(--terra-soft, #FEF2F2)',
-            borderColor: toast.type === 'success' ? '#166534' : 'var(--terra, #DC2626)',
-            color: toast.type === 'success' ? '#166534' : 'var(--terra, #DC2626)',
-          }}
-        >
-          {toast.message}
-        </div>
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
       )}
 
       {error && (
