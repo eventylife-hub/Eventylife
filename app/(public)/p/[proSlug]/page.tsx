@@ -438,6 +438,7 @@ export default function ProPublicPage() {
                   type="email"
                   autoComplete="email"
                   placeholder="votre@email.com"
+                  aria-label="Email pour suivre les voyages"
                   value={followEmail}
                   onChange={(e) => setFollowEmail(e.target.value)}
                   required

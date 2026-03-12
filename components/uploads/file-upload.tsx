@@ -212,6 +212,7 @@ export function FileUpload({
           type="file"
           accept={accept.join(',')}
           onChange={handleInputChange}
+          aria-label={label}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
 

@@ -126,6 +126,7 @@ export function CostTable({
                   <input
                     type="text"
                     placeholder="Titre"
+                    aria-label="Titre du coût"
                     value={formData.title}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setFormData({ ...formData, title: (e.target as HTMLInputElement).value })
@@ -138,6 +139,7 @@ export function CostTable({
                     type="number"
                     placeholder="0.00"
                     step="0.01"
+                    aria-label="Montant HT en euros"
                     value={formData.costAmountHT}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setFormData({

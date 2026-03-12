@@ -689,6 +689,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateDay(dIdx, 'title', (e.target as HTMLInputElement).value)}
                   className="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-sm font-medium focus:ring-2 focus:ring-indigo-600"
                   placeholder="Titre du jour"
+                  aria-label={`Titre du jour ${dIdx + 1}`}
                 />
               </div>
               <button type="button" onClick={() => removeDay(dIdx)} className="text-red-500 hover:text-red-700 p-2 ml-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Supprimer le jour">
@@ -714,6 +715,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                       type="time"
                       value={act.time}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateActivity(dIdx, aIdx, 'time', (e.target as HTMLInputElement).value)}
+                      aria-label={`Heure activité ${aIdx + 1} du jour ${dIdx + 1}`}
                       className="w-24 px-2 py-1 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-indigo-600"
                     />
                     <input
@@ -958,7 +960,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
             <p className="text-xs text-slate-400 mb-2">En attente de validation ({others.length})</p>
             {others.map((stop) => (
               <div key={stop.id} className="flex items-center gap-3 p-2 rounded opacity-50">
-                <input type="checkbox" disabled className="w-4 h-4" />
+                <input type="checkbox" disabled className="w-4 h-4" aria-label={`${stop.publicName} (${stop.status})`} />
                 <span className="text-xs text-slate-500">{stop.publicName} ({stop.status})</span>
               </div>
             ))}

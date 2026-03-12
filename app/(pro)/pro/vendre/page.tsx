@@ -273,6 +273,7 @@ export default function QuickSellPage() {
                   value={sellerCode}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSellerCode(e.target.value)}
                   placeholder="p.ex. VENDEUR123"
+                  aria-label="Code vendeur"
                   className="pro-input"
                   style={{ width: '100%' }}
                 />

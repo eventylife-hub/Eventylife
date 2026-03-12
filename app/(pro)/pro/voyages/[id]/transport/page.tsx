@@ -247,6 +247,7 @@ export default function TransportPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <input
                 placeholder="Compagnie bus"
+                aria-label="Compagnie bus"
                 value={busCompany}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusCompany((e.target as HTMLInputElement).value)}
                 className="pro-input"
@@ -254,6 +255,7 @@ export default function TransportPage() {
               <input
                 type="number"
                 placeholder="Capacité bus"
+                aria-label="Capacité bus"
                 value={busCapacity}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusCapacity((e.target as HTMLInputElement).value)}
                 className="pro-input"
@@ -261,6 +263,7 @@ export default function TransportPage() {
               <input
                 type="number"
                 placeholder="Prix par personne (€)"
+                aria-label="Prix bus par personne en euros"
                 value={busPriceCents ? (parseInt(busPriceCents) / 100).toFixed(2) : ''}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusPriceCents((parseFloat((e.target as HTMLInputElement).value) * 100).toString())}
                 className="pro-input"
@@ -272,6 +275,7 @@ export default function TransportPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <input
                 placeholder="Compagnie aérienne"
+                aria-label="Compagnie aérienne"
                 value={flightCompany}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFlightCompany((e.target as HTMLInputElement).value)}
                 className="pro-input"
@@ -279,6 +283,7 @@ export default function TransportPage() {
               <input
                 type="number"
                 placeholder="Prix vol (€)"
+                aria-label="Prix vol par personne en euros"
                 value={flightPriceCents ? (parseInt(flightPriceCents) / 100).toFixed(2) : ''}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFlightPriceCents((parseFloat((e.target as HTMLInputElement).value) * 100).toString())}
                 className="pro-input"
@@ -289,12 +294,14 @@ export default function TransportPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <input
               placeholder="Point de rendez-vous"
+              aria-label="Point de rendez-vous"
               value={meetingPoint}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMeetingPoint((e.target as HTMLInputElement).value)}
               className="pro-input"
             />
             <input
               type="time"
+              aria-label="Heure de rendez-vous"
               value={meetingTime}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMeetingTime((e.target as HTMLInputElement).value)}
               className="pro-input"

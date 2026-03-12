@@ -428,6 +428,7 @@ export default function EquipePage() {
                     type="checkbox"
                     checked={completed}
                     disabled
+                    aria-label={prereq.label}
                     className="w-5 h-5 rounded border-slate-300"
                   />
                   <div className="flex-1">

@@ -736,6 +736,7 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                   onChange={(e) => updateDay(dIdx, 'title', e.currentTarget.value)}
                   className="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-sm font-medium focus:ring-2 focus:ring-indigo-600"
                   placeholder="Titre du jour"
+                  aria-label={`Titre du jour ${day.dayNumber}`}
                 />
               </div>
               <button
@@ -764,12 +765,14 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                     <input
                       type="time"
                       value={act.time}
+                      aria-label={`Heure activité ${aIdx + 1} du jour ${day.dayNumber}`}
                       className="w-24 px-2 py-1 border border-slate-300 rounded text-xs focus:ring-2 focus:ring-indigo-600"
                     />
                     <input
                       type="text"
                       value={act.label}
                       placeholder="Activité"
+                      aria-label={`Nom activité ${aIdx + 1} du jour ${day.dayNumber}`}
                       className="flex-1 px-2 py-1 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-indigo-600"
                     />
                     <button
