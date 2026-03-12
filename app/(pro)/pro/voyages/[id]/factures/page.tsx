@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { ToastNotification } from '@/components/ui/toast-notification';
@@ -194,10 +194,15 @@ export default function InvoicesPage() {
     );
   }
 
-  // Calcul total commission (15% par défaut)
-  const totalRevenue = bookings.reduce((sum: number, bg: Record<string, unknown>) => sum + ((bg.paidAmountCents as number) || 0), 0);
+  // Calcul total commission (15% par défaut) — mémorisé pour éviter recalcul à chaque rendu
   const commissionRate = 15;
-  const commissionAmount = Math.floor((totalRevenue * commissionRate) / 100);
+  const { totalRevenue, commissionAmount } = useMemo(() => {
+    const total = bookings.reduce((sum: number, bg: Record<string, unknown>) => sum + ((bg.paidAmountCents as number) || 0), 0);
+    return {
+      totalRevenue: total,
+      commissionAmount: Math.floor((total * commissionRate) / 100),
+    };
+  }, [bookings]);
 
   return (
     <div className="pro-fade-in min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #FEFCF3 0%, #F0E6D8 100%)' }}>

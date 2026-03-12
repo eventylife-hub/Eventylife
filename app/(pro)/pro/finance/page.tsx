@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
 import { logger } from '@/lib/logger';
@@ -26,6 +26,23 @@ interface FinanceDashboard {
   byMonth?: Record<string, Record<string, unknown>>;
   travelCount?: number;
   travels: Array<Record<string, unknown>>;
+}
+
+/**
+ * Wrapper mémorisé pour MarginChart — évite de recalculer
+ * la transformation des données à chaque rendu du parent.
+ */
+function MemoizedMarginChart({ byMonth }: { byMonth: Record<string, Record<string, unknown>> }) {
+  const chartData = useMemo(
+    () => Object.entries(byMonth).map(([month, data]) => ({
+      month,
+      margin: (data.marge as number) || 0,
+      ca: (data.caTTC as number) || 0,
+    })),
+    [byMonth]
+  );
+
+  return <MarginChart data={chartData} />;
 }
 
 /**
@@ -159,11 +176,7 @@ export default function FinanceDashboardPage() {
 
       {/* Graphique */}
       {dashboard.byMonth && Object.entries(dashboard.byMonth).length > 0 && (
-        <MarginChart data={Object.entries(dashboard.byMonth).map(([month, data]: [string, Record<string, unknown>]) => ({
-          month,
-          margin: ((data as Record<string, unknown>).marge as number) || 0,
-          ca: ((data as Record<string, unknown>).caTTC as number) || 0,
-        }))} />
+        <MemoizedMarginChart byMonth={dashboard.byMonth} />
       )}
 
       {/* Voyages */}

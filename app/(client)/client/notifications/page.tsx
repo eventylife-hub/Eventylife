@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { useNotificationStore } from '@/lib/stores/notification-store';
 import { NotificationItem } from '@/components/notifications/notification-item';
@@ -48,20 +48,24 @@ export default function NotificationsPage() {
   }, [isLoading, fetchMore]);
 
   // Filtre les notifications si un type est sélectionné
-  const filteredNotifications = filter
-    ? notifications.filter((n) => n.type === filter)
-    : notifications;
+  const filteredNotifications = useMemo(
+    () => filter ? notifications.filter((n) => n.type === filter) : notifications,
+    [notifications, filter]
+  );
 
   // Types de notifications uniques
-  const types = Array.from(new Set(notifications.map((n) => n.type)));
+  const types = useMemo(
+    () => Array.from(new Set(notifications.map((n) => n.type))),
+    [notifications]
+  );
 
-  const handleMarkAsRead = async (id: string) => {
+  const handleMarkAsRead = useCallback(async (id: string) => {
     await markAsRead(id);
-  };
+  }, [markAsRead]);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = useCallback(async (id: string) => {
     await deleteNotification(id);
-  };
+  }, [deleteNotification]);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
