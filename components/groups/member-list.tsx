@@ -92,7 +92,7 @@ export function MemberList({
             {canManage && currentUserRole === 'LEADER' && (
               <div className="flex gap-1">
                 {member.role !== 'LEADER' && onPromote && (
-                  <button
+                  <button type="button"
                     onClick={() => onPromote(member.id)}
                     title="Promouvoir en leader"
                     aria-label="Promouvoir en leader"
@@ -102,7 +102,7 @@ export function MemberList({
                   </button>
                 )}
                 {onKick && (
-                  <button
+                  <button type="button"
                     onClick={() => onKick(member.id)}
                     title="Exclure"
                     aria-label="Exclure le membre"

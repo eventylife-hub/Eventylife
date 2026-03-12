@@ -104,7 +104,7 @@ export const HotelBlockCard = React.memo(function HotelBlockCard({
 
         {/* Actions */}
         {block.status !== 'CONFIRMED' && (
-          <button
+          <button type="button"
             onClick={onEdit}
             className="w-full px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] gap-2 text-xs flex items-center justify-center"
           >

@@ -88,7 +88,7 @@ export const CampaignCard = React.memo(function CampaignCard({ campaign }: Campa
             )}
           </div>
 
-          <button
+          <button type="button"
             className="w-full px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] flex items-center justify-center gap-2"
             onClick={(e: React.MouseEvent) => {
               e.preventDefault();

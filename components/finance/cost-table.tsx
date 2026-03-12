@@ -175,7 +175,7 @@ export function CostTable({
 
       <div className="flex gap-2">
         {!adding && (
-          <button
+          <button type="button"
             onClick={() => setAdding(true)}
             className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center"
           >
@@ -184,7 +184,7 @@ export function CostTable({
           </button>
         )}
         {adding && (
-          <button
+          <button type="button"
             onClick={handleAddCost}
             className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center rounded-lg"
           >

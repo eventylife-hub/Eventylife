@@ -104,7 +104,7 @@ export function DataTable<T extends { id: string }>({
                   <td className="px-4 py-3">
                     <div className="flex gap-2">
                       {rowActions.map((action) => (
-                        <button
+                        <button type="button"
                           key={action.label}
                           className={`px-3 py-1.5 text-sm rounded-lg transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] ${
                             action.variant === 'destructive'
@@ -130,7 +130,7 @@ export function DataTable<T extends { id: string }>({
 
       {pageable && (
         <div className="flex justify-between items-center">
-          <button
+          <button type="button"
             className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px]"
             disabled={!hasPrevPage}
             onClick={onPrevPage}
@@ -140,7 +140,7 @@ export function DataTable<T extends { id: string }>({
           <span className="text-sm text-gray-600">
             {data.length} résultats
           </span>
-          <button
+          <button type="button"
             className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px]"
             disabled={!hasNextPage}
             onClick={onNextPage}

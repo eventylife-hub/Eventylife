@@ -205,7 +205,7 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
 
         {/* Navigation */}
         <div className="flex gap-3 justify-between pt-4 border-t">
-          <button
+          <button type="button"
             className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] flex items-center justify-center gap-2"
             onClick={handleBack}
             disabled={step === 1 || loading}
@@ -215,7 +215,7 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
           </button>
 
           {step < 3 ? (
-            <button
+            <button type="button"
               className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] rounded-lg flex items-center justify-center gap-2"
               onClick={handleNext}
               disabled={loading}
@@ -224,7 +224,7 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
               <ChevronRight className="h-4 w-4" />
             </button>
           ) : (
-            <button
+            <button type="button"
               className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] rounded-lg flex items-center justify-center gap-2"
               onClick={handleSubmit}
               disabled={loading}

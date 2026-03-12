@@ -98,7 +98,7 @@ export function RoomingTable({
                       placeholder="N° chambre"
                       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-7 w-24"
                     />
-                    <button
+                    <button type="button"
                       onClick={handleSaveRoom}
                       disabled={isSaving}
                       className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] h-7 px-2 bg-white"
@@ -106,7 +106,7 @@ export function RoomingTable({
                     >
                       <Check className="w-4 h-4" />
                     </button>
-                    <button
+                    <button type="button"
                       onClick={() => setEditingRoomId(null)}
                       className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] h-7 px-2 bg-white"
                       aria-label="Annuler la modification"

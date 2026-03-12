@@ -149,7 +149,7 @@ export function NotificationBell() {
           {recentNotifications.length > 0 && (
             <div className="p-4 border-t border-gray-200 text-center">
               <Link href="/client/notifications">
-                <button className="w-full px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50">
+                <button type="button" className="w-full px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50">
                   Voir toutes les notifications
                 </button>
               </Link>

@@ -110,14 +110,14 @@ export const InsuranceCard = React.memo(function InsuranceCard({
 
         {/* Actions */}
         {onSubscribe ? (
-          <button
+          <button type="button"
             onClick={onSubscribe}
             className="w-full px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center justify-center rounded-lg"
           >
             Souscrire
           </button>
         ) : (
-          <button
+          <button type="button"
             className="w-full px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center justify-center"
           >
             <Download className="w-4 h-4" />

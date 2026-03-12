@@ -27,7 +27,7 @@ export const ExportCta = React.memo(function ExportCta({
 
   return (
     <Link href={`/admin/exports?${params.toString()}`}>
-      <button className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] inline-flex items-center gap-2">
+      <button type="button" className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] inline-flex items-center gap-2">
         <Download className="w-4 h-4" />
         {label}
       </button>

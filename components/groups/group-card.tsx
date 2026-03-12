@@ -72,7 +72,7 @@ export const GroupCard = React.memo(function GroupCard({ groupe }: GroupCardProp
 
         {/* Bouton */}
         <Link href={`/voyages/${groupe.id}/rejoindre`} className="block">
-          <button
+          <button type="button"
             className={`w-full px-4 py-2 rounded-lg transition-colors disabled:opacity-50 min-h-[44px] font-medium ${
               isFull
                 ? 'border border-gray-300 text-gray-700 hover:bg-gray-50'
