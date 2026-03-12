@@ -85,6 +85,7 @@ export default function CancellationDetailPage() {
   const [decision, setDecision] = useState<'APPROVED' | 'REJECTED' | null>(null);
   const [rejectionReason, setRejectionReason] = useState('');
   const [showRejectForm, setShowRejectForm] = useState(false);
+  const [showConfirmRefund, setShowConfirmRefund] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
@@ -170,10 +171,6 @@ export default function CancellationDetailPage() {
   };
 
   const handleProcessRefund = async () => {
-    if (!confirm('Êtes-vous sûr de vouloir traiter le remboursement ?')) {
-      return;
-    }
-
     try {
       setProcessing(true);
       const response = await fetch(`/api/cancellations/${cancellationId}/refund`, {
@@ -186,6 +183,7 @@ export default function CancellationDetailPage() {
       }
 
       setToast({ type: 'success', message: 'Remboursement traité avec succès' });
+      setShowConfirmRefund(false);
       await fetchDetail();
     } catch (err: unknown) {
       setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
@@ -253,6 +251,44 @@ export default function CancellationDetailPage() {
           message={toast.message}
           onClose={() => setToast(null)}
         />
+      )}
+
+      {showConfirmRefund && (
+        <div style={{
+          padding: '1.5rem',
+          backgroundColor: '#FFF7ED',
+          border: '1.5px solid #FB923C',
+          borderRadius: '14px',
+          marginBottom: '1rem',
+        }}>
+          <p style={{ fontWeight: 600, color: '#9A3412', marginBottom: '0.75rem' }}>
+            Êtes-vous sûr de vouloir traiter le remboursement ?
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button type="button" onClick={handleProcessRefund} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: '#DC2626',
+              color: 'white',
+              borderRadius: '8px',
+              fontWeight: 600,
+              border: 'none',
+              cursor: 'pointer',
+            }}>
+              Confirmer
+            </button>
+            <button type="button" onClick={() => setShowConfirmRefund(false)} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: 'white',
+              color: '#6B7280',
+              borderRadius: '8px',
+              fontWeight: 500,
+              border: '1px solid #D1D5DB',
+              cursor: 'pointer',
+            }}>
+              Annuler
+            </button>
+          </div>
+        </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -425,7 +461,7 @@ export default function CancellationDetailPage() {
       {cancellation.status === 'APPROVED' && (
         <div className="mt-8">
           <button type="button"
-            onClick={handleProcessRefund}
+            onClick={() => setShowConfirmRefund(true)}
             disabled={processing}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
           >

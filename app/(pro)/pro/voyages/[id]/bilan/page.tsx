@@ -18,6 +18,7 @@ export default function TravelBilanPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
+  const [showConfirmArchive, setShowConfirmArchive] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
@@ -117,6 +118,28 @@ export default function TravelBilanPage() {
     }
   };
 
+  const handleArchiveTravel = async () => {
+    try {
+      setSending(true);
+      const response = await fetch(`/api/post-sale/travel/${travelId}/archive`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'archivage');
+      }
+
+      setToastMessage({ type: 'success', message: 'Voyage archivé avec succès' });
+      setShowConfirmArchive(false);
+      await fetchDashboard();
+    } catch (err: unknown) {
+      setToastMessage({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
+    } finally {
+      setSending(false);
+    }
+  };
+
   if (loading) {
     return (
       <>
@@ -149,6 +172,44 @@ export default function TravelBilanPage() {
       {error && (
         <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#FFE0E3', border: '1px solid #E63946', borderRadius: '0.5rem', color: 'var(--pro-coral)' }}>
           {error}
+        </div>
+      )}
+
+      {showConfirmArchive && (
+        <div style={{
+          padding: '1.5rem',
+          backgroundColor: '#FFF7ED',
+          border: '1.5px solid #FB923C',
+          borderRadius: '14px',
+          marginBottom: '1rem',
+        }}>
+          <p style={{ fontWeight: 600, color: '#9A3412', marginBottom: '0.75rem' }}>
+            Êtes-vous sûr de vouloir archiver ce voyage ?
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button type="button" onClick={handleArchiveTravel} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: '#DC2626',
+              color: 'white',
+              borderRadius: '8px',
+              fontWeight: 600,
+              border: 'none',
+              cursor: 'pointer',
+            }}>
+              Confirmer
+            </button>
+            <button type="button" onClick={() => setShowConfirmArchive(false)} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: 'white',
+              color: '#6B7280',
+              borderRadius: '8px',
+              fontWeight: 500,
+              border: '1px solid #D1D5DB',
+              cursor: 'pointer',
+            }}>
+              Annuler
+            </button>
+          </div>
         </div>
       )}
 
@@ -263,12 +324,10 @@ export default function TravelBilanPage() {
 
           {((dashboard?.actions as unknown)?.canArchive as boolean) && (
             <button type="button"
-              onClick={() => {
-                if (confirm('Êtes-vous sûr de vouloir archiver ce voyage ?')) {
-                  // Appel pour archiver
-                }
-              }}
+              onClick={() => setShowConfirmArchive(true)}
+              disabled={sending}
               className="pro-btn-outline"
+              style={{ opacity: sending ? 0.5 : 1 }}
             >
               📦 Archiver le voyage
             </button>

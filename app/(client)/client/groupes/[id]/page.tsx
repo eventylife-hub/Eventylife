@@ -54,6 +54,7 @@ export default function GroupDetailPage() {
   const [newMessage, setNewMessage] = useState('');
   const [sendingMessage, setSendingMessage] = useState(false);
   const [leavingGroup, setLeavingGroup] = useState(false);
+  const [showConfirmLeave, setShowConfirmLeave] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
@@ -410,25 +411,7 @@ export default function GroupDetailPage() {
           Inviter des membres
         </Link>
         <button type="button"
-          onClick={async () => {
-            if (!confirm('Êtes-vous sûr de vouloir quitter ce groupe ? Cette action est irréversible.')) return;
-            try {
-              setLeavingGroup(true);
-              const res = await fetch(`/api/client/groups/${params.id}/leave`, {
-                method: 'POST',
-                credentials: 'include',
-              });
-              if (!res.ok) {
-                const data = (await res.json() as unknown) as Record<string, unknown>;
-                throw new Error(data.message || 'Erreur lors de la sortie du groupe');
-              }
-              router.push('/client/groupes');
-            } catch (err: unknown) {
-              setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur') });
-            } finally {
-              setLeavingGroup(false);
-            }
-          }}
+          onClick={() => setShowConfirmLeave(true)}
           disabled={leavingGroup}
           className="px-6 py-3 rounded-lg font-semibold disabled:opacity-50 transition-all hover:opacity-80"
           style={{
@@ -440,6 +423,62 @@ export default function GroupDetailPage() {
           {leavingGroup ? 'Sortie en cours...' : 'Quitter le groupe'}
         </button>
       </div>
+
+      {showConfirmLeave && (
+        <div style={{
+          padding: '1.5rem',
+          backgroundColor: '#FFF7ED',
+          border: '1.5px solid #FB923C',
+          borderRadius: '14px',
+          marginBottom: '1rem',
+          marginTop: '1rem',
+        }}>
+          <p style={{ fontWeight: 600, color: '#9A3412', marginBottom: '0.75rem' }}>
+            Êtes-vous sûr de vouloir quitter ce groupe ? Cette action est irréversible.
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button type="button" onClick={async () => {
+              try {
+                setLeavingGroup(true);
+                const res = await fetch(`/api/client/groups/${params.id}/leave`, {
+                  method: 'POST',
+                  credentials: 'include',
+                });
+                if (!res.ok) {
+                  const data = (await res.json() as unknown) as Record<string, unknown>;
+                  throw new Error(data.message || 'Erreur lors de la sortie du groupe');
+                }
+                router.push('/client/groupes');
+              } catch (err: unknown) {
+                setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur') });
+              } finally {
+                setLeavingGroup(false);
+              }
+            }} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: '#DC2626',
+              color: 'white',
+              borderRadius: '8px',
+              fontWeight: 600,
+              border: 'none',
+              cursor: 'pointer',
+            }}>
+              Confirmer
+            </button>
+            <button type="button" onClick={() => setShowConfirmLeave(false)} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: 'white',
+              color: '#6B7280',
+              borderRadius: '8px',
+              fontWeight: 500,
+              border: '1px solid #D1D5DB',
+              cursor: 'pointer',
+            }}>
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
 
       {toast && (
         <ToastNotification

@@ -68,6 +68,7 @@ export default function ProfilePage() {
   const [twoFACode, setTwoFACode] = useState('');
   const [twoFAEnabled, setTwoFAEnabled] = useState(false);
   const [enabling2FA, setEnabling2FA] = useState(false);
+  const [showConfirmDisable2FA, setShowConfirmDisable2FA] = useState(false);
 
   // Préférences
   const [preferences, setPreferences] = useState<PreferencesState>({
@@ -266,7 +267,6 @@ export default function ProfilePage() {
   };
 
   const handleDisable2FA = async () => {
-    if (!confirm('Êtes-vous sûr de vouloir désactiver l\'authentification à deux facteurs ?')) return;
     try {
       const res = await fetch('/api/auth/2fa/disable', {
         method: 'POST',
@@ -274,6 +274,7 @@ export default function ProfilePage() {
       });
       if (!res.ok) throw new Error('Erreur');
       setTwoFAEnabled(false);
+      setShowConfirmDisable2FA(false);
     } catch (err: unknown) {
       setToast({ type: 'error', message: extractErrorMessage(err) });
     }
@@ -529,7 +530,7 @@ export default function ProfilePage() {
             Changer mon mot de passe
           </button>
           <button type="button"
-            onClick={twoFAEnabled ? handleDisable2FA : handleInit2FA}
+            onClick={twoFAEnabled ? () => setShowConfirmDisable2FA(true) : handleInit2FA}
             disabled={enabling2FA}
             className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left"
             style={{ background: '#fff', color: 'var(--navy, #1A1A2E)', border: '1.5px solid #E5E0D8', opacity: enabling2FA ? 0.6 : 1 }}
@@ -678,6 +679,45 @@ export default function ProfilePage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation banner désactivation 2FA */}
+      {showConfirmDisable2FA && (
+        <div style={{
+          padding: '1.5rem',
+          backgroundColor: '#FFF7ED',
+          border: '1.5px solid #FB923C',
+          borderRadius: '14px',
+          marginBottom: '1rem',
+        }}>
+          <p style={{ fontWeight: 600, color: '#9A3412', marginBottom: '0.75rem' }}>
+            Êtes-vous sûr de vouloir désactiver l'authentification à deux facteurs ?
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button type="button" onClick={handleDisable2FA} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: '#DC2626',
+              color: 'white',
+              borderRadius: '8px',
+              fontWeight: 600,
+              border: 'none',
+              cursor: 'pointer',
+            }}>
+              Confirmer
+            </button>
+            <button type="button" onClick={() => setShowConfirmDisable2FA(false)} style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: 'white',
+              color: '#6B7280',
+              borderRadius: '8px',
+              fontWeight: 500,
+              border: '1px solid #D1D5DB',
+              cursor: 'pointer',
+            }}>
+              Annuler
+            </button>
           </div>
         </div>
       )}
