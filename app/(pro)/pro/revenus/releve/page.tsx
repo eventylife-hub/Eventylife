@@ -579,7 +579,7 @@ export default function ReleveMensuelPage() {
           </div>
 
           {/* Totals */}
-          <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1rem', marginTop: '1.5rem', space: '0.75rem' }}>
+          <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1rem', marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
               <span style={{ fontWeight: '600' }}>Total CA TTC:</span>
               <span style={{ fontWeight: 'bold', fontSize: '1.125rem' }}>

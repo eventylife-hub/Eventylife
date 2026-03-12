@@ -337,7 +337,7 @@ export default function FinancePage() {
                 <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)' }}>Les paiements reçus apparaîtront ici</p>
               </div>
             ) : (
-              <div style={{ space: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {payments.map((payment) => (
                   <div
                     key={payment.id}
@@ -391,7 +391,7 @@ export default function FinancePage() {
                 <p style={{ fontSize: '12px', color: 'var(--admin-text-secondary)' }}>Les demandes de remboursement apparaîtront ici</p>
               </div>
             ) : (
-              <div style={{ space: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {refunds.map((refund) => (
                   <div
                     key={refund.id}

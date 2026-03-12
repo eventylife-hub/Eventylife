@@ -333,7 +333,7 @@ export default function ExportsPage() {
               Générer un export
             </h2>
 
-            <div style={{ space: '16px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Type d'export

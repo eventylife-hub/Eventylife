@@ -434,7 +434,8 @@ export default function MessagerieDetail() {
                   style={{
                     display: 'flex',
                     justifyContent: msg.senderType === 'self' ? 'flex-end' : 'flex-start',
-                    paddingX: '16px',
+                    paddingLeft: '16px',
+                    paddingRight: '16px',
                   }}
                 >
                   <span style={{ fontSize: '12px', color: MUTED }}>

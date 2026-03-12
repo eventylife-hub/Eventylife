@@ -106,7 +106,7 @@ export default function ProDashboard() {
 
   return (
     <div className="pro-fade-in page-enter" style={{ minHeight: '100vh', backgroundColor: SAND, padding: '24px' }}>
-      <div style={{ maxWidth: '1280px', marginX: 'auto' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header with Welcome */}
         <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
@@ -335,8 +335,10 @@ export default function ProDashboard() {
                         style={{
                           fontSize: '12px',
                           fontWeight: 500,
-                          paddingX: '8px',
-                          paddingY: '4px',
+                          paddingLeft: '8px',
+                          paddingRight: '8px',
+                          paddingTop: '4px',
+                          paddingBottom: '4px',
                           borderRadius: '9999px',
                           backgroundColor:
                             activity.type === 'booking' ? '#dcfce7' :

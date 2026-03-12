@@ -508,7 +508,7 @@ export default function AdminNotificationsPage() {
               </button>
             </div>
 
-            <div style={{ space: '16px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Destinataire
@@ -612,7 +612,7 @@ export default function AdminNotificationsPage() {
                 ✕
               </button>
             </div>
-            <div style={{ padding: '24px', space: '24px' }}>
+            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)', display: 'block', marginBottom: '4px' }}>
                   Template

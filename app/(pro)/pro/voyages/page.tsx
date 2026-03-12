@@ -376,9 +376,10 @@ export default function TravelsPage() {
             )}
 
             {filteredTravels.length === 0 && (
-              <div style={{ textAlign: 'center', paddingY: '3rem', paddingTop: '3rem', paddingBottom: '3rem' }}>
-                <AlertCircle style={{ margin: '0 auto', height: '3rem', width: '3rem', color: '#D1D5DB', marginBottom: '1rem' }} />
-                <p style={{ color: '#4A5568', fontWeight: '500', marginBottom: '1rem' }}>Aucun voyage trouvé</p>
+              <div style={{ textAlign: 'center', paddingTop: '3rem', paddingBottom: '3rem' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✈️</div>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun voyage trouvé</h3>
+                <p style={{ color: '#64748B', fontSize: '0.875rem', marginBottom: '1rem' }}>Créez votre premier voyage pour commencer</p>
                 <Link
                   href="/pro/voyages/nouveau"
                   style={{ color: 'var(--pro-sun)', textDecoration: 'none', fontWeight: '500' }}

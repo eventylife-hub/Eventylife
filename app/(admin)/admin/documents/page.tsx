@@ -367,7 +367,7 @@ export default function AdminDocumentsPage() {
               Examiner le document
             </h3>
 
-            <div style={{ marginBottom: '24px', space: '16px' }}>
+            <div style={{ marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-secondary)' }}>
                   Nom du document
