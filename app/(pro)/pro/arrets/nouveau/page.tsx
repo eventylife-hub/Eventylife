@@ -8,6 +8,7 @@ import { ArrowLeft, MapPin, Save, Loader, AlertCircle, Upload } from 'lucide-rea
 import { logger } from '@/lib/logger';
 import { busStopSchema } from '@/lib/validations/bus-stop';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface BusStopForm {
   publicName: string;
   internalName: string;
@@ -27,6 +28,7 @@ export default function NouvelArretPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [form, setForm] = useState<BusStopForm>({
     publicName: '',
     internalName: '',
@@ -49,6 +51,7 @@ export default function NouvelArretPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
 
     const payload = {
       ...form,
@@ -60,8 +63,7 @@ export default function NouvelArretPage() {
       busStopSchema.parse(payload);
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -141,7 +143,11 @@ export default function NouvelArretPage() {
                   placeholder="Ex: Gare routiere de Lyon - Perrache"
                   className="pro-input"
                   required
+                  aria-invalid={!!errors.publicName}
+                  aria-describedby={errors.publicName ? 'publicName-error' : undefined}
+                  style={errors.publicName ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.publicName} id="publicName-error" />
                 <p style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
                   Ce nom sera visible par les voyageurs
                 </p>
@@ -192,7 +198,11 @@ export default function NouvelArretPage() {
                   placeholder="Numero et rue"
                   className="pro-input"
                   required
+                  aria-invalid={!!errors.addressLine}
+                  aria-describedby={errors.addressLine ? 'addressLine-error' : undefined}
+                  style={errors.addressLine ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.addressLine} id="addressLine-error" />
               </div>
 
               <div>
@@ -206,7 +216,11 @@ export default function NouvelArretPage() {
                   placeholder="Lyon"
                   className="pro-input"
                   required
+                  aria-invalid={!!errors.city}
+                  aria-describedby={errors.city ? 'city-error' : undefined}
+                  style={errors.city ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.city} id="city-error" />
               </div>
 
               <div>
@@ -220,7 +234,11 @@ export default function NouvelArretPage() {
                   placeholder="69002"
                   className="pro-input"
                   required
+                  aria-invalid={!!errors.postalCode}
+                  aria-describedby={errors.postalCode ? 'postalCode-error' : undefined}
+                  style={errors.postalCode ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.postalCode} id="postalCode-error" />
               </div>
 
               <div>

@@ -7,6 +7,7 @@ import { ZodError } from 'zod';
 import { logger } from '@/lib/logger';
 import { messageSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 
 const OCEAN = 'var(--pro-ocean)';
 const SUN = 'var(--pro-sun)';
@@ -47,6 +48,7 @@ export default function MessagerieDetail() {
   const [error, setError] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const demoConversations: Record<string, Conversation> = {
     '1': {
@@ -195,13 +197,14 @@ export default function MessagerieDetail() {
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (sending) return;
+    setError(null);
+    setErrors({});
 
     try {
       messageSchema.parse({ content: newMessage });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -461,22 +464,27 @@ export default function MessagerieDetail() {
               <Paperclip style={{ width: '20px', height: '20px' }} />
             </button>
 
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '8px', padding: '8px 12px', border: `1px solid #E5E7EB` }}>
-              <input
-                type="text"
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Votre message..."
-                style={{
-                  flex: 1,
-                  border: 'none',
-                  backgroundColor: 'transparent',
-                  outline: 'none',
-                  fontSize: '14px',
-                  color: DARK,
-                }}
-                disabled={sending}
-              />
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '8px', padding: '8px 12px', border: `1px solid ${errors.content ? '#DC2626' : '#E5E7EB'}` }}>
+                <input
+                  type="text"
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  placeholder="Votre message..."
+                  aria-invalid={!!errors.content}
+                  aria-describedby={errors.content ? 'message-content-error' : undefined}
+                  style={{
+                    flex: 1,
+                    border: 'none',
+                    backgroundColor: 'transparent',
+                    outline: 'none',
+                    fontSize: '14px',
+                    color: DARK,
+                  }}
+                  disabled={sending}
+                />
+              </div>
+              <FormFieldError error={errors.content} id="message-content-error" />
             </div>
 
             <button

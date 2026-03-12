@@ -13,6 +13,7 @@ import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { roomingPreferencesSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface CoOccupant {
   id: string;
   firstName: string;
@@ -71,6 +72,7 @@ export default function RoomingPage() {
   });
   const [preferencesLoading, setPreferencesLoading] = useState(false);
   const [preferencesMessage, setPreferencesMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [preferencesErrors, setPreferencesErrors] = useState<Record<string, string>>({});
 
   // Documents upload
   const [documents, setDocuments] = useState<File[]>([]);
@@ -148,13 +150,14 @@ export default function RoomingPage() {
 
   const handlePreferencesSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    setPreferencesErrors({});
+    setPreferencesMessage(null);
 
     try {
       roomingPreferencesSchema.parse(preferences);
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setPreferencesMessage({ type: 'error', text: Object.values(fieldErrors).join('. ') });
+        setPreferencesErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -361,8 +364,11 @@ export default function RoomingPage() {
                 value={preferences.floor}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, floor: (e.target as HTMLInputElement).value })}
                 disabled={isCutoffPassed}
-                style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
+                aria-invalid={!!preferencesErrors.floor}
+                aria-describedby={preferencesErrors.floor ? 'floor-error' : undefined}
+                style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${preferencesErrors.floor ? '#DC2626' : '#E5E0D8'}`, fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
               />
+              <FormFieldError error={preferencesErrors.floor} id="floor-error" />
             </div>
 
             <div>
@@ -373,11 +379,13 @@ export default function RoomingPage() {
                 value={preferences.bedType}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setPreferences({ ...preferences, bedType: e.target.value })}
                 disabled={isCutoffPassed}
+                aria-invalid={!!preferencesErrors.bedType}
+                aria-describedby={preferencesErrors.bedType ? 'bedType-error' : undefined}
                 style={{
                   width: '100%',
                   padding: '10px 12px',
                   borderRadius: '10px',
-                  border: '1.5px solid #E5E0D8',
+                  border: `1.5px solid ${preferencesErrors.bedType ? '#DC2626' : '#E5E0D8'}`,
                   color: 'var(--navy, #1A1A2E)',
                   backgroundColor: 'white',
                 }}
@@ -387,6 +395,7 @@ export default function RoomingPage() {
                 <option value="double">Lit double</option>
                 <option value="twin">Deux lits simples</option>
               </select>
+              <FormFieldError error={preferencesErrors.bedType} id="bedType-error" />
             </div>
 
             <div>
@@ -399,15 +408,18 @@ export default function RoomingPage() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, specialRequests: (e.target as HTMLInputElement).value })}
                 disabled={isCutoffPassed}
                 rows={3}
+                aria-invalid={!!preferencesErrors.specialRequests}
+                aria-describedby={preferencesErrors.specialRequests ? 'specialRequests-error' : undefined}
                 style={{
                   width: '100%',
                   padding: '10px 12px',
                   borderRadius: '10px',
-                  border: '1.5px solid #E5E0D8',
+                  border: `1.5px solid ${preferencesErrors.specialRequests ? '#DC2626' : '#E5E0D8'}`,
                   color: 'var(--navy, #1A1A2E)',
                   backgroundColor: 'white',
                 }}
               />
+              <FormFieldError error={preferencesErrors.specialRequests} id="specialRequests-error" />
             </div>
 
             <button

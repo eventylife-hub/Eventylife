@@ -6,6 +6,7 @@ import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
 import { profileSchema } from '@/lib/validations/profile';
 import { changePasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface ProfileData {
   id: string;
   email: string;
@@ -43,6 +44,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [success, setSuccess] = useState(false);
 
   // Sécurité
@@ -54,6 +56,7 @@ export default function ProfilePage() {
   });
   const [changingPassword, setChangingPassword] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({});
   const [passwordSuccess, setPasswordSuccess] = useState(false);
 
   // 2FA
@@ -126,14 +129,14 @@ export default function ProfilePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
     setSuccess(false);
 
     try {
       profileSchema.parse(form);
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -167,6 +170,7 @@ export default function ProfilePage() {
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setPasswordError(null);
+    setPasswordErrors({});
     setPasswordSuccess(false);
 
     try {
@@ -177,8 +181,7 @@ export default function ProfilePage() {
       });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setPasswordError(Object.values(fieldErrors)[0] || 'Erreur de validation');
+        setPasswordErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -368,15 +371,18 @@ export default function ProfilePage() {
               value={form.firstName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, firstName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
+              style={{ background: '#fff', border: `1.5px solid ${errors.firstName ? '#DC2626' : '#E5E0D8'}`, color: 'var(--navy, #1A1A2E)' }}
               placeholder="Votre prénom"
+              aria-invalid={!!errors.firstName}
+              aria-describedby={errors.firstName ? 'firstName-error' : undefined}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                if (!errors.firstName) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = '#E5E0D8';
+                e.currentTarget.style.borderColor = errors.firstName ? '#DC2626' : '#E5E0D8';
               }}
             />
+            <FormFieldError error={errors.firstName} id="firstName-error" />
           </div>
 
           {/* Nom */}
@@ -390,15 +396,18 @@ export default function ProfilePage() {
               value={form.lastName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, lastName: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
+              style={{ background: '#fff', border: `1.5px solid ${errors.lastName ? '#DC2626' : '#E5E0D8'}`, color: 'var(--navy, #1A1A2E)' }}
               placeholder="Votre nom"
+              aria-invalid={!!errors.lastName}
+              aria-describedby={errors.lastName ? 'lastName-error' : undefined}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                if (!errors.lastName) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = '#E5E0D8';
+                e.currentTarget.style.borderColor = errors.lastName ? '#DC2626' : '#E5E0D8';
               }}
             />
+            <FormFieldError error={errors.lastName} id="lastName-error" />
           </div>
 
           {/* Téléphone */}
@@ -412,15 +421,18 @@ export default function ProfilePage() {
               value={form.phone}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
               className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-              style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
+              style={{ background: '#fff', border: `1.5px solid ${errors.phone ? '#DC2626' : '#E5E0D8'}`, color: 'var(--navy, #1A1A2E)' }}
               placeholder="+33 6 XX XX XX XX"
+              aria-invalid={!!errors.phone}
+              aria-describedby={errors.phone ? 'phone-error' : undefined}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                if (!errors.phone) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = '#E5E0D8';
+                e.currentTarget.style.borderColor = errors.phone ? '#DC2626' : '#E5E0D8';
               }}
             />
+            <FormFieldError error={errors.phone} id="phone-error" />
           </div>
 
           {/* Boutons */}
@@ -543,15 +555,18 @@ export default function ProfilePage() {
                   value={passwordForm.currentPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, currentPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
+                  style={{ background: '#fff', border: `1.5px solid ${passwordErrors.currentPassword ? '#DC2626' : '#E5E0D8'}`, color: 'var(--navy, #1A1A2E)' }}
+                  aria-invalid={!!passwordErrors.currentPassword}
+                  aria-describedby={passwordErrors.currentPassword ? 'currentPassword-error' : undefined}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                    if (!passwordErrors.currentPassword) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#E5E0D8';
+                    e.currentTarget.style.borderColor = passwordErrors.currentPassword ? '#DC2626' : '#E5E0D8';
                   }}
                   required
                 />
+                <FormFieldError error={passwordErrors.currentPassword} id="currentPassword-error" />
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Nouveau mot de passe</label>
@@ -561,16 +576,19 @@ export default function ProfilePage() {
                   value={passwordForm.newPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, newPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
+                  style={{ background: '#fff', border: `1.5px solid ${passwordErrors.newPassword ? '#DC2626' : '#E5E0D8'}`, color: 'var(--navy, #1A1A2E)' }}
+                  aria-invalid={!!passwordErrors.newPassword}
+                  aria-describedby={passwordErrors.newPassword ? 'newPassword-error' : undefined}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                    if (!passwordErrors.newPassword) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#E5E0D8';
+                    e.currentTarget.style.borderColor = passwordErrors.newPassword ? '#DC2626' : '#E5E0D8';
                   }}
                   required
                   minLength={8}
                 />
+                <FormFieldError error={passwordErrors.newPassword} id="newPassword-error" />
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Confirmer le mot de passe</label>
@@ -580,16 +598,19 @@ export default function ProfilePage() {
                   value={passwordForm.confirmPassword}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordForm({ ...passwordForm, confirmPassword: (e.target as HTMLInputElement).value })}
                   className="w-full px-4 py-3 rounded-xl text-sm transition-all"
-                  style={{ background: '#fff', border: '1.5px solid #E5E0D8', color: 'var(--navy, #1A1A2E)' }}
+                  style={{ background: '#fff', border: `1.5px solid ${passwordErrors.confirmNewPassword ? '#DC2626' : '#E5E0D8'}`, color: 'var(--navy, #1A1A2E)' }}
+                  aria-invalid={!!passwordErrors.confirmNewPassword}
+                  aria-describedby={passwordErrors.confirmNewPassword ? 'confirmNewPassword-error' : undefined}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                    if (!passwordErrors.confirmNewPassword) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#E5E0D8';
+                    e.currentTarget.style.borderColor = passwordErrors.confirmNewPassword ? '#DC2626' : '#E5E0D8';
                   }}
                   required
                   minLength={8}
                 />
+                <FormFieldError error={passwordErrors.confirmNewPassword} id="confirmNewPassword-error" />
               </div>
               <div className="flex gap-2 pt-2">
                 <button

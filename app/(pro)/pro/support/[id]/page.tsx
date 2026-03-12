@@ -18,6 +18,7 @@ import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
 import { messageSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 
 interface Message {
   id: string;
@@ -90,6 +91,7 @@ export default function TicketDetailPage() {
   const [error, setError] = useState<string | null>(null);
   const [replyText, setReplyText] = useState('');
   const [submittingReply, setSubmittingReply] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     fetchTicket();
@@ -299,13 +301,14 @@ export default function TicketDetailPage() {
 
   const handleSendReply = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setErrors({});
 
     try {
       messageSchema.parse({ content: replyText });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -639,13 +642,17 @@ export default function TicketDetailPage() {
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 className="pro-input"
+                aria-invalid={!!errors.content}
+                aria-describedby={errors.content ? 'reply-content-error' : undefined}
                 style={{
                   width: '100%',
                   minHeight: '100px',
                   resize: 'vertical',
                   fontFamily: 'inherit',
+                  ...(errors.content ? { borderColor: '#DC2626' } : {}),
                 }}
               />
+              <FormFieldError error={errors.content} id="reply-content-error" />
 
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
                 <button

@@ -21,6 +21,7 @@ import { ToastNotification } from '@/components/ui/toast-notification';
 import { extractErrorMessage } from '@/lib/api-error';
 import { manualNotificationSchema } from '@/lib/validations/admin';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface NotificationTemplate {
   id: string;
   name: string;
@@ -70,6 +71,7 @@ export default function AdminNotificationsPage() {
   const [activeTab, setActiveTab] = useState('templates');
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [selectedNotification, setSelectedNotification] = useState<NotificationDetails | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -159,6 +161,8 @@ export default function AdminNotificationsPage() {
   };
 
   const handleSendManual = async () => {
+    setErrors({});
+
     try {
       manualNotificationSchema.parse({
         recipient: manualRecipient,
@@ -167,8 +171,7 @@ export default function AdminNotificationsPage() {
       });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setToastMessage({ type: 'error', message: Object.values(fieldErrors).join('. ') });
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -517,7 +520,11 @@ export default function AdminNotificationsPage() {
                   value={manualRecipient}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualRecipient((e.target as HTMLInputElement).value)}
                   className="admin-input"
+                  aria-invalid={!!errors.recipient}
+                  aria-describedby={errors.recipient ? 'recipient-error' : undefined}
+                  style={errors.recipient ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.recipient} id="recipient-error" />
               </div>
 
               <div style={{ marginBottom: '16px' }}>
@@ -528,6 +535,9 @@ export default function AdminNotificationsPage() {
                   value={manualTemplate}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualTemplate(e.target.value)}
                   className="admin-input"
+                  aria-invalid={!!errors.templateId}
+                  aria-describedby={errors.templateId ? 'templateId-error' : undefined}
+                  style={errors.templateId ? { borderColor: '#DC2626' } : undefined}
                 >
                   <option value="">Sélectionner un template</option>
                   {data.templates.map((t) => (
@@ -536,6 +546,7 @@ export default function AdminNotificationsPage() {
                     </option>
                   ))}
                 </select>
+                <FormFieldError error={errors.templateId} id="templateId-error" />
               </div>
 
               <div style={{ marginBottom: '16px' }}>
@@ -546,11 +557,15 @@ export default function AdminNotificationsPage() {
                   value={manualChannel}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualChannel(e.target.value as 'EMAIL' | 'SMS' | 'PUSH')}
                   className="admin-input"
+                  aria-invalid={!!errors.channel}
+                  aria-describedby={errors.channel ? 'channel-error' : undefined}
+                  style={errors.channel ? { borderColor: '#DC2626' } : undefined}
                 >
                   <option value="EMAIL">Email</option>
                   <option value="SMS">SMS</option>
                   <option value="PUSH">Push</option>
                 </select>
+                <FormFieldError error={errors.channel} id="channel-error" />
               </div>
             </div>
 

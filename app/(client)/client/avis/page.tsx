@@ -7,6 +7,7 @@ import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
 import { reviewSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface CompletedTravel {
   id: string;
   title: string;
@@ -31,6 +32,7 @@ export default function AvisPage() {
   const [completedTravels, setCompletedTravels] = useState<CompletedTravel[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     travelId: '',
@@ -106,13 +108,14 @@ export default function AvisPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setErrors({});
 
     try {
       reviewSchema.parse(formData);
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -240,8 +243,10 @@ export default function AvisPage() {
                 value={formData.travelId}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, travelId: e.target.value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
+                aria-invalid={!!errors.travelId}
+                aria-describedby={errors.travelId ? 'travelId-error' : undefined}
                 style={{
-                  border: '1.5px solid #E5E0D8',
+                  border: `1.5px solid ${errors.travelId ? '#DC2626' : '#E5E0D8'}`,
                   background: '#fff',
                   color: 'var(--navy, #1A1A2E)',
                 }}
@@ -260,6 +265,7 @@ export default function AvisPage() {
                   </option>
                 )}
               </select>
+              <FormFieldError error={errors.travelId} id="travelId-error" />
             </div>
 
             <div>
@@ -277,8 +283,10 @@ export default function AvisPage() {
                 value={formData.comment}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: e.target.value })}
                 className="w-full px-4 py-2 rounded-xl text-sm transition-all"
+                aria-invalid={!!errors.comment}
+                aria-describedby={errors.comment ? 'comment-error' : undefined}
                 style={{
-                  border: '1.5px solid #E5E0D8',
+                  border: `1.5px solid ${errors.comment ? '#DC2626' : '#E5E0D8'}`,
                   background: '#fff',
                   color: 'var(--navy, #1A1A2E)',
                   minHeight: '100px',
@@ -288,6 +296,7 @@ export default function AvisPage() {
                 minLength={10}
                 maxLength={2000}
               />
+              <FormFieldError error={errors.comment} id="comment-error" />
               <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
                 {formData.comment.length}/2000 caractères
               </p>

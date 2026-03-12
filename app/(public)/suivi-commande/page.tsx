@@ -6,23 +6,25 @@ import { ZodError } from 'zod';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { orderTrackingSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 
 export default function SuiviCommandePage() {
   const [orderRef, setOrderRef] = useState('');
   const [email, setEmail] = useState('');
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
 
     try {
       orderTrackingSchema.parse({ orderRef, email });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -108,22 +110,25 @@ export default function SuiviCommandePage() {
                 placeholder="Ex : EVT-2026-XXXXX"
                 required
                 className="w-full text-sm"
+                aria-invalid={!!errors.orderRef}
+                aria-describedby={errors.orderRef ? 'orderRef-error' : undefined}
                 style={{
-                  border: '1.5px solid #E5E0D8',
+                  border: `1.5px solid ${errors.orderRef ? '#DC2626' : '#E5E0D8'}`,
                   borderRadius: '12px',
                   padding: '12px 16px',
                   outline: 'none',
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                  if (!errors.orderRef) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.1)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#E5E0D8';
+                  e.currentTarget.style.borderColor = errors.orderRef ? '#DC2626' : '#E5E0D8';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
+              <FormFieldError error={errors.orderRef} id="orderRef-error" />
             </div>
             <div>
               <label
@@ -142,22 +147,25 @@ export default function SuiviCommandePage() {
                 placeholder="votre@email.com"
                 required
                 className="w-full text-sm"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'suivi-email-error' : undefined}
                 style={{
-                  border: '1.5px solid #E5E0D8',
+                  border: `1.5px solid ${errors.email ? '#DC2626' : '#E5E0D8'}`,
                   borderRadius: '12px',
                   padding: '12px 16px',
                   outline: 'none',
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                  if (!errors.email) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.1)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#E5E0D8';
+                  e.currentTarget.style.borderColor = errors.email ? '#DC2626' : '#E5E0D8';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
+              <FormFieldError error={errors.email} id="suivi-email-error" />
             </div>
             <button
               type="submit"

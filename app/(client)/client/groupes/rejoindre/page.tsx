@@ -8,6 +8,7 @@ import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
 import { joinGroupSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 /**
  * Page pour rejoindre un groupe via code d'invitation
  * Affiche les détails du groupe avant confirmation
@@ -19,6 +20,7 @@ export default function RejoindrePage() {
   const [loading, setLoading] = useState(false);
   const [joining, setJoining] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [groupePreview, setGroupePreview] = useState<Record<string, unknown> | null>(null);
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,13 +30,13 @@ export default function RejoindrePage() {
   const handleVerifyCode = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
 
     try {
       joinGroupSchema.parse({ invitationCode: code });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -130,17 +132,20 @@ export default function RejoindrePage() {
                   onChange={handleCodeChange}
                   disabled={loading || joining}
                   maxLength={12}
-                  style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)', textTransform: 'uppercase', textAlign: 'center', fontSize: '1.125rem', letterSpacing: '0.1em' }}
+                  aria-invalid={!!errors.invitationCode}
+                  aria-describedby={errors.invitationCode ? 'invitationCode-error' : undefined}
+                  style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.invitationCode ? '#DC2626' : '#E5E0D8'}`, fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)', textTransform: 'uppercase', textAlign: 'center', fontSize: '1.125rem', letterSpacing: '0.1em' }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                    if (!errors.invitationCode) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                     e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#E5E0D8';
+                    e.currentTarget.style.borderColor = errors.invitationCode ? '#DC2626' : '#E5E0D8';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                   required
                 />
+                <FormFieldError error={errors.invitationCode} id="invitationCode-error" />
                 <p className="text-xs" style={{ color: '#6B7280' }}>
                   Demandez le code au leader du groupe
                 </p>

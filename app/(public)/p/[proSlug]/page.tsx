@@ -15,6 +15,7 @@ import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { leadFormSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface Travel {
   id: string;
   title: string;
@@ -50,6 +51,7 @@ export default function ProPublicPage() {
   const [leadForm, setLeadForm] = useState({ name: '', phone: '', email: '', message: '' });
   const [followEmail, setFollowEmail] = useState('');
   const [rgpdConsent, setRgpdConsent] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Attribution tracking pour commission
   // SECURITY: Encode proSlug to prevent cookie injection attacks
@@ -130,13 +132,13 @@ export default function ProPublicPage() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
 
     try {
       leadFormSchema.parse({ ...leadForm, consent: rgpdConsent });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        toast.warning(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -308,10 +310,13 @@ export default function ProPublicPage() {
                 value={leadForm.name}
                 onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
                 required
-                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? 'lead-name-error' : undefined}
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.name ? '#DC2626' : '#E5E0D8'}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                onFocus={(e) => { if (!errors.name) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = errors.name ? '#DC2626' : '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
+              <FormFieldError error={errors.name} id="lead-name-error" />
             </div>
 
             <div>
@@ -322,10 +327,13 @@ export default function ProPublicPage() {
                 value={leadForm.phone}
                 onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
                 required
-                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? 'lead-phone-error' : undefined}
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.phone ? '#DC2626' : '#E5E0D8'}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                onFocus={(e) => { if (!errors.phone) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = errors.phone ? '#DC2626' : '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
+              <FormFieldError error={errors.phone} id="lead-phone-error" />
             </div>
 
             <div>
@@ -337,36 +345,47 @@ export default function ProPublicPage() {
                 value={leadForm.email}
                 onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
                 required
-                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'lead-email-error' : undefined}
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.email ? '#DC2626' : '#E5E0D8'}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                onFocus={(e) => { if (!errors.email) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(199, 91, 57, 0.1)'; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = errors.email ? '#DC2626' : '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
+              <FormFieldError error={errors.email} id="lead-email-error" />
             </div>
 
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Message</label>
               <textarea
-                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
+                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.message ? '#DC2626' : '#E5E0D8'}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
                 placeholder="Votre message..."
                 rows={4}
                 value={leadForm.message}
                 onChange={(e) => setLeadForm({ ...leadForm, message: e.target.value })}
-                onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? 'lead-message-error' : undefined}
+                onFocus={(e) => { if (!errors.message) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)'; e.currentTarget.style.boxShadow = `0 0 0 2px rgba(199, 91, 57, 0.1)`; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = errors.message ? '#DC2626' : '#E5E0D8'; e.currentTarget.style.boxShadow = 'none'; }}
               />
+              <FormFieldError error={errors.message} id="lead-message-error" />
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
               <input
                 type="checkbox"
                 id="rgpd"
                 checked={rgpdConsent}
                 onChange={(e) => setRgpdConsent(e.target.checked)}
-                style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: '1.5px solid #E5E0D8', cursor: 'pointer' }}
+                aria-invalid={!!errors.consent}
+                aria-describedby={errors.consent ? 'lead-consent-error' : undefined}
+                style={{ width: '1rem', height: '1rem', borderRadius: '4px', border: '1.5px solid #E5E0D8', cursor: 'pointer', marginTop: '2px' }}
               />
-              <label htmlFor="rgpd" style={{ fontSize: '0.875rem', color: '#6B7280' }}>
-                J&apos;accepte que mes données soient utilisées pour me recontacter
-              </label>
+              <div>
+                <label htmlFor="rgpd" style={{ fontSize: '0.875rem', color: '#6B7280' }}>
+                  J&apos;accepte que mes données soient utilisées pour me recontacter
+                </label>
+                <FormFieldError error={errors.consent} id="lead-consent-error" />
+              </div>
             </div>
 
             <button

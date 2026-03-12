@@ -8,6 +8,7 @@ import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
 import { groupInviteSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 /**
  * Page d'invitation des membres au groupe
  * Formulaire d'invitation et affichage des invitations en attente
@@ -21,6 +22,7 @@ export default function InviterPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [success, setSuccess] = useState<string | null>(null);
   const [codeCopied, setCodeCopied] = useState(false);
 
@@ -67,14 +69,14 @@ export default function InviterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
     setSuccess(null);
 
     try {
       groupInviteSchema.parse(formData);
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -191,16 +193,19 @@ export default function InviterPage() {
                     onChange={handleChange}
                     disabled={submitting}
                     required
-                    style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.email ? '#DC2626' : '#E5E0D8'}`, fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
                     onFocus={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                      if (!errors.email) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                       e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
                     }}
                     onBlur={(e) => {
-                      e.currentTarget.style.borderColor = '#E5E0D8';
+                      e.currentTarget.style.borderColor = errors.email ? '#DC2626' : '#E5E0D8';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   />
+                  <FormFieldError error={errors.email} id="email-error" />
                 </div>
 
                 <div className="space-y-2">

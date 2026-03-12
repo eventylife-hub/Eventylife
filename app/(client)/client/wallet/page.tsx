@@ -13,6 +13,7 @@ import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
 import { voucherCodeSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface Transaction {
   id: string;
   type: 'CREDIT' | 'DEBIT' | 'REFUND' | 'VOUCHER';
@@ -52,6 +53,7 @@ export default function WalletPage() {
   const [error, setError] = useState<string | null>(null);
   const [voucherCode, setVoucherCode] = useState('');
   const [voucherLoading, setVoucherLoading] = useState(false);
+  const [voucherErrors, setVoucherErrors] = useState<Record<string, string>>({});
   const [voucherMessage, setVoucherMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
   // Filtres
@@ -97,12 +99,13 @@ export default function WalletPage() {
 
   const handleRedeemVoucher = async (e: React.FormEvent) => {
     e.preventDefault();
+    setVoucherErrors({});
+    setVoucherMessage(null);
     try {
       voucherCodeSchema.parse({ code: voucherCode });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setVoucherMessage({ type: 'error', text: Object.values(fieldErrors).join('. ') });
+        setVoucherErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -252,19 +255,24 @@ export default function WalletPage() {
       <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
         <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Appliquer un voucher</h3>
         <form onSubmit={handleRedeemVoucher} className="flex gap-3 flex-wrap">
-          <input
-            type="text"
-            placeholder="Code voucher"
-            value={voucherCode}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVoucherCode((e.target as HTMLInputElement).value.toUpperCase())}
-            disabled={voucherLoading}
-            className="flex-1 min-w-48 px-4 py-2 rounded-xl text-sm transition-all"
-            style={{
-              border: '1.5px solid #E5E0D8',
-              background: '#fff',
-              color: 'var(--navy, #1A1A2E)',
-            }}
-          />
+          <div className="flex-1 min-w-48">
+            <input
+              type="text"
+              placeholder="Code voucher"
+              value={voucherCode}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVoucherCode((e.target as HTMLInputElement).value.toUpperCase())}
+              disabled={voucherLoading}
+              aria-invalid={!!voucherErrors.code}
+              aria-describedby={voucherErrors.code ? 'voucher-code-error' : undefined}
+              className="w-full px-4 py-2 rounded-xl text-sm transition-all"
+              style={{
+                border: `1.5px solid ${voucherErrors.code ? '#DC2626' : '#E5E0D8'}`,
+                background: '#fff',
+                color: 'var(--navy, #1A1A2E)',
+              }}
+            />
+            <FormFieldError error={voucherErrors.code} id="voucher-code-error" />
+          </div>
           <button
             type="submit"
             disabled={voucherLoading || !voucherCode.trim()}

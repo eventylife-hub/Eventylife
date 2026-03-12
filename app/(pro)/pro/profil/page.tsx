@@ -6,6 +6,7 @@ import { AlertCircle, MapPin, User, Building, Globe, Phone, Mail, Save } from 'l
 import { logger } from '@/lib/logger';
 import { proProfileSchema } from '@/lib/validations/pro';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 
 interface ProProfile {
   firstName: string;
@@ -36,6 +37,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [profile, setProfile] = useState<ProProfile | null>(null);
   const [formData, setFormData] = useState<ProProfile | null>(null);
 
@@ -93,6 +95,8 @@ export default function ProfilePage() {
     if (!formData) return;
 
     // Validation Zod
+    setError(null);
+    setErrors({});
     try {
       proProfileSchema.parse({
         name: `${formData.firstName} ${formData.lastName}`.trim(),
@@ -104,8 +108,7 @@ export default function ProfilePage() {
       });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -191,15 +194,18 @@ export default function ProfilePage() {
                   name="firstName"
                   value={formData?.firstName || ''}
                   onChange={handleInputChange}
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '1px solid #E0E0E0',
+                    border: `1px solid ${errors.name ? '#DC2626' : '#E0E0E0'}`,
                     borderRadius: '8px',
                     fontSize: '14px',
                     boxSizing: 'border-box',
                   }}
                 />
+                <FormFieldError error={errors.name} id="name-error" />
               </div>
               <div>
                 <label htmlFor="lastName" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
@@ -241,15 +247,18 @@ export default function ProfilePage() {
                   name="companyName"
                   value={formData?.companyName || ''}
                   onChange={handleInputChange}
+                  aria-invalid={!!errors.companyName}
+                  aria-describedby={errors.companyName ? 'companyName-error' : undefined}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '1px solid #E0E0E0',
+                    border: `1px solid ${errors.companyName ? '#DC2626' : '#E0E0E0'}`,
                     borderRadius: '8px',
                     fontSize: '14px',
                     boxSizing: 'border-box',
                   }}
                 />
+                <FormFieldError error={errors.companyName} id="companyName-error" />
               </div>
               <div>
                 <label htmlFor="companyType" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
@@ -281,15 +290,18 @@ export default function ProfilePage() {
                   name="businessNumber"
                   value={formData?.businessNumber || ''}
                   onChange={handleInputChange}
+                  aria-invalid={!!errors.siret}
+                  aria-describedby={errors.siret ? 'siret-error' : undefined}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '1px solid #E0E0E0',
+                    border: `1px solid ${errors.siret ? '#DC2626' : '#E0E0E0'}`,
                     borderRadius: '8px',
                     fontSize: '14px',
                     boxSizing: 'border-box',
                   }}
                 />
+                <FormFieldError error={errors.siret} id="siret-error" />
               </div>
             </div>
           </div>
@@ -401,15 +413,18 @@ export default function ProfilePage() {
                   name="email"
                   value={formData?.email || ''}
                   onChange={handleInputChange}
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '1px solid #E0E0E0',
+                    border: `1px solid ${errors.email ? '#DC2626' : '#E0E0E0'}`,
                     borderRadius: '8px',
                     fontSize: '14px',
                     boxSizing: 'border-box',
                   }}
                 />
+                <FormFieldError error={errors.email} id="email-error" />
               </div>
               <div>
                 <label htmlFor="phone" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -422,15 +437,18 @@ export default function ProfilePage() {
                   name="phone"
                   value={formData?.phone || ''}
                   onChange={handleInputChange}
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? 'phone-error' : undefined}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '1px solid #E0E0E0',
+                    border: `1px solid ${errors.phone ? '#DC2626' : '#E0E0E0'}`,
                     borderRadius: '8px',
                     fontSize: '14px',
                     boxSizing: 'border-box',
                   }}
                 />
+                <FormFieldError error={errors.phone} id="phone-error" />
               </div>
               <div style={{ gridColumn: 'span 1' }}>
                 <label htmlFor="website" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -470,16 +488,19 @@ export default function ProfilePage() {
               onChange={handleInputChange}
               placeholder="Présentez votre agence et vos spécialités..."
               rows={5}
+              aria-invalid={!!errors.description}
+              aria-describedby={errors.description ? 'description-error' : undefined}
               style={{
                 width: '100%',
                 padding: '12px',
-                border: '1px solid #E0E0E0',
+                border: `1px solid ${errors.description ? '#DC2626' : '#E0E0E0'}`,
                 borderRadius: '8px',
                 fontSize: '14px',
                 boxSizing: 'border-box',
                 fontFamily: 'inherit',
               }}
             />
+            <FormFieldError error={errors.description} id="description-error" />
           </div>
 
           {/* Submit Button */}

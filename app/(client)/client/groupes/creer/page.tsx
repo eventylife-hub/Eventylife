@@ -9,6 +9,7 @@ import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { createGroupSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 /**
  * Page de création d'un groupe de voyage
  * Formulaire avec prévisualisation du groupe créé
@@ -20,6 +21,7 @@ export default function CreerGroupePage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const [formData, setFormData] = useState({
     name: '',
@@ -84,6 +86,7 @@ export default function CreerGroupePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
 
     try {
       createGroupSchema.parse({
@@ -94,8 +97,7 @@ export default function CreerGroupePage() {
       });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -185,16 +187,19 @@ export default function CreerGroupePage() {
                       onChange={handleChange}
                       disabled={submitting}
                       required
-                      style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
+                      style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.name ? '#DC2626' : '#E5E0D8'}`, fontSize: '0.95rem', width: '100%', outline: 'none', background: 'white', color: 'var(--navy, #1A1A2E)' }}
                       onFocus={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                        if (!errors.name) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                         e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
                       }}
                       onBlur={(e) => {
-                        e.currentTarget.style.borderColor = '#E5E0D8';
+                        e.currentTarget.style.borderColor = errors.name ? '#DC2626' : '#E5E0D8';
                         e.currentTarget.style.boxShadow = 'none';
                       }}
                     />
+                    <FormFieldError error={errors.name} id="name-error" />
                   </div>
 
                   <div className="space-y-2">
@@ -205,10 +210,12 @@ export default function CreerGroupePage() {
                       value={formData.travelId}
                       onChange={handleChange}
                       disabled={submitting}
+                      aria-invalid={!!errors.travelId}
+                      aria-describedby={errors.travelId ? 'travelId-error' : undefined}
                       style={{
                         width: '100%',
                         padding: '10px 12px',
-                        border: '1.5px solid #E5E0D8',
+                        border: `1.5px solid ${errors.travelId ? '#DC2626' : '#E5E0D8'}`,
                         borderRadius: '10px',
                         fontSize: '0.875rem',
                         color: 'var(--navy, #1A1A2E)',
@@ -223,6 +230,7 @@ export default function CreerGroupePage() {
                         </option>
                       ))}
                     </select>
+                    <FormFieldError error={errors.travelId} id="travelId-error" />
                   </div>
 
                 <div className="space-y-2">

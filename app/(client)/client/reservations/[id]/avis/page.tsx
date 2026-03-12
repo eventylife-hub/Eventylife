@@ -8,6 +8,7 @@ import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
 import { detailedReviewSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface BookingFeedback {
   id: string;
   reference: string;
@@ -34,6 +35,7 @@ export default function FeedbackPage() {
   const [booking, setBooking] = useState<BookingFeedback | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
@@ -86,6 +88,7 @@ export default function FeedbackPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
 
     try {
       detailedReviewSchema.parse({
@@ -98,8 +101,7 @@ export default function FeedbackPage() {
       });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setToast({ type: 'error', message: Object.values(fieldErrors).join('. ') });
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -312,22 +314,25 @@ export default function FeedbackPage() {
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value)}
             placeholder="Partagez vos impressions, ce que vous avez aimé, ce qui pourrait être amélioré..."
             className="w-full px-4 py-3 rounded-lg"
+            aria-invalid={!!errors.comment}
+            aria-describedby={errors.comment ? 'comment-error' : undefined}
             style={{
               backgroundColor: 'white',
-              border: '1.5px solid #E5E0D8',
+              border: `1.5px solid ${errors.comment ? '#DC2626' : '#E5E0D8'}`,
               color: 'var(--navy, #1A1A2E)',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+              if (!errors.comment) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
               e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
             }}
             onBlur={(e) => {
-              e.currentTarget.style.borderColor = '#E5E0D8';
+              e.currentTarget.style.borderColor = errors.comment ? '#DC2626' : '#E5E0D8';
               e.currentTarget.style.boxShadow = 'none';
             }}
             rows={6}
             maxLength={1000}
           />
+          <FormFieldError error={errors.comment} id="comment-error" />
           <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
             {comment.length}/1000 caractères
           </p>

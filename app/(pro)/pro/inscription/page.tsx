@@ -18,6 +18,7 @@ import {
   Building,
   Users,
 } from 'lucide-react';
+import { FormFieldError } from '@/components/ui/form-field-error';
 
 /**
  * Page: Pro Inscription (/pro/inscription)
@@ -102,6 +103,7 @@ export default function InscriptionPage() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
   const handleProTypeSelect = (type: ProType) => {
@@ -128,6 +130,7 @@ export default function InscriptionPage() {
   const handleSubmit = async () => {
     if (!canSubmit || !canProceedStep2 || !canProceedStep3) return;
     setError(null);
+    setErrors({});
 
     try {
       proInscriptionSchema.parse({
@@ -145,8 +148,7 @@ export default function InscriptionPage() {
       });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -303,19 +305,27 @@ export default function InscriptionPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, name: (e.target as HTMLInputElement).value })}
                   placeholder="Jean Dupont"
                   className="pro-input"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
+                  style={errors.name ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.name} id="name-error" />
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Email professionnel *</label>
                 <input
                   type="email"
-                autoComplete="email"
+                  autoComplete="email"
                   value={form.email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, email: (e.target as HTMLInputElement).value })}
                   placeholder="pro@example.com"
                   className="pro-input"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
+                  style={errors.email ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.email} id="email-error" />
               </div>
 
               <div>
@@ -326,7 +336,11 @@ export default function InscriptionPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
                   placeholder="+33 6 12 34 56 78"
                   className="pro-input"
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? 'phone-error' : undefined}
+                  style={errors.phone ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.phone} id="phone-error" />
               </div>
 
               {form.proType === 'MAGASIN' && (
@@ -338,7 +352,11 @@ export default function InscriptionPage() {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, siret: (e.target as HTMLInputElement).value })}
                     placeholder="12345678901234"
                     className="pro-input"
+                    aria-invalid={!!errors.siret}
+                    aria-describedby={errors.siret ? 'siret-error' : undefined}
+                    style={errors.siret ? { borderColor: '#DC2626' } : undefined}
                   />
+                  <FormFieldError error={errors.siret} id="siret-error" />
                 </div>
               )}
             </div>
@@ -357,6 +375,9 @@ export default function InscriptionPage() {
                   value={form.zone}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setForm({ ...form, zone: e.target.value })}
                   className="pro-input"
+                  aria-invalid={!!errors.zone}
+                  aria-describedby={errors.zone ? 'zone-error' : undefined}
+                  style={errors.zone ? { borderColor: '#DC2626' } : undefined}
                 >
                   <option value="">Sélectionnez une zone</option>
                   {ZONES.map((zone) => (
@@ -365,6 +386,7 @@ export default function InscriptionPage() {
                     </option>
                   ))}
                 </select>
+                <FormFieldError error={errors.zone} id="zone-error" />
               </div>
 
               <div>
@@ -417,7 +439,11 @@ export default function InscriptionPage() {
                   placeholder="Décrivez votre expérience et vos spécialités..."
                   rows={4}
                   className="pro-input"
+                  aria-invalid={!!errors.description}
+                  aria-describedby={errors.description ? 'description-error' : undefined}
+                  style={errors.description ? { borderColor: '#DC2626' } : undefined}
                 />
+                <FormFieldError error={errors.description} id="description-error" />
               </div>
             </div>
           </div>

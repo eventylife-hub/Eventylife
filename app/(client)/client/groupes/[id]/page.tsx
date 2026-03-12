@@ -9,6 +9,7 @@ import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
 import { messageSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface Message {
   id: string;
   userId: string;
@@ -48,6 +49,7 @@ export default function GroupDetailPage() {
   const [group, setGroup] = useState<TravelGroup | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [newMessage, setNewMessage] = useState('');
   const [sendingMessage, setSendingMessage] = useState(false);
   const [leavingGroup, setLeavingGroup] = useState(false);
@@ -126,13 +128,13 @@ export default function GroupDetailPage() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
 
     try {
       messageSchema.parse({ content: newMessage });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -333,28 +335,32 @@ export default function GroupDetailPage() {
 
             {/* Formulaire d'envoi */}
             <form onSubmit={handleSendMessage} className="flex gap-2">
-              <textarea
-                value={newMessage}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewMessage(e.target.value)}
-                placeholder="Écrire un message..."
-                className="flex-1 px-4 py-2 resize-none rounded-lg"
-                style={{
-                  backgroundColor: 'white',
-                  border: '1.5px solid #E5E0D8',
-                  color: 'var(--navy, #1A1A2E)',
-                  focusOutlineStyle: 'none',
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
-                  e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#E5E0D8';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-                rows={3}
-                disabled={sendingMessage}
-              />
+              <div className="flex-1">
+                <textarea
+                  value={newMessage}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNewMessage(e.target.value)}
+                  placeholder="Écrire un message..."
+                  className="w-full px-4 py-2 resize-none rounded-lg"
+                  aria-invalid={!!errors.content}
+                  aria-describedby={errors.content ? 'content-error' : undefined}
+                  style={{
+                    backgroundColor: 'white',
+                    border: `1.5px solid ${errors.content ? '#DC2626' : '#E5E0D8'}`,
+                    color: 'var(--navy, #1A1A2E)',
+                  }}
+                  onFocus={(e) => {
+                    if (!errors.content) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
+                    e.currentTarget.style.boxShadow = `0 0 0 3px ${'rgba(199,91,57,0.1)'}`;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = errors.content ? '#DC2626' : '#E5E0D8';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                  rows={3}
+                  disabled={sendingMessage}
+                />
+                <FormFieldError error={errors.content} id="content-error" />
+              </div>
               <button
                 type="submit"
                 disabled={sendingMessage || !newMessage.trim()}

@@ -7,6 +7,7 @@ import { formatCurrency, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { cancellationSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
+import { FormFieldError } from '@/components/ui/form-field-error';
 interface Booking {
   id: string;
   reference: string;
@@ -42,6 +43,7 @@ export default function CancelReservationPage() {
   const [error, setError] = useState<string | null>(null);
   const [reason, setReason] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [refundCalc, setRefundCalc] = useState<RefundCalculation | null>(null);
 
   useEffect(() => {
@@ -99,13 +101,14 @@ export default function CancelReservationPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setErrors({});
 
     try {
       cancellationSchema.parse({ reason });
     } catch (err) {
       if (err instanceof ZodError) {
-        const fieldErrors = zodErrorsToRecord(err);
-        setError(Object.values(fieldErrors).join('. '));
+        setErrors(zodErrorsToRecord(err));
         return;
       }
     }
@@ -254,10 +257,12 @@ export default function CancelReservationPage() {
               const newReason = e.target.value;
               setReason(newReason);
             }}
-            className="w-full px-4 py-2 rounded-lg mb-3"
+            className="w-full px-4 py-2 rounded-lg mb-1"
+            aria-invalid={!!errors.reason}
+            aria-describedby={errors.reason ? 'reason-error' : undefined}
             style={{
               backgroundColor: 'white',
-              border: '1.5px solid #E5E0D8',
+              border: `1.5px solid ${errors.reason ? '#DC2626' : '#E5E0D8'}`,
               color: 'var(--navy, #1A1A2E)',
             }}
           >
@@ -267,6 +272,7 @@ export default function CancelReservationPage() {
             <option value="situation-professionnelle">Situation professionnelle</option>
             <option value="autre">Autre</option>
           </select>
+          <FormFieldError error={errors.reason} id="reason-error" />
 
           <label className="block text-sm font-medium mb-2 mt-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Commentaire (optionnel)
