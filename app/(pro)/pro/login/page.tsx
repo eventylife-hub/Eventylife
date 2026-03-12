@@ -58,7 +58,7 @@ export default function ProLoginPage() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+    <main aria-label="Connexion espace professionnel" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
       <div style={{ width: '100%', maxWidth: '448px' }}>
         <div className="pro-panel" style={{ padding: '32px' }}>
           <h1 className="pro-page-title" style={{ textAlign: 'center', marginBottom: '8px', fontSize: '28px' }}>Espace Pro</h1>

@@ -51,7 +51,7 @@ export default function ProForgotPasswordPage() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+    <main aria-label="Réinitialisation mot de passe professionnel" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
       <div style={{ width: '100%', maxWidth: '448px' }}>
         <div className="pro-panel" style={{ padding: '32px' }}>
           <Link

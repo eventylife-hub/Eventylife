@@ -62,6 +62,7 @@ export function Header({ user }: HeaderProps) {
 
   return (
     <header
+      role="banner"
       className="sticky top-0 z-40 transition-shadow duration-300"
       style={{
         background: 'linear-gradient(to right, #0077B6, #7B2FF7, #FF6B35)',

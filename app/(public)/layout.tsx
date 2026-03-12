@@ -57,7 +57,7 @@ export default function PublicLayout({
         Aller au contenu principal
       </a>
       <Header />
-      <main id="main-content">{children}</main>
+      <main id="main-content" role="main" aria-label="Contenu principal">{children}</main>
       <Footer />
       <BackToTop />
     </>
