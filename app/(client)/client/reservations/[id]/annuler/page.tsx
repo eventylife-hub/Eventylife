@@ -8,6 +8,7 @@ import { logger } from '@/lib/logger';
 import { cancellationSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
 import { FormFieldError } from '@/components/ui/form-field-error';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface Booking {
   id: string;
   reference: string;
@@ -45,6 +46,7 @@ export default function CancelReservationPage() {
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [refundCalc, setRefundCalc] = useState<RefundCalculation | null>(null);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     fetchBooking();
@@ -126,12 +128,12 @@ export default function CancelReservationPage() {
         throw new Error('Erreur lors de la demande d\'annulation');
       }
 
-      alert('Demande d\'annulation créée. Vous serez notifié de la décision par email.');
-      router.push(`/client/reservations/${bookingId}`);
+      setToast({ type: 'success', message: 'Demande d\'annulation créée. Vous serez notifié de la décision par email.' });
+      setTimeout(() => router.push(`/client/reservations/${bookingId}`), 1500);
     } catch (err: unknown) {
       logger.warn('API cancellations indisponible — données démo');
-      alert('Demande d\'annulation créée (démo). Vous serez notifié par email.');
-      setTimeout(() => router.push(`/client/reservations/${bookingId}`), 1000);
+      setToast({ type: 'success', message: 'Demande d\'annulation créée (démo). Vous serez notifié par email.' });
+      setTimeout(() => router.push(`/client/reservations/${bookingId}`), 1500);
     } finally {
       setSubmitting(false);
     }
@@ -353,6 +355,14 @@ export default function CancelReservationPage() {
           </button>
         </div>
       </form>
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { ToastNotification } from '@/components/ui/toast-notification';
 
 interface ApprovalModalProps {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export function ApprovalModal({
   const [action, setAction] = useState<'approve' | 'reject'>('approve');
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   if (!isOpen) return null;
 
@@ -35,7 +37,8 @@ export function ApprovalModal({
         await onApprove();
       } else {
         if (!reason.trim()) {
-          alert('Veuillez fournir une raison pour le rejet');
+          setToast({ type: 'error', message: 'Veuillez fournir une raison pour le rejet' });
+          setIsSubmitting(false);
           return;
         }
         await onReject(reason);
@@ -116,6 +119,14 @@ export function ApprovalModal({
           </div>
         </div>
       </div>
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

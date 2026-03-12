@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
+import { logger } from '@/lib/logger';
 
 /**
  * Initialisation de Sentry pour Next.js 14
@@ -14,7 +15,7 @@ export function initializeSentry(): void {
   const releaseVersion = process.env.NEXT_PUBLIC_SENTRY_RELEASE || 'unknown';
 
   if (!dsn) {
-    console.warn('⚠️  NEXT_PUBLIC_SENTRY_DSN not configured, error reporting disabled');
+    logger.warn('NEXT_PUBLIC_SENTRY_DSN not configured, error reporting disabled');
     return;
   }
 

@@ -7,6 +7,7 @@ import {
   COOKIE_CONSENT_VERSION,
   COOKIE_CONSENT_MAX_AGE,
 } from '@/types/cookie-consent';
+import { logger } from '@/lib/logger';
 
 export function useCookieConsent() {
   const [consent, setConsent] = useState<CookieConsent | null>(null);
@@ -35,7 +36,7 @@ export function useCookieConsent() {
 
       return parsed;
     } catch (error) {
-      console.error('Failed to parse consent cookie:', error);
+      logger.error('Failed to parse consent cookie:', error);
       return null;
     }
   }, []);
@@ -55,7 +56,7 @@ export function useCookieConsent() {
 
       return true;
     } catch (error) {
-      console.error('Failed to write consent cookie:', error);
+      logger.error('Failed to write consent cookie:', error);
       return false;
     }
   }, []);

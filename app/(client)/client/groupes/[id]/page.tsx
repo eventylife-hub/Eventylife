@@ -10,6 +10,7 @@ import { extractErrorMessage } from '@/lib/api-error';
 import { messageSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
 import { FormFieldError } from '@/components/ui/form-field-error';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface Message {
   id: string;
   userId: string;
@@ -53,6 +54,7 @@ export default function GroupDetailPage() {
   const [newMessage, setNewMessage] = useState('');
   const [sendingMessage, setSendingMessage] = useState(false);
   const [leavingGroup, setLeavingGroup] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     const fetchGroup = async () => {
@@ -422,7 +424,7 @@ export default function GroupDetailPage() {
               }
               router.push('/client/groupes');
             } catch (err: unknown) {
-              alert(extractErrorMessage(err, 'Erreur'));
+              setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur') });
             } finally {
               setLeavingGroup(false);
             }
@@ -438,6 +440,14 @@ export default function GroupDetailPage() {
           {leavingGroup ? 'Sortie en cours...' : 'Quitter le groupe'}
         </button>
       </div>
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

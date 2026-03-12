@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface Invoice {
   id: string;
   reference: string;
@@ -37,6 +38,7 @@ export default function InvoicePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     fetchBooking();
@@ -114,7 +116,7 @@ export default function InvoicePage() {
       document.body.removeChild(a);
     } catch (err: unknown) {
       logger.warn('API post-sale/invoice indisponible — données démo');
-      alert('Téléchargement de la facture en mode démo (fichier non générée)');
+      setToast({ type: 'error', message: 'Téléchargement de la facture en mode démo (fichier non générée)' });
     } finally {
       setDownloading(false);
     }
@@ -289,6 +291,14 @@ export default function InvoicePage() {
           🖨️ Imprimer
         </button>
       </div>
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

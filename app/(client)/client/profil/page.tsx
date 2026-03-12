@@ -7,6 +7,7 @@ import { extractErrorMessage } from '@/lib/api-error';
 import { profileSchema } from '@/lib/validations/profile';
 import { changePasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 import { FormFieldError } from '@/components/ui/form-field-error';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface ProfileData {
   id: string;
   email: string;
@@ -58,6 +59,7 @@ export default function ProfilePage() {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>({});
   const [passwordSuccess, setPasswordSuccess] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // 2FA
   const [show2FAModal, setShow2FAModal] = useState(false);
@@ -232,7 +234,7 @@ export default function ProfilePage() {
       setTwoFAQrUrl(data.qrCodeUrl as string);
       setShow2FAModal(true);
     } catch (err: unknown) {
-      alert(extractErrorMessage(err));
+      setToast({ type: 'error', message: extractErrorMessage(err) });
     } finally {
       setEnabling2FA(false);
     }
@@ -257,7 +259,7 @@ export default function ProfilePage() {
       setShow2FAModal(false);
       setTwoFACode('');
     } catch (err: unknown) {
-      alert(extractErrorMessage(err));
+      setToast({ type: 'error', message: extractErrorMessage(err) });
     } finally {
       setEnabling2FA(false);
     }
@@ -273,7 +275,7 @@ export default function ProfilePage() {
       if (!res.ok) throw new Error('Erreur');
       setTwoFAEnabled(false);
     } catch (err: unknown) {
-      alert(extractErrorMessage(err));
+      setToast({ type: 'error', message: extractErrorMessage(err) });
     }
   };
 
@@ -294,7 +296,7 @@ export default function ProfilePage() {
     } catch (err: unknown) {
       // Rollback
       setPreferences(preferences);
-      alert(extractErrorMessage(err));
+      setToast({ type: 'error', message: extractErrorMessage(err) });
     } finally {
       setSavingPreferences(false);
     }
@@ -817,6 +819,14 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

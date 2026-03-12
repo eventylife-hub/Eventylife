@@ -8,6 +8,7 @@ import { extractErrorMessage } from '@/lib/api-error';
 import { reviewSchema } from '@/lib/validations/client';
 import { zodErrorsToRecord } from '@/lib/validations/auth';
 import { FormFieldError } from '@/components/ui/form-field-error';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface CompletedTravel {
   id: string;
   title: string;
@@ -39,6 +40,7 @@ export default function AvisPage() {
     rating: 5,
     comment: '',
   });
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,7 +145,7 @@ export default function AvisPage() {
       setShowForm(false);
       setFormData({ travelId: '', rating: 5, comment: '' });
     } catch (err: unknown) {
-      alert(extractErrorMessage(err));
+      setToast({ type: 'error', message: extractErrorMessage(err) });
     } finally {
       setSubmitting(false);
     }
@@ -414,6 +416,14 @@ export default function AvisPage() {
             </div>
           ))}
         </div>
+      )}
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
       )}
     </div>
   );

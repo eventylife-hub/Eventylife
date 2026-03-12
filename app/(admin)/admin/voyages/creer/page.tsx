@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { ToastNotification } from '@/components/ui/toast-notification';
 type TransportMode = 'BUS' | 'FLIGHT' | 'MIXED';
 type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -59,6 +60,7 @@ export default function CreateTripPage() {
   const [isInitializing, setIsInitializing] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Form state
   const [basicInfo, setBasicInfo] = useState<BasicInfo>({
@@ -1041,19 +1043,19 @@ export default function CreateTripPage() {
           <button type="button"
             onClick={() => {
               if (currentStep === 1 && !isStep1Valid()) {
-                alert('Veuillez remplir tous les champs de cette étape');
+                setToast({ type: 'error', message: 'Veuillez remplir tous les champs de cette étape' });
                 return;
               }
               if (currentStep === 2 && !isStep2Valid()) {
-                alert('Veuillez remplir tous les champs de cette étape');
+                setToast({ type: 'error', message: 'Veuillez remplir tous les champs de cette étape' });
                 return;
               }
               if (currentStep === 3 && !isStep3Valid()) {
-                alert('Veuillez remplir tous les champs de cette étape');
+                setToast({ type: 'error', message: 'Veuillez remplir tous les champs de cette étape' });
                 return;
               }
               if (currentStep === 4 && !isStep4Valid()) {
-                alert('Veuillez remplir tous les champs de cette étape');
+                setToast({ type: 'error', message: 'Veuillez remplir tous les champs de cette étape' });
                 return;
               }
               setCurrentStep((prev) => (Math.min(5, prev + 1) as Step));
@@ -1074,6 +1076,14 @@ export default function CreateTripPage() {
           </button>
         )}
       </div>
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

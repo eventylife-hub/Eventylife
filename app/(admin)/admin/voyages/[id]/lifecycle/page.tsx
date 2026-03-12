@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
+import { ToastNotification } from '@/components/ui/toast-notification';
 interface Travel {
   id: string;
   title: string;
@@ -44,6 +45,7 @@ export default function TravelLifecyclePage() {
   const [processing, setProcessing] = useState(false);
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
   const [cancelReason, setCancelReason] = useState('');
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -178,7 +180,7 @@ export default function TravelLifecyclePage() {
   const handleAction = async (action: string) => {
     if (action === 'reject_p1' || action === 'cancel') {
       if (!cancelReason.trim()) {
-        alert('Veuillez entrer un motif');
+        setToast({ type: 'error', message: 'Veuillez entrer un motif' });
         return;
       }
     }
@@ -216,12 +218,12 @@ export default function TravelLifecyclePage() {
         throw new Error('Erreur lors de la transition');
       }
 
-      alert('Transition effectuée avec succès');
+      setToast({ type: 'success', message: 'Transition effectuée avec succès' });
       setSelectedAction(null);
       setCancelReason('');
       await fetchData();
     } catch (err: unknown) {
-      alert(extractErrorMessage(err, 'Erreur inconnue'));
+      setToast({ type: 'error', message: extractErrorMessage(err, 'Erreur inconnue') });
     } finally {
       setProcessing(false);
     }
@@ -425,6 +427,14 @@ export default function TravelLifecyclePage() {
             </button>
           </div>
         </div>
+      )}
+
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
       )}
     </div>
   );
