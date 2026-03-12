@@ -133,10 +133,11 @@ export default function NouvelArretPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
               <div style={{ gridColumn: '1 / -1' }}>
-                <label className="pro-input" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-publicName" className="pro-input" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Nom public *
                 </label>
                 <input
+                  id="stop-publicName"
                   type="text"
                   value={form.publicName}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('publicName', (e.target as HTMLInputElement).value)}
@@ -154,10 +155,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-internalName" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Nom interne
                 </label>
                 <input
+                  id="stop-internalName"
                   type="text"
                   value={form.internalName}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('internalName', (e.target as HTMLInputElement).value)}
@@ -167,10 +169,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-type" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Type *
                 </label>
                 <select
+                  id="stop-type"
                   value={form.type}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateField('type', e.target.value)}
                   className="pro-input"
@@ -188,10 +191,11 @@ export default function NouvelArretPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
               <div style={{ gridColumn: '1 / -1' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-addressLine" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Adresse *
                 </label>
                 <input
+                  id="stop-addressLine"
                   type="text"
                   value={form.addressLine}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('addressLine', (e.target as HTMLInputElement).value)}
@@ -206,10 +210,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-city" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Ville *
                 </label>
                 <input
+                  id="stop-city"
                   type="text"
                   value={form.city}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('city', (e.target as HTMLInputElement).value)}
@@ -224,10 +229,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-postalCode" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Code postal *
                 </label>
                 <input
+                  id="stop-postalCode"
                   type="text"
                   value={form.postalCode}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('postalCode', (e.target as HTMLInputElement).value)}
@@ -242,10 +248,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-country" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Pays
                 </label>
                 <input
+                  id="stop-country"
                   type="text"
                   value={form.country}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('country', (e.target as HTMLInputElement).value)}
@@ -254,10 +261,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-latitude" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Latitude
                 </label>
                 <input
+                  id="stop-latitude"
                   type="text"
                   value={form.latitude}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('latitude', (e.target as HTMLInputElement).value)}
@@ -267,10 +275,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-longitude" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Longitude
                 </label>
                 <input
+                  id="stop-longitude"
                   type="text"
                   value={form.longitude}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('longitude', (e.target as HTMLInputElement).value)}
@@ -287,10 +296,11 @@ export default function NouvelArretPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-instructions" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Instructions pour les voyageurs
                 </label>
                 <textarea
+                  id="stop-instructions"
                   value={form.instructions}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('instructions', (e.target as HTMLInputElement).value)}
                   rows={3}
@@ -301,10 +311,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-parkingInfo" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Parking
                 </label>
                 <textarea
+                  id="stop-parkingInfo"
                   value={form.parkingInfo}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('parkingInfo', (e.target as HTMLInputElement).value)}
                   rows={2}
@@ -315,10 +326,11 @@ export default function NouvelArretPage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
+                <label htmlFor="stop-accessibilityInfo" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '4px' }}>
                   Accessibilite PMR
                 </label>
                 <textarea
+                  id="stop-accessibilityInfo"
                   value={form.accessibilityInfo}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('accessibilityInfo', (e.target as HTMLInputElement).value)}
                   rows={2}
