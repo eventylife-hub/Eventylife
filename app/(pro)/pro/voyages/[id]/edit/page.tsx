@@ -925,7 +925,14 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
   };
 
   if (loading) {
-    return <div className="text-slate-600">Chargement des arrêts...</div>;
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ height: '24px', width: '200px', borderRadius: '8px', background: 'linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        {[...Array(3)].map((_, i) => (
+          <div key={i} style={{ height: '48px', borderRadius: '12px', background: 'linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        ))}
+      </div>
+    );
   }
 
   return (
