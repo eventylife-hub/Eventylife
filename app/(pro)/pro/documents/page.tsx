@@ -270,6 +270,7 @@ export default function ProDocumentsPage() {
                           onClick={() => handleDownload(doc)}
                           style={{ padding: '8px', color: 'var(--pro-ocean)', backgroundColor: 'transparent', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
                           title="Télécharger le document"
+                          aria-label="Télécharger le document"
                         >
                           <Download className="h-5 w-5" />
                         </button>

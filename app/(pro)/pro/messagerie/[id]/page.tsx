@@ -281,6 +281,7 @@ export default function MessagerieDetail() {
               onClick={() => router.back()}
               className="pro-btn-outline"
               style={{ padding: '8px' }}
+              aria-label="Retour"
             >
               <ArrowLeft style={{ width: '20px', height: '20px' }} />
             </button>
@@ -347,6 +348,7 @@ export default function MessagerieDetail() {
             onClick={() => router.back()}
             className="pro-btn-outline"
             style={{ padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            aria-label="Retour"
           >
             <ArrowLeft style={{ width: '20px', height: '20px' }} />
           </button>

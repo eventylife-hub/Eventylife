@@ -155,6 +155,8 @@ export default function TravelsPage() {
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button type="button"
               onClick={() => setViewMode('grid')}
+              aria-label="Vue grille"
+              aria-pressed={viewMode === 'grid'}
               style={{
                 padding: '0.5rem',
                 borderRadius: '0.5rem',
@@ -172,6 +174,8 @@ export default function TravelsPage() {
             </button>
             <button type="button"
               onClick={() => setViewMode('list')}
+              aria-label="Vue liste"
+              aria-pressed={viewMode === 'list'}
               style={{
                 padding: '0.5rem',
                 borderRadius: '0.5rem',
