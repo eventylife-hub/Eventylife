@@ -304,8 +304,9 @@ export default function ProPublicPage() {
           {/* Form */}
           <form role="search" onSubmit={handleLeadSubmit} className="space-y-4">
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Nom</label>
+              <label htmlFor="lead-name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Nom</label>
               <input
+                id="lead-name"
                 placeholder="Votre nom"
                 value={leadForm.name}
                 onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
@@ -320,8 +321,9 @@ export default function ProPublicPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Téléphone</label>
+              <label htmlFor="lead-phone" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Téléphone</label>
               <input
+                id="lead-phone"
                 type="tel"
                 placeholder="06 12 34 56 78"
                 value={leadForm.phone}
@@ -337,8 +339,9 @@ export default function ProPublicPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Email</label>
+              <label htmlFor="lead-email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Email</label>
               <input
+                id="lead-email"
                 type="email"
                 autoComplete="email"
                 placeholder="votre@email.com"
@@ -355,8 +358,9 @@ export default function ProPublicPage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Message</label>
+              <label htmlFor="lead-message" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Message</label>
               <textarea
+                id="lead-message"
                 style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: `1.5px solid ${errors.message ? '#DC2626' : '#E5E0D8'}`, outline: 'none', transition: 'all 0.3s ease', fontFamily: 'inherit' }}
                 placeholder="Votre message..."
                 rows={4}

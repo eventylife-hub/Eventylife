@@ -432,12 +432,14 @@ export default function DepartVillePage() {
               {/* Budget */}
               <div className="mb-6">
                 <label
+                  htmlFor="depart-budgetMax"
                   className="block text-xs font-semibold mb-2 uppercase tracking-wider"
                   style={{ color: '#64748B' }}
                 >
                   Budget max
                 </label>
                 <input
+                  id="depart-budgetMax"
                   type="range"
                   min={0}
                   max={200000}
