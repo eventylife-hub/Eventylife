@@ -244,7 +244,7 @@ export default function ContactPage() {
                 </h2>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-6 space-y-5" noValidate>
+              <form aria-label="Formulaire de contact" onSubmit={handleSubmit} className="p-6 space-y-5" noValidate>
                 {/* Nom + Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>

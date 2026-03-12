@@ -370,7 +370,7 @@ export default function ProfilePage() {
       <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
         <h2 className="font-bold text-base mb-6" style={{ color: 'var(--navy, #1A1A2E)' }}>Informations personnelles</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form aria-label="Modifier le profil" onSubmit={handleSubmit} className="space-y-6">
           {/* Email (lecture seule) */}
           <div>
             <label htmlFor="profile-email" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
@@ -585,7 +585,7 @@ export default function ProfilePage() {
               </div>
             )}
 
-            <form onSubmit={handleChangePassword} className="space-y-4">
+            <form aria-label="Changer le mot de passe" onSubmit={handleChangePassword} className="space-y-4">
               <div>
                 <label htmlFor="profile-currentPassword" className="block text-xs font-semibold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Mot de passe actuel</label>
                 <input

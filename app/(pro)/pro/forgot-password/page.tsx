@@ -88,7 +88,7 @@ export default function ProForgotPasswordPage() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <form aria-label="Réinitialisation mot de passe professionnel" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div>
                   <label
                     htmlFor="email"

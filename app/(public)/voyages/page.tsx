@@ -283,7 +283,7 @@ function VoyagesContent() {
       </div>
 
       {/* Filtres */}
-      <form
+      <form aria-label="Filtrer les voyages"
         role="search"
         aria-label="Filtrer les voyages"
         className="p-6 rounded-2xl"

@@ -123,7 +123,7 @@ export default function NouvelArretPage() {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <form aria-label="Créer un arrêt de bus" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Informations generales */}
           <div className="pro-panel">
             <h2 className="pro-panel-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>

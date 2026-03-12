@@ -254,7 +254,7 @@ export default function WalletPage() {
       {/* Voucher Input */}
       <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
         <h3 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Appliquer un voucher</h3>
-        <form onSubmit={handleRedeemVoucher} className="flex gap-3 flex-wrap">
+        <form aria-label="Utiliser un code promo" onSubmit={handleRedeemVoucher} className="flex gap-3 flex-wrap">
           <div className="flex-1 min-w-48">
             <input
               type="text"

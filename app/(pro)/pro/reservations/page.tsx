@@ -109,7 +109,7 @@ export default function ProReservationsPage() {
         {/* Search & Filters */}
         <div className="pro-panel" style={{ marginBottom: '24px', padding: '16px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <form onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', flex: 1 }}>
+            <form aria-label="Filtrer les réservations" onSubmit={handleSearch} style={{ display: 'flex', gap: '8px', flex: 1 }}>
               <div style={{ position: 'relative', flex: 1 }}>
                 <Search className="w-4 h-4" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }} />
                 <input

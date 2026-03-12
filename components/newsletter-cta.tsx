@@ -107,7 +107,7 @@ export function NewsletterCTA({
             {resolvedDesc}
           </p>
 
-          <form
+          <form aria-label="Inscription newsletter"
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
           >
@@ -192,7 +192,7 @@ export function NewsletterCTA({
       >
         {resolvedDesc}
       </p>
-      <form
+      <form aria-label="Inscription newsletter"
         onSubmit={handleSubmit}
         className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
       >

@@ -451,7 +451,7 @@ export default function MessagerieDetail() {
 
         {/* Input Area */}
         <div className="pro-panel" style={{ padding: '16px' }}>
-          <form onSubmit={handleSendMessage} style={{ display: 'flex', gap: '12px', alignItems: 'flex-end' }}>
+          <form aria-label="Envoyer un message" onSubmit={handleSendMessage} style={{ display: 'flex', gap: '12px', alignItems: 'flex-end' }}>
             <button
               type="button"
               className="pro-btn-outline"

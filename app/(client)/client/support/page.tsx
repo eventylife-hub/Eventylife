@@ -261,7 +261,7 @@ export default function SupportPage() {
         <div className="rounded-2xl p-6" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <h2 className="font-bold text-base mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Créer un ticket</h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form aria-label="Contacter le support" onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="ticket-subject" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Sujet *

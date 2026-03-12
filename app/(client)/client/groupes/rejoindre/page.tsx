@@ -115,7 +115,7 @@ export default function RejoindrePage() {
             <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--navy, #1A1A2E)' }}>Code d&apos;invitation</h3>
           </div>
           <div style={{ padding: '1.5rem' }} className="space-y-4">
-            <form onSubmit={handleVerifyCode} className="space-y-4">
+            <form aria-label="Rejoindre un groupe" onSubmit={handleVerifyCode} className="space-y-4">
               {error && (
                 <div role="alert" className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
                   <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--terra, #DC2626)' }} />

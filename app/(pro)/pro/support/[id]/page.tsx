@@ -640,7 +640,7 @@ export default function TicketDetailPage() {
               Ajouter une réponse
             </h3>
 
-            <form onSubmit={handleSendReply} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <form aria-label="Répondre au ticket" onSubmit={handleSendReply} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <textarea
                 placeholder="Écrivez votre message ici..."
                 value={replyText}

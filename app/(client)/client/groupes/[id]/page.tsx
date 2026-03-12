@@ -341,7 +341,7 @@ export default function GroupDetailPage() {
             </div>
 
             {/* Formulaire d'envoi */}
-            <form onSubmit={handleSendMessage} className="flex gap-2">
+            <form aria-label="Envoyer un message" onSubmit={handleSendMessage} className="flex gap-2">
               <div className="flex-1">
                 <textarea
                   value={newMessage}

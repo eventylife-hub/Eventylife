@@ -81,7 +81,7 @@ export function FeedbackForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
+    <form aria-label="Formulaire de retour" onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
       <h2 className="text-lg font-bold text-gray-900 mb-6">Vos Impressions</h2>
 
       {/* Note globale */}
