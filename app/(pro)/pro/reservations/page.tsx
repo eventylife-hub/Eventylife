@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Filter, Users, Calendar, MapPin, ChevronRight, AlertCircle, RotateCcw } from 'lucide-react';
 import { logger } from '@/lib/logger';
-// Button import removed - using native buttons with pro-btn-* classes
+
 interface Reservation {
   id: string;
   voyageTitle: string;
