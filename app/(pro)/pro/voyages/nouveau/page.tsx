@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { ChevronRight, ChevronLeft, CheckCircle2, AlertCircle, Save, Plus, Trash2, Image, MapPin, Calendar } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
@@ -1013,9 +1014,9 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
         <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
           <p className="text-sm text-amber-900">
             Vous n&apos;avez pas encore d&apos;arrêts de bus. Créez-les dans la section{' '}
-            <a href="/pro/arrets" target="_blank" rel="noopener noreferrer" className="font-medium underline">
+            <Link href="/pro/arrets" target="_blank" rel="noopener noreferrer" className="font-medium underline">
               Mes arrêts
-            </a>{' '}
+            </Link>{' '}
             avant de les associer à un voyage.
           </p>
         </div>

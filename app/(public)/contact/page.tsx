@@ -7,6 +7,7 @@
  */
 
 import { useState, useCallback } from 'react';
+import Link from 'next/link';
 import { useToast } from '@/lib/stores/ui-store';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { contactSchema, zodErrorsToRecord } from '@/lib/validations';
@@ -445,9 +446,9 @@ export default function ContactPage() {
                   />
                   <label htmlFor="contact-consent" className="text-xs" style={{ color: '#64748B', lineHeight: '1.5', cursor: 'pointer' }}>
                     J&apos;accepte que mes données soient traitées pour répondre à ma demande, conformément à la{' '}
-                    <a href="/confidentialite" style={{ color: 'var(--terra, #C75B39)', textDecoration: 'underline' }}>
+                    <Link href="/confidentialite" style={{ color: 'var(--terra, #C75B39)', textDecoration: 'underline' }}>
                       politique de confidentialité
-                    </a>.
+                    </Link>.
                     <span style={{ color: '#EF4444' }}> *</span>
                   </label>
                 </div>
