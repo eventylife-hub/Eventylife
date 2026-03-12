@@ -243,6 +243,7 @@ export default function ProPublicPage() {
           {pro.videoUrl && (
             <div style={{ aspectRatio: '16/9', backgroundColor: 'var(--navy, #1A1A2E)', borderRadius: '12px', overflow: 'hidden' }}>
               <iframe
+                title={`Vidéo de présentation de ${pro.name}`}
                 width="100%"
                 height="100%"
                 src={pro.videoUrl.replace('youtube.com', 'youtube-nocookie.com')}
@@ -302,7 +303,7 @@ export default function ProPublicPage() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form */}
-          <form role="search" onSubmit={handleLeadSubmit} className="space-y-4">
+          <form onSubmit={handleLeadSubmit} className="space-y-4" aria-label="Formulaire de contact">
             <div>
               <label htmlFor="lead-name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.25rem' }}>Nom</label>
               <input
@@ -433,7 +434,7 @@ export default function ProPublicPage() {
             {/* Follow Email Opt-in */}
             <div style={{ backgroundColor: '#FDF6E8', borderRadius: '12px', padding: '1rem' }}>
               <h4 style={{ fontWeight: '700', color: 'var(--navy, #1A1A2E)', marginBottom: '0.75rem' }}>Suivre les voyages</h4>
-              <form role="search" onSubmit={handleFollowEmail} className="space-y-2">
+              <form onSubmit={handleFollowEmail} className="space-y-2" aria-label="Suivre les voyages par email">
                 <input
                   type="email"
                   autoComplete="email"
