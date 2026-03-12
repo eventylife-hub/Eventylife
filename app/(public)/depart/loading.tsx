@@ -1,18 +1,14 @@
 export default function Loading() {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
-      <div className="animate-pulse rounded h-4 w-48 mb-8" style={{ background: 'rgba(0,0,0,0.06)' }} />
-      <div className="text-center mb-12 space-y-3">
-        <div className="animate-pulse rounded h-3 w-32 mx-auto" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        <div className="animate-pulse rounded-xl h-10 w-80 mx-auto" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        <div className="animate-pulse rounded h-4 w-96 mx-auto" style={{ background: 'rgba(0,0,0,0.06)' }} />
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      <div style={{ minHeight: '40vh', padding: '2rem 1rem' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ height: 32, width: 240, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 160, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 200, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        </div>
       </div>
-      <div className="animate-pulse rounded-xl h-12 w-80 mx-auto mb-10" style={{ background: 'rgba(0,0,0,0.06)' }} />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="animate-pulse rounded-xl h-16" style={{ background: 'rgba(0,0,0,0.06)' }} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }

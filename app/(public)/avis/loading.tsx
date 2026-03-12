@@ -1,22 +1,14 @@
-export default function AvisLoading() {
+export default function Loading() {
   return (
-    <div style={{ backgroundColor: 'var(--cream, #FAF7F2)', minHeight: '100vh' }}>
-      <div style={{ background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)', padding: '5rem 1rem 4rem' }}>
-        <div className="mx-auto max-w-6xl text-center">
-          <div className="h-4 w-36 mx-auto mb-4 rounded-full animate-pulse" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          <div className="h-10 w-80 mx-auto mb-4 rounded-xl animate-pulse" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          <div className="h-5 w-64 mx-auto rounded-lg animate-pulse" style={{ background: 'rgba(255,255,255,0.1)' }} />
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      <div style={{ minHeight: '40vh', padding: '2rem 1rem' }}>
+        <div style={{ maxWidth: '64rem', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ height: 32, width: 240, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 160, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+          <div style={{ height: 200, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
         </div>
       </div>
-      <div className="mx-auto max-w-5xl px-4 py-12 space-y-6">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div
-            key={i}
-            className="h-40 rounded-2xl animate-pulse"
-            style={{ background: 'rgba(26,26,46,0.04)' }}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
