@@ -425,7 +425,7 @@ export default function CreateTripPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="startDate" className="admin-input-label">Date de départ</label>
                     <input
@@ -542,7 +542,7 @@ export default function CreateTripPage() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="capacity">Capacité (places)</Label>
                     <input
@@ -641,7 +641,7 @@ export default function CreateTripPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
                     <Label htmlFor="checkInDate">Check-in</Label>
                     <Input
@@ -694,7 +694,7 @@ export default function CreateTripPage() {
                   <Label>Types de chambres</Label>
                   <div className="mt-1 space-y-3">
                     <div className="border rounded-lg p-4 space-y-3">
-                      <div className="grid grid-cols-3 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         <div>
                           <Label htmlFor="roomName" className="text-sm">
                             Type
@@ -813,7 +813,7 @@ export default function CreateTripPage() {
                   <Label>Options d&apos;assurance</Label>
                   <div className="mt-1 space-y-3">
                     <div className="border rounded-lg p-4 space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div>
                           <Label htmlFor="insuranceName" className="text-sm">
                             Nom

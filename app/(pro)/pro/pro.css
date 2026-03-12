@@ -409,6 +409,7 @@
 .pro-input {
   width: 100%;
   padding: 10px 14px;
+  min-height: 44px;
   border: 1px solid rgba(10,22,40,.1);
   border-radius: 10px;
   background: var(--pro-surface);
@@ -425,6 +426,7 @@
 
 .pro-btn-sun {
   padding: 10px 20px;
+  min-height: 44px;
   border-radius: 50px;
   border: none;
   background: linear-gradient(135deg, #FF6B35, #FF8F5E);
@@ -442,6 +444,7 @@
 
 .pro-btn-ocean {
   padding: 10px 20px;
+  min-height: 44px;
   border-radius: 50px;
   border: none;
   background: linear-gradient(135deg, #0077B6, #48CAE4);
@@ -459,6 +462,7 @@
 
 .pro-btn-outline {
   padding: 10px 20px;
+  min-height: 44px;
   border-radius: 50px;
   border: 1px solid rgba(10,22,40,.12);
   background: var(--pro-surface);

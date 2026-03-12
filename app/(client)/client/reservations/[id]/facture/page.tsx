@@ -178,7 +178,7 @@ export default function InvoicePage() {
         </div>
 
         {/* Client */}
-        <div className="grid grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div>
             <h3 className="font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Facturer à:</h3>
             <p style={{ color: 'var(--navy, #1A1A2E)' }}>{booking.createdByUser?.firstName} {booking.createdByUser?.lastName}</p>

@@ -676,8 +676,8 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                   placeholder="Titre du jour"
                 />
               </div>
-              <button type="button" onClick={() => removeDay(dIdx)} className="text-red-500 hover:text-red-700 p-1 ml-2" aria-label="Supprimer le jour">
-                <Trash2 className="w-4 h-4" />
+              <button type="button" onClick={() => removeDay(dIdx)} className="text-red-500 hover:text-red-700 p-2 ml-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Supprimer le jour">
+                <Trash2 className="w-5 h-5" />
               </button>
             </div>
 
@@ -707,8 +707,8 @@ function StepProgram({ formData, setFormData }: { formData: TravelFormData; setF
                       placeholder="Activité"
                       className="flex-1 px-2 py-1 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-indigo-600"
                     />
-                    <button type="button" onClick={() => removeActivity(dIdx, aIdx)} className="text-red-400 hover:text-red-600 p-1" aria-label="Supprimer l'activité">
-                      <Trash2 className="w-3 h-3" />
+                    <button type="button" onClick={() => removeActivity(dIdx, aIdx)} className="text-red-400 hover:text-red-600 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Supprimer l'activité">
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 ))}

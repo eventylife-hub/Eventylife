@@ -303,7 +303,7 @@ export default function CancellationDetailPage() {
           <h3 className="admin-panel-title">Calcul du Remboursement</h3>
         </div>
         <div className="admin-panel-body space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div style={{ background: 'var(--admin-surface-alt)', padding: '16px', borderRadius: '10px' }}>
               <p className="admin-kpi-label">Montant payé</p>
               <p className="admin-kpi-value" style={{ color: 'var(--admin-text-primary)' }}>

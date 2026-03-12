@@ -365,7 +365,7 @@ export default function TravelLifecyclePage() {
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {availableActions.map((action) => (
                 <button type="button"
                   key={action.action}

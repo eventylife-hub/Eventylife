@@ -16,7 +16,7 @@ export default function InscriptionLoading() {
 
           {/* Champs */}
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <div className="h-3.5 w-16 bg-gray-50 rounded mb-2" />
                 <div className="h-11 w-full bg-gray-100 rounded-lg" />
