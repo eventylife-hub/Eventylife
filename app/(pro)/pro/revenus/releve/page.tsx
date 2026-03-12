@@ -522,6 +522,7 @@ export default function ReleveMensuelPage() {
         <div className="pro-panel-body">
           <div style={{ overflowX: 'auto' }}>
             <table className="pro-table">
+              <caption className="sr-only">Relevé des opérations financières</caption>
               <thead style={{ borderBottom: '1px solid #e5e7eb', background: '#fefcf3' }}>
                 <tr style={{ textAlign: 'left' }}>
                   <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Voyage</th>

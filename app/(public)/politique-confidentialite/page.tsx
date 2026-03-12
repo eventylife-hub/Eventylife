@@ -470,6 +470,7 @@ export default function PolitiqueConfidentialite() {
                 className="mt-4 w-full border-collapse"
                 style={{ borderColor: '#E5E0D8' }}
               >
+                <caption className="sr-only">Base légale et finalités du traitement des données</caption>
                 <thead>
                   <tr>
                     <th

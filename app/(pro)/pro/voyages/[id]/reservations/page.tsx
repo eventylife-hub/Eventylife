@@ -355,6 +355,7 @@ export default function ReservationsPage() {
           {filteredReservations.length > 0 ? (
             <div style={{ overflowX: 'auto' }}>
               <table className="pro-table" style={{ width: '100%', fontSize: '0.875rem' }}>
+                <caption className="sr-only">Détail des réservations</caption>
                 <thead>
                   <tr style={{ borderBottom: '1px solid #E2E8F0', background: '#F7FAFC' }}>
                     <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Référence</th>

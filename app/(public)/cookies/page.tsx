@@ -241,6 +241,7 @@ export default function CookiesPolicy() {
                 className="w-full border-collapse text-sm"
                 style={{ borderColor: '#E5E0D8' }}
               >
+                <caption className="sr-only">Tableau détaillé des cookies utilisés</caption>
                 <thead style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
                   <tr>
                     <th

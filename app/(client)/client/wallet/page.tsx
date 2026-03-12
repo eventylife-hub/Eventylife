@@ -406,6 +406,7 @@ export default function WalletPage() {
         <div className="overflow-x-auto">
           {filteredTransactions.length > 0 ? (
             <table className="w-full text-sm">
+              <caption className="sr-only">Historique des transactions du portefeuille</caption>
               <thead style={{ background: 'var(--cream, #FAF7F2)', borderBottom: '1.5px solid #E5E0D8' }}>
                 <tr>
                   <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>

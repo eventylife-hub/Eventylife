@@ -224,6 +224,7 @@ export default function ManifestPage() {
               <div className="pro-panel-body">
                 <div style={{ overflowX: 'auto' }}>
                   <table className="pro-table" style={{ width: '100%', fontSize: '0.875rem' }}>
+                    <caption className="sr-only">Manifeste des passagers</caption>
                     <thead style={{ borderBottom: '1px solid #E2E8F0' }}>
                       <tr style={{ textAlign: 'left' }}>
                         <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Passager</th>

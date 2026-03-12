@@ -337,6 +337,7 @@ export default function TravelsPage() {
             ) : (
               <div style={{ background: '#FFFFFF', borderRadius: '0.5rem', border: '1px solid #E8F7FC', overflow: 'hidden' }}>
                 <table className="pro-table" style={{ width: '100%' }}>
+                  <caption className="sr-only">Liste des voyages</caption>
                   <thead style={{ background: '#F0E6D8', borderBottom: '1px solid #E8F7FC' }}>
                     <tr>
                       <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Voyage</th>

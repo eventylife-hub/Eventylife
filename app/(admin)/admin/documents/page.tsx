@@ -287,6 +287,7 @@ export default function AdminDocumentsPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="admin-table">
+                <caption className="sr-only">Liste des documents et signatures</caption>
                 <thead>
                   <tr>
                     <th>Document</th>

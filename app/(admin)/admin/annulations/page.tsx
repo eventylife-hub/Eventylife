@@ -237,6 +237,7 @@ export default function CancellationsPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="admin-table">
+                <caption className="sr-only">Liste des demandes d&apos;annulation</caption>
                 <thead>
                   <tr>
                     <th>Client</th>

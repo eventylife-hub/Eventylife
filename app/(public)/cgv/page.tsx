@@ -389,6 +389,7 @@ export default function CGV() {
                   className="mt-3 w-full border-collapse"
                   style={{ borderColor: '#E5E0D8' }}
                 >
+                  <caption className="sr-only">Barème des frais d'annulation</caption>
                   <thead>
                     <tr>
                       <th

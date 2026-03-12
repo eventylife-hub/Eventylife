@@ -176,6 +176,7 @@ export default function FinanceDashboardPage() {
           {dashboard.travels && dashboard.travels.length > 0 ? (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', fontSize: '14px', borderCollapse: 'collapse' }}>
+                <caption className="sr-only">Tableau financier des voyages</caption>
                 <thead style={{ borderBottom: '1px solid #E0E0E0', backgroundColor: '#F9FAFB' }}>
                   <tr style={{ textAlign: 'left' }}>
                     <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Voyage</th>

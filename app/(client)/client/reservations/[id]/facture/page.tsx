@@ -191,6 +191,7 @@ export default function InvoicePage() {
         {/* Détails */}
         <div className="mb-8">
           <table className="w-full">
+            <caption className="sr-only">Détails de la facture</caption>
             <thead>
               <tr style={{ borderBottom: '1px solid #E5E0D8' }}>
                 <th className="text-left py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>

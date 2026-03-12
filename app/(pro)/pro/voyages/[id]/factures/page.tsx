@@ -249,6 +249,7 @@ export default function InvoicesPage() {
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table className="pro-table" style={{ width: '100%' }}>
+              <caption className="sr-only">Liste des factures du voyage</caption>
               <thead style={{ background: '#F0E6D8', borderBottom: '1px solid #E8F7FC' }}>
                 <tr>
                   <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>

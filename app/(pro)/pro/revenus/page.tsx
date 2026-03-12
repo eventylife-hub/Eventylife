@@ -325,6 +325,7 @@ export default function RevenuesDashboardPage() {
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', fontSize: '14px', borderCollapse: 'collapse' }}>
+              <caption className="sr-only">Détail des revenus par voyage</caption>
                 <thead style={{ borderBottom: '1px solid #E0E0E0', backgroundColor: '#F9FAFB' }}>
                   <tr style={{ textAlign: 'left' }}>
                     <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Voyage</th>
