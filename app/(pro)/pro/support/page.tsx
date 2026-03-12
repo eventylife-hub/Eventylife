@@ -240,6 +240,7 @@ export default function ProSupportPage() {
             </p>
           </div>
           <button
+            type="button"
             onClick={() => setShowNewTicketModal(true)}
             className="pro-btn-sun"
             style={{ display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}
@@ -260,6 +261,7 @@ export default function ProSupportPage() {
             </div>
             <div style={{ marginTop: '16px' }}>
               <button
+                type="button"
                 onClick={() => {
                   setError(null);
                   fetchTickets();
@@ -279,6 +281,7 @@ export default function ProSupportPage() {
             {statuses.map((status) => (
               <button
                 key={status}
+                type="button"
                 onClick={() => setActiveFilter(status)}
                 style={{
                   padding: '8px 16px',
@@ -322,6 +325,7 @@ export default function ProSupportPage() {
               Vous n'avez pas de demande de support dans cette catégorie
             </p>
             <button
+              type="button"
               onClick={() => setShowNewTicketModal(true)}
               className="pro-btn-sun"
               style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}

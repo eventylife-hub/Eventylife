@@ -219,6 +219,7 @@ export default function RejoindrePage() {
                 </div>
 
                 <button
+                  type="button"
                   onClick={handleJoin}
                   disabled={joining}
                   className="w-full text-white font-semibold transition-all"

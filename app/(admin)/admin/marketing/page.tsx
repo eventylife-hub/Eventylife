@@ -229,7 +229,7 @@ export default function AdminMarketingPage() {
           <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
           <p className="text-red-700 font-medium mb-2">{error}</p>
           <p className="text-red-600 text-sm mb-4">Vérifiez votre connexion et réessayez.</p>
-          <button onClick={fetchStats} className="gap-2" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button type="button" onClick={fetchStats} className="gap-2" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
             <RefreshCw className="w-4 h-4" />
             Réessayer
           </button>
@@ -254,7 +254,7 @@ export default function AdminMarketingPage() {
         <div style={{ padding: '1rem', borderRadius: '12px', border: '1.5px solid #FECACA', backgroundColor: '#FEF2F2' }} role="alert">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: '0.875rem', color: '#991B1B' }}>{error}</span>
-            <button onClick={() => setError(null)} style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.85rem' }}>Fermer</button>
+            <button type="button" onClick={() => setError(null)} style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.5rem 1rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.85rem' }}>Fermer</button>
           </div>
         </div>
       )}
@@ -300,13 +300,13 @@ export default function AdminMarketingPage() {
 
       {/* Onglets */}
       <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
-        <button onClick={() => setActiveTab('campaigns')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'campaigns' ? 'white' : 'transparent', color: activeTab === 'campaigns' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'campaigns' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
+        <button type="button" onClick={() => setActiveTab('campaigns')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'campaigns' ? 'white' : 'transparent', color: activeTab === 'campaigns' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'campaigns' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
           Campagnes
         </button>
-        <button onClick={() => setActiveTab('sources')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'sources' ? 'white' : 'transparent', color: activeTab === 'sources' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'sources' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
+        <button type="button" onClick={() => setActiveTab('sources')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'sources' ? 'white' : 'transparent', color: activeTab === 'sources' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'sources' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
           Sources de leads
         </button>
-        <button onClick={() => setActiveTab('settings')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'settings' ? 'white' : 'transparent', color: activeTab === 'settings' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'settings' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
+        <button type="button" onClick={() => setActiveTab('settings')} style={{ padding: '0.5rem 1rem', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', backgroundColor: activeTab === 'settings' ? 'white' : 'transparent', color: activeTab === 'settings' ? '#1A1A2E' : '#64748B', boxShadow: activeTab === 'settings' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}>
           Paramètres
         </button>
       </div>
@@ -435,6 +435,7 @@ export default function AdminMarketingPage() {
 
               <div className="flex justify-end">
                 <button
+                  type="button"
                   onClick={handleSaveAttributionSettings}
                   disabled={savingAttribution}
                   style={{

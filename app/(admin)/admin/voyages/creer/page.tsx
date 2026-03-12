@@ -355,6 +355,7 @@ export default function CreateTripPage() {
               onClick={() => {
                 if (step < currentStep) setCurrentStep(step as Step);
               }}
+              aria-label={`Étape ${step}${step < currentStep ? ' (complétée)' : step === currentStep ? ' (en cours)' : ''}`}
               className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition ${
                 step < currentStep
                   ? 'bg-green-600 text-white cursor-pointer'

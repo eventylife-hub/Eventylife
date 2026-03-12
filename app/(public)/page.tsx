@@ -36,7 +36,7 @@ function FavBtn() {
     b.classList.toggle('liked');
     b.textContent = b.classList.contains('liked') ? '♥' : '♡';
   };
-  return <button ref={ref} className="tc-fav" aria-label="Favoris" onClick={toggle}>♡</button>;
+  return <button type="button" ref={ref} className="tc-fav" aria-label="Favoris" onClick={toggle}>♡</button>;
 }
 
 /* ── Chip filter (visual only) ── */
@@ -46,7 +46,7 @@ function Chips() {
   return (
     <div className="chips">
       {labels.map((l, i) => (
-        <button key={i} className={i === active ? 'on' : ''} onClick={() => setActive(i)}>{l}</button>
+        <button type="button" key={i} className={i === active ? 'on' : ''} onClick={() => setActive(i)}>{l}</button>
       ))}
     </div>
   );
@@ -508,6 +508,7 @@ export default function HomePage() {
           <h2 className="font-display">Prêt à partir sans stress ?</h2>
           <p>Trouvez le voyage qui part près de chez vous. 2 minutes, c&apos;est réservé.</p>
           <button
+            type="button"
             className="btn-final"
             onClick={() => {
               document.getElementById('hero-input')?.focus();

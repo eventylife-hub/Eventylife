@@ -278,6 +278,7 @@ export default function InviterPage() {
               </div>
 
               <button
+                type="button"
                 onClick={handleCopyCode}
                 className="w-full text-white font-semibold transition-all"
                 style={{

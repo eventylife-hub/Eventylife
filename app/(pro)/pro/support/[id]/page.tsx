@@ -345,6 +345,7 @@ export default function TicketDetailPage() {
       <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', paddingTop: '48px', paddingBottom: '48px' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', paddingLeft: '16px', paddingRight: '16px' }}>
           <button
+            type="button"
             onClick={() => router.back()}
             style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--pro-ocean)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', marginBottom: '24px', fontSize: '14px', fontWeight: 500 }}
           >
@@ -381,6 +382,7 @@ export default function TicketDetailPage() {
       <div className="pro-fade-in" style={{ minHeight: '100vh', backgroundColor: '#FEFCF3', paddingTop: '48px', paddingBottom: '48px' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', paddingLeft: '16px', paddingRight: '16px' }}>
           <button
+            type="button"
             onClick={() => router.back()}
             style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--pro-ocean)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', marginBottom: '24px', fontSize: '14px', fontWeight: 500 }}
           >
@@ -405,6 +407,7 @@ export default function TicketDetailPage() {
       <div style={{ maxWidth: '800px', margin: '0 auto', paddingLeft: '16px', paddingRight: '16px' }}>
         {/* Bouton retour */}
         <button
+          type="button"
           onClick={() => router.back()}
           style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--pro-ocean)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', marginBottom: '24px', fontSize: '14px', fontWeight: 500 }}
         >
@@ -497,6 +500,7 @@ export default function TicketDetailPage() {
             </div>
             <div style={{ marginTop: '16px' }}>
               <button
+                type="button"
                 onClick={() => {
                   setError(null);
                   fetchTicket();

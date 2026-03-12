@@ -210,7 +210,8 @@ export default function MotDePasseOubliePage() {
           </form>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button type="button"
+            <button
+              type="button"
               onClick={() => {
                 setSubmitted(false);
                 setError(null);

@@ -248,7 +248,7 @@ export default function RoomingPage() {
         <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
           <p style={{ color: 'var(--terra, #DC2626)' }}>Erreur : {error}</p>
           <Link href={`/client/reservations/${reservationId}`}>
-            <button className="ml-4 mt-4" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}>
+            <button type="button" className="ml-4 mt-4" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}>
               Retour à la réservation
             </button>
           </Link>
@@ -266,7 +266,7 @@ export default function RoomingPage() {
       {/* Header */}
       <div>
         <Link href={`/client/reservations/${reservationId}`}>
-          <button className="mb-4" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}>
+          <button type="button" className="mb-4" style={{ backgroundColor: 'white', color: 'var(--terra, #C75B39)', borderRadius: '12px', fontWeight: 600, padding: '0.75rem 1.5rem', border: '1.5px solid #E5E0D8', cursor: 'pointer', fontSize: '0.95rem' }}>
             ← Retour
           </button>
         </Link>

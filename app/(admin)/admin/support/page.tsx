@@ -205,6 +205,7 @@ export default function SupportPage() {
           <div style={{ display: 'flex', gap: '0.25rem', background: '#F1EDE8', borderRadius: '12px', padding: '4px', marginBottom: '1.5rem' }}>
             {statuses.map((status) => (
               <button
+                type="button"
                 key={status.value}
                 onClick={() => {
                   setActiveTab(status.value);
