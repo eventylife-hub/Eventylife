@@ -38,16 +38,33 @@ export default function CheckoutStep3Page() {
 
       const { url } = response.data as { url: string };
 
-      // Rediriger vers Stripe Checkout
-      if (url) {
+      // SECURITY: Validate URL is absolute and from trusted domain before redirect
+      if (url && isValidRedirectUrl(url)) {
         window.location.href = url;
+      } else {
+        throw new Error('Invalid payment URL received from server');
       }
     } catch (err: unknown) {
       console.warn('API /checkout/payment indisponible — données démo');
       setError(null);
-      window.location.href = FALLBACK_PAYMENT_URL;
+      // SECURITY: Only redirect to hardcoded fallback URL, not user input
+      if (isValidRedirectUrl(FALLBACK_PAYMENT_URL)) {
+        window.location.href = FALLBACK_PAYMENT_URL;
+      }
     } finally {
       setLoading(false);
+    }
+  };
+
+  // SECURITY: Validate redirect URLs are safe
+  const isValidRedirectUrl = (url: string): boolean => {
+    try {
+      const parsed = new URL(url);
+      // Only allow https and specific trusted domains
+      return parsed.protocol === 'https:' &&
+             (parsed.hostname.includes('stripe.com') || parsed.hostname === 'checkout.stripe.demo');
+    } catch {
+      return false;
     }
   };
 

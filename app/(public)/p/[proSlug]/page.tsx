@@ -48,9 +48,14 @@ export default function ProPublicPage() {
   const [rgpdConsent, setRgpdConsent] = useState(false);
 
   // Attribution tracking pour commission
+  // SECURITY: Encode proSlug to prevent cookie injection attacks
   useEffect(() => {
     if (proSlug) {
-      document.cookie = `LAST_TOUCH=${proSlug}; max-age=2592000; path=/`;
+      const encodedSlug = encodeURIComponent(proSlug);
+      // Validate slug format (alphanumeric, hyphens only)
+      if (/^[a-zA-Z0-9\-]+$/.test(proSlug)) {
+        document.cookie = `LAST_TOUCH=${encodedSlug}; max-age=2592000; path=/; SameSite=Lax`;
+      }
     }
   }, [proSlug]);
 

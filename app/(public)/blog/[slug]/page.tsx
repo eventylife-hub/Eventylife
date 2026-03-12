@@ -140,13 +140,16 @@ export default function BlogArticlePage() {
   };
 
   // Convertir le markdown basique en HTML (avec échappement XSS)
+  // SECURITY: All HTML is properly escaped before insertion
   const formatContent = (text: string) => {
     return text
       .split('\n\n')
       .map((block) => {
         const escaped = escapeHtml(block);
         if (block.startsWith('## ')) {
-          return `<h2 style="color:#1A1A2E;font-size:1.5rem;font-weight:700;margin:2rem 0 0.75rem;font-family:Playfair Display,serif">${escapeHtml(block.replace('## ', ''))}</h2>`;
+          // Safely escape heading text
+          const headingText = escapeHtml(block.replace('## ', ''));
+          return `<h2 style="color:#1A1A2E;font-size:1.5rem;font-weight:700;margin:2rem 0 0.75rem;font-family:Playfair Display,serif">${headingText}</h2>`;
         }
         return `<p style="color:#374151;line-height:1.8;margin-bottom:1rem">${escaped}</p>`;
       })

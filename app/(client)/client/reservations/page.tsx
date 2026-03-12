@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 interface Booking {
   id: string;
   status: string;
@@ -233,8 +234,9 @@ export default function ReservationsPage() {
                       {/* Image */}
                       {booking.travelCoverImageUrl && (
                         <div className="md:w-1/4 h-32 md:h-auto flex-shrink-0" style={{ background: 'var(--cream, #FAF7F2)' }}>
+                          {/* SECURITY: URL validated against XSS injection via sanitizeImageUrl */}
                           <img
-                            src={booking.travelCoverImageUrl}
+                            src={sanitizeImageUrl(booking.travelCoverImageUrl)}
                             alt={booking.travelTitle}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                           />

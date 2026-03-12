@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 
 interface ProProfile {
   id: string;
@@ -113,7 +114,8 @@ export default function ParametresPage() {
               <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>Logo</label>
               {profile?.logo && (
                 <div style={{ width: '120px', height: '120px', backgroundColor: '#F5F5F5', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
-                  <img src={profile.logo} alt="Logo agence" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                  {/* SECURITY: URL validated against XSS injection via sanitizeImageUrl */}
+                  <img src={sanitizeImageUrl(profile.logo)} alt="Logo agence" style={{ maxWidth: '100%', maxHeight: '100%' }} />
                 </div>
               )}
               {editable && (
