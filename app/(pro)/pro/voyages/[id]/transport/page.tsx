@@ -17,7 +17,12 @@ import { logger } from '@/lib/logger';
 interface TransportConfig {
   mode: 'BUS' | 'FLIGHT' | 'MIXED';
   busCompany?: string;
+  busCapacity?: number;
+  busPriceCents?: number;
   flightCompany?: string;
+  flightPriceCents?: number;
+  meetingPoint?: string;
+  meetingTime?: string;
 }
 
 interface TransportStop {
@@ -62,7 +67,7 @@ export default function TransportPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [config, setConfig] = useState<TransportConfig | null>(null);
-  const [stops, setStops] = useState<Record<string, unknown>[]>([]);
+  const [stops, setStops] = useState<TransportStop[]>([]);
 
   const [departureMode, setDepartureMode] = useState('BUS');
   const [busCompany, setBusCompany] = useState('');
@@ -83,7 +88,7 @@ export default function TransportPage() {
         const res = await fetch(`/api/transport/${travelId}/config`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement config transport');
 
-        const data = (await res.json() as unknown) as { travel: TransportConfig; stops: Record<string, unknown>[] };
+        const data: { travel: TransportConfig; stops: TransportStop[] } = await res.json();
         setConfig(data.travel);
         setStops(data.stops);
 
@@ -107,7 +112,7 @@ export default function TransportPage() {
           busCompany: 'Autocars Émeraude',
           flightCompany: 'Air France'
         };
-        const demoStops: Record<string, unknown>[] = [
+        const demoStops: TransportStop[] = [
           {
             id: 'demo-stop-1',
             type: 'PICKUP_DEPARTURE',
@@ -311,16 +316,16 @@ export default function TransportPage() {
             <p style={{ color: '#4A5568', textAlign: 'center', paddingTop: '2rem', paddingBottom: '2rem', margin: 0 }}>Aucun arrêt configuré</p>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <StopMap stops={stops as unknown as TransportStop[]} />
+              <StopMap stops={stops} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 {stops.map((stop) => {
-                  const stopType = (stop.type as string) === 'DROPOFF_ARRIVAL' ? 'ARRIVAL' : 'PICKUP_DEPARTURE';
+                  const stopType = stop.type === 'DROPOFF_ARRIVAL' ? 'ARRIVAL' : 'PICKUP_DEPARTURE';
                   return (
                     <StopCard
-                      key={(stop.linkId as string) || (stop.id as string)}
+                      key={stop.linkId || stop.id}
                       stop={{
-                        type: stopType as 'PICKUP_DEPARTURE' | 'ARRIVAL',
-                        busStop: (stop.busStop as unknown) || { id: '', publicName: '', city: '' }
+                        type: stopType,
+                        busStop: stop.busStop || { id: '', publicName: '', city: '' }
                       } as StopCardData}
                     />
                   );

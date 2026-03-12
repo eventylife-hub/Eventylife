@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { API_URL_SERVER } from '@/lib/config';
 
 /** Données SEO enrichies par voyage (fallback statique si API indisponible) */
 const VOYAGE_SEO: Record<string, { title: string; dest: string; desc: string }> = {
@@ -40,8 +41,7 @@ const VOYAGE_SEO: Record<string, { title: string; dest: string; desc: string }> 
  */
 export async function generateStaticParams() {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
-    const res = await fetch(`${apiUrl}/travels`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_URL_SERVER}/travels`, { next: { revalidate: 3600 } });
     if (res.ok) {
       const data = (await res.json()) as Array<{ slug: string }>;
       return data.map((t) => ({ slug: t.slug }));

@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { extractErrorMessage } from '@/lib/api-error';
 import { DEMO_NOTIFICATIONS, DEMO_NOTIFICATIONS_UNREAD_COUNT } from '@/lib/demo-data';
+import { API_URL } from '@/lib/config';
 
 export interface Notification {
   id: string;
@@ -40,7 +41,7 @@ interface NotificationStore {
   clearError: () => void;
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+const API_BASE_URL = API_URL;
 
 /**
  * Store Zustand pour les notifications

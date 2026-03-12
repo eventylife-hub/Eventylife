@@ -55,7 +55,7 @@ export default function RoomingPage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [roomingList, setRoomingList] = useState<Record<string, unknown>[]>([]);
+  const [roomingList, setRoomingList] = useState<PageRoom[]>([]);
   const [stats, setStats] = useState<RoomingStats | null>(null);
   const [exporting, setExporting] = useState(false);
 
@@ -72,7 +72,7 @@ export default function RoomingPage() {
           throw new Error('Erreur chargement rooming');
         }
 
-        const rooms = (await roomRes.json()) as Record<string, unknown>[];
+        const rooms: PageRoom[] = await roomRes.json();
         const statsData = (await statsRes.json()) as RoomingStats;
 
         setRoomingList(rooms);
@@ -251,7 +251,7 @@ export default function RoomingPage() {
           <div className="pro-panel-body">
             <RoomingTable
               travelId={travelId}
-              rooms={roomingList as unknown as []}
+              rooms={roomingList}
             />
           </div>
         </div>

@@ -8,6 +8,8 @@
 // ============= URLs =============
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
+/** URL absolue pour les fetches côté serveur (generateStaticParams, generateMetadata) */
+export const API_URL_SERVER = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.eventylife.fr';
 export const STRIPE_PUBLIC_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || '';
 export const S3_BUCKET = process.env.NEXT_PUBLIC_S3_BUCKET || '';

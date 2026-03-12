@@ -7,6 +7,25 @@ import { FinanceSummary } from '@/components/finance/finance-summary';
 import { Download } from 'lucide-react';
 import { logger } from '@/lib/logger';
 
+/** Données financières d'un voyage */
+interface ActivityCost {
+  id: string;
+  label: string;
+  costHT: number;
+  costTTC: number;
+  quantity: number;
+  notes?: string;
+  status: string;
+}
+
+interface TravelFinance {
+  caTTC: number;
+  coutsTTC: number;
+  marge: number;
+  tvaMarge: number;
+  activityCosts: ActivityCost[];
+}
+
 const CostTable = dynamic(
   () => import('@/components/finance/cost-table').then((m) => m.CostTable),
   { loading: () => <div className="animate-pulse rounded-xl h-64" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
@@ -32,7 +51,7 @@ export default function VoyageFinancePage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [finance, setFinance] = useState<Record<string, unknown> | null>(null);
+  const [finance, setFinance] = useState<TravelFinance | null>(null);
   const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
@@ -42,7 +61,7 @@ export default function VoyageFinancePage() {
         const res = await fetch(`/api/finance/travel/${travelId}`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement finance');
 
-        const data = (await res.json() as unknown) as Record<string, unknown>;
+        const data: TravelFinance = await res.json();
         setFinance(data);
         setError(null);
       } catch (err: unknown) {
@@ -51,7 +70,7 @@ export default function VoyageFinancePage() {
         // CA TTC: 89900 (5 clients × 17980€), Coûts TTC: 54600
         // Marge: 89900 - 54600 = 35300
         // TVA marge: (89900 - 54600) × 20/120 = 5883.33 ≈ 5883 centimes
-        const demoData: Record<string, unknown> = {
+        const demoData: TravelFinance = {
           caTTC: 89900,
           coutsTTC: 54600,
           marge: 35300,
@@ -212,13 +231,13 @@ export default function VoyageFinancePage() {
 
       {/* Résumé */}
       <FinanceSummary
-        caTTC={((finance?.caTTC as unknown as number) || 0) as number}
-        costsTTC={((finance?.coutsTTC as unknown as number) || 0) as number}
-        margin={((finance?.marge as unknown as number) || 0) as number}
-        tvaMarge={((finance?.tvaMarge as unknown as number) || 0) as number}
+        caTTC={finance?.caTTC ?? 0}
+        costsTTC={finance?.coutsTTC ?? 0}
+        margin={finance?.marge ?? 0}
+        tvaMarge={finance?.tvaMarge ?? 0}
         marginPercent={
-          ((finance?.caTTC as unknown as number) || 0) > 0
-            ? Math.round((((finance?.marge as unknown as number) || 0) / ((finance?.caTTC as unknown as number) || 1)) * 100)
+          (finance?.caTTC ?? 0) > 0
+            ? Math.round(((finance?.marge ?? 0) / (finance?.caTTC || 1)) * 100)
             : 0
         }
       />
@@ -232,12 +251,12 @@ export default function VoyageFinancePage() {
         <div className="pro-panel-body" style={{ padding: '0' }}>
           <CostTable
             travelId={travelId}
-            costs={((finance?.activityCosts as unknown as []) || []) as []}
+            costs={finance?.activityCosts ?? []}
             onUpdate={() => {
               // Recharger
               setLoading(true);
               fetch(`/api/finance/travel/${travelId}`, { credentials: 'include' })
-                .then((r) => r.json())
+                .then((r) => r.json() as Promise<TravelFinance>)
                 .then((data) => setFinance(data))
                 .finally(() => setLoading(false));
             }}

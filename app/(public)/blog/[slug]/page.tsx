@@ -12,6 +12,7 @@ import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { BlogPostingJsonLd } from '@/components/seo/json-ld';
 import { NewsletterCTA } from '@/components/newsletter-cta';
 import { logger } from '@/lib/logger';
+import { API_URL } from '@/lib/config';
 
 interface BlogArticle {
   slug: string;
@@ -89,8 +90,7 @@ export default function BlogArticlePage() {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
-        const res = await fetch(`${apiUrl}/api/blog/${slug}`);
+        const res = await fetch(`${API_URL}/blog/${slug}`);
         if (res.ok) {
           const data = await res.json();
           setArticle(data);

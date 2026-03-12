@@ -117,7 +117,7 @@ export default function CheckoutConfirmationPage() {
 
       if (response.success && response.data) {
         // Créer un blob et télécharger
-        const url = window.URL.createObjectURL(new Blob([response.data as unknown as BlobPart]));
+        const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', `confirmation-${booking.referenceNumber}.pdf`);

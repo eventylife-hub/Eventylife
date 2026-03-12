@@ -5,6 +5,21 @@ import { useParams } from 'next/navigation';
 import { HotelBlockCard } from '@/components/rooming/hotel-block-card';
 import { AlertCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
+
+/** Bloc hôtel négocié */
+interface HotelBlock {
+  id: string;
+  hotelId: string;
+  hotelName: string;
+  roomsRequested: number;
+  roomsConfirmed: number;
+  pricePerNightTTC: number;
+  notes?: string;
+  expiresIn?: number;
+  expiresAt?: string;
+  status: string;
+}
+
 /**
  * Page Gestion Blocs Hôtel - Négociation prix et disponibilités
  *
@@ -25,7 +40,7 @@ export default function HotelBlocksPage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [blocks, setBlocks] = useState<Record<string, unknown>[]>([]);
+  const [blocks, setBlocks] = useState<HotelBlock[]>([]);
   const [editingBlockId, setEditingBlockId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
@@ -43,13 +58,13 @@ export default function HotelBlocksPage() {
         const res = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
         if (!res.ok) throw new Error('Erreur chargement blocs hôtel');
 
-        const data = (await res.json()) as Record<string, unknown>[];
+        const data = (await res.json()) as HotelBlock[];
         setBlocks(data);
         setError(null);
       } catch (err: unknown) {
         logger.warn('API /api/rooming/hotel-blocks indisponible — données démo');
         // Fallback demo data
-        const demoBlocks: Record<string, unknown>[] = [
+        const demoBlocks: HotelBlock[] = [
           {
             id: 'block-001',
             hotelId: 'hotel-001',
@@ -99,12 +114,12 @@ export default function HotelBlocksPage() {
     }
   }, [travelId]);
 
-  const handleEditBlock = (block: Record<string, unknown>) => {
-    setEditingBlockId(block.id as string);
+  const handleEditBlock = (block: HotelBlock) => {
+    setEditingBlockId(block.id);
     setFormData({
       roomsRequested: String(block.roomsRequested),
-      pricePerNightTTC: block.pricePerNightTTC ? (Number(block.pricePerNightTTC) / 100).toFixed(2) : '',
-      notes: (block.notes as string) || '',
+      pricePerNightTTC: block.pricePerNightTTC ? (block.pricePerNightTTC / 100).toFixed(2) : '',
+      notes: block.notes || '',
     });
   };
 
@@ -128,7 +143,7 @@ export default function HotelBlocksPage() {
 
       // Recharger
       const blocRes = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
-      const updated = (await blocRes.json()) as Record<string, unknown>[];
+      const updated = (await blocRes.json()) as HotelBlock[];
       setBlocks(updated);
 
       setEditingBlockId(null);
@@ -197,9 +212,9 @@ export default function HotelBlocksPage() {
           {/* Cartes blocs */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem' }}>
             {blocks.map((block) => (
-              <div key={block.id as string}>
+              <div key={block.id}>
                 <HotelBlockCard
-                  block={block as unknown as unknown}
+                  block={block}
                   onEdit={() => handleEditBlock(block)}
                 />
               </div>

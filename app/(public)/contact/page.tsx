@@ -10,6 +10,7 @@ import { useState, useCallback } from 'react';
 import { useToast } from '@/lib/stores/ui-store';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { contactSchema, zodErrorsToRecord } from '@/lib/validations';
+import { API_URL } from '@/lib/config';
 
 const contactInfo = [
   {
@@ -109,15 +110,31 @@ export default function ContactPage() {
 
     setLoading(true);
     try {
-      // TODO: brancher API contact (email ou backend)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch(`${API_URL}/public/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone?.trim() || undefined,
+          subject: formData.subject,
+          message: formData.message.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.message || `Erreur serveur (${response.status})`);
+      }
+
       toast.success('Message envoyé avec succès ! Nous vous répondrons sous 24h.');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       setConsent(false);
       setTouched({});
       setErrors({});
-    } catch {
-      toast.error("Erreur lors de l'envoi du message. Réessayez plus tard.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Erreur lors de l'envoi du message.";
+      toast.error(`${msg} Réessayez plus tard.`);
     } finally {
       setLoading(false);
     }

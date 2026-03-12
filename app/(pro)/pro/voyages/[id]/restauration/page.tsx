@@ -94,7 +94,7 @@ export default function RestauratPage() {
         ]);
 
         if (mealRes.ok) {
-          const data = (await mealRes.json() as unknown) as MealPlan;
+          const data: MealPlan = await mealRes.json();
           setMealPlan(data);
         } else {
           logger.warn('API /restauration/meal-plan indisponible — données démo');
@@ -105,7 +105,7 @@ export default function RestauratPage() {
         }
 
         if (dietRes.ok) {
-          const data = (await dietRes.json() as unknown) as Dietary;
+          const data: Dietary = await dietRes.json();
           setDietary(data);
         } else {
           logger.warn('API /restauration/dietary indisponible — données démo');
@@ -128,7 +128,7 @@ export default function RestauratPage() {
         }
 
         if (restRes.ok) {
-          const data = (await restRes.json() as unknown) as { restaurants: Restaurant[] };
+          const data: { restaurants: Restaurant[] } = await restRes.json();
           setRestaurants(data.restaurants || []);
         } else {
           logger.warn('API /restauration/restaurants indisponible — données démo');
@@ -157,7 +157,7 @@ export default function RestauratPage() {
         }
 
         if (costRes.ok) {
-          const data = (await costRes.json() as unknown) as Costs;
+          const data: Costs = await costRes.json();
           setCosts(data);
         } else {
           logger.warn('API /restauration/costs indisponible — données démo');
@@ -310,7 +310,7 @@ export default function RestauratPage() {
               <div className="pro-panel-body">
                 <MealPlanEditor
                   travelId={travelId}
-                  initialPlan={mealPlan as unknown as unknown}
+                  initialPlan={mealPlan}
                 />
               </div>
             </div>
