@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import Link from 'next/link';
 
 interface BookingCardProps {
@@ -33,7 +35,7 @@ const statusColors: Record<string, string> = {
   CANCELED: 'bg-red-100 text-red-800',
 };
 
-export function BookingCard({
+export const BookingCard = React.memo(function BookingCard({
   id,
   travelTitle,
   travelSlug,
@@ -113,4 +115,4 @@ export function BookingCard({
       </div>
     </Link>
   );
-}
+});

@@ -11,6 +11,8 @@
 
 'use client';
 
+import React from 'react';
+
 import { formatPrice } from '@/lib/utils';
 
 interface Room {
@@ -26,7 +28,7 @@ interface PriceSummaryProps {
   rooms: Room[];
 }
 
-export function PriceSummary({ rooms }: PriceSummaryProps) {
+export const PriceSummary = React.memo(function PriceSummary({ rooms }: PriceSummaryProps) {
   const totalTTC = rooms.reduce((sum, room) => sum + room.priceTotalTTC, 0);
 
   return (
@@ -69,4 +71,4 @@ export function PriceSummary({ rooms }: PriceSummaryProps) {
       </p>
     </div>
   );
-}
+});

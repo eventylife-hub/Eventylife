@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import { MapPin, Phone } from 'lucide-react';
 
 interface BusStop {
@@ -21,7 +23,7 @@ interface StopCardData {
  *
  * Affiche les détails d'un arrêt de bus
  */
-export function StopCard({ stop }: { stop: StopCardData }) {
+export const StopCard = React.memo(function StopCard({ stop }: { stop: StopCardData }) {
   return (
     <div className="bg-white rounded-xl border shadow-sm">
       <div className="p-6 pb-0">
@@ -54,4 +56,4 @@ export function StopCard({ stop }: { stop: StopCardData }) {
       </div>
     </div>
   );
-}
+});

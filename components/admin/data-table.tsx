@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 
 export interface DataTableColumn<T> {
   key: keyof T;
@@ -30,6 +30,7 @@ interface DataTableProps<T> {
 
 /**
  * Composant de tableau de données réutilisable
+ * Optimisé avec useMemo pour les rendus lourds
  */
 export function DataTable<T extends { id: string }>({
   columns,
@@ -44,10 +45,12 @@ export function DataTable<T extends { id: string }>({
   emptyMessage = 'Aucune donnée',
   rowActions = [],
 }: DataTableProps<T>) {
+  const skeletonRows = useMemo(() => Array.from({ length: 5 }), []);
+
   if (loading) {
     return (
       <div className="space-y-4">
-        {[...Array(5)].map((_, i: number) => (
+        {skeletonRows.map((_, i: number) => (
           <div key={i} className="h-12 w-full bg-gray-200 rounded animate-pulse" />
         ))}
       </div>

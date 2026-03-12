@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import { AlertCircle, Pencil } from 'lucide-react';
 
 interface HotelBlock {
@@ -23,7 +25,7 @@ interface HotelBlock {
  * - Statut (INVITE_SENT, CONFIRMED, EXPIRED)
  * - Alerte expiration proche
  */
-export function HotelBlockCard({
+export const HotelBlockCard = React.memo(function HotelBlockCard({
   block,
   onEdit,
 }: {
@@ -113,4 +115,4 @@ export function HotelBlockCard({
       </div>
     </div>
   );
-}
+});

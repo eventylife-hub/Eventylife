@@ -1,15 +1,17 @@
+'use client';
+
+import React from 'react';
 /**
  * Composant indicateur d'étapes du checkout
  * Affiche les 4 étapes avec statut visuel
  */
 
-'use client';
 
 interface StepIndicatorProps {
   currentStep: number;
 }
 
-export function StepIndicator({ currentStep }: StepIndicatorProps) {
+export const StepIndicator = React.memo(function StepIndicator({ currentStep }: StepIndicatorProps) {
   const steps = [
     { number: 1, label: 'Sélection' },
     { number: 2, label: 'Chambres' },
@@ -56,4 +58,4 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
       ))}
     </div>
   );
-}
+});

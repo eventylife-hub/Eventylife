@@ -12,8 +12,9 @@ interface AdminPageHeaderProps {
 /**
  * En-tête standardisé pour les pages Admin (Design V38)
  * Breadcrumb + titre Fraunces + actions optionnelles
+ * React.memo — évite les re-renders si les props ne changent pas
  */
-export function AdminPageHeader({ title, breadcrumb, children }: AdminPageHeaderProps) {
+export const AdminPageHeader = React.memo(function AdminPageHeader({ title, breadcrumb, children }: AdminPageHeaderProps) {
   return (
     <div className="admin-page-header admin-fade-in" style={{ marginBottom: '24px' }}>
       <div>
@@ -35,4 +36,4 @@ export function AdminPageHeader({ title, breadcrumb, children }: AdminPageHeader
       )}
     </div>
   );
-}
+});

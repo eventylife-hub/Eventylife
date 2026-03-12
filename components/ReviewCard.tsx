@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 interface ReviewCardProps {
   id: string;
   userName: string;
@@ -10,7 +12,7 @@ interface ReviewCardProps {
   onReport?: (reviewId: string) => void;
 }
 
-export function ReviewCard({
+export const ReviewCard = React.memo(function ReviewCard({
   id,
   userName,
   rating,
@@ -71,4 +73,4 @@ export function ReviewCard({
       )}
     </div>
   );
-}
+});

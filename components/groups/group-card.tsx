@@ -21,7 +21,7 @@ interface GroupCardProps {
  * Card affichant un groupe de voyage
  * Affiche les infos et le bouton de rejoindre
  */
-export function GroupCard({ groupe }: GroupCardProps) {
+export const GroupCard = React.memo(function GroupCard({ groupe }: GroupCardProps) {
   const maxMembers = groupe.maxRooms ? groupe.maxRooms * 2 : null;
   const isFull = maxMembers && groupe.memberCount >= maxMembers;
   const spotsLeft = maxMembers ? maxMembers - groupe.memberCount : null;
@@ -92,4 +92,4 @@ export function GroupCard({ groupe }: GroupCardProps) {
       </div>
     </div>
   );
-}
+});

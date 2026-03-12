@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { Download } from 'lucide-react';
 
@@ -13,8 +14,9 @@ interface ExportCtaProps {
 /**
  * Bouton CTA d'export réutilisable
  * Redirige vers le Hub des exports avec paramètres pré-remplis
+ * React.memo — évite les re-renders si les props ne changent pas
  */
-export function ExportCta({
+export const ExportCta = React.memo(function ExportCta({
   exportType,
   scope,
   label = 'Exporter...',
@@ -31,4 +33,4 @@ export function ExportCta({
       </button>
     </Link>
   );
-}
+});

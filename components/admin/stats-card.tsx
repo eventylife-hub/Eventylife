@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 
 interface StatsCardProps {
@@ -11,8 +12,9 @@ interface StatsCardProps {
 
 /**
  * Composant de carte de statistiques réutilisable
+ * React.memo — évite les re-renders si les props ne changent pas
  */
-export function StatsCard({
+export const StatsCard = React.memo(function StatsCard({
   icon,
   title,
   value,
@@ -53,4 +55,4 @@ export function StatsCard({
   }
 
   return content;
-}
+});

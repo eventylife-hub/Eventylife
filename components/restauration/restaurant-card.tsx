@@ -17,7 +17,7 @@ interface RestaurantCardProps {
 /**
  * Card affichant un restaurant partenaire
  */
-export function RestaurantCard({ restaurant }: RestaurantCardProps) {
+export const RestaurantCard = React.memo(function RestaurantCard({ restaurant }: RestaurantCardProps) {
   return (
     <div className="bg-white rounded-xl border shadow-sm">
       <div className="pt-6 space-y-3">
@@ -71,4 +71,4 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
       </div>
     </div>
   );
-}
+});

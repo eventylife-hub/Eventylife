@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import { ShieldCheck, Download } from 'lucide-react';
 
 interface InsuranceCoverage {
@@ -27,7 +29,7 @@ interface InsuranceOption {
  * - Prix
  * - Bouton télécharger certificat
  */
-export function InsuranceCard({
+export const InsuranceCard = React.memo(function InsuranceCard({
   option,
   price,
   onSubscribe,
@@ -125,4 +127,4 @@ export function InsuranceCard({
       </div>
     </div>
   );
-}
+});

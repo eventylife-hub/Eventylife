@@ -21,7 +21,7 @@ export interface NotificationItemProps {
  * Composant affichant une notification individuelle
  * Affiche l'icône basée sur le type, le titre, le message et le temps écoulé
  */
-export function NotificationItem({
+export const NotificationItem = React.memo(function NotificationItem({
   id,
   type,
   title,
@@ -146,4 +146,4 @@ export function NotificationItem({
   }
 
   return <Content />;
-}
+});

@@ -18,7 +18,7 @@ interface CampaignCardProps {
 /**
  * Card affichant une campagne marketing
  */
-export function CampaignCard({ campaign }: CampaignCardProps) {
+export const CampaignCard = React.memo(function CampaignCard({ campaign }: CampaignCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'LIVE':
@@ -101,4 +101,4 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
       </div>
     </Link>
   );
-}
+});

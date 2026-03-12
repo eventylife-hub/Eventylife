@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -26,7 +28,7 @@ interface TravelCardProps {
   transportType?: 'BUS' | 'AVION' | 'MIXTE';
 }
 
-export function TravelCard({
+export const TravelCard = React.memo(function TravelCard({
   id,
   title,
   destination,
@@ -221,4 +223,4 @@ export function TravelCard({
       </article>
     </Link>
   );
-}
+});
