@@ -128,7 +128,8 @@ export default function NotificationsPage() {
             <h2 className="pro-panel-title">Fréquence des notifications</h2>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <fieldset style={{ display: 'flex', flexDirection: 'column', gap: '12px', border: 'none', padding: 0, margin: 0 }}>
+            <legend className="sr-only">Fréquence des notifications</legend>
             {['immediate', 'daily', 'weekly'].map((freq) => (
               <label key={freq} style={{ display: 'flex', alignItems: 'center', padding: '12px', border: '1px solid #E0E0E0', borderRadius: '8px', cursor: 'pointer', backgroundColor: prefs?.notificationFrequency === freq ? '#F0F9FF' : '#FFFFFF' }}>
                 <input
@@ -155,7 +156,7 @@ export default function NotificationsPage() {
                 </div>
               </label>
             ))}
-          </div>
+          </fieldset>
         </div>
 
         {/* Email */}

@@ -121,7 +121,8 @@ export default function CheckoutStep3Page() {
             Mode de paiement
           </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <fieldset style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', border: 'none', padding: 0, margin: 0 }}>
+            <legend className="sr-only">Mode de paiement</legend>
             <label
               style={{
                 display: 'flex',
@@ -203,7 +204,7 @@ export default function CheckoutStep3Page() {
                 </p>
               </div>
             </label>
-          </div>
+          </fieldset>
         </div>
 
         <div style={{ display: 'flex', gap: '1rem' }}>

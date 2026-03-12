@@ -63,9 +63,9 @@ export function DietaryForm({
       )}
 
       {/* Régime alimentaire */}
-      <div className="space-y-3">
-        <label className="block text-sm font-medium text-gray-700 text-base font-semibold">Régime alimentaire</label>
-        <div role="radiogroup">
+      <fieldset className="space-y-3">
+        <legend className="block text-sm font-medium text-gray-700 text-base font-semibold">Régime alimentaire</legend>
+        <div>
           <div className="flex items-center space-x-2">
             <input type="radio" id="omnivore" name="diet" value="omnivore" checked={diet === 'omnivore'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
             <label htmlFor="omnivore" className="block text-sm font-medium text-gray-700 cursor-pointer">
@@ -103,7 +103,7 @@ export function DietaryForm({
             </label>
           </div>
         </div>
-      </div>
+      </fieldset>
 
       {/* Allergies */}
       <div className="space-y-3">

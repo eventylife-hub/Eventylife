@@ -57,7 +57,8 @@ export function ApprovalModal({
         </div>
         <div className="p-6 space-y-6">
           {/* Action Selection */}
-          <div className="space-y-3">
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-semibold text-gray-700 mb-2">Action</legend>
             <label className="flex items-center gap-3 cursor-pointer">
               <input
                 type="radio"
@@ -81,7 +82,7 @@ export function ApprovalModal({
               />
               <span className="text-sm font-medium">Rejeter</span>
             </label>
-          </div>
+          </fieldset>
 
           {/* Reason Textarea */}
           {action === 'reject' && (

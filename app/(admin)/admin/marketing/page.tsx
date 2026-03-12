@@ -387,7 +387,8 @@ export default function AdminMarketingPage() {
                 <p className="text-sm text-blue-800 mb-4">
                   Configurez comment les conversions sont attribuées aux sources et campagnes
                 </p>
-                <div className="space-y-3">
+                <fieldset className="space-y-3" style={{ border: 'none', padding: 0, margin: 0 }}>
+                  <legend className="sr-only">Modèle d&apos;attribution</legend>
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="radio"
@@ -430,7 +431,7 @@ export default function AdminMarketingPage() {
                       <div className="text-sm text-gray-600">Répartit équitablement entre tous les points de contact</div>
                     </div>
                   </label>
-                </div>
+                </fieldset>
               </div>
 
               <div className="flex justify-end">
