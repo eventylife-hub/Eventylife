@@ -30,8 +30,6 @@
     "@hookform/resolvers": "^3.3.4",
     "zod": "^3.22.4",
     "lucide-react": "^0.369.0",
-    "clsx": "^2.0.0",
-    "tailwind-merge": "^2.2.0",
     "@sentry/nextjs": "^7.80.0",
     "date-fns": "^3.6.0"
   },
