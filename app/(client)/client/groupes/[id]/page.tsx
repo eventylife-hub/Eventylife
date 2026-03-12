@@ -332,7 +332,11 @@ export default function GroupDetailPage() {
                   </div>
                 ))
               ) : (
-                <p className="text-center py-8" style={{ color: '#6B7280' }}>Aucun message pour le moment</p>
+                <div className="text-center py-8">
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💬</div>
+                  <p className="text-sm font-medium" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun message</p>
+                  <p className="text-xs mt-1" style={{ color: '#6B7280' }}>Démarrez la conversation avec votre groupe</p>
+                </div>
               )}
             </div>
 

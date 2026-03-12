@@ -281,7 +281,11 @@ export default function BookingDetailPage() {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-center py-4" style={{ color: '#6B7280' }}>Aucune chambre réservée</p>
+          <div className="text-center py-6">
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🏨</div>
+            <p className="text-sm font-medium" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucune chambre réservée</p>
+            <p className="text-xs mt-1" style={{ color: '#6B7280' }}>Les détails de votre hébergement apparaîtront ici</p>
+          </div>
         )}
       </div>
 
@@ -314,7 +318,11 @@ export default function BookingDetailPage() {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-center py-4" style={{ color: '#6B7280' }}>Aucun paiement effectué</p>
+          <div className="text-center py-6">
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💳</div>
+            <p className="text-sm font-medium" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun paiement effectué</p>
+            <p className="text-xs mt-1" style={{ color: '#6B7280' }}>Votre historique de paiements s&apos;affichera ici</p>
+          </div>
         )}
       </div>
 

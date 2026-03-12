@@ -457,8 +457,14 @@ export default function WalletPage() {
               </tbody>
             </table>
           ) : (
-            <div className="text-center py-8">
-              <p style={{ color: '#6B7280' }}>Aucune transaction pour ces critères.</p>
+            <div className="text-center py-12">
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>💳</div>
+              <h3 className="font-bold text-base mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+                Aucune transaction
+              </h3>
+              <p className="text-sm" style={{ color: '#6B7280' }}>
+                Aucune transaction ne correspond à ces critères de recherche
+              </p>
             </div>
           )}
         </div>
