@@ -419,7 +419,8 @@ export default function EquipePage() {
           <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Éléments à valider avant la publication</p>
         </div>
         <div className="pro-panel-body">
-          <div className="space-y-3">
+          <fieldset className="space-y-3" style={{ border: 'none', padding: 0, margin: 0 }}>
+            <legend className="sr-only">Préalables avant lancement</legend>
             {PREREQUISITES.map((prereq) => {
               const completed = !!prerequisites.find((p) => p.label === prereq.label)?.completed;
               return (
@@ -444,7 +445,7 @@ export default function EquipePage() {
                 </div>
               );
             })}
-          </div>
+          </fieldset>
 
           <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <p className="text-sm text-blue-800">

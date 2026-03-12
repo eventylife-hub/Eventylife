@@ -976,8 +976,8 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 className="font-semibold text-slate-900 mb-3">Points de départ</h3>
+        <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+          <legend className="font-semibold text-slate-900 mb-3">Points de départ</legend>
           {pickupStops.length === 0 ? (
             <p className="text-sm text-slate-500">Aucun arrêt disponible</p>
           ) : (
@@ -998,10 +998,10 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
               ))}
             </div>
           )}
-        </div>
+        </fieldset>
 
-        <div>
-          <h3 className="font-semibold text-slate-900 mb-3">Points d'arrivée</h3>
+        <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+          <legend className="font-semibold text-slate-900 mb-3">Points d&apos;arrivée</legend>
           {dropoffStops.length === 0 ? (
             <p className="text-sm text-slate-500">Aucun arrêt disponible</p>
           ) : (
@@ -1022,7 +1022,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
               ))}
             </div>
           )}
-        </div>
+        </fieldset>
       </div>
     </div>
   );

@@ -839,7 +839,8 @@ export default function ProfilePage() {
           )}
         </h2>
 
-        <div className="space-y-3">
+        <fieldset className="space-y-3" style={{ border: 'none', padding: 0, margin: 0 }}>
+          <legend className="sr-only">Préférences</legend>
           <div className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--cream, #FAF7F2)' }}>
             <label htmlFor="pref-emailNotifications" className="font-semibold text-sm" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Notifications par email
@@ -881,7 +882,7 @@ export default function ProfilePage() {
               style={{ accentColor: 'var(--terra, #C75B39)' }}
             />
           </div>
-        </div>
+        </fieldset>
       </div>
 
       {toast && (

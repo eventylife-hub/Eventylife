@@ -405,8 +405,8 @@ export default function InscriptionPage() {
                 <FormFieldError error={errors.zone} id="zone-error" />
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>Compétences *</label>
+              <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+                <legend style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>Compétences *</legend>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {SKILLS.map((skill) => (
                     <button type="button"
@@ -445,7 +445,7 @@ export default function InscriptionPage() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </fieldset>
 
               <div>
                 <label htmlFor="reg-description" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>

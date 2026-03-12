@@ -601,7 +601,8 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
     <div>
       <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A1628', marginBottom: '24px' }}>Étape 6: Modules de formation</h2>
       <p style={{ fontSize: '14px', color: '#64748B', marginBottom: '16px' }}>Marquez les modules que vous avez complétés :</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <fieldset style={{ display: 'flex', flexDirection: 'column', gap: '12px', border: 'none', padding: 0, margin: 0 }}>
+        <legend className="sr-only">Modules de formation complétés</legend>
         {modules.map((module, idx) => (
           <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', backgroundColor: '#F5F5F5', borderRadius: '8px', border: '1px solid #E0E0E0' }}>
             <input
@@ -626,7 +627,7 @@ function StepFormation({ formData, setFormData }: { formData: OnboardingFormData
             <label htmlFor={`onboard-module-${idx}`} style={{ fontSize: '14px', fontWeight: 500, color: '#0A1628', cursor: 'pointer' }}>{module}</label>
           </div>
         ))}
-      </div>
+      </fieldset>
     </div>
   );
 }

@@ -106,10 +106,10 @@ export function DietaryForm({
       </fieldset>
 
       {/* Allergies */}
-      <div className="space-y-3">
-        <label className="block text-sm font-medium text-gray-700 text-base font-semibold">
+      <fieldset className="space-y-3" style={{ border: 'none', padding: 0, margin: 0 }}>
+        <legend className="block text-sm font-medium text-gray-700 text-base font-semibold">
           Allergies (optionnel)
-        </label>
+        </legend>
         <div className="space-y-2">
           {allergyOptions.map((option) => (
             <div key={option.id} className="flex items-center gap-2">
@@ -127,7 +127,7 @@ export function DietaryForm({
             </div>
           ))}
         </div>
-      </div>
+      </fieldset>
 
       {/* Notes spéciales */}
       <div className="space-y-2">
