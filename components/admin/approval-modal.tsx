@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ToastNotification } from '@/components/ui/toast-notification';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 
 interface ApprovalModalProps {
   isOpen: boolean;
@@ -51,6 +52,7 @@ export function ApprovalModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="approval-modal-title">
+      <FocusTrap onEscape={onClose}>
       <div className="w-full max-w-md bg-white rounded-xl border shadow-sm">
         <div className="p-6 pb-0">
           <h2 id="approval-modal-title" className="text-lg font-semibold">Décision pour {entityName}</h2>
@@ -120,6 +122,7 @@ export function ApprovalModal({
           </div>
         </div>
       </div>
+      </FocusTrap>
 
       {toast && (
         <ToastNotification

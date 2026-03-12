@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 
 interface LegalDocumentVersion {
   id: string;
@@ -87,6 +88,7 @@ export function LegalAcceptanceModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+      <FocusTrap>
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
         <h2 id="legal-modal-title" className="mb-6 text-2xl font-bold text-gray-900">
           Acceptation des documents légaux
@@ -150,6 +152,7 @@ export function LegalAcceptanceModal({
           services.
         </p>
       </div>
+      </FocusTrap>
     </div>
   );
 }
