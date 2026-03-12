@@ -424,10 +424,11 @@ export default function ProSupportPage() {
 
             <form onSubmit={handleCreateTicket}>
               <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
+                <label htmlFor="ticket-subject" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                   Sujet
                 </label>
                 <input
+                  id="ticket-subject"
                   type="text"
                   placeholder="Décrivez brièvement votre problème"
                   value={newTicketData.subject}
@@ -439,10 +440,11 @@ export default function ProSupportPage() {
               </div>
 
               <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
+                <label htmlFor="ticket-category" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                   Catégorie
                 </label>
                 <select
+                  id="ticket-category"
                   value={newTicketData.category}
                   onChange={(e) => setNewTicketData({ ...newTicketData, category: e.target.value })}
                   className="pro-input"
@@ -459,10 +461,11 @@ export default function ProSupportPage() {
               </div>
 
               <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
+                <label htmlFor="ticket-description" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>
                   Description
                 </label>
                 <textarea
+                  id="ticket-description"
                   placeholder="Décrivez votre problème en détail..."
                   value={newTicketData.description}
                   onChange={(e) => setNewTicketData({ ...newTicketData, description: e.target.value })}

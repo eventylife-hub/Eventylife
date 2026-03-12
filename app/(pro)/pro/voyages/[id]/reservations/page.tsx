@@ -295,10 +295,11 @@ export default function ReservationsPage() {
       {/* Search & Filters */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', '@media (min-width: 768px)': { flexDirection: 'row', alignItems: 'flex-end' } }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rechercher</label>
+          <label htmlFor="resa-search" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rechercher</label>
           <div style={{ position: 'relative' }}>
             <Search style={{ position: 'absolute', left: '0.75rem', top: '0.75rem', width: '1rem', height: '1rem', color: '#64748B' }} />
             <input
+              id="resa-search"
               type="text"
               value={search}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
@@ -310,8 +311,9 @@ export default function ReservationsPage() {
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Statut paiement</label>
+          <label htmlFor="resa-filterStatus" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Statut paiement</label>
           <select
+            id="resa-filterStatus"
             value={filterStatus || ''}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilterStatus(e.target.value || null)}
             className="pro-input"
@@ -325,8 +327,9 @@ export default function ReservationsPage() {
 
         {roomTypes.length > 0 && (
           <div>
-            <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Type chambre</label>
+            <label htmlFor="resa-filterRoomType" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Type chambre</label>
             <select
+              id="resa-filterRoomType"
               value={filterRoomType || ''}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilterRoomType(e.target.value || null)}
               className="pro-input"

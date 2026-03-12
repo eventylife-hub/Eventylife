@@ -232,8 +232,9 @@ export default function HotelBlocksPage() {
               </div>
               <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Chambres demandées</label>
+                  <label htmlFor="hblock-roomsRequested" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Chambres demandées</label>
                   <input
+                    id="hblock-roomsRequested"
                     type="number"
                     value={formData.roomsRequested}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -245,8 +246,9 @@ export default function HotelBlocksPage() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Prix par nuit (€)</label>
+                  <label htmlFor="hblock-pricePerNight" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Prix par nuit (€)</label>
                   <input
+                    id="hblock-pricePerNight"
                     type="number"
                     step="0.01"
                     value={formData.pricePerNightTTC}
@@ -259,8 +261,9 @@ export default function HotelBlocksPage() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Notes</label>
+                  <label htmlFor="hblock-notes" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Notes</label>
                   <textarea
+                    id="hblock-notes"
                     value={formData.notes}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setFormData({ ...formData, notes: (e.target as HTMLInputElement).value })

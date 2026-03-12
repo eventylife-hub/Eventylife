@@ -354,10 +354,11 @@ export default function ProDocumentsPage() {
             </h3>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>
+              <label htmlFor="doc-type" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '12px' }}>
                 Type de document
               </label>
               <select
+                id="doc-type"
                 value={selectedDocType}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedDocType(e.target.value)}
                 className="pro-input"

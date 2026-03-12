@@ -206,10 +206,11 @@ export default function EquipePage() {
             </div>
             <div style={{ display: 'flex', gap: '12px', flexDirection: 'column' }}>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="team-email" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>
                   Adresse email
                 </label>
                 <input
+                  id="team-email"
                   type="email"
                   className="pro-input"
                   placeholder="membre@example.com"
@@ -218,10 +219,10 @@ export default function EquipePage() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="team-role" style={{ fontSize: '13px', fontWeight: 600, color: '#0A1628', display: 'block', marginBottom: '8px' }}>
                   Rôle
                 </label>
-                <select className="pro-input">
+                <select id="team-role" className="pro-input">
                   <option value="agent">Agent</option>
                   <option value="manager">Manager</option>
                   <option value="consultant">Consultant</option>

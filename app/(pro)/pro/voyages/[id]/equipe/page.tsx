@@ -281,8 +281,9 @@ export default function EquipePage() {
           </div>
           <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Email</label>
+              <label htmlFor="equipe-email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Email</label>
               <input
+                id="equipe-email"
                 type="email"
                 autoComplete="email"
                 value={inviteEmail}
@@ -294,8 +295,9 @@ export default function EquipePage() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rôle</label>
+              <label htmlFor="equipe-role" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#4A5568', marginBottom: '0.5rem' }}>Rôle</label>
               <select
+                id="equipe-role"
                 value={inviteRole}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setInviteRole(e.target.value as 'CREATOR' | 'INDEPENDANT' | 'VENDEUR')}
                 className="pro-input"
