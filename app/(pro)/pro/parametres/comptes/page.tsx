@@ -233,11 +233,11 @@ export default function ComptesPage() {
                 <caption className="sr-only">Liste des clés API</caption>
                 <thead style={{ borderBottom: '1px solid #E0E0E0', backgroundColor: '#F9FAFB' }}>
                   <tr style={{ textAlign: 'left' }}>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Nom</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Clé</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Créée le</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Dernier accès</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Actions</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Nom</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Clé</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Créée le</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Dernier accès</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

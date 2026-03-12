@@ -409,11 +409,11 @@ export default function WalletPage() {
               <caption className="sr-only">Historique des transactions du portefeuille</caption>
               <thead style={{ background: 'var(--cream, #FAF7F2)', borderBottom: '1.5px solid #E5E0D8' }}>
                 <tr>
-                  <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>
-                  <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Type</th>
-                  <th className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>
-                  <th className="text-right py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant</th>
-                  <th className="text-right py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Solde après</th>
+                  <th scope="col" className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>
+                  <th scope="col" className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Type</th>
+                  <th scope="col" className="text-left py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>
+                  <th scope="col" className="text-right py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant</th>
+                  <th scope="col" className="text-right py-4 px-4 font-bold" style={{ color: 'var(--navy, #1A1A2E)' }}>Solde après</th>
                 </tr>
               </thead>
               <tbody>

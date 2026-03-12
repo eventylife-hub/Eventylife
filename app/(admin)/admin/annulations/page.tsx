@@ -240,12 +240,12 @@ export default function CancellationsPage() {
                 <caption className="sr-only">Liste des demandes d&apos;annulation</caption>
                 <thead>
                   <tr>
-                    <th>Client</th>
-                    <th>Voyage</th>
-                    <th>Date demande</th>
-                    <th style={{ textAlign: 'right' }}>Montant payé</th>
-                    <th style={{ textAlign: 'center' }}>Statut</th>
-                    <th style={{ textAlign: 'right' }}>Actions</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Voyage</th>
+                    <th scope="col">Date demande</th>
+                    <th scope="col" style={{ textAlign: 'right' }}>Montant payé</th>
+                    <th scope="col" style={{ textAlign: 'center' }}>Statut</th>
+                    <th scope="col" style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

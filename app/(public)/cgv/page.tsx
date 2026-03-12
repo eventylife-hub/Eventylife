@@ -392,7 +392,7 @@ export default function CGV() {
                   <caption className="sr-only">Barème des frais d'annulation</caption>
                   <thead>
                     <tr>
-                      <th
+                      <th scope="col"
                         className="p-2 text-left"
                         style={{
                           border: '1px solid #E5E0D8',
@@ -402,7 +402,7 @@ export default function CGV() {
                       >
                         Délai avant départ
                       </th>
-                      <th className="border border-gray-300 p-2 text-left">
+                      <th scope="col" className="border border-gray-300 p-2 text-left">
                         Frais d&apos;annulation
                       </th>
                     </tr>

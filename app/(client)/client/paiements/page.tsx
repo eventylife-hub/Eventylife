@@ -222,11 +222,11 @@ export default function PaiementsPage() {
               <caption className="sr-only">Historique des paiements</caption>
               <thead style={{ background: 'var(--cream, #FAF7F2)', borderBottom: '1.5px solid #E5E0D8' }}>
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Voyage</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Statut</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Méthode</th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Date</th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Voyage</th>
+                  <th scope="col" className="px-6 py-4 text-right text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant</th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Statut</th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Méthode</th>
                 </tr>
               </thead>
               <tbody style={{ borderTop: '1.5px solid #E5E0D8' }}>

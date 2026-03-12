@@ -227,10 +227,10 @@ export default function ManifestPage() {
                     <caption className="sr-only">Manifeste des passagers</caption>
                     <thead style={{ borderBottom: '1px solid #E2E8F0' }}>
                       <tr style={{ textAlign: 'left' }}>
-                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Passager</th>
-                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Chambre</th>
-                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Mode</th>
-                        <th style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Statut paiement</th>
+                        <th scope="col" style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Passager</th>
+                        <th scope="col" style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Chambre</th>
+                        <th scope="col" style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Mode</th>
+                        <th scope="col" style={{ paddingBottom: '0.5rem', fontWeight: '600', color: '#0A1628' }}>Statut paiement</th>
                       </tr>
                     </thead>
                     <tbody>

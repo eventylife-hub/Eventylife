@@ -358,13 +358,13 @@ export default function ReservationsPage() {
                 <caption className="sr-only">Détail des réservations</caption>
                 <thead>
                   <tr style={{ borderBottom: '1px solid #E2E8F0', background: '#F7FAFC' }}>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Référence</th>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Client</th>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Type chambre</th>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Occupancy</th>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Montant TTC</th>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Statut</th>
-                    <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Date</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Référence</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Client</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Type chambre</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Occupancy</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Montant TTC</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Statut</th>
+                    <th scope="col" style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', color: '#0A1628' }}>Date</th>
                   </tr>
                 </thead>
                 <tbody>

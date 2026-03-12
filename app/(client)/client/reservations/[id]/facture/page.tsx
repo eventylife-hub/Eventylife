@@ -194,10 +194,10 @@ export default function InvoicePage() {
             <caption className="sr-only">Détails de la facture</caption>
             <thead>
               <tr style={{ borderBottom: '1px solid #E5E0D8' }}>
-                <th className="text-left py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>
-                <th className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant HT</th>
-                <th className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>TVA sur marge</th>
-                <th className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant TTC</th>
+                <th scope="col" className="text-left py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Description</th>
+                <th scope="col" className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant HT</th>
+                <th scope="col" className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>TVA sur marge</th>
+                <th scope="col" className="text-right py-3 font-semibold" style={{ color: 'var(--navy, #1A1A2E)' }}>Montant TTC</th>
               </tr>
             </thead>
             <tbody>

@@ -252,19 +252,19 @@ export default function InvoicesPage() {
               <caption className="sr-only">Liste des factures du voyage</caption>
               <thead style={{ background: '#F0E6D8', borderBottom: '1px solid #E8F7FC' }}>
                 <tr>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
+                  <th scope="col" style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Client
                   </th>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
+                  <th scope="col" style={{ padding: '0.75rem 1rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Date de réservation
                   </th>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'right', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
+                  <th scope="col" style={{ padding: '0.75rem 1rem', textAlign: 'right', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Montant
                   </th>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'center', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
+                  <th scope="col" style={{ padding: '0.75rem 1rem', textAlign: 'center', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Statut
                   </th>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'right', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
+                  <th scope="col" style={{ padding: '0.75rem 1rem', textAlign: 'right', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>
                     Actions
                   </th>
                 </tr>

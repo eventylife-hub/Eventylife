@@ -290,12 +290,12 @@ export default function AdminDocumentsPage() {
                 <caption className="sr-only">Liste des documents et signatures</caption>
                 <thead>
                   <tr>
-                    <th>Document</th>
-                    <th>Utilisateur / Professionnel</th>
-                    <th>Type</th>
-                    <th>Statut</th>
-                    <th>Date</th>
-                    <th style={{ textAlign: 'right' }}>Actions</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Utilisateur / Professionnel</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Date</th>
+                    <th scope="col" style={{ textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

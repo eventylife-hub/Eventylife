@@ -328,12 +328,12 @@ export default function RevenuesDashboardPage() {
               <caption className="sr-only">Détail des revenus par voyage</caption>
                 <thead style={{ borderBottom: '1px solid #E0E0E0', backgroundColor: '#F9FAFB' }}>
                   <tr style={{ textAlign: 'left' }}>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Voyage</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Dates</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'center' }}>Réservations</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>CA TTC</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Commission</th>
-                    <th style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Montant Net</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Voyage</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628' }}>Dates</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'center' }}>Réservations</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>CA TTC</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Commission</th>
+                    <th scope="col" style={{ paddingBottom: '12px', fontWeight: 600, color: '#0A1628', textAlign: 'right' }}>Montant Net</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -473,7 +473,7 @@ export default function PolitiqueConfidentialite() {
                 <caption className="sr-only">Base légale et finalités du traitement des données</caption>
                 <thead>
                   <tr>
-                    <th
+                    <th scope="col"
                       className="p-2 text-left"
                       style={{
                         border: '1px solid #E5E0D8',
@@ -483,7 +483,7 @@ export default function PolitiqueConfidentialite() {
                     >
                       Type de données
                     </th>
-                    <th
+                    <th scope="col"
                       className="p-2 text-left"
                       style={{
                         border: '1px solid #E5E0D8',

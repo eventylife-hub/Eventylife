@@ -340,11 +340,11 @@ export default function TravelsPage() {
                   <caption className="sr-only">Liste des voyages</caption>
                   <thead style={{ background: '#F0E6D8', borderBottom: '1px solid #E8F7FC' }}>
                     <tr>
-                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Voyage</th>
-                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Destination</th>
-                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Dates</th>
-                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Statut</th>
-                      <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Action</th>
+                      <th scope="col" style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Voyage</th>
+                      <th scope="col" style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Destination</th>
+                      <th scope="col" style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Dates</th>
+                      <th scope="col" style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Statut</th>
+                      <th scope="col" style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.875rem', fontWeight: '600', color: '#0A1628' }}>Action</th>
                     </tr>
                   </thead>
                   <tbody style={{ borderTop: '1px solid #E8F7FC' }}>

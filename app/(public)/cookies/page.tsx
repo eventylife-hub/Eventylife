@@ -244,7 +244,7 @@ export default function CookiesPolicy() {
                 <caption className="sr-only">Tableau détaillé des cookies utilisés</caption>
                 <thead style={{ backgroundColor: 'var(--cream, #FAF7F2)' }}>
                   <tr>
-                    <th
+                    <th scope="col"
                       className="p-3 text-left"
                       style={{
                         border: '1px solid #E5E0D8',
@@ -252,7 +252,7 @@ export default function CookiesPolicy() {
                         fontWeight: 'bold',
                       }}
                     >Nom</th>
-                    <th
+                    <th scope="col"
                       className="p-3 text-left"
                       style={{
                         border: '1px solid #E5E0D8',
@@ -262,7 +262,7 @@ export default function CookiesPolicy() {
                     >
                       Catégorie
                     </th>
-                    <th
+                    <th scope="col"
                       className="p-3 text-left"
                       style={{
                         border: '1px solid #E5E0D8',
@@ -270,7 +270,7 @@ export default function CookiesPolicy() {
                         fontWeight: 'bold',
                       }}
                     >Finalité</th>
-                    <th
+                    <th scope="col"
                       className="p-3 text-left"
                       style={{
                         border: '1px solid #E5E0D8',
@@ -278,7 +278,7 @@ export default function CookiesPolicy() {
                         fontWeight: 'bold',
                       }}
                     >Durée</th>
-                    <th
+                    <th scope="col"
                       className="p-3 text-left"
                       style={{
                         border: '1px solid #E5E0D8',

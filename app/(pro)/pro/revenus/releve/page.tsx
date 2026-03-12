@@ -525,19 +525,19 @@ export default function ReleveMensuelPage() {
               <caption className="sr-only">Relevé des opérations financières</caption>
               <thead style={{ borderBottom: '1px solid #e5e7eb', background: '#fefcf3' }}>
                 <tr style={{ textAlign: 'left' }}>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Voyage</th>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Dates</th>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'center' }}>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Voyage</th>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600' }}>Dates</th>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'center' }}>
                     Réservations
                   </th>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>CA TTC</th>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>CA TTC</th>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
                     Commission
                   </th>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
                     Montant Commission
                   </th>
-                  <th style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
+                  <th scope="col" style={{ padding: '0.75rem 0.5rem', fontWeight: '600', textAlign: 'right' }}>
                     Montant Net
                   </th>
                 </tr>
