@@ -516,7 +516,8 @@ export default function AdminNotificationsPage() {
                 <input
                   id="notif-recipient"
                   type="email"
-                autoComplete="email"
+                  autoComplete="email"
+                  required
                   placeholder="email@example.com ou +33..."
                   value={manualRecipient}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setManualRecipient((e.target as HTMLInputElement).value)}
@@ -534,6 +535,7 @@ export default function AdminNotificationsPage() {
                 </label>
                 <select
                   id="notif-template"
+                  required
                   value={manualTemplate}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualTemplate(e.target.value)}
                   className="admin-input"
@@ -557,6 +559,7 @@ export default function AdminNotificationsPage() {
                 </label>
                 <select
                   id="notif-channel"
+                  required
                   value={manualChannel}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualChannel(e.target.value as 'EMAIL' | 'SMS' | 'PUSH')}
                   className="admin-input"

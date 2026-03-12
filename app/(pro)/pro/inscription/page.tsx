@@ -302,6 +302,7 @@ export default function InscriptionPage() {
                 <input
                   id="reg-name"
                   type="text"
+                  required
                   value={form.name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, name: (e.target as HTMLInputElement).value })}
                   placeholder="Jean Dupont"
@@ -319,6 +320,7 @@ export default function InscriptionPage() {
                   id="reg-email"
                   type="email"
                   autoComplete="email"
+                  required
                   value={form.email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, email: (e.target as HTMLInputElement).value })}
                   placeholder="pro@example.com"
@@ -336,6 +338,7 @@ export default function InscriptionPage() {
                   id="reg-phone"
                   type="tel"
                   autoComplete="tel"
+                  required
                   value={form.phone}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, phone: (e.target as HTMLInputElement).value })}
                   placeholder="+33 6 12 34 56 78"
@@ -353,6 +356,7 @@ export default function InscriptionPage() {
                   <input
                     id="reg-siret"
                     type="text"
+                    required
                     value={form.siret || ''}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, siret: (e.target as HTMLInputElement).value })}
                     placeholder="12345678901234"
@@ -378,6 +382,7 @@ export default function InscriptionPage() {
                 <label htmlFor="reg-zone" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Zone géographique *</label>
                 <select
                   id="reg-zone"
+                  required
                   value={form.zone}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setForm({ ...form, zone: e.target.value })}
                   className="pro-input"
@@ -441,6 +446,7 @@ export default function InscriptionPage() {
                 <label htmlFor="reg-description" style={{ display: 'block', fontSize: '14px', fontWeight: 500, color: '#0A1628', marginBottom: '8px' }}>Description professionnelle *</label>
                 <textarea
                   id="reg-description"
+                  required
                   value={form.description}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, description: e.target.value })}
                   placeholder="Décrivez votre expérience et vos spécialités..."

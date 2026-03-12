@@ -255,6 +255,7 @@ export default function ContactPage() {
                       id="contact-name"
                       placeholder="Votre nom"
                       autoComplete="name"
+                      required
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -284,6 +285,7 @@ export default function ContactPage() {
                       type="email"
                       placeholder="votre@email.com"
                       autoComplete="email"
+                      required
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -343,6 +345,7 @@ export default function ContactPage() {
                     </label>
                     <select
                       id="contact-subject"
+                      required
                       value={formData.subject}
                       onChange={(e) =>
                         setFormData({ ...formData, subject: e.target.value })
@@ -397,6 +400,7 @@ export default function ContactPage() {
                   <textarea
                     id="contact-message"
                     placeholder="Décrivez votre demande en détail..."
+                    required
                     value={formData.message}
                     onChange={(e) => {
                       if (e.target.value.length <= MESSAGE_MAX + 50) {
@@ -422,6 +426,7 @@ export default function ContactPage() {
                   <input
                     id="contact-consent"
                     type="checkbox"
+                    required
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                     className="mt-1 flex-shrink-0"

@@ -192,6 +192,7 @@ export default function ProfilePage() {
                   type="text"
                   id="firstName"
                   name="firstName"
+                  required
                   value={formData?.firstName || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.name}
@@ -245,6 +246,7 @@ export default function ProfilePage() {
                   type="text"
                   id="companyName"
                   name="companyName"
+                  required
                   value={formData?.companyName || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.companyName}
@@ -288,6 +290,7 @@ export default function ProfilePage() {
                   type="text"
                   id="businessNumber"
                   name="businessNumber"
+                  required
                   value={formData?.businessNumber || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.siret}
@@ -412,6 +415,7 @@ export default function ProfilePage() {
                   id="email"
                   name="email"
                   autoComplete="email"
+                  required
                   value={formData?.email || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.email}
@@ -437,6 +441,7 @@ export default function ProfilePage() {
                   id="phone"
                   name="phone"
                   autoComplete="tel"
+                  required
                   value={formData?.phone || ''}
                   onChange={handleInputChange}
                   aria-invalid={!!errors.phone}

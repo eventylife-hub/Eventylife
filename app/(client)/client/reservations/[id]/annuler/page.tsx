@@ -260,6 +260,7 @@ export default function CancelReservationPage() {
           </label>
           <select
             id="cancel-reason"
+            required
             value={reason.split('|')[0] || ''}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               const newReason = e.target.value;

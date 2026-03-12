@@ -264,6 +264,7 @@ export default function ReinitialiserMotDePassePage() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 autoComplete="new-password"
+                required
                 value={password}
                 onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
                 placeholder="Min. 8 caractères"
@@ -334,7 +335,8 @@ export default function ReinitialiserMotDePassePage() {
             <input
               id="passwordConfirm"
               type={showPassword ? 'text' : 'password'}
-                autoComplete="new-password"
+              autoComplete="new-password"
+              required
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
               placeholder="Retapez votre mot de passe"
