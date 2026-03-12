@@ -1,13 +1,23 @@
 /**
  * Route API Mock — GET /api/finance/dashboard/[id]
  * Mode démo : dashboard financier d'un Pro
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextRequest, NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   const { id: _id } = await params;
 
   return NextResponse.json({

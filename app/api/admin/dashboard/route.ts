@@ -1,10 +1,20 @@
 /**
  * Route API Mock — GET /api/admin/dashboard
  * Mode démo : données factices pour le dashboard admin
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextResponse } from 'next/server';
 
+const IS_DEV = process.env.NODE_ENV !== 'production';
+
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json({
     data: {
       stats: {

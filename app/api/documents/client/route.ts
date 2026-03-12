@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/documents/client
  * Mode démo : documents du client (confirmations, factures, documents voyage)
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_DOCUMENTS = [
   {
@@ -60,5 +64,11 @@ const MOCK_DOCUMENTS = [
 ];
 
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json(MOCK_DOCUMENTS);
 }

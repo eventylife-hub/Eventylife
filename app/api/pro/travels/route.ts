@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/pro/travels
  * Mode démo : voyages gérés par le Pro
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextRequest, NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_PRO_TRAVELS = [
   {
@@ -80,6 +84,12 @@ const MOCK_PRO_TRAVELS = [
 ];
 
 export async function GET(request: NextRequest) {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   const { searchParams } = new URL(request.url);
   const status = searchParams.get('status');
   const search = searchParams.get('search');

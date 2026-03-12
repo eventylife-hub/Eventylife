@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/client/groups
  * Mode démo : groupes de voyage du client
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_GROUPS = [
   {
@@ -34,5 +38,11 @@ const MOCK_GROUPS = [
 ];
 
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json({ items: MOCK_GROUPS, total: MOCK_GROUPS.length });
 }

@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/client/wallet
  * Mode démo : portefeuille fidélité client
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_WALLET = {
   balanceCents: 5000,
@@ -29,5 +33,11 @@ const MOCK_WALLET = {
 };
 
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json(MOCK_WALLET);
 }

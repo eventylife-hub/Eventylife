@@ -2,8 +2,15 @@
  * Route API Mock — POST /api/auth/login
  * Mode démo : accepte des credentials prédéfinis pour tester les portails
  * À remplacer par le vrai backend NestJS en production
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
+ * Ces identifiants en clair NE DOIVENT JAMAIS être accessibles hors développement
  */
 import { NextRequest, NextResponse } from 'next/server';
+
+// SECURITY GUARD: Double vérification — NODE_ENV + flag explicite
+// En production, JAMAIS de mock auth, même si ENABLE_MOCK_AUTH est défini par erreur
+const IS_DEV = process.env.NODE_ENV !== 'production' && process.env.ENABLE_MOCK_AUTH !== 'false';
 
 // Utilisateurs démo (mots de passe en clair = mode démo uniquement)
 const DEMO_USERS = [
@@ -55,6 +62,14 @@ const DEMO_USERS = [
 ];
 
 export async function POST(request: NextRequest) {
+  // SECURITY (LOT 166): Bloquer les mock routes en production
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production. Utilisez le backend NestJS.' },
+      { status: 403 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { email, password } = body;

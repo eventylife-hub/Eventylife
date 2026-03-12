@@ -1,10 +1,20 @@
 /**
  * Route API Mock — POST /api/auth/refresh
  * Mode démo : simule un refresh token
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextRequest, NextResponse } from 'next/server';
 
+// SECURITY GUARD: Double vérification — NODE_ENV + flag explicite
+const IS_DEV = process.env.NODE_ENV !== 'production' && process.env.ENABLE_MOCK_AUTH !== 'false';
+
 export async function POST(request: NextRequest) {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   const refreshToken = request.cookies.get('refresh_token')?.value;
 
   if (!refreshToken || !refreshToken.startsWith('refresh_demo_')) {

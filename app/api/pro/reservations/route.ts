@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/pro/reservations
  * Mode démo : réservations vues par le Pro
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextRequest, NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_RESERVATIONS = [
   { id: 'resa_001', voyageTitle: 'Marrakech Express', voyageId: '1', clientName: 'Jean Martin', clientEmail: 'jean.martin@mail.fr', passengers: 2, status: 'CONFIRMED', departureDate: '2026-05-15', totalAmount: 179800, createdAt: '2026-01-10T14:30:00Z' },
@@ -13,6 +17,12 @@ const MOCK_RESERVATIONS = [
 ];
 
 export async function GET(request: NextRequest) {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   const { searchParams } = new URL(request.url);
   const status = searchParams.get('status');
   const search = searchParams.get('search');

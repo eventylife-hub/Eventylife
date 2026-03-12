@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/reviews/mine
  * Mode démo : avis du client connecté
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_REVIEWS = [
   {
@@ -34,6 +38,12 @@ const MOCK_REVIEWS = [
 ];
 
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json({
     items: MOCK_REVIEWS,
     total: MOCK_REVIEWS.length,

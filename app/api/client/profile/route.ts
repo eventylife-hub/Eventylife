@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET/PATCH /api/client/profile
  * Mode démo : profil client factice
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextRequest, NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_PROFILE = {
   id: 'usr_client_001',
@@ -36,10 +40,22 @@ const MOCK_PROFILE = {
 };
 
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json(MOCK_PROFILE);
 }
 
 export async function PATCH(request: NextRequest) {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   try {
     const body = await request.json();
     const updated = { ...MOCK_PROFILE, ...body };

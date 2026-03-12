@@ -1,8 +1,12 @@
 /**
  * Route API Mock — GET /api/client/payments
  * Mode démo : historique paiements du client
+ *
+ * ⚠️ SECURITY (LOT 166): Guard environnement — BLOQUÉ en production
  */
 import { NextResponse } from 'next/server';
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const MOCK_PAYMENTS = [
   {
@@ -46,6 +50,12 @@ const MOCK_PAYMENTS = [
 ];
 
 export async function GET() {
+  if (!IS_DEV) {
+    return NextResponse.json(
+      { message: 'Route désactivée en production.' },
+      { status: 403 }
+    );
+  }
   return NextResponse.json({
     items: MOCK_PAYMENTS,
     total: MOCK_PAYMENTS.length,
