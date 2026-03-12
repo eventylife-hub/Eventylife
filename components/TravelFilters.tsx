@@ -71,10 +71,11 @@ export function TravelFilters({
 
       {/* Tri */}
       <div>
-        <label className="block text-sm font-semibold text-slate-900 mb-2">
+        <label htmlFor="sort-by" className="block text-sm font-semibold text-slate-900 mb-2">
           Trier par
         </label>
         <select
+          id="sort-by"
           value={sortBy}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onSortChange(e.target.value)}
           className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"

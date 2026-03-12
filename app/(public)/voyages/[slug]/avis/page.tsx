@@ -291,6 +291,7 @@ export default function TravelReviewsPage() {
             <select
               value={sortBy}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value as 'recent' | 'rating-high' | 'rating-low')}
+              aria-label="Trier les avis"
               className="px-4 py-2 rounded-lg focus:ring-2"
               style={{
                 borderRadius: '12px',

@@ -248,6 +248,7 @@ export default function QuickSellPage() {
                   value={selectedTrip}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedTrip(e.target.value)}
                   className="pro-input"
+                  aria-label="Sélectionner un voyage"
                   style={{ width: '100%' }}
                 >
                   {trips.map((trip) => (

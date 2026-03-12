@@ -237,7 +237,7 @@ export default function TransportPage() {
           <p style={{ fontSize: '0.875rem', color: '#64748B', margin: 0 }}>Sélectionnez le mode principal</p>
         </div>
         <div className="pro-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <select value={departureMode} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setDepartureMode(e.target.value)} className="pro-input">
+          <select value={departureMode} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setDepartureMode(e.target.value)} className="pro-input" aria-label="Mode de transport">
             <option value="BUS">Bus</option>
             <option value="FLIGHT">Avion</option>
             <option value="MIXED">Mixte (Bus + Avion)</option>
