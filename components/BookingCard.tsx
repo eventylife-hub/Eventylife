@@ -101,7 +101,7 @@ export const BookingCard = React.memo(function BookingCard({
               <p className="text-2xl font-bold text-slate-900">
                 {formatPrice(totalAmountTTC)}
               </p>
-              <p className="text-xs text-slate-500">Total</p>
+              <p className="text-xs text-slate-600">Total</p>
             </div>
             <span
               className={`px-3 py-1 rounded-full text-xs font-semibold ${

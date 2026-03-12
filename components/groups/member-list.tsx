@@ -73,7 +73,7 @@ export function MemberList({
               <p className="font-semibold">
                 {member.user.firstName} {member.user.lastName}
               </p>
-              <p className="text-xs text-gray-500">{member.user.email}</p>
+              <p className="text-xs text-gray-600">{member.user.email}</p>
             </div>
           </div>
 
