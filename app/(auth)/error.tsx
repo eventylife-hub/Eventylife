@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export default function AuthError({
   error,
@@ -15,7 +16,7 @@ export default function AuthError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Auth] Erreur capturée :', error);
+    logger.error('[Auth] Erreur capturée', error);
   }, [error]);
 
   return (

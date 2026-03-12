@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export default function CheckoutError({
   error,
@@ -15,7 +16,7 @@ export default function CheckoutError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Checkout] Erreur capturée :', error);
+    logger.error('[Checkout] Erreur capturée', error);
   }, [error]);
 
   return (

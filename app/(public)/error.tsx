@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export default function PublicError({
   error,
@@ -15,7 +16,7 @@ export default function PublicError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Public] Erreur capturée :', error);
+    logger.error('[Public] Erreur capturée', error);
   }, [error]);
 
   return (

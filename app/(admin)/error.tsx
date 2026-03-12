@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export default function AdminGroupError({
   error,
@@ -15,7 +16,8 @@ export default function AdminGroupError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Admin] Erreur capturée :', error);
+    // LOT 166: Logger production-safe → Sentry en prod, console en dev
+    logger.error('[Admin] Erreur capturée', error);
   }, [error]);
 
   return (

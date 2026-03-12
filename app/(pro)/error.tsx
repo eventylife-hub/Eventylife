@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export default function ProGroupError({
   error,
@@ -15,7 +16,7 @@ export default function ProGroupError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Pro] Erreur capturée :', error);
+    logger.error('[Pro] Erreur capturée', error);
   }, [error]);
 
   return (

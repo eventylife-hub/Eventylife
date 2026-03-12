@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 export default function ClientGroupError({
   error,
@@ -15,7 +16,7 @@ export default function ClientGroupError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('[Client] Erreur capturée :', error);
+    logger.error('[Client] Erreur capturée', error);
   }, [error]);
 
   return (
