@@ -149,7 +149,7 @@ export default function ProLayout({ children }: ProLayoutProps) {
       </aside>
 
       {/* ═══ MAIN ═══ */}
-      <main className="pro-main" id="main-content" role="main" aria-label="Contenu espace professionnel">
+      <main className="pro-main" id="pro-main-content" role="main" aria-label="Contenu espace professionnel">
         <div className="pro-content">
           <PortalErrorBoundary portal="pro">
             {children}
