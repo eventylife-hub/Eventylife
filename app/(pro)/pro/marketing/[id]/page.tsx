@@ -238,6 +238,7 @@ export default function CampagneDetailPage() {
                   disabled={actionLoading}
                   className="pro-btn-outline"
                   style={{ opacity: actionLoading ? 0.5 : 1, cursor: actionLoading ? 'not-allowed' : 'pointer' }}
+                  aria-label="Dupliquer la campagne"
                 >
                   <Copy className="h-4 w-4" />
                 </button>

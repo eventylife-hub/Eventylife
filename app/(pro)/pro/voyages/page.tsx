@@ -117,6 +117,7 @@ export default function TravelsPage() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
             placeholder="Rechercher un voyage..."
             className="pro-input"
+            aria-label="Rechercher un voyage"
             style={{ width: '100%' }}
           />
         </div>

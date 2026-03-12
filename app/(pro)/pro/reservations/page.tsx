@@ -118,6 +118,7 @@ export default function ProReservationsPage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
                   placeholder="Rechercher par client, voyage..."
                   className="pro-input"
+                  aria-label="Rechercher par client ou voyage"
                   style={{ paddingLeft: '36px' }}
                 />
               </div>

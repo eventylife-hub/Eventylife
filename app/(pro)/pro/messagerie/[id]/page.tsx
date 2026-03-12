@@ -460,6 +460,7 @@ export default function MessagerieDetail() {
                 flexShrink: 0,
               }}
               title="Ajouter une pièce jointe"
+              aria-label="Ajouter une pièce jointe"
             >
               <Paperclip style={{ width: '20px', height: '20px' }} />
             </button>

@@ -282,6 +282,7 @@ export default function VoyagesPage() {
                 value={searchQuery}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery((e.target as HTMLInputElement).value)}
                 className="admin-input pl-10 w-full"
+                aria-label="Rechercher un voyage"
               />
             </div>
           </div>

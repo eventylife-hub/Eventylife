@@ -311,7 +311,7 @@ export default function QuickSellPage() {
                       className="pro-input"
                       style={{ flex: 1, backgroundColor: '#F5F5F5', fontSize: '13px' }}
                     />
-                    <button type="button" onClick={handleCopyLink} className="pro-btn-outline" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center' }}>
+                    <button type="button" onClick={handleCopyLink} className="pro-btn-outline" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center' }} aria-label="Copier le lien">
                       <Copy className="h-4 w-4" />
                     </button>
                   </div>

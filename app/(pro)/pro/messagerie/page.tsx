@@ -193,6 +193,7 @@ export default function MessagerieInbox() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pro-input"
+                  aria-label="Rechercher une conversation"
                   style={{ paddingLeft: '40px', width: '100%' }}
                 />
               </div>
