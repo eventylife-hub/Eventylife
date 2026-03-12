@@ -15,6 +15,7 @@ import {
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { supportTicketSchema, zodErrorsToRecord } from '@/lib/validations';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 
 interface SupportTicket {
   id: string;
@@ -404,7 +405,13 @@ export default function ProSupportPage() {
 
       {/* Modal nouveau ticket */}
       {showNewTicketModal && (
-        <div role="dialog" aria-modal="true" aria-labelledby="new-ticket-title" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
+        <FocusTrap
+          onEscape={() => setShowNewTicketModal(false)}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="new-ticket-title"
+          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}
+        >
           <div className="pro-panel" style={{ maxWidth: '512px', width: '100%', maxHeight: '90vh', overflowY: 'auto' }}>
             <h2 id="new-ticket-title" className="pro-section-title" style={{ marginBottom: '24px' }}>
               Créer un nouveau ticket
@@ -484,7 +491,7 @@ export default function ProSupportPage() {
               </div>
             </form>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );

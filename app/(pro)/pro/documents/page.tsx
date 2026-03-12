@@ -14,6 +14,7 @@ import dynamic from 'next/dynamic';
 const FileUpload = dynamic(() => import('@/components/uploads/file-upload').then(m => ({ default: m.FileUpload })), { ssr: false });
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { FocusTrap } from '@/components/a11y/focus-trap';
 interface ProDocument {
   id: string;
   name: string;
@@ -331,7 +332,13 @@ export default function ProDocumentsPage() {
 
       {/* Modal de téléchargement */}
       {showUploadModal && (
-        <div role="dialog" aria-modal="true" aria-labelledby="upload-modal-title" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}>
+        <FocusTrap
+          onEscape={() => { setShowUploadModal(false); setSelectedDocType(''); }}
+          role="dialog"
+          aria-modal={true}
+          aria-labelledby="upload-modal-title"
+          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 50 }}
+        >
           <div className="pro-panel" style={{ maxWidth: '448px', width: '100%' }}>
             <h3 id="upload-modal-title" className="pro-panel-title" style={{ marginBottom: '16px' }}>
               Ajouter un document administratif
@@ -378,7 +385,7 @@ export default function ProDocumentsPage() {
               </button>
             </div>
           </div>
-        </div>
+        </FocusTrap>
       )}
     </div>
   );
