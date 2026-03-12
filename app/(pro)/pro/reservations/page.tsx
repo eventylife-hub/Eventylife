@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Filter, Users, Calendar, MapPin, ChevronRight, AlertCircle, RotateCcw } from 'lucide-react';
+import { logger } from '@/lib/logger';
 // Button import removed - using native buttons with pro-btn-* classes
 interface Reservation {
   id: string;
@@ -57,7 +58,7 @@ export default function ProReservationsPage() {
       const data = (await res.json()) as Record<string, unknown>;
       setReservations(data?.items || data || []);
     } catch {
-      console.warn('API pro/reservations indisponible — données démo');
+      logger.warn('API pro/reservations indisponible — données démo');
       setReservations([
         { id: 'resa_001', voyageTitle: 'Marrakech Express', voyageId: '1', clientName: 'Jean Martin', clientEmail: 'jean.martin@mail.fr', passengers: 2, status: 'CONFIRMED', departureDate: '2026-05-15', totalAmount: 179800, createdAt: '2026-01-10T14:30:00Z' },
         { id: 'resa_002', voyageTitle: 'Marrakech Express', voyageId: '1', clientName: 'Marie Dupont', clientEmail: 'marie.dupont@mail.fr', passengers: 1, status: 'CONFIRMED', departureDate: '2026-05-15', totalAmount: 89900, createdAt: '2026-01-15T10:00:00Z' },

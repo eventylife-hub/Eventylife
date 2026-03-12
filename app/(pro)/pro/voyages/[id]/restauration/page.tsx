@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { RestaurantCard } from '@/components/restauration/restaurant-card';
 import { AlertCircle, Loader2, FileText } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 const MealPlanEditor = dynamic(
   () => import('@/components/restauration/meal-plan-editor').then((m) => m.MealPlanEditor),
@@ -95,7 +96,7 @@ export default function RestauratPage() {
           const data = (await mealRes.json() as unknown) as MealPlan;
           setMealPlan(data);
         } else {
-          console.warn('API /restauration/meal-plan indisponible — données démo');
+          logger.warn('API /restauration/meal-plan indisponible — données démo');
           setMealPlan({
             'Jour 1': { breakfast: 'Buffet français', lunch: 'Cuisine lyonnaise', dinner: 'Menu régional' },
             'Jour 2': { breakfast: 'Petit-déjeuner continental', lunch: 'Spécialités bourguignonnes', dinner: 'Repas libre' }
@@ -106,7 +107,7 @@ export default function RestauratPage() {
           const data = (await dietRes.json() as unknown) as Dietary;
           setDietary(data);
         } else {
-          console.warn('API /restauration/dietary indisponible — données démo');
+          logger.warn('API /restauration/dietary indisponible — données démo');
           setDietary({
             restrictions: ['vegetarian', 'vegan', 'halal'],
             stats: {
@@ -129,7 +130,7 @@ export default function RestauratPage() {
           const data = (await restRes.json() as unknown) as { restaurants: Restaurant[] };
           setRestaurants(data.restaurants || []);
         } else {
-          console.warn('API /restauration/restaurants indisponible — données démo');
+          logger.warn('API /restauration/restaurants indisponible — données démo');
           setRestaurants([
             {
               id: 'demo-rest-1',
@@ -158,7 +159,7 @@ export default function RestauratPage() {
           const data = (await costRes.json() as unknown) as Costs;
           setCosts(data);
         } else {
-          console.warn('API /restauration/costs indisponible — données démo');
+          logger.warn('API /restauration/costs indisponible — données démo');
           setCosts({
             totalParticipants: 42,
             breakfastPerPersonCents: 1200,
@@ -174,7 +175,7 @@ export default function RestauratPage() {
 
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /restauration indisponible — données démo');
+        logger.warn('API /restauration indisponible — données démo');
 
         // Fallback demo data for all endpoints
         setMealPlan({

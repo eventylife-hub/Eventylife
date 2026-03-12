@@ -5,6 +5,7 @@ import Link from 'next/link';
 // Card, Button, Alert components removed - using pro-panel and pro-btn-* classes instead
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Download, TrendingUp, FileText } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface RevenueSummary {
   totalEarned: number;
   pendingAmount: number;
@@ -77,7 +78,7 @@ export default function RevenuesDashboardPage() {
         const payoutsData = await payoutsRes.json() as Record<string, unknown>;
         setPayouts((payoutsData.payouts || []) as Payout[]);
       } catch {
-        console.warn('API pro/revenues indisponible — données démo');
+        logger.warn('API pro/revenues indisponible — données démo');
         setSummary({
           totalEarned: 1245600,
           pendingAmount: 389400,

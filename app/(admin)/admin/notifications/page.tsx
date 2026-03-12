@@ -15,6 +15,7 @@ import {
   XCircle as XCircleIcon
 } from 'lucide-react';
 import { formatDate, formatDateTime } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface NotificationTemplate {
   id: string;
   name: string;
@@ -77,7 +78,7 @@ export default function AdminNotificationsPage() {
           setData(result);
         }
       } catch (_error: unknown) {
-        console.warn('API admin/notifications indisponible — données démo');
+        logger.warn('API admin/notifications indisponible — données démo');
         const FALLBACK_DATA: NotificationsData = {
           templates: [
             {

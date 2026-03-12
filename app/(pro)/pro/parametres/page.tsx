@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { sanitizeImageUrl } from '@/lib/security/url-validation';
+import { logger } from '@/lib/logger';
 
 interface ProProfile {
   id: string;
@@ -48,7 +49,7 @@ export default function ParametresPage() {
         const data = await res.json() as ProProfile;
         setProfile(data);
       } catch {
-        console.warn('API profil indisponible — données démo');
+        logger.warn('API profil indisponible — données démo');
         setProfile({
           id: 'pro_001',
           name: 'Agence Voyages Méditerranée',

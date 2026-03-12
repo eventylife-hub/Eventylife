@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 interface NotificationPreferences {
   id: string;
@@ -51,7 +52,7 @@ export default function NotificationsPage() {
         const data = await res.json() as NotificationPreferences;
         setPrefs(data);
       } catch {
-        console.warn('API notifications indisponible — données démo');
+        logger.warn('API notifications indisponible — données démo');
         setPrefs({
           id: 'notif_001',
           proId: 'pro_001',

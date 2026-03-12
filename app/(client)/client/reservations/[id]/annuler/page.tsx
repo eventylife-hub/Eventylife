@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Booking {
   id: string;
   reference: string;
@@ -69,7 +70,7 @@ export default function CancelReservationPage() {
 
       setError(null);
     } catch (err: unknown) {
-      console.warn('API bookings/cancellations indisponible — données démo');
+      logger.warn('API bookings/cancellations indisponible — données démo');
       const FALLBACK_BOOKING: Booking = {
         id: bookingId,
         reference: 'RES-' + bookingId.substring(0, 8).toUpperCase(),
@@ -117,7 +118,7 @@ export default function CancelReservationPage() {
       alert('Demande d\'annulation créée. Vous serez notifié de la décision par email.');
       router.push(`/client/reservations/${bookingId}`);
     } catch (err: unknown) {
-      console.warn('API cancellations indisponible — données démo');
+      logger.warn('API cancellations indisponible — données démo');
       alert('Demande d\'annulation créée (démo). Vous serez notifié par email.');
       setTimeout(() => router.push(`/client/reservations/${bookingId}`), 1000);
     } finally {

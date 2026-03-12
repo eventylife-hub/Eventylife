@@ -14,6 +14,7 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
+import { logger } from '@/lib/logger';
 
 interface RoomSelection {
   roomTypeId: string;
@@ -87,7 +88,7 @@ export default function CheckoutStep1Page() {
           setError(response.error?.message || 'Erreur lors du chargement des chambres');
         }
       } catch (err: unknown) {
-        console.warn('API /checkout/available-rooms indisponible — données démo');
+        logger.warn('API /checkout/available-rooms indisponible — données démo');
         const initialSelections = FALLBACK_ROOMS.map(room => ({
           ...room,
           occupancyCount: 0,

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { logger } from '@/lib/logger';
 interface ProfileData {
   id: string;
   email: string;
@@ -99,7 +100,7 @@ export default function ProfilePage() {
           setTwoFAEnabled(true);
         }
       } catch (err: unknown) {
-        console.warn('API indisponible, utilisation des données de démonstration');
+        logger.warn('API indisponible, utilisation des données de démonstration');
         const fallback = {
           id: 'usr_client_001',
           email: 'client@eventylife.fr',

@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -90,7 +91,7 @@ export const useNotificationStore = create<NotificationStore>()(
             set({ unreadCount: unreadData.unreadCount });
           }
         } catch {
-          console.warn('API notifications indisponible — données démo');
+          logger.warn('API notifications indisponible — données démo');
           set({
             notifications: [
               {

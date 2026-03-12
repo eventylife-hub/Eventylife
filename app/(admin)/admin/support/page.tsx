@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ExportCta } from '@/components/admin/export-cta';
 import { formatDate } from '@/lib/utils';
 import { AlertCircle, RefreshCw } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface SupportTicket {
   id: string;
   title: string;
@@ -72,7 +73,7 @@ export default function SupportPage() {
         setError('Erreur lors du chargement des tickets');
       }
     } catch (err: unknown) {
-      console.warn('API /api/admin/tickets indisponible — données démo');
+      logger.warn('API /api/admin/tickets indisponible — données démo');
       const allData = FALLBACK_TICKETS;
       setAllTickets(allData);
 

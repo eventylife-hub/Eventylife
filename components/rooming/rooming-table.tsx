@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Pencil, Check, X } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface Room {
   id: string;
@@ -67,7 +68,7 @@ export function RoomingTable({
       // Recharger le parent
       window.location.reload();
     } catch (err: unknown) {
-      console.error(err);
+      logger.error(err);
     } finally {
       setIsSaving(false);
     }

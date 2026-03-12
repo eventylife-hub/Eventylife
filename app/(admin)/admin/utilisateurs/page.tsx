@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Search, RefreshCw, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface User {
   id: string;
   email: string;
@@ -66,7 +67,7 @@ export default function UtilisateursPage() {
         setError('Erreur lors du chargement des utilisateurs');
       }
     } catch (err: unknown) {
-      console.warn('API /admin/users indisponible — données démo');
+      logger.warn('API /admin/users indisponible — données démo');
       const FALLBACK_DATA: PaginatedResponse = {
         data: [
           {

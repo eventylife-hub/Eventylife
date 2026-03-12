@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface UserDetail {
   id: string;
   email: string;
@@ -61,7 +62,7 @@ export default function UserDetailPage() {
         setError('Erreur lors du chargement de l\'utilisateur');
       }
     } catch {
-      console.warn('API /admin/users/[id] indisponible — données démo');
+      logger.warn('API /admin/users/[id] indisponible — données démo');
       const FALLBACK_DATA: UserDetail = {
         id: userId,
         email: 'sophie.travel@gmail.com',
@@ -117,7 +118,7 @@ export default function UserDetailPage() {
         setError('Erreur lors de la mise à jour du statut');
       }
     } catch {
-      console.warn('API PATCH /admin/users/[id]/status indisponible — données démo');
+      logger.warn('API PATCH /admin/users/[id]/status indisponible — données démo');
       setUser({ ...user, isActive: !user.isActive });
       setError(null);
     } finally {

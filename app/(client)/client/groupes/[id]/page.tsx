@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate, formatDateTime } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Message {
   id: string;
   userId: string;
@@ -60,7 +61,7 @@ export default function GroupDetailPage() {
         const data = (await res.json() as unknown) as TravelGroup;
         setGroup(data);
       } catch (err: unknown) {
-        console.warn('API client/groups indisponible — données démo');
+        logger.warn('API client/groups indisponible — données démo');
         const FALLBACK_GROUP: TravelGroup = {
           id: params.id as string,
           name: 'Groupe de voyage exemple',
@@ -144,7 +145,7 @@ export default function GroupDetailPage() {
       const updatedGroup = (await groupRes.json() as unknown) as TravelGroup;
       setGroup(updatedGroup);
     } catch (err: unknown) {
-      console.warn('API client/groups/messages indisponible — données démo');
+      logger.warn('API client/groups/messages indisponible — données démo');
       if (group) {
         const demoMessage: Message = {
           id: 'demo-' + Date.now(),

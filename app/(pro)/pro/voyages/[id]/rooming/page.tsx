@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { Download, AlertCircle } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 const RoomingTable = dynamic(
   () => import('@/components/rooming/rooming-table').then((m) => m.RoomingTable),
@@ -78,7 +79,7 @@ export default function RoomingPage() {
         setStats(statsData);
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /api/rooming indisponible — données démo');
+        logger.warn('API /api/rooming indisponible — données démo');
         // Fallback demo data
         const demoRooms: PageRoom[] = [
           {

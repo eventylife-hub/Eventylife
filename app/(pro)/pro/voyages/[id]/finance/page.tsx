@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { FinanceSummary } from '@/components/finance/finance-summary';
 import { Download } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 const CostTable = dynamic(
   () => import('@/components/finance/cost-table').then((m) => m.CostTable),
@@ -45,7 +46,7 @@ export default function VoyageFinancePage() {
         setFinance(data);
         setError(null);
       } catch (err: unknown) {
-        console.warn('API finance indisponible — données démo');
+        logger.warn('API finance indisponible — données démo');
         // Fallback demo data: séjour Provence réaliste
         // CA TTC: 89900 (5 clients × 17980€), Coûts TTC: 54600
         // Marge: 89900 - 54600 = 35300

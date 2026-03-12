@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 /**
  * Page Mes Assurances - Vue client
  *
@@ -35,7 +36,7 @@ export default function AssurancePage() {
         setInsurances((data.insurances || data || []) as Record<string, unknown>[]);
         setError(null);
       } catch {
-        console.warn('API assurances indisponible — données démo');
+        logger.warn('API assurances indisponible — données démo');
         setInsurances([
           {
             subscriptionId: 'ins_001',

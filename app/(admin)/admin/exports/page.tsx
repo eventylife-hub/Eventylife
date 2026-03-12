@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download, FileText, Users, Phone, Truck, Plane, FileStack } from 'lucide-react';
 import { formatDateTime } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface ExportLog {
   id: string;
   createdAt: string;
@@ -82,7 +83,7 @@ export default function ExportsPage() {
           setTrips(data.data || []);
         }
       } catch (_error: unknown) {
-        console.warn('API /api/admin/exports indisponible — données démo');
+        logger.warn('API /api/admin/exports indisponible — données démo');
         setExports(FALLBACK_EXPORTS);
         setTrips([
           { id: 'trip-1', title: 'Paris Luxe - Mars 2026' },

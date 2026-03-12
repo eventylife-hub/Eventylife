@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MessageSquare, Search, AlertCircle, RefreshCw, FileText } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 const OCEAN = 'var(--pro-ocean)';
 const SUN = 'var(--pro-sun)';
@@ -92,7 +93,7 @@ export default function MessagerieInbox() {
       const data = (await res.json()) as unknown;
       setConversations(data as Conversation[]);
     } catch (err: unknown) {
-      console.warn('API indisponible, utilisation des données de démonstration');
+      logger.warn('API indisponible, utilisation des données de démonstration');
       setConversations(demoConversations);
     } finally {
       setLoading(false);

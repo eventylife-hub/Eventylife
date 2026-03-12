@@ -11,6 +11,7 @@ const MetricsChart = dynamic(
 );
 import { AlertCircle, Loader2, Copy, Trash2 } from 'lucide-react';
 import { formatDate, formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 // Interface pour une campagne marketing
 interface Campaign {
   id: string;
@@ -69,7 +70,7 @@ export default function CampagneDetailPage() {
           setMetrics(metricsData);
         }
       } catch (err: unknown) {
-        console.warn('API /api/marketing/campaigns indisponible — données démo');
+        logger.warn('API /api/marketing/campaigns indisponible — données démo');
         // Fallback demo data
         const demoCampaign: Campaign = {
           id: campaignId,
@@ -114,7 +115,7 @@ export default function CampagneDetailPage() {
       const data = await res.json() as Campaign;
       setCampaign(data);
     } catch (err: unknown) {
-      console.warn('API /api/marketing/campaigns/.../launch indisponible — données démo');
+      logger.warn('API /api/marketing/campaigns/.../launch indisponible — données démo');
       // Fallback demo: update campaign status to LIVE
       if (campaign) {
         setCampaign({ ...campaign, status: 'LIVE' });
@@ -137,7 +138,7 @@ export default function CampagneDetailPage() {
       const newCampaign = await res.json() as { id: string };
       router.push(`/pro/marketing/${newCampaign.id}`);
     } catch (err: unknown) {
-      console.warn('API /api/marketing/campaigns/.../duplicate indisponible — données démo');
+      logger.warn('API /api/marketing/campaigns/.../duplicate indisponible — données démo');
       // Fallback demo: generate a new campaign ID and navigate
       const newCampaignId = `demo-${Date.now()}`;
       setError(null);
@@ -161,7 +162,7 @@ export default function CampagneDetailPage() {
       const data = await res.json() as Campaign;
       setCampaign(data);
     } catch (err: unknown) {
-      console.warn('API /api/marketing/campaigns/.../end indisponible — données démo');
+      logger.warn('API /api/marketing/campaigns/.../end indisponible — données démo');
       // Fallback demo: update campaign status to ENDED
       if (campaign) {
         setCampaign({ ...campaign, status: 'ENDED' });

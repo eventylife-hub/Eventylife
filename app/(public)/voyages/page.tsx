@@ -10,6 +10,7 @@ import { apiClient } from '@/lib/api-client';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { TravelCard } from '@/components/TravelCard';
 import { NewsletterCTA } from '@/components/newsletter-cta';
+import { logger } from '@/lib/logger';
 
 // Données fallback quand le backend n'est pas disponible
 const FALLBACK_TRAVELS: Travel[] = [
@@ -103,7 +104,7 @@ function VoyagesContent() {
         setTravels(mappedTravels);
         setState(mappedTravels.length > 0 ? 'data' : 'empty');
       } catch (err: unknown) {
-        console.warn('API indisponible, utilisation des données de démonstration');
+        logger.warn('API indisponible, utilisation des données de démonstration');
         setTravels(FALLBACK_TRAVELS);
         setState('data');
       }

@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { BlogPostingJsonLd } from '@/components/seo/json-ld';
 import { NewsletterCTA } from '@/components/newsletter-cta';
+import { logger } from '@/lib/logger';
 
 interface BlogArticle {
   slug: string;
@@ -100,7 +101,7 @@ export default function BlogArticlePage() {
           setState('data');
         }
       } catch {
-        console.warn('API blog indisponible — données démo');
+        logger.warn('API blog indisponible — données démo');
         setArticle({ ...mockArticle, slug: slug || mockArticle.slug });
         setState('data');
       }

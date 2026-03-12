@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { GroupCard } from '@/components/groups/group-card';
 import { AlertCircle, Plus } from 'lucide-react';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { logger } from '@/lib/logger';
 interface Group {
   id: string;
   code: string;
@@ -52,7 +53,7 @@ export default function GroupesPage() {
         const data = (await groupesRes.json()) as Group[];
         setGroupes(data);
       } catch (err: unknown) {
-        console.warn('API groupes indisponible — données démo');
+        logger.warn('API groupes indisponible — données démo');
         // Fallback demo data — 3 groups
         const fallbackGroups: Group[] = [
           {

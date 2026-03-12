@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 // shadcn component imports removed - using pro-panel and pro-btn-* classes
 import { AlertCircle, Loader2, ChevronRight } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 const CampaignWizard = dynamic(
   () => import('@/components/marketing/campaign-wizard').then((m) => m.CampaignWizard),
@@ -63,7 +64,7 @@ export default function CreerCampaignePage() {
       const newCampaign = await res.json() as NewCampaignResponse;
       router.push(`/pro/marketing/${newCampaign.id}`);
     } catch (err: unknown) {
-      console.warn('API /api/marketing/campaigns indisponible — données démo');
+      logger.warn('API /api/marketing/campaigns indisponible — données démo');
       // Fallback demo: simulate successful campaign creation
       const demoCampaignId = `demo-${Date.now()}`;
       setError(null);

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Download } from 'lucide-react';
 import { formatDateTime } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface AuditLog {
   id: string;
   action: string;
@@ -54,7 +55,7 @@ export default function AuditPage() {
           setError('Erreur lors du chargement des logs d\'audit');
         }
       } catch (err: unknown) {
-        console.warn('API audit-logs indisponible — données démo');
+        logger.warn('API audit-logs indisponible — données démo');
         const FALLBACK_DATA: AuditLog[] = [
           {
             id: '1',
@@ -150,7 +151,7 @@ export default function AuditPage() {
         setError('Erreur lors de l\'export des logs');
       }
     } catch (err: unknown) {
-      console.error('Audit export error:', err);
+      logger.error('Audit export error:', err);
       setError('Impossible d\'exporter les logs. Vérifiez votre connexion.');
     }
   };

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, MapPin, Save, Loader, AlertCircle, Upload } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface BusStopForm {
   publicName: string;
   internalName: string;
@@ -68,7 +69,7 @@ export default function NouvelArretPage() {
 
       router.push('/pro/arrets');
     } catch (err: unknown) {
-      console.warn('API /api/pro/bus-stops indisponible — données démo');
+      logger.warn('API /api/pro/bus-stops indisponible — données démo');
       // Fallback demo: simulate successful creation
       setError(null);
       setTimeout(() => {

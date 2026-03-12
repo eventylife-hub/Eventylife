@@ -13,6 +13,7 @@ import {
   User,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 interface Message {
   id: string;
@@ -102,7 +103,7 @@ export default function TicketDetailPage() {
       const data = await response.json();
       setTicket(data);
     } catch {
-      console.warn(`API support/tickets/${ticketId} indisponible — données démo`);
+      logger.warn(`API support/tickets/${ticketId} indisponible — données démo`);
       // Données démo basées sur l'ID
       const demoTickets: Record<string, TicketDetail> = {
         ticket_001: {

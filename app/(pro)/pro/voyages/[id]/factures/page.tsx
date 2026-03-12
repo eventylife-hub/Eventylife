@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { CheckCircle, XCircle, X } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface Travel {
   id: string;
   title: string;
@@ -49,7 +50,7 @@ export default function InvoicesPage() {
 
       setError(null);
     } catch (err: unknown) {
-      console.warn('API factures indisponible — données démo');
+      logger.warn('API factures indisponible — données démo');
       // Fallback demo data: séjour Provence avec 5 réservations
       const demoTravel: Travel = {
         id: travelId,

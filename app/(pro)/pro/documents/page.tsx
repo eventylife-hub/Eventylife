@@ -13,6 +13,7 @@ import {
 import dynamic from 'next/dynamic';
 const FileUpload = dynamic(() => import('@/components/uploads/file-upload').then(m => ({ default: m.FileUpload })), { ssr: false });
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface ProDocument {
   id: string;
   name: string;
@@ -49,7 +50,7 @@ export default function ProDocumentsPage() {
       const data = await response.json();
       setDocuments(data);
     } catch {
-      console.warn('API documents/pro indisponible — données démo');
+      logger.warn('API documents/pro indisponible — données démo');
       setDocuments([
         {
           id: 'doc_001',

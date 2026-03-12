@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice } from '@/lib/utils';
 import { CheckCircle, XCircle, X } from 'lucide-react';
+import { logger } from '@/lib/logger';
 /**
  * Page Pro - Bilan du voyage post-voyage
  * Résumé financier, stats, avis, actions
@@ -35,7 +36,7 @@ export default function TravelBilanPage() {
       setDashboard(data.data);
       setError(null);
     } catch (err: unknown) {
-      console.warn('API /api/post-sale/travel/{id}/dashboard indisponible — données démo');
+      logger.warn('API /api/post-sale/travel/{id}/dashboard indisponible — données démo');
       // Fallback demo data
       const demoDashboard: Record<string, unknown> = {
         travel: {

@@ -15,6 +15,7 @@ import { api } from '@/lib/api';
 import { PriceSummary } from '@/components/checkout/price-summary';
 import { formatPrice } from '@/lib/utils';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
+import { logger } from '@/lib/logger';
 
 const FALLBACK_PAYMENT_URL = 'https://checkout.stripe.demo/pay/demo-session-001';
 export default function CheckoutStep3Page() {
@@ -45,7 +46,7 @@ export default function CheckoutStep3Page() {
         throw new Error('Invalid payment URL received from server');
       }
     } catch (err: unknown) {
-      console.warn('API /checkout/payment indisponible — données démo');
+      logger.warn('API /checkout/payment indisponible — données démo');
       setError(null);
       // SECURITY: Only redirect to hardcoded fallback URL, not user input
       if (isValidRedirectUrl(FALLBACK_PAYMENT_URL)) {

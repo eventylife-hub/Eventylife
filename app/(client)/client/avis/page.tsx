@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface CompletedTravel {
   id: string;
   title: string;
@@ -62,7 +63,7 @@ export default function AvisPage() {
           setCompletedTravels(availableTravels);
         }
       } catch {
-        console.warn('API avis indisponible — données démo');
+        logger.warn('API avis indisponible — données démo');
         setReviews([
           {
             id: 'rev_001',

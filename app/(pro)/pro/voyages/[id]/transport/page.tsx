@@ -13,6 +13,7 @@ const StopMap = dynamic(
   { loading: () => <div className="animate-pulse rounded-xl h-80" style={{ background: 'rgba(0,0,0,0.06)' }} /> }
 );
 import { AlertCircle } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface TransportConfig {
   mode: 'BUS' | 'FLIGHT' | 'MIXED';
   busCompany?: string;
@@ -98,7 +99,7 @@ export default function TransportPage() {
 
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /transport/config indisponible — données démo');
+        logger.warn('API /transport/config indisponible — données démo');
 
         // Fallback demo data
         const demoConfig: TransportConfig = {

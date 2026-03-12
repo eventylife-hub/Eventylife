@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { AlertCircle, CreditCard, Lock, Mail, Phone } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 interface AccountData {
   email: string;
@@ -69,7 +70,7 @@ export default function AccountPage() {
         const invoicesData = await invoicesRes.json() as Record<string, unknown>;
         setInvoices((invoicesData.invoices || []) as Invoice[]);
       } catch {
-        console.warn('API pro/account indisponible — données démo');
+        logger.warn('API pro/account indisponible — données démo');
         setAccount({
           email: 'jean.dupont@voyages-soleil.fr',
           phone: '+33 1 23 45 67 89',

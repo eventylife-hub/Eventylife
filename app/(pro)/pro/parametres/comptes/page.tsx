@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 interface SecuritySettings {
   id: string;
@@ -61,7 +62,7 @@ export default function ComptesPage() {
         setSecurity(secData);
         setApiKeys(Array.isArray(keysData) ? keysData as ApiKey[] : []);
       } catch {
-        console.warn('API sécurité indisponible — données démo');
+        logger.warn('API sécurité indisponible — données démo');
         setSecurity({
           id: 'sec_001',
           proId: 'pro_001',

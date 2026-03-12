@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { CampaignCard } from '@/components/marketing/campaign-card';
 import { AlertCircle, Plus, TrendingUp } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 // Interface pour le dashboard marketing
 interface MarketingDashboard {
   stats?: {
@@ -43,7 +44,7 @@ export default function MarketingPage() {
         const data = await res.json() as MarketingDashboard;
         setDashboard(data);
       } catch {
-        console.warn('API marketing/dashboard indisponible — données démo');
+        logger.warn('API marketing/dashboard indisponible — données démo');
         setDashboard({
           stats: {
             activeCampaigns: 2,

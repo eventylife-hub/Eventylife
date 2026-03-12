@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
+import { logger } from '@/lib/logger';
   BarChart3,
   Users,
   DollarSign,
@@ -273,7 +274,7 @@ export default function VoyageDashboardPage() {
       setDashboard(data);
       setError(null);
     } catch {
-      console.warn('API pro/travels detail indisponible — données démo');
+      logger.warn('API pro/travels detail indisponible — données démo');
       setDashboard({
         id: travelId,
         title: 'Marrakech Express',

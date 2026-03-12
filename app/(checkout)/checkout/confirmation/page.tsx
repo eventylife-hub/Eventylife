@@ -14,6 +14,7 @@ import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 import { formatPrice } from '@/lib/utils';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
+import { logger } from '@/lib/logger';
 
 interface BookingDetails {
   id: string;
@@ -88,7 +89,7 @@ export default function CheckoutConfirmationPage() {
           setError(response.error?.message || 'Erreur lors du chargement des détails');
         }
       } catch (err: unknown) {
-        console.warn('API /checkout indisponible — données démo');
+        logger.warn('API /checkout indisponible — données démo');
         setBooking(FALLBACK_BOOKING);
         setError(null);
       } finally {

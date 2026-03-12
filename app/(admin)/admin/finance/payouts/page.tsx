@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, AlertCircle, RefreshCw, CreditCard, CheckCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 /**
  * Page Versements & PayRun
  * Gestion des versements aux professionnels
@@ -70,7 +71,7 @@ export default function PayoutsPage() {
       const data = await response.json();
       setPayouts(data?.items || data || []);
     } catch (err: unknown) {
-      console.warn('API Versements indisponible — données démo');
+      logger.warn('API Versements indisponible — données démo');
       setPayouts(FALLBACK_PAYOUTS);
       setError(null);
     } finally {

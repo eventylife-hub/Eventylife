@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 interface SupportTicket {
   id: string;
@@ -94,7 +95,7 @@ export default function ProSupportPage() {
       const data = await response.json();
       setTickets(data);
     } catch {
-      console.warn('API support/tickets indisponible — données démo');
+      logger.warn('API support/tickets indisponible — données démo');
       setTickets([
         {
           id: 'ticket_001',

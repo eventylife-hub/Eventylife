@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 /**
  * Page de création d'un groupe de voyage
  * Formulaire avec prévisualisation du groupe créé
@@ -35,7 +36,7 @@ export default function CreerGroupePage() {
         const data = (await res.json() as unknown) as Record<string, unknown>;
         setVoyages(data.travels || []);
       } catch (err: unknown) {
-        console.warn('API travels indisponible — données démo');
+        logger.warn('API travels indisponible — données démo');
         const FALLBACK_TRAVELS = [
           {
             id: 'demo-1',
@@ -113,7 +114,7 @@ export default function CreerGroupePage() {
       const newGroup = (await res.json() as unknown) as Record<string, unknown>;
       router.push(`/client/groupes/${newGroup.id as string}`);
     } catch (err: unknown) {
-      console.warn('API groups indisponible — données démo');
+      logger.warn('API groups indisponible — données démo');
       const demoGroupId = 'demo-group-' + Date.now();
       setError(null);
       setTimeout(() => router.push(`/client/groupes/${demoGroupId}`), 1000);

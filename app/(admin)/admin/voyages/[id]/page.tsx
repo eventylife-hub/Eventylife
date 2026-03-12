@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import Link from 'next/link';
+import { logger } from '@/lib/logger';
 interface TravelDetail {
   id: string;
   title: string;
@@ -80,7 +81,7 @@ export default function AdminVoyageDetailPage() {
         setError('Impossible de charger les détails du voyage');
       }
     } catch (err: unknown) {
-      console.warn('API /admin/travels/{id} indisponible — données démo');
+      logger.warn('API /admin/travels/{id} indisponible — données démo');
       const FALLBACK_DATA: TravelDetail = {
         id: travelId || 'demo-1',
         title: 'Voyage à Barcelone',
@@ -161,7 +162,7 @@ export default function AdminVoyageDetailPage() {
         setToastMessage({ type: 'error', message: 'Erreur lors de la mise à jour du statut' });
       }
     } catch (err: unknown) {
-      console.warn('API /admin/travels/{id}/status indisponible — données démo');
+      logger.warn('API /admin/travels/{id}/status indisponible — données démo');
       if (travel) {
         setTravel({ ...travel, status: newStatus });
         setToastMessage({ type: 'success', message: `Statut mis à jour en "${statusConfig[newStatus].label}"` });

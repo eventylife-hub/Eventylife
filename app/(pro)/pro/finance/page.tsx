@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 // Remove Card, Button, Alert imports
 import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 const FinanceSummary = dynamic(
   () => import('@/components/finance/finance-summary').then((m) => m.FinanceSummary),
@@ -66,7 +67,7 @@ export default function FinanceDashboardPage() {
         const data = await finRes.json() as FinanceDashboard;
         setDashboard(data);
       } catch {
-        console.warn('API finance indisponible — données démo');
+        logger.warn('API finance indisponible — données démo');
         setProProfileId('demo_pro_001');
         setDashboard({
           totalCA: 9908200,

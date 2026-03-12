@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Send, Paperclip, AlertCircle, RefreshCw, Loader } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 const OCEAN = 'var(--pro-ocean)';
 const SUN = 'var(--pro-sun)';
@@ -171,7 +172,7 @@ export default function MessagerieDetail() {
       setConversation(data);
       setMessages(data.messages);
     } catch (err: unknown) {
-      console.warn('API indisponible, utilisation des données de démonstration');
+      logger.warn('API indisponible, utilisation des données de démonstration');
       const demoConv = demoConversations[conversationId];
       if (!demoConv) {
         setError('Conversation non trouvée');
@@ -211,7 +212,7 @@ export default function MessagerieDetail() {
       setMessages((prev) => [...prev, newMsg]);
       setNewMessage('');
     } catch (err: unknown) {
-      console.warn('API indisponible, ajout du message en local');
+      logger.warn('API indisponible, ajout du message en local');
       const optimisticMessage: Message = {
         id: `msg-${Date.now()}`,
         senderId: 'user123',

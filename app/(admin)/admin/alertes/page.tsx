@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { formatDate } from '@/lib/utils';
 import { AlertCircle, AlertTriangle, Info, CheckCircle, XCircle, Clock, Filter, X } from 'lucide-react';
+import { logger } from '@/lib/logger';
 type DataTableColumn<T> = { key: keyof T; label: string; render?: (value: unknown) => React.ReactNode };
 interface Alert {
   id: string;
@@ -78,7 +79,7 @@ export default function AdminAlertesPage() {
         setUnreadCount(data.data?.filter((a: Alert) => !a.resolved).length || 0);
       }
     } catch (_error: unknown) {
-      console.warn('API admin/alerts indisponible — données démo');
+      logger.warn('API admin/alerts indisponible — données démo');
       const FALLBACK_DATA: Alert[] = [
         {
           id: 'alr_1',

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { sanitizeImageUrl } from '@/lib/security/url-validation';
+import { logger } from '@/lib/logger';
 interface Booking {
   id: string;
   status: string;
@@ -86,7 +87,7 @@ export default function ReservationsPage() {
       setCursor((data.nextCursor as string) || null);
       setHasMore(Boolean(data.hasMore));
     } catch (err: unknown) {
-      console.warn('API indisponible, utilisation des données de démonstration');
+      logger.warn('API indisponible, utilisation des données de démonstration');
       setBookings(FALLBACK_BOOKINGS);
       setHasMore(false);
     } finally {

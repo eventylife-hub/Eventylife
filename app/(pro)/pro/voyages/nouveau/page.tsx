@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ChevronRight, ChevronLeft, CheckCircle2, AlertCircle, Save, Plus, Trash2, Image, MapPin, Calendar } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 const FileUpload = dynamic(
   () => import('@/components/uploads/file-upload').then((m) => m.FileUpload),
@@ -151,7 +152,7 @@ export default function CreateTravelPage() {
       }
     } catch (error: unknown) {
       // Fallback: API indisponible — utiliser données démo
-      console.warn('API /api/pro/travels indisponible — données démo');
+      logger.warn('API /api/pro/travels indisponible — données démo');
       setSaveMessage('Mode démo: brouillon sauvegardé localement');
       // Simuler une redirection après 1.5s
       setTimeout(() => {
@@ -178,7 +179,7 @@ export default function CreateTravelPage() {
           router.push(`/pro/voyages/${travel.id}`);
         }
       } catch (error: unknown) {
-        console.warn('API /api/pro/travels indisponible — données démo');
+        logger.warn('API /api/pro/travels indisponible — données démo');
         // Fallback: redirection avec ID démo
         router.push(`/pro/voyages/demo-${Date.now()}`);
       }
@@ -819,7 +820,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
           setError('Impossible de charger vos arrêts');
         }
       } catch (error: unknown) {
-        console.warn('API /api/pro/bus-stops indisponible — données démo');
+        logger.warn('API /api/pro/bus-stops indisponible — données démo');
         // Fallback: données démo pour les arrêts de bus
         const demoStops: BusStopFromAPI[] = [
           {

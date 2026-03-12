@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface TravelGroup {
   id: string;
   name: string;
@@ -34,7 +35,7 @@ export default function GroupesPage() {
         const items = (data.items || data || []) as TravelGroup[];
         setGroups(items);
       } catch (err: unknown) {
-        console.warn('API indisponible, utilisation des données de démonstration');
+        logger.warn('API indisponible, utilisation des données de démonstration');
         setGroups([
           {
             id: 'grp_001', name: 'Les Voyageurs de Bordeaux', status: 'ACTIVE',

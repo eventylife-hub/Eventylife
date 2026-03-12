@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Download, ChevronLeft, FileText } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface StatementTrip {
   tripName: string;
   startDate: string;
@@ -88,7 +89,7 @@ export default function ReleveMensuelPage() {
         const data = await res.json() as MonthlyStatement;
         setStatement(data);
       } catch {
-        console.warn('API pro/revenues/releve indisponible — données démo');
+        logger.warn('API pro/revenues/releve indisponible — données démo');
         // Fallback démo réaliste
         setStatement({
           month: currentMonth,

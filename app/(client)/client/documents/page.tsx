@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Document {
   id: string;
   name: string;
@@ -62,7 +63,7 @@ export default function ClientDocumentsPage() {
         }
       }
     } catch {
-      console.warn('API documents indisponible — données démo');
+      logger.warn('API documents indisponible — données démo');
       setDocuments([
         {
           id: 'doc_001',

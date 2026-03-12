@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface BookingFeedback {
   id: string;
   reference: string;
@@ -58,7 +59,7 @@ export default function FeedbackPage() {
       setBooking(data.data);
       setError(null);
     } catch (err: unknown) {
-      console.warn('API bookings indisponible — données démo');
+      logger.warn('API bookings indisponible — données démo');
       const FALLBACK_BOOKING: BookingFeedback = {
         id: bookingId,
         reference: 'RES-' + bookingId.substring(0, 8).toUpperCase(),
@@ -110,7 +111,7 @@ export default function FeedbackPage() {
         router.push(`/client/reservations/${bookingId}`);
       }, 1500);
     } catch (err: unknown) {
-      console.warn('API post-sale/feedback indisponible — données démo');
+      logger.warn('API post-sale/feedback indisponible — données démo');
       setToast({ type: 'success', message: 'Merci pour votre avis (démo) !' });
       setTimeout(() => {
         router.push(`/client/reservations/${bookingId}`);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AlertCircle, Loader2, Copy, CheckCircle } from 'lucide-react';
+import { logger } from '@/lib/logger';
 /**
  * Page d'invitation des membres au groupe
  * Formulaire d'invitation et affichage des invitations en attente
@@ -36,7 +37,7 @@ export default function InviterPage() {
         const data = (await res.json()) as Record<string, unknown>;
         setGroupe(data);
       } catch (err: unknown) {
-        console.warn('API groups/stats indisponible — données démo');
+        logger.warn('API groups/stats indisponible — données démo');
         const FALLBACK_GROUP = {
           id: groupId,
           name: 'Groupe de voyage',
@@ -99,7 +100,7 @@ export default function InviterPage() {
         setGroupe(data);
       }
     } catch (err: unknown) {
-      console.warn('API groups/invite indisponible — données démo');
+      logger.warn('API groups/invite indisponible — données démo');
       setSuccess(`Invitation envoyée à ${formData.email} (démo)`);
       setFormData({ email: '', message: '' });
       setError(null);

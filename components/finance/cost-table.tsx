@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Trash2, Plus } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface Cost {
   id: string;
@@ -61,7 +62,7 @@ export function CostTable({
       setAdding(false);
       onUpdate();
     } catch (err: unknown) {
-      console.error(err);
+      logger.error(err);
     }
   };
 
@@ -76,7 +77,7 @@ export function CostTable({
       if (!res.ok) throw new Error('Erreur suppression');
       onUpdate();
     } catch (err: unknown) {
-      console.error(err);
+      logger.error(err);
     }
   };
 

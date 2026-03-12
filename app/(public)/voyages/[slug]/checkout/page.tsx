@@ -26,6 +26,7 @@ import { PriceSummary } from '@/components/checkout/price-summary';
 import { HoldTimer } from '@/components/checkout/hold-timer';
 import { ROUTES } from '@/lib/constants';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 type LoadState = 'loading' | 'error' | 'empty' | 'data';
 
@@ -175,7 +176,7 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
         setStoreTravel(data);
         setLoadState('data');
       } catch {
-        console.warn('API voyage indisponible — données démo');
+        logger.warn('API voyage indisponible — données démo');
         const fallbackTravel: Travel = {
           id: 'voyage-demo-' + params.slug,
           title: 'Îles Éoliennes & Baroque Sicilien',

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Copy, QrCode, TrendingUp } from 'lucide-react';
 import { sanitizeImageUrl } from '@/lib/security/url-validation';
+import { logger } from '@/lib/logger';
 
 interface Trip {
   id: string;
@@ -80,7 +81,7 @@ export default function QuickSellPage() {
           setSelectedTrip(tripsData[0].id);
         }
       } catch {
-        console.warn('API pro/quick-sell/trips indisponible — données démo');
+        logger.warn('API pro/quick-sell/trips indisponible — données démo');
         const demoTrips: Trip[] = [
           { id: '1', name: 'Marrakech Express', startDate: '2026-05-15', endDate: '2026-05-22', status: 'SALES_OPEN' },
           { id: '3', name: 'Barcelone & Gaudí', startDate: '2026-06-20', endDate: '2026-06-25', status: 'SALES_OPEN' },
@@ -164,7 +165,7 @@ export default function QuickSellPage() {
       setSales((data.sales || []) as Sale[]);
     } catch {
       // En mode démo, générer un lien fictif
-      console.warn('API quick-sell/generate-link indisponible — lien démo');
+      logger.warn('API quick-sell/generate-link indisponible — lien démo');
       setSellerLink({
         id: 'link_gen',
         code: sellerCode,

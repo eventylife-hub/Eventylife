@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { HotelBlockCard } from '@/components/rooming/hotel-block-card';
 import { AlertCircle } from 'lucide-react';
+import { logger } from '@/lib/logger';
 /**
  * Page Gestion Blocs Hôtel - Négociation prix et disponibilités
  *
@@ -46,7 +47,7 @@ export default function HotelBlocksPage() {
         setBlocks(data);
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /api/rooming/hotel-blocks indisponible — données démo');
+        logger.warn('API /api/rooming/hotel-blocks indisponible — données démo');
         // Fallback demo data
         const demoBlocks: Record<string, unknown>[] = [
           {

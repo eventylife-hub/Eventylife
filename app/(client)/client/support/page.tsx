@@ -8,6 +8,7 @@
 
 import { useEffect, useState } from 'react';
 import { formatDateTime } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Ticket {
   id: string;
   subject: string;
@@ -99,7 +100,7 @@ export default function SupportPage() {
       setTickets(data?.items || data as Ticket[]);
       setState('data');
     } catch (err: unknown) {
-      console.warn('API indisponible, utilisation des données de démonstration');
+      logger.warn('API indisponible, utilisation des données de démonstration');
       setTickets([
         {
           id: 'tkt_001', subject: 'Question sur le ramassage porte-à-porte',

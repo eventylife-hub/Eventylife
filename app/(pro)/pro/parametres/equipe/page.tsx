@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { logger } from '@/lib/logger';
 
 interface TeamMember {
   id: string;
@@ -54,7 +55,7 @@ export default function EquipePage() {
         const data = await res.json() as TeamSettings;
         setTeam(data);
       } catch {
-        console.warn('API équipe indisponible — données démo');
+        logger.warn('API équipe indisponible — données démo');
         setTeam({
           id: 'team_001',
           proId: 'pro_001',

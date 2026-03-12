@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { BarChart, Users, TrendingUp, AlertCircle, RefreshCw, Calendar, DollarSign, Star } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 const SUN = 'var(--pro-sun)';
 const OCEAN = 'var(--pro-ocean)';
 const DARK = '#0A1628';
@@ -68,7 +69,7 @@ export default function ProDashboard() {
         recentActivity: data.recentActivity ?? [],
       });
     } catch (err: unknown) {
-      console.warn('API indisponible, utilisation des données de démonstration');
+      logger.warn('API indisponible, utilisation des données de démonstration');
       setStats({
         activeVoyages: 4,
         totalBookings: 127,

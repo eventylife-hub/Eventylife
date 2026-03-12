@@ -6,6 +6,7 @@ import { StatsCard } from '@/components/admin/stats-card';
 import { TrendingUp, Users, Target, DollarSign, CheckCircle, XCircle, Pause, AlertCircle, RefreshCw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { AdminPageHeader } from '@/components/admin/admin-page-header';
+import { logger } from '@/lib/logger';
 interface Campaign {
   id: string;
   name: string;
@@ -76,7 +77,7 @@ export default function AdminMarketingPage() {
       const data = await response.json();
       setStats(data);
     } catch (err: unknown) {
-      console.warn('API /api/admin/marketing indisponible — données démo');
+      logger.warn('API /api/admin/marketing indisponible — données démo');
       setStats(FALLBACK_STATS);
       setError(null);
     } finally {
@@ -105,7 +106,7 @@ export default function AdminMarketingPage() {
         setError('Erreur lors de la sauvegarde des paramètres d\'attribution');
       }
     } catch (err: unknown) {
-      console.error('Attribution settings save error:', err);
+      logger.error('Attribution settings save error:', err);
       setError('Erreur lors de la sauvegarde des paramètres');
     } finally {
       setSavingAttribution(false);

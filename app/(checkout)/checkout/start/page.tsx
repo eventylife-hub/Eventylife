@@ -12,6 +12,7 @@ import { useCheckoutStore } from '@/lib/stores/checkout-store';
 import { useAuth } from '@/lib/hooks/use-auth';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
+import { logger } from '@/lib/logger';
 
 const FALLBACK_BOOKING_GROUP_ID = 'bg-demo-2026-001';
 export default function CheckoutStartPage() {
@@ -171,7 +172,7 @@ export default function CheckoutStartPage() {
       // Rediriger vers l'étape 1 (sélection de chambres)
       router.push(ROUTES.CHECKOUT.STEP_1);
     } catch (err: unknown) {
-      console.warn('API /checkout/initiate indisponible — données démo');
+      logger.warn('API /checkout/initiate indisponible — données démo');
       setBookingGroupId(FALLBACK_BOOKING_GROUP_ID);
       setCurrentStep(1);
       setError(null);

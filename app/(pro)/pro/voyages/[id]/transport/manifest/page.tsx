@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Download, AlertCircle } from 'lucide-react';
+import { logger } from '@/lib/logger';
 /**
  * Page Manifest Passagers - Tableau des passagers par arrêt
  *
@@ -36,7 +37,7 @@ export default function ManifestPage() {
         setManifest(data);
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /api/transport/manifest indisponible — données démo');
+        logger.warn('API /api/transport/manifest indisponible — données démo');
         // Fallback demo data
         const demoManifest: Record<string, unknown>[] = [
           {

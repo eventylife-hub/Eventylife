@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDateTime, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Payment {
   id: string;
   amount: number;
@@ -51,7 +52,7 @@ export default function PaiementsPage() {
         const data = await res.json() as Record<string, unknown>;
         setPayments((data.items || data || []) as Payment[]);
       } catch {
-        console.warn('API paiements indisponible — données démo');
+        logger.warn('API paiements indisponible — données démo');
         setPayments([
           {
             id: 'pay_001',

@@ -11,6 +11,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useToast } from '@/lib/stores/ui-store';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Travel {
   id: string;
   title: string;
@@ -75,7 +76,7 @@ export default function ProPublicPage() {
         setPro(data);
         setState(data.travels?.length > 0 ? 'data' : 'empty');
       } catch (err: unknown) {
-        console.warn('API pro indisponible — données démo');
+        logger.warn('API pro indisponible — données démo');
         // Fallback demo data
         const fallbackPro: Pro = {
           slug: proSlug,

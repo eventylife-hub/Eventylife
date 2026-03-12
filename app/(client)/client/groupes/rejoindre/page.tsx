@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import { logger } from '@/lib/logger';
 /**
  * Page pour rejoindre un groupe via code d'invitation
  * Affiche les détails du groupe avant confirmation
@@ -42,7 +43,7 @@ export default function RejoindrePage() {
       const data = (await res.json() as unknown) as Record<string, unknown>;
       setGroupePreview(data);
     } catch (err: unknown) {
-      console.warn('API groups/code indisponible — données démo');
+      logger.warn('API groups/code indisponible — données démo');
       const FALLBACK_GROUP = {
         id: 'demo-group-' + code,
         name: 'Groupe ' + code,
@@ -82,7 +83,7 @@ export default function RejoindrePage() {
 
       router.push(`/client/groupes/${groupePreview.id}`);
     } catch (err: unknown) {
-      console.warn('API groups/join-by-code indisponible — données démo');
+      logger.warn('API groups/join-by-code indisponible — données démo');
       setError(null);
       setTimeout(() => router.push(`/client/groupes/${groupePreview?.id || 'demo'}`), 1000);
     } finally {

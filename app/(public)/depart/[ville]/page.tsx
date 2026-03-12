@@ -10,6 +10,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { NewsletterCTA } from '@/components/newsletter-cta';
+import { logger } from '@/lib/logger';
 
 /* ─── Types ─── */
 interface Travel {
@@ -170,7 +171,7 @@ export default function DepartVillePage() {
           setTravels(DEMO_TRAVELS);
         }
       } catch {
-        console.warn('API voyages indisponible — données démo');
+        logger.warn('API voyages indisponible — données démo');
         setTravels(DEMO_TRAVELS);
       } finally {
         setLoading(false);

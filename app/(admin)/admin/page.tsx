@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { logger } from '@/lib/logger';
 /* ────────────────────────────── Types ────────────────────────────── */
 interface DashboardStats {
   totalUsers: number;
@@ -120,7 +121,7 @@ export default function AdminDashboardPage() {
         setStats(null);
       }
     } catch {
-      console.warn('API /admin/dashboard indisponible — données démo');
+      logger.warn('API /admin/dashboard indisponible — données démo');
       const FALLBACK_DATA: DashboardStats = {
         totalUsers: 247,
         userGrowth: 12,

@@ -17,6 +17,7 @@ import { formatPrice } from '@/lib/utils';
 import { api } from '@/lib/api';
 import { ROUTES } from '@/lib/constants';
 import { CheckoutProgress } from '@/components/checkout/CheckoutProgress';
+import { logger } from '@/lib/logger';
 
 interface ParticipantForm {
   roomBookingId: string;
@@ -99,10 +100,10 @@ export default function CheckoutStep2Page() {
           setBusStops(response.data);
         } else {
           // Garder les arrêts vides en cas d'erreur, ne pas bloquer le formulaire
-          console.warn('Erreur lors du chargement des arrêts:', response.error?.message);
+          logger.warn('Erreur lors du chargement des arrêts:', response.error?.message);
         }
       } catch (err: unknown) {
-        console.warn('API /checkout/bus-stops indisponible — données démo');
+        logger.warn('API /checkout/bus-stops indisponible — données démo');
         setBusStops(FALLBACK_BUS_STOPS);
       } finally {
         setLoadingBusStops(false);

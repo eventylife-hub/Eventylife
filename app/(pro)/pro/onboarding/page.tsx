@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useProStore } from '@/lib/stores/pro-store';
 import { ChevronRight, CheckCircle2, Clock, Shield, FileText, AlertCircle } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { logger } from '@/lib/logger';
 const FileUpload = dynamic(() => import('@/components/uploads/file-upload').then(m => ({ default: m.FileUpload })), { ssr: false });
 const STEPS = [
   { number: 1, label: 'Profil', description: 'Informations personnelles' },
@@ -115,7 +116,7 @@ export default function OnboardingPage() {
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue';
       setError(errorMsg);
-      console.error('Erreur submission étape:', err);
+      logger.error('Erreur submission étape:', err);
     } finally {
       setLoading(false);
     }
@@ -140,7 +141,7 @@ export default function OnboardingPage() {
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : 'Une erreur est survenue';
       setError(errorMsg);
-      console.error('Erreur completion onboarding:', err);
+      logger.error('Erreur completion onboarding:', err);
     } finally {
       setLoading(false);
     }

@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 import type { ProProfile, Travel, BusStop } from '@/lib/types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -163,7 +164,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ proProfile: data });
         } catch {
-          console.warn('API pro/profile indisponible — données démo');
+          logger.warn('API pro/profile indisponible — données démo');
           set({
             proProfile: {
               id: 'pro_demo_001',
@@ -189,7 +190,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ onboardingStatus: data });
         } catch {
-          console.warn('API pro/onboarding indisponible — données démo');
+          logger.warn('API pro/onboarding indisponible — données démo');
           set({
             onboardingStatus: {
               step1_profile: true,
@@ -223,7 +224,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ travels: (data as Record<string, unknown>).data as Travel[] || [] });
         } catch {
-          console.warn('API pro/travels indisponible — données démo');
+          logger.warn('API pro/travels indisponible — données démo');
           set({
             travels: [
               { id: '1', slug: 'marrakech-express', title: 'Marrakech Express', destination: 'Marrakech, Maroc', startDate: '2026-05-15', endDate: '2026-05-22', pricePerPerson: 89900, image: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=600&h=400&fit=crop', rating: 4.8, reviews: 124, daysCount: 7, capacity: 50, bookings: 38, status: 'SALES_OPEN', transport: 'BUS', pickupCity: 'Bordeaux' },
@@ -253,7 +254,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ busStops: (data as Record<string, unknown>).data as BusStop[] || [] });
         } catch {
-          console.warn('API pro/bus-stops indisponible — données démo');
+          logger.warn('API pro/bus-stops indisponible — données démo');
           set({
             busStops: [
               { id: 'bs_001', ownerUserId: 'user_demo', type: 'PICKUP_DEPARTURE', status: 'VALIDATED', publicName: 'Gare Saint-Jean', addressLine: '1 Rue Charles Domercq', city: 'Bordeaux', postalCode: '33800', country: 'FR', lat: 44.8256, lng: -0.5561, createdAt: '2025-12-01T10:00:00Z', updatedAt: '2025-12-01T10:00:00Z' },
@@ -275,7 +276,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ formationModules: (data as FormationModule[]) || [] });
         } catch {
-          console.warn('API pro/formation indisponible — données démo');
+          logger.warn('API pro/formation indisponible — données démo');
           set({
             formationModules: [
               { id: 'mod_001', title: 'Bases du voyage de groupe', description: 'Les fondamentaux pour organiser un voyage de groupe réussi', duration: 45, icon: '🎓' },
@@ -304,7 +305,7 @@ export const useProStore = create<ProStore>()(
             },
           });
         } catch {
-          console.warn('API pro/formation/progress indisponible — données démo');
+          logger.warn('API pro/formation/progress indisponible — données démo');
           set({
             formationProgress: {
               completedModules: ['mod_001', 'mod_002'],
@@ -325,7 +326,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ team: (data as TeamMember[]) || [] });
         } catch {
-          console.warn('API pro/team indisponible — données démo');
+          logger.warn('API pro/team indisponible — données démo');
           set({
             team: [
               { id: 'tm_001', email: 'jean.dupont@voyages-soleil.fr', name: 'Jean Dupont', role: 'OWNER', createdAt: '2025-09-01T10:00:00Z' },
@@ -347,7 +348,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ financials: data as FinancialData });
         } catch {
-          console.warn('API pro/financials indisponible — données démo');
+          logger.warn('API pro/financials indisponible — données démo');
           set({
             financials: {
               totalRevenue: 9908200,
@@ -370,7 +371,7 @@ export const useProStore = create<ProStore>()(
           const data = await response.json();
           set({ marketingCampaigns: (data as MarketingCampaign[]) || [] });
         } catch {
-          console.warn('API pro/marketing indisponible — données démo');
+          logger.warn('API pro/marketing indisponible — données démo');
           set({
             marketingCampaigns: [
               { id: 'camp_001', name: 'Lancement Été 2026', budget: 250000, spent: 125000, status: 'ACTIVE' },

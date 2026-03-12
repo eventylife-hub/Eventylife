@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import {
+import { logger } from '@/lib/logger';
   Download,
   Search,
   Filter,
@@ -100,7 +101,7 @@ export default function ReservationsPage() {
         setStats(data.stats as ReservationStats || stats);
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /api/pro/travels/${travelId}/reservations indisponible — données démo');
+        logger.warn('API /api/pro/travels/${travelId}/reservations indisponible — données démo');
         const demoReservations: Reservation[] = [
           {
             id: 'res-001',

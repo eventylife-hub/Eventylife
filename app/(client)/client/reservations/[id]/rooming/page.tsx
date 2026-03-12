@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface CoOccupant {
   id: string;
   firstName: string;
@@ -95,7 +96,7 @@ export default function RoomingPage() {
         });
         setState('data');
       } catch (err: unknown) {
-        console.warn('API client/reservations/rooming indisponible — données démo');
+        logger.warn('API client/reservations/rooming indisponible — données démo');
         const FALLBACK_ROOMING: RoomingData = {
           id: 'room-' + reservationId,
           roomType: 'Double',
@@ -163,7 +164,7 @@ export default function RoomingPage() {
       setPreferencesMessage({ type: 'success', text: 'Préférences sauvegardées avec succès !' });
       setTimeout(() => setPreferencesMessage(null), 5000);
     } catch (err: unknown) {
-      console.warn('API client/reservations/rooming/preferences indisponible — données démo');
+      logger.warn('API client/reservations/rooming/preferences indisponible — données démo');
       if (rooming) {
         setRooming({
           ...rooming,
@@ -203,7 +204,7 @@ export default function RoomingPage() {
       setDocumentsMessage({ type: 'success', text: 'Documents uploadés avec succès !' });
       setTimeout(() => setDocumentsMessage(null), 5000);
     } catch (err: unknown) {
-      console.warn('API client/reservations/rooming/documents indisponible — données démo');
+      logger.warn('API client/reservations/rooming/documents indisponible — données démo');
       setDocuments([]);
       setDocumentsMessage({ type: 'success', text: 'Documents uploadés (démo) !' });
       setTimeout(() => setDocumentsMessage(null), 5000);

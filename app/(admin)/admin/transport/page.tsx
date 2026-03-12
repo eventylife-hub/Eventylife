@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
 import { Download, Bus, Plane, Package, AlertCircle } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface TransportTrip {
   id: string;
   tripName: string;
@@ -109,7 +110,7 @@ export default function TransportPage() {
           setError('Erreur lors du chargement des transports');
         }
       } catch (err: unknown) {
-        console.warn('API Transport indisponible — données démo');
+        logger.warn('API Transport indisponible — données démo');
         setTrips(FALLBACK_TRANSPORT_TRIPS);
         setError(null);
       } finally {
@@ -131,7 +132,7 @@ export default function TransportPage() {
           setStats(data);
         }
       } catch (err: unknown) {
-        console.warn('API Stats Transport indisponible — données démo');
+        logger.warn('API Stats Transport indisponible — données démo');
         setStats(FALLBACK_TRANSPORT_STATS);
       }
     };
@@ -213,7 +214,7 @@ export default function TransportPage() {
         setError('Erreur lors de la génération du manifeste');
       }
     } catch (err: unknown) {
-      console.error('Manifest generation error:', err);
+      logger.error('Manifest generation error:', err);
       setError('Impossible de générer le manifeste. Vérifiez votre connexion.');
     } finally {
       setGeneratingManifest(null);

@@ -8,6 +8,7 @@
 
 import { useEffect, useState } from 'react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Transaction {
   id: string;
   type: 'CREDIT' | 'DEBIT' | 'REFUND' | 'VOUCHER';
@@ -73,7 +74,7 @@ export default function WalletPage() {
         setWallet(data);
         setState('data');
       } catch (err: unknown) {
-        console.warn('API indisponible, utilisation des données de démonstration');
+        logger.warn('API indisponible, utilisation des données de démonstration');
         setWallet({
           balanceCents: 5000,
           totalCreditsCents: 5000,

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Download, Wallet, TrendingUp, AlertCircle, RefreshCw, CreditCard, RotateCcw, Settings, FileText, Zap } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 /**
  * PATCH LOT 8 — G1 : Page Finance corrigée
  *
@@ -117,7 +118,7 @@ export default function FinancePage() {
         setRefunds(refundsData.items || refundsData || []);
       }
     } catch (err: unknown) {
-      console.warn('API Finance indisponible — données démo');
+      logger.warn('API Finance indisponible — données démo');
       setStats(FALLBACK_STATS);
       setPayments(FALLBACK_PAYMENTS);
       setRefunds(FALLBACK_REFUNDS);

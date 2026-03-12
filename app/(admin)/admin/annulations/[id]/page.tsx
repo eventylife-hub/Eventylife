@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface CancellationDetail {
   id: string;
   bookingRef: string;
@@ -103,7 +104,7 @@ export default function CancellationDetailPage() {
       setCancellation(data.data);
       setError(null);
     } catch (err: unknown) {
-      console.warn('API Détail annulation indisponible — données démo');
+      logger.warn('API Détail annulation indisponible — données démo');
       setCancellation(FALLBACK_CANCELLATION_DETAIL);
       setError(null);
     } finally {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 interface BillingSettings {
   id: string;
@@ -53,7 +54,7 @@ export default function FacturationPage() {
         const data = await res.json() as BillingSettings;
         setSettings(data);
       } catch {
-        console.warn('API facturation indisponible — données démo');
+        logger.warn('API facturation indisponible — données démo');
         setSettings({
           id: 'bill_001',
           proId: 'pro_001',

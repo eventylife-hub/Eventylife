@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface ProfileStats {
   totalBookings: number;
   confirmedBookings: number;
@@ -87,7 +88,7 @@ export default function ClientDashboardPage() {
           nextTravel,
         });
       } catch (err: unknown) {
-        console.warn('API indisponible, utilisation des données de démonstration');
+        logger.warn('API indisponible, utilisation des données de démonstration');
         setData(FALLBACK_DATA);
       } finally {
         setLoading(false);

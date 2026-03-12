@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
 import { Download, Home, Users, Sofa, AlertCircle, X } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Room {
   id: string;
   number: string;
@@ -91,7 +92,7 @@ export default function AdminRoomingPage() {
           }
         }
       } catch (_error: unknown) {
-        console.warn('API /api/admin/rooming indisponible — données démo');
+        logger.warn('API /api/admin/rooming indisponible — données démo');
         setRooming(FALLBACK_DATA);
         setError(null);
       } finally {

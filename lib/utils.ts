@@ -177,3 +177,137 @@ export function ellipsis(str: string, start: number, end: number): string {
 export function formatNumber(num: number): string {
   return new Intl.NumberFormat('fr-FR').format(num);
 }
+
+// ============= FORMATTERS SUPPLÉMENTAIRES =============
+
+/**
+ * Formate une durée en jours
+ */
+export function formatDuration(days: number): string {
+  return `${days} jour${days > 1 ? 's' : ''}`;
+}
+
+/**
+ * Formate un nom (prénom + nom)
+ */
+export function formatName(firstName: string, lastName: string): string {
+  return `${firstName} ${lastName}`;
+}
+
+/**
+ * Formate un téléphone français
+ * "0612345678" → "06 12 34 56 78"
+ */
+export function formatPhone(phone: string): string {
+  const cleaned = phone.replace(/\D/g, '');
+  if (cleaned.length !== 10) return phone;
+  return cleaned.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+}
+
+/**
+ * Valide un numéro de téléphone français
+ */
+export function isValidPhone(phone: string): boolean {
+  const cleaned = phone.replace(/\D/g, '');
+  return cleaned.length === 10 && cleaned.startsWith('0');
+}
+
+/**
+ * Formate un statut en français
+ */
+export function formatStatus(status: string): string {
+  const statusMap: Record<string, string> = {
+    PENDING: 'En attente',
+    CONFIRMED: 'Confirmé',
+    COMPLETED: 'Terminé',
+    CANCELLED: 'Annulé',
+    PROCESSING: 'En cours de traitement',
+    FAILED: 'Échoué',
+    DRAFT: 'Brouillon',
+    PUBLISHED: 'Publié',
+    IN_PROGRESS: 'En cours',
+    EXPIRED: 'Expiré',
+    HOLD: 'Bloqué',
+    REFUNDED: 'Remboursé',
+    PARTIALLY_REFUNDED: 'Partiellement remboursé',
+    ACTIVE: 'Actif',
+    APPROVED: 'Approuvé',
+    REJECTED: 'Rejeté',
+  };
+  return statusMap[status] || status;
+}
+
+// ============= CONVERSIONS MONÉTAIRES =============
+
+/**
+ * Convertit des centimes en euros
+ */
+export function centimesToEuros(centimes: number): number {
+  return centimes / 100;
+}
+
+/**
+ * Convertit des euros en centimes (arrondi entier)
+ */
+export function eurosToCentimes(euros: number): number {
+  return Math.round(euros * 100);
+}
+
+/**
+ * Arrondit un nombre à 2 décimales
+ */
+export function roundTo2(num: number): number {
+  return Math.round(num * 100) / 100;
+}
+
+// ============= DATE UTILITIES =============
+
+/**
+ * Ajoute des jours à une date
+ */
+export function addDays(date: Date, days: number): Date {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+/**
+ * Calcule la différence en jours entre deux dates
+ */
+export function daysBetween(date1: Date, date2: Date): number {
+  const oneDay = 24 * 60 * 60 * 1000;
+  return Math.round(Math.abs((date1.getTime() - date2.getTime()) / oneDay));
+}
+
+/**
+ * Vérifie si une date est passée
+ */
+export function isPastDate(dateString: string): boolean {
+  return new Date(dateString) < new Date();
+}
+
+// ============= LOCAL STORAGE (SSR-safe) =============
+
+export function getStorageItem<T>(key: string, defaultValue?: T): T | null {
+  if (typeof window === 'undefined') return defaultValue || null;
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : defaultValue || null;
+  } catch {
+    return defaultValue || null;
+  }
+}
+
+export function setStorageItem(key: string, value: unknown): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Silently fail — localStorage plein ou indisponible
+  }
+}
+
+export function removeStorageItem(key: string): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(key);
+}

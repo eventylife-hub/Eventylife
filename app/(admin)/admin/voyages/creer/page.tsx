@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 type TransportMode = 'BUS' | 'FLIGHT' | 'MIXED';
 type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -273,7 +274,7 @@ export default function CreateTripPage() {
       const data = await response.json() as { id: string };
       window.location.href = `/admin/voyages/${data.id}`;
     } catch (err: unknown) {
-      console.warn('API /admin/travels (POST) indisponible — mode démo');
+      logger.warn('API /admin/travels (POST) indisponible — mode démo');
       const demoId = `demo-${Date.now()}`;
       setSubmitError(null);
       setIsSubmitting(false);

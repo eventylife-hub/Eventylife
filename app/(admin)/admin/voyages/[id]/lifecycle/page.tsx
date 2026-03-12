@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface Travel {
   id: string;
   title: string;
@@ -70,7 +71,7 @@ export default function TravelLifecyclePage() {
 
       setError(null);
     } catch (err: unknown) {
-      console.warn('API /travels/{id} indisponible — données démo');
+      logger.warn('API /travels/{id} indisponible — données démo');
       const FALLBACK_TRAVEL: Travel = {
         id: travelId || 'demo-1',
         title: 'Voyage à Barcelone',

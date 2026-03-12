@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { ExportCta } from '@/components/admin/export-cta';
+import { logger } from '@/lib/logger';
 interface Cancellation {
   id: string;
   bookingRef: string;
@@ -124,7 +125,7 @@ export default function CancellationsPage() {
       setCancellations(data.data || []);
       setError(null);
     } catch (err: unknown) {
-      console.warn('API Annulations indisponible — données démo');
+      logger.warn('API Annulations indisponible — données démo');
       let demoData: Cancellation[] = [];
       if (filter === 'PENDING') {
         demoData = FALLBACK_CANCELLATIONS_PENDING;

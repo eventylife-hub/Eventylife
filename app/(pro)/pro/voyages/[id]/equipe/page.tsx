@@ -14,6 +14,7 @@ import {
   Briefcase,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 /**
  * Page: Pro Voyage Équipe (/pro/voyages/[id]/equipe)
  * 
@@ -113,7 +114,7 @@ export default function EquipePage() {
         setPrerequisites(data.prerequisites || []);
         setError(null);
       } catch (err: unknown) {
-        console.warn('API /api/pro/travels/{id}/team indisponible — données démo');
+        logger.warn('API /api/pro/travels/{id}/team indisponible — données démo');
         // Fallback demo data
         const demoTeam: TeamMember[] = [
           {

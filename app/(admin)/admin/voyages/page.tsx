@@ -7,6 +7,7 @@ const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').
 import { ExportCta } from '@/components/admin/export-cta';
 import { formatDate, formatPrice } from '@/lib/utils';
 import { Search, RefreshCw } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface Travel {
   id: string;
   title: string;
@@ -72,7 +73,7 @@ export default function VoyagesPage() {
         setError('Erreur lors du chargement des voyages');
       }
     } catch (_error: unknown) {
-      console.warn('API /admin/travels indisponible — données démo');
+      logger.warn('API /admin/travels indisponible — données démo');
       const FALLBACK_DATA: Travel[] = [
         {
           id: 'demo-1',

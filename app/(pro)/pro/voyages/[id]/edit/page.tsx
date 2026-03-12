@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { ChevronRight, ChevronLeft, CheckCircle2, AlertCircle, Save, Plus, Trash2, Image, MapPin, Calendar } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { formatPrice } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 
 const FileUpload = dynamic(
   () => import('@/components/uploads/file-upload').then((m) => m.FileUpload),
@@ -193,7 +194,7 @@ export default function EditTravelPage() {
           setFormData(DEMO_TRAVEL_DATA);
         }
       } catch (error: unknown) {
-        console.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
+        logger.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
         // Fallback: utiliser les données démo
         setFormData(DEMO_TRAVEL_DATA);
       } finally {
@@ -221,7 +222,7 @@ export default function EditTravelPage() {
         setSaveMessage(error?.message || 'Erreur lors de la sauvegarde. Veuillez réessayer.');
       }
     } catch (error: unknown) {
-      console.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
+      logger.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
       // Fallback: afficher un message de succès local
       setSaveMessage('Mode démo: modifications sauvegardées localement');
     } finally {
@@ -243,7 +244,7 @@ export default function EditTravelPage() {
           router.push(`/pro/voyages/${travelId}`);
         }
       } catch (error: unknown) {
-        console.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
+        logger.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
         // Fallback: retour à la page du voyage
         router.push(`/pro/voyages/${travelId}`);
       }
@@ -852,7 +853,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
           setError('Impossible de charger vos arrêts');
         }
       } catch (error: unknown) {
-        console.warn('API /api/pro/bus-stops indisponible — données démo');
+        logger.warn('API /api/pro/bus-stops indisponible — données démo');
         const demoStops: BusStopFromAPI[] = [
           {
             id: 'demo-pickup-paris',

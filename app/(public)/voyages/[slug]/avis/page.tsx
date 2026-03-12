@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
+import { logger } from '@/lib/logger';
 interface Review {
   id: string;
   userId: string;
@@ -41,7 +42,7 @@ export default function TravelReviewsPage() {
         setReviews(data.reviews || []);
         setTravel(data.travel);
       } catch (err: unknown) {
-        console.warn('API avis indisponible — données démo');
+        logger.warn('API avis indisponible — données démo');
         // Fallback demo data — 5 reviews
         const fallbackReviews: Review[] = [
           {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { AlertCircle, Search, X, Clock, XCircle } from 'lucide-react';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Booking {
   id: string;
   reference: string;
@@ -65,7 +66,7 @@ export default function AdminBookingsPage() {
         setError('Erreur lors du chargement des réservations');
       }
     } catch (_error: unknown) {
-      console.warn('API /admin/bookings indisponible — données démo');
+      logger.warn('API /admin/bookings indisponible — données démo');
       const FALLBACK_DATA: Booking[] = [
         {
           id: 'bk-demo-1',

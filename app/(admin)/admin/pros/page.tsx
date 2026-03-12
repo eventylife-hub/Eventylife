@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import dynamic from 'next/dynamic';
 const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').then(m => ({ default: m.ApprovalModal })), { ssr: false });
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface ProProfile {
   id: string;
   firstName: string;
@@ -51,7 +52,7 @@ export default function ProsPage() {
           setError('Erreur lors du chargement des profils Pro');
         }
       } catch (err: unknown) {
-        console.warn('API /admin/pros indisponible — données démo');
+        logger.warn('API /admin/pros indisponible — données démo');
         const FALLBACK_DATA: ProProfile[] = [
           {
             id: 'pro_1',
@@ -156,7 +157,7 @@ export default function ProsPage() {
         setError('Erreur lors de l\'approbation du profil');
       }
     } catch (err: unknown) {
-      console.warn('API POST /admin/pros/[id]/approve indisponible — données démo');
+      logger.warn('API POST /admin/pros/[id]/approve indisponible — données démo');
       setProfiles(profiles.filter((p) => p.id !== selectedProfile.id));
       setShowApprovalModal(false);
       setSelectedProfile(null);
@@ -188,7 +189,7 @@ export default function ProsPage() {
         setError('Erreur lors du rejet du profil');
       }
     } catch (err: unknown) {
-      console.warn('API POST /admin/pros/[id]/reject indisponible — données démo');
+      logger.warn('API POST /admin/pros/[id]/reject indisponible — données démo');
       setProfiles(profiles.filter((p) => p.id !== selectedProfile.id));
       setShowApprovalModal(false);
       setSelectedProfile(null);

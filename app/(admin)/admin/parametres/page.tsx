@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Save, CheckCircle, XCircle, X } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface Setting {
   key: string;
   value: string;
@@ -38,7 +39,7 @@ export default function ParametresPage() {
           }));
           setSettings(validSettings);
         } else {
-          console.warn('API admin/settings indisponible — données démo');
+          logger.warn('API admin/settings indisponible — données démo');
           const FALLBACK_SETTINGS: Setting[] = [
             {
               key: 'SITE_NAME',
@@ -63,7 +64,7 @@ export default function ParametresPage() {
           const data = await flagsRes.json() as Record<string, unknown>[];
           setFeatureFlags(data);
         } else {
-          console.warn('API admin/feature-flags indisponible — données démo');
+          logger.warn('API admin/feature-flags indisponible — données démo');
           const FALLBACK_FLAGS: Record<string, unknown>[] = [
             {
               key: 'ENABLE_BETA_FEATURES',
@@ -84,7 +85,7 @@ export default function ParametresPage() {
           setFeatureFlags(FALLBACK_FLAGS);
         }
       } catch (_error: unknown) {
-        console.warn('API admin/settings et feature-flags indisponible — données démo');
+        logger.warn('API admin/settings et feature-flags indisponible — données démo');
         const FALLBACK_SETTINGS: Setting[] = [
           {
             key: 'SITE_NAME',
@@ -158,7 +159,7 @@ export default function ParametresPage() {
         setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde du paramètre' });
       }
     } catch (err: unknown) {
-      console.error('Setting save error:', err);
+      logger.error('Setting save error:', err);
       setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde' });
     }
   };
@@ -184,7 +185,7 @@ export default function ParametresPage() {
         setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde du flag' });
       }
     } catch (err: unknown) {
-      console.error('Flag save error:', err);
+      logger.error('Flag save error:', err);
       setToastMessage({ type: 'error', message: 'Erreur lors de la sauvegarde du flag' });
     }
   };

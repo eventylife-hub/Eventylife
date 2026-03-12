@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import { DietaryForm } from '@/components/restauration/dietary-form';
+import { logger } from '@/lib/logger';
 /**
  * Page des préférences alimentaires du client
  * Formulaire de configuration des allergies et régimes
@@ -43,7 +44,7 @@ export default function PreferencesPage() {
         router.push(`/client/reservations/${bookingId}`);
       }, 2000);
     } catch (err: unknown) {
-      console.warn('API restauration/dietary indisponible — données démo');
+      logger.warn('API restauration/dietary indisponible — données démo');
       setSuccess(true);
       setError(null);
       setTimeout(() => {

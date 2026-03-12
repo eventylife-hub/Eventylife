@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { AlertCircle, MapPin, User, Building, Globe, Phone, Mail, Save } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface ProProfile {
   firstName: string;
@@ -48,7 +49,7 @@ export default function ProfilePage() {
         setProfile(profileData);
         setFormData(profileData);
       } catch {
-        console.warn('API pro/profile indisponible — données démo');
+        logger.warn('API pro/profile indisponible — données démo');
         const demoProfile: ProProfile = {
           firstName: 'Jean',
           lastName: 'Dupont',
@@ -105,7 +106,7 @@ export default function ProfilePage() {
       setProfile(updatedProfile);
       setFormData(updatedProfile);
     } catch {
-      console.warn('API pro/profile PUT indisponible — données démo');
+      logger.warn('API pro/profile PUT indisponible — données démo');
       setProfile(formData);
       setError(null);
     } finally {

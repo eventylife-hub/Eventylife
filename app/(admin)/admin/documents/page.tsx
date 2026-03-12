@@ -12,6 +12,7 @@ import {
   Eye,
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface AdminDocument {
   id: string;
   name: string;
@@ -68,7 +69,7 @@ export default function AdminDocumentsPage() {
       const data = await response.json();
       setDocuments(data);
     } catch (err: unknown) {
-      console.warn('API /api/admin/documents indisponible — données démo');
+      logger.warn('API /api/admin/documents indisponible — données démo');
       setDocuments(FALLBACK_DOCUMENTS);
       setError(null);
     } finally {

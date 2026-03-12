@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Participant {
   id: string;
   firstName: string;
@@ -62,7 +63,7 @@ export default function BookingDetailPage() {
         const data = (await res.json() as unknown) as Booking;
         setBooking(data);
       } catch (err: unknown) {
-        console.warn('API client/bookings indisponible — données démo');
+        logger.warn('API client/bookings indisponible — données démo');
         const FALLBACK_BOOKING: Booking = {
           id: params.id as string,
           status: 'CONFIRMED',

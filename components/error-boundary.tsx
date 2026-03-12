@@ -14,6 +14,7 @@
 'use client';
 
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { logger } from '@/lib/logger';
 
 // ─── Types ──────────────────────────────────────────────────
 
@@ -44,7 +45,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Log vers console (remplacer par Sentry en prod)
-    console.error('[ErrorBoundary] Erreur capturée :', error, errorInfo);
+    logger.error('[ErrorBoundary] Erreur capturée :', error, errorInfo);
     this.props.onError?.(error, errorInfo);
   }
 

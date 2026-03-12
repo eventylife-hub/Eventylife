@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { formatCurrency, formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 interface Invoice {
   id: string;
   reference: string;
@@ -56,7 +57,7 @@ export default function InvoicePage() {
       setBooking(data.data);
       setError(null);
     } catch (err: unknown) {
-      console.warn('API bookings indisponible — données démo');
+      logger.warn('API bookings indisponible — données démo');
       const FALLBACK_INVOICE: Invoice = {
         id: bookingId,
         reference: 'FACT-' + bookingId.substring(0, 8).toUpperCase(),
@@ -112,7 +113,7 @@ export default function InvoicePage() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err: unknown) {
-      console.warn('API post-sale/invoice indisponible — données démo');
+      logger.warn('API post-sale/invoice indisponible — données démo');
       alert('Téléchargement de la facture en mode démo (fichier non générée)');
     } finally {
       setDownloading(false);
