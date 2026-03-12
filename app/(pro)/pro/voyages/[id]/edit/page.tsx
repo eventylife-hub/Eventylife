@@ -401,8 +401,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
       <h2 className="text-2xl font-bold text-slate-900 mb-6">Informations de base</h2>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Titre du voyage</label>
+          <label htmlFor="edit-title" className="block text-sm font-medium text-slate-700 mb-2">Titre du voyage</label>
           <input
+            id="edit-title"
             type="text"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.currentTarget.value })}
@@ -412,8 +413,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Description</label>
+          <label htmlFor="edit-description" className="block text-sm font-medium text-slate-700 mb-2">Description</label>
           <textarea
+            id="edit-description"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.currentTarget.value })}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
@@ -424,8 +426,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Date de départ</label>
+            <label htmlFor="edit-startDate" className="block text-sm font-medium text-slate-700 mb-2">Date de départ</label>
             <input
+              id="edit-startDate"
               type="date"
               value={formData.startDate}
               onChange={(e) => setFormData({ ...formData, startDate: e.currentTarget.value })}
@@ -433,8 +436,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Date d'arrivée</label>
+            <label htmlFor="edit-endDate" className="block text-sm font-medium text-slate-700 mb-2">Date d&apos;arrivée</label>
             <input
+              id="edit-endDate"
               type="date"
               value={formData.endDate}
               onChange={(e) => setFormData({ ...formData, endDate: e.currentTarget.value })}
@@ -445,8 +449,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Destination</label>
+            <label htmlFor="edit-destination" className="block text-sm font-medium text-slate-700 mb-2">Destination</label>
             <input
+              id="edit-destination"
               type="text"
               value={formData.destination}
               onChange={(e) => setFormData({ ...formData, destination: e.currentTarget.value })}
@@ -455,8 +460,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Mode de transport</label>
+            <label htmlFor="edit-transportMode" className="block text-sm font-medium text-slate-700 mb-2">Mode de transport</label>
             <select
+              id="edit-transportMode"
               value={formData.transportMode}
               onChange={(e) => setFormData({ ...formData, transportMode: e.currentTarget.value })}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
@@ -470,8 +476,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Capacité (places)</label>
+          <label htmlFor="edit-capacity" className="block text-sm font-medium text-slate-700 mb-2">Capacité (places)</label>
           <input
+            id="edit-capacity"
             type="number"
             value={formData.capacity}
             onChange={(e) => setFormData({ ...formData, capacity: parseInt(e.currentTarget.value) })}
@@ -552,8 +559,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Type</label>
+                <label htmlFor={`edit-room-${idx}-type`} className="block text-xs font-medium text-slate-600 mb-1">Type</label>
                 <select
+                  id={`edit-room-${idx}-type`}
                   value={room.type}
                   onChange={(e) => updateRoom(idx, 'type', e.currentTarget.value)}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
@@ -565,8 +573,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Libellé (optionnel)</label>
+                <label htmlFor={`edit-room-${idx}-label`} className="block text-xs font-medium text-slate-600 mb-1">Libellé (optionnel)</label>
                 <input
+                  id={`edit-room-${idx}-label`}
                   type="text"
                   value={room.label}
                   onChange={(e) => updateRoom(idx, 'label', e.currentTarget.value)}
@@ -576,8 +585,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Capacité (pers.)</label>
+                <label htmlFor={`edit-room-${idx}-capacity`} className="block text-xs font-medium text-slate-600 mb-1">Capacité (pers.)</label>
                 <input
+                  id={`edit-room-${idx}-capacity`}
                   type="number"
                   value={room.capacity}
                   onChange={(e) => updateRoom(idx, 'capacity', parseInt(e.currentTarget.value) || 1)}
@@ -588,8 +598,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Prix / personne (centimes)</label>
+                <label htmlFor={`edit-room-${idx}-price`} className="block text-xs font-medium text-slate-600 mb-1">Prix / personne (centimes)</label>
                 <input
+                  id={`edit-room-${idx}-price`}
                   type="number"
                   value={room.pricePerPersonCents}
                   onChange={(e) => updateRoom(idx, 'pricePerPersonCents', parseInt(e.currentTarget.value) || 0)}
@@ -599,8 +610,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Quantité</label>
+                <label htmlFor={`edit-room-${idx}-quantity`} className="block text-xs font-medium text-slate-600 mb-1">Quantité</label>
                 <input
+                  id={`edit-room-${idx}-quantity`}
                   type="number"
                   value={room.quantity}
                   onChange={(e) => updateRoom(idx, 'quantity', parseInt(e.currentTarget.value) || 1)}
@@ -1006,8 +1018,9 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Prix de base (centimes)</label>
+          <label htmlFor="edit-basePrice" className="block text-sm font-medium text-slate-700 mb-2">Prix de base (centimes)</label>
           <input
+            id="edit-basePrice"
             type="number"
             value={formData.pricing.basePrice}
             onChange={(e) => setFormData({ ...formData, pricing: { ...formData.pricing, basePrice: parseInt(e.currentTarget.value) || 0 } })}
@@ -1017,8 +1030,9 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Inclusions (une par ligne)</label>
+          <label htmlFor="edit-inclusions" className="block text-sm font-medium text-slate-700 mb-2">Inclusions (une par ligne)</label>
           <textarea
+            id="edit-inclusions"
             value={formData.pricing.inclusions.join('\n')}
             onChange={(e) => setFormData({ ...formData, pricing: { ...formData.pricing, inclusions: e.currentTarget.value.split('\n').filter(Boolean) } })}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600"
@@ -1028,8 +1042,9 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Exclusions (une par ligne)</label>
+          <label htmlFor="edit-exclusions" className="block text-sm font-medium text-slate-700 mb-2">Exclusions (une par ligne)</label>
           <textarea
+            id="edit-exclusions"
             value={formData.pricing.exclusions.join('\n')}
             onChange={(e) => setFormData({ ...formData, pricing: { ...formData.pricing, exclusions: e.currentTarget.value.split('\n').filter(Boolean) } })}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600"
