@@ -313,8 +313,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
       <h2 className="text-2xl font-bold text-slate-900 mb-6">Informations de base</h2>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Titre du voyage</label>
+          <label htmlFor="trip-title" className="block text-sm font-medium text-slate-700 mb-2">Titre du voyage</label>
           <input
+            id="trip-title"
             type="text"
             value={formData.title}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, title: (e.target as HTMLInputElement).value } as TravelFormData)}
@@ -324,8 +325,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Description</label>
+          <label htmlFor="trip-description" className="block text-sm font-medium text-slate-700 mb-2">Description</label>
           <textarea
+            id="trip-description"
             value={formData.description}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, description: e.target.value } as TravelFormData)}
             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
@@ -336,8 +338,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Date de départ</label>
+            <label htmlFor="trip-startDate" className="block text-sm font-medium text-slate-700 mb-2">Date de départ</label>
             <input
+              id="trip-startDate"
               type="date"
               value={formData.startDate}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, startDate: (e.target as HTMLInputElement).value } as TravelFormData)}
@@ -345,8 +348,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Date d&apos;arrivée</label>
+            <label htmlFor="trip-endDate" className="block text-sm font-medium text-slate-700 mb-2">Date d&apos;arrivée</label>
             <input
+              id="trip-endDate"
               type="date"
               value={formData.endDate}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, endDate: (e.target as HTMLInputElement).value } as TravelFormData)}
@@ -357,8 +361,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Destination</label>
+            <label htmlFor="trip-destination" className="block text-sm font-medium text-slate-700 mb-2">Destination</label>
             <input
+              id="trip-destination"
               type="text"
               value={formData.destination}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, destination: (e.target as HTMLInputElement).value } as TravelFormData)}
@@ -367,8 +372,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Mode de transport</label>
+            <label htmlFor="trip-transportMode" className="block text-sm font-medium text-slate-700 mb-2">Mode de transport</label>
             <select
+              id="trip-transportMode"
               value={formData.transportMode}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, transportMode: e.target.value } as TravelFormData)}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
@@ -382,8 +388,9 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Capacité (places)</label>
+          <label htmlFor="trip-capacity" className="block text-sm font-medium text-slate-700 mb-2">Capacité (places)</label>
           <input
+            id="trip-capacity"
             type="number"
             value={formData.capacity}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, capacity: parseInt((e.target as HTMLInputElement).value) } as TravelFormData)}
@@ -467,8 +474,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Type</label>
+                <label htmlFor={`trip-room-${idx}-type`} className="block text-xs font-medium text-slate-600 mb-1">Type</label>
                 <select
+                  id={`trip-room-${idx}-type`}
                   value={room.type}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateRoom(idx, 'type', e.target.value)}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-600"
@@ -480,8 +488,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Libellé (optionnel)</label>
+                <label htmlFor={`trip-room-${idx}-label`} className="block text-xs font-medium text-slate-600 mb-1">Libellé (optionnel)</label>
                 <input
+                  id={`trip-room-${idx}-label`}
                   type="text"
                   value={room.label}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'label', (e.target as HTMLInputElement).value)}
@@ -491,8 +500,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Capacité (pers.)</label>
+                <label htmlFor={`trip-room-${idx}-capacity`} className="block text-xs font-medium text-slate-600 mb-1">Capacité (pers.)</label>
                 <input
+                  id={`trip-room-${idx}-capacity`}
                   type="number"
                   value={room.capacity}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'capacity', parseInt((e.target as HTMLInputElement).value) || 1)}
@@ -503,8 +513,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Prix / personne (€)</label>
+                <label htmlFor={`trip-room-${idx}-price`} className="block text-xs font-medium text-slate-600 mb-1">Prix / personne (€)</label>
                 <input
+                  id={`trip-room-${idx}-price`}
                   type="number"
                   value={room.pricePerPersonCents / 100}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'pricePerPersonCents', Math.round(parseFloat((e.target as HTMLInputElement).value) * 100) || 0)}
@@ -515,8 +526,9 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Nombre de chambres</label>
+                <label htmlFor={`trip-room-${idx}-quantity`} className="block text-xs font-medium text-slate-600 mb-1">Nombre de chambres</label>
                 <input
+                  id={`trip-room-${idx}-quantity`}
                   type="number"
                   value={room.quantity}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateRoom(idx, 'quantity', parseInt((e.target as HTMLInputElement).value) || 1)}
@@ -1012,8 +1024,9 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
       <h2 className="text-2xl font-bold text-slate-900 mb-6">Tarification</h2>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Prix de base par personne (EUR)</label>
+          <label htmlFor="trip-basePrice" className="block text-sm font-medium text-slate-700 mb-2">Prix de base par personne (EUR)</label>
           <input
+            id="trip-basePrice"
             type="number"
             value={formData.pricing.basePrice / 100}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1028,8 +1041,9 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Inclusions (une par ligne)</label>
+          <label htmlFor="trip-inclusions" className="block text-sm font-medium text-slate-700 mb-2">Inclusions (une par ligne)</label>
           <textarea
+            id="trip-inclusions"
             value={formData.pricing.inclusions.join('\n')}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData((prev: TravelFormData) => ({
@@ -1044,8 +1058,9 @@ function StepPricing({ formData, setFormData }: { formData: TravelFormData; setF
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Exclusions (optionnel)</label>
+          <label htmlFor="trip-exclusions" className="block text-sm font-medium text-slate-700 mb-2">Exclusions (optionnel)</label>
           <textarea
+            id="trip-exclusions"
             value={formData.pricing.exclusions.join('\n')}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData((prev: TravelFormData) => ({
