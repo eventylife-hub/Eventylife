@@ -58,13 +58,14 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // Next.js requiert 'unsafe-inline' pour style-src (injection de styles inline)
+              // Next.js requiert 'unsafe-inline' pour script-src (hydration inline scripts)
+              // et style-src (injection de styles inline)
               // TODO: Implémenter nonce-based CSP via middleware pour supprimer 'unsafe-inline'
-              "script-src 'self' https://js.stripe.com https://maps.googleapis.com",
+              "script-src 'self' 'unsafe-inline' https://js.stripe.com https://maps.googleapis.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://*.amazonaws.com https://images.unsplash.com https://maps.gstatic.com",
-              "connect-src 'self' https://api.stripe.com https://*.sentry.io",
+              "connect-src 'self' https://api.stripe.com https://*.sentry.io https://maps.googleapis.com",
               "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",

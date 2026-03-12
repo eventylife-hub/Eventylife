@@ -7,26 +7,31 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { ZodError } from 'zod'
 import { AlertCircle, Loader } from 'lucide-react'
 import { extractErrorMessage } from '@/lib/api-error'
+import { loginSchema, zodErrorsToRecord } from '@/lib/validations/auth'
+
 export default function ProLoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
+    setErrors({})
 
-    if (!email.trim() || !password) {
-      setError('Veuillez remplir tous les champs.')
-      return
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError('Veuillez saisir une adresse email valide.')
-      return
+    try {
+      loginSchema.parse({ email, password })
+    } catch (err) {
+      if (err instanceof ZodError) {
+        setErrors(zodErrorsToRecord(err))
+        return
+      }
     }
 
     setLoading(true)

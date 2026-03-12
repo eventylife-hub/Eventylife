@@ -2,26 +2,30 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { ZodError } from 'zod';
 import { AlertCircle, Loader, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { extractErrorMessage } from '@/lib/api-error';
+import { forgotPasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
+
 export default function ProForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+    setErrors({});
 
-    const trimmed = email.trim();
-    if (!trimmed) {
-      setError('Veuillez saisir votre adresse email.');
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-      setError('Veuillez saisir une adresse email valide.');
-      return;
+    try {
+      forgotPasswordSchema.parse({ email });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        setErrors(zodErrorsToRecord(err));
+        return;
+      }
     }
 
     setLoading(true);

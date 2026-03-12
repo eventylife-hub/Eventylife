@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ZodError } from 'zod';
 import { logger } from '@/lib/logger';
 import { extractErrorMessage } from '@/lib/api-error';
+import { profileSchema } from '@/lib/validations/profile';
+import { changePasswordSchema, zodErrorsToRecord } from '@/lib/validations/auth';
 interface ProfileData {
   id: string;
   email: string;
@@ -125,13 +128,14 @@ export default function ProfilePage() {
     setError(null);
     setSuccess(false);
 
-    if (!form.firstName.trim() || !form.lastName.trim()) {
-      setError('Veuillez renseigner votre prénom et votre nom.');
-      return;
-    }
-    if (form.phone && !/^[\d\s+()-]{8,20}$/.test(form.phone)) {
-      setError('Veuillez saisir un numéro de téléphone valide.');
-      return;
+    try {
+      profileSchema.parse(form);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {
@@ -165,13 +169,18 @@ export default function ProfilePage() {
     setPasswordError(null);
     setPasswordSuccess(false);
 
-    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      setPasswordError('Les mots de passe ne correspondent pas');
-      return;
-    }
-    if (passwordForm.newPassword.length < 8) {
-      setPasswordError('Le mot de passe doit contenir au moins 8 caractères');
-      return;
+    try {
+      changePasswordSchema.parse({
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword,
+        confirmNewPassword: passwordForm.confirmPassword,
+      });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setPasswordError(Object.values(fieldErrors)[0] || 'Erreur de validation');
+        return;
+      }
     }
 
     try {

@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { ZodError } from 'zod';
 import { AlertCircle, MapPin, User, Building, Globe, Phone, Mail, Save } from 'lucide-react';
 import { logger } from '@/lib/logger';
+import { proProfileSchema } from '@/lib/validations/pro';
+import { zodErrorsToRecord } from '@/lib/validations/auth';
 
 interface ProProfile {
   firstName: string;
@@ -89,16 +92,22 @@ export default function ProfilePage() {
     e.preventDefault();
     if (!formData) return;
 
-    // Validation côté client
-    const required: (keyof ProProfile)[] = ['firstName', 'lastName', 'companyName', 'email', 'phone'];
-    const missing = required.filter((k) => !formData[k]?.toString().trim());
-    if (missing.length > 0) {
-      setError('Veuillez remplir tous les champs obligatoires (nom, prénom, entreprise, email, téléphone).');
-      return;
-    }
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setError('Veuillez saisir une adresse email valide.');
-      return;
+    // Validation Zod
+    try {
+      proProfileSchema.parse({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        phone: formData.phone,
+        companyName: formData.companyName,
+        siret: formData.businessNumber,
+        description: formData.bio,
+      });
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const fieldErrors = zodErrorsToRecord(err);
+        setError(Object.values(fieldErrors).join('. '));
+        return;
+      }
     }
 
     try {
