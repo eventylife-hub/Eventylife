@@ -334,7 +334,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">Date de départ</label>
             <input
@@ -355,7 +355,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">Destination</label>
             <input
@@ -465,7 +465,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-slate-600 mb-1">Type</label>
                 <select
@@ -1070,7 +1070,7 @@ function StepSummary({ formData }: { formData: TravelFormData }) {
       <div className="space-y-6">
         <div className="border border-slate-200 rounded-lg p-6">
           <h3 className="font-bold text-slate-900 mb-4">Informations générales</h3>
-          <dl className="grid grid-cols-2 gap-4 text-sm">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
               <dt className="text-slate-600">Titre</dt>
               <dd className="font-medium text-slate-900">{formData.title}</dd>
@@ -1149,7 +1149,7 @@ function StepSummary({ formData }: { formData: TravelFormData }) {
         )}
 
         {/* Photos & Arrêts */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="border border-slate-200 rounded-lg p-6">
             <h3 className="font-bold text-slate-900 mb-2">Photos</h3>
             <p className="text-sm text-slate-600">{formData.photos.length} photo(s) téléchargée(s)</p>

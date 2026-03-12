@@ -415,7 +415,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">Date de départ</label>
             <input
@@ -436,7 +436,7 @@ function StepInfo({ formData, setFormData }: { formData: TravelFormData; setForm
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">Destination</label>
             <input
@@ -543,7 +543,7 @@ function StepAccommodation({ formData, setFormData }: { formData: TravelFormData
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-slate-600 mb-1">Type</label>
                 <select
@@ -932,7 +932,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h3 className="font-semibold text-slate-900 mb-3">Points de départ</h3>
           {pickupStops.length === 0 ? (
@@ -1039,7 +1039,7 @@ function StepSummary({ formData }: { formData: TravelFormData }) {
           <p className="text-lg font-semibold text-slate-900">{formData.title}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-slate-50 p-4 rounded-lg">
             <p className="text-sm text-slate-600 mb-1">Destination</p>
             <p className="font-semibold text-slate-900">{formData.destination}</p>
