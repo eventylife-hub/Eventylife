@@ -1,66 +1,64 @@
 /**
  * Loading page — Dashboard Revenus Pro
- * Affiche des skeletons pendant le chargement
+ * Skeletons réutilisables du design system Pro.
  */
+import {
+  ProShimmerStyles,
+  ProSkeletonBar,
+  ProSkeletonCard,
+  ProSkeletonTableRow,
+} from '@/components/pro';
 
 export default function RevenuesLoading() {
   return (
-      <>
-      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
-    <div className="space-y-6 animate-in fade-in duration-300 p-6">
-      {/* Titre de page skeleton */}
-      <div className="space-y-2">
-        <div style={{ height: 32, width: 256, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        <div style={{ height: 16, width: 384, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-      </div>
-
-      {/* Cartes statistiques skeleton */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 space-y-3">
-            <div style={{ height: 16, width: 96, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-            <div style={{ height: 32, width: 128, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-            <div style={{ height: 12, width: 80, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-          </div>
-        ))}
-      </div>
-
-      {/* Filtres skeleton */}
-      <div className="flex gap-2">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} style={{ height: 36, width: 96, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        ))}
-      </div>
-
-      {/* Table skeleton */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-        <div className="flex items-center justify-between">
-          <div style={{ height: 24, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-          <div style={{ height: 36, width: 128, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+    <>
+      <ProShimmerStyles />
+      <div className="space-y-6 animate-in fade-in duration-300 p-6">
+        {/* Titre */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <ProSkeletonBar width={256} height={32} />
+          <ProSkeletonBar width={384} height={16} />
         </div>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100 last:border-0">
-            <div style={{ height: 16, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-            <div style={{ height: 16, width: 80, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-            <div style={{ height: 16, width: 96, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-          </div>
-        ))}
-      </div>
 
-      {/* Payout history skeleton */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-        <div style={{ height: 24, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="flex items-center justify-between p-4 border border-gray-100 rounded-lg">
-            <div className="flex-1 space-y-2">
-              <div style={{ height: 16, width: 96, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-              <div style={{ height: 12, width: 128, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-            </div>
-            <div style={{ height: 24, width: 80, borderRadius: '50%', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+        {/* Stat cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <ProSkeletonCard key={i} />
+          ))}
+        </div>
+
+        {/* Filtres */}
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <ProSkeletonBar key={i} width={96} height={36} radius={8} />
+          ))}
+        </div>
+
+        {/* Table */}
+        <div className="pro-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <ProSkeletonBar width={192} height={24} />
+            <ProSkeletonBar width={128} height={36} radius={8} />
           </div>
-        ))}
+          {Array.from({ length: 6 }).map((_, i) => (
+            <ProSkeletonTableRow key={i} columns={3} />
+          ))}
+        </div>
+
+        {/* Historique paiements */}
+        <div className="pro-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <ProSkeletonBar width={192} height={24} />
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', border: '1px solid #E0E0E0', borderRadius: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <ProSkeletonBar width={96} height={16} />
+                <ProSkeletonBar width={128} height={12} />
+              </div>
+              <ProSkeletonBar width={80} height={24} radius={12} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </>
+    </>
   );
 }

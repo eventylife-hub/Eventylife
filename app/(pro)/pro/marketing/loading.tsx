@@ -1,17 +1,23 @@
+/**
+ * Squelette de chargement — Marketing Pro
+ */
+import {
+  ProShimmerStyles,
+  ProSkeletonBar,
+} from '@/components/pro';
 
-/** Squelette de chargement — Marketing */
 export default function Loading() {
   return (
-      <>
-      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
-    <div className="space-y-6 p-6">
-      <div style={{ height: 40, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-      <div className="space-y-3">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} style={{ height: 96, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        ))}
+    <>
+      <ProShimmerStyles />
+      <div className="space-y-6 p-6">
+        <ProSkeletonBar width={192} height={40} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {Array.from({ length: 4 }).map((_, i) => (
+            <ProSkeletonBar key={i} height={96} radius={8} />
+          ))}
+        </div>
       </div>
-    </div>
-  </>
+    </>
   );
 }

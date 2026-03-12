@@ -5,3 +5,9 @@
 export { ProEmptyState } from './pro-empty-state';
 export { ProStatCard } from './pro-stat-card';
 export { ProPageHeader } from './pro-page-header';
+export {
+  ProShimmerStyles,
+  ProSkeletonBar,
+  ProSkeletonCard,
+  ProSkeletonTableRow,
+} from './pro-skeleton';

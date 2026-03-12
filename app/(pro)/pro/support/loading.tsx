@@ -1,29 +1,37 @@
 /**
- * Loading skeleton
+ * Loading skeleton — Support Pro
  */
+import {
+  ProShimmerStyles,
+  ProSkeletonBar,
+} from '@/components/pro';
 
 export default function PageLoading() {
   return (
-      <>
-      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
-    <div className="space-y-6 animate-in fade-in duration-300">
-      <div className="space-y-2">
-        <div style={{ height: 32, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        <div style={{ height: 16, width: 288, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-      </div>
-      <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-4">
-            <div style={{ height: 40, width: 40, borderRadius: '50%', background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-            <div className="flex-1 space-y-2">
-              <div style={{ height: 16, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-              <div style={{ height: 12, width: '100%', borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+    <>
+      <ProShimmerStyles />
+      <div className="space-y-6 animate-in fade-in duration-300">
+        {/* Titre */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <ProSkeletonBar width={192} height={32} />
+          <ProSkeletonBar width={288} height={16} />
+        </div>
+
+        {/* Liste tickets */}
+        <div className="pro-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <ProSkeletonBar width={160} height={24} />
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <ProSkeletonBar circle height={40} />
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <ProSkeletonBar height={16} />
+                <ProSkeletonBar height={12} />
+              </div>
+              <ProSkeletonBar width={64} height={24} radius={6} />
             </div>
-            <div style={{ height: 24, width: 64, borderRadius: 6, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </>
+    </>
   );
 }

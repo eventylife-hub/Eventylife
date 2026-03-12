@@ -1,20 +1,23 @@
+/**
+ * Squelette de chargement — Voyages Pro
+ */
+import { ProShimmerStyles, ProSkeletonBar } from '@/components/pro';
 
-/** Squelette de chargement — Voyages */
 export default function Loading() {
   return (
-      <>
-      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
-    <div className="space-y-6 p-6">
-      <div className="flex justify-between items-center">
-        <div style={{ height: 40, width: 192, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        <div style={{ height: 40, width: 128, borderRadius: 12, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+    <>
+      <ProShimmerStyles />
+      <div className="space-y-6 p-6">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <ProSkeletonBar width={192} height={40} />
+          <ProSkeletonBar width={128} height={40} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <ProSkeletonBar key={i} height={80} radius={8} />
+          ))}
+        </div>
       </div>
-      <div className="space-y-3">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} style={{ height: 80, borderRadius: 8, background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
-        ))}
-      </div>
-    </div>
-  </>
+    </>
   );
 }
