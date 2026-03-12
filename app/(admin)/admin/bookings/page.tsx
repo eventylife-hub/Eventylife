@@ -246,10 +246,11 @@ export default function AdminBookingsPage() {
           <form onSubmit={handleSearch}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <div>
-                <label className="admin-kpi-label block mb-2">Chercher (ref, email, voyage)</label>
+                <label htmlFor="bk-search" className="admin-kpi-label block mb-2">Chercher (ref, email, voyage)</label>
                 <div className="relative">
                   <Search className="absolute left-3 top-3 h-4 w-4" style={{ color: 'var(--admin-text-secondary)' }} />
                   <input
+                    id="bk-search"
                     type="text"
                     placeholder="Ex: BK-001234"
                     className="admin-input pl-10"
@@ -260,8 +261,8 @@ export default function AdminBookingsPage() {
               </div>
 
               <div>
-                <label className="admin-kpi-label block mb-2">Statut</label>
-                <select value={statusFilter} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)} className="admin-input">
+                <label htmlFor="bk-statusFilter" className="admin-kpi-label block mb-2">Statut</label>
+                <select id="bk-statusFilter" value={statusFilter} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)} className="admin-input">
                   <option value="all">Tous les statuts</option>
                   <option value="HOLD">En attente</option>
                   <option value="PARTIALLY_PAID">Partiellement payé</option>
@@ -272,8 +273,9 @@ export default function AdminBookingsPage() {
               </div>
 
               <div>
-                <label className="admin-kpi-label block mb-2">Du</label>
+                <label htmlFor="bk-dateFrom" className="admin-kpi-label block mb-2">Du</label>
                 <input
+                  id="bk-dateFrom"
                   type="date"
                   value={dateRangeStart}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRangeStart((e.target as HTMLInputElement).value)}
@@ -282,8 +284,9 @@ export default function AdminBookingsPage() {
               </div>
 
               <div>
-                <label className="admin-kpi-label block mb-2">Au</label>
+                <label htmlFor="bk-dateTo" className="admin-kpi-label block mb-2">Au</label>
                 <input
+                  id="bk-dateTo"
                   type="date"
                   value={dateRangeEnd}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRangeEnd((e.target as HTMLInputElement).value)}
@@ -430,10 +433,11 @@ export default function AdminBookingsPage() {
             </div>
 
             <div style={{ marginBottom: '16px' }}>
-              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
-                Raison (obligatoire pour l'audit)
+              <label htmlFor="bk-auditReason" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                Raison (obligatoire pour l&apos;audit)
               </label>
               <textarea
+                id="bk-auditReason"
                 style={{
                   width: '100%',
                   border: '1px solid var(--admin-border)',

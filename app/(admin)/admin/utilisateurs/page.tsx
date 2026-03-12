@@ -235,10 +235,11 @@ export default function UtilisateursPage() {
           <div className="flex gap-4 flex-col md:flex-row items-end">
             {/* Recherche */}
             <div className="flex-1 relative">
-              <label className="admin-input-label">Rechercher</label>
+              <label htmlFor="usr-search" className="admin-input-label">Rechercher</label>
               <div className="relative">
                 <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <input
+                  id="usr-search"
                   placeholder="Nom, email..."
                   value={search}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch((e.target as HTMLInputElement).value)}
@@ -250,8 +251,9 @@ export default function UtilisateursPage() {
 
             {/* Filtre rôle */}
             <div className="w-full md:w-48">
-              <label className="admin-input-label">Rôle</label>
+              <label htmlFor="usr-roleFilter" className="admin-input-label">Rôle</label>
               <select
+                id="usr-roleFilter"
                 value={roleFilter}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRoleFilter(e.target.value)}
                 className="admin-input"
@@ -266,8 +268,9 @@ export default function UtilisateursPage() {
 
             {/* Filtre statut */}
             <div className="w-full md:w-48">
-              <label className="admin-input-label">Statut</label>
+              <label htmlFor="usr-statusFilter" className="admin-input-label">Statut</label>
               <select
+                id="usr-statusFilter"
                 value={statusFilter}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
                 className="admin-input"

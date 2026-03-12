@@ -222,12 +222,13 @@ export default function AdminDocumentsPage() {
         <div className="admin-panel-body">
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-end' }}>
             <div style={{ flex: 1, minWidth: '200px' }}>
-              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+              <label htmlFor="doc-search" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                 Rechercher
               </label>
               <div style={{ position: 'relative' }}>
                 <Search style={{ position: 'absolute', left: '12px', top: '10px', width: '16px', height: '16px', color: 'var(--admin-text-secondary)' }} />
                 <input
+                  id="doc-search"
                   type="text"
                   placeholder="Par nom, email ou professionnel..."
                   value={searchQuery}
@@ -238,10 +239,11 @@ export default function AdminDocumentsPage() {
               </div>
             </div>
             <div style={{ minWidth: '150px' }}>
-              <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+              <label htmlFor="doc-statusFilter" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                 Statut
               </label>
               <select
+                id="doc-statusFilter"
                 value={statusFilter}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
                 className="admin-input"
@@ -393,10 +395,11 @@ export default function AdminDocumentsPage() {
             {selectedDocument.status === 'PENDING' && (
               <>
                 <div style={{ marginBottom: '24px' }}>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', marginBottom: '8px' }}>
+                  <label htmlFor="doc-rejectReason" style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', marginBottom: '8px' }}>
                     Motif du rejet (optionnel)
                   </label>
                   <textarea
+                    id="doc-rejectReason"
                     value={approvalReason}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setApprovalReason(e.target.value)}
                     style={{

@@ -425,10 +425,11 @@ export default function CancellationDetailPage() {
             </div>
           ) : (
             <div className="bg-gray-50 rounded-lg p-6">
-              <label className="block text-sm font-medium text-gray-900 mb-2">
+              <label htmlFor="canc-rejectionReason" className="block text-sm font-medium text-gray-900 mb-2">
                 Motif de refus
               </label>
               <textarea
+                id="canc-rejectionReason"
                 value={rejectionReason}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setRejectionReason(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4"

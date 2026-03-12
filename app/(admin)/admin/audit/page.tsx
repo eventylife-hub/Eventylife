@@ -206,8 +206,9 @@ export default function AuditPage() {
         <div className="admin-panel-body space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label className="admin-kpi-label block mb-2">Action</label>
+              <label htmlFor="audit-action" className="admin-kpi-label block mb-2">Action</label>
               <input
+                id="audit-action"
                 type="text"
                 placeholder="Ex: USER_CREATED"
                 value={filters.action}
@@ -218,8 +219,9 @@ export default function AuditPage() {
             </div>
 
             <div>
-              <label className="admin-kpi-label block mb-2">Type d'entité</label>
+              <label htmlFor="audit-entityType" className="admin-kpi-label block mb-2">Type d&apos;entité</label>
               <input
+                id="audit-entityType"
                 type="text"
                 placeholder="Ex: User"
                 value={filters.entityType}
@@ -230,8 +232,9 @@ export default function AuditPage() {
             </div>
 
             <div>
-              <label className="admin-kpi-label block mb-2">Date de début</label>
+              <label htmlFor="audit-startDate" className="admin-kpi-label block mb-2">Date de début</label>
               <input
+                id="audit-startDate"
                 type="date"
                 value={filters.startDate}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilters({ ...filters, startDate: (e.target as HTMLInputElement).value })}
@@ -241,8 +244,9 @@ export default function AuditPage() {
             </div>
 
             <div>
-              <label className="admin-kpi-label block mb-2">Date de fin</label>
+              <label htmlFor="audit-endDate" className="admin-kpi-label block mb-2">Date de fin</label>
               <input
+                id="audit-endDate"
                 type="date"
                 value={filters.endDate}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilters({ ...filters, endDate: (e.target as HTMLInputElement).value })}

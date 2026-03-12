@@ -362,10 +362,11 @@ export default function TravelLifecyclePage() {
           <div className="admin-panel-body p-6">
             {selectedAction && (selectedAction === 'reject_p1' || selectedAction === 'cancel') && (
               <div className="mb-6 bg-gray-50 rounded-lg p-4">
-                <label className="admin-input-label">
+                <label htmlFor="lc-cancelReason" className="admin-input-label">
                   Motif
                 </label>
                 <textarea
+                  id="lc-cancelReason"
                   value={cancelReason}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setCancelReason(e.target.value)}
                   className="admin-input"

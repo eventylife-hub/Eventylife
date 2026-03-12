@@ -256,8 +256,9 @@ export default function AdminAlertesPage() {
         <div className="admin-panel-body">
           <div className="flex gap-4 flex-wrap items-end">
             <div>
-              <label className="admin-kpi-label block mb-2">Niveau</label>
+              <label htmlFor="alert-levelFilter" className="admin-kpi-label block mb-2">Niveau</label>
               <select
+                id="alert-levelFilter"
                 value={levelFilter}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setLevelFilter(e.target.value)}
                 className="admin-input"
@@ -271,8 +272,9 @@ export default function AdminAlertesPage() {
             </div>
 
             <div>
-              <label className="admin-kpi-label block mb-2">Statut</label>
+              <label htmlFor="alert-statusFilter" className="admin-kpi-label block mb-2">Statut</label>
               <select
+                id="alert-statusFilter"
                 value={statusFilter}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
                 className="admin-input"

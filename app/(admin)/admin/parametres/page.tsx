@@ -221,10 +221,11 @@ export default function ParametresPage() {
           {settings.map((setting) => (
             <div key={setting.key} className="flex items-end gap-4">
               <div className="flex-1">
-                <label className="admin-input-label">{setting.key}</label>
+                <label htmlFor={`param-${setting.key}`} className="admin-input-label">{setting.key}</label>
                 {setting.key.toLowerCase().includes('email') ||
                 setting.key.toLowerCase().includes('url') ? (
                   <input
+                    id={`param-${setting.key}`}
                     type={
                       setting.key.toLowerCase().includes('email')
                         ? 'email'
@@ -238,6 +239,7 @@ export default function ParametresPage() {
                   />
                 ) : (
                   <textarea
+                    id={`param-${setting.key}`}
                     className="admin-input resize-none"
                     rows={2}
                     value={editedSettings[setting.key] || setting.value}

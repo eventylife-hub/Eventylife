@@ -510,10 +510,11 @@ export default function AdminNotificationsPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="notif-recipient" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Destinataire
                 </label>
                 <input
+                  id="notif-recipient"
                   type="email"
                 autoComplete="email"
                   placeholder="email@example.com ou +33..."
@@ -528,10 +529,11 @@ export default function AdminNotificationsPage() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="notif-template" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Template
                 </label>
                 <select
+                  id="notif-template"
                   value={manualTemplate}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualTemplate(e.target.value)}
                   className="admin-input"
@@ -550,10 +552,11 @@ export default function AdminNotificationsPage() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
+                <label htmlFor="notif-channel" style={{ fontSize: '14px', fontWeight: '500', color: 'var(--admin-text-primary)', display: 'block', marginBottom: '8px' }}>
                   Canal
                 </label>
                 <select
+                  id="notif-channel"
                   value={manualChannel}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setManualChannel(e.target.value as 'EMAIL' | 'SMS' | 'PUSH')}
                   className="admin-input"

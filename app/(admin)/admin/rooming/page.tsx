@@ -280,10 +280,11 @@ export default function AdminRoomingPage() {
         <div className="admin-panel-body p-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end">
             <div className="flex-1">
-              <label className="text-sm font-medium text-gray-700 mb-2 block">
+              <label htmlFor="room-tripSelect" className="text-sm font-medium text-gray-700 mb-2 block">
                 Sélectionner un voyage
               </label>
               <select
+                id="room-tripSelect"
                 value={selectedTrip}
                 onChange={(e) => setSelectedTrip(e.target.value)}
                 style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: '1.5px solid #E5E0D8', background: 'white', fontSize: '0.95rem', cursor: 'pointer', outline: 'none', width: '100%' }}
@@ -496,10 +497,10 @@ export default function AdminRoomingPage() {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">
+                <label htmlFor="room-editStatus" className="text-sm font-medium text-gray-700 mb-2 block">
                   Statut
                 </label>
-                <select className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="room-editStatus" className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                   <option value="AVAILABLE">Disponible</option>
                   <option value="OCCUPIED">Occupée</option>
                   <option value="MAINTENANCE">Maintenance</option>
@@ -508,10 +509,11 @@ export default function AdminRoomingPage() {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700 mb-2 block">
+                <label htmlFor="room-editGuests" className="text-sm font-medium text-gray-700 mb-2 block">
                   Clients logés (un par ligne)
                 </label>
                 <textarea
+                  id="room-editGuests"
                   className="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows={4}
                   placeholder="Nom et prénom des clients..."
