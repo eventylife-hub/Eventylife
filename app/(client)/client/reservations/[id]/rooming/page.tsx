@@ -360,10 +360,11 @@ export default function RoomingPage() {
 
           <form onSubmit={handlePreferencesSave} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="room-floor" className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Étage (optionnel)
               </label>
               <input
+                id="room-floor"
                 placeholder="ex: Rez-de-chaussée, 1er étage..."
                 value={preferences.floor}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, floor: (e.target as HTMLInputElement).value })}
@@ -376,10 +377,11 @@ export default function RoomingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="room-bedType" className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Type de lit (optionnel)
               </label>
               <select
+                id="room-bedType"
                 value={preferences.bedType}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setPreferences({ ...preferences, bedType: e.target.value })}
                 disabled={isCutoffPassed}
@@ -403,10 +405,11 @@ export default function RoomingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              <label htmlFor="room-specialRequests" className="block text-sm font-medium mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
                 Demandes spéciales (optionnel)
               </label>
               <textarea
+                id="room-specialRequests"
                 placeholder="ex: Hypoallergénique, lit surélevé, etc."
                 value={preferences.specialRequests}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPreferences({ ...preferences, specialRequests: (e.target as HTMLInputElement).value })}

@@ -407,6 +407,7 @@ export default function CheckoutStep2Page() {
 
                     <div>
                       <label
+                        htmlFor={`co-busStop-${globalIndex}`}
                         style={{
                           fontSize: '0.875rem',
                           fontWeight: '500',
@@ -418,6 +419,7 @@ export default function CheckoutStep2Page() {
                         Point d&apos;arrêt
                       </label>
                       <select
+                        id={`co-busStop-${globalIndex}`}
                         value={participant.busStopId || ''}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                           handleParticipantChange(globalIndex, 'busStopId', e.target.value)

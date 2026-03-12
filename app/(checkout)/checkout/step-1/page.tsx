@@ -284,10 +284,11 @@ export default function CheckoutStep1Page() {
                 </p>
 
                 <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ fontSize: '0.875rem', fontWeight: '500', display: 'block', marginBottom: '0.5rem', color: 'var(--navy, #1A1A2E)' }}>
+                  <label htmlFor={`co-occupancy-${room.roomTypeId}`} style={{ fontSize: '0.875rem', fontWeight: '500', display: 'block', marginBottom: '0.5rem', color: 'var(--navy, #1A1A2E)' }}>
                     Nombre de personnes:
                   </label>
                   <select
+                    id={`co-occupancy-${room.roomTypeId}`}
                     style={{
                       width: '100%',
                       backgroundColor: 'white',

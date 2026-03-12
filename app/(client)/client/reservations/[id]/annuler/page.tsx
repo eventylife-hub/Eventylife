@@ -255,10 +255,11 @@ export default function CancelReservationPage() {
         <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--navy, #1A1A2E)' }}>Demander l&apos;Annulation</h2>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+          <label htmlFor="cancel-reason" className="block text-sm font-medium mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Motif d&apos;annulation
           </label>
           <select
+            id="cancel-reason"
             value={reason.split('|')[0] || ''}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               const newReason = e.target.value;
@@ -281,10 +282,11 @@ export default function CancelReservationPage() {
           </select>
           <FormFieldError error={errors.reason} id="reason-error" />
 
-          <label className="block text-sm font-medium mb-2 mt-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
+          <label htmlFor="cancel-comment" className="block text-sm font-medium mb-2 mt-4" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Commentaire (optionnel)
           </label>
           <textarea
+            id="cancel-comment"
             value={reason}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReason(e.target.value)}
             placeholder="Décrivez les raisons de votre annulation..."

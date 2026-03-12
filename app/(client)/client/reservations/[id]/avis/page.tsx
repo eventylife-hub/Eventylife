@@ -306,10 +306,11 @@ export default function FeedbackPage() {
 
         {/* Commentaire */}
         <div className="mt-6">
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
+          <label htmlFor="feedback-comment" className="block text-sm font-medium mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Votre Commentaire
           </label>
           <textarea
+            id="feedback-comment"
             value={comment}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value)}
             placeholder="Partagez vos impressions, ce que vous avez aimé, ce qui pourrait être amélioré..."

@@ -318,10 +318,11 @@ export default function WalletPage() {
         {/* Filters */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="wallet-typeFilter" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
               Type de transaction
             </label>
             <select
+              id="wallet-typeFilter"
               value={typeFilter}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTypeFilter(e.target.value as typeof typeFilter)}
               className="w-full px-4 py-2 rounded-xl text-sm transition-all"
@@ -340,10 +341,11 @@ export default function WalletPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+            <label htmlFor="wallet-dateFrom" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
               À partir du
             </label>
             <input
+              id="wallet-dateFrom"
               type="date"
               value={dateFrom}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateFrom((e.target as HTMLInputElement).value)}
@@ -357,10 +359,11 @@ export default function WalletPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
-              Jusqu'au
+            <label htmlFor="wallet-dateTo" className="block text-sm font-semibold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>
+              Jusqu&apos;au
             </label>
             <input
+              id="wallet-dateTo"
               type="date"
               value={dateTo}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateTo((e.target as HTMLInputElement).value)}
