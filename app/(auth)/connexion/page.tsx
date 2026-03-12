@@ -117,7 +117,7 @@ export default function ConnexionPage() {
         </div>
 
         {/* Titre */}
-        <h2 className="font-display text-xl font-bold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>Connexion</h2>
+        <h1 className="font-display text-xl font-bold mb-1" style={{ color: 'var(--navy, #1A1A2E)' }}>Connexion</h1>
         <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
           Bienvenue ! Connectez-vous à votre compte
         </p>
