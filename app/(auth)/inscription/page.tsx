@@ -227,6 +227,8 @@ export default function InscriptionPage() {
                   outline: 'none',
                   transition: 'border-color 0.2s',
                 }}
+                aria-invalid={!!errors.firstName}
+                aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.firstName) {
                     e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
@@ -237,7 +239,7 @@ export default function InscriptionPage() {
                 }}
               />
               {errors.firstName && (
-                <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                <p id="firstName-error" style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                   {errors.firstName}
                 </p>
               )}
@@ -274,6 +276,8 @@ export default function InscriptionPage() {
                   outline: 'none',
                   transition: 'border-color 0.2s',
                 }}
+                aria-invalid={!!errors.lastName}
+                aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.lastName) {
                     e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
@@ -284,7 +288,7 @@ export default function InscriptionPage() {
                 }}
               />
               {errors.lastName && (
-                <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                <p id="lastName-error" style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                   {errors.lastName}
                 </p>
               )}
@@ -324,6 +328,8 @@ export default function InscriptionPage() {
                 outline: 'none',
                 transition: 'border-color 0.2s',
               }}
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'email-error' : undefined}
               onFocus={(e) => {
                 if (!errors.email) {
                   e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
@@ -334,7 +340,7 @@ export default function InscriptionPage() {
               }}
             />
             {errors.email && (
-              <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              <p id="email-error" style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.email}
               </p>
             )}
@@ -460,6 +466,8 @@ export default function InscriptionPage() {
                   outline: 'none',
                   transition: 'border-color 0.2s',
                 }}
+                aria-invalid={!!errors.password}
+                aria-describedby={errors.password ? 'password-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.password) {
                     e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
@@ -520,7 +528,7 @@ export default function InscriptionPage() {
               </div>
             )}
             {errors.password && (
-              <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              <p id="password-error" style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.password}
               </p>
             )}
@@ -561,6 +569,8 @@ export default function InscriptionPage() {
                   outline: 'none',
                   transition: 'border-color 0.2s',
                 }}
+                aria-invalid={!!errors.confirmPassword}
+                aria-describedby={errors.confirmPassword ? 'confirmPassword-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.confirmPassword) {
                     e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
@@ -603,7 +613,7 @@ export default function InscriptionPage() {
               </button>
             </div>
             {errors.confirmPassword && (
-              <p style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              <p id="confirmPassword-error" style={{ color: '#DC2626', fontSize: '0.75rem', marginTop: '0.25rem' }}>
                 {errors.confirmPassword}
               </p>
             )}

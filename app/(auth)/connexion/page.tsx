@@ -148,6 +148,8 @@ export default function ConnexionPage() {
               required
               style={inputStyle(!!errors.email)}
               placeholder="votre@email.com"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'login-email-error' : undefined}
               onFocus={(e) => {
                 if (!errors.email) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.08)';
@@ -157,7 +159,7 @@ export default function ConnexionPage() {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
-            {errors.email && <p className="text-xs mt-1" style={{ color: 'var(--terra, #DC2626)' }}>{errors.email}</p>}
+            {errors.email && <p id="login-email-error" className="text-xs mt-1" style={{ color: 'var(--terra, #DC2626)' }}>{errors.email}</p>}
           </div>
 
           <div>
@@ -180,6 +182,8 @@ export default function ConnexionPage() {
                 required
                 style={inputStyle(!!errors.password)}
                 placeholder="••••••••"
+                aria-invalid={!!errors.password}
+                aria-describedby={errors.password ? 'login-password-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.password) e.currentTarget.style.borderColor = 'var(--terra, #C75B39)';
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.08)';
@@ -221,7 +225,7 @@ export default function ConnexionPage() {
                 )}
               </button>
             </div>
-            {errors.password && <p className="text-xs mt-1" style={{ color: 'var(--terra, #DC2626)' }}>{errors.password}</p>}
+            {errors.password && <p id="login-password-error" className="text-xs mt-1" style={{ color: 'var(--terra, #DC2626)' }}>{errors.password}</p>}
           </div>
 
           <button

@@ -161,6 +161,8 @@ export default function MotDePasseOubliePage() {
                   boxSizing: 'border-box',
                   color: 'var(--navy, #1A1A2E)',
                 }}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'forgot-email-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.email) {
                     e.currentTarget.style.borderColor = '#C75B39';
@@ -172,7 +174,7 @@ export default function MotDePasseOubliePage() {
                 }}
               />
               {errors.email && (
-                <p style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', marginTop: '0.25rem', margin: '0.25rem 0 0 0' }}>
+                <p id="forgot-email-error" style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', marginTop: '0.25rem', margin: '0.25rem 0 0 0' }}>
                   {errors.email}
                 </p>
               )}

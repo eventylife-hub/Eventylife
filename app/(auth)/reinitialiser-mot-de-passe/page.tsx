@@ -280,6 +280,8 @@ export default function ReinitialiserMotDePassePage() {
                   boxSizing: 'border-box',
                   color: 'var(--navy, #1A1A2E)',
                 }}
+                aria-invalid={!!errors.password}
+                aria-describedby={errors.password ? 'reset-password-error' : undefined}
                 onFocus={(e) => {
                   if (!errors.password) {
                     e.currentTarget.style.borderColor = '#C75B39';
@@ -318,7 +320,7 @@ export default function ReinitialiserMotDePassePage() {
               </button>
             </div>
             {errors.password && (
-              <p style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
+              <p id="reset-password-error" style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
                 {errors.password}
               </p>
             )}
@@ -348,6 +350,8 @@ export default function ReinitialiserMotDePassePage() {
                 boxSizing: 'border-box',
                 color: 'var(--navy, #1A1A2E)',
               }}
+              aria-invalid={!!errors.passwordConfirm}
+              aria-describedby={errors.passwordConfirm ? 'reset-confirm-error' : undefined}
               onFocus={(e) => {
                 if (!errors.passwordConfirm) {
                   e.currentTarget.style.borderColor = '#C75B39';
@@ -359,7 +363,7 @@ export default function ReinitialiserMotDePassePage() {
               }}
             />
             {errors.passwordConfirm && (
-              <p style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
+              <p id="reset-confirm-error" style={{ color: 'var(--terra, #DC2626)', fontSize: '0.75rem', margin: '0.25rem 0 0 0' }}>
                 {errors.passwordConfirm}
               </p>
             )}
