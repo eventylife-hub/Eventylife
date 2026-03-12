@@ -125,6 +125,7 @@ export default function ConnexionPage() {
         {/* Message d'erreur */}
         {error && (
           <div
+            role="alert"
             className="mb-4 p-3 rounded-lg text-sm"
             style={{ background: 'var(--terra-soft, #FEF2F2)', border: '1px solid #FECACA', color: 'var(--terra, #DC2626)' }}
           >

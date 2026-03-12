@@ -239,6 +239,7 @@ export default function ReinitialiserMotDePassePage() {
         {/* Erreur serveur */}
         {serverError && (
           <div
+            role="alert"
             style={{
               marginBottom: '1rem',
               padding: '0.75rem',

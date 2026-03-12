@@ -95,12 +95,21 @@ export const useNotificationStore = create<NotificationStore>()(
           }
         } catch {
           logger.warn('API notifications indisponible — données démo');
-          set({
-            notifications: DEMO_NOTIFICATIONS,
-            unreadCount: DEMO_NOTIFICATIONS_UNREAD_COUNT,
-            error: null,
-            isLoading: false,
-          });
+          if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+            set({
+              notifications: DEMO_NOTIFICATIONS,
+              unreadCount: DEMO_NOTIFICATIONS_UNREAD_COUNT,
+              error: null,
+              isLoading: false,
+            });
+          } else {
+            set({
+              notifications: [],
+              unreadCount: 0,
+              error: 'Erreur chargement notifications',
+              isLoading: false,
+            });
+          }
         }
       },
 

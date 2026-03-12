@@ -244,6 +244,7 @@ export default function SupportPage() {
       {/* Message de succès/erreur */}
       {submitMessage && (
         <div
+          role={submitMessage.type === 'success' ? 'status' : 'alert'}
           className="p-6 rounded-2xl text-sm"
           style={{
             background: submitMessage.type === 'success' ? '#DCFCE7' : 'var(--terra-soft, #FEF2F2)',

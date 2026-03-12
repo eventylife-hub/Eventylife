@@ -167,6 +167,7 @@ export default function AdminLoginPage() {
           {/* Message d'erreur */}
           {error && (
             <div
+              role="alert"
               style={{
                 marginBottom: '20px',
                 padding: '12px 16px',

@@ -66,6 +66,12 @@ export default function VoyageFinancePage() {
         setError(null);
       } catch (err: unknown) {
         logger.warn('API finance indisponible — données démo');
+        if (process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') {
+          setError('Données indisponibles');
+          setFinance(null);
+          setLoading(false);
+          return;
+        }
         // Fallback demo data: séjour Provence réaliste
         // CA TTC: 89900 (5 clients × 17980€), Coûts TTC: 54600
         // Marge: 89900 - 54600 = 35300

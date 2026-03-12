@@ -133,7 +133,9 @@ export default function BlogArticlePage() {
     year: 'numeric',
   });
 
-  // XSS FIX: Échapper les entités HTML avant insertion dans le DOM
+  // SECURITY: XSS Prevention
+  // HTML escaping function that converts special characters to HTML entities
+  // This prevents XSS attacks by ensuring user/API content cannot inject scripts
   const escapeHtml = (text: string): string => {
     return text
       .replace(/&/g, '&amp;')
@@ -144,7 +146,8 @@ export default function BlogArticlePage() {
   };
 
   // Convertir le markdown basique en HTML (avec échappement XSS)
-  // SECURITY: All HTML is properly escaped before insertion
+  // SECURITY: All HTML is properly escaped before insertion via escapeHtml()
+  // Content is safe for dangerouslySetInnerHTML because all HTML entities are escaped
   const formatContent = (text: string) => {
     return text
       .split('\n\n')

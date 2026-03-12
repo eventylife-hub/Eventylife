@@ -77,7 +77,7 @@ export default function QuickSellPage() {
         const data = await res.json() as Record<string, unknown>;
         const tripsData = (data.trips || []) as Trip[];
         setTrips(tripsData);
-        if (tripsData.length > 0) {
+        if (tripsData?.[0]?.id) {
           setSelectedTrip(tripsData[0].id);
         }
       } catch {

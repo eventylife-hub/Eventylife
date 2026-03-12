@@ -87,7 +87,7 @@ export default function AdminRoomingPage() {
         if (response.ok) {
           const data = await response.json();
           setRooming(data);
-          if (!selectedTrip && data.trips.length > 0) {
+          if (!selectedTrip && data?.trips?.[0]?.id) {
             setSelectedTrip(data.trips[0].id);
           }
         }

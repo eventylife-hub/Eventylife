@@ -90,8 +90,8 @@ const WIZARD_STEPS = [
   { number: 7, label: 'Récapitulatif', description: 'Vérification et soumission' },
 ];
 
-// Données démo pour le voyage
-const DEMO_TRAVEL_DATA: TravelFormData = {
+// Données démo pour le voyage (protégées derrière NEXT_PUBLIC_DEMO_MODE)
+const getDemoTravelData = (): TravelFormData => ({
   title: 'Week-end à Marrakech',
   description: 'Découvrez la magie de Marrakech avec ses souks colorés, sa médina fascinante et l\'hospitalité marocaine. Un voyage inoubliable à travers la culture et l\'histoire du Maroc.',
   startDate: '2026-05-15',
@@ -168,7 +168,7 @@ const DEMO_TRAVEL_DATA: TravelFormData = {
     inclusions: ['Transport en bus climatisé', 'Hébergement 3 nuits', 'Petit-déjeuners et dîners', 'Guide local', 'Entrées musées'],
     exclusions: ['Déjeuners individuels', 'Dépenses personnelles', 'Assurance voyage'],
   },
-};
+});
 
 export default function EditTravelPage() {
   const router = useRouter();
@@ -177,7 +177,9 @@ export default function EditTravelPage() {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState<TravelFormData>(DEMO_TRAVEL_DATA);
+  const [formData, setFormData] = useState<TravelFormData>(
+    process.env.NEXT_PUBLIC_DEMO_MODE === 'true' ? getDemoTravelData() : { title: '', description: '', startDate: '', endDate: '', destination: '', transportMode: 'BUS', capacity: 0, rooms: [], program: [], photos: [], busStops: [], pricing: { basePrice: 0, inclusions: [], exclusions: [] } }
+  );
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
@@ -189,14 +191,18 @@ export default function EditTravelPage() {
         const res = await fetch(`/api/pro/travels/${travelId}`, { credentials: 'include' });
         if (res.ok) {
           const data = (await res.json()) as { data?: TravelFormData };
-          setFormData(data?.data || DEMO_TRAVEL_DATA);
+          setFormData(data?.data || (process.env.NEXT_PUBLIC_DEMO_MODE === 'true' ? getDemoTravelData() : { title: '', description: '', startDate: '', endDate: '', destination: '', transportMode: 'BUS', capacity: 0, rooms: [], program: [], photos: [], busStops: [], pricing: { basePrice: 0, inclusions: [], exclusions: [] } }));
         } else {
-          setFormData(DEMO_TRAVEL_DATA);
+          if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+            setFormData(getDemoTravelData());
+          }
         }
       } catch (error: unknown) {
         logger.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
         // Fallback: utiliser les données démo
-        setFormData(DEMO_TRAVEL_DATA);
+        if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+          setFormData(getDemoTravelData());
+        }
       } finally {
         setLoading(false);
       }
@@ -218,7 +224,10 @@ export default function EditTravelPage() {
       if (response.ok) {
         setSaveMessage('Brouillon sauvegardé avec succès !');
       } else {
-        const error = (await response.json().catch(() => null)) as { message?: string };
+        const error = (await response.json().catch((err) => {
+          logger.error('[EditTravel] Erreur parsing réponse JSON:', err);
+          return null;
+        })) as { message?: string };
         setSaveMessage(error?.message || 'Erreur lors de la sauvegarde. Veuillez réessayer.');
       }
     } catch (error: unknown) {

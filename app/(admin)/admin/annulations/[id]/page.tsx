@@ -236,7 +236,7 @@ export default function CancellationDetailPage() {
       </div>
 
       {error && (
-        <div className="admin-fade-in p-4 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
+        <div role="alert" className="admin-fade-in p-4 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
           <span className="text-red-800">{error}</span>
           <button type="button" onClick={() => setError(null)} className="admin-btn-secondary" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>
             Fermer

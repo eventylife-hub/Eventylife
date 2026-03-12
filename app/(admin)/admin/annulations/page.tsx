@@ -127,14 +127,16 @@ export default function CancellationsPage() {
     } catch (err: unknown) {
       logger.warn('API Annulations indisponible — données démo');
       let demoData: Cancellation[] = [];
-      if (filter === 'PENDING') {
-        demoData = FALLBACK_CANCELLATIONS_PENDING;
-      } else if (filter === 'APPROVED') {
-        demoData = FALLBACK_CANCELLATIONS_APPROVED;
-      } else if (filter === 'REJECTED') {
-        demoData = FALLBACK_CANCELLATIONS_REJECTED;
-      } else if (filter === 'REFUNDED') {
-        demoData = FALLBACK_CANCELLATIONS_REFUNDED;
+      if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+        if (filter === 'PENDING') {
+          demoData = FALLBACK_CANCELLATIONS_PENDING;
+        } else if (filter === 'APPROVED') {
+          demoData = FALLBACK_CANCELLATIONS_APPROVED;
+        } else if (filter === 'REJECTED') {
+          demoData = FALLBACK_CANCELLATIONS_REJECTED;
+        } else if (filter === 'REFUNDED') {
+          demoData = FALLBACK_CANCELLATIONS_REFUNDED;
+        }
       }
       setCancellations(demoData);
       setError(null);
@@ -181,7 +183,7 @@ export default function CancellationsPage() {
       </div>
 
       {error && (
-        <div className="admin-fade-in p-4 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
+        <div role="alert" className="admin-fade-in p-4 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
           <span className="text-red-800">{error}</span>
           <div className="flex gap-2">
             <button type="button" onClick={() => fetchCancellations()} className="admin-btn-secondary" style={{ padding: '0.25rem 0.75rem', fontSize: '0.875rem' }}>

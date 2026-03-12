@@ -255,7 +255,7 @@ export default function VoyagesPage() {
 
       {/* Error State */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center admin-fade-in delay-2">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex justify-between items-center admin-fade-in delay-2">
           <div>
             <p className="font-medium">{error}</p>
             <p className="text-sm text-red-700 mt-1">Vérifiez votre connexion et réessayez.</p>

@@ -43,8 +43,8 @@ const TRANSPORT_LABELS: Record<string, { icon: string; label: string }> = {
   MIXTE: { icon: '🚌✈️', label: 'Mixte' },
 };
 
-/* ─── Données démo ─── */
-const DEMO_TRAVELS: Travel[] = [
+/* ─── Données démo (protégées derrière NEXT_PUBLIC_DEMO_MODE) ─── */
+const getDemoTravels = (): Travel[] => [
   {
     id: 'voyage-demo-1',
     title: 'Marrakech en Famille',
@@ -168,11 +168,15 @@ export default function DepartVillePage() {
           const data = await res.json() as { items: Travel[] };
           setTravels(data?.items || []);
         } else {
-          setTravels(DEMO_TRAVELS);
+          if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+            setTravels(getDemoTravels());
+          }
         }
       } catch {
         logger.warn('API voyages indisponible — données démo');
-        setTravels(DEMO_TRAVELS);
+        if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+          setTravels(getDemoTravels());
+        }
       } finally {
         setLoading(false);
       }

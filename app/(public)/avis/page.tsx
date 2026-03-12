@@ -26,8 +26,8 @@ interface Review {
   avatarColor: string;
 }
 
-/* ─── Données démo ─── */
-const DEMO_REVIEWS: Review[] = [
+/* ─── Données démo (protégées derrière NEXT_PUBLIC_DEMO_MODE) ─── */
+const getDemoReviews = (): Review[] => [
   {
     id: 'r1',
     author: 'Sophie Martin',
@@ -167,8 +167,9 @@ export default function AvisPage() {
   const [transportFilter, setTransportFilter] = useState<TransportFilter>('all');
   const [sortBy, setSortBy] = useState<'recent' | 'helpful'>('recent');
 
+  const demoReviews = process.env.NEXT_PUBLIC_DEMO_MODE === 'true' ? getDemoReviews() : [];
   const filteredReviews = useMemo(() => {
-    let result = [...DEMO_REVIEWS];
+    let result = [...demoReviews];
 
     if (ratingFilter !== 'all') {
       const min = parseInt(ratingFilter);
@@ -183,15 +184,15 @@ export default function AvisPage() {
     else result.sort((a, b) => b.helpful - a.helpful);
 
     return result;
-  }, [ratingFilter, transportFilter, sortBy]);
+  }, [demoReviews, ratingFilter, transportFilter, sortBy]);
 
   /* Stats globales */
-  const avgRating = (DEMO_REVIEWS.reduce((s, r) => s + r.rating, 0) / DEMO_REVIEWS.length).toFixed(1);
-  const fiveStarPct = Math.round((DEMO_REVIEWS.filter((r) => r.rating === 5).length / DEMO_REVIEWS.length) * 100);
+  const avgRating = demoReviews.length > 0 ? (demoReviews.reduce((s, r) => s + r.rating, 0) / demoReviews.length).toFixed(1) : '0';
+  const fiveStarPct = demoReviews.length > 0 ? Math.round((demoReviews.filter((r) => r.rating === 5).length / demoReviews.length) * 100) : 0;
   const ratingDistribution = [5, 4, 3, 2, 1].map((n) => ({
     stars: n,
-    count: DEMO_REVIEWS.filter((r) => r.rating === n).length,
-    pct: Math.round((DEMO_REVIEWS.filter((r) => r.rating === n).length / DEMO_REVIEWS.length) * 100),
+    count: demoReviews.filter((r) => r.rating === n).length,
+    pct: demoReviews.length > 0 ? Math.round((demoReviews.filter((r) => r.rating === n).length / demoReviews.length) * 100) : 0,
   }));
 
   return (
@@ -243,7 +244,7 @@ export default function AvisPage() {
           <div className="flex justify-center gap-8 sm:gap-12">
             {[
               { value: avgRating, label: 'Note moyenne', sub: '/ 5' },
-              { value: `${DEMO_REVIEWS.length}+`, label: 'Avis vérifiés', sub: '' },
+              { value: `${demoReviews.length}+`, label: 'Avis vérifiés', sub: '' },
               { value: `${fiveStarPct}%`, label: '5 étoiles', sub: '' },
               { value: '98%', label: 'Recommandent', sub: '' },
             ].map((stat) => (

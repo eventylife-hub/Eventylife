@@ -186,7 +186,7 @@ export default function AuditPage() {
       </div>
 
       {error && (
-        <div className="admin-alert-bar danger">
+        <div role="alert" className="admin-alert-bar danger">
           <span>{error}</span>
           <div className="flex gap-2 ml-4">
             <button type="button" className="text-sm font-medium hover:underline" onClick={() => setRetryKey((k) => k + 1)}>

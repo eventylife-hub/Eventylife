@@ -209,6 +209,7 @@ export default function CheckoutStartPage() {
 
         {error && (
           <div
+            role="alert"
             style={{
               marginBottom: '1.5rem',
               padding: '1rem',

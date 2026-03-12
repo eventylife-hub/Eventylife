@@ -244,7 +244,7 @@ export default function InscriptionPage() {
         </div>
 
         {error && (
-          <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div role="alert" style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#FFE0E3', border: '1px solid #FFE0E3', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <AlertCircle className="w-5 h-5" style={{ color: 'var(--pro-coral)', flexShrink: 0 }} />
             <p style={{ color: 'var(--pro-coral)', fontSize: '14px' }}>{error}</p>
           </div>

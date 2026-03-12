@@ -51,7 +51,12 @@ async function request<T>(
   endpoint: string,
   options: FetchOptions = {}
 ): Promise<ApiResponse<T>> {
-  const baseUrl = API_CONFIG.BASE_URL ?? 'http://localhost:4000/api';
+  const baseUrl = API_CONFIG.BASE_URL ?? (() => {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('NEXT_PUBLIC_API_URL doit être configuré en production');
+    }
+    return 'http://localhost:4000/api';
+  })();
   const url = `${baseUrl}${endpoint}`;
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

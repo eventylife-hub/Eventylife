@@ -165,7 +165,7 @@ export default function FinancePage() {
             <h1 className="admin-page-title">Finance & Paiements</h1>
           </div>
         </div>
-        <div className="admin-alert-bar danger">
+        <div role="alert" className="admin-alert-bar danger">
           <span>{error}</span>
           <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={fetchAll}>
             Réessayer

@@ -99,6 +99,7 @@ export default function MotDePasseOubliePage() {
         {/* Message de confirmation */}
         {submitted && (
           <div
+            role="status"
             style={{
               marginBottom: '1.5rem',
               padding: '1rem',
@@ -120,6 +121,7 @@ export default function MotDePasseOubliePage() {
         {/* Message d'erreur */}
         {error && (
           <div
+            role="alert"
             style={{
               marginBottom: '1rem',
               padding: '0.75rem',

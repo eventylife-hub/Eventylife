@@ -190,7 +190,7 @@ export default function SupportPage() {
 
       {/* Affichage erreur */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex gap-3 items-start">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex gap-3 items-start">
           <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
             <p className="font-medium">{error}</p>

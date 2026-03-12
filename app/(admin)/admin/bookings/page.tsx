@@ -325,7 +325,7 @@ export default function AdminBookingsPage() {
         </div>
         <div className="admin-panel-body">
           {error && (
-            <div className="admin-alert-bar danger mb-6">
+            <div role="alert" className="admin-alert-bar danger mb-6">
               <span>{error}</span>
               <button type="button" className="ml-4 text-sm font-medium hover:underline" onClick={() => fetchBookings()}>
                 Réessayer

@@ -177,6 +177,7 @@ export default function InscriptionPage() {
         {/* Message d'erreur */}
         {error && (
           <div
+            role="alert"
             style={{
               marginBottom: '1rem',
               padding: '0.75rem',

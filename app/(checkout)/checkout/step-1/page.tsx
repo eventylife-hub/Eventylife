@@ -195,6 +195,7 @@ export default function CheckoutStep1Page() {
 
         {error && (
           <div
+            role="alert"
             style={{
               marginBottom: '1.5rem',
               backgroundColor: 'var(--terra-soft, #FEF2F2)',

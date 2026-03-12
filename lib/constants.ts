@@ -247,7 +247,10 @@ export const STRIPE_CONFIG = {
  * Configuration API
  */
 export const API_CONFIG = {
-  BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
+  BASE_URL: process.env.NEXT_PUBLIC_API_URL ||
+    (process.env.NODE_ENV === 'production'
+      ? (() => { throw new Error('NEXT_PUBLIC_API_URL doit être configuré en production'); })()
+      : 'http://localhost:4000/api'),
   TIMEOUT: 30000,
   RETRY_ATTEMPTS: 3
 };

@@ -319,7 +319,7 @@ export default function CreateTripPage() {
 
       {/* Error banner */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 admin-fade-in delay-1">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 admin-fade-in delay-1">
           <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">{error}</p>
@@ -335,7 +335,7 @@ export default function CreateTripPage() {
 
       {/* Submit error banner */}
       {submitError && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 admin-fade-in delay-1">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 admin-fade-in delay-1">
           <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-red-900">{submitError}</p>

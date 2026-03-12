@@ -123,7 +123,10 @@ export default function ContactPage() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
+        const errorData = await response.json().catch((err) => {
+          console.error('[ContactForm] Erreur parsing réponse JSON:', err);
+          return null;
+        });
         throw new Error(errorData?.message || `Erreur serveur (${response.status})`);
       }
 

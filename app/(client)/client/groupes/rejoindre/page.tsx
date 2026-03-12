@@ -117,7 +117,7 @@ export default function RejoindrePage() {
           <div style={{ padding: '1.5rem' }} className="space-y-4">
             <form onSubmit={handleVerifyCode} className="space-y-4">
               {error && (
-                <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
+                <div role="alert" className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: 'var(--terra-soft, #FEF2F2)', border: '1.5px solid #DC2626' }}>
                   <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--terra, #DC2626)' }} />
                   <p className="text-sm" style={{ color: 'var(--terra, #DC2626)' }}>{error}</p>
                 </div>
@@ -191,7 +191,7 @@ export default function RejoindrePage() {
             {/* Aperçu du groupe */}
             {groupePreview && (
               <div className="pt-4 space-y-4" style={{ borderTop: '1px solid #E5E0D8' }}>
-                <div className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#DCFCE7', border: `1.5px solid ${'#166534'}` }}>
+                <div role="status" className="rounded-lg p-3 flex items-start gap-3" style={{ backgroundColor: '#DCFCE7', border: `1.5px solid ${'#166534'}` }}>
                   <CheckCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: '#166534' }} />
                   <p className="text-sm" style={{ color: '#166534' }}>Groupe trouvé!</p>
                 </div>

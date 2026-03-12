@@ -372,6 +372,7 @@ export default function CheckoutConfirmationPage() {
 
         {error && (
           <div
+            role="alert"
             style={{
               backgroundColor: 'var(--terra-soft, #FEF2F2)',
               border: '1.5px solid #E5E0D8',
