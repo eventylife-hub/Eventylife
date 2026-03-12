@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 interface ApprovalModalProps {
   isOpen: boolean;
@@ -50,11 +48,11 @@ export function ApprovalModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <Card className="w-full max-w-md">
-        <CardHeader>
+      <div className="w-full max-w-md bg-white rounded-xl border shadow-sm">
+        <div className="p-6 pb-0">
           <h2 className="text-lg font-semibold">Décision pour {entityName}</h2>
-        </CardHeader>
-        <CardContent className="space-y-6">
+        </div>
+        <div className="p-6 space-y-6">
           {/* Action Selection */}
           <div className="space-y-3">
             <label className="flex items-center gap-3 cursor-pointer">
@@ -101,23 +99,23 @@ export function ApprovalModal({
 
           {/* Buttons */}
           <div className="flex gap-3 justify-end">
-            <Button
-              variant="outline"
+            <button
+              className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px]"
               onClick={onClose}
               disabled={isSubmitting}
             >
               Annuler
-            </Button>
-            <Button
+            </button>
+            <button
+              className={`px-4 py-2 border rounded-lg transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] ${action === 'reject' ? 'bg-red-600 hover:bg-red-700 text-white border-red-600' : 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600'}`}
               onClick={handleSubmit}
               disabled={isSubmitting || (action === 'reject' && !reason.trim())}
-              className={action === 'reject' ? 'bg-red-600 hover:bg-red-700' : ''}
             >
               {isSubmitting ? 'Traitement...' : action === 'approve' ? 'Approuver' : 'Rejeter'}
-            </Button>
+            </button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

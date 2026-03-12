@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 
 export interface DataTableColumn<T> {
   key: keyof T;
@@ -51,7 +48,7 @@ export function DataTable<T extends { id: string }>({
     return (
       <div className="space-y-4">
         {[...Array(5)].map((_, i: number) => (
-          <Skeleton key={i} className="h-12 w-full" />
+          <div key={i} className="h-12 w-full bg-gray-200 rounded animate-pulse" />
         ))}
       </div>
     );
@@ -68,77 +65,80 @@ export function DataTable<T extends { id: string }>({
   return (
     <div className="space-y-4">
       <div className="overflow-x-auto border rounded-lg">
-        <Table>
-          <TableHeader>
-            <TableRow>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
               {columns.map((col) => (
-                <TableHead
+                <th
                   key={String(col.key ?? "")}
-                  className={col.width ? `w-[${col.width}]` : ''}
+                  className={`px-4 py-3 text-left text-sm font-medium text-gray-500 ${col.width ? `w-[${col.width}]` : ''}`}
                 >
                   {col.label}
                   {col.sortable && ' ↕'}
-                </TableHead>
+                </th>
               ))}
-              {rowActions.length > 0 && <TableHead>Actions</TableHead>}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+              {rowActions.length > 0 && <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Actions</th>}
+            </tr>
+          </thead>
+          <tbody>
             {data.map((row) => (
-              <TableRow
+              <tr
                 key={row.id}
-                className={onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}
+                className={`border-b ${onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}`}
                 onClick={() => onRowClick?.(row)}
               >
                 {columns.map((col) => (
-                  <TableCell key={String(col.key ?? "")}>
+                  <td key={String(col.key ?? "")} className="px-4 py-3">
                     {col.render ? col.render(row[col.key], row) : String(row[col.key] ?? "")}
-                  </TableCell>
+                  </td>
                 ))}
                 {rowActions.length > 0 && (
-                  <TableCell>
+                  <td className="px-4 py-3">
                     <div className="flex gap-2">
                       {rowActions.map((action) => (
-                        <Button
+                        <button
                           key={action.label}
-                          size="sm"
-                          variant={action.variant || 'outline'}
+                          className={`px-3 py-1.5 text-sm rounded-lg transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] ${
+                            action.variant === 'destructive'
+                              ? 'bg-red-600 hover:bg-red-700 text-white border border-red-600'
+                              : 'px-3 py-1.5 border rounded-lg hover:bg-gray-50 transition-colors'
+                          }`}
                           onClick={(e: React.MouseEvent) => {
                             e.stopPropagation();
                             action.onClick(row);
                           }}
                         >
                           {action.label}
-                        </Button>
+                        </button>
                       ))}
                     </div>
-                  </TableCell>
+                  </td>
                 )}
-              </TableRow>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       </div>
 
       {pageable && (
         <div className="flex justify-between items-center">
-          <Button
-            variant="outline"
+          <button
+            className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px]"
             disabled={!hasPrevPage}
             onClick={onPrevPage}
           >
             Précédent
-          </Button>
+          </button>
           <span className="text-sm text-gray-600">
             {data.length} résultats
           </span>
-          <Button
-            variant="outline"
+          <button
+            className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px]"
             disabled={!hasNextPage}
             onClick={onNextPage}
           >
             Suivant
-          </Button>
+          </button>
         </div>
       )}
     </div>

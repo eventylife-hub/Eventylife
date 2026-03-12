@@ -1,11 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle, Loader2, ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface CampaignData {
@@ -92,11 +87,11 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Étape {step} / 3</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
+    <div className="bg-white rounded-xl border shadow-sm">
+      <div className="p-6 pb-0">
+        <h3 className="text-lg font-semibold">Étape {step} / 3</h3>
+      </div>
+      <div className="p-6 space-y-6">
         {error && (
           <div className="rounded-lg border border-red-200 bg-red-50 p-3 flex items-start gap-3">
             <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
@@ -108,8 +103,8 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
         {step === 1 && (
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="title">Titre de la campagne *</Label>
-              <Input
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700">Titre de la campagne *</label>
+              <input
                 id="title"
                 name="title"
                 value={formData.title}
@@ -117,12 +112,13 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
                 placeholder="Ex: Promo hiver 2026"
                 disabled={loading}
                 required
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
-              <Textarea
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+              <textarea
                 id="description"
                 name="description"
                 value={formData.description}
@@ -130,6 +126,7 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
                 placeholder="Détails de votre campagne..."
                 rows={4}
                 disabled={loading}
+                className="w-full px-3 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
             </div>
           </div>
@@ -139,8 +136,8 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
         {step === 2 && (
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="targetAudience">Audience cible</Label>
-              <Textarea
+              <label htmlFor="targetAudience" className="block text-sm font-medium text-gray-700">Audience cible</label>
+              <textarea
                 id="targetAudience"
                 name="targetAudience"
                 value={formData.targetAudience}
@@ -148,12 +145,13 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
                 placeholder="Décrivez votre audience..."
                 rows={3}
                 disabled={loading}
+                className="w-full px-3 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="budgetEuros">Budget (€) *</Label>
-              <Input
+              <label htmlFor="budgetEuros" className="block text-sm font-medium text-gray-700">Budget (€) *</label>
+              <input
                 id="budgetEuros"
                 name="budgetEuros"
                 type="number"
@@ -164,6 +162,7 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
                 placeholder="Ex: 500"
                 disabled={loading}
                 required
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
             </div>
           </div>
@@ -173,26 +172,28 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
         {step === 3 && (
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="startDate">Date de début</Label>
-              <Input
+              <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">Date de début</label>
+              <input
                 id="startDate"
                 name="startDate"
                 type="date"
                 value={formData.startDate}
                 onChange={handleChange}
                 disabled={loading}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="endDate">Date de fin</Label>
-              <Input
+              <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">Date de fin</label>
+              <input
                 id="endDate"
                 name="endDate"
                 type="date"
                 value={formData.endDate}
                 onChange={handleChange}
                 disabled={loading}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
             </div>
 
@@ -204,34 +205,42 @@ export function CampaignWizard({ onComplete, loading }: CampaignWizardProps) {
 
         {/* Navigation */}
         <div className="flex gap-3 justify-between pt-4 border-t">
-          <Button
-            variant="outline"
+          <button
+            className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] flex items-center justify-center gap-2"
             onClick={handleBack}
             disabled={step === 1 || loading}
           >
-            <ChevronLeft className="h-4 w-4 mr-2" />
+            <ChevronLeft className="h-4 w-4" />
             Précédent
-          </Button>
+          </button>
 
           {step < 3 ? (
-            <Button onClick={handleNext} disabled={loading}>
+            <button
+              className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] rounded-lg flex items-center justify-center gap-2"
+              onClick={handleNext}
+              disabled={loading}
+            >
               Suivant
-              <ChevronRight className="h-4 w-4 ml-2" />
-            </Button>
+              <ChevronRight className="h-4 w-4" />
+            </button>
           ) : (
-            <Button onClick={handleSubmit} disabled={loading} variant="default">
+            <button
+              className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] rounded-lg flex items-center justify-center gap-2"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
               {loading ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 animate-spin" />
                   Création...
                 </>
               ) : (
                 'Créer la campagne'
               )}
-            </Button>
+            </button>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

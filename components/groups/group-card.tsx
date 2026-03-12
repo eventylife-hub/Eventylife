@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, MapPin } from 'lucide-react';
 
 interface GroupCardProps {
@@ -29,11 +27,11 @@ export function GroupCard({ groupe }: GroupCardProps) {
   const spotsLeft = maxMembers ? maxMembers - groupe.memberCount : null;
 
   return (
-    <Card className="hover:shadow-lg transition-shadow">
-      <CardHeader>
-        <CardTitle className="text-lg">Groupe</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="bg-white rounded-xl border shadow-sm hover:shadow-lg transition-shadow">
+      <div className="p-6 pb-0">
+        <h3 className="text-lg font-semibold">Groupe</h3>
+      </div>
+      <div className="space-y-4 p-6 pt-4">
         {/* Leader */}
         {groupe.leaderUser && (
           <div className="flex items-center gap-2">
@@ -74,13 +72,16 @@ export function GroupCard({ groupe }: GroupCardProps) {
 
         {/* Bouton */}
         <Link href={`/voyages/${groupe.id}/rejoindre`} className="block">
-          <Button
-            className="w-full"
+          <button
+            className={`w-full px-4 py-2 rounded-lg transition-colors disabled:opacity-50 min-h-[44px] font-medium ${
+              isFull
+                ? 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
             disabled={!!isFull}
-            variant={isFull ? 'outline' : 'primary'}
           >
             {isFull ? 'Groupe plein' : 'Rejoindre'}
-          </Button>
+          </button>
         </Link>
 
         {spotsLeft && spotsLeft > 0 && (
@@ -88,7 +89,7 @@ export function GroupCard({ groupe }: GroupCardProps) {
             {spotsLeft} place{spotsLeft > 1 ? 's' : ''} disponible{spotsLeft > 1 ? 's' : ''}
           </p>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Phone, Users, MapPin } from 'lucide-react';
 
 interface RestaurantCardProps {
@@ -20,8 +19,8 @@ interface RestaurantCardProps {
  */
 export function RestaurantCard({ restaurant }: RestaurantCardProps) {
   return (
-    <Card>
-      <CardContent className="pt-6 space-y-3">
+    <div className="bg-white rounded-xl border shadow-sm">
+      <div className="pt-6 space-y-3">
         <div>
           <h3 className="font-semibold text-lg">{restaurant.name}</h3>
           {restaurant.cuisineType && (
@@ -69,7 +68,7 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
             {restaurant.notes}
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

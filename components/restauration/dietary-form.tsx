@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 interface DietaryFormProps {
@@ -69,64 +64,66 @@ export function DietaryForm({
 
       {/* Régime alimentaire */}
       <div className="space-y-3">
-        <Label className="text-base font-semibold">Régime alimentaire</Label>
-        <RadioGroup value={diet} onValueChange={setDiet}>
+        <label className="block text-sm font-medium text-gray-700 text-base font-semibold">Régime alimentaire</label>
+        <div role="radiogroup">
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="omnivore" id="omnivore" />
-            <Label htmlFor="omnivore" className="cursor-pointer">
+            <input type="radio" id="omnivore" name="diet" value="omnivore" checked={diet === 'omnivore'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <label htmlFor="omnivore" className="block text-sm font-medium text-gray-700 cursor-pointer">
               Omnivore
-            </Label>
+            </label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="vegetarian" id="vegetarian" />
-            <Label htmlFor="vegetarian" className="cursor-pointer">
+            <input type="radio" id="vegetarian" name="diet" value="vegetarian" checked={diet === 'vegetarian'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <label htmlFor="vegetarian" className="block text-sm font-medium text-gray-700 cursor-pointer">
               Végétarien
-            </Label>
+            </label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="vegan" id="vegan" />
-            <Label htmlFor="vegan" className="cursor-pointer">
+            <input type="radio" id="vegan" name="diet" value="vegan" checked={diet === 'vegan'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <label htmlFor="vegan" className="block text-sm font-medium text-gray-700 cursor-pointer">
               Végan
-            </Label>
+            </label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="halal" id="halal" />
-            <Label htmlFor="halal" className="cursor-pointer">
+            <input type="radio" id="halal" name="diet" value="halal" checked={diet === 'halal'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <label htmlFor="halal" className="block text-sm font-medium text-gray-700 cursor-pointer">
               Halal
-            </Label>
+            </label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="kosher" id="kosher" />
-            <Label htmlFor="kosher" className="cursor-pointer">
+            <input type="radio" id="kosher" name="diet" value="kosher" checked={diet === 'kosher'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <label htmlFor="kosher" className="block text-sm font-medium text-gray-700 cursor-pointer">
               Casher
-            </Label>
+            </label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="glutenFree" id="glutenFree" />
-            <Label htmlFor="glutenFree" className="cursor-pointer">
+            <input type="radio" id="glutenFree" name="diet" value="glutenFree" checked={diet === 'glutenFree'} onChange={(e) => setDiet(e.target.value)} className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <label htmlFor="glutenFree" className="block text-sm font-medium text-gray-700 cursor-pointer">
               Sans gluten
-            </Label>
+            </label>
           </div>
-        </RadioGroup>
+        </div>
       </div>
 
       {/* Allergies */}
       <div className="space-y-3">
-        <Label className="text-base font-semibold">
+        <label className="block text-sm font-medium text-gray-700 text-base font-semibold">
           Allergies (optionnel)
-        </Label>
+        </label>
         <div className="space-y-2">
           {allergyOptions.map((option) => (
             <div key={option.id} className="flex items-center gap-2">
-              <Checkbox
+              <input
+                type="checkbox"
                 id={option.id}
                 checked={allergies.includes(option.id)}
-                onCheckedChange={() => handleAllergyChange(option.id)}
+                onChange={() => handleAllergyChange(option.id)}
                 disabled={loading}
+                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
-              <Label htmlFor={option.id} className="cursor-pointer">
+              <label htmlFor={option.id} className="block text-sm font-medium text-gray-700 cursor-pointer">
                 {option.label}
-              </Label>
+              </label>
             </div>
           ))}
         </div>
@@ -134,23 +131,23 @@ export function DietaryForm({
 
       {/* Notes spéciales */}
       <div className="space-y-2">
-        <Label htmlFor="specialNotes">Notes spéciales (optionnel)</Label>
-        <Textarea
+        <label htmlFor="specialNotes" className="block text-sm font-medium text-gray-700">Notes spéciales (optionnel)</label>
+        <textarea
           id="specialNotes"
           value={specialNotes}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpecialNotes((e.target as HTMLInputElement).value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSpecialNotes(e.target.value)}
           placeholder="Ex: Intolérances, préférences culinaires, etc."
           rows={3}
           disabled={loading}
+          className="w-full px-3 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       {/* Submit */}
-      <Button
+      <button
         type="submit"
         disabled={loading}
-        className="w-full"
-        size="lg"
+        className="w-full px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] bg-blue-600 text-white hover:bg-blue-700"
       >
         {loading ? (
           <>
@@ -160,7 +157,7 @@ export function DietaryForm({
         ) : (
           'Sauvegarder mes préférences'
         )}
-      </Button>
+      </button>
     </form>
   );
 }

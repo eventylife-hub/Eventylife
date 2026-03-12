@@ -1,6 +1,4 @@
 import React from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Crown, Shield, Trash2 } from 'lucide-react';
 
 interface Member {
@@ -80,7 +78,7 @@ export function MemberList({
           </div>
 
           <div className="flex items-center gap-2">
-            <Badge className={getRoleBadgeColor(member.role)}>
+            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getRoleBadgeColor(member.role)}`}>
               <span className="flex items-center gap-1">
                 {getRoleIcon(member.role)}
                 {member.role === 'LEADER'
@@ -89,31 +87,29 @@ export function MemberList({
                   ? 'Association'
                   : 'Membre'}
               </span>
-            </Badge>
+            </span>
 
             {canManage && currentUserRole === 'LEADER' && (
               <div className="flex gap-1">
                 {member.role !== 'LEADER' && onPromote && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
+                  <button
                     onClick={() => onPromote(member.id)}
                     title="Promouvoir en leader"
                     aria-label="Promouvoir en leader"
+                    className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px]"
                   >
                     <Crown className="h-4 w-4" />
-                  </Button>
+                  </button>
                 )}
                 {onKick && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
+                  <button
                     onClick={() => onKick(member.id)}
                     title="Exclure"
                     aria-label="Exclure le membre"
+                    className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px]"
                   >
                     <Trash2 className="h-4 w-4 text-red-500" />
-                  </Button>
+                  </button>
                 )}
               </div>
             )}

@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2 } from 'lucide-react';
 
 interface InviteFormProps {
@@ -71,8 +67,8 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email du membre</Label>
-        <Input
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email du membre</label>
+        <input
           id="email"
           type="email"
           autoComplete="email"
@@ -81,31 +77,33 @@ export function InviteForm({ groupId, onSuccess }: InviteFormProps) {
           placeholder="membre@example.com"
           disabled={loading}
           required
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message">Message (optionnel)</Label>
-        <Textarea
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message (optionnel)</label>
+        <textarea
           id="message"
           value={message}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage((e.target as HTMLInputElement).value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage((e.target as HTMLTextAreaElement).value)}
           placeholder="Bienvenue dans notre groupe..."
           disabled={loading}
           rows={3}
+          className="w-full px-3 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
-      <Button type="submit" disabled={loading} className="w-full">
+      <button type="submit" disabled={loading} className="w-full px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors disabled:opacity-50 min-h-[44px] font-medium">
         {loading ? (
           <>
-            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            <Loader2 className="h-4 w-4 mr-2 animate-spin inline" />
             Envoi...
           </>
         ) : (
           'Envoyer invitation'
         )}
-      </Button>
+      </button>
     </form>
   );
 }

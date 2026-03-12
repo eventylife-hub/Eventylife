@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useNotificationStore } from '@/lib/stores/notification-store';
 import { NotificationItem } from './notification-item';
-import { Button } from '@/components/ui/button';
 
 /**
  * Composant cloche de notifications dans le header
@@ -150,9 +149,9 @@ export function NotificationBell() {
           {recentNotifications.length > 0 && (
             <div className="p-4 border-t border-gray-200 text-center">
               <Link href="/client/notifications">
-                <Button variant="outline" size="sm" className="w-full">
+                <button className="w-full px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50">
                   Voir toutes les notifications
-                </Button>
+                </button>
               </Link>
             </div>
           )}

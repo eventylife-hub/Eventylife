@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Link from 'next/link';
 
 interface StatsCardProps {
@@ -25,8 +24,8 @@ export function StatsCard({
   const trendColor = trend === 'up' ? 'text-green-600' : 'text-red-600';
 
   const content = (
-    <Card elevated className={href ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''}>
-      <CardContent className="p-6">
+    <div className={`bg-white rounded-xl border shadow-md ${href ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''}`}>
+      <div className="p-6">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <p className="text-gray-600 text-sm font-medium">{title}</p>
@@ -41,8 +40,8 @@ export function StatsCard({
           </div>
           <div className="text-3xl opacity-20">{icon}</div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 
   if (href) {

@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Textarea } from '@/components/ui/textarea';
 import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 
 interface MealPlan {
@@ -88,30 +83,32 @@ export function MealPlanEditor({
       {/* Petit-déjeuner */}
       <div className="space-y-2 border-b pb-4">
         <div className="flex items-center gap-2">
-          <Checkbox
+          <input
+            type="checkbox"
             id="breakfast-enabled"
             checked={plan.breakfast?.enabled ?? false}
-            onCheckedChange={(checked) =>
+            onChange={(e) =>
               handleMealChange(
                 'breakfast',
                 'enabled',
-                checked === true
+                e.target.checked
               )
             }
             disabled={submitting}
+            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          <Label htmlFor="breakfast-enabled" className="font-semibold">
+          <label htmlFor="breakfast-enabled" className="block text-sm font-medium text-gray-700 font-semibold">
             Petit-déjeuner
-          </Label>
+          </label>
         </div>
 
         {plan.breakfast?.enabled && (
           <div className="ml-6 space-y-2">
             <div>
-              <Label htmlFor="breakfast-provider" className="text-xs">
+              <label htmlFor="breakfast-provider" className="block text-sm font-medium text-gray-700 text-xs">
                 Prestataire
-              </Label>
-              <Input
+              </label>
+              <input
                 id="breakfast-provider"
                 value={plan.breakfast?.provider || ''}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -119,6 +116,7 @@ export function MealPlanEditor({
                 }
                 placeholder="Nom du restaurant..."
                 disabled={submitting}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -128,26 +126,28 @@ export function MealPlanEditor({
       {/* Déjeuner */}
       <div className="space-y-2 border-b pb-4">
         <div className="flex items-center gap-2">
-          <Checkbox
+          <input
+            type="checkbox"
             id="lunch-enabled"
             checked={plan.lunch?.enabled ?? false}
-            onCheckedChange={(checked) =>
-              handleMealChange('lunch', 'enabled', checked === true)
+            onChange={(e) =>
+              handleMealChange('lunch', 'enabled', e.target.checked)
             }
             disabled={submitting}
+            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          <Label htmlFor="lunch-enabled" className="font-semibold">
+          <label htmlFor="lunch-enabled" className="block text-sm font-medium text-gray-700 font-semibold">
             Déjeuner
-          </Label>
+          </label>
         </div>
 
         {plan.lunch?.enabled && (
           <div className="ml-6 space-y-2">
             <div>
-              <Label htmlFor="lunch-provider" className="text-xs">
+              <label htmlFor="lunch-provider" className="block text-sm font-medium text-gray-700 text-xs">
                 Prestataire
-              </Label>
-              <Input
+              </label>
+              <input
                 id="lunch-provider"
                 value={plan.lunch?.provider || ''}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -155,6 +155,7 @@ export function MealPlanEditor({
                 }
                 placeholder="Nom du restaurant..."
                 disabled={submitting}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -164,26 +165,28 @@ export function MealPlanEditor({
       {/* Dîner */}
       <div className="space-y-2 border-b pb-4">
         <div className="flex items-center gap-2">
-          <Checkbox
+          <input
+            type="checkbox"
             id="dinner-enabled"
             checked={plan.dinner?.enabled ?? false}
-            onCheckedChange={(checked) =>
-              handleMealChange('dinner', 'enabled', checked === true)
+            onChange={(e) =>
+              handleMealChange('dinner', 'enabled', e.target.checked)
             }
             disabled={submitting}
+            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          <Label htmlFor="dinner-enabled" className="font-semibold">
+          <label htmlFor="dinner-enabled" className="block text-sm font-medium text-gray-700 font-semibold">
             Dîner
-          </Label>
+          </label>
         </div>
 
         {plan.dinner?.enabled && (
           <div className="ml-6 space-y-2">
             <div>
-              <Label htmlFor="dinner-provider" className="text-xs">
+              <label htmlFor="dinner-provider" className="block text-sm font-medium text-gray-700 text-xs">
                 Prestataire
-              </Label>
-              <Input
+              </label>
+              <input
                 id="dinner-provider"
                 value={plan.dinner?.provider || ''}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -191,13 +194,14 @@ export function MealPlanEditor({
                 }
                 placeholder="Nom du restaurant..."
                 disabled={submitting}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
         )}
       </div>
 
-      <Button type="submit" disabled={submitting} className="w-full">
+      <button type="submit" disabled={submitting} className="w-full px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] bg-blue-600 text-white hover:bg-blue-700">
         {submitting ? (
           <>
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -206,7 +210,7 @@ export function MealPlanEditor({
         ) : (
           'Sauvegarder le plan'
         )}
-      </Button>
+      </button>
     </form>
   );
 }

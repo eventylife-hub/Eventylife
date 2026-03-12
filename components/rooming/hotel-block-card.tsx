@@ -1,8 +1,5 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { AlertCircle, Pencil } from 'lucide-react';
 
 interface HotelBlock {
@@ -34,33 +31,33 @@ export function HotelBlockCard({
   onEdit: () => void;
 }) {
   return (
-    <Card>
-      <CardHeader className="pb-3">
+    <div className="bg-white rounded-xl border shadow-sm">
+      <div className="p-6 pb-0">
         <div className="flex justify-between items-start">
           <div>
-            <CardTitle className="text-base">{block.hotelName}</CardTitle>
-            <CardDescription className="text-xs mt-1">
+            <h3 className="text-lg font-semibold text-base">{block.hotelName}</h3>
+            <p className="text-sm text-gray-500 text-xs mt-1">
               {block.hotelEmail}
-            </CardDescription>
+            </p>
           </div>
-          <Badge
-            variant={
+          <span
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
               block.status === 'CONFIRMED'
-                ? 'default'
+                ? 'bg-green-100 text-green-800'
                 : block.status === 'EXPIRED'
-                ? 'destructive'
-                : 'secondary'
-            }
+                ? 'bg-red-100 text-red-800'
+                : 'bg-gray-100 text-gray-800'
+            }`}
           >
             {block.status === 'CONFIRMED'
               ? 'Confirmé'
               : block.status === 'EXPIRED'
               ? 'Expiré'
               : 'Invitation'}
-          </Badge>
+          </span>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-3">
+      </div>
+      <div className="p-6 space-y-3">
         {/* Alerte expiration */}
         {block.expiresIn && block.expiresIn <= 3 && block.expiresIn > 0 && (
           <div className="flex gap-2 bg-yellow-50 border border-yellow-200 p-2 rounded text-xs text-yellow-800">
@@ -105,17 +102,15 @@ export function HotelBlockCard({
 
         {/* Actions */}
         {block.status !== 'CONFIRMED' && (
-          <Button
+          <button
             onClick={onEdit}
-            size="sm"
-            variant="outline"
-            className="w-full gap-2 text-xs"
+            className="w-full px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] gap-2 text-xs flex items-center justify-center"
           >
             <Pencil className="w-3 h-3" />
             Modifier
-          </Button>
+          </button>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

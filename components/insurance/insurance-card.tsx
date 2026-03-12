@@ -1,8 +1,5 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { ShieldCheck, Download } from 'lucide-react';
 
 interface InsuranceCoverage {
@@ -42,22 +39,22 @@ export function InsuranceCard({
   if (!option) return null;
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
+    <div className="bg-white rounded-xl border shadow-sm">
+      <div className="p-6 pb-3">
         <div className="flex justify-between items-start">
           <div>
-            <CardTitle className="text-lg flex items-center gap-2">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-blue-600" />
               {option.name}
-            </CardTitle>
-            <CardDescription className="text-sm mt-2">
+            </h3>
+            <p className="text-sm text-gray-500 mt-2">
               {option.description}
-            </CardDescription>
+            </p>
           </div>
-          <Badge variant="outline">{option.priceCents / 100}€</Badge>
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border">{option.priceCents / 100}€</span>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
+      </div>
+      <div className="p-6 space-y-4">
         {/* Couvertures */}
         <div className="space-y-2">
           <p className="text-xs font-semibold text-gray-700">Couvertures incluses:</p>
@@ -111,16 +108,21 @@ export function InsuranceCard({
 
         {/* Actions */}
         {onSubscribe ? (
-          <Button onClick={onSubscribe} className="w-full gap-2">
+          <button
+            onClick={onSubscribe}
+            className="w-full px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center justify-center rounded-lg"
+          >
             Souscrire
-          </Button>
+          </button>
         ) : (
-          <Button variant="outline" className="w-full gap-2">
+          <button
+            className="w-full px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center justify-center"
+          >
             <Download className="w-4 h-4" />
             Voir certificat
-          </Button>
+          </button>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

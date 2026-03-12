@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 
 interface ExportCtaProps {
@@ -26,10 +25,10 @@ export function ExportCta({
 
   return (
     <Link href={`/admin/exports?${params.toString()}`}>
-      <Button variant={variant} size="sm" className="min-h-[44px] min-w-[44px]">
-        <Download className="w-4 h-4 mr-2" />
+      <button className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] inline-flex items-center gap-2">
+        <Download className="w-4 h-4" />
         {label}
-      </Button>
+      </button>
     </Link>
   );
 }

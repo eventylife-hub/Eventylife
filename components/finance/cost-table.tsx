@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Trash2, Plus } from 'lucide-react';
 
 interface Cost {
@@ -124,17 +122,18 @@ export function CostTable({
             {adding && (
               <tr className="border-b bg-blue-50">
                 <td className="py-2">
-                  <Input
+                  <input
+                    type="text"
                     placeholder="Titre"
                     value={formData.title}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setFormData({ ...formData, title: (e.target as HTMLInputElement).value })
                     }
-                    className="h-8"
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-8"
                   />
                 </td>
                 <td className="py-2 text-right">
-                  <Input
+                  <input
                     type="number"
                     placeholder="0.00"
                     step="0.01"
@@ -145,7 +144,7 @@ export function CostTable({
                         costAmountHT: (e.target as HTMLInputElement).value,
                       })
                     }
-                    className="h-8 text-right"
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-8 text-right"
                   />
                 </td>
                 <td className="py-2 text-right">20%</td>
@@ -175,19 +174,21 @@ export function CostTable({
 
       <div className="flex gap-2">
         {!adding && (
-          <Button
+          <button
             onClick={() => setAdding(true)}
-            variant="outline"
-            className="gap-2"
+            className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center"
           >
             <Plus className="w-4 h-4" />
             Ajouter coût
-          </Button>
+          </button>
         )}
         {adding && (
-          <Button onClick={handleAddCost} className="gap-2">
+          <button
+            onClick={handleAddCost}
+            className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] gap-2 flex items-center rounded-lg"
+          >
             Ajouter
-          </Button>
+          </button>
         )}
       </div>
 

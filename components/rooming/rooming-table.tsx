@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Pencil, Check, X } from 'lucide-react';
 
 interface Room {
@@ -93,31 +91,27 @@ export function RoomingTable({
               <td className="py-2 font-medium">
                 {editingRoomId === room.id ? (
                   <div className="flex gap-2">
-                    <Input
+                    <input
                       value={editValue}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditValue((e.target as HTMLInputElement).value)}
                       placeholder="N° chambre"
-                      className="h-7 w-24"
+                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-7 w-24"
                     />
-                    <Button
-                      size="sm"
+                    <button
                       onClick={handleSaveRoom}
                       disabled={isSaving}
-                      variant="ghost"
-                      className="h-7 px-2"
+                      className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] h-7 px-2 bg-white"
                       aria-label="Enregistrer le numéro de chambre"
                     >
                       <Check className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      size="sm"
+                    </button>
+                    <button
                       onClick={() => setEditingRoomId(null)}
-                      variant="ghost"
-                      className="h-7 px-2"
+                      className="px-3 py-1.5 text-sm border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] h-7 px-2 bg-white"
                       aria-label="Annuler la modification"
                     >
                       <X className="w-4 h-4" />
-                    </Button>
+                    </button>
                   </div>
                 ) : (
                   room.roomLabel

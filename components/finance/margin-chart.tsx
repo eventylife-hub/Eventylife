@@ -1,7 +1,5 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
 /**
  * Composant Margin Chart
  *
@@ -15,15 +13,15 @@ export function MarginChart({
 }) {
   if (!data || data.length === 0) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Évolution Marge</CardTitle>
-          <CardDescription>Par mois</CardDescription>
-        </CardHeader>
-        <CardContent className="text-center py-8">
+      <div className="bg-white rounded-xl border shadow-sm">
+        <div className="p-6 pb-0">
+          <h3 className="text-lg font-semibold">Évolution Marge</h3>
+          <p className="text-sm text-gray-500">Par mois</p>
+        </div>
+        <div className="p-6 text-center py-8">
           <p className="text-gray-500">Aucune donnée</p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
@@ -38,12 +36,12 @@ export function MarginChart({
   const chartWidth = data.length * (barWidth + spacing) + 40;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Évolution Marge</CardTitle>
-        <CardDescription>Par mois (en €)</CardDescription>
-      </CardHeader>
-      <CardContent className="overflow-x-auto pb-4">
+    <div className="bg-white rounded-xl border shadow-sm">
+      <div className="p-6 pb-0">
+        <h3 className="text-lg font-semibold">Évolution Marge</h3>
+        <p className="text-sm text-gray-500">Par mois (en €)</p>
+      </div>
+      <div className="p-6 overflow-x-auto pb-4">
         <svg width={chartWidth} height={chartHeight + 60} className="min-w-full">
           {/* Grille */}
           {[0, 25, 50, 75, 100].map((percent) => (
@@ -124,7 +122,7 @@ export function MarginChart({
             </text>
           </g>
         </svg>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

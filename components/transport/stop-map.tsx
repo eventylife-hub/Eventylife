@@ -1,6 +1,5 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
 import { MapPin } from 'lucide-react';
 
 interface BusStop {
@@ -24,8 +23,8 @@ interface TransportStop {
  */
 export function StopMap({ stops }: { stops: TransportStop[] }) {
   return (
-    <Card className="border-gray-200">
-      <CardContent className="p-4">
+    <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
+      <div className="p-4">
         <div className="space-y-3">
           {stops.length === 0 ? (
             <p className="text-gray-500 text-center py-8">Aucun arrêt</p>
@@ -79,7 +78,7 @@ export function StopMap({ stops }: { stops: TransportStop[] }) {
             </>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

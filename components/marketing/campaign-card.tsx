@@ -1,8 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { TrendingUp, Clock } from 'lucide-react';
 
 interface CampaignCardProps {
@@ -54,18 +51,18 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
 
   return (
     <Link href={`/pro/marketing/${campaign.id}`}>
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
-        <CardHeader>
+      <div className="bg-white rounded-xl border shadow-sm hover:shadow-lg transition-shadow cursor-pointer h-full">
+        <div className="p-6 pb-0">
           <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-lg line-clamp-2">
+            <h3 className="text-lg font-semibold line-clamp-2">
               {campaign.title}
-            </CardTitle>
-            <Badge className={getStatusColor(campaign.status)}>
+            </h3>
+            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(campaign.status)}`}>
               {getStatusLabel(campaign.status)}
-            </Badge>
+            </span>
           </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
+        </div>
+        <div className="p-6 space-y-4">
           {campaign.description && (
             <p className="text-sm text-gray-600 line-clamp-2">
               {campaign.description}
@@ -91,19 +88,17 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             )}
           </div>
 
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full"
+          <button
+            className="w-full px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 min-h-[44px] flex items-center justify-center gap-2"
             onClick={(e: React.MouseEvent) => {
               e.preventDefault();
             }}
           >
-            <TrendingUp className="h-4 w-4 mr-2" />
+            <TrendingUp className="h-4 w-4" />
             Voir détails
-          </Button>
-        </CardContent>
-      </Card>
+          </button>
+        </div>
+      </div>
     </Link>
   );
 }
