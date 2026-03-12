@@ -53,7 +53,7 @@ export function Sidebar({ items, title, onLinkClick }: SidebarProps) {
         )}
 
         {/* Menu Items */}
-        <nav className="flex-1 px-2 py-4 space-y-1">
+        <nav aria-label="Navigation espace client" className="flex-1 px-2 py-4 space-y-1">
           {items.map((item) => (
             <div key={item.href}>
               <Link

@@ -92,7 +92,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </div>
 
       {/* Navigation sections */}
-      <nav style={{ flex: 1, overflowY: 'auto', paddingBottom: '8px' }}>
+      <nav aria-label="Menu administration" style={{ flex: 1, overflowY: 'auto', paddingBottom: '8px' }}>
         {SIDEBAR_SECTIONS.map((section) => (
           <div key={section.title} className="admin-sidebar-section">
             <div className="admin-sidebar-section-title">{section.title}</div>

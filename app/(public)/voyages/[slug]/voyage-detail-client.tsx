@@ -174,7 +174,7 @@ function Topbar() {
   };
 
   return (
-    <nav style={{
+    <nav aria-label="Navigation détail voyage" style={{
       background: solid ? 'white' : 'var(--navy, #1A1A2E)',
       height: 52, display: 'flex', alignItems: 'center', padding: '0 24px', gap: 16,
       position: 'sticky', top: 0, zIndex: 200,
