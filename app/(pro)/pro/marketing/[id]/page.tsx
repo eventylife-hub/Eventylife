@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
@@ -60,6 +60,10 @@ export default function CampagneDetailPage() {
           fetch(`/api/marketing/campaigns/${campaignId}/metrics`, { credentials: 'include' }),
         ]);
 
+        if (campRes.status === 404) {
+          notFound();
+          return;
+        }
         if (!campRes.ok) throw new Error('Campagne non trouvée');
 
         const campData = await campRes.json() as Campaign;

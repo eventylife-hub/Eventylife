@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { BlogPostingJsonLd } from '@/components/seo/json-ld';
@@ -92,6 +92,7 @@ export default function BlogArticlePage() {
     const fetchArticle = async () => {
       try {
         const res = await fetch(`${API_URL}/blog/${slug}`);
+        if (res.status === 404) { notFound(); return; }
         if (res.ok) {
           const data = await res.json();
           setArticle(data);

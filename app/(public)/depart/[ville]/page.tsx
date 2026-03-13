@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useMemo } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/seo/breadcrumb';
 import { NewsletterCTA } from '@/components/newsletter-cta';
@@ -164,6 +164,7 @@ export default function DepartVillePage() {
       setLoading(true);
       try {
         const res = await fetch(`/api/travels?departure=${encodeURIComponent(ville)}`);
+        if (res.status === 404) { notFound(); return; }
         if (res.ok) {
           const data = await res.json() as { items: Travel[] };
           setTravels(data?.items || []);

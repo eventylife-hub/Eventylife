@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { StatsCard } from '@/components/admin/stats-card';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import {
   CheckCircle,
   Clock,
@@ -75,6 +75,10 @@ export default function AdminVoyageDetailPage() {
       const response = await fetch(`/api/admin/travels/${travelId}`, {
         credentials: 'include',
       });
+      if (response.status === 404) {
+        notFound();
+        return;
+      }
       if (response.ok) {
         const data = await response.json() as TravelDetail;
         setTravel(data);

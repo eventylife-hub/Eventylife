@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, notFound } from 'next/navigation';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
@@ -99,6 +99,10 @@ export default function CancellationDetailPage() {
         credentials: 'include',
       });
 
+      if (response.status === 404) {
+        notFound();
+        return;
+      }
       if (!response.ok) {
         throw new Error('Erreur lors du chargement');
       }

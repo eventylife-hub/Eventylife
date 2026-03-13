@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ZodError } from 'zod';
 import { formatDate, formatDateTime } from '@/lib/utils';
@@ -65,6 +65,10 @@ export default function GroupDetailPage() {
           credentials: 'include',
         });
 
+        if (res.status === 404) {
+          notFound();
+          return;
+        }
         if (!res.ok) throw new Error('Impossible de charger le groupe');
 
         const data = (await res.json() as unknown) as TravelGroup;

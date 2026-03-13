@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import {
   ArrowLeft,
   Send,
@@ -103,6 +103,7 @@ export default function TicketDetailPage() {
       setError(null);
       // Tentative de récupération API
       const response = await fetch(`/api/support/tickets/${ticketId}`, { credentials: 'include' });
+      if (response.status === 404) { notFound(); return; }
       if (!response.ok) {
         throw new Error('Erreur lors du chargement du ticket');
       }

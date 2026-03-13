@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
@@ -58,6 +58,10 @@ export default function BookingDetailPage() {
           credentials: 'include',
         });
 
+        if (res.status === 404) {
+          notFound();
+          return;
+        }
         if (!res.ok) throw new Error('Impossible de charger la réservation');
 
         const data = (await res.json() as unknown) as Booking;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
@@ -55,7 +55,8 @@ export default function UserDetailPage() {
         const data = await response.json();
         setUser(data);
       } else if (response.status === 404) {
-        setError('Utilisateur non trouvé');
+        notFound();
+        return;
       } else if (response.status === 401) {
         setError('Session expirée. Veuillez vous reconnecter.');
       } else {

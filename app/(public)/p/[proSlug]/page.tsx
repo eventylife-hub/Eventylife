@@ -7,7 +7,7 @@
 
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ZodError } from 'zod';
 import { useToast } from '@/lib/stores/ui-store';
@@ -72,6 +72,7 @@ export default function ProPublicPage() {
         setState('loading');
         const res = await fetch(`/api/public/pros/${proSlug}`);
 
+        if (res.status === 404) { notFound(); return; }
         if (!res.ok) {
           setState('empty');
           return;

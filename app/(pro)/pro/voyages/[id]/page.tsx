@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice, formatDate, formatDateTime } from '@/lib/utils';
 import {
@@ -275,6 +275,7 @@ export default function VoyageDashboardPage() {
       setLoading(true);
       const res = await fetch(`/api/pro/travels/${travelId}`, { credentials: 'include' });
 
+      if (res.status === 404) { notFound(); return; }
       if (!res.ok) throw new Error('Erreur chargement tableau de bord');
 
       const data = await res.json() as TravelDashboard;

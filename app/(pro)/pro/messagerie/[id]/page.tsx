@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import { ArrowLeft, Send, Paperclip, AlertCircle, RefreshCw, Loader } from 'lucide-react';
 import { ZodError } from 'zod';
 import { logger } from '@/lib/logger';
@@ -170,6 +170,10 @@ export default function MessagerieDetail() {
       const res = await fetch(`/api/pro/messagerie/${conversationId}`, {
         credentials: 'include',
       });
+      if (res.status === 404) {
+        notFound();
+        return;
+      }
       if (!res.ok) {
         throw new Error('Conversation non trouvée');
       }
