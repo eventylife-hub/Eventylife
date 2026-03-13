@@ -33,6 +33,24 @@ export default function ConnexionPage() {
       ...prev,
       [name]: value,
     }));
+    // Effacer l'erreur du champ quand l'utilisateur tape
+    if (errors[name]) {
+      setErrors((prev) => { const next = { ...prev }; delete next[name]; return next; });
+    }
+  };
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'email':
+        if (!value.trim()) return 'L\'email est requis';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Format d\'email invalide';
+        return null;
+      case 'password':
+        if (!value) return 'Le mot de passe est requis';
+        return null;
+      default:
+        return null;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -156,7 +174,14 @@ export default function ConnexionPage() {
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.08)';
               }}
               onBlur={(e) => {
-                if (!errors.email) e.currentTarget.style.borderColor = '#E5E0D8';
+                const fieldError = validateField('email', e.target.value);
+                if (fieldError) {
+                  setErrors((prev) => ({ ...prev, email: fieldError }));
+                  e.currentTarget.style.borderColor = '#DC2626';
+                } else {
+                  setErrors((prev) => { const next = { ...prev }; delete next.email; return next; });
+                  e.currentTarget.style.borderColor = '#E5E0D8';
+                }
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
@@ -190,7 +215,14 @@ export default function ConnexionPage() {
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(199,91,57,0.08)';
                 }}
                 onBlur={(e) => {
-                  if (!errors.password) e.currentTarget.style.borderColor = '#E5E0D8';
+                  const fieldError = validateField('password', e.target.value);
+                  if (fieldError) {
+                    setErrors((prev) => ({ ...prev, password: fieldError }));
+                    e.currentTarget.style.borderColor = '#DC2626';
+                  } else {
+                    setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                    e.currentTarget.style.borderColor = '#E5E0D8';
+                  }
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
