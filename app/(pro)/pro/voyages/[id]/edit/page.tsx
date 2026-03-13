@@ -185,10 +185,11 @@ export default function EditTravelPage() {
 
   // Fetch voyage data on mount
   useEffect(() => {
+    const controller = new AbortController();
     const fetchTravel = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/pro/travels/${travelId}`, { credentials: 'include' });
+        const res = await fetch(`/api/pro/travels/${travelId}`, { credentials: 'include', signal: controller.signal });
         if (res.ok) {
           const data = (await res.json()) as { data?: TravelFormData };
           setFormData(data?.data || (process.env.NEXT_PUBLIC_DEMO_MODE === 'true' ? getDemoTravelData() : { title: '', description: '', startDate: '', endDate: '', destination: '', transportMode: 'BUS', capacity: 0, rooms: [], program: [], photos: [], busStops: [], pricing: { basePrice: 0, inclusions: [], exclusions: [] } }));
@@ -198,6 +199,7 @@ export default function EditTravelPage() {
           }
         }
       } catch (error: unknown) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
         logger.warn(`API /api/pro/travels/${travelId} indisponible — données démo`);
         // Fallback: utiliser les données démo
         if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
@@ -208,6 +210,7 @@ export default function EditTravelPage() {
       }
     };
     fetchTravel();
+    return () => controller.abort();
   }, [travelId]);
 
   const handleSaveDraft = useCallback(async () => {
@@ -879,9 +882,10 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchStops = async () => {
       try {
-        const res = await fetch('/api/pro/bus-stops?take=50', { credentials: 'include' });
+        const res = await fetch('/api/pro/bus-stops?take=50', { credentials: 'include', signal: controller.signal });
         if (res.ok) {
           const data = (await res.json()) as { items?: BusStopFromAPI[] };
           setMyStops(data?.items || []);
@@ -889,6 +893,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
           setError('Impossible de charger vos arrêts');
         }
       } catch (error: unknown) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
         logger.warn('API /api/pro/bus-stops indisponible — données démo');
         const demoStops: BusStopFromAPI[] = [
           {
@@ -931,6 +936,7 @@ function StepBusStops({ formData, setFormData }: { formData: TravelFormData; set
       }
     };
     fetchStops();
+    return () => controller.abort();
   }, []);
 
   const pickupStops = myStops.filter((s) => s.type === 'PICKUP_DEPARTURE');

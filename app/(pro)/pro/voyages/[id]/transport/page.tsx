@@ -82,10 +82,11 @@ export default function TransportPage() {
 
   // Charger la configuration transport
   useEffect(() => {
+    const controller = new AbortController();
     const fetchConfig = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/transport/${travelId}/config`, { credentials: 'include' });
+        const res = await fetch(`/api/transport/${travelId}/config`, { credentials: 'include', signal: controller.signal });
         if (!res.ok) throw new Error('Erreur chargement config transport');
 
         const data: { travel: TransportConfig; stops: TransportStop[] } = await res.json();
@@ -104,6 +105,7 @@ export default function TransportPage() {
 
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /transport/config indisponible — données démo');
 
         // Fallback demo data
@@ -153,6 +155,7 @@ export default function TransportPage() {
     if (travelId) {
       fetchConfig();
     }
+    return () => controller.abort();
   }, [travelId]);
 
   const handleSave = async () => {

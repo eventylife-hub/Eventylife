@@ -27,16 +27,18 @@ export default function ManifestPage() {
   const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchManifest = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/transport/${travelId}/manifest`, { credentials: 'include' });
+        const res = await fetch(`/api/transport/${travelId}/manifest`, { credentials: 'include', signal: controller.signal });
         if (!res.ok) throw new Error('Erreur chargement manifest');
 
         const data = (await res.json()) as Record<string, unknown>[];
         setManifest(data);
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /api/transport/manifest indisponible — données démo');
         // Fallback demo data
         const demoManifest: Record<string, unknown>[] = [
@@ -144,6 +146,7 @@ export default function ManifestPage() {
     if (travelId) {
       fetchManifest();
     }
+    return () => controller.abort();
   }, [travelId]);
 
   const handleExportPDF = async () => {

@@ -102,10 +102,11 @@ export default function EquipePage() {
   const [deleteConfirming, setDeleteConfirming] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchTeam = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/pro/travels/${travelId}/team`, { credentials: 'include' });
+        const res = await fetch(`/api/pro/travels/${travelId}/team`, { credentials: 'include', signal: controller.signal });
 
         if (!res.ok) throw new Error('Erreur chargement équipe');
 
@@ -114,6 +115,7 @@ export default function EquipePage() {
         setPrerequisites(data.prerequisites || []);
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /api/pro/travels/{id}/team indisponible — données démo');
         // Fallback demo data
         const demoTeam: TeamMember[] = [
@@ -181,6 +183,7 @@ export default function EquipePage() {
     if (travelId) {
       fetchTeam();
     }
+    return () => controller.abort();
   }, [travelId]);
 
   const handleInvite = async () => {

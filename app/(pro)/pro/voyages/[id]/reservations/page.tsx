@@ -83,6 +83,7 @@ export default function ReservationsPage() {
   const roomTypes = [...new Set(reservations.map((r) => r.roomType))];
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchReservations = async () => {
       try {
         setLoading(true);
@@ -92,6 +93,7 @@ export default function ReservationsPage() {
 
         const res = await fetch(`/api/pro/travels/${travelId}/reservations?${params.toString()}`, {
           credentials: 'include',
+          signal: controller.signal,
         });
 
         if (!res.ok) throw new Error('Erreur chargement réservations');
@@ -101,6 +103,7 @@ export default function ReservationsPage() {
         setStats(data.stats as ReservationStats || stats);
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /api/pro/travels/${travelId}/reservations indisponible — données démo');
         const demoReservations: Reservation[] = [
           {
@@ -187,6 +190,7 @@ export default function ReservationsPage() {
     if (travelId) {
       fetchReservations();
     }
+    return () => controller.abort();
   }, [travelId, filterStatus, filterRoomType]);
 
   const filteredReservations = reservations.filter((r) => {

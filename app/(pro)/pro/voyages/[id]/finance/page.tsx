@@ -55,16 +55,18 @@ export default function VoyageFinancePage() {
   const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchFinance = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/finance/travel/${travelId}`, { credentials: 'include' });
+        const res = await fetch(`/api/finance/travel/${travelId}`, { credentials: 'include', signal: controller.signal });
         if (!res.ok) throw new Error('Erreur chargement finance');
 
         const data: TravelFinance = await res.json();
         setFinance(data);
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API finance indisponible — données démo');
         if (process.env.NEXT_PUBLIC_DEMO_MODE !== 'true') {
           setError('Données indisponibles');
@@ -148,6 +150,7 @@ export default function VoyageFinancePage() {
     if (travelId) {
       fetchFinance();
     }
+    return () => controller.abort();
   }, [travelId]);
 
   const handleExport = async (format: 'csv' | 'pdf') => {

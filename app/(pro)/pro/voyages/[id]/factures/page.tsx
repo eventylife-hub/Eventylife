@@ -29,21 +29,23 @@ export default function InvoicesPage() {
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
-    fetchData();
+    const controller = new AbortController();
+    fetchData(controller.signal);
+    return () => controller.abort();
   }, [travelId]);
 
-  const fetchData = async () => {
+  const fetchData = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       // Récupérer le voyage
-      const travelResponse = await fetch(`/api/travels/${travelId}`, { credentials: 'include' });
+      const travelResponse = await fetch(`/api/travels/${travelId}`, { credentials: 'include', signal });
       if (travelResponse.ok) {
         const travelData = (await travelResponse.json() as unknown) as Record<string, unknown>;
         setTravel(travelData.data as Travel);
       }
 
       // Récupérer les groupes de réservation
-      const bookingsResponse = await fetch(`/api/travels/${travelId}/bookings`, { credentials: 'include' });
+      const bookingsResponse = await fetch(`/api/travels/${travelId}/bookings`, { credentials: 'include', signal });
       if (bookingsResponse.ok) {
         const bookingsData = (await bookingsResponse.json() as unknown) as Record<string, unknown>;
         setBookings((bookingsData.data as []) || []);
@@ -51,6 +53,7 @@ export default function InvoicesPage() {
 
       setError(null);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API factures indisponible — données démo');
       // Fallback demo data: séjour Provence avec 5 réservations
       const demoTravel: Travel = {

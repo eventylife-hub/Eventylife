@@ -60,12 +60,13 @@ export default function RoomingPage() {
   const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchRooming = async () => {
       try {
         setLoading(true);
         const [roomRes, statsRes] = await Promise.all([
-          fetch(`/api/rooming/${travelId}`, { credentials: 'include' }),
-          fetch(`/api/rooming/${travelId}/stats`, { credentials: 'include' }),
+          fetch(`/api/rooming/${travelId}`, { credentials: 'include', signal: controller.signal }),
+          fetch(`/api/rooming/${travelId}/stats`, { credentials: 'include', signal: controller.signal }),
         ]);
 
         if (!roomRes.ok || !statsRes.ok) {
@@ -79,6 +80,7 @@ export default function RoomingPage() {
         setStats(statsData);
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /api/rooming indisponible — données démo');
         // Fallback demo data
         const demoRooms: PageRoom[] = [
@@ -147,6 +149,7 @@ export default function RoomingPage() {
     if (travelId) {
       fetchRooming();
     }
+    return () => controller.abort();
   }, [travelId]);
 
   const handleExportPDF = async () => {

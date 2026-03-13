@@ -22,13 +22,15 @@ export default function TravelBilanPage() {
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
-    fetchDashboard();
+    const controller = new AbortController();
+    fetchDashboard(controller.signal);
+    return () => controller.abort();
   }, [travelId]);
 
-  const fetchDashboard = async () => {
+  const fetchDashboard = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/post-sale/travel/${travelId}/dashboard`, { credentials: 'include' });
+      const response = await fetch(`/api/post-sale/travel/${travelId}/dashboard`, { credentials: 'include', signal });
 
       if (!response.ok) {
         throw new Error('Erreur lors du chargement');
@@ -38,6 +40,7 @@ export default function TravelBilanPage() {
       setDashboard(data.data);
       setError(null);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /api/post-sale/travel/{id}/dashboard indisponible — données démo');
       // Fallback demo data
       const demoDashboard: Record<string, unknown> = {

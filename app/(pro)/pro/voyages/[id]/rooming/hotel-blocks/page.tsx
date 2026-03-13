@@ -53,16 +53,18 @@ export default function HotelBlocksPage() {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchBlocks = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include' });
+        const res = await fetch(`/api/rooming/${travelId}/hotel-blocks`, { credentials: 'include', signal: controller.signal });
         if (!res.ok) throw new Error('Erreur chargement blocs hôtel');
 
         const data = (await res.json()) as HotelBlock[];
         setBlocks(data);
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /api/rooming/hotel-blocks indisponible — données démo');
         // Fallback demo data
         const demoBlocks: HotelBlock[] = [
@@ -113,6 +115,7 @@ export default function HotelBlocksPage() {
     if (travelId) {
       fetchBlocks();
     }
+    return () => controller.abort();
   }, [travelId]);
 
   const handleEditBlock = (block: HotelBlock) => {

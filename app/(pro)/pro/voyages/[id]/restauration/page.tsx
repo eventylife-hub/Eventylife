@@ -77,6 +77,7 @@ export default function RestauratPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -87,10 +88,10 @@ export default function RestauratPage() {
           restRes,
           costRes,
         ] = await Promise.all([
-          fetch(`/api/restauration/${travelId}/meal-plan`, { credentials: 'include' }),
-          fetch(`/api/restauration/${travelId}/dietary`, { credentials: 'include' }),
-          fetch(`/api/restauration/${travelId}/restaurants`, { credentials: 'include' }),
-          fetch(`/api/restauration/${travelId}/costs`, { credentials: 'include' }),
+          fetch(`/api/restauration/${travelId}/meal-plan`, { credentials: 'include', signal: controller.signal }),
+          fetch(`/api/restauration/${travelId}/dietary`, { credentials: 'include', signal: controller.signal }),
+          fetch(`/api/restauration/${travelId}/restaurants`, { credentials: 'include', signal: controller.signal }),
+          fetch(`/api/restauration/${travelId}/costs`, { credentials: 'include', signal: controller.signal }),
         ]);
 
         if (mealRes.ok) {
@@ -176,6 +177,7 @@ export default function RestauratPage() {
 
         setError(null);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /restauration indisponible — données démo');
 
         // Fallback demo data for all endpoints
@@ -243,6 +245,7 @@ export default function RestauratPage() {
     };
 
     fetchData();
+    return () => controller.abort();
   }, [travelId]);
 
   const handleGeneratePDF = async () => {
