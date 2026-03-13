@@ -279,6 +279,17 @@ export default function CheckoutPage({ params }: { params: { slug: string } }) {
       });
       if (!response.ok) { toast.error('Erreur lors de la redirection paiement'); return; }
       const { redirectUrl } = await response.json() as { redirectUrl: string };
+      // SECURITY: Valider l'URL Stripe avant redirection
+      try {
+        const parsed = new URL(redirectUrl);
+        if (parsed.protocol !== 'https:' || !parsed.hostname.includes('stripe.com')) {
+          toast.error('URL de paiement invalide');
+          return;
+        }
+      } catch {
+        toast.error('URL de paiement invalide');
+        return;
+      }
       window.location.href = redirectUrl;
     } catch {
       toast.error('Erreur lors de la redirection paiement');

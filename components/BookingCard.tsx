@@ -3,6 +3,7 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 
 interface BookingCardProps {
   id: string;
@@ -70,7 +71,7 @@ export const BookingCard = React.memo(function BookingCard({
           {travelCoverImageUrl && (
             <div className="md:w-1/4 h-32 md:h-auto bg-slate-100 flex-shrink-0">
               <img
-                src={travelCoverImageUrl}
+                src={sanitizeImageUrl(travelCoverImageUrl)}
                 alt={travelTitle}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
               />

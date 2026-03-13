@@ -9,6 +9,7 @@ import {
   Image as ImageIcon,
   Play,
 } from 'lucide-react';
+import { sanitizeImageUrl, isValidUrl } from '@/lib/security/url-validation';
 
 interface FilePreviewProps {
   id: string;
@@ -52,15 +53,16 @@ export function FilePreview({
 
   const getPreview = () => {
     if (mimeType.startsWith('image/') && url) {
+      const safeUrl = sanitizeImageUrl(url);
       return (
         <img
-          src={url}
+          src={safeUrl}
           alt={filename}
           className="w-full h-full object-cover"
         />
       );
     }
-    if (mimeType.startsWith('video/') && url) {
+    if (mimeType.startsWith('video/') && url && isValidUrl(url)) {
       return (
         <video
           src={url}
@@ -94,7 +96,7 @@ export function FilePreview({
 
         {/* Actions */}
         <div className="flex gap-2">
-          {url && (
+          {url && isValidUrl(url) && (
             <a
               href={url}
               download={filename}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 interface ProfileStats {
   totalBookings: number;
   confirmedBookings: number;
@@ -211,7 +212,7 @@ export default function ClientDashboardPage() {
             {data.nextTravel.coverImageUrl && (
               <div className="md:w-1/3 h-48 md:h-auto flex-shrink-0" style={{ background: 'var(--cream, #FAF7F2)' }}>
                 <img
-                  src={data.nextTravel.coverImageUrl}
+                  src={sanitizeImageUrl(data.nextTravel.coverImageUrl)}
                   alt={data.nextTravel.title}
                   className="w-full h-full object-cover"
                 />

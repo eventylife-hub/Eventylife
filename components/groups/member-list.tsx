@@ -1,5 +1,6 @@
 import React from 'react';
 import { Crown, Shield, Trash2 } from 'lucide-react';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 
 interface Member {
   id: string;
@@ -64,7 +65,7 @@ export function MemberList({
           <div className="flex items-center gap-3 flex-1">
             {member.user.avatarUrl && (
               <img
-                src={member.user.avatarUrl}
+                src={sanitizeImageUrl(member.user.avatarUrl)}
                 alt={member.user.firstName}
                 className="w-8 h-8 rounded-full"
               />

@@ -5,6 +5,7 @@ import React from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 
 const TRANSPORT_LABELS: Record<string, { icon: string; label: string }> = {
   BUS: { icon: '🚌', label: 'Bus' },
@@ -92,7 +93,7 @@ export const TravelCard = React.memo(function TravelCard({
         <div className="relative aspect-[4/3] overflow-hidden">
           {imageUrl && !imgError ? (
             <Image
-              src={imageUrl}
+              src={sanitizeImageUrl(imageUrl)}
               alt={title}
               fill
               loading="lazy"

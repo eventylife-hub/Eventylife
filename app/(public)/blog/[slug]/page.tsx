@@ -13,6 +13,7 @@ import { BlogPostingJsonLd } from '@/components/seo/json-ld';
 import { NewsletterCTA } from '@/components/newsletter-cta';
 import { logger } from '@/lib/logger';
 import { API_URL } from '@/lib/config';
+import { sanitizeImageUrl } from '@/lib/security/url-validation';
 
 interface BlogArticle {
   slug: string;
@@ -220,7 +221,7 @@ export default function BlogArticlePage() {
       {article.coverImage && (
         <div className="rounded-2xl overflow-hidden mb-10" style={{ border: '1px solid #E5E0D8' }}>
           <Image
-            src={article.coverImage}
+            src={sanitizeImageUrl(article.coverImage)}
             alt={article.title}
             width={800}
             height={450}
