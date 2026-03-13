@@ -5,6 +5,8 @@ interface UsePaginationOptions {
   pageSize?: number;
   /** Page initiale (défaut: 1) */
   initialPage?: number;
+  /** Scroll vers le haut lors du changement de page (défaut: true) */
+  scrollToTop?: boolean;
 }
 
 interface UsePaginationReturn {
@@ -26,7 +28,7 @@ interface UsePaginationReturn {
  * Compatible avec la pagination cursor-based du backend
  */
 export function usePagination(options: UsePaginationOptions = {}): UsePaginationReturn {
-  const { pageSize = 20, initialPage = 1 } = options;
+  const { pageSize = 20, initialPage = 1, scrollToTop = true } = options;
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [totalItems, setTotalItems] = useState(0);
 
@@ -40,20 +42,38 @@ export function usePagination(options: UsePaginationOptions = {}): UsePagination
     [currentPage, pageSize],
   );
 
+  const scrollUp = useCallback(() => {
+    if (scrollToTop && typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [scrollToTop]);
+
   const setPage = useCallback(
     (page: number) => {
-      setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+      const clamped = Math.max(1, Math.min(page, totalPages));
+      setCurrentPage((prev) => {
+        if (prev !== clamped) scrollUp();
+        return clamped;
+      });
     },
-    [totalPages],
+    [totalPages, scrollUp],
   );
 
   const nextPage = useCallback(() => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-  }, [totalPages]);
+    setCurrentPage((prev) => {
+      const next = Math.min(prev + 1, totalPages);
+      if (prev !== next) scrollUp();
+      return next;
+    });
+  }, [totalPages, scrollUp]);
 
   const prevPage = useCallback(() => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
-  }, []);
+    setCurrentPage((prev) => {
+      const next = Math.max(prev - 1, 1);
+      if (prev !== next) scrollUp();
+      return next;
+    });
+  }, [scrollUp]);
 
   return {
     currentPage,
