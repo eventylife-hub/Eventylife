@@ -1,28 +1,39 @@
 /**
  * Loading skeleton — Conditions générales
+ * Design Eventy v2 : cream background, shimmer pattern
  */
 export default function ConditionsLoading() {
-  return (
-    <main className="min-h-screen bg-[#FEFCF3]">
-      <div className="max-w-3xl mx-auto px-4 py-16">
-        {/* Titre */}
-        <div className="h-10 w-72 bg-gray-100 rounded-lg mb-4" />
-        <div className="h-4 w-48 bg-gray-50 rounded mb-12" />
+  const shimmer = {
+    borderRadius: 10,
+    background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)',
+    backgroundSize: '200% 100%',
+    animation: 'shimmer 1.5s infinite',
+  } as const;
 
-        {/* Blocs de texte */}
-        <div className="space-y-8">
-          {[...Array(5)].map((_, i) => (
-            <div key={i}>
-              <div className="h-6 w-64 bg-gray-100 rounded mb-3" />
-              <div className="space-y-2">
-                <div className="h-4 w-full bg-gray-50 rounded" />
-                <div className="h-4 w-full bg-gray-50 rounded" />
-                <div className="h-4 w-3/4 bg-gray-50 rounded" />
+  return (
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      <div style={{ minHeight: '100vh', backgroundColor: '#FEFCF3' }}>
+        <div style={{ maxWidth: '48rem', margin: '0 auto', padding: '4rem 1rem' }}>
+          {/* Titre */}
+          <div style={{ ...shimmer, height: 40, width: 288, marginBottom: 16 }} />
+          <div style={{ ...shimmer, height: 16, width: 192, marginBottom: '3rem' }} />
+
+          {/* Blocs de texte */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i}>
+                <div style={{ ...shimmer, height: 24, width: 256, marginBottom: 12 }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <div style={{ ...shimmer, height: 16, width: '100%' }} />
+                  <div style={{ ...shimmer, height: 16, width: '100%' }} />
+                  <div style={{ ...shimmer, height: 16, width: '75%' }} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </main>
+    </>
   );
 }

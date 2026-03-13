@@ -1,89 +1,106 @@
+/**
+ * Loading skeleton — Comment ça marche
+ * Design Eventy v2 : cream background, shimmer pattern
+ */
 export default function CommentCaMarcheLoading() {
+  const shimmer = {
+    borderRadius: 10,
+    background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)',
+    backgroundSize: '200% 100%',
+    animation: 'shimmer 1.5s infinite',
+  } as const;
+
+  const shimmerLight = {
+    borderRadius: 10,
+    background: 'linear-gradient(90deg, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 75%)',
+    backgroundSize: '200% 100%',
+    animation: 'shimmer 1.5s infinite',
+  } as const;
+
   return (
-    <div style={{ backgroundColor: '#FAF7F2', minHeight: '100vh' }}>
-      {/* Hero skeleton */}
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
-          padding: '5rem 1rem 4rem',
-        }}
-      >
-        <div className="mx-auto max-w-6xl text-center">
-          <div
-            className="mx-auto mb-4 h-4 w-40 rounded skeleton"
-            style={{ opacity: 0.2 }}
-          />
-          <div
-            className="mx-auto mb-4 h-10 w-80 rounded skeleton"
-            style={{ opacity: 0.15 }}
-          />
-          <div
-            className="mx-auto h-5 w-64 rounded skeleton"
-            style={{ opacity: 0.1 }}
-          />
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-5xl px-4 py-12">
-        {/* Breadcrumb skeleton */}
-        <div className="flex gap-2 mb-10">
-          <div className="h-4 w-16 rounded skeleton" />
-          <div className="h-4 w-4 rounded skeleton" />
-          <div className="h-4 w-36 rounded skeleton" />
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      <div style={{ backgroundColor: '#FAF7F2', minHeight: '100vh' }}>
+        {/* Hero skeleton */}
+        <div
+          style={{
+            background: 'linear-gradient(135deg, #1A1A2E 0%, #2d2d4e 100%)',
+            padding: '5rem 1rem 4rem',
+            textAlign: 'center',
+          }}
+        >
+          <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+            <div style={{ ...shimmerLight, height: 16, width: 160, margin: '0 auto 16px' }} />
+            <div style={{ ...shimmerLight, height: 40, width: 320, margin: '0 auto 16px' }} />
+            <div style={{ ...shimmerLight, height: 20, width: 256, margin: '0 auto' }} />
+          </div>
         </div>
 
-        {/* 4 étapes skeleton */}
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="flex flex-col md:flex-row gap-8 mb-16 items-start">
-            {/* Icône + numéro */}
-            <div className="flex-shrink-0 flex flex-col items-center">
-              <div className="w-20 h-20 rounded-2xl skeleton" />
-              <div className="mt-3 h-3 w-16 rounded skeleton" />
-            </div>
-            {/* Contenu */}
-            <div
-              className="flex-1 p-6 rounded-2xl"
-              style={{
-                background: 'white',
-                border: '1px solid rgba(26,26,46,0.08)',
-              }}
-            >
-              <div className="h-6 w-48 rounded skeleton mb-3" />
-              <div className="h-4 w-full rounded skeleton mb-2" />
-              <div className="h-4 w-3/4 rounded skeleton mb-4" />
-              <div className="space-y-2">
-                <div className="h-3 w-56 rounded skeleton" />
-                <div className="h-3 w-48 rounded skeleton" />
-                <div className="h-3 w-52 rounded skeleton" />
+        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '3rem 1rem' }}>
+          {/* Breadcrumb skeleton */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: '2.5rem' }}>
+            <div style={{ ...shimmer, height: 16, width: 64 }} />
+            <div style={{ ...shimmer, height: 16, width: 16 }} />
+            <div style={{ ...shimmer, height: 16, width: 144 }} />
+          </div>
+
+          {/* 4 étapes skeleton */}
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} style={{ display: 'flex', gap: '2rem', marginBottom: '4rem', alignItems: 'flex-start' }}>
+              {/* Icône + numéro */}
+              <div style={{ flexShrink: 0, textAlign: 'center' }}>
+                <div style={{ ...shimmer, width: 80, height: 80, borderRadius: 16 }} />
+                <div style={{ ...shimmer, height: 12, width: 64, margin: '12px auto 0' }} />
               </div>
-            </div>
-          </div>
-        ))}
-
-        {/* Garanties skeleton */}
-        <div className="mb-20">
-          <div className="text-center mb-10">
-            <div className="mx-auto h-3 w-32 rounded skeleton mb-3" />
-            <div className="mx-auto h-8 w-48 rounded skeleton" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
+              {/* Contenu */}
               <div
-                key={i}
-                className="text-center p-5 rounded-2xl"
                 style={{
+                  flex: 1,
+                  padding: '1.5rem',
+                  borderRadius: 16,
                   background: 'white',
                   border: '1px solid rgba(26,26,46,0.08)',
                 }}
               >
-                <div className="mx-auto w-10 h-10 rounded-full skeleton mb-3" />
-                <div className="mx-auto h-4 w-28 rounded skeleton mb-2" />
-                <div className="mx-auto h-3 w-36 rounded skeleton" />
+                <div style={{ ...shimmer, height: 24, width: 192, marginBottom: 12 }} />
+                <div style={{ ...shimmer, height: 16, width: '100%', marginBottom: 8 }} />
+                <div style={{ ...shimmer, height: 16, width: '75%', marginBottom: 16 }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <div style={{ ...shimmer, height: 12, width: 224 }} />
+                  <div style={{ ...shimmer, height: 12, width: 192 }} />
+                  <div style={{ ...shimmer, height: 12, width: 208 }} />
+                </div>
               </div>
-            ))}
+            </div>
+          ))}
+
+          {/* Garanties skeleton */}
+          <div style={{ marginBottom: '5rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+              <div style={{ ...shimmer, height: 12, width: 128, margin: '0 auto 12px' }} />
+              <div style={{ ...shimmer, height: 32, width: 192, margin: '0 auto' }} />
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  style={{
+                    textAlign: 'center',
+                    padding: '1.25rem',
+                    borderRadius: 16,
+                    background: 'white',
+                    border: '1px solid rgba(26,26,46,0.08)',
+                  }}
+                >
+                  <div style={{ ...shimmer, width: 40, height: 40, borderRadius: '50%', margin: '0 auto 12px' }} />
+                  <div style={{ ...shimmer, height: 16, width: 112, margin: '0 auto 8px' }} />
+                  <div style={{ ...shimmer, height: 12, width: 144, margin: '0 auto' }} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

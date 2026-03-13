@@ -1,64 +1,99 @@
 /**
  * Loading skeleton — Inscription
+ * Design Eventy v2 : cream gradient, shimmer pattern
  */
 export default function InscriptionLoading() {
+  const shimmer = {
+    borderRadius: 10,
+    background: 'linear-gradient(90deg, #E5E0D8 25%, #F0ECE6 50%, #E5E0D8 75%)',
+    backgroundSize: '200% 100%',
+    animation: 'shimmer 1.5s infinite',
+  } as const;
+
   return (
-    <main className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(135deg, #FFF7ED 0%, #FEFCF3 50%, #FFF1E6 100%)' }}>
-      <div className="w-full max-w-lg">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          {/* Titre */}
-          <div className="flex justify-center mb-6">
-            <div className="h-8 w-48 bg-gray-100 rounded-lg" />
-          </div>
-          <div className="flex justify-center mb-8">
-            <div className="h-4 w-60 bg-gray-50 rounded" />
-          </div>
+    <>
+      <style>{`@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}`}</style>
+      <div
+        style={{
+          minHeight: '100vh',
+          background: 'linear-gradient(135deg, #FFF7ED 0%, #FEFCF3 50%, #FFF1E6 100%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <div style={{ width: '100%', maxWidth: '32rem' }}>
+          <div
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '16px',
+              boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
+              padding: '2rem',
+            }}
+          >
+            {/* Titre */}
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <div style={{ ...shimmer, height: 32, width: 192, margin: '0 auto 8px' }} />
+              <div style={{ ...shimmer, height: 16, width: 240, margin: '0 auto' }} />
+            </div>
 
-          {/* Champs */}
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <div className="h-3.5 w-16 bg-gray-50 rounded mb-2" />
-                <div className="h-11 w-full bg-gray-100 rounded-lg" />
+            {/* Champs */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {/* Nom / Prénom */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <div style={{ ...shimmer, height: 14, width: 64, marginBottom: 8 }} />
+                  <div style={{ ...shimmer, height: 44, width: '100%' }} />
+                </div>
+                <div>
+                  <div style={{ ...shimmer, height: 14, width: 56, marginBottom: 8 }} />
+                  <div style={{ ...shimmer, height: 44, width: '100%' }} />
+                </div>
               </div>
+
+              {/* Email */}
               <div>
-                <div className="h-3.5 w-14 bg-gray-50 rounded mb-2" />
-                <div className="h-11 w-full bg-gray-100 rounded-lg" />
+                <div style={{ ...shimmer, height: 14, width: 48, marginBottom: 8 }} />
+                <div style={{ ...shimmer, height: 44, width: '100%' }} />
               </div>
-            </div>
-            <div>
-              <div className="h-3.5 w-24 bg-gray-50 rounded mb-2" />
-              <div className="h-11 w-full bg-gray-100 rounded-lg" />
-            </div>
-            <div>
-              <div className="h-3.5 w-28 bg-gray-50 rounded mb-2" />
-              <div className="h-11 w-full bg-gray-100 rounded-lg" />
-            </div>
-            <div>
-              <div className="h-3.5 w-24 bg-gray-50 rounded mb-2" />
-              <div className="h-11 w-full bg-gray-100 rounded-lg" />
+
+              {/* Mot de passe */}
+              <div>
+                <div style={{ ...shimmer, height: 14, width: 110, marginBottom: 8 }} />
+                <div style={{ ...shimmer, height: 44, width: '100%' }} />
+              </div>
+
+              {/* Téléphone */}
+              <div>
+                <div style={{ ...shimmer, height: 14, width: 80, marginBottom: 8 }} />
+                <div style={{ ...shimmer, height: 44, width: '100%' }} />
+              </div>
+
+              {/* Type selector */}
+              <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ ...shimmer, height: 44, flex: 1, borderRadius: 12 }} />
+                <div style={{ ...shimmer, height: 44, flex: 1, borderRadius: 12 }} />
+              </div>
+
+              {/* Checkboxes */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 }}>
+                <div style={{ ...shimmer, height: 14, width: 240 }} />
+                <div style={{ ...shimmer, height: 14, width: 208 }} />
+              </div>
+
+              {/* Bouton submit */}
+              <div style={{ ...shimmer, height: 44, width: '100%', borderRadius: 12, marginTop: 4 }} />
             </div>
 
-            {/* Type selector */}
-            <div className="flex gap-3">
-              <div className="h-11 flex-1 bg-gray-100 rounded-lg" />
-              <div className="h-11 flex-1 bg-gray-100 rounded-lg" />
+            {/* Lien connexion */}
+            <div style={{ margin: '1.5rem 0', borderTop: '1px solid #E5E0D8' }} />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ ...shimmer, height: 16, width: 208, margin: '0 auto' }} />
             </div>
-
-            {/* Checkboxes */}
-            <div className="space-y-2 mt-2">
-              <div className="h-4 w-60 bg-gray-50 rounded" />
-              <div className="h-4 w-52 bg-gray-50 rounded" />
-            </div>
-
-            <div className="h-11 w-full bg-gray-100 rounded-lg mt-2" />
-          </div>
-
-          <div className="mt-6 pt-6 border-t flex justify-center">
-            <div className="h-4 w-52 bg-gray-50 rounded" />
           </div>
         </div>
       </div>
-    </main>
+    </>
   );
 }
