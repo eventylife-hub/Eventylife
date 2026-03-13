@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 interface Document {
@@ -233,9 +234,24 @@ export default function ClientDocumentsPage() {
           <h3 className="font-bold text-base mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>
             Aucun document
           </h3>
-          <p className="text-sm" style={{ color: '#6B7280' }}>
-            Vous n'avez pas encore de documents pour cette catégorie
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
+            Vos documents (factures, billets, attestations) apparaîtront ici après une réservation
           </p>
+          <Link
+            href="/voyages"
+            className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#D97B5E';
+              e.currentTarget.style.boxShadow = '0 6px 24px rgba(199,91,57,0.19)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            Explorer les voyages
+          </Link>
         </div>
       ) : (
         <div className="space-y-3">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { formatPrice, formatDateTime, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 interface Payment {
@@ -213,7 +214,22 @@ export default function PaiementsPage() {
         <div className="text-center py-16 rounded-2xl" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
           <div className="text-5xl mb-4">💰</div>
           <h2 className="font-display text-xl font-bold mb-2" style={{ color: 'var(--navy, #1A1A2E)' }}>Aucun paiement</h2>
-          <p className="text-sm" style={{ color: '#6B7280' }}>Vos paiements apparaîtront ici</p>
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>Vos paiements apparaîtront ici après votre première réservation</p>
+          <Link
+            href="/voyages"
+            className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+            style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#D97B5E';
+              e.currentTarget.style.boxShadow = '0 6px 24px rgba(199,91,57,0.19)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--terra, #C75B39)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            Explorer les voyages
+          </Link>
         </div>
       ) : (
         <div className="rounded-2xl overflow-hidden" style={{ background: '#fff', border: '1.5px solid #E5E0D8' }}>
