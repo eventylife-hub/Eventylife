@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Politique de cookies d\'Eventy Life. Gestion des cookies et traceurs conformément à la réglementation CNIL.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Politique de Cookies | Eventy Life',
     description:
       'Gestion des cookies et traceurs conformément à la réglementation CNIL.',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary',
     title: 'Cookies | Eventy Life',
     description:

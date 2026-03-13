@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Conditions générales de vente d\'Eventy Life. Modalités de réservation, paiement, annulation et responsabilité pour nos voyages de groupe.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Conditions Générales de Vente | Eventy Life',
     description:
       'CGV Eventy Life — Réservation, paiement, annulation et responsabilité pour nos voyages de groupe.',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary',
     title: 'CGV | Eventy Life',
     description:

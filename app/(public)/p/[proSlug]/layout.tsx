@@ -10,6 +10,7 @@ export function generateMetadata({ params }: { params: { proSlug: string } }): M
     title: `${name} — Partenaire Eventy Life`,
     description: `Découvrez les voyages proposés par ${name}, partenaire Eventy Life. Réservez en ligne votre prochain voyage de groupe.`,
     openGraph: {
+      images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
       title: `${name} — Partenaire Eventy Life`,
       description: `Voyages de groupe proposés par ${name} sur Eventy Life.`,
       type: 'website',
@@ -18,6 +19,7 @@ export function generateMetadata({ params }: { params: { proSlug: string } }): M
       url: `https://www.eventylife.fr/p/${params.proSlug}`,
     },
     twitter: {
+    images: ['/opengraph-image'],
       card: 'summary_large_image',
       title: `${name} — Partenaire Eventy Life`,
       description: `Voyages de groupe proposés par ${name} sur Eventy Life.`,

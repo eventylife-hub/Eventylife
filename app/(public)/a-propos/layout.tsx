@@ -6,12 +6,14 @@ export const metadata: Metadata = {
   description:
     'Découvrez Eventy Life, votre agence spécialisée dans les voyages de groupe accompagnés. Notre mission : des voyages de qualité à prix justes.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'À Propos — Eventy Life',
     description:
       'L\'agence de voyages de groupe qui met l\'humain au centre. Accompagnement porte-à-porte, qualité sans compromis.',
     url: 'https://www.eventylife.fr/a-propos',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'À Propos — Eventy Life',
     description:

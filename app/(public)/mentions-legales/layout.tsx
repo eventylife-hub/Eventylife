@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Mentions légales d\'Eventy Life. Informations sur l\'éditeur, l\'hébergement, la propriété intellectuelle et les conditions d\'utilisation.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Mentions Légales | Eventy Life',
     description:
       'Informations légales sur l\'éditeur, l\'hébergement et les conditions d\'utilisation.',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary',
     title: 'Mentions Légales | Eventy Life',
     description:

@@ -6,11 +6,13 @@ export const metadata: Metadata = {
   description:
     'Rejoignez le réseau de partenaires Eventy Life : hébergements, restaurants, activités, transporteurs. Développez votre activité avec nous.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Devenir Partenaire | Eventy Life',
     description:
       'Rejoignez le réseau de partenaires Eventy Life et développez votre activité.',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'Devenir Partenaire | Eventy Life',
     description:

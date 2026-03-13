@@ -6,12 +6,14 @@ export const metadata: Metadata = {
   description:
     'Découvrez notre sélection de voyages en groupe accompagnés. Destinations variées, prix justes et qualité garantie pour vos voyages de groupe.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Voyages en Groupe Accompagnés | Eventy Life',
     description:
       'Explorez nos voyages de groupe : Maroc, Italie, Espagne, Turquie… Transport porte-à-porte, accompagnateur dédié, prix tout compris.',
     url: 'https://www.eventylife.fr/voyages',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'Voyages en Groupe | Eventy Life',
     description:

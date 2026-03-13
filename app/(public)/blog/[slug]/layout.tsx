@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: titleFormatted,
     description: `Lisez notre article « ${titleFormatted} » sur le blog Eventy Life. Conseils voyage, astuces groupe, destinations et accompagnement.`,
     openGraph: {
+      images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
       title: `${titleFormatted} — Blog Eventy Life`,
       description: `Découvrez « ${titleFormatted} » — un article du blog Eventy Life sur les voyages de groupe accompagnés.`,
       type: 'article',
@@ -41,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'Eventy Life',
     },
     twitter: {
+    images: ['/opengraph-image'],
       card: 'summary_large_image',
       title: titleFormatted,
       description: `Article blog Eventy Life : ${titleFormatted}`,

@@ -78,6 +78,7 @@ export async function generateMetadata({
     title: `${titleCase} — Voyage en Groupe`,
     description,
     openGraph: {
+      images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
       title: `${titleCase} — Voyage de Groupe | Eventy Life`,
       description,
       type: 'website',
@@ -86,6 +87,7 @@ export async function generateMetadata({
       url,
     },
     twitter: {
+    images: ['/opengraph-image'],
       card: 'summary_large_image',
       title: `${titleCase} — Eventy Life`,
       description,

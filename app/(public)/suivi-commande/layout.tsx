@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Suivez l\'état de votre réservation Eventy Life. Entrez votre référence et votre email pour retrouver votre commande.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Suivi de Commande | Eventy Life',
     description:
       'Suivez l\'état de votre réservation. Entrez votre référence pour retrouver votre commande.',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary',
     title: 'Suivi de Commande | Eventy Life',
     description:

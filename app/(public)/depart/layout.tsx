@@ -6,11 +6,13 @@ export const metadata: Metadata = {
   description:
     'Retrouvez tous nos voyages de groupe au départ de votre ville. Transport porte-à-porte avec accompagnement personnalisé depuis 20 villes en France.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Villes de départ | Eventy Life',
     description:
       'Voyages de groupe au départ de votre ville avec transport porte-à-porte.',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'Villes de départ | Eventy Life',
     description:

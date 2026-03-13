@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Découvrez le processus de réservation Eventy Life en 4 étapes simples : choisissez votre voyage, réservez en ligne, on vient vous chercher, profitez du voyage.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Comment ça marche — Eventy Life',
     description:
       'De la réservation au retour, on s\'occupe de tout. Votre seul rôle : profiter du voyage.',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'Comment ça marche — Eventy Life',
     description:

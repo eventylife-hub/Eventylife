@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Politique de confidentialité d\'Eventy Life. Protection de vos données personnelles, vos droits RGPD et traitement de vos informations.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Politique de Confidentialité | Eventy Life',
     description:
       'Protection de vos données personnelles, vos droits RGPD et traitement de vos informations.',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary',
     title: 'Politique de Confidentialité | Eventy Life',
     description:

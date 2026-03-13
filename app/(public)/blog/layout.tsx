@@ -6,11 +6,13 @@ export const metadata: Metadata = {
   description:
     'Découvrez nos articles, conseils et inspirations pour vos voyages de groupe. Destinations, astuces, témoignages de voyageurs Eventy Life.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Blog Voyage | Eventy Life',
     description:
       'Articles, conseils et inspirations pour vos voyages de groupe Eventy Life.',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'Blog Voyage | Eventy Life',
     description:

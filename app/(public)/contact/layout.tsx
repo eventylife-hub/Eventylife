@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     'Contactez Eventy Life pour toute question sur nos voyages en groupe. Notre équipe vous répond rapidement pour vos demandes.',
   openGraph: {
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Eventy Life' }],
     title: 'Contactez Eventy Life',
     description:
       'Une question sur nos voyages de groupe ? Contactez notre équipe par email, téléphone ou formulaire.',
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Eventy Life',
   },
   twitter: {
+    images: ['/opengraph-image'],
     card: 'summary_large_image',
     title: 'Contactez Eventy Life',
     description:
