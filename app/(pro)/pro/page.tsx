@@ -48,12 +48,13 @@ export default function ProDashboard() {
     fetchFormationProgress();
   }, []);
 
-  const fetchStats = async () => {
+  const fetchStats = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
       const res = await fetch('/api/pro/dashboard/stats', {
         credentials: 'include',
+        signal,
       });
       if (!res.ok) {
         throw new Error('Erreur lors du chargement des statistiques');
@@ -69,6 +70,7 @@ export default function ProDashboard() {
         recentActivity: data.recentActivity ?? [],
       });
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API indisponible, utilisation des données de démonstration');
       setStats({
         activeVoyages: 4,
@@ -90,7 +92,9 @@ export default function ProDashboard() {
   };
 
   useEffect(() => {
-    fetchStats();
+    const controller = new AbortController();
+    fetchStats(controller.signal);
+    return () => controller.abort();
   }, []);
 
   const isOnboardingComplete = onboardingStatus?.currentStatus === 'APPROVED';

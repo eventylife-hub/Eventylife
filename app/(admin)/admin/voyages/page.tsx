@@ -47,7 +47,7 @@ export default function VoyagesPage() {
     { value: 'canceled', label: 'Annulés' },
   ];
 
-  const fetchTravels = async () => {
+  const fetchTravels = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
@@ -58,7 +58,7 @@ export default function VoyagesPage() {
           ? '/api/admin/travels'
           : `/api/admin/travels?status=${statusFilter.toUpperCase()}`;
 
-      const response = await fetch(endpoint, { credentials: 'include' });
+      const response = await fetch(endpoint, { credentials: 'include', signal });
       if (response.ok) {
         let data = await response.json();
         data = data.data || data;
@@ -74,7 +74,8 @@ export default function VoyagesPage() {
       } else {
         setError('Erreur lors du chargement des voyages');
       }
-    } catch (_error: unknown) {
+    } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /admin/travels indisponible — données démo');
       const FALLBACK_DATA: Travel[] = [
         {
@@ -116,7 +117,9 @@ export default function VoyagesPage() {
   };
 
   useEffect(() => {
-    fetchTravels();
+    const controller = new AbortController();
+    fetchTravels(controller.signal);
+    return () => controller.abort();
   }, [statusFilter]);
 
   const columns: DataTableColumn<Travel>[] = [

@@ -58,6 +58,7 @@ export default function ClientDashboardPage() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
@@ -65,6 +66,7 @@ export default function ClientDashboardPage() {
 
         const profileRes = await fetch('/api/client/profile', {
           credentials: 'include',
+          signal: controller.signal,
         });
 
         if (!profileRes.ok) throw new Error('Impossible de charger le profil');
@@ -73,6 +75,7 @@ export default function ClientDashboardPage() {
 
         const bookingsRes = await fetch('/api/client/bookings?limit=1', {
           credentials: 'include',
+          signal: controller.signal,
         });
 
         const bookingsData = bookingsRes.ok
@@ -89,6 +92,7 @@ export default function ClientDashboardPage() {
           nextTravel,
         });
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API indisponible, utilisation des données de démonstration');
         setData(FALLBACK_DATA);
       } finally {
@@ -97,6 +101,7 @@ export default function ClientDashboardPage() {
     };
 
     fetchDashboardData();
+    return () => controller.abort();
   }, [user]);
 
   const daysUntilDeparture = (date: string) => {

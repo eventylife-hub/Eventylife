@@ -67,7 +67,7 @@ export default function ReservationsPage() {
     },
   ];
 
-  const fetchBookings = async (cursorValue?: string) => {
+  const fetchBookings = async (cursorValue?: string, signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
@@ -77,6 +77,7 @@ export default function ReservationsPage() {
 
       const res = await fetch(`/api/client/bookings?${params.toString()}`, {
         credentials: 'include',
+        signal,
       });
 
       if (!res.ok) throw new Error('Impossible de charger les réservations');
@@ -87,6 +88,7 @@ export default function ReservationsPage() {
       setCursor((data.nextCursor as string) || null);
       setHasMore(Boolean(data.hasMore));
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API indisponible, utilisation des données de démonstration');
       setBookings(FALLBACK_BOOKINGS);
       setHasMore(false);
@@ -96,7 +98,9 @@ export default function ReservationsPage() {
   };
 
   useEffect(() => {
-    fetchBookings();
+    const controller = new AbortController();
+    fetchBookings(undefined, controller.signal);
+    return () => controller.abort();
   }, []);
 
   const filteredBookings =

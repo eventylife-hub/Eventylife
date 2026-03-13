@@ -106,12 +106,13 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchStats = async () => {
+  const fetchStats = async (signal?: AbortSignal) => {
     try {
       setError(null);
       setLoading(true);
       const response = await fetch('/api/admin/dashboard', {
         credentials: 'include',
+        signal,
       });
       if (response.ok) {
         const data = await response.json();
@@ -120,7 +121,8 @@ export default function AdminDashboardPage() {
         // API pas encore connectée — on affiche le dashboard avec les données mock
         setStats(null);
       }
-    } catch {
+    } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /admin/dashboard indisponible — données démo');
       const FALLBACK_DATA: DashboardStats = {
         totalUsers: 247,
@@ -185,7 +187,9 @@ export default function AdminDashboardPage() {
   };
 
   useEffect(() => {
-    fetchStats();
+    const controller = new AbortController();
+    fetchStats(controller.signal);
+    return () => controller.abort();
   }, []);
 
   /* ═══════ LOADING STATE ═══════ */
