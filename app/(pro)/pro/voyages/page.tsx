@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useProStore } from '@/lib/stores/pro-store';
 import { Plus, MapPin, Users, Clock, Grid, List, AlertCircle } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { useDebounce } from '@/lib/hooks/use-debounce';
 const TABS = ['Brouillons', 'En révision', 'Publiés', 'Terminés', 'Annulés'];
 const STATUS_MAP: Record<string, string> = {
   'Brouillons': 'DRAFT',
@@ -39,6 +40,7 @@ export default function TravelsPage() {
   const [activeTab, setActiveTab] = useState('Brouillons');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,7 +51,7 @@ export default function TravelsPage() {
         setError(null);
         await fetchTravels({
           status: (STATUS_MAP[activeTab] || 'DRAFT').split(','),
-          search: search || undefined,
+          search: debouncedSearch || undefined,
         });
       } catch (_error: unknown) {
         setError('Une erreur est survenue lors du chargement des voyages');
@@ -58,7 +60,7 @@ export default function TravelsPage() {
       }
     };
     handleFetch();
-  }, [activeTab, search]);
+  }, [activeTab, debouncedSearch]);
 
   const filteredTravels = travels.filter((t) => {
     if (search) {

@@ -5,6 +5,7 @@ import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Search, RefreshCw, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
+import { useDebounce } from '@/lib/hooks/use-debounce';
 interface User {
   id: string;
   email: string;
@@ -34,6 +35,7 @@ export default function UtilisateursPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 300);
   const [roleFilter, setRoleFilter] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('');
   const [page, setPage] = useState(1);
@@ -48,7 +50,7 @@ export default function UtilisateursPage() {
       const params = new URLSearchParams();
       params.append('page', page.toString());
       params.append('pageSize', pageSize.toString());
-      if (search) params.append('search', search);
+      if (debouncedSearch) params.append('search', debouncedSearch);
       if (roleFilter) params.append('role', roleFilter);
       if (statusFilter) params.append('isActive', statusFilter);
 
@@ -129,14 +131,11 @@ export default function UtilisateursPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, pageSize, search, roleFilter, statusFilter]);
+  }, [page, pageSize, debouncedSearch, roleFilter, statusFilter]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setPage(1); // Reset to page 1 when filters change
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [search, roleFilter, statusFilter]);
+    setPage(1); // Retour à la page 1 quand les filtres changent
+  }, [debouncedSearch, roleFilter, statusFilter]);
 
   useEffect(() => {
     fetchUsers();
