@@ -267,7 +267,10 @@ export default function ReinitialiserMotDePassePage() {
                 autoComplete="new-password"
                 required
                 value={password}
-                onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
+                onChange={(e) => {
+                  setPassword((e.target as HTMLInputElement).value);
+                  if (errors.password) setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                }}
                 placeholder="Min. 8 caractères"
                 style={{
                   width: '100%',
@@ -291,6 +294,17 @@ export default function ReinitialiserMotDePassePage() {
                   }
                 }}
                 onBlur={(e) => {
+                  const val = e.target.value;
+                  if (!val) {
+                    setErrors((prev) => ({ ...prev, password: 'Le mot de passe est requis' }));
+                    e.currentTarget.style.borderColor = 'var(--terra, #DC2626)';
+                  } else if (val.length < 8) {
+                    setErrors((prev) => ({ ...prev, password: 'Le mot de passe doit contenir au moins 8 caractères' }));
+                    e.currentTarget.style.borderColor = 'var(--terra, #DC2626)';
+                  } else {
+                    setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                    e.currentTarget.style.borderColor = '#E5E0D8';
+                  }
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
@@ -339,7 +353,10 @@ export default function ReinitialiserMotDePassePage() {
               autoComplete="new-password"
               required
               value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
+              onChange={(e) => {
+                setPasswordConfirm((e.target as HTMLInputElement).value);
+                if (errors.passwordConfirm) setErrors((prev) => { const next = { ...prev }; delete next.passwordConfirm; return next; });
+              }}
               placeholder="Retapez votre mot de passe"
               style={{
                 width: '100%',
@@ -362,6 +379,17 @@ export default function ReinitialiserMotDePassePage() {
                 }
               }}
               onBlur={(e) => {
+                const val = e.target.value;
+                if (!val) {
+                  setErrors((prev) => ({ ...prev, passwordConfirm: 'La confirmation est requise' }));
+                  e.currentTarget.style.borderColor = 'var(--terra, #DC2626)';
+                } else if (val !== password) {
+                  setErrors((prev) => ({ ...prev, passwordConfirm: 'Les mots de passe ne correspondent pas' }));
+                  e.currentTarget.style.borderColor = 'var(--terra, #DC2626)';
+                } else {
+                  setErrors((prev) => { const next = { ...prev }; delete next.passwordConfirm; return next; });
+                  e.currentTarget.style.borderColor = '#E5E0D8';
+                }
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />

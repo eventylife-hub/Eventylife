@@ -148,7 +148,10 @@ export default function MotDePasseOubliePage() {
                 id="email"
                 value={email}
                 autoComplete="email"
-                onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
+                onChange={(e) => {
+                  setEmail((e.target as HTMLInputElement).value);
+                  if (errors.email) setErrors({});
+                }}
                 required
                 placeholder="votre@email.com"
                 style={{
@@ -172,6 +175,17 @@ export default function MotDePasseOubliePage() {
                   }
                 }}
                 onBlur={(e) => {
+                  const val = e.target.value;
+                  if (!val.trim()) {
+                    setErrors({ email: 'L\'email est requis' });
+                    e.currentTarget.style.borderColor = 'var(--terra, #DC2626)';
+                  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                    setErrors({ email: 'Format d\'email invalide' });
+                    e.currentTarget.style.borderColor = 'var(--terra, #DC2626)';
+                  } else {
+                    setErrors({});
+                    e.currentTarget.style.borderColor = '#E5E0D8';
+                  }
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
