@@ -64,7 +64,7 @@ export default function AdminAlertesPage() {
     SLA_BREACH: 'Violation SLA',
   };
 
-  const fetchAlerts = async () => {
+  const fetchAlerts = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
@@ -73,6 +73,7 @@ export default function AdminAlertesPage() {
 
       const response = await fetch(`/api/admin/alerts?${params.toString()}`, {
         credentials: 'include',
+        signal,
       });
       if (response.ok) {
         const data = await response.json();
@@ -80,6 +81,7 @@ export default function AdminAlertesPage() {
         setUnreadCount(data.data?.filter((a: Alert) => !a.resolved).length || 0);
       }
     } catch (_error: unknown) {
+      if (_error instanceof DOMException && _error.name === 'AbortError') return;
       logger.warn('API admin/alerts indisponible — données démo');
       const FALLBACK_DATA: Alert[] = [
         {
@@ -120,7 +122,9 @@ export default function AdminAlertesPage() {
   };
 
   useEffect(() => {
-    fetchAlerts();
+    const controller = new AbortController();
+    fetchAlerts(controller.signal);
+    return () => controller.abort();
   }, [levelFilter, statusFilter]);
 
   const handleBulkAction = async (action: 'acknowledge' | 'dismiss' | 'assign') => {

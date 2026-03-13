@@ -67,12 +67,13 @@ export default function ExportsPage() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         setLoading(true);
         const [exportsRes, tripsRes] = await Promise.all([
-          fetch('/api/admin/exports', { credentials: 'include' }),
-          fetch('/api/admin/travels', { credentials: 'include' }),
+          fetch('/api/admin/exports', { credentials: 'include', signal: controller.signal }),
+          fetch('/api/admin/travels', { credentials: 'include', signal: controller.signal }),
         ]);
 
         if (exportsRes.ok) {
@@ -85,6 +86,7 @@ export default function ExportsPage() {
           setTrips(data.data || []);
         }
       } catch (_error: unknown) {
+        if (_error instanceof DOMException && _error.name === 'AbortError') return;
         logger.warn('API /api/admin/exports indisponible — données démo');
         setExports(FALLBACK_EXPORTS);
         setTrips([
@@ -98,6 +100,7 @@ export default function ExportsPage() {
     };
 
     fetchData();
+    return () => controller.abort();
   }, []);
 
   const handleQuickExport = async (type: ExportType, format: 'CSV' | 'PDF') => {

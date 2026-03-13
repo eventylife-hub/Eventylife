@@ -75,17 +75,20 @@ export default function AdminNotificationsPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         setLoading(true);
         const response = await fetch('/api/admin/notifications', {
           credentials: 'include',
+          signal: controller.signal,
         });
         if (response.ok) {
           const result = await response.json();
           setData(result);
         }
       } catch (_error: unknown) {
+        if (_error instanceof DOMException && _error.name === 'AbortError') return;
         logger.warn('API admin/notifications indisponible — données démo');
         const FALLBACK_DATA: NotificationsData = {
           templates: [
@@ -137,6 +140,7 @@ export default function AdminNotificationsPage() {
     };
 
     fetchData();
+    return () => controller.abort();
   }, []);
 
   const handleToggleTemplate = async (templateId: string, active: boolean) => {

@@ -45,7 +45,7 @@ export default function UtilisateursPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
 
-  const fetchUsers = useCallback(async () => {
+  const fetchUsers = useCallback(async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
@@ -58,6 +58,7 @@ export default function UtilisateursPage() {
 
       const response = await fetch(`/api/admin/users?${params}`, {
         credentials: 'include',
+        signal,
       });
       if (response.ok) {
         const data = (await response.json()) as PaginatedResponse;
@@ -71,6 +72,7 @@ export default function UtilisateursPage() {
         setError('Erreur lors du chargement des utilisateurs');
       }
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /admin/users indisponible — données démo');
       const FALLBACK_DATA: PaginatedResponse = {
         data: [
@@ -140,7 +142,9 @@ export default function UtilisateursPage() {
   }, [debouncedSearch, roleFilter, statusFilter]);
 
   useEffect(() => {
-    fetchUsers();
+    const controller = new AbortController();
+    fetchUsers(controller.signal);
+    return () => controller.abort();
   }, [fetchUsers]);
 
   const columns: DataTableColumn<User>[] = [

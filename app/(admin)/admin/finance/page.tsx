@@ -87,15 +87,15 @@ export default function FinancePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchAll = async () => {
+  const fetchAll = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
 
       const [revenueRes, paymentsRes, refundsRes] = await Promise.all([
-        fetch('/api/admin/dashboard/revenue', { credentials: 'include' }),
-        fetch('/api/admin/finance/payments?limit=5', { credentials: 'include' }),
-        fetch('/api/admin/finance/refunds?status=PENDING', { credentials: 'include' }),
+        fetch('/api/admin/dashboard/revenue', { credentials: 'include', signal }),
+        fetch('/api/admin/finance/payments?limit=5', { credentials: 'include', signal }),
+        fetch('/api/admin/finance/refunds?status=PENDING', { credentials: 'include', signal }),
       ]);
 
       if (!revenueRes.ok) {
@@ -118,6 +118,7 @@ export default function FinancePage() {
         setRefunds(refundsData.items || refundsData || []);
       }
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API Finance indisponible — données démo');
       setStats(FALLBACK_STATS);
       setPayments(FALLBACK_PAYMENTS);
@@ -129,7 +130,9 @@ export default function FinancePage() {
   };
 
   useEffect(() => {
-    fetchAll();
+    const controller = new AbortController();
+    fetchAll(controller.signal);
+    return () => controller.abort();
   }, []);
 
   /** INVARIANT 3 : formatPrice centralisé (centimes Int → euros) */

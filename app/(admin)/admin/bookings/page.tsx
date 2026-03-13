@@ -47,7 +47,7 @@ export default function AdminBookingsPage() {
     EXPIRED: { label: 'Expiré', color: 'admin-badge admin-badge-neutral' },
   };
 
-  const fetchBookings = async () => {
+  const fetchBookings = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
@@ -60,6 +60,7 @@ export default function AdminBookingsPage() {
 
       const response = await fetch(`/api/admin/bookings?${params.toString()}`, {
         credentials: 'include',
+        signal,
       });
       if (response.ok) {
         const data = await response.json() as { data: Booking[] };
@@ -68,6 +69,7 @@ export default function AdminBookingsPage() {
         setError('Erreur lors du chargement des réservations');
       }
     } catch (_error: unknown) {
+      if (_error instanceof DOMException && _error.name === 'AbortError') return;
       logger.warn('API /admin/bookings indisponible — données démo');
       const FALLBACK_DATA: Booking[] = [
         {
@@ -127,7 +129,9 @@ export default function AdminBookingsPage() {
   };
 
   useEffect(() => {
-    fetchBookings();
+    const controller = new AbortController();
+    fetchBookings(controller.signal);
+    return () => controller.abort();
   }, [statusFilter, tripFilter, dateRangeStart, dateRangeEnd]);
 
   const handleSearch = (e: React.FormEvent) => {

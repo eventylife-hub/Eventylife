@@ -23,12 +23,13 @@ export default function ParametresPage() {
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         setLoading(true);
         const [settingsRes, flagsRes] = await Promise.all([
-          fetch('/api/admin/settings', { credentials: 'include' }),
-          fetch('/api/admin/feature-flags', { credentials: 'include' }),
+          fetch('/api/admin/settings', { credentials: 'include', signal: controller.signal }),
+          fetch('/api/admin/feature-flags', { credentials: 'include', signal: controller.signal }),
         ]);
 
         if (settingsRes.ok) {
@@ -86,6 +87,7 @@ export default function ParametresPage() {
           setFeatureFlags(FALLBACK_FLAGS);
         }
       } catch (_error: unknown) {
+        if (_error instanceof DOMException && _error.name === 'AbortError') return;
         logger.warn('API admin/settings et feature-flags indisponible — données démo');
         const FALLBACK_SETTINGS: Setting[] = [
           {
@@ -129,6 +131,7 @@ export default function ParametresPage() {
     };
 
     fetchData();
+    return () => controller.abort();
   }, []);
 
   const handleSettingChange = (key: string, value: string) => {

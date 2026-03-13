@@ -37,6 +37,7 @@ export default function ProsPage() {
   ];
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchProfiles = async () => {
       try {
         setLoading(true);
@@ -46,7 +47,7 @@ export default function ProsPage() {
             ? '/api/admin/pros/pending'
             : `/api/admin/pros?status=${statusFilter.toUpperCase()}`;
 
-        const response = await fetch(endpoint, { credentials: 'include' });
+        const response = await fetch(endpoint, { credentials: 'include', signal: controller.signal });
         if (response.ok) {
           const data = await response.json();
           setProfiles(data.data || data);
@@ -54,6 +55,7 @@ export default function ProsPage() {
           setError('Erreur lors du chargement des profils Pro');
         }
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /admin/pros indisponible — données démo');
         const FALLBACK_DATA: ProProfile[] = [
           {
@@ -109,6 +111,7 @@ export default function ProsPage() {
     };
 
     fetchProfiles();
+    return () => controller.abort();
   }, [statusFilter]);
 
   const columns: DataTableColumn<ProProfile>[] = [

@@ -52,11 +52,12 @@ export default function SupportPage() {
     { value: 'closed', label: 'Fermé', color: 'admin-badge admin-badge-neutral' },
   ];
 
-  const fetchAllTickets = async () => {
+  const fetchAllTickets = async (signal?: AbortSignal) => {
     try {
       setError(null);
       const response = await fetch('/api/admin/tickets', {
         credentials: 'include',
+        signal,
       });
       if (response.ok) {
         const data = await response.json();
@@ -75,6 +76,7 @@ export default function SupportPage() {
         setError('Erreur lors du chargement des tickets');
       }
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /api/admin/tickets indisponible — données démo');
       const allData = FALLBACK_TICKETS;
       setAllTickets(allData);
@@ -92,7 +94,9 @@ export default function SupportPage() {
   };
 
   useEffect(() => {
-    fetchAllTickets();
+    const controller = new AbortController();
+    fetchAllTickets(controller.signal);
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {

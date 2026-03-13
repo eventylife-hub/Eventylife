@@ -56,14 +56,17 @@ export default function AdminDocumentsPage() {
   const [approvalReason, setApprovalReason] = useState('');
 
   useEffect(() => {
-    fetchDocuments();
+    const controller = new AbortController();
+    fetchDocuments(controller.signal);
+    return () => controller.abort();
   }, []);
 
-  const fetchDocuments = async () => {
+  const fetchDocuments = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       const response = await fetch('/api/admin/documents', {
         credentials: 'include',
+        signal,
       });
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des documents');
@@ -71,6 +74,7 @@ export default function AdminDocumentsPage() {
       const data = await response.json();
       setDocuments(data);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /api/admin/documents indisponible — données démo');
       setDocuments(FALLBACK_DOCUMENTS);
       setError(null);

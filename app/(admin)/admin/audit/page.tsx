@@ -36,6 +36,7 @@ export default function AuditPage() {
   });
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchLogs = async () => {
       try {
         setLoading(true);
@@ -48,6 +49,7 @@ export default function AuditPage() {
 
         const response = await fetch(`/api/admin/audit-logs?${params}`, {
           credentials: 'include',
+          signal: controller.signal,
         });
         if (response.ok) {
           const data = await response.json();
@@ -56,6 +58,7 @@ export default function AuditPage() {
           setError('Erreur lors du chargement des logs d\'audit');
         }
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API audit-logs indisponible — données démo');
         const FALLBACK_DATA: AuditLog[] = [
           {
@@ -91,7 +94,7 @@ export default function AuditPage() {
     };
 
     const timer = setTimeout(fetchLogs, 300);
-    return () => clearTimeout(timer);
+    return () => { clearTimeout(timer); controller.abort(); };
   }, [filters, retryKey]);
 
   const columns: DataTableColumn<AuditLog>[] = [

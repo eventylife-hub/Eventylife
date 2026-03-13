@@ -67,17 +67,19 @@ export default function AdminMarketingPage() {
   const [savingAttribution, setSavingAttribution] = useState(false);
   const [activeTab, setActiveTab] = useState('campaigns');
 
-  const fetchStats = async () => {
+  const fetchStats = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
       const response = await fetch('/api/admin/marketing', {
         credentials: 'include',
+        signal,
       });
       if (!response.ok) throw new Error('Erreur lors du chargement des données marketing');
       const data = await response.json();
       setStats(data);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /api/admin/marketing indisponible — données démo');
       setStats(FALLBACK_STATS);
       setError(null);
@@ -87,7 +89,9 @@ export default function AdminMarketingPage() {
   };
 
   useEffect(() => {
-    fetchStats();
+    const controller = new AbortController();
+    fetchStats(controller.signal);
+    return () => controller.abort();
   }, []);
 
   const handleSaveAttributionSettings = async () => {

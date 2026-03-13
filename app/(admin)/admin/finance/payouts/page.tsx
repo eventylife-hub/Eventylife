@@ -55,13 +55,14 @@ export default function PayoutsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchPayouts = async () => {
+  const fetchPayouts = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
 
       const response = await fetch('/api/admin/finance/payouts', {
         credentials: 'include',
+        signal,
       });
 
       if (!response.ok) {
@@ -71,6 +72,7 @@ export default function PayoutsPage() {
       const data = await response.json();
       setPayouts(data?.items || data || []);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API Versements indisponible — données démo');
       setPayouts(FALLBACK_PAYOUTS);
       setError(null);
@@ -80,7 +82,9 @@ export default function PayoutsPage() {
   };
 
   useEffect(() => {
-    fetchPayouts();
+    const controller = new AbortController();
+    fetchPayouts(controller.signal);
+    return () => controller.abort();
   }, []);
 
   const getStatusBadgeColor = (status: Payout['status']): string => {

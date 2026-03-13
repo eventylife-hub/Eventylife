@@ -103,15 +103,17 @@ export default function CancellationsPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchCancellations();
+    const controller = new AbortController();
+    fetchCancellations(controller.signal);
+    return () => controller.abort();
   }, [filter]);
 
-  const fetchCancellations = async () => {
+  const fetchCancellations = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       const response = await fetch(
         `/api/admin/cancellations?status=${filter}`,
-        { credentials: 'include' },
+        { credentials: 'include', signal },
       );
 
       if (!response.ok) {
@@ -125,6 +127,7 @@ export default function CancellationsPage() {
       setCancellations(data.data || []);
       setError(null);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API Annulations indisponible — données démo');
       let demoData: Cancellation[] = [];
       if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {

@@ -93,6 +93,7 @@ export default function TransportPage() {
   ];
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -105,6 +106,7 @@ export default function TransportPage() {
 
         const response = await fetch(`/api/admin/transport?${params.toString()}`, {
           credentials: 'include',
+          signal: controller.signal,
         });
         if (response.ok) {
           const data = await response.json();
@@ -113,6 +115,7 @@ export default function TransportPage() {
           setError('Erreur lors du chargement des transports');
         }
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API Transport indisponible — données démo');
         setTrips(FALLBACK_TRANSPORT_TRIPS);
         setError(null);
@@ -122,25 +125,30 @@ export default function TransportPage() {
     };
 
     fetchData();
+    return () => controller.abort();
   }, [statusFilter, modeFilter, retryKey]);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchStats = async () => {
       try {
         const response = await fetch('/api/admin/transport/stats', {
           credentials: 'include',
+          signal: controller.signal,
         });
         if (response.ok) {
           const data = await response.json();
           setStats(data);
         }
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API Stats Transport indisponible — données démo');
         setStats(FALLBACK_TRANSPORT_STATS);
       }
     };
 
     fetchStats();
+    return () => controller.abort();
   }, []);
 
   const getDepartureModeIcon = (mode: string) => {

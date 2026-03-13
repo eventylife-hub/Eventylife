@@ -76,6 +76,7 @@ export default function AdminRoomingPage() {
   const [editingRoom, setEditingRoom] = useState<Room | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchRooming = async () => {
       try {
         setLoading(true);
@@ -84,6 +85,7 @@ export default function AdminRoomingPage() {
 
         const response = await fetch(`/api/admin/rooming?${params.toString()}`, {
           credentials: 'include',
+          signal: controller.signal,
         });
         if (response.ok) {
           const data = await response.json();
@@ -93,6 +95,7 @@ export default function AdminRoomingPage() {
           }
         }
       } catch (_error: unknown) {
+        if (_error instanceof DOMException && _error.name === 'AbortError') return;
         logger.warn('API /api/admin/rooming indisponible — données démo');
         setRooming(FALLBACK_DATA);
         setError(null);
@@ -102,6 +105,7 @@ export default function AdminRoomingPage() {
     };
 
     fetchRooming();
+    return () => controller.abort();
   }, [selectedTrip]);
 
   const handleExport = async (format: 'pdf' | 'csv') => {
