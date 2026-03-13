@@ -51,13 +51,14 @@ export default function CampagneDetailPage() {
   const [actionLoading, setActionLoading] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         setLoading(true);
 
         const [campRes, metricsRes] = await Promise.all([
-          fetch(`/api/marketing/campaigns/${campaignId}`, { credentials: 'include' }),
-          fetch(`/api/marketing/campaigns/${campaignId}/metrics`, { credentials: 'include' }),
+          fetch(`/api/marketing/campaigns/${campaignId}`, { credentials: 'include', signal: controller.signal }),
+          fetch(`/api/marketing/campaigns/${campaignId}/metrics`, { credentials: 'include', signal: controller.signal }),
         ]);
 
         if (campRes.status === 404) {
@@ -74,6 +75,7 @@ export default function CampagneDetailPage() {
           setMetrics(metricsData);
         }
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API /api/marketing/campaigns indisponible — données démo');
         // Fallback demo data
         const demoCampaign: Campaign = {
@@ -105,6 +107,7 @@ export default function CampagneDetailPage() {
     };
 
     fetchData();
+    return () => controller.abort();
   }, [campaignId]);
 
   const handleLaunch = async () => {

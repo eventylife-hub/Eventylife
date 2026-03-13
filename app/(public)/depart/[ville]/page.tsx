@@ -160,10 +160,11 @@ export default function DepartVillePage() {
 
   /* Charger les données */
   useEffect(() => {
+    const controller = new AbortController();
     const load = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/travels?departure=${encodeURIComponent(ville)}`);
+        const res = await fetch(`/api/travels?departure=${encodeURIComponent(ville)}`, { signal: controller.signal });
         if (res.status === 404) { notFound(); return; }
         if (res.ok) {
           const data = await res.json() as { items: Travel[] };
@@ -173,7 +174,8 @@ export default function DepartVillePage() {
             setTravels(getDemoTravels());
           }
         }
-      } catch {
+      } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API voyages indisponible — données démo');
         if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
           setTravels(getDemoTravels());
@@ -183,6 +185,7 @@ export default function DepartVillePage() {
       }
     };
     if (ville) load();
+    return () => controller.abort();
   }, [ville]);
 
   /* Filtrer + trier */

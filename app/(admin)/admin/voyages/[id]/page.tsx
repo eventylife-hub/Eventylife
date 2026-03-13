@@ -68,12 +68,13 @@ export default function AdminVoyageDetailPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const fetchTravel = async () => {
+  const fetchTravel = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
       const response = await fetch(`/api/admin/travels/${travelId}`, {
         credentials: 'include',
+        signal,
       });
       if (response.status === 404) {
         notFound();
@@ -86,6 +87,7 @@ export default function AdminVoyageDetailPage() {
         setError('Impossible de charger les détails du voyage');
       }
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /admin/travels/{id} indisponible — données démo');
       const FALLBACK_DATA: TravelDetail = {
         id: travelId || 'demo-1',
@@ -131,7 +133,9 @@ export default function AdminVoyageDetailPage() {
 
   useEffect(() => {
     if (travelId) {
-      fetchTravel();
+      const controller = new AbortController();
+      fetchTravel(controller.signal);
+      return () => controller.abort();
     }
   }, [travelId]);
 

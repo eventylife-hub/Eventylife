@@ -45,11 +45,12 @@ export default function UserDetailPage() {
   const [error, setError] = useState<string | null>(null);
   const [toggling, setToggling] = useState(false);
 
-  const fetchUser = async () => {
+  const fetchUser = async (signal?: AbortSignal) => {
     try {
       setError(null);
       const response = await fetch(`/api/admin/users/${userId}`, {
         credentials: 'include',
+        signal,
       });
       if (response.ok) {
         const data = await response.json();
@@ -62,7 +63,8 @@ export default function UserDetailPage() {
       } else {
         setError('Erreur lors du chargement de l\'utilisateur');
       }
-    } catch {
+    } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API /admin/users/[id] indisponible — données démo');
       const FALLBACK_DATA: UserDetail = {
         id: userId,
@@ -95,7 +97,9 @@ export default function UserDetailPage() {
   };
 
   useEffect(() => {
-    fetchUser();
+    const controller = new AbortController();
+    fetchUser(controller.signal);
+    return () => controller.abort();
   }, [userId]);
 
   const handleToggleStatus = async () => {

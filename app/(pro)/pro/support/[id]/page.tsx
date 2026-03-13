@@ -94,22 +94,25 @@ export default function TicketDetailPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    fetchTicket();
+    const controller = new AbortController();
+    fetchTicket(controller.signal);
+    return () => controller.abort();
   }, [ticketId]);
 
-  const fetchTicket = async () => {
+  const fetchTicket = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
       // Tentative de récupération API
-      const response = await fetch(`/api/support/tickets/${ticketId}`, { credentials: 'include' });
+      const response = await fetch(`/api/support/tickets/${ticketId}`, { credentials: 'include', signal });
       if (response.status === 404) { notFound(); return; }
       if (!response.ok) {
         throw new Error('Erreur lors du chargement du ticket');
       }
       const data = await response.json();
       setTicket(data);
-    } catch {
+    } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn(`API support/tickets/${ticketId} indisponible — données démo`);
       // Données démo basées sur l'ID
       const demoTickets: Record<string, TicketDetail> = {

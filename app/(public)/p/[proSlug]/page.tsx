@@ -67,10 +67,11 @@ export default function ProPublicPage() {
 
   // Charger les données du pro
   useEffect(() => {
+    const controller = new AbortController();
     const loadPro = async () => {
       try {
         setState('loading');
-        const res = await fetch(`/api/public/pros/${proSlug}`);
+        const res = await fetch(`/api/public/pros/${proSlug}`, { signal: controller.signal });
 
         if (res.status === 404) { notFound(); return; }
         if (!res.ok) {
@@ -82,6 +83,7 @@ export default function ProPublicPage() {
         setPro(data);
         setState(data.travels?.length > 0 ? 'data' : 'empty');
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API pro indisponible — données démo');
         // Fallback demo data
         const fallbackPro: Pro = {
@@ -129,6 +131,7 @@ export default function ProPublicPage() {
     };
 
     if (proSlug) loadPro();
+    return () => controller.abort();
   }, [proSlug]);
 
   const handleLeadSubmit = async (e: React.FormEvent) => {

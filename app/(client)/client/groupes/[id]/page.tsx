@@ -58,11 +58,13 @@ export default function GroupDetailPage() {
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchGroup = async () => {
       try {
         setLoading(true);
         const res = await fetch(`/api/client/groups/${params.id}`, {
           credentials: 'include',
+          signal: controller.signal,
         });
 
         if (res.status === 404) {
@@ -74,6 +76,7 @@ export default function GroupDetailPage() {
         const data = (await res.json() as unknown) as TravelGroup;
         setGroup(data);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API client/groups indisponible — données démo');
         const FALLBACK_GROUP: TravelGroup = {
           id: params.id as string,
@@ -131,6 +134,7 @@ export default function GroupDetailPage() {
     };
 
     fetchGroup();
+    return () => controller.abort();
   }, [params.id]);
 
   const handleSendMessage = async (e: React.FormEvent) => {

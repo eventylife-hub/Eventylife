@@ -89,9 +89,10 @@ export default function BlogArticlePage() {
   const [state, setState] = useState<'loading' | 'data' | 'error'>('loading');
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchArticle = async () => {
       try {
-        const res = await fetch(`${API_URL}/blog/${slug}`);
+        const res = await fetch(`${API_URL}/blog/${slug}`, { signal: controller.signal });
         if (res.status === 404) { notFound(); return; }
         if (res.ok) {
           const data = await res.json();
@@ -102,13 +103,15 @@ export default function BlogArticlePage() {
           setArticle({ ...mockArticle, slug: slug || mockArticle.slug });
           setState('data');
         }
-      } catch {
+      } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API blog indisponible — données démo');
         setArticle({ ...mockArticle, slug: slug || mockArticle.slug });
         setState('data');
       }
     };
     fetchArticle();
+    return () => controller.abort();
   }, [slug]);
 
   if (state === 'loading' || !article) {

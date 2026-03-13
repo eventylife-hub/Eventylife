@@ -163,12 +163,13 @@ export default function MessagerieDetail() {
     },
   };
 
-  const fetchConversation = async () => {
+  const fetchConversation = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       setError(null);
       const res = await fetch(`/api/pro/messagerie/${conversationId}`, {
         credentials: 'include',
+        signal,
       });
       if (res.status === 404) {
         notFound();
@@ -181,6 +182,7 @@ export default function MessagerieDetail() {
       setConversation(data);
       setMessages(data.messages);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API indisponible, utilisation des données de démonstration');
       const demoConv = demoConversations[conversationId];
       if (!demoConv) {
@@ -195,7 +197,9 @@ export default function MessagerieDetail() {
   };
 
   useEffect(() => {
-    fetchConversation();
+    const controller = new AbortController();
+    fetchConversation(controller.signal);
+    return () => controller.abort();
   }, [conversationId]);
 
   const handleSendMessage = async (e: React.FormEvent) => {

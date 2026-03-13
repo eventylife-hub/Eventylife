@@ -270,10 +270,10 @@ export default function VoyageDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchDashboard = async () => {
+  const fetchDashboard = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/pro/travels/${travelId}`, { credentials: 'include' });
+      const res = await fetch(`/api/pro/travels/${travelId}`, { credentials: 'include', signal });
 
       if (res.status === 404) { notFound(); return; }
       if (!res.ok) throw new Error('Erreur chargement tableau de bord');
@@ -281,7 +281,8 @@ export default function VoyageDashboardPage() {
       const data = await res.json() as TravelDashboard;
       setDashboard(data);
       setError(null);
-    } catch {
+    } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API pro/travels detail indisponible — données démo');
       setDashboard({
         id: travelId,
@@ -311,7 +312,9 @@ export default function VoyageDashboardPage() {
 
   useEffect(() => {
     if (travelId) {
-      fetchDashboard();
+      const controller = new AbortController();
+      fetchDashboard(controller.signal);
+      return () => controller.abort();
     }
   }, [travelId]);
 

@@ -51,11 +51,13 @@ export default function BookingDetailPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchBooking = async () => {
       try {
         setLoading(true);
         const res = await fetch(`/api/client/bookings/${params.id}`, {
           credentials: 'include',
+          signal: controller.signal,
         });
 
         if (res.status === 404) {
@@ -67,6 +69,7 @@ export default function BookingDetailPage() {
         const data = (await res.json() as unknown) as Booking;
         setBooking(data);
       } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
         logger.warn('API client/bookings indisponible — données démo');
         const FALLBACK_BOOKING: Booking = {
           id: params.id as string,
@@ -115,6 +118,7 @@ export default function BookingDetailPage() {
     };
 
     fetchBooking();
+    return () => controller.abort();
   }, [params.id]);
 
   const getDaysDifference = (startDate: string, endDate: string) => {

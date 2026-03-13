@@ -89,14 +89,17 @@ export default function CancellationDetailPage() {
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   useEffect(() => {
-    fetchDetail();
+    const controller = new AbortController();
+    fetchDetail(controller.signal);
+    return () => controller.abort();
   }, [cancellationId]);
 
-  const fetchDetail = async () => {
+  const fetchDetail = async (signal?: AbortSignal) => {
     try {
       setLoading(true);
       const response = await fetch(`/api/cancellations/${cancellationId}`, {
         credentials: 'include',
+        signal,
       });
 
       if (response.status === 404) {
@@ -111,6 +114,7 @@ export default function CancellationDetailPage() {
       setCancellation(data.data);
       setError(null);
     } catch (err: unknown) {
+      if (err instanceof DOMException && err.name === 'AbortError') return;
       logger.warn('API Détail annulation indisponible — données démo');
       setCancellation(FALLBACK_CANCELLATION_DETAIL);
       setError(null);
