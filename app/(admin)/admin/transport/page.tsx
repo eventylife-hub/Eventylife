@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { StatsCard } from '@/components/admin/stats-card';
 import { Download, Bus, Plane, Package, AlertCircle } from 'lucide-react';
@@ -68,6 +69,7 @@ const FALLBACK_TRANSPORT_STATS: TransportStats = {
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
 export default function TransportPage() {
+  const router = useRouter();
   const [trips, setTrips] = useState<TransportTrip[]>([]);
   const [stats, setStats] = useState<TransportStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -284,7 +286,7 @@ export default function TransportPage() {
     {
       label: 'Éditer config',
       onClick: (row: TransportTrip) => {
-        window.location.href = `/admin/voyages/${row.id}/transport`;
+        router.push(`/admin/voyages/${row.id}/transport`);
       },
     },
   ];
@@ -357,7 +359,7 @@ export default function TransportPage() {
       {/* Lien vers gestion des arrêts bus */}
       <div className="flex gap-2 admin-fade-in delay-2">
         <button type="button"
-          onClick={() => (window.location.href = '/admin/transport/stops')}
+          onClick={() => router.push('/admin/transport/stops')}
           className="admin-btn-secondary"
         >
           Gérer les arrêts bus

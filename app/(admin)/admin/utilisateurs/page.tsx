@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { Search, RefreshCw, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
@@ -31,6 +32,7 @@ interface PaginatedResponse {
  * - Gestion d'erreurs robuste avec retry
  */
 export default function UtilisateursPage() {
+  const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -191,7 +193,7 @@ export default function UtilisateursPage() {
     {
       label: 'Détails',
       onClick: (row: User) => {
-        window.location.href = `/admin/utilisateurs/${row.id}`;
+        router.push(`/admin/utilisateurs/${row.id}`);
       },
     },
   ];

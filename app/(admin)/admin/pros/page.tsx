@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import dynamic from 'next/dynamic';
 const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').then(m => ({ default: m.ApprovalModal })), { ssr: false });
@@ -20,6 +21,7 @@ interface ProProfile {
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
 export default function ProsPage() {
+  const router = useRouter();
   const [profiles, setProfiles] = useState<ProProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -201,7 +203,7 @@ export default function ProsPage() {
     {
       label: 'Détails',
       onClick: (row: ProProfile) => {
-        window.location.href = `/admin/pros/${row.id}`;
+        router.push(`/admin/pros/${row.id}`);
       },
     },
     ...(statusFilter === 'pending'

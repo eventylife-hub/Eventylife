@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import dynamic from 'next/dynamic';
 const ApprovalModal = dynamic(() => import('@/components/admin/approval-modal').then(m => ({ default: m.ApprovalModal })), { ssr: false });
@@ -27,6 +28,7 @@ interface Travel {
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
 export default function VoyagesPage() {
+  const router = useRouter();
   const [travels, setTravels] = useState<Travel[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -215,7 +217,7 @@ export default function VoyagesPage() {
     {
       label: 'Détails',
       onClick: (row: Travel) => {
-        window.location.href = `/admin/voyages/${row.id}`;
+        router.push(`/admin/voyages/${row.id}`);
       },
     },
     ...(statusFilter === 'pending'

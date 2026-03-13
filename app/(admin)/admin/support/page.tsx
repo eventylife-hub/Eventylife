@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { DataTable, DataTableColumn } from '@/components/admin/data-table';
 import { ExportCta } from '@/components/admin/export-cta';
 import { formatDate } from '@/lib/utils';
@@ -34,6 +35,7 @@ const FALLBACK_TICKETS: SupportTicket[] = [
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
 export default function SupportPage() {
+  const router = useRouter();
   const [tickets, setTickets] = useState<SupportTicket[]>([]);
   const [allTickets, setAllTickets] = useState<SupportTicket[]>([]);
   const [loading, setLoading] = useState(true);
@@ -235,7 +237,7 @@ export default function SupportPage() {
                     {
                       label: 'Détails',
                       onClick: (row) => {
-                        window.location.href = `/admin/support/${row.id}`;
+                        router.push(`/admin/support/${row.id}`);
                       },
                     },
                   ]}

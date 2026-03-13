@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { HotelBlockCard } from '@/components/rooming/hotel-block-card';
 import { AlertCircle } from 'lucide-react';
 import { logger } from '@/lib/logger';
@@ -36,6 +36,7 @@ interface HotelBlock {
  */
 export default function HotelBlocksPage() {
   const params = useParams();
+  const router = useRouter();
   const travelId = params.id as string;
 
   const [loading, setLoading] = useState(true);
@@ -204,7 +205,7 @@ export default function HotelBlocksPage() {
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏢</div>
             <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0A1628', marginBottom: '0.5rem' }}>Aucun bloc hôtel</h3>
             <p style={{ color: '#64748B', margin: 0, fontSize: '0.875rem', marginBottom: '1rem' }}>Ajoutez des blocs hôtel pour gérer l'hébergement</p>
-            <button type="button" onClick={() => (window.location.href = `/pro/voyages/${travelId}`)} className="pro-btn-sun">
+            <button type="button" onClick={() => router.push(`/pro/voyages/${travelId}`)} className="pro-btn-sun">
               Ajouter bloc
             </button>
           </div>

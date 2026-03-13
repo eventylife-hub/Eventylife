@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { ToastNotification } from '@/components/ui/toast-notification';
@@ -138,13 +139,13 @@ export default function AssurancePage() {
           <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
             Protégez vos voyages avec une assurance annulation
           </p>
-          <button type="button"
-            onClick={() => (window.location.href = '/client/reservations')}
+          <Link
+            href="/client/reservations"
             className="inline-block px-6 py-3 rounded-xl font-semibold text-sm transition-all"
             style={{ background: 'var(--terra, #C75B39)', color: '#fff' }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#D97B5E';
-              e.currentTarget.style.boxShadow = `0 6px 24px var(--terra, #C75B39)30`;
+              e.currentTarget.style.boxShadow = '0 6px 24px rgba(199,91,57,0.19)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'var(--terra, #C75B39)';
@@ -152,7 +153,7 @@ export default function AssurancePage() {
             }}
           >
             Souscrire une assurance →
-          </button>
+          </Link>
         </div>
       ) : (
         <div className="space-y-4">

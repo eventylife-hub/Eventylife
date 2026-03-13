@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
@@ -55,6 +56,7 @@ interface PricingConfig {
  * Les identifiants de session sont transmis via les cookies httpOnly
  */
 export default function CreateTripPage() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState<Step>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
@@ -274,13 +276,13 @@ export default function CreateTripPage() {
       }
 
       const data = await response.json() as { id: string };
-      window.location.href = `/admin/voyages/${data.id}`;
+      router.push(`/admin/voyages/${data.id}`);
     } catch (err: unknown) {
       logger.warn('API /admin/travels (POST) indisponible — mode démo');
       const demoId = `demo-${Date.now()}`;
       setSubmitError(null);
       setIsSubmitting(false);
-      window.location.href = `/admin/voyages/${demoId}`;
+      router.push(`/admin/voyages/${demoId}`);
     }
   };
 

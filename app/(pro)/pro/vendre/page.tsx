@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { formatPrice, formatDate } from '@/lib/utils';
 import { AlertCircle, Copy, QrCode, TrendingUp } from 'lucide-react';
 import { sanitizeImageUrl } from '@/lib/security/url-validation';
@@ -231,9 +232,9 @@ export default function QuickSellPage() {
           <p style={{ color: '#64748B', marginBottom: '16px', fontSize: '14px' }}>
             Vous devez créer un voyage avant de pouvoir générer un lien de vente
           </p>
-          <button type="button" onClick={() => (window.location.href = '/pro/voyages/nouveau')} className="pro-btn-sun">
+          <Link href="/pro/voyages/nouveau" className="pro-btn-sun" style={{ display: 'inline-block', textAlign: 'center' }}>
             Créer un voyage
-          </button>
+          </Link>
         </div>
       ) : (
         <>
