@@ -205,15 +205,20 @@ export default function AdminLoginPage() {
                 autoComplete="email"
                 id="admin-email"
                 value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setEmail(e.target.value);
+                  if (errors.email) setErrors((prev) => { const next = { ...prev }; delete next.email; return next; });
+                }}
                 placeholder="admin@eventylife.fr"
                 required
                 disabled={loading}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'admin-email-error' : undefined}
                 style={{
                   width: '100%',
                   padding: '12px 16px',
                   borderRadius: '10px',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: `1px solid ${errors.email ? '#E63946' : 'rgba(255,255,255,0.1)'}`,
                   background: 'rgba(255,255,255,0.06)',
                   color: '#FFFFFF',
                   fontSize: '14px',
@@ -221,14 +226,25 @@ export default function AdminLoginPage() {
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#0077B6';
+                  if (!errors.email) e.currentTarget.style.borderColor = '#0077B6';
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,119,182,0.2)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  const val = e.target.value;
+                  if (!val.trim()) {
+                    setErrors((prev) => ({ ...prev, email: 'L\'email est requis' }));
+                    e.currentTarget.style.borderColor = '#E63946';
+                  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                    setErrors((prev) => ({ ...prev, email: 'Format d\'email invalide' }));
+                    e.currentTarget.style.borderColor = '#E63946';
+                  } else {
+                    setErrors((prev) => { const next = { ...prev }; delete next.email; return next; });
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  }
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
+              {errors.email && <p id="admin-email-error" style={{ color: '#FF8A95', fontSize: '12px', marginTop: '4px' }}>{errors.email}</p>}
             </div>
 
             <div>
@@ -250,15 +266,20 @@ export default function AdminLoginPage() {
                 autoComplete="current-password"
                 id="admin-password"
                 value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setPassword(e.target.value);
+                  if (errors.password) setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                }}
                 placeholder="••••••••"
                 required
                 disabled={loading}
+                aria-invalid={!!errors.password}
+                aria-describedby={errors.password ? 'admin-password-error' : undefined}
                 style={{
                   width: '100%',
                   padding: '12px 16px',
                   borderRadius: '10px',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: `1px solid ${errors.password ? '#E63946' : 'rgba(255,255,255,0.1)'}`,
                   background: 'rgba(255,255,255,0.06)',
                   color: '#FFFFFF',
                   fontSize: '14px',
@@ -266,14 +287,22 @@ export default function AdminLoginPage() {
                   transition: 'border-color 0.2s, box-shadow 0.2s',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#0077B6';
+                  if (!errors.password) e.currentTarget.style.borderColor = '#0077B6';
                   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,119,182,0.2)';
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  const val = e.target.value;
+                  if (!val) {
+                    setErrors((prev) => ({ ...prev, password: 'Le mot de passe est requis' }));
+                    e.currentTarget.style.borderColor = '#E63946';
+                  } else {
+                    setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  }
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               />
+              {errors.password && <p id="admin-password-error" style={{ color: '#FF8A95', fontSize: '12px', marginTop: '4px' }}>{errors.password}</p>}
             </div>
 
             <button

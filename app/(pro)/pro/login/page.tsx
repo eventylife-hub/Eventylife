@@ -81,12 +81,25 @@ export default function ProLoginPage() {
                 autoComplete="email"
                 id="email"
                 value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setEmail((e.target as HTMLInputElement).value);
+                  if (errors.email) setErrors((prev) => { const next = { ...prev }; delete next.email; return next; });
+                }}
+                onBlur={(e) => {
+                  const val = e.target.value;
+                  if (!val.trim()) setErrors((prev) => ({ ...prev, email: 'L\'email est requis' }));
+                  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) setErrors((prev) => ({ ...prev, email: 'Format d\'email invalide' }));
+                  else setErrors((prev) => { const next = { ...prev }; delete next.email; return next; });
+                }}
                 placeholder="pro@eventylife.fr"
                 className="pro-input"
                 required
                 disabled={loading}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'pro-email-error' : undefined}
+                style={errors.email ? { borderColor: 'var(--pro-coral)' } : undefined}
               />
+              {errors.email && <p id="pro-email-error" style={{ color: 'var(--pro-coral)', fontSize: '12px', marginTop: '4px' }}>{errors.email}</p>}
             </div>
 
             <div>
@@ -98,12 +111,23 @@ export default function ProLoginPage() {
                 autoComplete="current-password"
                 id="password"
                 value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword((e.target as HTMLInputElement).value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setPassword((e.target as HTMLInputElement).value);
+                  if (errors.password) setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) setErrors((prev) => ({ ...prev, password: 'Le mot de passe est requis' }));
+                  else setErrors((prev) => { const next = { ...prev }; delete next.password; return next; });
+                }}
                 placeholder="••••••••"
                 className="pro-input"
                 required
                 disabled={loading}
+                aria-invalid={!!errors.password}
+                aria-describedby={errors.password ? 'pro-password-error' : undefined}
+                style={errors.password ? { borderColor: 'var(--pro-coral)' } : undefined}
               />
+              {errors.password && <p id="pro-password-error" style={{ color: 'var(--pro-coral)', fontSize: '12px', marginTop: '4px' }}>{errors.password}</p>}
             </div>
 
             <button

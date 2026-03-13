@@ -101,12 +101,25 @@ export default function ProForgotPasswordPage() {
                 autoComplete="email"
                     id="email"
                     value={email}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail((e.target as HTMLInputElement).value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setEmail((e.target as HTMLInputElement).value);
+                      if (errors.email) setErrors({});
+                    }}
+                    onBlur={(e) => {
+                      const val = e.target.value;
+                      if (!val.trim()) setErrors({ email: 'L\'email est requis' });
+                      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) setErrors({ email: 'Format d\'email invalide' });
+                      else setErrors({});
+                    }}
                     placeholder="pro@eventylife.fr"
                     className="pro-input"
                     required
                     disabled={loading}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'pro-forgot-email-error' : undefined}
+                    style={errors.email ? { borderColor: 'var(--pro-coral)' } : undefined}
                   />
+                  {errors.email && <p id="pro-forgot-email-error" style={{ color: 'var(--pro-coral)', fontSize: '12px', marginTop: '4px' }}>{errors.email}</p>}
                 </div>
 
                 <button
