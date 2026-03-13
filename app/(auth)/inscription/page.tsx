@@ -31,6 +31,7 @@ export default function InscriptionPage() {
 
   const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(false);
   const [submitButtonHover, setSubmitButtonHover] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -44,6 +45,52 @@ export default function InscriptionPage() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+
+    // Effacer l'erreur du champ quand l'utilisateur tape
+    if (errors[name]) {
+      setErrors((prev) => { const next = { ...prev }; delete next[name]; return next; });
+    }
+  };
+
+  /** Validation individuelle d'un champ au blur */
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+
+    const fieldErrors: Record<string, string> = {};
+
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) fieldErrors.firstName = 'Le prénom est requis';
+        else if (value.trim().length < 2) fieldErrors.firstName = 'Le prénom doit contenir au moins 2 caractères';
+        break;
+      case 'lastName':
+        if (!value.trim()) fieldErrors.lastName = 'Le nom est requis';
+        else if (value.trim().length < 2) fieldErrors.lastName = 'Le nom doit contenir au moins 2 caractères';
+        break;
+      case 'email':
+        if (!value.trim()) fieldErrors.email = 'L\'email est requis';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) fieldErrors.email = 'Format d\'email invalide';
+        break;
+      case 'password':
+        if (!value) fieldErrors.password = 'Le mot de passe est requis';
+        else if (value.length < 8) fieldErrors.password = 'Le mot de passe doit contenir au moins 8 caractères';
+        break;
+      case 'confirmPassword':
+        if (!value) fieldErrors.confirmPassword = 'La confirmation est requise';
+        else if (value !== formData.password) fieldErrors.confirmPassword = 'Les mots de passe ne correspondent pas';
+        break;
+    }
+
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (fieldErrors[name]) {
+        next[name] = fieldErrors[name];
+      } else {
+        delete next[name];
+      }
+      return next;
+    });
   };
 
   const calculatePasswordStrength = (password: string) => {
@@ -216,6 +263,7 @@ export default function InscriptionPage() {
                 autoComplete="given-name"
                 value={formData.firstName}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
                 style={{
                   width: '100%',
@@ -265,6 +313,7 @@ export default function InscriptionPage() {
                 autoComplete="family-name"
                 value={formData.lastName}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
                 style={{
                   width: '100%',
@@ -317,6 +366,7 @@ export default function InscriptionPage() {
                 autoComplete="email"
               value={formData.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               required
               style={{
                 width: '100%',
@@ -454,6 +504,7 @@ export default function InscriptionPage() {
                   autoComplete="new-password"
                 value={formData.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
                 placeholder="••••••••"
                 style={{
@@ -557,6 +608,7 @@ export default function InscriptionPage() {
                   autoComplete="new-password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
                 placeholder="••••••••"
                 style={{
