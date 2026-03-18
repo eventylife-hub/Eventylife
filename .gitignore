@@ -90,3 +90,4 @@ push_*.py
 cleanup-mocks.bat
 dossier-avocat.js
 
+.github/workflows/

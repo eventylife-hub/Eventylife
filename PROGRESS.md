@@ -1,8 +1,24 @@
 # PROGRESS — Eventy Life Platform
 
-> **Dernière mise à jour** : Session 150, Backend Error Handling + Prisma Indexes (2026-03-18)
-> **Diagramme de référence** : drawio v53 (1 510+ pages)
+> **Dernière mise à jour** : Session 151, Audit Comparaison draw.io v53 vs Site + Programme Dev (2026-03-18)
+> **Diagramme de référence** : drawio v53 (1 798 diagrammes)
 > **Stack** : Next.js 14 App Router · NestJS 10 · Prisma 5 · PostgreSQL 15 · Stripe · Tailwind CSS
+
+---
+
+## Couverture Réelle (18 mars 2026)
+
+| Dimension | Fait | Total specs | Couverture |
+|-----------|------|-------------|------------|
+| Pages Frontend UI | 135 | ~160 | **~75%** |
+| Features Backend (logique métier) | ~30 | ~1 650 | **~2%** |
+| QA/Patches appliqués | 0 | ~500 | **0%** |
+| Tests E2E Playwright (specs) | 0 | spécifiés | **0%** |
+| Email templates | 0 | 14 | **0%** |
+| Stripe webhooks | partiel | complet | **~20%** |
+
+> **Verdict** : L'UI est bien avancée, mais le backend est quasi vide de logique métier.
+> Programme de développement en 4 phases / 20 semaines créé → `PROGRAMME-DEVELOPPEMENT.md`
 
 ---
 
@@ -25,6 +41,25 @@
 | PWA Pro (standalone) | 1 | 1 198 |
 | PWA Admin (standalone) | 1 | 1 405 |
 | Marketing (Brand Guide, Audit, Templates) | 6 | 1 685 |
+
+---
+
+## Session 151 — Audit Comparaison draw.io v53 vs Site (2026-03-18)
+
+> **Objectif** : Identifier TOUT ce qui manque entre les specs (1 798 diagrammes) et le site (135 pages)
+> **Résultat** : Programme de développement en 4 phases / 20 semaines
+
+### Constats principaux
+- **~20 pages UI manquantes** : 11 Admin + 8 Pro + 6 Client (dont 2 PARTIEL)
+- **~1 650 diagrammes non implémentés** = 95% des specs backend
+- **15 features P0** bloquant le lancement (Finance, Transport, Booking, RBAC, RGPD, Pricing, Création Voyage)
+- **13 features P1** pour post-lancement immédiat
+- **5 features P2** pour évolution M6+
+- **10 éléments transverses manquants** : Stripe webhooks, emails, E2E, seed, Sentry, CI/CD, S3, crons, rate limiting, migration DB
+
+### Fichiers créés
+- `PROGRAMME-DEVELOPPEMENT.md` — Programme complet 4 phases, 20 semaines, Front + Back + Autres
+- `PROGRESS.md` — Mis à jour avec couverture réelle et audit
 
 ---
 

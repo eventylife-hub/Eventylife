@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remboursement - Voyage annulé</title>
+    <style type="text/css">
+        body { margin: 0; padding: 0; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; }
+        table { border-collapse: collapse; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: #FF6B35; text-decoration: none; }
+        h1, h2, h3 { font-family: 'Fraunces', serif; margin: 0; }
+    </style>
+</head>
+<body style="margin:0; padding:0; background-color:#FEFCF3;">
+    <table role="presentation" style="width:100%; background-color:#FEFCF3;">
+        <tr>
+            <td align="center" style="padding:20px 0;">
+                <table role="presentation" style="width:100%; max-width:600px; background-color:#FFFFFF; border-radius:8px; box-shadow:0 2px 8px rgba(10,22,40,0.1);">
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td style="padding:40px 30px; background:linear-gradient(135deg, #FF6B35 0%, #0077B6 100%); text-align:center; border-radius:8px 8px 0 0;">
+                            <h1 style="color:#FFFFFF; font-size:28px; margin:0 0 8px 0;">Eventy Life</h1>
+                            <p style="color:#FEFCF3; font-size:12px; margin:0; font-weight:300; letter-spacing:1px;">VOYAGES DE GROUPE</p>
+                        </td>
+                    </tr>
+
+                    <!-- Cancellation Notice -->
+                    <tr>
+                        <td style="padding:24px 30px; background:linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); text-align:center;">
+                            <h2 style="color:#991B1B; font-size:24px; margin:0;">Voyage annulé</h2>
+                        </td>
+                    </tr>
+
+                    <!-- Main Content -->
+                    <tr>
+                        <td style="padding:40px 30px;">
+                            <!-- Message -->
+                            <p style="color:#0A1628; font-size:14px; line-height:1.6; margin:0 0 24px 0;">
+                                Bonjour {{FIRST_NAME}},
+                            </p>
+
+                            <p style="color:#0A1628; font-size:14px; line-height:1.6; margin:0 0 24px 0;">
+                                Malheureusement, le voyage <strong>{{TRAVEL_NAME}}</strong> prévu pour {{TRAVEL_DATE}} a été annulé. Nous vous présentons nos excuses sincères pour ce changement.
+                            </p>
+
+                            <!-- Refund Details -->
+                            <h3 style="color:#0A1628; font-size:16px; margin-bottom:16px;">💰 Détails du remboursement</h3>
+
+                            <table role="presentation" style="width:100%; background-color:#F9FAFB; border-radius:8px; margin-bottom:24px;">
+                                <tr>
+                                    <td style="padding:16px;">
+                                        <table role="presentation" style="width:100%;">
+                                            <tr>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0;">Voyage annulé</td>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0; text-align:right;"><strong>{{TRAVEL_NAME}}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0;">Montant remboursé</td>
+                                                <td style="color:#06D6A0; font-size:14px; padding:8px 0; text-align:right; font-weight:700;">{{REFUND_AMOUNT}}€</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0;">Mode de remboursement</td>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0; text-align:right;">{{REFUND_METHOD}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0;">Délai estimé</td>
+                                                <td style="color:#0A1628; font-size:13px; padding:8px 0; text-align:right;">{{REFUND_TIMELINE}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Next Steps -->
+                            <h3 style="color:#0A1628; font-size:16px; margin-bottom:16px;">📋 Prochaines étapes</h3>
+
+                            <p style="color:#0A1628; font-size:14px; line-height:1.6; margin:0 0 16px 0;">
+                                Vous avez plusieurs options:
+                            </p>
+
+                            <!-- Option 1 -->
+                            <table role="presentation" style="width:100%; margin-bottom:12px;">
+                                <tr>
+                                    <td style="width:20px; vertical-align:top;">
+                                        <div style="width:20px; height:20px; background-color:#FF6B35; border-radius:50%; text-align:center; line-height:20px; color:#FFFFFF; font-weight:700; font-size:12px;">1</div>
+                                    </td>
+                                    <td style="padding-left:12px; vertical-align:top;">
+                                        <p style="color:#0A1628; font-size:13px; margin:0;"><strong>Convertir en crédit</strong> - Utilisez le montant remboursé pour réserver un autre voyage</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Option 2 -->
+                            <table role="presentation" style="width:100%; margin-bottom:24px;">
+                                <tr>
+                                    <td style="width:20px; vertical-align:top;">
+                                        <div style="width:20px; height:20px; background-color:#0077B6; border-radius:50%; text-align:center; line-height:20px; color:#FFFFFF; font-weight:700; font-size:12px;">2</div>
+                                    </td>
+                                    <td style="padding-left:12px; vertical-align:top;">
+                                        <p style="color:#0A1628; font-size:13px; margin:0;"><strong>Recevoir le remboursement</strong> - Vous serez remboursé intégralement à votre mode de paiement</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Alternative Travels -->
+                            <h3 style="color:#0A1628; font-size:16px; margin-bottom:16px;">✨ Voyages similaires à découvrir</h3>
+
+                            <!-- Travel Card 1 -->
+                            <table role="presentation" style="width:100%; background-color:#F0F9FF; border-radius:8px; overflow:hidden; margin-bottom:16px;">
+                                <tr>
+                                    <td style="padding:16px;">
+                                        <h4 style="color:#0077B6; font-size:14px; margin:0 0 4px 0; font-weight:700;">{{ALTERNATIVE_1_NAME}}</h4>
+                                        <p style="color:#666; font-size:12px; margin:0 0 8px 0;">{{ALTERNATIVE_1_DESCRIPTION}}</p>
+                                        <p style="color:#FF6B35; font-size:13px; font-weight:700; margin:0;">À partir de {{ALTERNATIVE_1_PRICE}}€ par personne</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Travel Card 2 -->
+                            <table role="presentation" style="width:100%; background-color:#FEF3C7; border-radius:8px; overflow:hidden; margin-bottom:24px;">
+                                <tr>
+                                    <td style="padding:16px;">
+                                        <h4 style="color:#92400E; font-size:14px; margin:0 0 4px 0; font-weight:700;">{{ALTERNATIVE_2_NAME}}</h4>
+                                        <p style="color:#666; font-size:12px; margin:0 0 8px 0;">{{ALTERNATIVE_2_DESCRIPTION}}</p>
+                                        <p style="color:#FF6B35; font-size:13px; font-weight:700; margin:0;">À partir de {{ALTERNATIVE_2_PRICE}}€ par personne</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CTA Button -->
+                            <table role="presentation" style="width:100%; margin-bottom:24px;">
+                                <tr>
+                                    <td style="text-align:center;">
+                                        <a href="{{EXPLORE_TRAVELS_URL}}" style="display:inline-block; padding:14px 32px; background:linear-gradient(135deg, #FF6B35 0%, #FF8C5A 100%); color:#FFFFFF; text-decoration:none; border-radius:4px; font-weight:700; font-size:14px;">Explorer les voyages</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Support -->
+                            <p style="color:#0A1628; font-size:13px; margin:0;">
+                                Vous avez des questions? <a href="mailto:support@eventylife.com" style="color:#FF6B35; font-weight:600;">Notre équipe est là pour vous aider</a>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding:30px; background-color:#0A1628; border-radius:0 0 8px 8px; text-align:center;">
+                            <p style="color:#FFFFFF; font-size:12px; margin:0 0 12px 0;">
+                                © 2026 Eventy Life - Tous droits réservés
+                            </p>
+                            <p style="color:#94A3B8; font-size:11px; margin:0 0 8px 0;">
+                                <a href="{{UNSUBSCRIBE_URL}}" style="color:#94A3B8; text-decoration:none;">Se désabonner</a> |
+                                <a href="{{PRIVACY_POLICY_URL}}" style="color:#94A3B8; text-decoration:none;">Politique de confidentialité</a> |
+                                <a href="{{LEGAL_NOTICE_URL}}" style="color:#94A3B8; text-decoration:none;">Mentions légales</a>
+                            </p>
+                            <p style="color:#64748B; font-size:10px; margin:0;">
+                                Eventy Life - Plateforme de voyages de groupe | Paris, France
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
