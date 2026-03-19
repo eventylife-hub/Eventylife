@@ -297,6 +297,22 @@ Le squelette est complet. Les services ont du code réel (pas des mocks vides), 
 
 ---
 
+## SPECS DRAW.IO À SUIVRE PAR LOT
+
+| LOT | Diagrammes draw.io |
+|-----|-------------------|
+| LOT 0 | DEV_000 (Env Setup DotEnv), DEV_001 (Project Structure), DEV_014 (Seed Data), DEV_011 (Prisma Enums) |
+| LOT 1 | DEV_010 (Auth JWT Refresh 2FA), DEV_006 (RBAC Matrice Endpoint) |
+| LOT 4 | 04 (CréationVoyage 2Phases), 108-110 (Phase1 Approval) |
+| LOT 5 | DEV_002 (Checkout 5 Étapes), DEV_015 (Stripe Webhooks), 117-119 (RoomBooking SplitPay) |
+| LOT 6 | DEV_016 (Formules Finance Exemples Chiffrés), 54-56 (Compta Exports Cabinet) |
+| LOT 8 | DEV_005 (Email Templates 14), DEV_013 (Cron Jobs 9 Details) |
+| LOT 12 | DEV_004 (Admin Paramètres Centralisé), DEV_019 (Admin Dashboard UI), DEV_012 (Error Codes API) |
+| LOT 13 | DEV_017 (API Endpoints Complets), DEV_018 (Go Live Checklist), DEV_021 (Testing Strategy) |
+| TOUS | DEV_007 (Design System — pour validation des réponses API) |
+
+---
+
 ## RÈGLES DE CHAQUE SESSION
 
 ```

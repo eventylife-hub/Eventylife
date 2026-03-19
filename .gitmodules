@@ -1,0 +1,7 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/eventylife-hub/eventy-backend.git
+
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/eventylife-hub/eventy-frontend.git

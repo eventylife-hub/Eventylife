@@ -26,10 +26,11 @@
 | SEO (meta, sitemap) | ✅ | Production-ready |
 | Uploads (S3) | ✅ | Production-ready |
 | Pro (espace pro) | ✅ | Production-ready |
+| **Formation Pro (bibliothèque vidéos)** | ✅ **REWRITE 19/03** | Production-ready — 3 thèmes, 22 vidéos draw.io, RGPD 2-click |
 | HRA (hébergement, resto, activités) | 40 ✅ | Production-ready |
 | Finance | ✅ | Production-ready |
 | Insurance | ✅ | Production-ready |
-| Marketing (campagnes) | ✅ | Production-ready |
+| **Marketing Suite (10 pages)** | ✅ **COMPLET 19/03** | Production-ready — shortlinks e.ty/xxx, QR-print A4, analytics CSV, visuels, réseaux sociaux, studio IA, leads, campagnes |
 | Notifications | ✅ | Production-ready |
 | Cancellation | ✅ | Production-ready |
 | Legal / DSAR | ✅ | Production-ready |

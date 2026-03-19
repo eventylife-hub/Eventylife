@@ -1,6 +1,6 @@
 # DASHBOARD PDG — Eventy
 
-> **Dernière mise à jour** : 18 mars 2026 — Session nuit : PWA Pro/Admin reconstruites + Brand Guide + Audit Frontend
+> **Dernière mise à jour** : 19 mars 2026 — Cowork-5 Marketing + Opérations : +9 pages + QualityGate component — portail Pro = 56 pages — MEGA-AUDIT gaps #1-4 fermés
 > **PDG** : David — eventylife@gmail.com
 > **Activité** : Plateforme SaaS + Agence de voyages de groupe
 > **Domaine** : www.eventylife.fr
@@ -43,48 +43,62 @@
 
 ---
 
-## 🔧 Organisation Cowork (MAJ 16/03/2026)
+## 🔧 Organisation Cowork (MAJ 19/03/2026)
 
-| Instance | Rôle | Instructions | État | Statut |
-|----------|------|-------------|------|--------|
-| **Cowork BACK** | Backend NestJS, API, Stripe | `INSTRUCTIONS-COWORK-BACK.md` | `ETAT-COWORK-BACK.md` | ✅ **TERMINÉ** B-001→B-010 |
-| **Cowork FRONT** | Frontend Next.js, Pages, UI | `INSTRUCTIONS-COWORK-FRONT.md` | `ETAT-COWORK-FRONT.md` | ✅ **TERMINÉ** F-001→F-010 + V2-V5 |
-| **Cowork PDG** | Coordination, pilotage | Ce dashboard | — | 🔄 Actif |
+### Sessions terminées
+| Instance | Rôle | Statut |
+|----------|------|--------|
+| **Cowork BACK** | Backend NestJS, API, Stripe | ✅ **TERMINÉ** B-001→B-010 + 4 sessions enrichissement |
+| **Cowork FRONT** | Frontend Next.js, Pages, UI | ✅ **TERMINÉ** F-001→F-010 + V2-V17 (V18 jamais lancé) |
+| **Cowork PDG** | Coordination, pilotage | 🔄 Actif |
+| **Cowork-5** | Marketing Suite complète draw.io — 6 pages + 2 API routes (10 fichiers) | ✅ **TERMINÉ** 19/03 |
+| **Cowork-4** | Sprint Formation + Marketing + Backend (8 fichiers) | ✅ **TERMINÉ** 19/03 |
 
-**Fichiers de coordination :**
-- `SPRINT-COWORK.md` — Plan de sprint 6 phases, 20 LOTs — **TOUS TERMINÉS ✅**
-- `CONTRAT-API-COWORK.md` — Contrat API **MAJ V70** (15/03/2026)
-- `ETAT-COWORK-BACK.md` / `ETAT-COWORK-FRONT.md` — Mémoire persistante entre sessions
-- `AUDIT-TECHNIQUE-2026-03-15.md` — **NOUVEAU** : Rapport technique complet (sécurité A-, perf A/B, tests 85%)
-- `AUDIT-API-COMPLIANCE-2026-03-15.md` — **NOUVEAU** : Audit conformité API
+### Sessions à lancer (NOUVEAUX — combler les écarts drawio)
+| Instance | Rôle | Fichier | Statut |
+|----------|------|---------|--------|
+| **Cowork 7** | Écarts frontend drawio ↔ code | `COWORK-7-ECARTS-DRAWIO.md` | 🆕 À LANCER |
+| **Cowork 8** | Features manquantes (Runbook, Season, Safety) | `COWORK-8-FEATURES-AVANCEES.md` | 🆕 À LANCER |
+| **Cowork 9** | Polish UX final + tests E2E | `COWORK-9-POLISH-UX.md` | 🆕 À LANCER |
 
-**🟢 DÉVELOPPEMENT TERMINÉ — Prêt pour déploiement production.**
+### Méga-audit drawio (19/03/2026)
+- **1 798 pages de specs** analysées dans le draw.io v53
+- **88% des features core** implémentées (12/16 features majeures)
+- **10 features absentes** : Runbook J0, Duplicate Season, Safety Sheets, Quality Gate, Portail Hôtelier, Portail Restaurateur, Module VENDEUR, Bibliothèque parcours, Transport Quote Auto, Purge Simulation
+- **8 features partielles** : Catalogue 55%, Détail 65%, Checkout avancé, Carte bus stops, Gating PREANNOUNCE, NoGo Board, Email flows crédit, Elastic Hold
+- Voir `MEGA-AUDIT-19-MARS-2026.md` pour le détail complet
 
----
-
-## Actions urgentes en attente
-
-| Action | Priorité | Détail |
-|--------|----------|--------|
-| **Envoyer les 6 brouillons Gmail** | P0 | APST, CMB, Hiscox, Chevalier Conseil, Nexco, Mutuaide — prêts dans Gmail |
-| **Relancer sous 7 jours** | P0 | Si pas de réponse aux emails de devis |
-| **Trouver avocat tourisme** | P0 | Contacter Maître Llop + TourismLex — **DOSSIER AVOCAT .DOCX PRÊT** (DOSSIER-AVOCAT-EVENTY.docx) |
-| **Vérifier capacité professionnelle** | P0 | Atout France exige un justificatif — voir options dans IMMATRICULATION-ATOUT-FRANCE.md |
-| **Contacter ORIAS** | P1 | Pack Sérénité = question qualification IAS prioritaire pour l'avocat |
-| **Rotater credentials Neon DB** | P0 TECH | Le mot de passe BDD a été exposé dans .env — rotater AVANT mise en prod |
-| **Déployer sur Scaleway** | P0 TECH | **PRÊT** — deploy.sh, monitoring, k6, tests Stripe ✅ — RESTE: remplir .env.production + provisionner instance |
+**🟡 CODE SOLIDE — Écarts drawio à combler avant production.**
 
 ---
 
-## 🖥️ Statut Technique (MAJ 18/03/2026)
+## ⚠️ ALERTES — Actions en souffrance (19/03/2026)
+
+| Action | Priorité | Créé le | Jours en attente | Statut |
+|--------|----------|---------|-------------------|--------|
+| **Emails devis (6 brouillons Gmail)** | **P0** | 05/03 | **14 jours** ⚠️ | ❓ Envoyés ? Pas de trace de confirmation |
+| **Relancer contacts sans réponse** | **P0** | 12/03 | **7 jours** ⚠️ | ❓ Aucune relance notée |
+| **Trouver avocat tourisme** | **P0** | 05/03 | **14 jours** ⚠️ | Dossier .docx PRÊT — 0 contact effectué |
+| **Capacité professionnelle** | **P0** | 05/03 | **14 jours** | ⏳ Bloqué par avocat |
+| **ORIAS (qualification IAS)** | **P1** | 05/03 | **14 jours** | ⏳ Bloqué par avocat |
+| **Rotater credentials Neon DB** | **P0 TECH** | 15/03 | **4 jours** | 🔴 MDP exposé dans .env |
+| **Déployer sur Scaleway** | **P0 TECH** | 15/03 | **4 jours** | Prêt mais .env.production à remplir |
+| **Lancer Cowork 7 (écarts drawio)** | **P1 TECH** | 19/03 | **NOUVEAU** | 🆕 Prompt prêt |
+| **Lancer Cowork 8 (features avancées)** | **P2 TECH** | 19/03 | **NOUVEAU** | 🆕 Prompt prêt |
+
+> **David** : Les 6 emails ont-ils été envoyés le 05/03 ? As-tu eu des réponses ? Met à jour CONTACTS-PDG.md avec les vrais statuts. Voir aussi `SUIVI-RELANCES.md` (nouveau fichier créé le 19/03).
+
+---
+
+## 🖥️ Statut Technique (MAJ 19/03/2026)
 
 | Métrique | Valeur |
 |----------|--------|
-| **TypeScript** | ✅ 0 erreur frontend + backend |
+| **TypeScript** | ✅ 0 erreur frontend + backend (2 transport hors scope — prisma generate requis) |
 | **Auth** | ✅ JWT + 2FA TOTP (RFC 6238) + Argon2id + cookie fix |
-| **Sécurité** | **A++** — 4 critiques + 4 majeures corrigées (Session 145), AllExceptionsFilter, CSP durci, HSTS 2ans, TOTP chiffré AES-256-GCM, rate limiting, Fail2Ban |
+| **Sécurité** | **A++** — RBAC granulaire AdminRoles migré (7 modules), 4 bugs critiques corrigés, 13 cron locks anti-concurrence, PII masking complet |
 | **Performance** | A/B — Redis cache activé, 275 index DB, 0 N+1 |
-| **Tests** | 90%+ — 180+ fichiers, 1800+ tests |
+| **Tests** | 90%+ — 180+ fichiers, 1800+ tests, 278 tests RBAC validés (19/03) |
 | **SEO** | A — Sitemap dynamique, robots.txt, JSON-LD TravelAgency, OpenGraph |
 | **API** | 377 endpoints, 100% documentés (API-REFERENCE.md), Swagger en dev |
 | **Backend** | ✅ 100% — 31 modules, env-validation, AllExceptionsFilter, graceful shutdown |
@@ -92,6 +106,8 @@
 | **Monitoring** | ✅ Admin UI + CRON surveillance 30min + rapport quotidien 7h + Sentry |
 | **Stripe** | ✅ Tests intégration (20 cas), 6 flows, idempotence, invariants 3/4/5/7 |
 | **Load testing** | ✅ 3 scénarios k6, 4 profils (smoke/load/stress/spike) |
+| **Formation Pro** | ✅ **REWRITE COMPLET** — 3 thèmes, 22 vidéos draw.io, RGPD 2-click, priority/block badges, a11y |
+| **Marketing Suite** | ✅ **COMPLÈTE** — 10 pages (dashboard + 9 outils), shortlinks e.ty/xxx, QR-print A4, analytics CSV, visuels, réseaux sociaux, studio IA, leads — ~90% draw.io |
 | **Frontend** | ✅ 100% — 3 portails, 122 pages, MaintenanceBanner, PWA |
 | **PWA Pro** | ✅ **RECONSTRUITE** — 1198 lignes, 28 vues, 47 pages (tabs inclus), React 18 + Chart.js |
 | **PWA Admin** | ✅ **RECONSTRUITE** — 1405 lignes, 26 pages complètes, tableaux + graphiques + filtres |
@@ -135,7 +151,7 @@
 | Marketing lancement | ✅ **Bus complet** — 6 canaux + "places ouvertes" | P2 | `07-marketing-commercial/PLAN-LANCEMENT.md` |
 | RH / Organisation | ✅ Enrichi (coûts salariaux réels, phases 1-3) | P2 | `06-rh-organisation/ORGANIGRAMME.md` |
 | Hébergement cloud | ✅ Enrichi (tarifs Scaleway 2026) | P2 | `04-hebergement-infra/COMPARATIF-CLOUD.md` |
-| **🔒 Audit sécurité LOT 166** | ✅ **COMPLET — 88 vulnérabilités + 8 Session 145 corrigées** | **P0** | `PROGRESS.md` (Phases 1-129 + Session 145) |
+| **🔒 Audit sécurité LOT 166** | ✅ **COMPLET — 88 vulnérabilités + 8 Session 145 + audit RBAC 19/03** | **P0** | `PROGRESS.md` (Phases 1-129 + Session 145 + RBAC 19/03) |
 | Déploiement tech | ✅ Enrichi (Scaleway + Go/No-Go) | P2 | `09-site-beta/PLAN-DEPLOIEMENT.md` |
 | Process quotidien | ✅ Enrichi (routines + 4 process + KPIs) | P2 | `10-operations/PROCESS-QUOTIDIEN.md` |
 | Guide comptable TVA marge | ✅ Enrichi | P2 | `13-comptabilite/GUIDE-COMPTABLE.md` |

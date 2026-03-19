@@ -37,11 +37,11 @@
 | A1 | Validation Pro | `/admin/validation-pro` | P0 |
 | A2 | Équipes internes | `/admin/equipes` | P1 |
 | A3 | Fournisseurs | `/admin/fournisseurs` | P1 |
-| A4 | Finance avancée (PayoutBatch, TVA, Ledger) | `/admin/finance/*` | P0 |
+| A4 | Finance avancée (PayoutBatch, TVA, Ledger) | `/admin/finance/*` | ✅ **FAIT** (Cowork-1) |
 | A5 | Restauration | `/admin/restauration` | P1 |
 | A6 | Intégrations | `/admin/integrations` | P2 |
 | A7 | Feature Flags | `/admin/feature-flags` | P1 |
-| A8 | Leads Marketing | `/admin/marketing/leads` | P1 |
+| A8 | Leads Marketing | `/admin/marketing/leads` | ✅ **FAIT** (Cowork-1) |
 | A9 | Gestion HRA | `/admin/hra` | P1 |
 | A10 | Communications Hub | `/admin/communications` | P1 |
 | A11 | Planning 18 mois | `/admin/planning` | P2 |
@@ -55,7 +55,7 @@
 | P4 | Annuaire indépendants | `/pro/annuaire` | P2 |
 | P5 | Hub CE/Association | `/pro/association` | P2 |
 | P6 | Wallet Pro / Jetons | `/pro/wallet` | P1 |
-| P7 | Leads Inbox | `/pro/marketing/leads` | P1 |
+| P7 | Leads Inbox | `/pro/marketing/leads` | ✅ **FAIT** (Cowork-1) |
 | P8 | Restauration avancée | `/pro/voyages/[id]/restauration` | P1 (PARTIEL) |
 
 #### Client (6 pages manquantes)
@@ -63,7 +63,7 @@
 |---|------|-------|-----------|
 | C1 | Favoris / Wishlist | `/client/favoris` | P1 |
 | C2 | Credit Wallet avancé | `/client/wallet` | P1 (PARTIEL) |
-| C3 | Préférences notifications | `/client/notifications/preferences` | P1 |
+| C3 | Préférences notifications | `/client/notifications/preferences` | ✅ **FAIT** (Cowork-1) |
 | C4 | Urgence / Assistance | `/client/urgence` | P0 |
 | C5 | Préférences marketing | `/client/preferences-marketing` | P2 |
 | C6 | Pourboire / Merci voyage | `/client/pourboire` | P2 |
