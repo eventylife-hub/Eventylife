@@ -1,5 +1,7 @@
 # PLAN PHASE 2 — Sprints jusqu'au 19 mars 13h
 
+**STATUT : ✅ SUPERCÉDÉ** — Ce plan a été exécuté et complété via les sessions Cowork V9+ (mars 2026). Voir ETAT-COWORK-FRONT.md pour le suivi réel.
+
 > Règle : **max 2-3 fichiers par sprint**, TypeScript check entre chaque sprint.
 > Objectif : routes API manquantes + hooks métier Phase 2
 

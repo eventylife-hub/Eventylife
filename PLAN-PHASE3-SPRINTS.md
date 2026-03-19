@@ -1,5 +1,7 @@
 # PLAN PHASE 3 — Sprints Messagerie, Reviews, Favoris, Marketing, Transport, Paiements
 
+> **STATUT : ✅ SUPERCÉDÉ** — Ce plan a été exécuté et complété via les sessions Cowork (mars 2026). Voir ETAT-COWORK-FRONT.md pour le suivi réel.
+
 > Règle : **max 3 fichiers par sprint**, TypeScript check entre chaque sprint.
 > Objectif : routes API manquantes + hooks métier Phase 3
 

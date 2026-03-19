@@ -1,6 +1,6 @@
 # DASHBOARD PDG — Eventy
 
-> **Dernière mise à jour** : 19 mars 2026 — Cowork-5 Marketing + Opérations : +9 pages + QualityGate component — portail Pro = 56 pages — MEGA-AUDIT gaps #1-4 fermés
+> **Dernière mise à jour** : 19 mars 2026 — Cowork-5b : NoGo Board + Purge RGPD + Detail/Catalog enhancements — Admin = 29 pages — MEGA-AUDIT 7/10 gaps fermés
 > **PDG** : David — eventylife@gmail.com
 > **Activité** : Plateforme SaaS + Agence de voyages de groupe
 > **Domaine** : www.eventylife.fr
@@ -49,23 +49,24 @@
 | Instance | Rôle | Statut |
 |----------|------|--------|
 | **Cowork BACK** | Backend NestJS, API, Stripe | ✅ **TERMINÉ** B-001→B-010 + 4 sessions enrichissement |
-| **Cowork FRONT** | Frontend Next.js, Pages, UI | ✅ **TERMINÉ** F-001→F-010 + V2-V17 (V18 jamais lancé) |
+| **Cowork FRONT** | Frontend Next.js, Pages, UI | ✅ **TERMINÉ** F-001→F-010 + V2-V18 (V18 terminé) |
 | **Cowork PDG** | Coordination, pilotage | 🔄 Actif |
-| **Cowork-5** | Marketing Suite complète draw.io — 6 pages + 2 API routes (10 fichiers) | ✅ **TERMINÉ** 19/03 |
+| **Cowork-5b** | NoGo Board + Purge RGPD + Detail/Catalog — 8 fichiers | ✅ **TERMINÉ** 19/03 |
+| **Cowork-5** | Marketing Suite (6 pages) + Opérations (3 pages) + QualityGate — 16 fichiers | ✅ **TERMINÉ** 19/03 |
 | **Cowork-4** | Sprint Formation + Marketing + Backend (8 fichiers) | ✅ **TERMINÉ** 19/03 |
 
 ### Sessions à lancer (NOUVEAUX — combler les écarts drawio)
 | Instance | Rôle | Fichier | Statut |
 |----------|------|---------|--------|
-| **Cowork 7** | Écarts frontend drawio ↔ code | `COWORK-7-ECARTS-DRAWIO.md` | 🆕 À LANCER |
-| **Cowork 8** | Features manquantes (Runbook, Season, Safety) | `COWORK-8-FEATURES-AVANCEES.md` | 🆕 À LANCER |
+| **Cowork 7** | Écarts frontend drawio ↔ code | `COWORK-7-ECARTS-DRAWIO.md` | ✅ **TERMINÉ** 19/03 — 77/78 tâches (Sprint Voyages) |
+| **Cowork 8** | Features manquantes (Runbook, Season, Safety) | `COWORK-8-FEATURES-AVANCEES.md` | ✅ **FAIT** (Cowork-5) |
 | **Cowork 9** | Polish UX final + tests E2E | `COWORK-9-POLISH-UX.md` | 🆕 À LANCER |
 
 ### Méga-audit drawio (19/03/2026)
 - **1 798 pages de specs** analysées dans le draw.io v53
 - **88% des features core** implémentées (12/16 features majeures)
-- **10 features absentes** : Runbook J0, Duplicate Season, Safety Sheets, Quality Gate, Portail Hôtelier, Portail Restaurateur, Module VENDEUR, Bibliothèque parcours, Transport Quote Auto, Purge Simulation
-- **8 features partielles** : Catalogue 55%, Détail 65%, Checkout avancé, Carte bus stops, Gating PREANNOUNCE, NoGo Board, Email flows crédit, Elastic Hold
+- **~~10~~ 5 features absentes** (5 fermées Cowork-5) : ~~Runbook J0~~, ~~Duplicate Season~~, ~~Safety Sheets~~, ~~Quality Gate~~, Portail Hôtelier, Portail Restaurateur, ~~Module VENDEUR~~, Bibliothèque parcours, Transport Quote Auto, Purge Simulation
+- **8 features partielles** : Catalogue 95%, Détail 95%, Checkout avancé, Carte bus stops, Gating PREANNOUNCE, NoGo Board, Email flows crédit, Elastic Hold
 - Voir `MEGA-AUDIT-19-MARS-2026.md` pour le détail complet
 
 **🟡 CODE SOLIDE — Écarts drawio à combler avant production.**

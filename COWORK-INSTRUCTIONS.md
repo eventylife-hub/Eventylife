@@ -1,76 +1,89 @@
-# INSTRUCTIONS COWORK — Plan Global (v2 — 19 mars 2026)
+# INSTRUCTIONS COWORK — Partage de tâches (19 mars 2026)
 
-> **MAJ** : 19 mars 2026 — Après MÉGA-AUDIT (1 798 pages drawio analysées)
-> **9 sessions au total** : 3 frontend (FAIT) + 3 backend legacy (FAIT) + 3 nouvelles sessions
-
----
-
-## SESSIONS TERMINÉES
-
-| # | Nom | Scope | Statut |
-|---|-----|-------|--------|
-| 1 | COWORK-1-ADMIN | Portail Admin (39 pages) | ✅ TERMINÉ |
-| 2 | COWORK-2-PRO | Portail Pro (50 pages) | ✅ TERMINÉ |
-| 3 | COWORK-3-CLIENT | Portail Client + Public (27+26 pages) | ✅ TERMINÉ |
-| 4 | COWORK-4-BACK-FONDATIONS | Infra + Auth + Users + Onboarding | ✅ TERMINÉ (B-001→B-010) |
-| 5 | COWORK-5-BACK-COEUR-METIER | Voyage + Booking + Finance | ✅ TERMINÉ (enrichissements) |
-| 6 | COWORK-6-BACK-OPERATIONS | Notifs + Docs + Support + Sécu | ✅ TERMINÉ (enrichissements) |
-
-**Bilan sessions 1-6** : 165 pages, 31 modules, 113 modèles Prisma, 0 erreur TS, 3 300+ tests.
+> **MODE PARTAGE** : Chaque session Cowork pioche dans la liste ci-dessous.
+> Quand tu prends une tâche, inscris ton nom de session et la date à côté.
+> Lis **AME-EVENTY.md** en premier, toujours.
 
 ---
 
-## NOUVELLES SESSIONS À LANCER
+## ÉTAT DU PROJET
 
-| # | Fichier | Scope | Effort | Priorité |
-|---|---------|-------|--------|----------|
-| **7** | `COWORK-7-ECARTS-DRAWIO.md` | Écarts frontend drawio : catalogue, détail, checkout, carte, gating | ~12-15j | **P0 — MVP** |
-| **8** | `COWORK-8-FEATURES-AVANCEES.md` | Features manquantes : Quality Gate, Runbook J0, Safety Sheets, Duplicate Season, Email flows, NoGo Board | ~12-16j | **P1 — V1.1** |
-| **9** | COWORK-9-POLISH-UX (à créer) | Tests E2E complets, polish UX, accessibilité finale, perf audit | ~5-8j | **P2** |
-
-### Ordre de lancement
-
-```
-Session 7 (Écarts drawio MVP) ──→ Session 9 (Polish + Tests)
-Session 8 (Features avancées)  ──→ peut tourner EN PARALLÈLE avec 7
-```
+| Domaine | Complétion | Détail |
+|---------|-----------|--------|
+| **Frontend** | 90% | 165 pages, 203 API calls connectées, 0 erreurs TS |
+| **Backend** | 82% | 31 modules avec logique métier réelle, 3 300+ tests |
+| **Sprint Voyages** | 99% | 77/78 tâches terminées |
+| **Sessions COWORK 1-8** | ✅ | Toutes terminées |
 
 ---
 
-## PROMPTS DE LANCEMENT
+## TÂCHES DISPONIBLES — BACKEND
 
-### Session 7 — Écarts Draw.io Frontend
-```
-Lis le fichier COWORK-7-ECARTS-DRAWIO.md et exécute-le.
-C'est la session frontend : combler les écarts entre le draw.io et le code sur les pages catalogue, détail voyage, checkout et carte bus stops.
-Lis aussi AME-EVENTY.md et RAPPORT-ECARTS-DRAWIO-VS-CODE.md en premier.
-```
+Chaque Cowork prend une ou plusieurs tâches et inscrit son nom.
 
-### Session 8 — Features Avancées
-```
-Lis le fichier COWORK-8-FEATURES-AVANCEES.md et exécute-le.
-C'est la session features avancées : Quality Gate, Runbook J0, Safety Sheets, Duplicate Season, Email automation, NoGo Board.
-Lis aussi AME-EVENTY.md en premier.
-```
-
-### Session 9 — Polish UX (prompt à préparer quand sessions 7-8 terminées)
-```
-Tu es le testeur QA + UX designer d'Eventy Life.
-Ton rôle : tests E2E Playwright sur les 3 portails, audit accessibilité WCAG 2.1 AA, audit performance Lighthouse, polish micro-interactions.
-```
+| Tâche | Module | État actuel | Priorité | Pris par | Date |
+|-------|--------|------------|----------|----------|------|
+| Compléter HRA Hub (hôtels, restaus, activités) | HRA | 65% | P0 | | |
+| Compléter module SEO (slugs dynamiques, JSON-LD) | SEO | 60% | P1 | | |
+| Compléter module Restauration (meal management) | Restauration | 70% | P1 | | |
+| Compléter module Client (edge cases, workflows) | Client | 65% | P1 | | |
+| Compléter module Post-sale (post-trip services) | Post-sale | 70% | P2 | | |
+| Finir les 4 templates email manquants (10/14 → 14/14) | Email | 88% | P0 | | |
+| Cron jobs métier (rappels, expirations, nettoyage) | Cron | 70% | P1 | | |
+| Compléter module Groups (social entity, smart invite) | Groups | 75% | P1 | | |
+| Compléter module Cancellation (edge cases remboursement) | Cancellation | 78% | P1 | | |
+| Prisma migration script production (up/down/rollback) | DB | 0% | P0 | | |
+| CI/CD pipeline GitHub Actions (build → test → deploy) | DevOps | 0% | P1 | | |
+| Performance optimization (caching, query optim) | Infra | Baseline | P2 | | |
 
 ---
 
-## ESTIMATION TOTALE MISE À JOUR
+## TÂCHES DISPONIBLES — NOUVELLES FEATURES
 
-| Phase | Sessions | Heures Cowork | Statut |
-|-------|----------|---------------|--------|
-| Frontend pages UI | 1, 2, 3 | ~20h | ✅ FAIT |
-| Backend fondations + enrichissement | 4, 5, 6 | ~45h | ✅ FAIT |
-| Écarts drawio frontend | 7 | ~12-15j | 🆕 À faire |
-| Features avancées | 8 | ~12-16j | 🆕 À faire |
-| Polish + Tests E2E | 9 | ~5-8j | 🆕 À faire |
-| **TOTAL** | **9** | **~95-110h** | **67% fait** |
+| Tâche | Description | Priorité | Pris par | Date |
+|-------|------------|----------|----------|------|
+| Portail Hôtelier | Nouveau portail partenaire hôtels | P2 | | |
+| Portail Restaurateur | Nouveau portail partenaire restos | P2 | | |
+| Bibliothèque parcours | Templates de parcours/itinéraires | P2 | | |
+| Transport Quote Auto | Système de devis transport auto | P2 | | |
+| Purge Simulation | Utilitaire nettoyage données | P2 | | |
+
+---
+
+## TÂCHES DISPONIBLES — FRONTEND
+
+| Tâche | Pages concernées | Priorité | Pris par | Date |
+|-------|-----------------|----------|----------|------|
+| Tests E2E Playwright (3 portails) | Toutes | P0 | | |
+| Audit accessibilité WCAG 2.1 AA + corrections | Toutes | P1 | | |
+| Audit performance Lighthouse + optimisation | Toutes | P1 | | |
+| Polish micro-interactions (animations, transitions) | UI globale | P2 | | |
+| Tâche 4.8 Sprint Voyages (migration Prisma) | Voyages | P0 | | |
+| Mettre à jour pages HRA quand backend terminé | /admin/hra, /pro/hra | P1 | | |
+| Mettre à jour pages Restauration quand backend terminé | /admin/restauration | P1 | | |
+
+---
+
+## TÂCHES DISPONIBLES — DÉPLOIEMENT
+
+| Tâche | Détail | Priorité | Pris par | Date |
+|-------|--------|----------|----------|------|
+| Setup environnement production (DB, cache, CDN, monitoring) | Infra | P0 | | |
+| Go-live checklist (sécurité, compliance, backups) | Ops | P0 | | |
+| Deployment dry-run (simulation production complète) | Ops | P1 | | |
+| Tests de charge k6 (scénarios réalistes) | Perf | P1 | | |
+| Tests sécurité OWASP top 10 | Sécu | P1 | | |
+
+---
+
+## RÈGLES POUR LES COWORK
+
+1. **Lis AME-EVENTY.md en premier** — c'est l'âme du projet
+2. **Prends une tâche** — inscris ton nom de session et la date dans le tableau
+3. **Une tâche à la fois** — termine avant d'en prendre une autre
+4. **Commite régulièrement** — petit commits clairs
+5. **Mets à jour PROGRESS.md** — note ce que tu as fait
+6. **Signale les blocages** — si tu es bloqué, note-le dans le tableau
 
 ---
 
@@ -78,13 +91,31 @@ Ton rôle : tests E2E Playwright sur les 3 portails, audit accessibilité WCAG 2
 
 | Document | Rôle |
 |----------|------|
-| `AME-EVENTY.md` | Manifeste fondateur — LIRE EN PREMIER |
+| `AME-EVENTY.md` | Manifeste fondateur — **LIRE EN PREMIER** |
+| `PROGRAMME-DEVELOPPEMENT.md` | État réel du projet + plan final |
 | `MEGA-AUDIT-19-MARS-2026.md` | Audit complet drawio vs code |
-| `RAPPORT-ECARTS-DRAWIO-VS-CODE.md` | 45 écarts détaillés page catalogue/détail |
-| `ROADMAP-PRODUIT.md` | Priorisation des 18 features manquantes |
-| `ETAT-COWORK-FRONT.md` | Mémoire sessions frontend |
-| `ETAT-COWORK-BACK.md` | Mémoire sessions backend |
+| `RAPPORT-ECARTS-DRAWIO-VS-CODE.md` | Écarts détaillés catalogue/détail |
+| `ROADMAP-PRODUIT.md` | Priorisation features |
+| `pdg-eventy/ETAT-COWORK-FRONT.md` | Mémoire sessions frontend |
+| `pdg-eventy/DASHBOARD-PDG.md` | Dashboard PDG central |
 
 ---
 
-*Mis à jour le 19 mars 2026 — Post MÉGA-AUDIT*
+## HISTORIQUE — Sessions terminées
+
+| Session | Scope | Résultat |
+|---------|-------|----------|
+| COWORK-1-ADMIN | Portail Admin (39 pages) | ✅ |
+| COWORK-2-PRO | Portail Pro (50 pages) | ✅ |
+| COWORK-3-CLIENT | Portail Client + Public (53 pages) | ✅ |
+| COWORK-4-BACK-FONDATIONS | Infra + Auth + Users + Onboarding | ✅ |
+| COWORK-5-BACK-COEUR-METIER | Voyage + Booking + Finance | ✅ |
+| COWORK-6-BACK-OPERATIONS | Notifs + Docs + Support + Sécu | ✅ |
+| COWORK-7-ECARTS-DRAWIO | 77/78 tâches Sprint Voyages | ✅ |
+| COWORK-8-FEATURES-AVANCEES | Quality Gate, Runbook, Safety Sheets | ✅ |
+
+**Bilan** : 165 pages, 31 modules, 113 modèles Prisma, 0 erreur TS, 3 300+ tests.
+
+---
+
+*Mis à jour le 19 mars 2026 — Mode partage Cowork*

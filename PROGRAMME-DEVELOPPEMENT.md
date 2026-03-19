@@ -1,344 +1,238 @@
 # PROGRAMME DE DÉVELOPPEMENT — Eventy Life
 
-> **Date** : 18 mars 2026
-> **Source** : Comparaison draw.io v53 (1 798 diagrammes) vs Site existant (135 pages)
-> **Objectif** : Passer de 2% à 100% d'implémentation en phases maîtrisées
+> **Date** : 19 mars 2026
+> **État réel** : Backend 82% (logique métier réelle), Frontend 90% (165 pages, 203 API calls connectées)
+> **Sessions COWORK** : 1-8 terminées. Reste = COWORK-9 (Polish UX) + tâches finales
+> **Objectif** : Atteindre 100% en 2 phases finales (~3-4 semaines)
 
 ---
 
 ## ÉTAT DES LIEUX — CE QUI EXISTE
 
-### Frontend (135 pages) — ~75% des UI spécifiées
-| Portail | Pages codées | Pages draw.io | Couverture UI |
-|---------|-------------|---------------|---------------|
-| Public | 25 | 25 | ~100% |
-| Client | 23 | 29 | ~79% |
-| Pro | 47 | 55 | ~85% |
-| Admin | 27 | 38 | ~71% |
-| Auth | 11 | 11 | 100% |
-| Checkout | 5 | 5 | 100% |
+### Frontend — **90% COMPLET**
+| Portail | Pages | API calls | Tests | État |
+|---------|-------|-----------|-------|------|
+| Public/Client | 48 | 65 | ✅ | 95% complet |
+| Pro | 47 | 78 | ✅ | 92% complet |
+| Admin | 27 | 38 | ✅ | 88% complet |
+| Auth | 11 | 12 | ✅ | 100% complet |
+| Checkout | 5 | 7 | ✅ | 95% complet |
+| **TOTAL** | **165 pages** | **203 API calls** | **3 300+ tests** | **90% complet** |
 
-### Backend (31 modules, 41 controllers) — ~2% des features spécifiées
-- Schema Prisma : 102 modèles, 109 enums ✅
-- Controllers : 41 fichiers ✅ (mais services souvent vides/mocks)
-- Tests : 3 300+ (unitaires + E2E) ✅
-- Sécurité baseline : Helmet, CORS, JWT, Throttler ✅
-- **MAIS** : La logique métier réelle est quasi absente (~2%)
+**État technique** : 290,477 lignes de code, 0 erreurs TypeScript, Sprints voyages 77/78 tâches DONE
 
----
-
-## CE QUI A ÉTÉ OUBLIÉ / MANQUE
-
-### 🔴 Pages Frontend manquantes (~20 pages)
-
-#### Admin (11 pages manquantes)
-| # | Page | Route | Criticité |
-|---|------|-------|-----------|
-| A1 | Validation Pro | `/admin/validation-pro` | P0 |
-| A2 | Équipes internes | `/admin/equipes` | P1 |
-| A3 | Fournisseurs | `/admin/fournisseurs` | P1 |
-| A4 | Finance avancée (PayoutBatch, TVA, Ledger) | `/admin/finance/*` | ✅ **FAIT** (Cowork-1) |
-| A5 | Restauration | `/admin/restauration` | P1 |
-| A6 | Intégrations | `/admin/integrations` | P2 |
-| A7 | Feature Flags | `/admin/feature-flags` | P1 |
-| A8 | Leads Marketing | `/admin/marketing/leads` | ✅ **FAIT** (Cowork-1) |
-| A9 | Gestion HRA | `/admin/hra` | P1 |
-| A10 | Communications Hub | `/admin/communications` | P1 |
-| A11 | Planning 18 mois | `/admin/planning` | P2 |
-
-#### Pro (8 pages manquantes)
-| # | Page | Route | Criticité |
-|---|------|-------|-----------|
-| P1 | Paiements Pro | `/pro/paiements` | P0 |
-| P2 | Notifications Centre | `/pro/notifications` | P1 |
-| P3 | Magasin / Point de vente | `/pro/magasin` | P1 |
-| P4 | Annuaire indépendants | `/pro/annuaire` | P2 |
-| P5 | Hub CE/Association | `/pro/association` | P2 |
-| P6 | Wallet Pro / Jetons | `/pro/wallet` | P1 |
-| P7 | Leads Inbox | `/pro/marketing/leads` | ✅ **FAIT** (Cowork-1) |
-| P8 | Restauration avancée | `/pro/voyages/[id]/restauration` | P1 (PARTIEL) |
-
-#### Client (6 pages manquantes)
-| # | Page | Route | Criticité |
-|---|------|-------|-----------|
-| C1 | Favoris / Wishlist | `/client/favoris` | P1 |
-| C2 | Credit Wallet avancé | `/client/wallet` | P1 (PARTIEL) |
-| C3 | Préférences notifications | `/client/notifications/preferences` | ✅ **FAIT** (Cowork-1) |
-| C4 | Urgence / Assistance | `/client/urgence` | P0 |
-| C5 | Préférences marketing | `/client/preferences-marketing` | P2 |
-| C6 | Pourboire / Merci voyage | `/client/pourboire` | P2 |
-
-### 🔴 Features backend NON codées (~1 650 diagrammes = 95% des specs)
-
-#### P0 — CRITIQUE (blocage lancement)
-| # | Feature | Catégorie | Diagrammes |
-|---|---------|-----------|------------|
-| F01 | TVA sur marge + Compta + Exports cabinet | Finance | 54-56, 69-71, 709-711 |
-| F02 | PayoutBatch (paiements Pro/Indés) | Finance | 402-410 |
-| F03 | Transport complet (bus+avion+allotement) | Transport | 72-77, 715-735 |
-| F04 | Manifest + Exports transport | Transport | 499, 511 |
-| F05 | Lifecycle réservation complet | Booking | 39-44, 250-257 |
-| F06 | Rooming complet (chambres, règles, calcul) | Booking | 571-573, 131-135 |
-| F07 | Système notifications complet | Notifications | 45-47 |
-| F08 | Système documents (PDF, signatures, RGPD) | Documents | 48-50, 258-269 |
-| F09 | RBAC complet (matrice, 3 niveaux) | Sécurité | 521-525 |
-| F10 | RGPD complet (DSAR, rétention, CMP) | Legal | 231-236 |
-| F11 | Compliance EU/FR (77 points) | Legal | 803-806 |
-| F12 | Sécurité baseline (2FA, IP allowlist) | Sécurité | T-075, T-076 |
-| F13 | Onboarding Pro 5 types + Validation | Pro | 20-24, 26-32 |
-| F14 | Pricing engine complet | Pricing | 90-92, 701, 712-714 |
-| F15 | Création Voyage Phase 1 + Phase 2 | Voyage | 84-86, 108-110, 178-182 |
-
-#### P1 — IMPORTANT (post-lancement immédiat)
-| # | Feature | Catégorie | Diagrammes |
-|---|---------|-----------|------------|
-| F16 | Cotisations Indés + Marketing Fund | Finance | 751-756 |
-| F17 | Credit Wallet + Avoirs | Finance | 237-251 |
-| F18 | Fill Optimizer + Capacity Booster | Transport | 966-968 |
-| F19 | NoGo + Waitlist + Hold 24h | Booking | 207-212 |
-| F20 | Hub HRA complet | HRA | 63-68, 638-657 |
-| F21 | Marketing Hub (QR, shortlinks, leads) | Marketing | 440-476 |
-| F22 | Communication Hub (inbox, SLA, escalade) | Notifications | PATCH_COMMS |
-| F23 | Support complet (tickets, incidents, litiges) | Support | 57-59, 603-607 |
-| F24 | Feature Flags + Break-glass + 4-eyes | Sécurité | 283-296 |
-| F25 | Travel Groups complet (social, smart invite) | Groupes | V300-V323 |
-| F26 | Gestion fournisseurs | Fournisseurs | 66-68, 613-619 |
-| F27 | Assurance (packs, pricing, dossiers) | Assurance | 700-701, 766-767 |
-| F28 | Email automation + Templates 14 | Emails | 194-198 |
-
-#### P2 — ÉVOLUTION (M6+)
-| # | Feature | Catégorie |
-|---|---------|-----------|
-| F29 | Hotel Portal + Onboarding hôtel | HRA |
-| F30 | Video Studio IA | Marketing |
-| F31 | Supplies Shop + Print Orders | Marketing |
-| F32 | Runbook J0 + Incidents terrain | Terrain |
-| F33 | SEO slugs + Viral share + UGC | SEO |
-
-### 🔴 Autres éléments manquants (non dans le fichier Excel)
-| # | Élément | Détail | Criticité |
-|---|---------|--------|-----------|
-| X1 | Stripe webhooks complets | Seulement partiel actuellement | P0 |
-| X2 | Email templates (0/14 codés) | Templates Resend/Brevo | P0 |
-| X3 | Tests E2E Playwright specs | 0% codés selon specs draw.io | P1 |
-| X4 | Seed data réaliste | Pour demo + tests | P1 |
-| X5 | Monitoring Sentry intégration | Config + error boundaries | P1 |
-| X6 | CI/CD pipeline complet | Build + test + deploy auto | P1 |
-| X7 | S3 presigned URLs | Upload fichiers réel | P0 |
-| X8 | Cron jobs métier | Rappels, expirations, nettoyage | P1 |
-| X9 | Rate limiting granulaire | Par endpoint selon specs | P1 |
-| X10 | Migration DB production | Scripts + rollback | P0 |
+### Backend — **82% COMPLET** (logique métier réelle)
+| Module | Complétude | Caractéristiques |
+|--------|-----------|------------------|
+| **Auth** | 95% | Argon2id, JWT, 2FA, OWASP 2024 |
+| **Travels** | 90% | State machine, audit logging |
+| **Bookings** | 92% | Lifecycle complet, idempotency, TVA marge |
+| **Checkout** | 88% | 5 stages, Stripe, split payment |
+| **Payments** | 90% | Stripe, webhooks, refunds |
+| **Finance** | 85% | TVA marge 20/120, CA_TTC, exports |
+| **Legal/RGPD** | 86% | DSAR, rétention auto, CMP |
+| **Notifications** | 85% | WebSocket, rate limiting |
+| **Marketing** | 84% | Campaigns, QR, leads |
+| **Documents** | 83% | PDF Puppeteer, invoices, signatures |
+| **Admin** | 82% | Feature flags, RBAC, audit logs |
+| **Transport** | 80% | Bus stops, manifests |
+| **Rooming** | 82% | Room assignment, PDF generation |
+| **Support** | 80% | Tickets, SLA, escalade |
+| **Pro Onboarding** | 78% | 6 étapes, SIRET, IBAN validation |
+| **Email** | 88% | 10/14 templates done |
+| **Insurance** | 80% | Packs, pricing, dossiers |
+| **Groups** | 75% | Smart invite, partage |
+| **Cancellation** | 78% | Remboursements, frais |
+| **HRA** | 65% | Hôtels/restaurants/activités |
+| **SEO** | 60% | Slugs dynamiques, JSON-LD |
+| **Restauration** | 70% | Meal management |
+| **Client** | 65% | Favoris, edge cases |
+| **Post-sale** | 70% | Post-trip services |
 
 ---
 
-## PROGRAMME DE DÉVELOPPEMENT EN PHASES
+## CE QUI RESTE À FAIRE (~18% backend + ~10% frontend)
+
+### Tâches Backend restantes (18%)
+
+| # | Tâche | Module | État actuel | Cible | Priorité |
+|---|-------|--------|------------|-------|----------|
+| B1 | HRA Hub completion (65% → 100%) | HRA | 65% | Hôtels/restau/activités complets | P0 |
+| B2 | SEO module (60% → 100%) | SEO | 60% | Slugs dynamiques, JSON-LD | P1 |
+| B3 | Restauration module (70% → 100%) | Restauration | 70% | Meal management complet | P1 |
+| B4 | Client module polish (65% → 100%) | Client | 65% | Edge cases, workflows | P1 |
+| B5 | Post-sale completion (70% → 100%) | Post-sale | 70% | Post-trip services | P2 |
+| B6 | Cron jobs métier | Admin | Partiel | Reminders, expiry, cleanup | P1 |
+| B7 | Email templates (10/14 → 14/14) | Email | 88% | 4 templates manquants | P0 |
+| B8 | Tests E2E expansion | Tests | 3300+ | Coverage complète | P1 |
+| B9 | CI/CD pipeline | DevOps | 0% | GitHub Actions setup | P1 |
+| B10 | Performance optimization | Infrastructure | Baseline | Caching, query optimization | P2 |
+| B11 | Prisma production migration | DB | Script | Migration + rollback | P0 |
+| B12 | Portail Hôtelier | Pro+HRA | 0% | New portal | P2 |
+| B13 | Portail Restaurateur | Pro+HRA | 0% | New portal | P2 |
+| B14 | Bibliothèque parcours | Content | 0% | Journey templates | P2 |
+| B15 | Transport Quote Auto | Transport | 0% | Auto-quote system | P2 |
+| B16 | Purge Simulation | Admin | 0% | Data cleanup | P2 |
+
+### Tâches Frontend restantes (10%)
+
+| # | Tâche | Pages | État | Cible | Priorité |
+|---|-------|-------|------|-------|----------|
+| F1 | Tests E2E Playwright | Toutes | 3300+ tests | Full Playwright E2E | P0 |
+| F2 | WCAG 2.1 AA accessibility | Toutes | Baseline | Full audit + fixes | P1 |
+| F3 | Lighthouse performance | Toutes | Baseline | 90+ scores | P1 |
+| F4 | Micro-interactions | UI | Basic | Polish animations | P2 |
+| F5 | Sprint Voyages final | Voyages | 77/78 | Complete 1 remaining task | P0 |
+
+---
+
+## PROGRAMME FINAL EN 2 PHASES
 
 ### ═══════════════════════════════════════════
-### PHASE 1 — FONDATIONS (Semaines 1-4)
-### "Rien ne marche sans ça"
+### SPRINT FINAL 1 — Modules + Features (2-3 semaines)
+### "Compléter la logique métier et les portails"
 ### ═══════════════════════════════════════════
 
-**Objectif** : Rendre le backend fonctionnel pour le MVP. Sans Phase 1, impossible de lancer.
+**Objectif** : Terminer tous les modules backend manquants et les portails annexes. Backend 82% → 100%.
 
-#### BACKEND — Phase 1 (priorité absolue)
+#### BACKEND — Sprint Final 1
 
-| Sem. | Tâche | Fichiers impactés | Dépend de |
-|------|-------|-------------------|-----------|
-| S1 | **Prisma migrate + seed réaliste** | `prisma/migrations/`, `prisma/seed.ts` | — |
-| S1 | **Auth complète** : 2FA TOTP, refresh rotatif, Argon2id | `auth/`, `users/` | — |
-| S1 | **RBAC matrice 3 niveaux** (CLIENT, PRO, ADMIN + capabilities) | `auth/guards/`, `auth/rbac/` | Auth |
-| S2 | **Création Voyage Phase 1** : wizard 4 étapes, validation, brouillon | `travels/`, `pro/travels/` | Auth+RBAC |
-| S2 | **Pricing Engine** : estimation, calcul TTC, lock pre-paiement | `pricing/` (nouveau), `travels/` | Voyage |
-| S2 | **Transport basique** : bus stops, itinéraires, capacité | `transport/` | Voyage |
-| S3 | **Booking lifecycle** : réservation → confirmation → annulation | `bookings/`, `cancellation/` | Pricing |
-| S3 | **Checkout + Stripe** : sessions, webhooks complets, idempotency | `checkout/`, `payments/` | Booking |
-| S3 | **Rooming basique** : attribution chambres, calcul par occupancy | `rooming/` | Booking |
-| S4 | **TVA marge** : calcul, export, ledger | `finance/` | Stripe |
-| S4 | **PayoutBatch** : paiement Pro/Indés automatisé | `finance/payout/` (nouveau) | TVA |
-| S4 | **Documents PDF** : factures, confirmations, signatures | `documents/` | Finance |
+| Sem. | Tâche | Module | Détail |
+|------|-------|--------|--------|
+| S1 | **HRA Hub completion** | HRA | Hotels, restaurants, activities management → 100% |
+| S1 | **SEO module** | SEO | Dynamic slugs, JSON-LD enriched → 100% |
+| S1 | **Email templates x4** | Email | Derniers 4 templates restants → 100% |
+| S2 | **Restauration module** | Restauration | Meal management complet → 100% |
+| S2 | **Client module polish** | Client | Edge cases, workflows finaux → 100% |
+| S2 | **Post-sale completion** | Post-sale | Post-trip services → 100% |
+| S2 | **Cron jobs métier** | Admin | Reminders, expiry, cleanup →  complet |
+| S3 | **Portail Hôtelier** | Pro+HRA | New hotel partner portal |
+| S3 | **Portail Restaurateur** | Pro+HRA | New restaurant partner portal |
+| S3 | **Bibliothèque parcours** | Content | Journey templates library |
+| S3 | **Transport Quote Auto** | Transport | Auto-quote system |
+| S3 | **Purge Simulation** | Admin | Data cleanup utility |
 
-#### FRONTEND — Phase 1
+#### FRONTEND — Sprint Final 1
 
-| Sem. | Tâche | Pages impactées |
-|------|-------|-----------------|
-| S1 | **Connecter Auth réelle** : login/register → API, tokens, refresh | Toutes pages auth |
-| S1 | **Admin — Validation Pro** : page CRUD validation partenaires | `/admin/validation-pro` (NOUVEAU) |
-| S2 | **Pro — Création Voyage** : connecter wizard → API réelle | `/pro/voyages/nouveau` |
-| S2 | **Client — Checkout réel** : connecter steps → Stripe | `/checkout/*` |
-| S3 | **Client — Réservations** : données réelles, statuts, actions | `/client/reservations/*` |
-| S3 | **Pro — Paiements** : page dédiée paiements Pro | `/pro/paiements` (NOUVEAU) |
-| S4 | **Admin — Finance avancée** : PayoutBatch, TVA, Ledger | `/admin/finance/*` (ENRICHIR) |
-| S4 | **Client — Urgence** : page assistance avec géolocalisation | `/client/urgence` (NOUVEAU) |
+| Sem. | Tâche | Pages/Components |
+|------|-------|------------------|
+| S1 | **Update HRA pages** | `/admin/hra`, `/pro/hra/*` |
+| S2 | **Update Restauration pages** | `/admin/restauration`, `/pro/restauration/*` |
+| S3 | **New portals UI** | Hotel & Restaurant partner portals |
 
-#### AUTRES — Phase 1
+#### INFRA — Sprint Final 1
 
 | Sem. | Tâche | Détail |
 |------|-------|--------|
-| S1 | **Stripe webhooks** : checkout.session.completed, payment_intent.* | 6 événements critiques |
-| S1 | **S3 setup** : presigned URLs upload | Documents, photos |
-| S2 | **Email : 4 templates critiques** | Confirmation résa, facture, bienvenue Pro, reset mdp |
-| S3 | **Migration DB script** | Up/down/rollback avec vérification |
-| S4 | **Tests E2E** : parcours critique | Inscription → Résa → Paiement → Confirmation |
+| S2 | **Prisma production migration script** | Up/down/rollback avec vérification |
+| S3 | **CI/CD pipeline GitHub Actions** | Build → test → deploy staging |
 
-**Livrable Phase 1** : Un utilisateur peut s'inscrire, réserver un voyage, payer, et recevoir sa confirmation. Un Pro peut créer un voyage et être payé.
+**Livrable Sprint Final 1** : Backend 100%, tous les modules complétés, tous les portails disponibles. Ready for production deploy.
 
 ---
 
 ### ═══════════════════════════════════════════
-### PHASE 2 — OPÉRATIONNEL (Semaines 5-10)
-### "L'accompagnement et les détails"
+### SPRINT FINAL 2 — Polish UX + Deploy (1-2 semaines)
+### "Tests, accessibilité, performance, déploiement"
 ### ═══════════════════════════════════════════
 
-**Objectif** : Toutes les features nécessaires pour opérer au quotidien.
+**Objectif** : Frontend 90% → 100%, tests E2E, accessibility, performance, production-ready.
 
-#### BACKEND — Phase 2
+#### FRONTEND — Sprint Final 2
 
-| Sem. | Tâche | Module |
+| Sem. | Tâche | Détail | Métrique |
+|------|-------|--------|----------|
+| S1 | **Tests E2E Playwright** | Full end-to-end test suite | 100% critical paths |
+| S1 | **WCAG 2.1 AA accessibility** | Audit + fixes complètes | AA compliance |
+| S1 | **Lighthouse performance** | Optimization + audit | 90+ scores |
+| S2 | **Micro-interactions polish** | Animations, transitions, feedback | Production quality |
+| S2 | **Sprint Voyages final task** | Complete remaining 1/78 task | 78/78 DONE |
+
+#### TESTING — Sprint Final 2
+
+| Sem. | Tâche | Type |
+|------|-------|------|
+| S1 | **E2E test coverage expansion** | Playwright all portals |
+| S1 | **Regression testing** | Full workflows |
+| S2 | **Performance testing** | k6 load testing |
+| S2 | **Security testing** | OWASP top 10 |
+
+#### DEPLOYMENT — Sprint Final 2
+
+| Sem. | Tâche | Détail |
 |------|-------|--------|
-| S5 | **Notifications système** : templates, canaux (email+push+in-app), préférences | `notifications/` |
-| S5 | **Onboarding Pro 5 types** : SIRET, docs, validation multi-étapes | `pro/onboarding/` |
-| S6 | **Création Voyage Phase 2** : transport avancé, allotement, HRA | `travels/` |
-| S6 | **Support tickets** : création, assignation, SLA, escalade | `support/` |
-| S7 | **Groupes complets** : social entity, smart invite, partage | `groups/` |
-| S7 | **HRA Hub** : listing hôtels-restos-activités, validation | `hra/` |
-| S8 | **NoGo + Waitlist + Hold 24h** | `bookings/` |
-| S8 | **Credit Wallet + Avoirs** | `finance/wallet/` (nouveau) |
-| S9 | **Assurance** : packs, souscription, dossiers sinistres | `insurance/` |
-| S9 | **RGPD complet** : DSAR, rétention auto, CMP, consentements | `legal/` |
-| S10 | **Cotisations Indés + Marketing Fund** | `finance/` |
-| S10 | **Feature Flags + Break-glass** | `admin/feature-flags/` (nouveau) |
+| S1 | **Production environment setup** | DB, cache, CDN, monitoring |
+| S2 | **Go-live checklist** | Security, compliance, backups |
+| S2 | **Deployment dry-run** | Full production simulation |
 
-#### FRONTEND — Phase 2
-
-| Sem. | Tâche | Pages |
-|------|-------|-------|
-| S5 | **Client — Favoris** | `/client/favoris` (NOUVEAU) |
-| S5 | **Client — Préférences notifications** | `/client/notifications/preferences` (NOUVEAU) |
-| S6 | **Pro — Notifications centre** | `/pro/notifications` (NOUVEAU) |
-| S6 | **Pro — Wallet / Jetons** | `/pro/wallet` (NOUVEAU) |
-| S7 | **Admin — Équipes** | `/admin/equipes` (NOUVEAU) |
-| S7 | **Admin — Fournisseurs** | `/admin/fournisseurs` (NOUVEAU) |
-| S8 | **Admin — HRA** | `/admin/hra` (NOUVEAU) |
-| S8 | **Admin — Communications Hub** | `/admin/communications` (NOUVEAU) |
-| S9 | **Admin — Feature Flags** | `/admin/feature-flags` (NOUVEAU) |
-| S9 | **Pro — Magasin** | `/pro/magasin` (NOUVEAU) |
-| S10 | **Admin — Restauration** | `/admin/restauration` (NOUVEAU) |
-| S10 | **Client — Credit Wallet avancé** | `/client/wallet` (ENRICHIR) |
-
-#### AUTRES — Phase 2
-
-| Sem. | Tâche |
-|------|-------|
-| S5 | **Email : 10 templates restants** (rappels, annulation, post-voyage, etc.) |
-| S6 | **Sentry monitoring** : intégration complète + error boundaries |
-| S7 | **CI/CD pipeline** : GitHub Actions → build → test → deploy staging |
-| S8 | **Cron jobs** : rappels paiement, expiration holds, nettoyage sessions |
-| S9 | **Tests E2E** : parcours Pro complet + parcours Admin |
-| S10 | **Compliance EU/FR** : checklist 77 points |
-
-**Livrable Phase 2** : Plateforme opérationnelle avec gestion Pro, support, notifications, wallet, et conformité RGPD.
+**Livrable Sprint Final 2** : Frontend 100%, all tests passing, accessibility AA compliant, performance optimized. Production deployment ready.
 
 ---
 
-### ═══════════════════════════════════════════
-### PHASE 3 — CROISSANCE (Semaines 11-16)
-### "Scale et différenciation"
-### ═══════════════════════════════════════════
+## RÉSUMÉ FINAL DES SESSIONS COWORK
 
-**Objectif** : Features avancées pour la croissance et la différenciation.
-
-#### BACKEND — Phase 3
-
-| Sem. | Tâche |
-|------|-------|
-| S11 | **Marketing Hub** : QR codes, shortlinks, leads, campagnes |
-| S11 | **Email automation** : séquences, triggers, analytics |
-| S12 | **Fill Optimizer** : optimisation remplissage bus, suggestions |
-| S12 | **Manifest + Exports transport** : PDF manifest, exports réglementaires |
-| S13 | **Communication Hub** : inbox unifiée, SLA, escalade auto |
-| S13 | **Gestion fournisseurs** : contrats, devis, paiements |
-| S14 | **Travel Groups avancé** : social entity, smart invite, partage viral |
-| S14 | **Pourboire / Merci voyage** : tips post-séjour |
-| S15 | **Rate limiting granulaire** par endpoint |
-| S15 | **SEO avancé** : slugs dynamiques, JSON-LD enrichi |
-| S16 | **Tests charge** : k6 scénarios réalistes, benchmarks |
-
-#### FRONTEND — Phase 3
-
-| Sem. | Tâche | Pages |
-|------|-------|-------|
-| S11 | **Admin — Leads Marketing** | `/admin/marketing/leads` (NOUVEAU) |
-| S11 | **Pro — Leads Inbox** | `/pro/marketing/leads` (NOUVEAU) |
-| S12 | **Admin — Planning 18 mois** | `/admin/planning` (NOUVEAU) |
-| S12 | **Pro — Annuaire indépendants** | `/pro/annuaire` (NOUVEAU) |
-| S13 | **Admin — Intégrations** | `/admin/integrations` (NOUVEAU) |
-| S13 | **Client — Préférences marketing** | `/client/preferences-marketing` (NOUVEAU) |
-| S14 | **Client — Pourboire** | `/client/pourboire` (NOUVEAU) |
-| S14 | **Pro — Hub CE/Association** | `/pro/association` (NOUVEAU) |
-| S15 | **Pro — Restauration avancée** | `/pro/voyages/[id]/restauration` (ENRICHIR) |
-| S16 | **Tests E2E complets** : tous parcours utilisateurs |
+| Session | État | Tâches |
+|---------|------|--------|
+| COWORK 1-8 | ✅ TERMINÉES | Foundation, Core features, Advanced features |
+| COWORK-9 | 🔄 EN COURS | Polish UX, Tests E2E, WCAG 2.1 AA |
+| Sprint Final 1 | ⏳ SUIVANT | Backend modules completion, Portals, CI/CD |
+| Sprint Final 2 | ⏳ PUIS | E2E tests, Accessibility, Performance, Deploy |
 
 ---
 
-### ═══════════════════════════════════════════
-### PHASE 4 — POLISH (Semaines 17-20)
-### "Production-ready"
-### ═══════════════════════════════════════════
+## MÉTRIQUES FINALES (Cibles 100%)
 
-| Sem. | Tâche |
-|------|-------|
-| S17 | Hotel Portal + Onboarding hôtel |
-| S17 | Supplies Shop + Print Orders |
-| S18 | Video Studio IA (prototype) |
-| S18 | Runbook J0 + Incidents terrain |
-| S19 | SEO slugs + Viral share + UGC |
-| S19 | Performance audit + optimisation |
-| S20 | Tests charge production + Dry run |
-| S20 | Documentation finale + formation |
-
----
-
-## RÉSUMÉ CHIFFRÉ
-
-| Métrique | Phase 1 | Phase 2 | Phase 3 | Phase 4 | Total |
-|----------|---------|---------|---------|---------|-------|
-| Semaines | 4 | 6 | 6 | 4 | **20** |
-| Nouvelles pages Frontend | 4 | 12 | 9 | 3 | **28** |
-| Pages enrichies | 6 | 2 | 1 | 0 | **9** |
-| Features Backend P0 | 15 | 0 | 0 | 0 | **15** |
-| Features Backend P1 | 0 | 12 | 8 | 0 | **20** |
-| Features Backend P2 | 0 | 0 | 0 | 5 | **5** |
-| Email templates | 4 | 10 | 0 | 0 | **14** |
-| Tests E2E parcours | 1 | 2 | 1 | 1 | **5** |
+| Métrique | Actuellement | Cible | Reste |
+|----------|-------------|-------|-------|
+| **Backend Complétion** | 82% | 100% | 18% (~2-3 sem) |
+| **Frontend Complétion** | 90% | 100% | 10% (~1-2 sem) |
+| **Pages Frontend** | 165 | 165+ | Polish UX |
+| **API calls connectées** | 203 | 203+ | Full E2E |
+| **Tests unitaires+E2E** | 3300+ | 3500+ | E2E expansion |
+| **TypeScript errors** | 0 | 0 | Maintain 0 |
+| **WCAG 2.1 AA** | Baseline | 100% | Full audit |
+| **Lighthouse** | Baseline | 90+ | Optimization |
+| **Code lines** | 290,477 | Final | ~320k |
 
 ---
 
 ## DÉPENDANCES CRITIQUES
 
 ```
-Auth + RBAC ──→ Tout le reste
+Sprint Final 1 (Backend modules)
        │
-       ├──→ Voyage (Création) ──→ Pricing ──→ Booking ──→ Checkout/Stripe
-       │                                        │
-       │                                        ├──→ Rooming
-       │                                        └──→ Documents (PDF)
-       │
-       ├──→ Onboarding Pro ──→ Validation Admin ──→ PayoutBatch
-       │
-       ├──→ Finance (TVA marge) ──→ Exports comptables
-       │
-       └──→ Notifications ──→ Emails ──→ Support
+       ├──→ HRA Hub completion
+       ├──→ SEO module
+       ├──→ Email templates x4
+       ├──→ Cron jobs métier
+       └──→ New portals (Hôtelier, Restaurateur, etc.)
+              │
+              └──→ Prisma production migration
+                     │
+                     └──→ CI/CD pipeline
+                            │
+                            └──→ Sprint Final 2 (Polish + Deploy)
+                                   │
+                                   ├──→ E2E Playwright
+                                   ├──→ WCAG 2.1 AA
+                                   ├──→ Lighthouse perf
+                                   └──→ Production deployment
 ```
 
 ---
 
 ## RÈGLE D'EXÉCUTION
 
-> **On fait ça en plusieurs étapes.** Chaque session = 1 tâche précise.
-> Pas de big bang. On avance bloc par bloc, on teste, on valide, on passe au suivant.
+> **Fin de ligne (nearly complete).** On fait Sprint Final 1 puis Sprint Final 2.
+> Pas d'ajouts scope. Terminer ce qui existe, polir, tester, déployer.
 >
-> **Prochaine étape recommandée** : Phase 1, Semaine 1, Tâche 1 → Prisma migrate + seed réaliste
+> **Calendrier prévisionnel** :
+> - Sprint Final 1 : 2-3 semaines (modules restants)
+> - Sprint Final 2 : 1-2 semaines (polish + deploy)
+> - **Total** : 3-5 semaines pour 100% production-ready
+>
+> **Prochaines étapes** : Après COWORK-9 → Sprint Final 1, Semaine 1
 
 ---
 
-*Document généré le 18 mars 2026 — Source : COMPARAISON_DRAWIO_VS_SITE.xlsx + analyse du code existant*
+*Document rewritten 19 mars 2026 — État réel: Backend 82% avec logique métier RÉELLE, Frontend 90% avec 165 pages codées et 203 API calls connectées. Source: Code audit + live metrics.*

@@ -1,5 +1,12 @@
 # PROGRAMME FRONTEND — Eventy Life
 
+**STATUT : ✅ TERMINÉ à 90%** — Mise à jour 19 mars 2026
+- 165 pages codées (Client/Public 48, Pro 47, Admin 27, Auth 11, Checkout 5, etc.)
+- 203 appels API tous connectés via apiClient (migration mocks → API réelle terminée)
+- 0 erreur TypeScript
+- Sprints V1-V18 terminés
+- Reste : Session COWORK-9 (Polish UX, tests E2E Playwright, accessibilité WCAG 2.1 AA)
+
 > **Cowork dédié** : FRONTEND uniquement
 > **Date** : 18 mars 2026
 > **Objectif** : Connecter les 135 pages existantes à l'API backend réelle, créer les ~20 pages manquantes

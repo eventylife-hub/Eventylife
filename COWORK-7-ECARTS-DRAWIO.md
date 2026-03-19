@@ -1,5 +1,8 @@
 # COWORK 7 — Combler les écarts Draw.io ↔ Code (Frontend)
 
+> **STATUT : ✅ TERMINÉ** — 77/78 tâches complétées (19 mars 2026)
+> Seule la tâche 4.8 (Migration Prisma) reste en attente du déploiement DB production.
+
 > **Scope** : Pages catalogue, détail voyage, checkout avancé, gating PREANNOUNCE
 > **Durée estimée** : ~12-15 jours Cowork
 > **Dépendances** : Aucune — le code actuel est stable (0 erreur TS)

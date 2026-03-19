@@ -53,11 +53,13 @@
 
 - [x] Sprint 0 — Analyse des écarts (FAIT)
 - [x] Audit V2 — 13 oublis corrigés (FAIT — 2026-03-18)
-- [ ] Sprint 1 — Quick Wins (4 tâches)
-- [ ] Sprint 2 — Chips Filtres (10 tâches)
-- [ ] Sprint 3 — Sections Catalogue (8 tâches)
-- [ ] Sprint 4 — Backend Tags (9 tâches)
-- [ ] Sprint 5 — Détail Médias (6 tâches)
-- [ ] Sprint 6 — Détail Social (16 tâches)
-- [ ] Sprint 7 — Détail UX (15 tâches)
-- [ ] Sprint 8 — SEO Final (10 tâches)
+- [x] Sprint 1 — Quick Wins (4 tâches)
+- [x] Sprint 2 — Chips Filtres (10 tâches)
+- [x] Sprint 3 — Sections Catalogue (8 tâches)
+- [x] Sprint 4 — Backend Tags (9 tâches)
+- [x] Sprint 5 — Détail Médias (6 tâches)
+- [x] Sprint 6 — Détail Social (16 tâches)
+- [x] Sprint 7 — Détail UX (15 tâches)
+- [x] Sprint 8 — SEO Final (10 tâches)
+
+✅ 77/78 tâches terminées — 19 mars 2026. Seule la tâche 4.8 (Migration Prisma) en attente du déploiement DB.

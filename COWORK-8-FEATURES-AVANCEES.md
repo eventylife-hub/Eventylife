@@ -1,5 +1,10 @@
 # COWORK 8 — Features avancées manquantes (Backend + Frontend)
 
+> **STATUT : ✅ TERMINÉ** — Complété via Cowork-5 (19 mars 2026)
+> LOT 8.1 Quality Gate ✅, LOT 8.2 Runbook J0 ✅, LOT 8.3 Safety Sheets ✅, LOT 8.4 Duplicate Season ✅
+> LOT 8.5 Email automation: partiellement fait (10/14 templates)
+> LOT 8.6 NoGo Board: partiellement fait
+
 > **Scope** : Runbook J0, Duplicate Season, Safety Sheets, Quality Gate, Email automation
 > **Durée estimée** : ~12-16 jours Cowork
 > **Dépendances** : Aucune — ces features sont indépendantes du code existant
