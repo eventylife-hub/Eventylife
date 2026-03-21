@@ -20,7 +20,7 @@ David (PDG / Fondateur / CTO)
 
 **Charge estimée** : 50-60h/semaine
 **Rémunération PDG Phase 1** : 0€ (pas de rémunération les 6 premiers mois — vivre sur épargne)
-**Priorité** : Automatiser au maximum via la plateforme (29 modules backend) pour réduire le besoin en personnel
+**Priorité** : Automatiser au maximum via la plateforme (31 modules backend) pour réduire le besoin en personnel
 
 ### Coûts RH Phase 1 : 0€
 
@@ -130,7 +130,7 @@ David (PDG / CTO)
 - **KPIs** : 3 séminaires signés/mois, CA B2B > 30% du total, marge > 25%
 
 ### Développeur fullstack
-- **Mission** : Maintenance et évolution de la plateforme Eventy (290 000+ lignes)
+- **Mission** : Maintenance et évolution de la plateforme Eventy (~296 500 lignes)
 - **Compétences** : NestJS, React/Next.js, PostgreSQL, Prisma, TypeScript, tests automatisés
 - **Contrat** : CDI ou freelance senior
 - **Rémunération** : 3 000€ - 4 500€ net/mois (3 800€ brut CDI Paris)

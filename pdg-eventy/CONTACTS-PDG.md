@@ -1,6 +1,6 @@
 # Carnet de Contacts PDG — Eventy
 
-> **Dernière mise à jour** : 5 mars 2026
+> **Dernière mise à jour** : 20 mars 2026
 > Ce fichier est mis à jour automatiquement par Claude quand un contact important est identifié.
 
 ---
@@ -30,12 +30,12 @@
 
 | Nom / Organisme | Rôle / Entreprise | Email / Tél | Contexte | Date ajout | Statut |
 |-----------------|-------------------|-------------|----------|------------|--------|
-| **APST** | Garantie financière tourisme | info@apst.travel / 01 44 09 25 35 | Garant n°1 du secteur (2/3 des agences). 15 av. Carnot 75017 Paris. Cotisation ~2 100€/an | 2026-03-05 | 📧 Email envoyé — attente réponse |
-| **CMB Assurances** | RC Pro agréée Atout France | contact@cmb-assurances.fr | Assureur spécialisé tourisme, agréé Atout France. RC Pro 780-1 200€/an | 2026-03-05 | 📧 Devis demandé — attente réponse |
-| **Hiscox** | RC Pro agences digitales | contact@hiscox.fr | Spécialisé startups et agences digitales. RC Pro 780-1 200€/an | 2026-03-05 | 📧 Devis demandé — attente réponse |
-| **Chevalier Conseil** | Expert-comptable tourisme | contact@chevalierconseil.com | Cabinet spécialisé tourisme. À partir de 165€ HT/mois. TVA marge | 2026-03-05 | 📧 Devis demandé — attente réponse |
-| **Nexco Expertise** | Expert-comptable tourisme | contact@nexco-expertise.com | Cabinet spécialisé tourisme et PME innovantes | 2026-03-05 | 📧 Devis demandé — attente réponse |
-| **Mutuaide Assistance** | Assurance voyage groupes | assistance@mutuaide.fr | Spécialiste assurance groupes 10-500 personnes. Contrat cadre possible | 2026-03-05 | 📧 Devis demandé — attente réponse |
+| **APST** | Garantie financière tourisme | info@apst.travel / 01 44 09 25 35 | Garant n°1 du secteur (2/3 des agences). 15 av. Carnot 75017 Paris. Cotisation ~2 100€/an | 2026-03-05 | 🔴 **BROUILLON Gmail — JAMAIS ENVOYÉ** (vérifié 20/03) |
+| **CMB Assurances** | RC Pro agréée Atout France | contact@cmb-assurances.fr | Assureur spécialisé tourisme, agréé Atout France. RC Pro 780-1 200€/an | 2026-03-05 | 🔴 **BROUILLON Gmail — JAMAIS ENVOYÉ** (vérifié 20/03) |
+| **Hiscox** | RC Pro agences digitales | contact@hiscox.fr | Spécialisé startups et agences digitales. RC Pro 780-1 200€/an | 2026-03-05 | 🔴 **BROUILLON Gmail — JAMAIS ENVOYÉ** (vérifié 20/03) |
+| **Chevalier Conseil** | Expert-comptable tourisme | contact@chevalierconseil.com | Cabinet spécialisé tourisme. À partir de 165€ HT/mois. TVA marge | 2026-03-05 | 🔴 **BROUILLON Gmail — JAMAIS ENVOYÉ** (vérifié 20/03) |
+| **Nexco Expertise** | Expert-comptable tourisme | contact@nexco-expertise.com | Cabinet spécialisé tourisme et PME innovantes | 2026-03-05 | 🔴 **BROUILLON Gmail — JAMAIS ENVOYÉ** (vérifié 20/03) |
+| **Mutuaide Assistance** | Assurance voyage groupes | assistance@mutuaide.fr | Spécialiste assurance groupes 10-500 personnes. Contrat cadre possible | 2026-03-05 | 🔴 **BROUILLON Gmail — JAMAIS ENVOYÉ** (vérifié 20/03) |
 | **Groupama Voyage** | Assurance voyage groupes | groupama.fr (devis en ligne) | Alternative Mutuaide, devis en ligne disponible | 2026-03-05 | À contacter |
 | **MTV (Médiation Tourisme)** | Médiateur obligatoire | www.mtv.travel | Adhésion gratuite, obligatoire pour agences. 75€ HT/dossier si médiation | 2026-03-05 | À adhérer (après immatriculation) |
 | **INPI** | Dépôt marque "Eventy" | inpi.fr | 270€ pour 3 classes (39, 43, 35). Protection 10 ans | 2026-03-05 | À déposer |
@@ -52,4 +52,15 @@
 ### 5 mars 2026 — Première vague de contacts
 - 6 emails de demande de devis créés en brouillon Gmail (APST, CMB, Hiscox, Chevalier Conseil, Nexco, Mutuaide)
 - En attente de validation David pour envoi
-- Prochaine étape : relancer sous 5 jours ouvrés si pas de réponse
+
+### 20 mars 2026 — AUDIT GMAIL (Cowork-12)
+- **CONSTAT** : Les 6 brouillons sont TOUJOURS en brouillon — aucun n'a été envoyé
+- **Emails envoyés depuis le compte** : 0 (zéro, hors auto-HubSpot)
+- **Conséquence** : 15 jours de retard sur TOUT le chemin critique P0
+- **ACTION REQUISE** : David doit ouvrir Gmail > Brouillons > Envoyer les 6 emails immédiatement
+
+### 20 mars 2026 — Audit liens & chiffres
+- Tous les fichiers PDG harmonisés (165+ pages, 31 modules, ~296 500 lignes, 3 300+ tests)
+- SUIVI-RELANCES.md mis à jour : 6 contacts en retard de +8 jours (deadlines 12/03 dépassées)
+- Avocats Llop + TourismLex : deadline contact = 22/03 (J-2)
+- **Action David** : confirmer si les 6 brouillons Gmail ont été envoyés le 05/03

@@ -32,10 +32,16 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Environment variables
+# Environment variables — NEVER commit real secrets
 .env
+.env.*
+!.env.example
+!.env.*.example
 .env.local
 .env.*.local
+.env.production
+.env.staging
+.env.development
 
 # Prisma
 prisma/migrations/

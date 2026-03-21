@@ -26,12 +26,12 @@
 
 | Cabinet / Avocat | Spécialité | Localisation | Contact | Tarif indicatif | Priorité |
 |-----------------|-----------|-------------|---------|----------------|----------|
-| **Maître Emmanuelle Llop** | Droit du tourisme, aviation, hôtellerie | Paris (Barreau de Paris) | www.llop-avocat.com | Sur devis | ⭐ P1 |
-| **TourismLex** (Cabinet spécialisé) | Droit du tourisme, OTA, agences en ligne | Paris | tourismlex.com | Sur devis | ⭐ P1 |
-| **UNAT** (réseau avocats tourisme) | Réseau avocats spécialisés tourisme social | Paris | unat.asso.fr | Variable | P2 |
-| **Avocats-tourisme.fr** (annuaire) | Annuaire spécialisé | National | avocats-tourisme.fr | Variable | P2 |
+| **Maître Emmanuelle Llop** | Droit du tourisme, aviation, hôtellerie | Paris (Barreau de Paris) | [www.llop-avocat.com](https://www.llop-avocat.com) | Sur devis | ⭐ P1 |
+| **TourismLex** (Cabinet spécialisé) | Droit du tourisme, OTA, agences en ligne | Paris | [tourismlex.com](https://tourismlex.com) | Sur devis | ⭐ P1 |
+| **UNAT** (réseau avocats tourisme) | Réseau avocats spécialisés tourisme social | Paris | [unat.asso.fr](https://unat.asso.fr) | Variable | P2 |
+| **Avocats-tourisme.fr** (annuaire) | Annuaire spécialisé | National | [avocats-tourisme.fr](https://avocats-tourisme.fr) | Variable | P2 |
 | **Cabinet Durrieu** | Droit du tourisme, transport | Paris | Sur recherche | Sur devis | P2 |
-| **Legalstart / Captain Contrat** | Création SAS (statuts standard) | En ligne | legalstart.fr | 299€ - 799€ | P3 (backup statuts) |
+| **Legalstart / Captain Contrat** | Création SAS (statuts standard) | En ligne | [legalstart.fr](https://legalstart.fr) | 299€ - 799€ | P3 (backup statuts) |
 
 > **Stratégie** : Contacter en priorité un cabinet spécialisé tourisme pour le pack complet (statuts + CGV + mentions + confidentialité). Legalstart uniquement en backup pour les statuts si le budget est contraint.
 

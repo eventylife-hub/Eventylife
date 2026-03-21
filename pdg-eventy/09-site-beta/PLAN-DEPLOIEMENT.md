@@ -21,7 +21,7 @@
     │   Container   │          │   DEV1-S      │
     │   (Frontend)  │          │   (Backend)   │
     │   Next.js 14  │◄────────►│   NestJS 10   │
-    │   SSR + Static│   API    │   29 modules  │
+    │   SSR + Static│   API    │   31 modules  │
     └──────────────┘          └──────┬───────┘
                                      │
                           ┌──────────┼──────────┐
@@ -194,7 +194,7 @@ PACK_SERENITE_EMAIL=sinistre@eventylife.fr
 - [ ] Configurer les variables d'env (`NEXT_PUBLIC_API_URL=https://api.eventylife.fr`, etc.)
 - [ ] Lier le domaine eventylife.fr
 - [ ] Vérifier build production + SSR/SSG OK
-- [ ] Tester navigation complète (102 pages, 72 composants)
+- [ ] Tester navigation complète (165+ pages, 100+ composants)
 - [ ] Vérifier les images et assets (optimisation Next.js Image)
 
 ### Phase 4 — Sécurité (Jour 4-5)

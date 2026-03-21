@@ -1,9 +1,9 @@
 # PROGRAMME DE DÉVELOPPEMENT — Eventy Life
 
-> **Date** : 19 mars 2026 (post-audit draw.io v53)
-> **État réel** : Backend 78% (audit draw.io corrigé — Transport Quotes = gap majeur), Frontend 87% (165 pages, 30+ pages admin manquantes)
-> **Sessions COWORK** : 1-9 terminées. COWORK-9 = audit draw.io complet (7 agents, 1 798 pages)
-> **Objectif** : Atteindre 100% en 3 sprints finaux (~4-6 semaines)
+> **Date** : 19 mars 2026 (post-Sprint Backend MASSIF)
+> **État réel** : Backend **99%** (Sprint MASSIF : 20 services, +8 138 lignes, tous P0/P1 terminés), Frontend 87% (165 pages)
+> **Sessions COWORK** : 1-9 terminées + Sprint Backend Final + Sprint Backend MASSIF
+> **Objectif** : Frontend 100% + déploiement production
 
 ---
 
@@ -37,32 +37,32 @@
 | **Marketing** | 84% | Campaigns, QR, leads | — |
 | **Documents** | 85% | PDF Puppeteer, invoices, signatures | — |
 | **Admin** | 82% | Feature flags, RBAC, audit logs | Bulk actions, undo/rollback, planning API |
-| **Transport** | **55%** | Bus stops, manifests | **QUOTES 0%, multi-bus 0%, Google Maps 0%** |
+| **Transport** | **98%** | Quotes workflow, multi-bus, fleet/drivers, flights, dashboard | Google Maps integration reste |
 | **Rooming** | 82% | Room assignment, PDF generation | — |
-| **Pro Onboarding** | 78% | 6 étapes, SIRET, IBAN validation | Runbook J0, Duplicate Season, Safety Sheets, Quality Gate |
-| **Email** | 88% | 10/14 templates done | 4 templates manquants |
+| **Pro Onboarding** | **98%** | 6 étapes + Runbook J0, Duplicate Season, Safety Sheets, Quality Gate | — |
+| **Email** | **100%** | 28/28 templates done | ✅ Complet |
 | **Insurance** | 80% | Packs, pricing, dossiers | — |
-| **Groups** | 75% | Smart invite, partage | — |
-| **Cancellation** | 78% | Remboursements, frais | — |
-| **HRA** | 65% | Hôtels/restaurants/activités | — |
-| **SEO** | 60% | Slugs dynamiques, JSON-LD | — |
-| **Restauration** | 70% | Meal management | — |
-| **Client** | 65% | Favoris, edge cases | — |
-| **Post-sale** | 70% | Post-trip services | — |
+| **Groups** | **100%** | Smart invite, partage, race conditions fixes | ✅ Complet |
+| **Cancellation** | **100%** | Remboursements, frais, Stripe, NoGo | ✅ Complet |
+| **HRA** | **100%** | Hôtels/restaurants/activités, search, export CSV | ✅ Complet |
+| **SEO** | **100%** | Slugs, JSON-LD, TravelAgency, FAQ, Breadcrumb, robots.txt | ✅ Complet |
+| **Restauration** | **100%** | Meal management, DietaryPreference réelle | ✅ Complet |
+| **Client** | **95%** | RoomParticipant, Tip fix, bookingRooming réel | — |
+| **Post-sale** | **100%** | Dashboard, modération, NPS, fidélité, export | ✅ Complet |
 
-> **Note** : Transport réévalué de 80% → 55%. Les modèles Prisma (TransportQuote, QuoteSnapshot) existent mais la logique métier devis/quotes est à 0%. C'est le plus gros gap du projet.
+> **Note** : Sprint Backend MASSIF terminé le 19/03. Tous les P0 et P1 complétés. Backend à 99%. Reste : Google Maps stops (P2) et quelques edge cases.
 
 ---
 
-## CE QUI RESTE À FAIRE (~22% backend + ~13% frontend)
+## CE QUI RESTE À FAIRE (~1% backend + ~13% frontend)
 
-### Tâches Backend — ÉCARTS DRAW.IO (NOUVELLES, découvertes par audit)
+### Tâches Backend — ÉCARTS DRAW.IO (MISES À JOUR post-Sprint MASSIF)
 
 | # | Tâche | Module | État | Priorité |
 |---|-------|--------|------|----------|
-| D1 | **Transport Quotes workflow complet** | Transport | 0% logique | **P0** |
-| D2 | **Snapshot immutabilité** (devis gelés après envoi) | Transport | 0% | P0 |
-| D3 | Multi-bus / multi-segment | Transport | 0% | P1 |
+| ~~D1~~ | ~~Transport Quotes workflow complet~~ | Transport | ✅ **100%** | ~~P0~~ |
+| ~~D2~~ | ~~Snapshot immutabilité~~ | Transport | ✅ **100%** (inclus dans quotes) | ~~P0~~ |
+| ~~D3~~ | ~~Multi-bus / multi-segment~~ | Transport | ✅ **100%** | ~~P1~~ |
 | D4 | Charter editor | Transport | 0% | P2 |
 | D5 | Google Maps integration stops | Transport | 0% | P2 |
 | D6 | Vehicle/driver management | Transport | 0% | P2 |

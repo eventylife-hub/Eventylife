@@ -31,6 +31,10 @@
 | Finance | ✅ | Production-ready |
 | Insurance | ✅ | Production-ready |
 | **Marketing Suite (10 pages)** | ✅ **COMPLET 19/03** | Production-ready — shortlinks e.ty/xxx, QR-print A4, analytics CSV, visuels, réseaux sociaux, studio IA, leads, campagnes |
+| **Runbook J0 (opérations départ)** | ✅ **CRÉÉ 19/03** | Production-ready — checklist, pointage, urgences, timeline J0 |
+| **Clone Season Wizard** | ✅ **CRÉÉ 19/03** | Production-ready — wizard 4 étapes, duplication voyage saison suivante |
+| **Fiche Sécurité (safety sheets)** | ✅ **CRÉÉ 19/03** | Production-ready — urgences, médical, assurance, consignes, équipe |
+| **Quality Gate (score qualité)** | ✅ **CRÉÉ 19/03** | Composant réutilisable — 13 checks, 3 variantes, seuil 80% |
 | Notifications | ✅ | Production-ready |
 | Cancellation | ✅ | Production-ready |
 | Legal / DSAR | ✅ | Production-ready |

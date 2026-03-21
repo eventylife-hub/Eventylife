@@ -1,6 +1,6 @@
 # Templates Emails — Clients
 
-> **Dernière mise à jour** : 5 mars 2026
+> **Dernière mise à jour** : 20 mars 2026
 > **Domaine** : eventylife.fr (PAS eventy.fr)
 > **Email expéditeur** : contact@eventylife.fr
 > **Signature** : David — Fondateur & Président, Eventy | eventylife.fr
@@ -329,7 +329,132 @@ contact@eventylife.fr | eventylife.fr
 
 ---
 
-## 10. Proposition prochain voyage J+30
+## 10. Notification NoGo — Voyage annulé (min pax non atteint)
+
+**Objet** : Information importante — Votre voyage [destination] du [date] — Eventy
+**Trigger** : Admin décide NoGo (min pax non atteint à la deadline)
+**Drawio ref** : Pages 245-247 (V107)
+
+---
+
+Bonjour [Prénom],
+
+Nous vous contactons au sujet de votre voyage **[destination]** prévu du **[date début]** au **[date fin]**.
+
+Malgré nos efforts, le **nombre minimum de participants** requis pour garantir les meilleures conditions de voyage n'a pas été atteint à la date limite. Nous avons donc pris la décision d'annuler ce départ.
+
+**Nous savons que c'est décevant** — et croyez-nous, ça l'est pour nous aussi.
+
+**Ce qui se passe maintenant :**
+
+Vous avez le choix entre deux options :
+
+1. **Avoir Eventy** — Un crédit de **[montant]€** valable **12 mois** sur tous nos voyages (déjà crédité sur votre espace client)
+2. **Remboursement intégral** — Virement sous **14 jours** sur votre moyen de paiement d'origine
+
+Pour choisir votre option, rendez-vous sur votre espace client :
+**[eventylife.fr/client/reservations/[id]]**
+
+Si vous ne faites rien, l'avoir Eventy sera automatiquement appliqué (vous pourrez toujours demander le remboursement plus tard).
+
+**Le bon côté** : d'autres départs sont prévus vers [destination] et d'autres destinations. Votre avoir vous permet de repartir quand vous voulez, toujours avec le **Pack Sérénité** inclus.
+
+On reste à votre disposition — et on espère vous retrouver très vite pour une prochaine aventure.
+
+David
+Fondateur & Président — Eventy
+contact@eventylife.fr | eventylife.fr
+
+---
+
+## 11. Crédit attribué — Avoir Eventy
+
+**Objet** : Votre avoir Eventy de [montant]€ est disponible
+**Trigger** : Crédit attribué (NoGo, geste commercial, remboursement partiel)
+**Drawio ref** : Pages 245-246 (V107)
+
+---
+
+Bonjour [Prénom],
+
+Un **avoir Eventy de [montant]€** vient d'être crédité sur votre compte.
+
+**Détails de votre avoir :**
+- Montant : **[montant]€**
+- Motif : [NoGo voyage [destination] / Geste commercial / Remboursement partiel]
+- Valable jusqu'au : **[date expiration — 12 mois]**
+- Utilisable sur : tous les voyages Eventy, sans minimum
+
+**Comment l'utiliser ?**
+Lors de votre prochaine réservation sur eventylife.fr, votre avoir sera automatiquement proposé en déduction. Aucun code à saisir.
+
+**Consultez votre solde** : [eventylife.fr/client/wallet]
+
+Tous nos voyages incluent le **Pack Sérénité** — vous repartez l'esprit tranquille, comme toujours.
+
+David
+Fondateur & Président — Eventy
+contact@eventylife.fr | eventylife.fr
+
+---
+
+## 12. Rappel expiration crédit (J-30 puis J-7)
+
+**Objet** : Votre avoir de [montant]€ expire dans [30/7] jours — Eventy
+**Trigger** : Cron J-30 et J-7 avant expiration crédit
+**Drawio ref** : Page 249 (V108)
+
+---
+
+Bonjour [Prénom],
+
+Petit rappel amical : votre **avoir Eventy de [montant]€** expire le **[date expiration]** — c'est dans **[30/7] jours**.
+
+Ce serait dommage de le perdre ! Voici nos prochains départs :
+
+- **[Voyage 1]** — [date] — à partir de [prix]€/pers
+- **[Voyage 2]** — [date] — à partir de [prix]€/pers
+- **[Voyage 3]** — [date] — à partir de [prix]€/pers
+
+Votre avoir de [montant]€ sera déduit automatiquement à la réservation. Tous nos voyages incluent le **Pack Sérénité** (annulation toutes causes + assistance 24h).
+
+**Réserver maintenant** : [eventylife.fr/voyages]
+
+À très vite !
+David
+Fondateur & Président — Eventy
+contact@eventylife.fr | eventylife.fr
+
+---
+
+## 13. Place libérée — Notification waitlist
+
+**Objet** : Bonne nouvelle — Une place s'est libérée ! [destination] — Eventy
+**Trigger** : Annulation sur un voyage complet → notification premier inscrit waitlist
+**Drawio ref** : Page 189-191 (V91)
+
+---
+
+Bonjour [Prénom],
+
+**Bonne nouvelle !** Une place vient de se libérer sur le voyage que vous surveilliez :
+
+**[Destination]** — du [date début] au [date fin]
+**[X] place(s) disponible(s)** — Pack Sérénité inclus
+**À partir de [prix]€/pers**
+
+Cette place est réservée en priorité pour vous pendant **24 heures**. Passé ce délai, elle sera ouverte à tous.
+
+**Réserver maintenant** : [eventylife.fr/voyages/[slug]]
+
+On croise les doigts pour vous !
+David
+Fondateur & Président — Eventy
+contact@eventylife.fr | eventylife.fr
+
+---
+
+## 14. Proposition prochain voyage J+30
 
 **Objet** : Envie de repartir ? Votre réduction de 5% vous attend — Eventy
 

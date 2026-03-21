@@ -54,11 +54,11 @@
 
 | Élément | Détail |
 |---------|--------|
-| Backend | `../backend/` — NestJS 10, 29 modules, 252 fichiers source |
+| Backend | `../backend/` — NestJS 10, 31 modules, 252 fichiers source |
 | Frontend | `../frontend/` — Next.js 14 App Router, 20+ pages |
 | Tests | 3 300+ (3 301 pass), 7 audits backend complétés |
 | Prisma | 3 232 lignes de schema |
 | CI/CD | 4 workflows GitHub Actions |
 | Docker | docker-compose.yml prêt |
 | Module HRA | 24 endpoints fournisseurs, 40 tests |
-| Lignes totales | 290 477 |
+| Lignes totales | ~296 500 |

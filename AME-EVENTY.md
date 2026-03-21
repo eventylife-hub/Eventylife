@@ -54,7 +54,7 @@ Le bus complet à 53, c'est l'objectif. C'est le sweet spot financier. Mais la m
 
 ### Humain avant tout
 
-La tech est puissante — 290 000 lignes de code, 29 modules backend, tout automatisé. Mais la tech est *invisible*. Ce que le client voit, c'est un humain qui l'accueille au point de départ, qui l'appelle par son prénom, qui sait qu'il a demandé une chambre au calme.
+La tech est puissante — ~296 500 lignes de code, 29 modules backend, tout automatisé. Mais la tech est *invisible*. Ce que le client voit, c'est un humain qui l'accueille au point de départ, qui l'appelle par son prénom, qui sait qu'il a demandé une chambre au calme.
 
 L'accompagnateur Eventy n'est pas un « guide touristique ». C'est le garant de la sérénité. Il est là du premier au dernier kilomètre. Porte-à-porte. Du ramassage en bus au retour à la maison.
 

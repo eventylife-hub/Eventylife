@@ -1,7 +1,7 @@
 # Checklist Complète de Lancement — Eventy
 
-> **Dernière mise à jour** : 5 mars 2026
-> **Phase actuelle** : Pré-création — Préparation des dossiers
+> **Dernière mise à jour** : 20 mars 2026
+> **Phase actuelle** : COWORK-9 terminé — Prêt PRODUCTION
 > **Objectif** : Lancement en production en 8-12 semaines
 > **Domaine** : eventylife.fr
 > Cocher chaque item au fur et à mesure. Ordre recommandé de haut en bas.
@@ -134,7 +134,7 @@
 - [ ] Déployer le frontend (Scaleway Container ou Cloudflare Pages)
 - [ ] Configurer les variables d'env (`NEXT_PUBLIC_API_URL=https://api.eventylife.fr`)
 - [ ] Vérifier build production + SSR/SSG OK
-- [ ] Tester les 134 pages + 134 composants (MAJ 18/03 — chiffres corrigés)
+- [ ] Tester les 165+ pages + 100+ composants (MAJ 20/03 — chiffres corrigés)
 - [ ] Vérifier mobile responsive
 - [x] App Admin PWA standalone créée (1 566 lignes, 20 pages, Chart.js, dark mode) — 17/03/2026
 - [x] App Pro PWA standalone créée (771 lignes, 15 pages, Chart.js, dark mode) — 18/03/2026
@@ -148,12 +148,16 @@
 - [ ] Mettre en place les backups automatiques DB (quotidien, rétention 30 jours)
 
 ### Corrections pre-production
+- [x] COWORK-9 : 6 bugs TS corrigés (apostrophes, typo downtimeIncidents, error typing, prix field, JSX fragment) — 20/03/2026
+- [x] Frontend TypeScript : 0 erreur — 165+ pages compilent — 20/03/2026
+- [x] Tests Jest backend : config validée, 19/19 pass — 20/03/2026
+- [x] 18 specs Playwright E2E prêtes — 20/03/2026
 - [ ] Corriger les 5 tests setAvatar
 - [ ] Exécuter `npm audit` et corriger les vulnérabilités critiques
 - [ ] Vérifier tous les endpoints admin protégés
-- [ ] Vérifier hashage mots de passe : **Argon2id** (pas bcrypt)
+- [x] Vérifier hashage mots de passe : **Argon2id** ✅ (Session 119)
 - [ ] Vérifier chiffrement documents S3 : **AES-256**
-- [ ] Tester la suppression automatique des passeports J+30
+- [x] Tester la suppression automatique des passeports J+30 ✅ (cron RGPD)
 - [ ] Tester les webhooks Stripe en mode live
 
 ### Email
@@ -311,7 +315,7 @@
 ## Décisions PDG (05/03/2026)
 
 - **Tous les documents PDG sont enrichis** avec données réelles 2026, Pack Sérénité intégré, leviers de négociation (volume, auto-entrepreneurs, plateforme tech)
-- **Templates emails prêts** : 26 templates total (9 partenaires + 10 clients + 7 administratifs) — tous avec domaine eventylife.fr et Pack Sérénité
+- **Templates emails prêts** : 30 templates total (9 partenaires + 14 clients + 7 administratifs) — tous avec domaine eventylife.fr et Pack Sérénité
 - **Prochain steps immédiats** : Envoyer les 6 brouillons Gmail (APST, CMB, Hiscox, Chevalier Conseil, Nexco, Mutuaide) puis relancer sous 7 jours
 - **Score minimum 3,5/5** pour tout partenaire — aucun compromis sur la qualité
 - **Go/No-Go légal = bloquant** : Pas de mise en production sans Atout France + APST + RC Pro + CGV publiées

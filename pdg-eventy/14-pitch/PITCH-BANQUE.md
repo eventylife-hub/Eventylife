@@ -39,7 +39,7 @@ Eventy est une plateforme technologique tout-en-un qui simplifie l'organisation 
 | Assurance | Option payante (50-80€/pers) | **Incluse (Pack Sérénité)** |
 | Annulation | Frais élevés, pas de garantie | **Annulation toutes causes incluse** |
 | Remplissage | Groupe seul | **Multi-groupes + places ouvertes + auto-entrepreneurs** |
-| Automatisation | Manuelle | **Backend 29 modules, 3 300+ tests** |
+| Automatisation | Manuelle | **Backend 31 modules, 3 300+ tests** |
 
 ### Pack Sérénité Eventy — Notre force de vente n°1
 Chaque voyage inclut automatiquement une assurance complète :
@@ -55,7 +55,7 @@ Chaque voyage inclut automatiquement une assurance complète :
 ### Modèle bus complet — Notre différenciateur opérationnel
 Chaque voyage est dimensionné pour remplir un bus complet de 53 passagers. Le coût du bus est fixe (~1 000€/jour), donc le prix par personne diminue proportionnellement au remplissage. Nos clients bénéficient de tarifs imbattables car nous garantissons le remplissage via 3 sources : le groupe organisateur, les places ouvertes sur notre site, et notre réseau d'auto-entrepreneurs.
 
-**Barrière à l'entrée** : Plateforme développée en interne (290 000+ lignes de code, 3 300+ tests automatisés), non reproductible facilement. Valorisation technique estimée : **100 000€+** (coût de développement équivalent par une agence web).
+**Barrière à l'entrée** : Plateforme développée en interne (296 500+ lignes de code, 3 300+ tests automatisés, 165+ pages, 31 modules backend), non reproductible facilement. Valorisation technique estimée : **100 000€+** (coût de développement équivalent par une agence web).
 
 ---
 
@@ -160,7 +160,7 @@ Chaque voyage est dimensionné pour remplir un bus complet de 53 passagers. Le c
 | Trésorerie de démarrage (3 mois charges) | 3 000€ | |
 | **TOTAL investissement** | **~18 565€** | |
 
-> **Note** : La plateforme technologique (290 000+ lignes de code, 29 modules backend, 102 pages frontend) a été développée intégralement par le fondateur. Coût de développement équivalent : **100 000€ - 150 000€** si externalisé.
+> **Note** : La plateforme technologique (296 500+ lignes de code, 31 modules backend, 165+ pages frontend) a été développée intégralement par le fondateur. Coût de développement équivalent : **100 000€ - 150 000€** si externalisé.
 
 ### Apport personnel
 - **Apport en numéraire** : 30 000€ (épargne personnelle)
@@ -245,7 +245,7 @@ Eventy paie les prestataires : J+30 après le séjour
 ## 9. Pourquoi investir dans Eventy
 
 1. **Marché porteur** : Tourisme de groupe en croissance (+12%/an), digitalisation en retard dans le secteur
-2. **Produit prêt** : 290 000+ lignes de code, 29 modules backend, 3 300+ tests — plateforme opérationnelle
+2. **Produit prêt** : 296 500+ lignes de code, 31 modules backend, 165+ pages, 3 300+ tests — plateforme opérationnelle
 3. **Modèle bus complet** : CA moyen par voyage = 20 000€ (vs 6 000€ pour une agence classique), marge 25-27%
 4. **Coûts faibles** : Tech développée en interne, charges fixes < 1 000€/mois en Phase 1
 5. **Scalable** : De 1 bus (53 pers) à 3 bus + charter (159 pers) sans coûts proportionnels

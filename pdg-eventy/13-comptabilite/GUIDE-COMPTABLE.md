@@ -1,6 +1,6 @@
 # Guide Comptable — Agence de Voyages Eventy
 
-> **Dernière mise à jour** : 5 mars 2026
+> **Dernière mise à jour** : 20 mars 2026
 > **Important** : À valider avec un expert-comptable spécialisé tourisme
 > **Expert-comptable visé** : Chevalier Conseil (devis demandé — 165-300€ HT/mois)
 
@@ -295,3 +295,99 @@ J+30 : Eventy paie les prestataires :
 - [ ] Paramétrer la facturation automatique dans le backend Eventy
 - [ ] Vérifier le traitement TVA du Pack Sérénité avec l'expert-comptable
 - [ ] Définir la périodicité TVA (mensuelle recommandée pour maîtriser la tréso)
+- [ ] Configurer l'accès comptable au Tableau de Bord Comptable (/admin/finance/accounting-dashboard)
+- [ ] Tester l'export FEC avec l'expert-comptable sur une période de test
+- [ ] Valider le workflow de clôture mensuelle (/admin/finance/closing)
+- [ ] Former le comptable aux 3 pages comptables du portail admin
+
+---
+
+## 9. Collaboration avec le prestataire comptable
+
+> Ajouté le 20/03/2026
+
+### Outils intégrés dans le portail Admin
+
+Le portail Admin d'Eventy dispose de 3 pages dédiées à la collaboration avec l'expert-comptable :
+
+| Page | Route | Usage |
+|------|-------|-------|
+| **Tableau de Bord Comptable** | `/admin/finance/accounting-dashboard` | P&L simplifié, TVA trimestrielle, BFR, ratios clés |
+| **Clôture Mensuelle** | `/admin/finance/closing` | Checklist pré-clôture (8 points), verrouillage période, export FEC |
+| **Factures Fournisseurs** | `/admin/finance/supplier-invoices` | Suivi achats, ventilation plan comptable 607xxx, validation |
+| **Rapprochement Bancaire** | `/admin/finance/reconciliation` | Écarts Stripe vs banque, résolution |
+
+### Workflow mensuel avec l'expert-comptable
+
+```
+J+1 du mois suivant :
+  1. Ouvrir le Tableau de Bord Comptable → vérifier les KPIs du mois
+  2. Ouvrir Factures Fournisseurs → valider toutes les factures du mois
+  3. Ouvrir Rapprochement Bancaire → résoudre les écarts éventuels
+
+J+3 du mois suivant :
+  4. Ouvrir Clôture Mensuelle → lancer la vérification (8 contrôles)
+  5. Si tout est OK → Verrouiller la période
+  6. Exporter le FEC au format DGFIP
+
+J+5 du mois suivant :
+  7. Envoyer le FEC + rapport de clôture à l'expert-comptable
+  8. Joindre les pièces justificatives manquantes si signalées
+```
+
+### Données transmises chaque mois au comptable
+
+1. **Fichier FEC** (Fichier des Écritures Comptables) — format légal DGFIP
+   - Généré automatiquement depuis `/admin/finance/closing`
+   - Contient toutes les écritures du journal (VE, HA, BQ, OD)
+   - Plan comptable Eventy intégré (706xxx produits, 607xxx charges)
+
+2. **Rapport de clôture PDF** — résumé mensuel
+   - CA TTC, charges TTC, marge, TVA marge due
+   - Nombre de factures émises/reçues
+   - Résultat des 8 contrôles de pré-clôture
+
+3. **Pièces justificatives**
+   - Factures clients (générées par le backend : `invoice-pdf.service.ts`)
+   - Factures fournisseurs (stockées dans `/admin/finance/supplier-invoices`)
+   - Relevés Stripe (rapprochement automatique : `bank-reconciliation.service.ts`)
+
+### Points de vigilance pour le comptable
+
+| Sujet | Détail | Action |
+|-------|--------|--------|
+| **TVA marge** | Formule : (CA_TTC − Coûts_TTC) × 20/120 | Vérifier chaque mois via le Dashboard |
+| **Pack Sérénité** | Possiblement exonéré TVA si courtage assurance | À valider avec l'avocat |
+| **Frais Stripe** | 1,4% + 0,25€/tx CB — comptabilisés en 627200 | Réconciliés automatiquement |
+| **Marge négative** | TVA = 0 si marge < 0 (annulations) | Pas de crédit de TVA |
+| **Avoirs** | Numérotés AV-AAAA-XXXX, écritures en sens inverse | Backend génère automatiquement |
+| **Devise** | Tout en centimes (Int) dans le backend | INVARIANT 3 |
+| **Idempotence** | Clés d'idempotence sur tous les payouts | INVARIANT 4 |
+
+### Accès comptable recommandé
+
+L'expert-comptable devrait avoir un accès en **lecture seule** au portail Admin, limité aux pages Finance. Cela lui permet de :
+- Consulter le Tableau de Bord Comptable en temps réel
+- Vérifier les écritures avant clôture
+- Télécharger les exports FEC directement
+- Contrôler les rapprochements bancaires
+
+**TODO** : Créer un rôle `COMPTABLE` dans le RBAC (read-only finance) — à planifier dans un prochain sprint.
+
+---
+
+## 10. Audit du backend comptable (20/03/2026)
+
+Le backend NestJS dispose d'environ **4 700+ lignes** de code dédié à la comptabilité :
+
+| Service | Lignes | Fonction |
+|---------|--------|----------|
+| `fec-export.service.ts` | ~716 | Export FEC format légal DGFIP |
+| `invoice-pdf.service.ts` | ~712 | Génération PDF factures/avoirs |
+| `tva-audit-trail.service.ts` | ~788 | Calcul TVA marge avec piste d'audit |
+| `ledger-analytics.service.ts` | ~611 | Analytique journal comptable |
+| `bank-reconciliation.service.ts` | ~604 | Rapprochement Stripe/banque |
+| `finance.service.ts` | ~878 | Calculs financiers (marges, commissions) |
+| `exports.service.ts` | ~416 | Framework d'export avec S3 |
+
+**Verdict** : Le backend est complet et conforme pour travailler avec un expert-comptable. Les exports FEC, le calcul TVA marge, et la réconciliation bancaire sont tous automatisés.

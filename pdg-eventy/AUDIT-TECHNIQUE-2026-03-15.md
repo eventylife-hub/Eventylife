@@ -14,7 +14,7 @@ La plateforme Eventy est **techniquement mature et prête pour un déploiement e
 ### Chiffres clés
 | Métrique | Valeur |
 |----------|--------|
-| **Lignes de code** | 290 477 |
+| **Lignes de code** | ~296 500 |
 | **Tests automatisés** | 3 300+ |
 | **Erreurs TypeScript** | 0 (frontend + backend) |
 | **Couverture tests** | 85-90% |

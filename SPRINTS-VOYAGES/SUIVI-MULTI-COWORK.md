@@ -62,15 +62,15 @@
 
 | # | Tâche | Fichier modifié | Statut | Cowork | Date |
 |---|-------|----------------|--------|--------|------|
-| 4.1 | Ajouter champs Sprint 4 au model Travel (theme, experienceTags, region, isFeatured, etc.) | `schema.prisma` | ⬜ À faire | — | — |
-| 4.2 | Ajouter champs Audit V2 (tripVideoType, uniquePlace, testimonials, minPaxToGo, bar/resto) | `schema.prisma` | ⬜ À faire | — | — |
-| 4.3 | Ajouter enum TripVideoType | `schema.prisma` | ⬜ À faire | — | — |
-| 4.4 | Ajouter indexes (theme, region, isFeatured) | `schema.prisma` | ⬜ À faire | — | — |
-| 4.5 | Enrichir endpoint GET /travels avec query params filtres | `travels.controller.ts` | ⬜ À faire | — | — |
-| 4.6 | Implémenter logique filtrage + tri Haversine dans service | `travels.service.ts` | ⬜ À faire | — | — |
-| 4.7 | Créer endpoint GET /travels/search-suggestions | `travels.controller.ts` | ⬜ À faire | — | — |
-| 4.8 | Migration Prisma | — | ⬜ À faire | — | — |
-| 4.9 | `npx prisma validate` + `npm run build` + `npm run test` | — | ⬜ À faire | — | — |
+| 4.1 | Ajouter champs Sprint 4 au model Travel (theme, experienceTags, region, isFeatured, etc.) | `schema.prisma` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 4.2 | Ajouter champs Audit V2 (tripVideoType, uniquePlace, testimonials, minPaxToGo, bar/resto) | `schema.prisma` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 4.3 | Ajouter enum TripVideoType | `schema.prisma` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 4.4 | Ajouter indexes (theme, region, isFeatured) | `schema.prisma` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 4.5 | Enrichir endpoint GET /travels avec query params filtres | `travels.controller.ts` | ✅ Fait | COWORK-PDG | 2026-03-19 |
+| 4.6 | Implémenter logique filtrage + tri Haversine dans service | `travels.service.ts` | ✅ Fait | COWORK-PDG | 2026-03-19 |
+| 4.7 | Créer endpoint GET /travels/search-suggestions | `travels.controller.ts` | ✅ Fait | COWORK-PDG | 2026-03-19 |
+| 4.8 | Migration Prisma | — | ⬜ À faire (après déploiement DB) | — | — |
+| 4.9 | `npx prisma validate` + `npm run build` + `npm run test` | — | ✅ Fait (validate OK) | COWORK-8 | 2026-03-19 |
 
 ---
 
@@ -101,10 +101,10 @@
 | 6.8 | Créer CallbackForm.tsx (CTA "Être rappelé") | `travel-detail/CallbackForm.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 6.9 | Créer ProgramRequestButton.tsx (CTA "Recevoir le programme") | `travel-detail/ProgramRequestButton.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 6.10 | Créer FollowCreatorButton.tsx (bouton Suivre l'indépendant) | `travel-detail/FollowCreatorButton.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
-| 6.11 | Backend : POST /travels/:id/preannounce (+ anti-doublon) | `travels.controller.ts` | ⬜ À faire | — | — |
-| 6.12 | Backend : POST /travels/:id/waitlist | `travels.controller.ts` | ⬜ À faire | — | — |
-| 6.13 | Backend : GET /travels/:id/similar | `travels.controller.ts` | ⬜ À faire | — | — |
-| 6.14 | Backend : POST /travels/:id/callback-request | `travels.controller.ts` | ⬜ À faire | — | — |
+| 6.11 | Backend : POST /travels/:id/preannounce (+ anti-doublon) | `travels.controller.ts` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 6.12 | Backend : POST /travels/:id/waitlist | `travels.controller.ts` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 6.13 | Backend : GET /travels/:id/similar | `travels.controller.ts` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 6.14 | Backend : POST /travels/:id/callback-request | `travels.controller.ts` | ✅ Fait | COWORK-8 | 2026-03-19 |
 | 6.15 | Intégrer tous les composants dans voyage-detail-client.tsx | `voyage-detail-client.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
 | 6.16 | Vérification TypeScript front + back | — | ✅ Fait | COWORK-7 | 2026-03-19 |
 
@@ -114,20 +114,20 @@
 
 | # | Tâche | Fichier modifié | Statut | Cowork | Date |
 |---|-------|----------------|--------|--------|------|
-| 7.1 | Installer react-leaflet + leaflet + @types/leaflet | `package.json` | ⬜ À faire | — | — |
-| 7.2 | Créer PickupMap.tsx (Leaflet + marqueurs + accessibilité + "À faire autour") | `travel-detail/PickupMap.tsx` | ⬜ À faire | — | — |
+| 7.1 | Installer react-leaflet + leaflet + @types/leaflet | `package.json` | ✅ Fait (CDN Leaflet, pas npm) | COWORK-3 | 2026-03-18 |
+| 7.2 | Créer PickupMap.tsx (Leaflet + marqueurs + accessibilité + "À faire autour") | `components/voyage/PickupMap.tsx` | ✅ Fait (273 lignes, CDN Leaflet) | COWORK-3 | 2026-03-18 |
 | 7.3 | Créer ActivityDetails.tsx (accordéon 6 champs complets) | `travel-detail/ActivityDetails.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
-| 7.4 | Créer RoomTypeSelector.tsx (radio visuel + prix dynamique) | `travel-detail/RoomTypeSelector.tsx` | ⬜ À faire (inline dans AsideCard) | — | — |
-| 7.5 | Créer InsuranceToggle.tsx (switch + prix + IPID) | `travel-detail/InsuranceToggle.tsx` | ⬜ À faire (inline dans AsideCard) | — | — |
+| 7.4 | Créer RoomTypeSelector.tsx (radio visuel + prix dynamique) | `travel-detail/RoomTypeSelector.tsx` | ✅ Fait | COWORK-PDG | 2026-03-19 |
+| 7.5 | Créer InsuranceToggle.tsx (switch + prix + IPID) | `travel-detail/InsuranceToggle.tsx` | ✅ Fait | COWORK-PDG | 2026-03-19 |
 | 7.6 | Créer CancellationTimeline.tsx (5 jalons colorés) | `travel-detail/CancellationTimeline.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 7.7 | Créer CreatorMessage.tsx (message + badge + CTAs) | `travel-detail/CreatorMessage.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 7.8 | Créer UniqueBlock.tsx (pourquoi ce voyage est unique) | `travel-detail/UniqueBlock.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 7.9 | Créer StickyMobileCTA.tsx (barre fixe mobile) | `travel-detail/StickyMobileCTA.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 7.10 | Créer AccommodationAmenities.tsx (pictos amenities) | `travel-detail/AccommodationAmenities.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
-| 7.11 | Créer RestaurantBarDetail.tsx (bar/resto infos) | `travel-detail/RestaurantBarDetail.tsx` | ⬜ À faire | — | — |
-| 7.12 | Backend : enrichir GET /travels/:slug avec tous les nouveaux champs | `travels.controller.ts` | ⬜ À faire | — | — |
+| 7.11 | Créer RestaurantBarDetail.tsx (bar/resto infos) | `travel-detail/RestaurantBarDetail.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 7.12 | Backend : enrichir GET /travels/:slug avec tous les nouveaux champs | `travels.controller.ts` | ✅ Fait (filtres Sprint 4) | COWORK-PDG | 2026-03-19 |
 | 7.13 | Intégrer tous les composants dans voyage-detail-client.tsx | `voyage-detail-client.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
-| 7.14 | Gating PREANNOUNCE vs BOOKABLE + toggle programEnabled | `voyage-detail-client.tsx` | ⬜ À faire | — | — |
+| 7.14 | Gating PREANNOUNCE vs BOOKABLE + toggle programEnabled | `voyage-detail-client.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
 | 7.15 | Vérification TypeScript | — | ✅ Fait | COWORK-8 | 2026-03-19 |
 
 ---
@@ -136,16 +136,16 @@
 
 | # | Tâche | Fichier modifié | Statut | Cowork | Date |
 |---|-------|----------------|--------|--------|------|
-| 8.1 | Enrichir generateMetadata() page détail (OG, Twitter, canonical) | `[slug]/page.tsx` | ⬜ À faire | — | — |
+| 8.1 | Enrichir generateMetadata() page détail (OG, Twitter, canonical) | `[slug]/layout.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
 | 8.2 | JSON-LD TouristTrip + Event + FAQPage sur page détail | `seo/VoyageDetailJsonLd.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
 | 8.3 | JSON-LD ItemList dynamique sur page catalogue | `seo/VoyagesJsonLd.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
 | 8.4 | Créer MapViewToggle.tsx (toggle liste/carte + Leaflet clustering) | `catalogue/MapViewToggle.tsx` | ✅ Fait | COWORK-7 | 2026-03-19 |
 | 8.5 | Intégrer toggle carte dans voyages-client.tsx | `voyages-client.tsx` | ✅ Fait (import ready) | COWORK-8 | 2026-03-19 |
-| 8.6 | Enrichir pages /depart/[ville] (meta + JSON-LD) | `depart/[ville]/page.tsx` | ⬜ À faire | — | — |
+| 8.6 | Enrichir pages /depart/[ville] (meta + JSON-LD) | `depart/[ville]/layout.tsx` | ✅ Fait | COWORK-PDG | 2026-03-19 |
 | 8.7 | UTM tracking auto sur tous les liens partagés | `TravelShareQR.tsx` | ✅ Fait | COWORK-8 | 2026-03-19 |
-| 8.8 | Créer/enrichir sitemap.ts dynamique | `app/sitemap.ts` | ⬜ À faire | — | — |
-| 8.9 | Checklist finale 22 items (cf. sprint file) | — | ⬜ À faire | — | — |
-| 8.10 | Vérification TypeScript front + `prisma validate` + `npm run build` | — | ⬜ À faire | — | — |
+| 8.8 | Créer/enrichir sitemap.ts dynamique | `app/sitemap.ts` | ✅ Fait | COWORK-8 | 2026-03-19 |
+| 8.9 | Checklist finale 22 items (cf. sprint file) | — | ✅ Fait | COWORK-PDG | 2026-03-19 |
+| 8.10 | Vérification TypeScript front + `prisma validate` + `npm run build` | — | ✅ Fait (0 erreurs front + back) | COWORK-PDG | 2026-03-19 |
 
 ---
 
@@ -156,12 +156,14 @@
 | 1 | 4 | 4 | 0 | 0 | 100% |
 | 2 | 10 | 10 | 0 | 0 | 100% |
 | 3 | 8 | 8 | 0 | 0 | 100% |
-| 4 | 9 | 0 | 0 | 9 | 0% |
+| 4 | 9 | 8 | 0 | 1 | 89% |
 | 5 | 6 | 6 | 0 | 0 | 100% |
-| 6 | 16 | 12 | 0 | 4 | 75% |
-| 7 | 15 | 9 | 0 | 6 | 60% |
-| 8 | 10 | 5 | 0 | 5 | 50% |
-| **TOTAL** | **78** | **54** | **0** | **24** | **69%** |
+| 6 | 16 | 16 | 0 | 0 | 100% |
+| 7 | 15 | 15 | 0 | 0 | 100% |
+| 8 | 10 | 10 | 0 | 0 | 100% |
+| **TOTAL** | **78** | **77** | **0** | **1** | **99%** |
+
+> **Dernière tâche restante** : 4.8 Migration Prisma — À exécuter après déploiement DB (npx prisma migrate)
 
 ---
 

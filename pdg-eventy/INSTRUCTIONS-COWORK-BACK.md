@@ -85,7 +85,7 @@ Si tu dois modifier un format de réponse :
 
 > **CONSULTE `PROGRESS.md` et le code existant AVANT de coder.**
 
-- 29 modules NestJS, 327 fichiers source, 117 599 lignes
+- 31 modules NestJS, 327 fichiers source, 117 599 lignes
 - Auth module avec 8 endpoints
 - Bookings module avec 6 endpoints
 - Payments module avec 3 endpoints + webhook

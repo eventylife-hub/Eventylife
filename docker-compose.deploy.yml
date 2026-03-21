@@ -1,0 +1,113 @@
+# Docker Compose — Premier Déploiement Backend Eventy Life
+# Stratégie: Backend + Redis sur Scaleway, Cloudflare gère SSL
+# Frontend reste sur Vercel (eventylife.fr)
+# API servie via api.eventylife.fr → Cloudflare proxy → ce serveur:80
+#
+# Usage:
+#   1. Copier backend/.env.production.example → backend/.env.production
+#   2. Remplir les valeurs
+#   3. docker compose -f docker-compose.deploy.yml up -d
+#   4. Vérifier: curl http://localhost:4000/api/health
+
+version: '3.9'
+
+services:
+
+  # ── Nginx reverse proxy (HTTP only — Cloudflare gère SSL) ──────
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: eventy-nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.deploy.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - eventy-prod
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Backend NestJS ─────────────────────────────────────────────
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: 20
+    image: eventy-backend:${APP_VERSION:-latest}
+    container_name: eventy-backend
+    restart: always
+    expose:
+      - "4000"
+    env_file:
+      - ./backend/.env.production
+    environment:
+      NODE_ENV: production
+      LOG_LEVEL: warn
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - eventy-prod
+    volumes:
+      - backend-logs:/app/logs:rw
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 768M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # ── Redis (cache + sessions) ───────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: eventy-redis
+    restart: always
+    command: >
+      redis-server
+      --appendonly yes
+      --requirepass ${REDIS_PASSWORD:-changeme}
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+      --save 900 1
+      --save 300 10
+    volumes:
+      - redis-data:/data:rw
+    networks:
+      - eventy-prod
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a $$REDIS_PASSWORD ping | grep PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 192M
+
+volumes:
+  redis-data:
+    driver: local
+  backend-logs:
+    driver: local
+
+networks:
+  eventy-prod:
+    driver: bridge

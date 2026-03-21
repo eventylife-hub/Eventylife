@@ -50,6 +50,8 @@ Tous les fichiers de pilotage sont dans `pdg-eventy/` :
 | `README.md` | Vue d'ensemble du projet PDG |
 | `DASHBOARD-PDG.md` | Dashboard central — statut de tous les domaines |
 | `CONTACTS-PDG.md` | Carnet de contacts importants (créé automatiquement) |
+| `PLAN-ACTION-IMMEDIAT.md` | Actions urgentes PDG + plan semaine |
+| `ROADMAP-V2-POST-LANCEMENT.md` | ~71 jours features post-lancement (drawio V53) |
 
 ### 01-legal/ — Juridique
 | Fichier | Description |
@@ -84,6 +86,7 @@ Tous les fichiers de pilotage sont dans `pdg-eventy/` :
 |---------|-------------|
 | `STRATEGIE-PARTENAIRES.md` | Stratégie acquisition partenaires |
 | `SUIVI-PARTENAIRES.md` | Suivi et tracking partenaires |
+| `SCRIPTS-COMMERCIAUX.md` | 5 scripts d'appel téléphonique partenaires |
 
 ### 06-rh-organisation/ — RH & Organisation
 | Fichier | Description |
@@ -111,13 +114,14 @@ Tous les fichiers de pilotage sont dans `pdg-eventy/` :
 | Fichier | Description |
 |---------|-------------|
 | `PROCESS-QUOTIDIEN.md` | Process quotidiens, KPIs, routines |
+| `GUIDE-PREMIER-VOYAGE.md` | Checklist opérationnelle J-90 à J+7 du 1er voyage |
 
 ### 11-templates-emails/ — Templates
 | Fichier | Description |
 |---------|-------------|
-| `EMAILS-PARTENAIRES.md` | 7 templates emails partenaires |
-| `EMAILS-CLIENTS.md` | 8 templates emails clients |
-| `EMAILS-ADMINISTRATIF.md` | 4 templates emails administratifs |
+| `EMAILS-PARTENAIRES.md` | 9 templates emails partenaires |
+| `EMAILS-CLIENTS.md` | 14 templates emails clients |
+| `EMAILS-ADMINISTRATIF.md` | 7 templates emails administratifs |
 
 ### 12-checklist-lancement/ — Lancement
 | Fichier | Description |
@@ -151,15 +155,17 @@ Tous les fichiers de pilotage sont dans `pdg-eventy/` :
 - **Activité** : Plateforme SaaS + Agence de voyages de groupe
 - **Statut** : Pré-création — Beta test en cours
 - **Budget** : 15 000€ - 50 000€
-- **Stack** : NestJS 10 (29 modules) + Next.js 14 + Prisma + PostgreSQL
+- **Stack** : NestJS 10 (31 modules) + Next.js 14 + Prisma + PostgreSQL
 - **Tests** : 3 300+ tests passants
-- **Code** : 290 477 lignes
+- **Code** : ~296 500 lignes
 
-### Architecture 3 portails (mis à jour 2026-03-18)
-- **Portail Client/Public** : `app/(public)/` + `app/(client)/client/` — **48 pages** (espace connecté + pages publiques) — design gradient sunset premium
-- **Portail Pro** : `app/(pro)/pro/` — **47 pages** (dashboard, voyages, réservations, finance, marketing, messagerie...) — rôle PRO ou ADMIN
-- **Portail Admin** : `app/(admin)/admin/` — **27 pages** (back-office complet) — rôle ADMIN uniquement
-- **Backend NestJS** : 29 modules (auth, bookings, payments, transport, rooming, finance, etc.)
+### Architecture 3 portails (mis à jour 2026-03-20)
+- **Portail Client/Public** : `app/(public)/` + `app/(client)/client/` — **54 pages** (26 publiques + 28 client connecté) — design gradient sunset premium
+- **Portail Pro** : `app/(pro)/pro/` — **50 pages** (dashboard, voyages, réservations, finance, marketing, messagerie...) — rôle PRO ou ADMIN
+- **Portail Admin** : `app/(admin)/admin/` — **45 pages** (back-office complet) — rôle ADMIN uniquement
+- **Auth + Checkout** : 11 pages auth + 5 pages checkout
+- **Total** : **165+ pages frontend**
+- **Backend NestJS** : 31 modules (admin, auth, bookings, cancellation, checkout, client, cron, documents, email, exports, finance, groups, health, hra, insurance, legal, marketing, notifications, payments, post-sale, pro, public, restauration, reviews, rooming, seo, support, transport, travels, uploads, users)
 - Le frontend Next.js est le VRAI produit — les PWA (admin-pwa/, pro-pwa/) sont des apps standalone complémentaires
 - Les 3 portails ont des designs, layouts et composants distincts. Ne pas réutiliser les composants client pour pro/admin.
 

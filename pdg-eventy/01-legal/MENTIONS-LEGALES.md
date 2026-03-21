@@ -159,7 +159,7 @@ Eventy met en œuvre les mesures techniques et organisationnelles suivantes (Art
 - **Données sensibles (passeports)** : Suppression automatique J+30 après retour de voyage
 - **Sauvegardes** : Backup quotidien automatisé (PostgreSQL managé Scaleway), rétention 30 jours
 - **Monitoring** : Alertes temps réel (uptime, erreurs, tentatives d'intrusion)
-- **Tests de sécurité** : 3 300+ tests automatisés, audits réguliers du code backend (290 000+ lignes)
+- **Tests de sécurité** : 3 300+ tests automatisés, audits réguliers du code backend (~296 500 lignes)
 - **Accès restreint** : Principe du moindre privilège, logs d'accès conservés 1 an
 
 ---

@@ -193,7 +193,7 @@
 
 ## Automatisations backend — Gain de temps Phase 1
 
-Le backend NestJS (29 modules, 290 477 lignes de code) automatise une grande partie des tâches opérationnelles :
+Le backend NestJS (31 modules, ~296 500 lignes de code) automatise une grande partie des tâches opérationnelles :
 
 | Module backend | Tâche automatisée | Temps économisé / semaine |
 |----------------|-------------------|--------------------------|

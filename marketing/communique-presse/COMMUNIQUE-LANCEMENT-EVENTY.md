@@ -41,7 +41,7 @@ Contrairement aux plateformes digitales purement automatisées, Eventy assigne u
 
 ### Technologie et simplicité
 
-La plateforme eventylife.fr a été développée entièrement en interne (Next.js, NestJS, 290 000+ lignes de code, 3 300+ tests automatisés). Elle offre trois portails distincts :
+La plateforme eventylife.fr a été développée entièrement en interne (Next.js, NestJS, ~296 500 lignes de code, 3 300+ tests automatisés). Elle offre trois portails distincts :
 
 - **Portail Client** : recherche, réservation, paiement fractionné, espace voyageur
 - **Portail Pro** : création de voyages, gestion des réservations, tableau de bord financier

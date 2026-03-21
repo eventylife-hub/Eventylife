@@ -4,8 +4,8 @@
 > **Données** : Tarifs réels 2026 (scaleway.com, vercel.com, cloudflare.com)
 
 ## Stack technique confirmée
-- **Backend** : NestJS 10 (29 modules) + Prisma + PostgreSQL
-- **Frontend** : Next.js 14 (102 pages, 72 composants)
+- **Backend** : NestJS 10 (31 modules) + Prisma + PostgreSQL
+- **Frontend** : Next.js 14 (165+ pages, 100+ composants)
 - **Paiement** : Stripe (CB + SEPA + gestion litiges)
 - **Stockage fichiers** : S3 compatible
 - **Emails** : Brevo / Mailjet

@@ -112,7 +112,7 @@ Chaque page DOIT gérer :
 
 > **CONSULTE le code frontend existant AVANT de coder.**
 
-- 130 pages (page.tsx) sur les 3 portails
+- 165+ pages (page.tsx) sur les 3 portails
 - Beaucoup de pages utilisent déjà des appels API réels avec fallback
 - Composants Pro réutilisables (ProEmptyState, ProStatCard, etc.)
 - Composants a11y (FocusTrap)
