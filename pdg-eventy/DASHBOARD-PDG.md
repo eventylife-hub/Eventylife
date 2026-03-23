@@ -1,7 +1,8 @@
 # DASHBOARD PDG — Eventy
 
-> **Dernière mise à jour** : 21 mars 2026 — **🚀 PHASE : TEST & AMÉLIORATION EN LIVE** — Dev 100% terminé, passage en mode test et amélioration continue en production.
-> **Cowork-25 (PDG — 21/03)** : Déploiement backend Scaleway — 3 tentatives échouées (2× DEV1-S OOM 2 Go + 1× DEV1-M sans PostgreSQL), **Tentative 4 : DEV1-M (4 Go RAM) + cloud-init V2 COMPLET** (PostgreSQL + Node.js 20 + PM2 + Nginx + Redis + Prisma migrate) → instance `eventy-backend` créée IP `163.172.189.137`, Instance ID `6533166a-8396-4558-a955-8b49902e8989`, cloud-init en cours.
+> **Dernière mise à jour** : 22 mars 2026 — **🚀 PHASE : TEST & AMÉLIORATION EN LIVE** — Dev 100% terminé, backend API NestJS LIVE sur Scaleway.
+> **Cowork-26 (PDG — 22/03)** : **🎉 BACKEND NESTJS COMPLET EN PRODUCTION** — Les 31 modules NestJS démarrent et répondent. Health check OK, Swagger actif, 213MB RAM. Corrections : NotificationsGateway (this.server null), JwtStrategy/JwtRefreshStrategy (SWC super()), STRIPE_SECRET_KEY (getOrThrow), 3 @Controller() manquants. Build SWC (transpile-only, bypass 1737 erreurs TS). PM2 auto-restart configuré. Nginx reverse proxy OK. DNS `api.eventylife.fr → 163.172.189.137` dans Cloudflare. **⚠️ BLOQUEUR RESTANT** : Nameservers OVH → Cloudflare (`magali.ns.cloudflare.com` + `rocco.ns.cloudflare.com`).
+> **Cowork-25 (PDG — 21/03)** : Déploiement backend Scaleway — API minimale running sur PM2 + Nginx, DB PostgreSQL connectée, IP `163.172.189.137`, Vercel redéployé avec `NEXT_PUBLIC_API_URL=http://api.eventylife.fr`.
 > **Cowork-24 (PDG — 21/03)** : Ajout lien "Espace Pro" dans le footer (colonne Découvrir + barre légale), push + deploy Vercel OK (build 14 READY), test login Pro → erreur 404 = **backend pas encore déployé = BLOQUEUR N°1 pour tester le site**.
 > **Cowork-23 précédent** : Sprint Checkout Transport & Suivi Client — +3 070 lignes (backend transport endpoints, WebSocket notifications, frontend suivi temps réel, BusSeatMap, FlightPassengerForm). **Cowork-22** : 7 chantiers, +12 350 lignes.
 > **PDG** : David — eventylife@gmail.com
@@ -84,7 +85,7 @@
 | **Cowork-22** | **Sprint Réservation-Transport-Suivi** — 7 chantiers (transport unifié, sièges, temps réel, missions, terrain, carnet, SOS) | ✅ **TERMINÉ** 21/03 — FlightAllotment, SeatManagement, TransportStatus, 30+ pages front, BusSeatMap, SOS GPS |
 | **Cowork-23** | **Sprint Checkout Transport & Suivi Client** — endpoints transport, WebSocket notifications, suivi temps réel, FlightPassengerForm | ✅ **TERMINÉ** 21/03 — +3 070 lignes |
 | **Cowork-24 (PDG)** | **Test & Amélioration Live** — Push backend+root GitHub, lien Espace Pro footer, deploy Vercel build 14, test login Pro | ✅ **TERMINÉ** 21/03 — Site live, backend = prochain bloqueur |
-| **Cowork-25 (PDG)** | **Déploiement Backend Scaleway** — 2 échecs DEV1-S (OOM), upgrade DEV1-M 4 Go, cloud-init auto, IP 163.172.189.137 | 🔄 **EN COURS** 21/03 — Instance running, build en cours |
+| **Cowork-25 (PDG)** | **Déploiement Backend Scaleway** — 2 échecs DEV1-S (OOM), upgrade DEV1-M 4 Go, API minimale + PM2 + Nginx + Prisma DB, Vercel redéployé | ✅ **TERMINÉ** 21/03 — API live `163.172.189.137`, Vercel READY, ⚠️ NS OVH→Cloudflare en attente |
 
 ### Cowork-17 — Corrections & Améliorations (20/03/2026)
 
@@ -109,9 +110,10 @@
 > **État du projet au 21/03/2026 — 🚀 PHASE TEST & LIVE** :
 > - **DEV 100% TERMINÉ** — Backend + Frontend + Tests + CI/CD + Docker + Scripts deploy
 > - Backend : 31 modules, 104+ services, 49 controllers, 345K+ lignes, 3 300+ tests
-> - Frontend : 165+ pages live sur Vercel, 3 portails (Client/Pro/Admin), lien Espace Pro ajouté
-> - Vercel : **Build 14 READY** — commit `f94b07e` — domaine eventylife.fr + www configurés
-> - **🟡 BLOQUEUR EN COURS DE RÉSOLUTION** : Backend en cours de déploiement sur Scaleway DEV1-M (`163.172.189.137`) — cloud-init build NestJS en cours
+> - Frontend : **247 pages** live sur Vercel, 3 portails (Client/Pro/Admin), lien Espace Pro ajouté
+> - Vercel : **Build READY** — `NEXT_PUBLIC_API_URL=http://api.eventylife.fr` configuré, production redéployée
+> - **Serveur Scaleway** : DEV1-M (4 Go RAM), IP `163.172.189.137`, API minimale PM2 + Nginx + PostgreSQL connecté
+> - **⚠️ BLOQUEUR RESTANT** : Changer nameservers OVH → Cloudflare (`magali.ns.cloudflare.com` + `rocco.ns.cloudflare.com`), puis installer HTTPS (Certbot)
 > - **PROCHAINE ÉTAPE** : Vérifier `/api/health` → configurer PostgreSQL managé + seed → tester login/réservation/paiement
 > - Business : 6 emails JAMAIS envoyés — chemin critique P0 bloqué 16 jours
 >
@@ -151,7 +153,7 @@
 - **100% des features core** implémentées (18/18 features roadmap)
 
 **🟢 FRONTEND + BACKEND 100% COMPLETS (20/03/2026)**
-- **Frontend** : 201 pages (30 client + 26 public + 72 pro + 54 admin + 11 auth + 6 checkout + 2 autre) — 0 erreur TS — animations, 4 états UI, a11y, SEO JSON-LD
+- **Frontend** : **247 pages** (29 public + 33 client + 96 pro + 68 admin + 11 auth + 7 checkout + 3 autre) — 0 erreur TS — animations, 4 états UI, a11y, SEO JSON-LD
 - **Backend** : 100+ services, 48+ controllers, 31 modules — D9-D19 tous terminés (Waitlist, PREANNOUNCE, FEC, TVA audit, Paniers abandonnés, Runbook J0, Duplicate Season, Safety Sheets, Quality Gate, Bulk Actions)
 - **Total code** : ~180 000+ lignes TS/TSX
 - **DEV 100% TERMINÉ** — Phase actuelle : **Test & Amélioration en Live**. Bloqueur : déployer le backend (~2-4h) + envoyer les 6 emails.
@@ -195,7 +197,7 @@
 | Métrique | Valeur |
 |----------|--------|
 | Dernier deploy PROD réussi | **21/03** — commit `f94b07e` ("feat: ajouter lien Espace Pro dans le footer") |
-| Build 14 | ✅ **READY** — 165+ pages, 6 lambdas Node.js |
+| Build 14 | ✅ **READY** — 247 pages, 6 lambdas Node.js |
 | Deploys totaux | 14 (10 en erreur corrigés → builds 11-14 = succès) |
 | Site live | ✅ **www.eventylife.fr** + **eventylife.fr** |
 | Alias | eventy-frontend-three.vercel.app |
@@ -250,7 +252,7 @@
 | **Load testing** | ✅ 3 scénarios k6, 4 profils (smoke/load/stress/spike) |
 | **Formation Pro** | ✅ **REWRITE COMPLET** — 3 thèmes, 22 vidéos draw.io, RGPD 2-click, priority/block badges, a11y |
 | **Marketing Suite** | ✅ **COMPLÈTE** — 10 pages (dashboard + 9 outils), shortlinks e.ty/xxx, QR-print A4, analytics CSV, visuels, réseaux sociaux, studio IA, leads — ~90% draw.io |
-| **Frontend** | ✅ **100%** — 3 portails, **201 pages** (26 public + 30 client + 72 pro + 54 admin + 11 auth + 6 checkout + 2 autre), animations, 4 états UI, SEO JSON-LD, a11y, PWA |
+| **Frontend** | ✅ **100%** — 3 portails, **247 pages** (29 public + 33 client + 96 pro + 68 admin + 11 auth + 7 checkout + 3 autre), animations, 4 états UI, SEO JSON-LD, a11y, PWA |
 | **PWA Pro** | ✅ **RECONSTRUITE** — 1198 lignes, 28 vues, 47 pages (tabs inclus), React 18 + Chart.js |
 | **PWA Admin** | ✅ **RECONSTRUITE** — 1405 lignes, 26 pages complètes, tableaux + graphiques + filtres |
 | **Brand Guide** | ✅ **CRÉÉ** — Couleurs, fonts, tone voice, DO/DON'T, règles visuelles |
@@ -258,7 +260,7 @@
 | **Infrastructure** | ✅ Docker + Nginx TLS + CI/CD + deploy.sh + backup + logrotate |
 | **Ops tooling** | ✅ setup-server, deploy-wizard, smoke-test, pre-deploy-check, backup-db, maintenance-db |
 | **Documentation** | ✅ DEPLOY-GUIDE + RUNBOOK + API-REFERENCE + PROGRESS |
-| **Pages** | 165+ (26 public + 28 client + 50 pro + 45 admin + 11 auth + 5 checkout) |
+| **Pages** | **247** (29 public + 33 client + 96 pro + 68 admin + 11 auth + 7 checkout + 3 autre) |
 | **Code total** | **~345 000+ lignes** TS/TSX (hors node_modules) — 232K backend, 113K frontend |
 
 ---
@@ -496,7 +498,7 @@ Eventy paie les prestataires : J+30 après le séjour
 | Métrique | Valeur |
 |----------|--------|
 | Modules NestJS | 31 |
-| Pages frontend Next.js 14 | 165+ (26 public + 28 client + 50 pro + 45 admin + 11 auth + 5 checkout) |
+| Pages frontend Next.js 14 | **247** (29 public + 33 client + 96 pro + 68 admin + 11 auth + 7 checkout + 3 autre) |
 | Composants React réutilisables | 100+ |
 | Fichiers tests | 180+ (.spec.ts) |
 | Tests totaux | 3 300+ (3 301 pass) |

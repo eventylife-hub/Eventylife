@@ -1,8 +1,59 @@
 # PROGRESS — Eventy Life Platform
 
-> **Dernière mise à jour** : Cowork-37 Sprints 65-74 (21 mars 2026) — 8 as any→typed, 35 error.tsx pro, 5 forms validés, 3 race conditions, 53 findMany bornés, audits sécurité clean
+> **Dernière mise à jour** : Cowork-38 Sprints 48-56 (23 mars 2026) — 3 error.tsx, CSP unsafe-eval supprimé, image domains restreints, phone validation standardisée, 12 h4→h3, 9 aria-labels, auth debug logs supprimés, session revocation on password change, 14 JSON.parse→safeJsonParse, 7 Record<string,any>→unknown, 2 as any éliminés, 3 unbounded findMany bornés, 3 User queries avec select
 > **Diagramme de référence** : drawio v53 (1 533 diagrammes dont 834 PATCHES)
 > **Stack** : Next.js 14 App Router · NestJS 10 · Prisma 5 · PostgreSQL 15 · Stripe · Tailwind CSS
+
+---
+
+## Cowork-38 — Sprints 48-51 : Frontend Security Hardening, Accessibility, Validation (23 mars 2026)
+
+### Sprint 56 — Prisma Select + Additional Hardening
+- ✅ **webhook.controller.ts** — `user.findFirst` sans select → ajouté `select: { id: true, email: true }` (ne charge plus passwordHash)
+- ✅ **pro-travels.controller.ts** — `user.findUnique` sans select → ajouté `select: { id: true }` (invite team member)
+- ✅ Audit complet : TOUS les `user.findUnique/findFirst` dans le backend utilisent maintenant `select`
+- ✅ Bookings pagination déjà capped (max 100), widget déjà capped (max 50) — false positives confirmés
+
+### Sprint 55 — JSON Safety + Unbounded Query Fixes
+- ✅ **quality-gate.service.ts** — 2× `JSON.parse` → `safeJsonParse` (inclusionsJson, exclusionsJson)
+- ✅ **document-signing.service.ts** — `JSON.parse(log.afterJson)` → `safeJsonParse` + import ajouté
+- ✅ **stripe-webhooks-advanced.service.ts** — `paymentContribution.findMany` sans take → `take: 10000, orderBy: { createdAt: 'desc' }`
+- ✅ **stripe-webhooks-advanced.service.ts** — `stripeWebhookEvent.findMany` sans where → ajouté `where: { createdAt: { gte: 30 jours } }` + `orderBy`
+- **Impact** : 0 JSON.parse non protégé restant dans le backend (hors try-catch existants)
+
+### Sprint 52 — Auth Security Critical Fixes
+- ✅ **auth.service.ts** — Supprimé 5 `console.log/error` DEBUG TEMPORAIRE exposant le flow auth (email trouvé, passwordHash existence, token generation, stack traces)
+- ✅ **auth.service.ts** — Catch block: `console.error` → `this.logger.error` + re-throw `UnauthorizedException` générique (anti-enumération)
+- ✅ **auth.controller.ts** — Ajouté `await this.authService.logout(user.id)` après changement de mot de passe → révoque TOUS les refresh tokens actifs (force re-auth sur tous appareils)
+
+### Sprint 53 — Backend Type Safety + JSON Safety
+- ✅ **packages.service.ts** — 12× `JSON.parse()` → `safeJsonParse()` (packagesJson, surchargesJson, marketingPacksJson) — ne crash plus sur JSON malformé
+- ✅ **admin.controller.ts** — `user.findUnique({})` → `select: { id: true }` + update avec `select` limité (ne retourne plus passwordHash/twoFactorSecret)
+- ✅ **audit.entity.ts** — 2× `Record<string, any>` → `Record<string, unknown>`
+- ✅ **audit.service.ts** — 2× `Record<string, any>` → `Record<string, unknown>`
+- ✅ **user-preferences.service.ts** — 2× `as any` → `as Record<string, unknown>` (Prisma metadata)
+- ✅ **duplicate-season.service.ts** — 2× `Record<string, any>` → `Record<string, unknown>`
+- ✅ **create-campaign.dto.ts + update-campaign.dto.ts** — targetAudience `Record<string, any>` → `Record<string, unknown>`
+
+### Sprint 48 — Error Boundaries Complètes (3 pages spéciales)
+- ✅ **embed/[proSlug]/error.tsx** — Design minimaliste iframe, pas de header/footer Eventy
+- ✅ **maintenance/error.tsx** — Fond sombre gradient cohérent avec la page maintenance
+- ✅ **offline/error.tsx** — Design léger pour contexte hors-ligne
+- **Impact** : Couverture error.tsx = **247/247 pages (100%)**
+- SEO metadata confirmée déjà présente dans layout.tsx pour itineraires, v/[code], checkout
+
+### Sprint 49 — Security Config Hardening (5 fixes)
+- ✅ **CSP unsafe-eval supprimé** — `next.config.js` script-src nettoyé (bloque eval/Function injection)
+- ✅ **Image domains restreints** — Supprimé wildcards `*.amazonaws.com`, `*.s3.amazonaws.com`, `*.scw.cloud`, `unsplash.com` → gardé uniquement `eventy-uploads-prod.s3.fr-par.scw.cloud` + `images.unsplash.com`
+- ✅ **use-messaging.ts** — Dependency array `[currentConversation]` → `[currentConversation?.id]` (empêche boucle infinie useCallback)
+- ✅ **use-theme.ts** — SSR guard `typeof window/document !== 'undefined'` + try/catch localStorage (sandboxed iframe safe)
+- ✅ **middleware.ts** — Restauré `process.env.SITE_PASSWORD` pour protection pré-lancement (était hardcodé `null`)
+
+### Sprint 50 — Validation, Accessibilité, Hiérarchie HTML
+- ✅ **Phone validation standardisée** — `client.ts` : remplacé regex permissif `/^[\d\s+\-()]*$/` → `/^[+]?[\d\s()-]{6,20}$/` + `.max(20)` (2 schémas corrigés: checkoutInviteSchema + profileFormSchema)
+- ✅ **Heading hierarchy** — `page-client.tsx` : 12× `<h4>` → `<h3>` (WCAG 2.1 Level A, h2→h4 skip fix)
+- ✅ **9 aria-labels ajoutés** — admin: leads, annulations, ledger, payouts, fournisseurs, missions · pro: devis, marketing, notifications
+- **Impact** : 9 search inputs accessibles aux lecteurs d'écran
 
 ---
 
@@ -213,7 +264,19 @@
 - ✅ **widget.controller.ts** — 2× `parseInt(limit)` → `safeParseInt` avec bornes
 - **Impact** : NaN rejeté proprement, valeurs toujours bornées
 
-### Sprint 41 — Documentation
+### Sprint 42-43 — Security Deep Audit + Fixes critiques
+- ✅ **totp.service.ts** — `expectedToken === token` → `crypto.timingSafeEqual()` (timing attack fix sur 2FA)
+- ✅ **checkout.service.ts** — Idempotency key refund: `crypto.randomUUID()` → hash déterministe `sha256(contributionId + amount + adminId)` (évite doublons Stripe)
+- ✅ **db-backup.service.ts** — Path traversal fix: validation `resolvedPath.startsWith(backupDir)` avant accès fichier
+- ✅ **db-backup.service.ts** — DB URL validation: hostname regex `^[a-zA-Z0-9._-]+$`, database regex `^[a-zA-Z0-9_-]+$`
+- ✅ Vérification AllExceptionsFilter + HttpExceptionFilter → déjà solides (sanitisation prod, codes Prisma masqués)
+
+### Sprint 44 — Borner les findMany unbounded (notifications)
+- ✅ **notification-digest.service.ts** — `notification.findMany({ type: DIGEST })` → `take: 10000` + `orderBy: desc`
+- ✅ **notification-digest.service.ts** — `user.findMany({ select: metadata })` → `take: 50000`
+- ✅ **notification-dispatcher.service.ts** — `notificationPreference.findMany` → `take: 100`
+
+### Sprint 45 — Documentation
 - ✅ PROGRESS.md mis à jour
 
 ---

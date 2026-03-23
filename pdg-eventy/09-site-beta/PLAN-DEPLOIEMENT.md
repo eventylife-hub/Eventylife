@@ -1,9 +1,24 @@
 # Plan de Déploiement Technique — Eventy
 
-> **Dernière mise à jour** : 5 mars 2026
+> **Dernière mise à jour** : 21 mars 2026
 > **Objectif** : Passer du développement local à la production
 > **Hébergeur retenu** : Scaleway (Paris, France) — données 100% françaises, conforme RGPD
 > **Budget infra Phase 1** : ~25-50€ HT/mois
+>
+> ## 🟢 ÉTAT ACTUEL DU DÉPLOIEMENT (21/03/2026)
+>
+> | Composant | Statut | Détails |
+> |-----------|--------|---------|
+> | **Serveur Scaleway** | ✅ Running | DEV1-M (3 vCPU, 4 Go RAM), IP `163.172.189.137`, Instance ID `6533166a` |
+> | **Backend API** | ✅ Running | API minimale sur PM2 (process `eventy-api`), port 3000, health check OK |
+> | **PostgreSQL** | ✅ Connecté | Base locale sur le serveur, Prisma schema synchronisé (`prisma db push`) |
+> | **Nginx** | ✅ Configuré | Reverse proxy port 80 → 3000, headers WebSocket + X-Forwarded |
+> | **DNS Cloudflare** | ⚠️ Pending | `api.eventylife.fr` → `163.172.189.137` (A record Proxied) — NS OVH pas encore changés |
+> | **Vercel Frontend** | ✅ READY | `NEXT_PUBLIC_API_URL=http://api.eventylife.fr`, production redéployée |
+> | **HTTPS** | ❌ À faire | Certbot/Let's Encrypt à installer après activation DNS |
+> | **NestJS complet** | ❌ À faire | API minimale en attendant — 154 fichiers locaux non pushés vers repo |
+>
+> **Nameservers à changer chez OVH** : `magali.ns.cloudflare.com` + `rocco.ns.cloudflare.com`
 
 ---
 
@@ -97,10 +112,10 @@ Déclencheur : > 20 voyages/mois OU > 10 000 visiteurs/jour
 ### Phase 1 — Infrastructure (Jour 1-2)
 
 **1.1 Domaine et DNS**
-- [ ] Vérifier propriété domaine eventylife.fr (Cloudflare Registrar)
-- [ ] Configurer DNS Cloudflare : `A` record vers IP Scaleway backend
-- [ ] Configurer CNAME : `api.eventylife.fr` → backend Scaleway
-- [ ] Configurer CNAME : `www.eventylife.fr` → frontend Scaleway ou Cloudflare Pages
+- [x] Vérifier propriété domaine eventylife.fr (OVH Registrar) ✅ 21/03
+- [x] Configurer DNS Cloudflare : `A` record `api.eventylife.fr` → `163.172.189.137` (Proxied) ✅ 21/03
+- [x] Configurer CNAME : `www.eventylife.fr` → Vercel ✅ déjà fait
+- [ ] **Changer nameservers OVH** → `magali.ns.cloudflare.com` + `rocco.ns.cloudflare.com` ⚠️ EN COURS
 - [ ] Activer HTTPS automatique (Cloudflare + Let's Encrypt sur Scaleway)
 - [ ] Configurer redirect `www` → `eventylife.fr` (ou inverse)
 - [ ] Configurer sous-domaines emails : MX + SPF + DKIM + DMARC pour Brevo

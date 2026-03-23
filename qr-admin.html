@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Code — Eventy Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0A1628 0%, #0F1F3A 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated particles */
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+      50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+    }
+
+    .container {
+      text-align: center;
+      max-width: 480px;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hex icon */
+    .hex-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 24px;
+      filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.3));
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #FF6B35, #FF8F5E);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      color: rgba(255,255,255,0.5);
+      font-size: 15px;
+      margin-bottom: 32px;
+    }
+
+    /* QR Card */
+    .qr-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px;
+      backdrop-filter: blur(12px);
+      margin-bottom: 24px;
+    }
+    .qr-box {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      display: inline-block;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 32px rgba(255, 107, 53, 0.15);
+    }
+    #qrcode canvas, #qrcode img { border-radius: 4px; }
+
+    .url-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .url-value {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #48CAE4;
+      background: rgba(72, 202, 228, 0.1);
+      padding: 8px 16px;
+      border-radius: 8px;
+      word-break: break-all;
+    }
+
+    /* Instructions */
+    .steps {
+      text-align: left;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .steps h3 {
+      font-size: 15px;
+      color: #22C55E;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF6B35, #FF8F5E);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+      padding-top: 3px;
+    }
+    .step-text strong { color: white; }
+    .step-text .tag {
+      display: inline-block;
+      background: rgba(255,107,53,0.15);
+      color: #FF8F5E;
+      padding: 1px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: monospace;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 16px 0;
+    }
+    .os-tabs { display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; }
+    .os-tab {
+      padding: 6px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .os-tab.active { background: #FF6B35; border-color: #FF6B35; color: white; }
+    .os-section { display: none; }
+    .os-section.active { display: block; }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles -->
+  <div class="particle" style="width:8px;height:8px;background:#48CAE4;left:10%;top:20%;animation-delay:0s;"></div>
+  <div class="particle" style="width:5px;height:5px;background:#48CAE4;left:15%;top:70%;animation-delay:1s;"></div>
+  <div class="particle" style="width:6px;height:6px;background:#0077B6;left:8%;top:50%;animation-delay:2s;"></div>
+  <div class="particle" style="width:8px;height:8px;background:#FF6B35;right:12%;top:15%;animation-delay:0.5s;"></div>
+  <div class="particle" style="width:5px;height:5px;background:#FF8F5E;right:18%;top:60%;animation-delay:1.5s;"></div>
+  <div class="particle" style="width:6px;height:6px;background:#FF6B35;right:8%;top:40%;animation-delay:3s;"></div>
+  <div class="particle" style="width:4px;height:4px;background:#22C55E;left:50%;top:8%;animation-delay:2.5s;"></div>
+
+  <div class="container">
+    <!-- Hex Icon -->
+    <svg class="hex-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hexO" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF6B35"/><stop offset="100%" stop-color="#FF8F5E"/></linearGradient>
+        <linearGradient id="hexM" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22C55E"/><stop offset="100%" stop-color="#06D6A0"/></linearGradient>
+        <linearGradient id="hexI" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0077B6"/><stop offset="100%" stop-color="#48CAE4"/></linearGradient>
+        <linearGradient id="gG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#B8860B"/><stop offset="100%" stop-color="#DAA520"/></linearGradient>
+      </defs>
+      <polygon points="256,70 420,115 420,265 256,310 92,265 92,115" fill="none" stroke="url(#hexO)" stroke-width="14" stroke-linejoin="round"/>
+      <polygon points="256,88 404,128 404,252 256,292 108,252 108,128" fill="none" stroke="url(#hexM)" stroke-width="10" stroke-linejoin="round"/>
+      <polygon points="256,104 390,140 390,240 256,276 122,240 122,140" fill="url(#hexI)" fill-opacity="0.15" stroke="url(#hexI)" stroke-width="7" stroke-linejoin="round"/>
+      <polygon points="256,114 380,146 380,234 256,266 132,234 132,146" fill="#0A1628" fill-opacity="0.9"/>
+      <circle cx="256" cy="155" r="18" fill="white"/>
+      <circle cx="206" cy="166" r="14" fill="white" opacity="0.9"/>
+      <circle cx="306" cy="166" r="14" fill="white" opacity="0.9"/>
+      <path d="M256,177 C237,177 224,192 224,205 L288,205 C288,192 275,177 256,177Z" fill="white"/>
+      <path d="M206,183 C192,183 183,194 183,204 L229,204 C229,194 220,183 206,183Z" fill="white" opacity="0.85"/>
+      <path d="M306,183 C292,183 283,194 283,204 L329,204 C329,194 320,183 306,183Z" fill="white" opacity="0.85"/>
+      <g transform="translate(348,240)">
+        <circle cx="0" cy="0" r="22" fill="url(#gG)"/>
+        <circle cx="0" cy="0" r="8" fill="white"/>
+        <rect x="-4" y="-28" width="8" height="12" rx="2" fill="url(#gG)"/>
+        <rect x="-4" y="16" width="8" height="12" rx="2" fill="url(#gG)"/>
+        <rect x="-28" y="-4" width="12" height="8" rx="2" fill="url(#gG)"/>
+        <rect x="16" y="-4" width="12" height="8" rx="2" fill="url(#gG)"/>
+      </g>
+      <text x="256" y="365" text-anchor="middle" font-family="system-ui,sans-serif" font-size="52" font-weight="700" fill="white" letter-spacing="2">Admin</text>
+    </svg>
+
+    <h1>Eventy Admin</h1>
+    <p class="subtitle">Scanne pour installer l'application</p>
+
+    <!-- QR Card -->
+    <div class="qr-card">
+      <div class="qr-box">
+        <div id="qrcode"></div>
+      </div>
+      <div class="url-label">URL de l'application</div>
+      <div class="url-value">https://www.eventylife.fr/admin-pwa/</div>
+    </div>
+
+    <!-- Installation steps -->
+    <div class="steps">
+      <h3>📱 Comment installer</h3>
+      <div class="os-tabs">
+        <button class="os-tab active" onclick="switchOS('ios')">iPhone / iPad</button>
+        <button class="os-tab" onclick="switchOS('android')">Android</button>
+      </div>
+
+      <div id="ios-steps" class="os-section active">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Scanne le QR code avec l'<strong>appareil photo</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">La page s'ouvre dans <strong>Safari</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Tape le bouton <strong>Partager</strong> <span class="tag">⬆️</span> en bas</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>"Sur l'écran d'accueil"</strong> → Ajouter</div>
+        </div>
+      </div>
+
+      <div id="android-steps" class="os-section">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Scanne le QR code avec l'<strong>appareil photo</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">La page s'ouvre dans <strong>Chrome</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Tape le menu <strong>⋮</strong> en haut à droite</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>"Installer l'application"</strong> → Installer</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer">Eventy Life © 2026 — Portail admin sécurisé</p>
+  </div>
+
+  <script>
+    // Generate QR code
+    new QRCode(document.getElementById('qrcode'), {
+      text: 'https://www.eventylife.fr/admin-pwa/',
+      width: 220,
+      height: 220,
+      colorDark: '#0A1628',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // OS tab switching
+    function switchOS(os) {
+      document.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.os-section').forEach(s => s.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(os + '-steps').classList.add('active');
+    }
+  </script>
+</body>
+</html>

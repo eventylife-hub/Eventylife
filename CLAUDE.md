@@ -159,12 +159,15 @@ Tous les fichiers de pilotage sont dans `pdg-eventy/` :
 - **Tests** : 3 300+ tests passants
 - **Code** : ~296 500 lignes
 
-### Architecture 3 portails (mis à jour 2026-03-20)
-- **Portail Client/Public** : `app/(public)/` + `app/(client)/client/` — **54 pages** (26 publiques + 28 client connecté) — design gradient sunset premium
-- **Portail Pro** : `app/(pro)/pro/` — **50 pages** (dashboard, voyages, réservations, finance, marketing, messagerie...) — rôle PRO ou ADMIN
-- **Portail Admin** : `app/(admin)/admin/` — **45 pages** (back-office complet) — rôle ADMIN uniquement
-- **Auth + Checkout** : 11 pages auth + 5 pages checkout
-- **Total** : **165+ pages frontend**
+### Architecture 3 portails (mis à jour 2026-03-22 — inventaire réel)
+- **Portail Public** : `app/(public)/` — **29 pages** (accueil, voyages, blog, CGV, FAQ, contact, itinéraires, départs, devenir-partenaire...) — design gradient sunset premium
+- **Portail Client** : `app/(client)/client/` — **33 pages** (dashboard, réservations, groupes, favoris, wallet, paiements, profil, voyage/[id]/*...) — espace client connecté
+- **Portail Pro** : `app/(pro)/pro/` — **96 pages** (dashboard, voyages/[id]/*, vendre/*, marketing/*, finance, terrain, transport, activités, messagerie...) — rôle PRO ou ADMIN
+- **Portail Admin** : `app/(admin)/admin/` — **68 pages** (dashboard, finance/*, voyages/[id]/controle/*, monitoring, utilisateurs, sponsors, RBAC...) — rôle ADMIN uniquement
+- **Auth** : 11 pages (connexion, inscription, mot-de-passe-oublié, vérification-email, admin-login...)
+- **Checkout** : 7 pages (start, step-1/2/3, activités, transport, confirmation)
+- **Autre** : 3 pages (embed, maintenance, offline)
+- **Total** : **247 pages frontend**
 - **Backend NestJS** : 31 modules (admin, auth, bookings, cancellation, checkout, client, cron, documents, email, exports, finance, groups, health, hra, insurance, legal, marketing, notifications, payments, post-sale, pro, public, restauration, reviews, rooming, seo, support, transport, travels, uploads, users)
 - Le frontend Next.js est le VRAI produit — les PWA (admin-pwa/, pro-pwa/) sont des apps standalone complémentaires
 - Les 3 portails ont des designs, layouts et composants distincts. Ne pas réutiliser les composants client pour pro/admin.
