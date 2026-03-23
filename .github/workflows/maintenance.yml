@@ -1,12 +1,11 @@
-name: Maintenance - Fix Sentry and Seed Admin
+name: Maintenance Fix
 on:
   workflow_dispatch:
 jobs:
   maintenance:
-    name: Fix Sentry and Seed Admin
     runs-on: ubuntu-latest
     steps:
-      - name: SSH and apply fixes
+      - name: Fix Sentry and seed admin
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -14,41 +13,13 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           timeout: 120s
           script: |
-            set -e
-            echo "=== Finding sentry.interceptor.js ==="
+            echo "Y29uc3QgeyBQcmlzbWFDbGllbnQgfSA9IHJlcXVpcmUoJ0BwcmlzbWEvY2xpZW50Jyk7CmNvbnN0IGFyZ29uMiA9IHJlcXVpcmUoJ2FyZ29uMicpOwpjb25zdCBwcmlzbWEgPSBuZXcgUHJpc21hQ2xpZW50KCk7CmFzeW5jIGZ1bmN0aW9uIG1haW4oKSB7CiAgY29uc3QgaGFzaCA9IGF3YWl0IGFyZ29uMi5oYXNoKCdFdmVudHkyMDI2JywgeyB0eXBlOiBhcmdvbjIuYXJnb24yaWQsIG1lbW9yeUNvc3Q6IDY1NTM2LCB0aW1lQ29zdDogMywgcGFyYWxsZWxpc206IDQgfSk7CiAgY29uc3QgdSA9IGF3YWl0IHByaXNtYS51c2VyLnVwc2VydCh7CiAgICB3aGVyZTogeyBlbWFpbDogJ2V2ZW50eWxpZmVAZ21haWwuY29tJyB9LAogICAgdXBkYXRlOiB7IHBhc3N3b3JkSGFzaDogaGFzaCwgcm9sZTogJ0FETUlOJywgZW1haWxWZXJpZmllZEF0OiBuZXcgRGF0ZSgpIH0sCiAgICBjcmVhdGU6IHsgZW1haWw6ICdldmVudHlsaWZlQGdtYWlsLmNvbScsIHBhc3N3b3JkSGFzaDogaGFzaCwgZmlyc3ROYW1lOiAnRGF2aWQnLCBsYXN0TmFtZTogJ0FkbWluJywgcm9sZTogJ0FETUlOJywgZW1haWxWZXJpZmllZEF0OiBuZXcgRGF0ZSgpIH0KICB9KTsKICBjb25zb2xlLmxvZygnQWRtaW4gT0s6JywgdS5lbWFpbCwgdS5yb2xlKTsKICBhd2FpdCBwcmlzbWEuJGRpc2Nvbm5lY3QoKTsKfQptYWluKCkuY2F0Y2goZSA9PiB7IGNvbnNvbGUuZXJyb3IoZSk7IHByb2Nlc3MuZXhpdCgxKTsgfSk7Cg==" | base64 -d > /tmp/seed_admin.js
             SENTRY=$(find /opt/eventy /root /home -name sentry.interceptor.js 2>/dev/null | grep dist | head -1)
-            if [ -n "$SENTRY" ]; then
-              cp "$SENTRY" "$SENTRY.bak"
-              sed -i 's/transaction\.finish()/transaction?.finish()/g' "$SENTRY"
-              echo "Sentry patched: $SENTRY"
-            else
-              echo "sentry.interceptor.js not found in dist"
-            fi
-            echo "=== Finding backend dir ==="
+            if [ -n "$SENTRY" ]; then sed -i 's/transaction\.finish()/transaction?.finish()/g' "$SENTRY" && echo "Sentry patched"; fi
             BACKEND=$(find /opt/eventy /root /home -maxdepth 8 -name package.json 2>/dev/null | grep -v node_modules | xargs grep -l prisma 2>/dev/null | head -1 | xargs dirname 2>/dev/null)
             [ -z "$BACKEND" ] && BACKEND=/opt/eventy/app/backend
-            echo "Backend dir: $BACKEND"
-            cd "$BACKEND"
-            if [ -f .env ]; then set -a && . .env && set +a; fi
-            echo "=== Seeding admin user ==="
-            cat > /tmp/seed_admin.js << 'SEEDEOF'
-const { PrismaClient } = require('@prisma/client');
-const argon2 = require('argon2');
-const prisma = new PrismaClient();
-async function main() {
-  const hash = await argon2.hash('Eventy2026', { type: argon2.argon2id, memoryCost: 65536, timeCost: 3, parallelism: 4 });
-  const u = await prisma.user.upsert({
-    where: { email: 'eventylife@gmail.com' },
-    update: { passwordHash: hash, role: 'ADMIN', emailVerifiedAt: new Date() },
-    create: { email: 'eventylife@gmail.com', passwordHash: hash, firstName: 'David', lastName: 'Admin', role: 'ADMIN', emailVerifiedAt: new Date() }
-  });
-  console.log('Admin OK:', u.email, u.role, 'verified:', u.emailVerifiedAt);
-  await prisma.$disconnect();
-}
-main().catch(e => { console.error(e); process.exit(1); });
-SEEDEOF
-            NODE_PATH="$BACKEND/node_modules" node /tmp/seed_admin.js
-            echo "=== Restarting PM2 ==="
+            cd "$BACKEND" && [ -f .env ] && export $(grep -v '^#' .env | xargs)
+            NODE_PATH="$BACKEND/node_modules" node /tmp/seed_admin.js && echo "Seed OK"
             pm2 restart eventy-api 2>/dev/null || pm2 restart all 2>/dev/null || true
             pm2 save 2>/dev/null || true
-            echo "=== Done ==="
+            echo "Done"
