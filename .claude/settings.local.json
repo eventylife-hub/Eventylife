@@ -10,7 +10,17 @@
       "Bash(ls -la frontend/app/\"\\(client\\)\"/client/)",
       "Bash(ls -R \"frontend/app/\\(admin\\)/admin/\")",
       "Bash(ls -R \"frontend/app/\\(public\\)/\")",
-      "Bash(wc -l backend/src/modules/travels/*.ts backend/src/modules/pro/travels/*.ts)"
+      "Bash(wc -l backend/src/modules/travels/*.ts backend/src/modules/pro/travels/*.ts)",
+      "Bash(find backend/src -name *.ts -type f)",
+      "Bash(git -C /c/Users/paco6/eventisite/.claude/worktrees/elastic-colden submodule status)",
+      "Bash(grep -rn \"SupplierPayment\\\\|supplier_payment\\\\|PaymentDelay\\\\|paymentDelay\\\\|delayDays\\\\|PaymentConfig\" /c/Users/paco6/eventisite/.claude/worktrees/elastic-colden/backend/src/ --include=*.ts -l)",
+      "Bash(find /c/Users/paco6/eventisite/.claude/worktrees/elastic-colden/frontend/app -path */admin/activites* -type d)",
+      "Bash(ls /c/Users/paco6/eventisite/.claude/worktrees/elastic-colden/frontend/app/\\\\\\(admin\\\\\\)/admin/activites/)",
+      "Bash(ls /c/Users/paco6/eventisite/.claude/worktrees/elastic-colden/frontend/app/\\\\\\(admin\\\\\\)/admin/activites/prestataires/)",
+      "Bash(npx prisma:*)",
+      "Bash(./node_modules/.bin/prisma validate:*)",
+      "Bash(npm install:*)",
+      "Bash(git config:*)"
     ]
   }
 }
