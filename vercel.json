@@ -3,6 +3,38 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.eventylife.fr",
+      "permanent": true
+    },
+    {
+      "source": "/voyages/:path*",
+      "destination": "https://www.eventylife.fr/voyages/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/connexion",
+      "destination": "https://www.eventylife.fr/connexion",
+      "permanent": true
+    },
+    {
+      "source": "/inscription",
+      "destination": "https://www.eventylife.fr/inscription",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "https://www.eventylife.fr/contact",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://www.eventylife.fr/blog/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/sw.js",

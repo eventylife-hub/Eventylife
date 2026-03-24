@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eventy Life — PWA</title>
+  <title>Eventy Life — Outils internes</title>
+  <meta http-equiv="refresh" content="0; url=https://www.eventylife.fr">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -12,39 +13,53 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFB347 100%);
+      background: linear-gradient(135deg, #0a0e14 0%, #1a1f2e 100%);
       color: #fff;
     }
-    .container {
-      text-align: center;
-      padding: 2rem;
-    }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
-    .links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .container { text-align: center; padding: 2rem; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    p { font-size: 1rem; opacity: 0.7; margin-bottom: 2rem; }
+    .links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
     a {
       display: inline-block;
-      padding: 1rem 2rem;
-      background: rgba(255,255,255,0.2);
-      border: 2px solid rgba(255,255,255,0.5);
-      border-radius: 12px;
-      color: #fff;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255,144,106,0.15);
+      border: 1px solid rgba(255,144,106,0.4);
+      border-radius: 10px;
+      color: #ff906a;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       transition: all 0.2s;
     }
-    a:hover { background: rgba(255,255,255,0.35); transform: translateY(-2px); }
+    a:hover { background: rgba(255,144,106,0.25); }
+    .main-link {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: linear-gradient(135deg, #ff906a, #f7652f);
+      border-radius: 10px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Eventy Life</h1>
-    <p>Le voyage de groupe où tu n'as rien à gérer, tout à vivre.</p>
+    <h1>Eventy<span style="color:#ff906a">Life</span></h1>
+    <p>Redirection vers le site principal…</p>
+    <a href="https://www.eventylife.fr" class="main-link">→ www.eventylife.fr</a>
     <div class="links">
-      <a href="/admin-pwa/">Admin PWA</a>
-      <a href="/pro-pwa/">Pro PWA</a>
+      <a href="/admin-pwa/">Admin PWA (interne)</a>
+      <a href="/pro-pwa/">Pro PWA (interne)</a>
     </div>
   </div>
+  <script>
+    // Redirection immédiate vers le site principal
+    if (!window.location.pathname.startsWith('/admin-pwa') && !window.location.pathname.startsWith('/pro-pwa')) {
+      window.location.replace('https://www.eventylife.fr');
+    }
+  </script>
 </body>
 </html>
